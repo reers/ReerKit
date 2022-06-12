@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D0038B7D285642B600A890F9 /* Locked.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0038B7C285642B600A890F9 /* Locked.swift */; };
+		D0038B7F2856581600A890F9 /* UnfairLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0038B7E2856581600A890F9 /* UnfairLock.swift */; };
+		D0038B8128565B9500A890F9 /* ReadWriteLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0038B8028565B9400A890F9 /* ReadWriteLock.swift */; };
+		D0038B832856662B00A890F9 /* RWLocked.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0038B822856662B00A890F9 /* RWLocked.swift */; };
 		D0B120FD285505AA00B5B326 /* ReerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B120F4285505AA00B5B326 /* ReerKit.framework */; };
 		D0B1210F2855079000B5B326 /* UIView+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B1210E2855079000B5B326 /* UIView+REExtensions.swift */; };
 		D0B121122855089000B5B326 /* ReerKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B121112855089000B5B326 /* ReerKit.swift */; };
@@ -27,6 +31,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D0038B7C285642B600A890F9 /* Locked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locked.swift; sourceTree = "<group>"; };
+		D0038B7E2856581600A890F9 /* UnfairLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfairLock.swift; sourceTree = "<group>"; };
+		D0038B8028565B9400A890F9 /* ReadWriteLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteLock.swift; sourceTree = "<group>"; };
+		D0038B822856662B00A890F9 /* RWLocked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RWLocked.swift; sourceTree = "<group>"; };
 		D0B120F4285505AA00B5B326 /* ReerKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B120FC285505AA00B5B326 /* ReerKit-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ReerKit-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B1210E2855079000B5B326 /* UIView+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+REExtensions.swift"; sourceTree = "<group>"; };
@@ -130,6 +138,10 @@
 			isa = PBXGroup;
 			children = (
 				D0B1211D2855156200B5B326 /* TypeNameDescribable.swift */,
+				D0038B7E2856581600A890F9 /* UnfairLock.swift */,
+				D0038B8028565B9400A890F9 /* ReadWriteLock.swift */,
+				D0038B7C285642B600A890F9 /* Locked.swift */,
+				D0038B822856662B00A890F9 /* RWLocked.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -200,6 +212,7 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1320;
+				ORGANIZATIONNAME = reers;
 				TargetAttributes = {
 					D0B120F3285505AA00B5B326 = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -253,7 +266,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0B1210F2855079000B5B326 /* UIView+REExtensions.swift in Sources */,
+				D0038B7D285642B600A890F9 /* Locked.swift in Sources */,
+				D0038B8128565B9500A890F9 /* ReadWriteLock.swift in Sources */,
 				D0B121122855089000B5B326 /* ReerKit.swift in Sources */,
+				D0038B832856662B00A890F9 /* RWLocked.swift in Sources */,
+				D0038B7F2856581600A890F9 /* UnfairLock.swift in Sources */,
 				D0B1211528550E1000B5B326 /* NSObject+REExtensions.swift in Sources */,
 				D0B1211E2855156200B5B326 /* TypeNameDescribable.swift in Sources */,
 			);
@@ -282,12 +299,14 @@
 		D0B120ED2855057800B5B326 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
 		D0B120EE2855057800B5B326 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Release;
 		};

@@ -6,8 +6,6 @@
 //  Copyright © 2022 reers. All rights reserved.
 //
 
-import Foundation
-
 // MARK: - Properties
 extension Bool: ReerKitCompatibleValue {}
 public extension ReerKitWrapper where Base == Bool {

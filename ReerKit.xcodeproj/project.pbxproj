@@ -20,6 +20,12 @@
 		D0B121212855207900B5B326 /* UIViewExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B121202855207900B5B326 /* UIViewExtensionsTests.swift */; };
 		D0C95FD52857899F00D0522D /* Bool+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FD42857899F00D0522D /* Bool+REExtensions.swift */; };
 		D0C95FD8285793A000D0522D /* BoolExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FD7285793A000D0522D /* BoolExtensionsTests.swift */; };
+		D0C95FDA2857999D00D0522D /* Int+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FD92857999D00D0522D /* Int+REExtensions.swift */; };
+		D0C95FDC28579B5500D0522D /* SignedInteger+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FDB28579B5500D0522D /* SignedInteger+REExtensions.swift */; };
+		D0C95FDE2857A24000D0522D /* SignedIntegerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FDD2857A24000D0522D /* SignedIntegerExtensionsTests.swift */; };
+		D0C95FE02857AC1A00D0522D /* SignedNumeric+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FDF2857AC1A00D0522D /* SignedNumeric+REExtensions.swift */; };
+		D0C95FE22857AD5D00D0522D /* SignedNumericExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FE12857AD5D00D0522D /* SignedNumericExtensionsTests.swift */; };
+		D0C95FE42857B4C400D0522D /* IntExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FE32857B4C400D0522D /* IntExtensionsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +53,12 @@
 		D0B121202855207900B5B326 /* UIViewExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensionsTests.swift; sourceTree = "<group>"; };
 		D0C95FD42857899F00D0522D /* Bool+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+REExtensions.swift"; sourceTree = "<group>"; };
 		D0C95FD7285793A000D0522D /* BoolExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolExtensionsTests.swift; sourceTree = "<group>"; };
+		D0C95FD92857999D00D0522D /* Int+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+REExtensions.swift"; sourceTree = "<group>"; };
+		D0C95FDB28579B5500D0522D /* SignedInteger+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignedInteger+REExtensions.swift"; sourceTree = "<group>"; };
+		D0C95FDD2857A24000D0522D /* SignedIntegerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedIntegerExtensionsTests.swift; sourceTree = "<group>"; };
+		D0C95FDF2857AC1A00D0522D /* SignedNumeric+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignedNumeric+REExtensions.swift"; sourceTree = "<group>"; };
+		D0C95FE12857AD5D00D0522D /* SignedNumericExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedNumericExtensionsTests.swift; sourceTree = "<group>"; };
+		D0C95FE32857B4C400D0522D /* IntExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensionsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +176,9 @@
 			isa = PBXGroup;
 			children = (
 				D0C95FD42857899F00D0522D /* Bool+REExtensions.swift */,
+				D0C95FD92857999D00D0522D /* Int+REExtensions.swift */,
+				D0C95FDB28579B5500D0522D /* SignedInteger+REExtensions.swift */,
+				D0C95FDF2857AC1A00D0522D /* SignedNumeric+REExtensions.swift */,
 			);
 			path = StandardLibrary;
 			sourceTree = "<group>";
@@ -172,6 +187,9 @@
 			isa = PBXGroup;
 			children = (
 				D0C95FD7285793A000D0522D /* BoolExtensionsTests.swift */,
+				D0C95FDD2857A24000D0522D /* SignedIntegerExtensionsTests.swift */,
+				D0C95FE12857AD5D00D0522D /* SignedNumericExtensionsTests.swift */,
+				D0C95FE32857B4C400D0522D /* IntExtensionsTests.swift */,
 			);
 			path = StandardLibraryExtensionsTests;
 			sourceTree = "<group>";
@@ -287,11 +305,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0C95FE02857AC1A00D0522D /* SignedNumeric+REExtensions.swift in Sources */,
 				D0C95FD52857899F00D0522D /* Bool+REExtensions.swift in Sources */,
 				D0B1210F2855079000B5B326 /* UIView+REExtensions.swift in Sources */,
+				D0C95FDA2857999D00D0522D /* Int+REExtensions.swift in Sources */,
 				D0038B7D285642B600A890F9 /* Locked.swift in Sources */,
 				D0038B8128565B9500A890F9 /* ReadWriteLock.swift in Sources */,
 				D0B121122855089000B5B326 /* ReerKit.swift in Sources */,
+				D0C95FDC28579B5500D0522D /* SignedInteger+REExtensions.swift in Sources */,
 				D0038B832856662B00A890F9 /* RWLocked.swift in Sources */,
 				D0038B7F2856581600A890F9 /* UnfairLock.swift in Sources */,
 				D0B1211528550E1000B5B326 /* NSObject+REExtensions.swift in Sources */,
@@ -303,8 +324,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0C95FDE2857A24000D0522D /* SignedIntegerExtensionsTests.swift in Sources */,
 				D0B121212855207900B5B326 /* UIViewExtensionsTests.swift in Sources */,
 				D0B1211B285510B200B5B326 /* NSObjectExtensionsTests.swift in Sources */,
+				D0C95FE42857B4C400D0522D /* IntExtensionsTests.swift in Sources */,
+				D0C95FE22857AD5D00D0522D /* SignedNumericExtensionsTests.swift in Sources */,
 				D0C95FD8285793A000D0522D /* BoolExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

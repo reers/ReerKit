@@ -18,6 +18,8 @@
 		D0B1211B285510B200B5B326 /* NSObjectExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B1211A285510B200B5B326 /* NSObjectExtensionsTests.swift */; };
 		D0B1211E2855156200B5B326 /* TypeNameDescribable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B1211D2855156200B5B326 /* TypeNameDescribable.swift */; };
 		D0B121212855207900B5B326 /* UIViewExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B121202855207900B5B326 /* UIViewExtensionsTests.swift */; };
+		D0C95FD52857899F00D0522D /* Bool+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FD42857899F00D0522D /* Bool+REExtensions.swift */; };
+		D0C95FD8285793A000D0522D /* BoolExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FD7285793A000D0522D /* BoolExtensionsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,8 @@
 		D0B1211A285510B200B5B326 /* NSObjectExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObjectExtensionsTests.swift; sourceTree = "<group>"; };
 		D0B1211D2855156200B5B326 /* TypeNameDescribable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeNameDescribable.swift; sourceTree = "<group>"; };
 		D0B121202855207900B5B326 /* UIViewExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensionsTests.swift; sourceTree = "<group>"; };
+		D0C95FD42857899F00D0522D /* Bool+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+REExtensions.swift"; sourceTree = "<group>"; };
+		D0C95FD7285793A000D0522D /* BoolExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolExtensionsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,7 @@
 		D0B1210A2855067B00B5B326 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D0C95FD32857898200D0522D /* StandardLibrary */,
 				D0B1211C2855154100B5B326 /* Utility */,
 				D0B1211328550DF800B5B326 /* Foundation */,
 				D0B121102855086B00B5B326 /* General */,
@@ -96,6 +101,7 @@
 		D0B1210C2855069400B5B326 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				D0C95FD62857937F00D0522D /* StandardLibraryExtensionsTests */,
 				D0B1211F28551FA000B5B326 /* UIKitTests */,
 				D0B1211628550EDD00B5B326 /* FoundationTests */,
 			);
@@ -152,6 +158,22 @@
 				D0B121202855207900B5B326 /* UIViewExtensionsTests.swift */,
 			);
 			path = UIKitTests;
+			sourceTree = "<group>";
+		};
+		D0C95FD32857898200D0522D /* StandardLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				D0C95FD42857899F00D0522D /* Bool+REExtensions.swift */,
+			);
+			path = StandardLibrary;
+			sourceTree = "<group>";
+		};
+		D0C95FD62857937F00D0522D /* StandardLibraryExtensionsTests */ = {
+			isa = PBXGroup;
+			children = (
+				D0C95FD7285793A000D0522D /* BoolExtensionsTests.swift */,
+			);
+			path = StandardLibraryExtensionsTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0C95FD52857899F00D0522D /* Bool+REExtensions.swift in Sources */,
 				D0B1210F2855079000B5B326 /* UIView+REExtensions.swift in Sources */,
 				D0038B7D285642B600A890F9 /* Locked.swift in Sources */,
 				D0038B8128565B9500A890F9 /* ReadWriteLock.swift in Sources */,
@@ -282,6 +305,7 @@
 			files = (
 				D0B121212855207900B5B326 /* UIViewExtensionsTests.swift in Sources */,
 				D0B1211B285510B200B5B326 /* NSObjectExtensionsTests.swift in Sources */,
+				D0C95FD8285793A000D0522D /* BoolExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

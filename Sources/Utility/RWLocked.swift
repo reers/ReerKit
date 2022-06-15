@@ -36,17 +36,17 @@ public final class RWLocked<T> {
     
     public var projectedValue: RWLocked<T> { return self }
     
-    public func read<U>(_ closure: (T) throws -> U) rethrows -> U {
+    public func read<U>(_ execute: (T) throws -> U) rethrows -> U {
         pthread_rwlock_rdlock(&rwlock)
         defer { pthread_rwlock_unlock(&rwlock) }
-        return try closure(value)
+        return try execute(value)
     }
     
     @discardableResult
-    public func write<U>(_ closure: (inout T) throws -> U) rethrows -> U {
+    public func write<U>(_ execute: (inout T) throws -> U) rethrows -> U {
         pthread_rwlock_wrlock(&rwlock)
         defer { pthread_rwlock_unlock(&rwlock) }
-        return try closure(&value)
+        return try execute(&value)
     }
 }
 

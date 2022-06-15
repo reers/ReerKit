@@ -37,17 +37,17 @@ public final class Locked<T> {
     
     public var projectedValue: Locked<T> { return self }
     
-    public func read<U>(_ closure: (T) throws -> U) rethrows -> U {
+    public func read<U>(_ execute: (T) throws -> U) rethrows -> U {
         os_unfair_lock_lock(lock)
         defer { os_unfair_lock_unlock(lock)}
-        return try closure(value)
+        return try execute(value)
     }
     
     @discardableResult
-    public func write<U>(_ closure: (inout T) throws -> U) rethrows -> U {
+    public func write<U>(_ execute: (inout T) throws -> U) rethrows -> U {
         os_unfair_lock_lock(lock)
         defer { os_unfair_lock_unlock(lock)}
-        return try closure(&value)
+        return try execute(&value)
     }
 }
 #endif

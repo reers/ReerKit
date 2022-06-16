@@ -9,40 +9,69 @@ import Foundation
 #if canImport(Darwin)
 import Darwin
 
-/// ReerKit: A wrapper of `pthread_rwlock_t`
+/// ReerKit: Represents a reader-writer lock. Note that this implementation is not recursive.
 public final class ReadWriteLock {
-    private var rwlock = pthread_rwlock_t()
+    
+    private var readMutex = pthread_mutex_t()
+    private var writeMutex = pthread_mutex_t()
+    private var readCount: UInt = 0
     
     public init() {
-        pthread_rwlock_init(&rwlock, nil)
+        pthread_mutex_init(&readMutex, nil)
+        pthread_mutex_init(&writeMutex, nil)
     }
     
     deinit {
-        pthread_rwlock_destroy(&rwlock)
+        pthread_mutex_destroy(&readMutex)
+        pthread_mutex_destroy(&writeMutex)
     }
     
     public func readLock() {
-        pthread_rwlock_rdlock(&rwlock)
+        pthread_mutex_lock(&readMutex)
+        defer { pthread_mutex_unlock(&readMutex) }
+        if readCount == 0 {
+            pthread_mutex_lock(&writeMutex)
+        }
+        readCount += 1
     }
     
     /// ReerKit: Returns true if the lock was succesfully locked and false if the lock was already locked.
     @discardableResult
     public func tryReadLock() -> Bool {
-        pthread_rwlock_tryrdlock(&rwlock) == 0
+        pthread_mutex_lock(&readMutex)
+        defer { pthread_mutex_unlock(&readMutex) }
+        let success = (readCount == 0)
+            ? pthread_mutex_trylock(&writeMutex) == 0
+            : true
+        if success {
+            readCount += 1
+        }
+        return success
+    }
+    
+    public func readUnlock() {
+        pthread_mutex_lock(&readMutex)
+        defer { pthread_mutex_unlock(&readMutex) }
+        if readCount > 0 {
+            readCount -= 1
+            if readCount == 0 {
+                pthread_mutex_unlock(&writeMutex)
+            }
+        }
     }
     
     public func writeLock() {
-        pthread_rwlock_wrlock(&rwlock)
+        pthread_mutex_lock(&writeMutex)
     }
     
     /// ReerKit: Returns true if the lock was succesfully locked and false if the lock was already locked.
     @discardableResult
     public func tryWriteLock() -> Bool {
-        pthread_rwlock_trywrlock(&rwlock) == 0
+        return pthread_mutex_trylock(&writeMutex) == 0
     }
     
-    public func unlock() {
-        pthread_rwlock_unlock(&rwlock)
+    public func writeUnlock() {
+        pthread_mutex_unlock(&writeMutex)
     }
 }
 #endif

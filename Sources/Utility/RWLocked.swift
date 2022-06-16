@@ -10,19 +10,13 @@ import Foundation
 import Darwin
 
 /// ReerKit: A read write lock wrapper grants multiple readers and single-writer guarantees on a value.
-/// It is backed by a `pthread_rwlock_t`.
 @propertyWrapper
 public final class RWLocked<T> {
     private var value: T
-    private var rwlock = pthread_rwlock_t()
+    private var rwlock = ReadWriteLock()
     
     public init(wrappedValue: T) {
         value = wrappedValue
-        pthread_rwlock_init(&rwlock, nil)
-    }
-    
-    deinit {
-        pthread_rwlock_destroy(&rwlock)
     }
     
     public var wrappedValue: T {
@@ -37,15 +31,15 @@ public final class RWLocked<T> {
     public var projectedValue: RWLocked<T> { return self }
     
     public func read<U>(_ execute: (T) throws -> U) rethrows -> U {
-        pthread_rwlock_rdlock(&rwlock)
-        defer { pthread_rwlock_unlock(&rwlock) }
+        rwlock.readLock()
+        defer { rwlock.readUnlock() }
         return try execute(value)
     }
     
     @discardableResult
     public func write<U>(_ execute: (inout T) throws -> U) rethrows -> U {
-        pthread_rwlock_wrlock(&rwlock)
-        defer { pthread_rwlock_unlock(&rwlock) }
+        rwlock.writeLock()
+        defer { rwlock.writeUnlock() }
         return try execute(&value)
     }
 }

@@ -9,7 +9,11 @@
 #if canImport(Foundation)
 import Foundation
 
-public func synchronized<Result>(_ token: AnyObject, execute: () throws -> Result) rethrows -> Result {
+/// Use just like objective-c `@synchronized`.
+public func synchronized<Result>(
+    _ token: AnyObject,
+    execute: () throws -> Result
+) rethrows -> Result {
     objc_sync_enter(token)
     defer { objc_sync_exit(token) }
     return try execute()

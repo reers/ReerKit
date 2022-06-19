@@ -10,6 +10,14 @@
 import Foundation
 
 /// Use just like objective-c `@synchronized`.
+///
+///     let obj = NSObject()
+///     synchronized(obj) {
+///         // do something
+///     }
+/// - Parameters:
+///   - token: A reference type object.
+///   - execute: An action need to be executed synchronizely.
 public func synchronized<Result>(
     _ token: AnyObject,
     execute: () throws -> Result

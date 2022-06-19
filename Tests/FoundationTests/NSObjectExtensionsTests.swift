@@ -9,7 +9,7 @@ import XCTest
 import Foundation
 @testable import ReerKit
 
-extension NSObject {
+fileprivate extension NSObject {
     @objc var foo: String {
         get {
             re.associatedValue(forKey: AssociationKey(#function as StaticString), default: "123")

@@ -7,6 +7,10 @@
 
 import Foundation
 
+/// Return the type name of an instance or a type.
+///
+///     UIView().typeName // "UIView"
+///     UIView.typeName   // "UIView"
 public protocol TypeNameDescribable {
     var typeName: String { get }
     static var typeName: String { get }
@@ -21,3 +25,5 @@ extension TypeNameDescribable {
         String(describing: self)
     }
 }
+
+extension NSObject: TypeNameDescribable {}

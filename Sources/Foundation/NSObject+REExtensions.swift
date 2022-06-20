@@ -5,10 +5,10 @@
 //  Created by phoenix on 2022/6/12.
 //
 
-extension NSObject: ReerKitCompatible {}
-
 #if canImport(ObjectiveC)
 import ObjectiveC
+
+extension NSObject: ReerKitCompatible {}
 
 // MARK: - Association
 

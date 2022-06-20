@@ -10,189 +10,183 @@ import UIKit
 
 // MARK: - Frame
 
-public extension UIView {
+public extension ReerKitWrapper where Base: UIView {
     
     /// ReerKit: Shortcut for frame.origin.x
     var x: CGFloat {
-        get { return frame.origin.x }
+        get { return base.frame.origin.x }
         set {
-            var frame = self.frame
+            var frame = base.frame
             frame.origin.x = newValue
-            self.frame = frame
+            base.frame = frame
         }
     }
     
     /// ReerKit: Shortcut for frame.origin.y
     var y: CGFloat {
-        get { return frame.origin.y }
+        get { return base.frame.origin.y }
         set {
-            var frame = self.frame
+            var frame = base.frame
             frame.origin.y = newValue
-            self.frame = frame
+            base.frame = frame
         }
     }
     
     /// ReerKit: Shortcut for frame.size.width
     var width: CGFloat {
-        get { return frame.size.width }
+        get { return base.frame.size.width }
         set {
-            var frame = self.frame
+            var frame = base.frame
             frame.size.width = newValue
-            self.frame = frame
+            base.frame = frame
         }
     }
     
     /// ReerKit: Shortcut for frame.size.height
     var height: CGFloat {
-        get { return frame.size.height }
+        get { return base.frame.size.height }
         set {
-            var frame = self.frame
+            var frame = base.frame
             frame.size.height = newValue
-            self.frame = frame
+            base.frame = frame
         }
     }
     
     /// ReerKit: Shortcut for frame.origin.x
     var left: CGFloat {
-        get { return frame.origin.x }
+        get { return base.frame.origin.x }
         set {
-            var frame = self.frame
+            var frame = base.frame
             frame.origin.x = newValue
-            self.frame = frame
+            base.frame = frame
         }
     }
     
     /// ReerKit: Shortcut for frame.origin.x + frame.size.width
     var right: CGFloat {
-        get { return frame.origin.x + frame.size.width }
+        get { return base.frame.origin.x + base.frame.size.width }
         set {
-            var frame = self.frame
+            var frame = base.frame
             frame.origin.x = newValue - frame.size.width
-            self.frame = frame
+            base.frame = frame
         }
     }
     
     /// ReerKit: Shortcut for frame.origin.y
     var top: CGFloat {
-        get { return frame.origin.y }
+        get { return base.frame.origin.y }
         set {
-            var frame = self.frame
+            var frame = base.frame
             frame.origin.y = newValue
-            self.frame = frame
+            base.frame = frame
         }
     }
     
     /// ReerKit: Shortcut for frame.origin.y + frame.size.height
     var bottom: CGFloat {
-        get { return frame.origin.y + frame.size.height }
+        get { return base.frame.origin.y + base.frame.size.height }
         set {
-            var frame = self.frame
+            var frame = base.frame
             frame.origin.y = newValue - frame.size.height
-            self.frame = frame
+            base.frame = frame
         }
     }
     
     /// ReerKit: Shortcut for center.x
     var centerX: CGFloat {
-        get { return center.x }
-        set { center = CGPoint.init(x: newValue, y: center.y) }
+        get { return base.center.x }
+        set { base.center = CGPoint.init(x: newValue, y: base.center.y) }
     }
     
     /// ReerKit: Shortcut for center.y
     var centerY: CGFloat {
-        get { return center.y }
-        set { center = CGPoint.init(x: center.x, y: newValue) }
+        get { return base.center.y }
+        set { base.center = CGPoint.init(x: base.center.x, y: newValue) }
     }
     
     /// ReerKit: Shortcut for frame.origin
     var origin: CGPoint {
-        get { return frame.origin }
+        get { return base.frame.origin }
         set {
-            var frame = self.frame
+            var frame = base.frame
             frame.origin = newValue
-            self.frame = frame
+            base.frame = frame
         }
     }
     
     /// ReerKit: Shortcut for frame.size
     var size: CGSize {
-        get { return frame.size }
+        get { return base.frame.size }
         set {
-            var frame = self.frame
+            var frame = base.frame
             frame.size = newValue
-            self.frame = frame
+            base.frame = frame
         }
     }
 }
 
 // MARK: - CALayer Bridge
 
-public extension UIView {
+public extension ReerKitWrapper where Base: UIView {
     
-    /// ReerKit: Border color of view; also inspectable from Storyboard.
-    @IBInspectable
+    /// ReerKit: Border color of view.
     var borderColor: UIColor? {
         get {
-            guard let color = layer.borderColor else { return nil }
+            guard let color = base.layer.borderColor else { return nil }
             return UIColor(cgColor: color)
         }
-        set { layer.borderColor = newValue?.cgColor }
+        set { base.layer.borderColor = newValue?.cgColor }
     }
     
-    /// ReerKit: Border width of view; also inspectable from Storyboard.
-    @IBInspectable
+    /// ReerKit: Border width of view.
     var borderWidth: CGFloat {
-        get { return layer.borderWidth }
-        set { layer.borderWidth = newValue }
+        get { return base.layer.borderWidth }
+        set { base.layer.borderWidth = newValue }
     }
     
-    /// ReerKit: Corner radius of view; also inspectable from Storyboard.
-    @IBInspectable
+    /// ReerKit: Corner radius of view.
     var cornerRadius: CGFloat {
-        get { return layer.cornerRadius }
+        get { return base.layer.cornerRadius }
         set {
-            layer.masksToBounds = true
-            layer.cornerRadius = abs(CGFloat(Int(newValue * 100)) / 100)
+            base.layer.masksToBounds = true
+            base.layer.cornerRadius = Swift.abs(CGFloat(Int(newValue * 100)) / 100)
         }
     }
     
-    /// ReerKit: Shadow color of view; also inspectable from Storyboard.
-    @IBInspectable
+    /// ReerKit: Shadow color of view.
     var shadowColor: UIColor? {
         get {
-            guard let color = layer.shadowColor else { return nil }
+            guard let color = base.layer.shadowColor else { return nil }
             return UIColor(cgColor: color)
         }
-        set { layer.shadowColor = newValue?.cgColor }
+        set { base.layer.shadowColor = newValue?.cgColor }
     }
     
-    /// ReerKit: Shadow offset of view; also inspectable from Storyboard.
-    @IBInspectable
+    /// ReerKit: Shadow offset of view.
     var shadowOffset: CGSize {
-        get { return layer.shadowOffset }
-        set { layer.shadowOffset = newValue }
+        get { return base.layer.shadowOffset }
+        set { base.layer.shadowOffset = newValue }
     }
     
-    /// ReerKit: Shadow opacity of view; also inspectable from Storyboard.
-    @IBInspectable
+    /// ReerKit: Shadow opacity of view.
     var shadowOpacity: Float {
-        get { return layer.shadowOpacity }
-        set { layer.shadowOpacity = newValue }
+        get { return base.layer.shadowOpacity }
+        set { base.layer.shadowOpacity = newValue }
     }
     
-    /// ReerKit: Shadow radius of view; also inspectable from Storyboard.
-    @IBInspectable
+    /// ReerKit: Shadow radius of view.
     var shadowRadius: CGFloat {
-        get { return layer.shadowRadius }
-        set { layer.shadowRadius = newValue }
+        get { return base.layer.shadowRadius }
+        set { base.layer.shadowRadius = newValue }
     }
     
+    /// ReerKit: Shadow path of view.
     var shadowPath: UIBezierPath? {
         get {
-            guard let cgPath = layer.shadowPath else { return nil }
+            guard let cgPath = base.layer.shadowPath else { return nil }
             return UIBezierPath(cgPath: cgPath)
         }
-        set { layer.shadowPath = newValue?.cgPath }
+        set { base.layer.shadowPath = newValue?.cgPath }
     }
 }
 
@@ -237,7 +231,7 @@ extension ReerKitWrapper where Base: UIView {
 
 // MARK: - Method
 
-extension ReerKitWrapper where Base: UIView {
+public extension ReerKitWrapper where Base: UIView {
     
     /// ReerKit: Create a snapshot image of the complete view hierarchy.
     /// It's faster than `snapshotImage`, but may cause screen updates.

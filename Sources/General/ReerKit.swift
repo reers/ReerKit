@@ -5,8 +5,6 @@
 //  Created by phoenix on 2022/6/12.
 //
 
-import Foundation
-
 /// Wrapper for ReerKit compatible types. This type provides an extension point for
 /// connivence methods in ReerKit.
 public struct ReerKitWrapper<Base> {

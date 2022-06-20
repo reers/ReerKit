@@ -6,8 +6,8 @@
 //  Copyright © 2022 reers. All rights reserved.
 //
 
-#if canImport(Foundation)
-import Foundation
+#if canImport(ObjectiveC)
+import ObjectiveC
 
 /// Use just like objective-c `@synchronized`.
 ///

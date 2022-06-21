@@ -98,6 +98,18 @@
 			path = UtilityTests;
 			sourceTree = "<group>";
 		};
+		D0A0040728621C7600D2FA7C /* Lock */ = {
+			isa = PBXGroup;
+			children = (
+				D0038B7E2856581600A890F9 /* UnfairLock.swift */,
+				D0038B8028565B9400A890F9 /* ReadWriteLock.swift */,
+				D0038B7C285642B600A890F9 /* Locked.swift */,
+				D0038B822856662B00A890F9 /* RWLocked.swift */,
+				D004CC48285A41F500C41360 /* Synchronizing.swift */,
+			);
+			path = Lock;
+			sourceTree = "<group>";
+		};
 		D0B120E82855057800B5B326 = {
 			isa = PBXGroup;
 			children = (
@@ -174,12 +186,8 @@
 		D0B1211C2855154100B5B326 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				D0A0040728621C7600D2FA7C /* Lock */,
 				D0B1211D2855156200B5B326 /* TypeNameDescribable.swift */,
-				D0038B7E2856581600A890F9 /* UnfairLock.swift */,
-				D0038B8028565B9400A890F9 /* ReadWriteLock.swift */,
-				D0038B7C285642B600A890F9 /* Locked.swift */,
-				D0038B822856662B00A890F9 /* RWLocked.swift */,
-				D004CC48285A41F500C41360 /* Synchronizing.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";

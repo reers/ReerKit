@@ -18,10 +18,7 @@ import ObjectiveC
 /// - Parameters:
 ///   - token: A reference type object.
 ///   - execute: An action need to be executed synchronizely.
-public func synchronized<Result>(
-    _ token: AnyObject,
-    execute: () throws -> Result
-) rethrows -> Result {
+public func synchronized<Result>(_ token: AnyObject, execute: () throws -> Result) rethrows -> Result {
     objc_sync_enter(token)
     defer { objc_sync_exit(token) }
     return try execute()

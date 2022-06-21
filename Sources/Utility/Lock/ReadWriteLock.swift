@@ -73,4 +73,18 @@ public final class ReadWriteLock {
         pthread_mutex_unlock(&writeMutex)
     }
 }
+
+/// Global function that wrapped `readLock()` and `readUnlock()`
+public func readLocked<Result>(_ lock: ReadWriteLock, execute: () throws -> Result) rethrows -> Result {
+    lock.readLock()
+    defer { lock.readUnlock() }
+    return try execute()
+}
+
+/// Global function that wrapped `writeLock()` and `writeUnlock()`
+public func writeLocked<Result>(_ lock: ReadWriteLock, execute: () throws -> Result) rethrows -> Result {
+    lock.writeLock()
+    defer { lock.writeUnlock() }
+    return try execute()
+}
 #endif

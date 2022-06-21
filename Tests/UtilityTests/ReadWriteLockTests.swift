@@ -36,5 +36,30 @@ class ReadWriteLockTests: XCTestCase {
             }
         }
     }
+    
+    func testReadWriteLockClosure() {
+        var result = ""
+        let rwlock = ReadWriteLock()
+        DispatchQueue.global().async {
+            writeLocked(rwlock) {
+                result += "1"
+                for _ in 0...10000 {
+                    // do something
+                }
+                result += "2"
+            }
+        }
+        for i in 0...10 {
+            DispatchQueue.global().async {
+                readLocked(rwlock) {
+                    result += "3"
+                    for _ in 0..<i {}
+                }
+                if i == 0 {
+                    XCTAssertTrue(result.hasPrefix("123"))
+                }
+            }
+        }
+    }
 
 }

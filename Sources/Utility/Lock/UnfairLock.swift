@@ -37,4 +37,11 @@ public final class UnfairLock {
     }
 }
 
+/// Global function that wrapped `lock()` and `unlock()`
+public func locked<Result>(_ lock: UnfairLock, execute: () throws -> Result) rethrows -> Result {
+    lock.lock()
+    defer { lock.unlock() }
+    return try execute()
+}
+
 #endif

@@ -27,9 +27,9 @@ class UnfairLockTests: XCTestCase {
             
             group.enter()
             DispatchQueue.global().async(group: group) {
-                lock.lock()
-                count -= 1
-                lock.unlock()
+                locked(lock) {
+                    count -= 1
+                }
                 group.leave()
             }
         }

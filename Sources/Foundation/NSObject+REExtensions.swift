@@ -10,6 +10,10 @@ import ObjectiveC
 
 extension NSObject: ReerKitCompatible {}
 
+// MARK: - TypeName
+
+extension NSObject: TypeNameDescribable {}
+
 // MARK: - Association
 
 /// ReerKit: Policies related to associative references.
@@ -147,6 +151,43 @@ public extension ReerKitWrapper where Base: NSObject {
         let closure: (() -> Object?)? = objc_getAssociatedObject(base, key.address) as! (() -> Object?)?
         guard let closure = closure else { return nil }
         return closure()
+    }
+}
+
+// MARK: - Once
+
+public extension ReerKitWrapper where Base: NSObject {
+    
+    /// Execute the passed closure once during the object life time.
+    ///
+    ///     // example:
+    ///     let obj = NSObject()
+    ///     func test() {
+    ///         obj.re.executeOnce { print("once") }
+    ///     }
+    ///     test()
+    ///     test()
+    ///     // output: once
+    ///
+    ///     // BAD EXAMPLE: this case is treated as two different closures
+    ///     let closure = { print("foo") }
+    ///     obj.executeOnce(closure)
+    ///     obj.executeOnce(closure)
+    ///     // output: foo foo
+    func executeOnce<Result>(_ execute: @escaping () throws -> Result) rethrows -> Result {
+        var closure = execute
+        let pointer = withUnsafePointer(to: &closure) { UnsafeRawPointer($0) }
+        let address = pointer.load(as: UInt.self)
+        guard let closurePointer = UnsafeRawPointer(bitPattern: address) else {
+            fatalError("Can not get pointer of the closure.")
+        }
+        if let lastExecutedResult = objc_getAssociatedObject(base, closurePointer) as! Result? {
+            return lastExecutedResult
+        } else {
+            let result = try execute()
+            defer { objc_setAssociatedObject(base, closurePointer, result, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+            return result
+        }
     }
 }
 #endif

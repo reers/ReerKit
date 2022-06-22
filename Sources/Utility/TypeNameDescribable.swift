@@ -56,5 +56,3 @@ extension TypeNameDescribable {
 public func moduleName(fileId: String = #fileID) -> String {
     fileId.firstIndex(of: "/").flatMap { String(fileId[fileId.startIndex..<$0]) } ?? ""
 }
-
-extension NSObject: TypeNameDescribable {}

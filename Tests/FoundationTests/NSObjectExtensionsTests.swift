@@ -54,5 +54,16 @@ class NSObjectExtensionsTests: XCTestCase {
         aObject.foo = "abc"
         XCTAssertEqual(aObject.foo, "abc")
     }
+    
+    func testOnce() {
+        let obj = NSObject()
+        var result = 0
+        func test() {
+            obj.re.executeOnce { result += 1 }
+        }
+        test()
+        test()
+        XCTAssertEqual(result, 1)
+    }
 }
 

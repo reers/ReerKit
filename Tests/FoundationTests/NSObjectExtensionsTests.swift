@@ -65,5 +65,38 @@ class NSObjectExtensionsTests: XCTestCase {
         test()
         XCTAssertEqual(result, 1)
     }
+    
+    func testSwizzle() {
+        class TestSwizzle: NSObject {
+            @objc
+            dynamic func test() -> Int {
+                return 1
+            }
+            
+            @objc
+            func swizzled_test() -> Int {
+                return 2
+            }
+            
+            @objc
+            dynamic static func classMethodTest() -> Int {
+                return 1
+            }
+            
+            @objc static func swizzled_classMethodTest() -> Int {
+                return 2
+            }
+        }
+        
+        TestSwizzle.re.swizzleInstanceMethod(#selector(TestSwizzle.test), with: #selector(TestSwizzle.swizzled_test))
+        XCTAssertEqual(TestSwizzle().test(), 2)
+        TestSwizzle.re.swizzleInstanceMethod(#selector(TestSwizzle.test), with: #selector(TestSwizzle.swizzled_test))
+        XCTAssertEqual(TestSwizzle().test(), 1)
+        
+        TestSwizzle.re.swizzleClassMethod(#selector(TestSwizzle.classMethodTest), with: #selector(TestSwizzle.swizzled_classMethodTest))
+        XCTAssertEqual(TestSwizzle.classMethodTest(), 2)
+        TestSwizzle.re.swizzleClassMethod(#selector(TestSwizzle.classMethodTest), with: #selector(TestSwizzle.swizzled_classMethodTest))
+        XCTAssertEqual(TestSwizzle.classMethodTest(), 1)
+    }
 }
 

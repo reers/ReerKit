@@ -6,7 +6,7 @@
 //  Copyright © 2022 reers. All rights reserved.
 //
 
-/// An once token type that wrapped an internal string.
+/// ReerKit: An once token type that wrapped an internal string.
 public struct OnceToken: Hashable {
     private let value: String
     
@@ -25,7 +25,7 @@ public struct OnceToken: Hashable {
 fileprivate var tokens = Set<OnceToken>()
 fileprivate let lock = UnfairLock()
 
-/// Invoke the passed closure only once during the life time of the process.
+/// ReerKit: Invoke the passed closure only once during the life time of the process.
 /// It will create an once token by combining #fileID, #function, #line.
 ///
 ///     once {
@@ -47,7 +47,7 @@ public func once(
     once(token, execute: execute)
 }
 
-/// Invoke the passed closure only once during the life time of the process.
+/// ReerKit: Invoke the passed closure only once during the life time of the process.
 /// It need an once token parameter, seealso `OnceToken`.
 ///
 ///     let token = OnceToken()
@@ -70,7 +70,7 @@ public func once(_ token: OnceToken, execute: () -> Void) {
     execute()
 }
 
-/// Cancel the once token mark, that means you can execute the action again with the same token.
+/// ReerKit: Cancel the once token mark, that means you can execute the action again with the same token.
 /// - Parameter token: The token that need to cancel marking.
 public func deonce(_ token: OnceToken) {
     lock.lock()

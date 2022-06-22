@@ -7,6 +7,7 @@
 
 #if canImport(ObjectiveC)
 import ObjectiveC
+import Foundation
 
 extension NSObject: ReerKitCompatible {}
 
@@ -158,7 +159,7 @@ public extension ReerKitWrapper where Base: NSObject {
 
 public extension ReerKitWrapper where Base: NSObject {
     
-    /// Execute the passed closure once during the object life time.
+    /// ReerKit: Execute the passed closure once during the object life time.
     ///
     ///     // example:
     ///     let obj = NSObject()
@@ -188,6 +189,75 @@ public extension ReerKitWrapper where Base: NSObject {
             defer { objc_setAssociatedObject(base, closurePointer, result, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
             return result
         }
+    }
+}
+
+// MARK: - Swizzle
+
+public extension ReerKitWrapper where Base: NSObject {
+    
+    
+    /// ReerKit: Swizzle instance method of the class.
+    /// Used for `NSObject` subclasses, if you need to swizzle for pure swift class, see `@_dynamicReplacement(for: )`
+    ///
+    /// - Parameters:
+    ///   - originalSelector: The selector must be a `@objc dynamic` method.
+    ///   - swizzledSelector: The selector must be a `@objc` method.
+    /// - Returns: Successful or not.
+    @discardableResult
+    static func swizzleInstanceMethod(_ originalSelector: Selector, with swizzledSelector: Selector) -> Bool {
+        guard let originalMethod = class_getInstanceMethod(Base.self, originalSelector),
+              let swizzledMethod = class_getInstanceMethod(Base.self, swizzledSelector)
+        else { return false }
+        let addMethodSuccess = class_addMethod(
+            Base.self,
+            originalSelector,
+            method_getImplementation(swizzledMethod),
+            method_getTypeEncoding(swizzledMethod)
+        )
+        if addMethodSuccess {
+            class_replaceMethod(
+                Base.self,
+                swizzledSelector,
+                method_getImplementation(originalMethod),
+                method_getTypeEncoding(originalMethod)
+            )
+        } else {
+            method_exchangeImplementations(originalMethod, swizzledMethod)
+        }
+        return true
+    }
+    
+    /// ReerKit: Swizzle class method of the class.
+    /// Used for `NSObject` subclasses, if you need to swizzle for pure swift class, see `@_dynamicReplacement(for: )`
+    ///
+    /// - Parameters:
+    ///   - originalSelector: The selector must be a `@objc dynamic` method.
+    ///   - swizzledSelector: The selector must be a `@objc` method.
+    /// - Returns: Successful or not.
+    @discardableResult
+    static func swizzleClassMethod(_ originalSelector: Selector, with swizzledSelector: Selector) -> Bool {
+        guard let originalMethod = class_getClassMethod(Base.self, originalSelector),
+              let swizzledMethod = class_getClassMethod(Base.self, swizzledSelector)
+        else { return false }
+        let metaCls = objc_getMetaClass(class_getName(Base.self))
+        let addMethodSuccess = class_addMethod(
+            metaCls as? AnyClass,
+            originalSelector,
+            method_getImplementation(swizzledMethod),
+            method_getTypeEncoding(swizzledMethod)
+        )
+        if addMethodSuccess {
+            class_replaceMethod(
+                metaCls as? AnyClass,
+                swizzledSelector,
+                method_getImplementation(originalMethod),
+                method_getTypeEncoding(originalMethod)
+            )
+        } else {
+            method_exchangeImplementations(originalMethod, swizzledMethod)
+        }
+        return true
     }
 }
 #endif

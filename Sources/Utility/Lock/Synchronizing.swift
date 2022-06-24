@@ -9,7 +9,7 @@
 #if canImport(ObjectiveC)
 import ObjectiveC
 
-/// Use just like objective-c `@synchronized`.
+/// ReerKit: Use just like objective-c `@synchronized`.
 ///
 ///     let obj = NSObject()
 ///     synchronized(obj) {

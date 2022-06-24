@@ -7,7 +7,6 @@
 
 #if canImport(ObjectiveC)
 import ObjectiveC
-import Foundation
 
 extension NSObject: ReerKitCompatible {}
 
@@ -48,7 +47,7 @@ fileprivate extension AssociationPolicy {
 }
 
 public struct AssociationKey {
-    fileprivate let address: UnsafeRawPointer
+    let address: UnsafeRawPointer
     
     /// ReerKit: Create an ObjC association key.
     ///
@@ -157,36 +156,26 @@ public extension ReerKitWrapper where Base: NSObject {
 
 // MARK: - Once
 
+public typealias OnceKey = AssociationKey
+
 public extension ReerKitWrapper where Base: NSObject {
     
-    /// ReerKit: Execute the passed closure once during the object life time.
+    /// ReerKit: Execute the passed closure once by a key during the object life time.
     ///
-    ///     // example:
     ///     let obj = NSObject()
     ///     func test() {
-    ///         obj.re.executeOnce { print("once") }
+    ///         obj.re.executeOnce(byKey: key) { print("once") }
     ///     }
     ///     test()
     ///     test()
+    ///     obj.re.executeOnce(byKey: key) { print("once") }
     ///     // output: once
-    ///
-    ///     // BAD EXAMPLE: this case is treated as two different closures
-    ///     let closure = { print("foo") }
-    ///     obj.executeOnce(closure)
-    ///     obj.executeOnce(closure)
-    ///     // output: foo foo
-    func executeOnce<Result>(_ execute: @escaping () throws -> Result) rethrows -> Result {
-        var closure = execute
-        let pointer = withUnsafePointer(to: &closure) { UnsafeRawPointer($0) }
-        let address = pointer.load(as: UInt.self)
-        guard let closurePointer = UnsafeRawPointer(bitPattern: address) else {
-            fatalError("Can not get pointer of the closure.")
-        }
-        if let lastExecutedResult = objc_getAssociatedObject(base, closurePointer) as! Result? {
+    func executeOnce<Result>(byKey key: OnceKey, _ execute: @escaping () throws -> Result) rethrows -> Result {
+        if let lastExecutedResult = objc_getAssociatedObject(base, key.address) as! Result? {
             return lastExecutedResult
         } else {
             let result = try execute()
-            defer { objc_setAssociatedObject(base, closurePointer, result, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+            defer { objc_setAssociatedObject(base, key.address, result, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
             return result
         }
     }

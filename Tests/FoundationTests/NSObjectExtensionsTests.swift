@@ -57,12 +57,18 @@ class NSObjectExtensionsTests: XCTestCase {
     
     func testOnce() {
         let obj = NSObject()
+        let key = OnceKey()
         var result = 0
         func test() {
-            obj.re.executeOnce { result += 1 }
+            obj.re.executeOnce(byKey: key) {
+                result += 1
+            }
         }
         test()
         test()
+        obj.re.executeOnce(byKey: key) {
+            result += 1
+        }
         XCTAssertEqual(result, 1)
     }
     

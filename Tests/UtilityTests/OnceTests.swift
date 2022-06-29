@@ -10,6 +10,14 @@ import XCTest
 @testable import ReerKit
 
 class OnceTests: XCTestCase {
+    
+    static var int = 0
+    
+    func initString() {
+        once {
+            Self.int += 1
+        }
+    }
 
     func testOnce() {
         var result = 0
@@ -32,6 +40,11 @@ class OnceTests: XCTestCase {
         deonce(token)
         once(token) { ret += 1 }
         XCTAssertEqual(ret, 2)
+        
+        initString()
+        initString()
+        initString()
+        XCTAssertEqual(Self.int, 1)
     }
 
 }

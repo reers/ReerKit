@@ -28,10 +28,10 @@ class DispatchTests: XCTestCase {
     func testAsyncAfter() {
         let expectation = self.expectation(description: "AsyncAfter")
         let start = Date()
-        DispatchQueue.main.re.asyncAfter(delay: 3) {
-            XCTAssertEqual((Date().timeIntervalSince(start) - 3) < 0.1, true)
+        DispatchQueue.main.re.asyncAfter(delay: 1) {
+            XCTAssertEqual((Date().timeIntervalSince(start) - 1) < 0.1, true)
             expectation.fulfill()
         }
-        waitForExpectations(timeout: 4, handler: nil)
+        waitForExpectations(timeout: 1.5, handler: nil)
     }
 }

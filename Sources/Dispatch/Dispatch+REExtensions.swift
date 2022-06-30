@@ -23,7 +23,7 @@
 #if canImport(Dispatch)
 import Dispatch
 
-public extension ReerKitWrapper where Base: DispatchQueue {
+public extension Reer where Base: DispatchQueue {
     
     /// ReerKit: A Boolean value indicating whether the current dispatch queue is the main queue.
     static var isMainQueue: Bool {
@@ -42,7 +42,7 @@ public extension ReerKitWrapper where Base: DispatchQueue {
 }
 
 public typealias DelayTimeInSecond = Double
-public extension ReerKitWrapper where Base: DispatchQueue {
+public extension Reer where Base: DispatchQueue {
 
     /// ReerKit: Runs passed closure asynchronous after certain time interval.
     ///

@@ -25,7 +25,7 @@ import Foundation
 #endif
 
 // MARK: - Properties
-public extension ReerKitWrapper where Base: SignedInteger {
+public extension Reer where Base: SignedInteger {
     
     /// ReerKit: Absolute value of integer number.
     var abs: Base {
@@ -73,7 +73,7 @@ public extension ReerKitWrapper where Base: SignedInteger {
     }
 }
 
-public extension ReerKitWrapper where Base: SignedInteger {
+public extension Reer where Base: SignedInteger {
     
     /// ReerKit: Greatest common divisor of integer value and n.
     ///

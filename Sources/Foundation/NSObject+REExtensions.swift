@@ -22,7 +22,7 @@
 #if canImport(ObjectiveC)
 import ObjectiveC
 
-extension NSObject: ReerKitCompatible {}
+extension NSObject: ReerCompatible {}
 
 // MARK: - TypeName
 
@@ -95,7 +95,7 @@ public struct AssociationKey {
     }
 }
 
-public extension ReerKitWrapper where Base: NSObject {
+public extension Reer where Base: NSObject {
     
     /// ReerKit: Sets an associated value for self using a given key and association policy.
     ///
@@ -172,7 +172,7 @@ public extension ReerKitWrapper where Base: NSObject {
 
 public typealias OnceKey = AssociationKey
 
-public extension ReerKitWrapper where Base: NSObject {
+public extension Reer where Base: NSObject {
     
     /// ReerKit: Execute the passed closure once by a key during the object life time.
     ///
@@ -197,7 +197,7 @@ public extension ReerKitWrapper where Base: NSObject {
 
 // MARK: - Swizzle
 
-public extension ReerKitWrapper where Base: NSObject {
+public extension Reer where Base: NSObject {
     
     
     /// ReerKit: Swizzle instance method of the class.

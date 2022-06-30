@@ -21,8 +21,8 @@
 //  THE SOFTWARE.
 
 // MARK: - Properties
-extension Bool: ReerKitCompatibleValue {}
-public extension ReerKitWrapper where Base == Bool {
+extension Bool: ReerCompatibleValue {}
+public extension Reer where Base == Bool {
     
     /// ReerKit: Return 1 if true, or 0 if false.
     ///

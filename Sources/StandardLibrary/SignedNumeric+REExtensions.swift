@@ -26,21 +26,21 @@ import Foundation
 
 public extension SignedNumeric {
     /// Gets a namespace holder for ReerKit compatible types.
-    var re: ReerKitWrapper<Self> {
-        get { return ReerKitWrapper(self) }
+    var re: Reer<Self> {
+        get { return Reer(self) }
         set {}
     }
     
     /// Gets a namespace holder for ReerKit compatible meta types.
-    static var re: ReerKitWrapper<Self>.Type {
-        get { return ReerKitWrapper.self }
+    static var re: Reer<Self>.Type {
+        get { return Reer.self }
         set {}
     }
 }
 
 // MARK: - Properties
 
-public extension ReerKitWrapper where Base: SignedNumeric {
+public extension Reer where Base: SignedNumeric {
     
     /// ReerKit: String.
     var string: String {
@@ -50,7 +50,7 @@ public extension ReerKitWrapper where Base: SignedNumeric {
 
 // MARK: - Methods
 
-public extension ReerKitWrapper where Base: SignedNumeric {
+public extension Reer where Base: SignedNumeric {
     
     #if canImport(Foundation)
     /// ReerKit: String with number and current locale currency.

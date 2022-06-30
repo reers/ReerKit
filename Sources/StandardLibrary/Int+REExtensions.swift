@@ -31,7 +31,7 @@ import Glibc
 #endif
 
 // MARK: - Properties
-public extension ReerKitWrapper where Base == Int {
+public extension Reer where Base == Int {
     
     /// ReerKit: Bool
     var bool: Bool {
@@ -114,7 +114,7 @@ public extension ReerKitWrapper where Base == Int {
     }
 }
 
-public extension ReerKitWrapper where Base == Int {
+public extension Reer where Base == Int {
     
     /// ReerKit: check if given integer prime or not.
     /// Warning: Using big numbers can be computationally expensive!

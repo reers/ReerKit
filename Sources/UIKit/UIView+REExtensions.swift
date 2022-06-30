@@ -25,7 +25,7 @@ import UIKit
 
 // MARK: - Frame
 
-public extension ReerKitWrapper where Base: UIView {
+public extension Reer where Base: UIView {
     
     /// ReerKit: Shortcut for frame.origin.x
     var x: CGFloat {
@@ -142,7 +142,7 @@ public extension ReerKitWrapper where Base: UIView {
 
 // MARK: - CALayer Bridge
 
-public extension ReerKitWrapper where Base: UIView {
+public extension Reer where Base: UIView {
     
     /// ReerKit: Border color of view.
     var borderColor: UIColor? {
@@ -207,7 +207,7 @@ public extension ReerKitWrapper where Base: UIView {
 
 // MARK: - Properties
 
-extension ReerKitWrapper where Base: UIView {
+extension Reer where Base: UIView {
     
     /// ReerKit: Create a snapshot image of the complete view hierarchy.
     var snapshotImage: UIImage? {
@@ -246,7 +246,7 @@ extension ReerKitWrapper where Base: UIView {
 
 // MARK: - Method
 
-public extension ReerKitWrapper where Base: UIView {
+public extension Reer where Base: UIView {
     
     /// ReerKit: Create a snapshot image of the complete view hierarchy.
     /// It's faster than `snapshotImage`, but may cause screen updates.

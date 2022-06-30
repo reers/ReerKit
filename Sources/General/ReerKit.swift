@@ -21,7 +21,7 @@
 
 /// Wrapper for ReerKit compatible types. This type provides an extension point for
 /// connivence methods in ReerKit.
-public struct ReerKitWrapper<Base> {
+public struct Reer<Base> {
     public let base: Base
     public init(_ base: Base) {
         self.base = base
@@ -30,36 +30,36 @@ public struct ReerKitWrapper<Base> {
 
 /// Represents an object type that is compatible with ReerKit. You can use `re` property to get a
 /// value in the namespace of ReerKit.
-public protocol ReerKitCompatible: AnyObject {}
+public protocol ReerCompatible: AnyObject {}
 
 /// Represents a value type that is compatible with ReerKit. You can use `re` property to get a
 /// value in the namespace of ReerKit.
-public protocol ReerKitCompatibleValue {}
+public protocol ReerCompatibleValue {}
 
-extension ReerKitCompatible {
+extension ReerCompatible {
     /// Gets a namespace holder for ReerKit compatible types.
-    public var re: ReerKitWrapper<Self> {
-        get { return ReerKitWrapper(self) }
+    public var re: Reer<Self> {
+        get { return Reer(self) }
         set {}
     }
     
     /// Gets a namespace holder for ReerKit compatible meta types.
-    public static var re: ReerKitWrapper<Self>.Type {
-        get { return ReerKitWrapper.self }
+    public static var re: Reer<Self>.Type {
+        get { return Reer.self }
         set {}
     }
 }
 
-extension ReerKitCompatibleValue {
+extension ReerCompatibleValue {
     /// Gets a namespace holder for ReerKit compatible types.
-    public var re: ReerKitWrapper<Self> {
-        get { return ReerKitWrapper(self) }
+    public var re: Reer<Self> {
+        get { return Reer(self) }
         set {}
     }
     
     /// Gets a namespace holder for ReerKit compatible meta types.
-    public static var re: ReerKitWrapper<Self>.Type {
-        get { return ReerKitWrapper.self }
+    public static var re: Reer<Self>.Type {
+        get { return Reer.self }
         set {}
     }
 }

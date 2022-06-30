@@ -63,3 +63,32 @@ extension ReerCompatibleValue {
         set {}
     }
 }
+
+/// Wrapper for ReerKit compatible types with a generic parameter. This type provides an extension point for
+/// connivence methods in ReerKit.
+public struct ReerGeneric<Base, T> {
+    public let base: Base
+    public init(_ base: Base) {
+        self.base = base
+    }
+}
+
+/// Represents a type with a generic parameter that is compatible with ReerKit. You can use `re` property to get a
+/// value in the namespace of ReerKit.
+public protocol ReerGenericCompatible {
+    associatedtype T
+}
+
+public extension ReerGenericCompatible {
+    /// Gets a namespace holder for ReerKit compatible types.
+    var re: ReerGeneric<Self, T> {
+        get { return ReerGeneric(self) }
+        set {}
+    }
+    
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    static var re: ReerGeneric<Self, T>.Type {
+        get { return ReerGeneric<Self, T>.self }
+        set {}
+    }
+}

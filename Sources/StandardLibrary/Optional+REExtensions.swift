@@ -19,6 +19,15 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+#if canImport(CoreGraphics)
+import CoreGraphics
+#endif
+
+postfix operator >!
+public postfix func >! <T>(value: T) -> T? {
+    return Optional(value)
+}
+
 extension Optional: ReerGenericCompatible {
     public typealias T = Wrapped
 }
@@ -93,6 +102,201 @@ public extension ReerGeneric where Base == Optional<T> {
     func run(_ action: (T) -> Void) {
         _ = base.map(action)
     }
+}
+
+// MARK: - Get bool/string/int/float/double/cgFloat value from the optional.
+
+public extension ReerGeneric where Base == Optional<T> {
+    
+    /// ReerKit: Transform the optional wrapped value to `Bool` if possible.
+    ///
+    ///     let a: Any? = 23
+    ///     a.re.bool -> Optional(true)
+    var bool: Bool? {
+        if isNil { return nil }
+        if let bool = base as? Bool {
+            return bool
+        } else if let stringConvertible = base as? CustomStringConvertible,
+                  let double = Double(stringConvertible.description) {
+            return double != .zero
+        } else if let string = base as? String {
+            if let int = string>!.re.int {
+                return int != 0
+            } else if string.count <= 5 {
+                let lowercased = string.lowercased()
+                if lowercased == "true" || lowercased == "yes" {
+                    return true
+                } else if lowercased == "false" || lowercased == "no" {
+                    return false
+                } else {
+                    return nil
+                }
+            } else {
+                return nil
+            }
+        } else {
+            return nil
+        }
+    }
+    
+    /// ReerKit: Transform the optional wrapped value to `Bool` if possible.
+    /// Return `false` if failed.
+    var boolValue: Bool {
+        boolValue(default: false)
+    }
+    
+    /// ReerKit: Transform the optional wrapped value to `Bool` if possible.
+    /// Return the passed default value if it is nil.
+    func boolValue(default defaultValue: Bool) -> Bool {
+        guard let bool = bool else { return defaultValue }
+        return bool
+    }
+    
+    /// ReerKit: Transform the optional wrapped value to `Int` if possible.
+    ///
+    ///     let a: Any? = "23"
+    ///     a.re.int -> Optional(23)
+    var int: Int? {
+        if isNil { return nil }
+        if let stringConvertible = base as? CustomStringConvertible,
+           let double = Double(stringConvertible.description) {
+            return Int(double)
+        } else if let bool = base as? Bool {
+            return bool ? 1 : 0
+        } else {
+            return nil
+        }
+    }
+    
+    /// ReerKit: Transform the optional wrapped value to `Int` if possible.
+    /// Return `0` if failed.
+    var intValue: Int {
+        intValue(default: 0)
+    }
+    
+    /// ReerKit: Transform the optional wrapped value to `Int` if possible.
+    /// Return the passed default value if it is nil.
+    func intValue(default defaultValue: Int) -> Int {
+        guard let int = int else { return defaultValue }
+        return int
+    }
+    
+    /// ReerKit: Transform the optional wrapped value to `String` if possible.
+    ///
+    ///     let a: Any? = 23
+    ///     a.re.string -> Optional("23")
+    var string: String? {
+        if let string = base as? String {
+            return string
+        } else if let bool = base as? Bool {
+            return bool ? "true" : "false"
+        } else if let stringConvertible = base as? CustomStringConvertible {
+            if let int = Int(stringConvertible.description) {
+                return int.description
+            } else if let double = Double(stringConvertible.description) {
+                return double.description
+            } else {
+                return nil
+            }
+        } else {
+            return nil
+        }
+    }
+    
+    /// ReerKit: Transform the optional wrapped value to `String` if possible.
+    /// Return `""` if failed.
+    var stringValue: String {
+        stringValue(default: "")
+    }
+    
+    /// ReerKit: Transform the optional wrapped value to `String` if possible.
+    /// Return the passed default value if it is nil.
+    func stringValue(default defaultValue: String) -> String {
+        guard let string = string else { return defaultValue }
+        return string
+    }
+    
+    /// ReerKit: Transform the optional wrapped value to `Double` if possible.
+    ///
+    ///     let a: Any? = 23
+    ///     a.re.double -> Optional(23.0)
+    var double: Double? {
+        if isNil { return nil }
+        if let stringConvertible = base as? CustomStringConvertible,
+           let double = Double(stringConvertible.description) {
+            return double
+        } else if let bool = base as? Bool {
+            return bool ? 1.0 : 0.0
+        } else {
+            return nil
+        }
+    }
+    
+    /// ReerKit: Transform the optional wrapped value to `Double` if possible.
+    /// Return `0` if failed.
+    var doubleValue: Double {
+        doubleValue(default: 0.0)
+    }
+    
+    /// ReerKit: Transform the optional wrapped value to `Double` if possible.
+    /// Return the passed default value if it is nil.
+    func doubleValue(default defaultValue: Double) -> Double {
+        guard let double = double else { return defaultValue }
+        return double
+    }
+    
+    /// ReerKit: Transform the optional wrapped value to `Float` if possible.
+    ///
+    ///     let a: Any? = 23
+    ///     a.re.float -> Optional(23.0)
+    var float: Float? {
+        if isNil { return nil }
+        if let stringConvertible = base as? CustomStringConvertible,
+           let float = Float(stringConvertible.description) {
+            return float
+        } else if let bool = base as? Bool {
+            return bool ? 1.0 : 0.0
+        } else {
+            return nil
+        }
+    }
+    
+    /// ReerKit: Transform the optional wrapped value to `Float` if possible.
+    /// Return `0` if failed.
+    var floatValue: Float {
+        floatValue(default: 0.0)
+    }
+    
+    /// ReerKit: Transform the optional wrapped value to `Float` if possible.
+    /// Return the passed default value if it is nil.
+    func floatValue(default defaultValue: Float) -> Float {
+        guard let float = float else { return defaultValue }
+        return float
+    }
+    
+    #if canImport(CoreGraphics)
+    /// ReerKit: Transform the optional wrapped value to `CGFloat` if possible.
+    ///
+    ///     let a: Any? = 23
+    ///     a.re.cgFloat -> Optional(23.0)
+    var cgFloat: CGFloat? {
+        guard let double = double else { return nil }
+        return CGFloat(double)
+    }
+    
+    /// ReerKit: Transform the optional wrapped value to `CGFloat` if possible.
+    /// Return `0` if failed.
+    var cgFloatValue: CGFloat {
+        cgFloatValue(default: 0.0)
+    }
+    
+    /// ReerKit: Transform the optional wrapped value to `CGFloat` if possible.
+    /// Return the passed default value if it is nil.
+    func cgFloatValue(default defaultValue: CGFloat) -> CGFloat {
+        guard let cgFloat = cgFloat else { return defaultValue }
+        return cgFloat
+    }
+    #endif
 }
 
 // MARK: - Check Optional<Collection> is nil or empty.

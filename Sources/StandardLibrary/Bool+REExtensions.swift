@@ -26,8 +26,8 @@ public extension Reer where Base == Bool {
     
     /// ReerKit: Return 1 if true, or 0 if false.
     ///
-    ///     false.int -> 0
-    ///     true.int -> 1
+    ///     false.re.int -> 0
+    ///     true.re.int -> 1
     ///
     var int: Int {
         return base ? 1 : 0
@@ -35,8 +35,8 @@ public extension Reer where Base == Bool {
     
     /// ReerKit: Return "true" if true, or "false" if false.
     ///
-    ///     false.string -> "false"
-    ///     true.string -> "true"
+    ///     false.re.string -> "false"
+    ///     true.re.string -> "true"
     ///
     var string: String {
         return base.description

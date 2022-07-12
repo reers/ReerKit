@@ -36,6 +36,8 @@
 		D0C95FE02857AC1A00D0522D /* SignedNumeric+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FDF2857AC1A00D0522D /* SignedNumeric+REExtensions.swift */; };
 		D0C95FE22857AD5D00D0522D /* SignedNumericExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FE12857AD5D00D0522D /* SignedNumericExtensionsTests.swift */; };
 		D0C95FE42857B4C400D0522D /* IntExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FE32857B4C400D0522D /* IntExtensionsTests.swift */; };
+		D0F39A7C287DC70100A754B2 /* Character+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F39A7B287DC70100A754B2 /* Character+REExtensions.swift */; };
+		D0F39A7E287DC9B600A754B2 /* CharacterExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F39A7D287DC9B600A754B2 /* CharacterExtensionsTests.swift */; };
 		D0FB4056286362F10019D56A /* Once.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FB4055286362F10019D56A /* Once.swift */; };
 		D0FB4058286363380019D56A /* OnceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FB4057286363380019D56A /* OnceTests.swift */; };
 /* End PBXBuildFile section */
@@ -81,6 +83,8 @@
 		D0C95FDF2857AC1A00D0522D /* SignedNumeric+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignedNumeric+REExtensions.swift"; sourceTree = "<group>"; };
 		D0C95FE12857AD5D00D0522D /* SignedNumericExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedNumericExtensionsTests.swift; sourceTree = "<group>"; };
 		D0C95FE32857B4C400D0522D /* IntExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensionsTests.swift; sourceTree = "<group>"; };
+		D0F39A7B287DC70100A754B2 /* Character+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Character+REExtensions.swift"; sourceTree = "<group>"; };
+		D0F39A7D287DC9B600A754B2 /* CharacterExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterExtensionsTests.swift; sourceTree = "<group>"; };
 		D0FB4055286362F10019D56A /* Once.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Once.swift; sourceTree = "<group>"; };
 		D0FB4057286363380019D56A /* OnceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -246,6 +250,7 @@
 				D0C95FDB28579B5500D0522D /* SignedInteger+REExtensions.swift */,
 				D0C95FDF2857AC1A00D0522D /* SignedNumeric+REExtensions.swift */,
 				D0397611286E111800C33E17 /* Optional+REExtensions.swift */,
+				D0F39A7B287DC70100A754B2 /* Character+REExtensions.swift */,
 			);
 			path = StandardLibrary;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 				D0C95FE12857AD5D00D0522D /* SignedNumericExtensionsTests.swift */,
 				D0C95FE32857B4C400D0522D /* IntExtensionsTests.swift */,
 				D0397613286E12A900C33E17 /* OptionalExtensionsTests.swift */,
+				D0F39A7D287DC9B600A754B2 /* CharacterExtensionsTests.swift */,
 			);
 			path = StandardLibraryExtensionsTests;
 			sourceTree = "<group>";
@@ -377,6 +383,7 @@
 				D0C95FD52857899F00D0522D /* Bool+REExtensions.swift in Sources */,
 				D0FB4056286362F10019D56A /* Once.swift in Sources */,
 				D0B1210F2855079000B5B326 /* UIView+REExtensions.swift in Sources */,
+				D0F39A7C287DC70100A754B2 /* Character+REExtensions.swift in Sources */,
 				D04D34F7286C7A8A001E974C /* DispatchQueue+REExtensions.swift in Sources */,
 				D0C95FDA2857999D00D0522D /* Int+REExtensions.swift in Sources */,
 				D04D34F4286C7390001E974C /* Utils.swift in Sources */,
@@ -406,6 +413,7 @@
 				D0B1211B285510B200B5B326 /* NSObjectExtensionsTests.swift in Sources */,
 				D0397614286E12A900C33E17 /* OptionalExtensionsTests.swift in Sources */,
 				D0FB4058286363380019D56A /* OnceTests.swift in Sources */,
+				D0F39A7E287DC9B600A754B2 /* CharacterExtensionsTests.swift in Sources */,
 				D0C95FE42857B4C400D0522D /* IntExtensionsTests.swift in Sources */,
 				D0C95FE22857AD5D00D0522D /* SignedNumericExtensionsTests.swift in Sources */,
 				D0C95FD8285793A000D0522D /* BoolExtensionsTests.swift in Sources */,

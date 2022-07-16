@@ -22,6 +22,7 @@
 		D04D34FC286C843B001E974C /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34FB286C843B001E974C /* UtilsTests.swift */; };
 		D07E53AB2883083300921873 /* RETimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AA2883083300921873 /* RETimer.swift */; };
 		D07E53AD288309DF00921873 /* RETimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AC288309DF00921873 /* RETimerTests.swift */; };
+		D07E53AF2883137000921873 /* WeakProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AE2883137000921873 /* WeakProxy.swift */; };
 		D0A0040628620D9900D2FA7C /* TypeNameDescribableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */; };
 		D0B120FD285505AA00B5B326 /* ReerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B120F4285505AA00B5B326 /* ReerKit.framework */; };
 		D0B1210F2855079000B5B326 /* UIView+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B1210E2855079000B5B326 /* UIView+REExtensions.swift */; };
@@ -73,6 +74,7 @@
 		D04D34FB286C843B001E974C /* UtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTests.swift; sourceTree = "<group>"; };
 		D07E53AA2883083300921873 /* RETimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimer.swift; sourceTree = "<group>"; };
 		D07E53AC288309DF00921873 /* RETimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimerTests.swift; sourceTree = "<group>"; };
+		D07E53AE2883137000921873 /* WeakProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakProxy.swift; sourceTree = "<group>"; };
 		D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeNameDescribableTests.swift; sourceTree = "<group>"; };
 		D0B120F4285505AA00B5B326 /* ReerKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B120FC285505AA00B5B326 /* ReerKit-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ReerKit-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				D0B1211428550E1000B5B326 /* NSObject+REExtensions.swift */,
+				D07E53AE2883137000921873 /* WeakProxy.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				D0B1211528550E1000B5B326 /* NSObject+REExtensions.swift in Sources */,
 				D0B1211E2855156200B5B326 /* TypeNameDescribable.swift in Sources */,
 				D0F39A80287DD42300A754B2 /* Sequence+REExtensions.swift in Sources */,
+				D07E53AF2883137000921873 /* WeakProxy.swift in Sources */,
 				D004CC49285A41F500C41360 /* Synchronizing.swift in Sources */,
 				D0397612286E111800C33E17 /* Optional+REExtensions.swift in Sources */,
 				D07E53AB2883083300921873 /* RETimer.swift in Sources */,

@@ -177,6 +177,11 @@ public class RETimer {
             timer.schedule(deadline: .now() + delayTime + deadlineTime)
         }
     }()
+    
+    /// ReerKit: Resumes the timer. Same to `schedule()`.
+    public func resume() {
+        schedule()
+    }
 
     /// ReerKit: Suspends the timer.
     public func suspend() {

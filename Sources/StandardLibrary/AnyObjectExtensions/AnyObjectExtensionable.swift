@@ -19,19 +19,9 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#if canImport(ObjectiveC)
-import ObjectiveC
-
-extension NSObject: ReerCompatible {}
-
-
-// MARK: - TypeName
-
-extension NSObject: TypeNameDescribable {}
-
-
-// MARK: - Association & Once & Swizzle
-
-extension NSObject: AnyObjectExtensionable {}
-
-#endif
+/// ReerKit: Combinations of AnyObject extension protocols.
+/// You must conform this protocol by yourself if your class is NOT inheriting from `NSObject`.
+public typealias AnyObjectExtensionable =
+    Associatable
+    & OnceExecutable
+    & Swizzlable

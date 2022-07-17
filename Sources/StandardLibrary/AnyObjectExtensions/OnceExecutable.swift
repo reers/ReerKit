@@ -22,16 +22,32 @@
 #if canImport(ObjectiveC)
 import ObjectiveC
 
-extension NSObject: ReerCompatible {}
+/// The ability to execute a closure once.
+/// You must conform this protocol by yourself if your class is NOT inheriting from `NSObject`.
+public protocol OnceExecutable: ReerCompatible {}
 
+public typealias OnceKey = AssociationKey
 
-// MARK: - TypeName
-
-extension NSObject: TypeNameDescribable {}
-
-
-// MARK: - Association & Once & Swizzle
-
-extension NSObject: AnyObjectExtensionable {}
-
+public extension Reer where Base: AnyObject {
+    
+    /// ReerKit: Execute the passed closure once by a key during the object life time.
+    ///
+    ///     let obj = NSObject()
+    ///     func test() {
+    ///         obj.re.executeOnce(byKey: key) { print("once") }
+    ///     }
+    ///     test()
+    ///     test()
+    ///     obj.re.executeOnce(byKey: key) { print("once") }
+    ///     // output: once
+    func executeOnce<Result>(byKey key: OnceKey, _ execute: @escaping () throws -> Result) rethrows -> Result {
+        if let lastExecutedResult = objc_getAssociatedObject(base, key.address) as! Result? {
+            return lastExecutedResult
+        } else {
+            let result = try execute()
+            defer { objc_setAssociatedObject(base, key.address, result, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+            return result
+        }
+    }
+}
 #endif

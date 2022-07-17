@@ -102,5 +102,29 @@ class AnyObjectExtensionsTests: XCTestCase {
         TestSwizzle.re.swizzleClassMethod(#selector(TestSwizzle.classMethodTest), with: #selector(TestSwizzle.swizzled_classMethodTest))
         XCTAssertEqual(TestSwizzle.classMethodTest(), 1)
     }
+    
+    func testDeinitObservable() {
+        let expectation = self.expectation(description: "testDeinitObservable")
+        var result = 0
+        var foo: TestAnyObject? = TestAnyObject()
+        
+        foo?.re.onDeinit {
+            result += 1
+        }
+        
+        foo?.re.onDeinit {
+            result += 1
+        }
 
+        RETimer.after(0.5) {
+            foo = nil
+        }
+        
+        RETimer.after(1) {
+            XCTAssertEqual(result, 2)
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.5, handler: nil)
+    }
 }

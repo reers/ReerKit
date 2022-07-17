@@ -46,6 +46,9 @@
 		D0EBE2392884797B004925E5 /* OnceExecutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE2382884797B004925E5 /* OnceExecutable.swift */; };
 		D0EBE23B28847B72004925E5 /* Swizzlable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE23A28847B72004925E5 /* Swizzlable.swift */; };
 		D0EBE23D28847EC4004925E5 /* AnyObjectExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE23C28847EC4004925E5 /* AnyObjectExtensionsTests.swift */; };
+		D0EBE23F28848939004925E5 /* DeinitObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE23E28848939004925E5 /* DeinitObservable.swift */; };
+		D0EBE241288492B2004925E5 /* DeinitObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE240288492B2004925E5 /* DeinitObserver.swift */; };
+		D0EBE243288493F8004925E5 /* DeinitObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE242288493F8004925E5 /* DeinitObserverTests.swift */; };
 		D0F39A7C287DC70100A754B2 /* Character+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F39A7B287DC70100A754B2 /* Character+REExtensions.swift */; };
 		D0F39A7E287DC9B600A754B2 /* CharacterExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F39A7D287DC9B600A754B2 /* CharacterExtensionsTests.swift */; };
 		D0F39A80287DD42300A754B2 /* Sequence+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F39A7F287DD42300A754B2 /* Sequence+REExtensions.swift */; };
@@ -106,6 +109,9 @@
 		D0EBE2382884797B004925E5 /* OnceExecutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnceExecutable.swift; sourceTree = "<group>"; };
 		D0EBE23A28847B72004925E5 /* Swizzlable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swizzlable.swift; sourceTree = "<group>"; };
 		D0EBE23C28847EC4004925E5 /* AnyObjectExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyObjectExtensionsTests.swift; sourceTree = "<group>"; };
+		D0EBE23E28848939004925E5 /* DeinitObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeinitObservable.swift; sourceTree = "<group>"; };
+		D0EBE240288492B2004925E5 /* DeinitObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeinitObserver.swift; sourceTree = "<group>"; };
+		D0EBE242288493F8004925E5 /* DeinitObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeinitObserverTests.swift; sourceTree = "<group>"; };
 		D0F39A7B287DC70100A754B2 /* Character+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Character+REExtensions.swift"; sourceTree = "<group>"; };
 		D0F39A7D287DC9B600A754B2 /* CharacterExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterExtensionsTests.swift; sourceTree = "<group>"; };
 		D0F39A7F287DD42300A754B2 /* Sequence+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Sequence+REExtensions.swift"; path = "../../../Desktop/Sequence+REExtensions.swift"; sourceTree = "<group>"; };
@@ -143,6 +149,7 @@
 				D0FB4057286363380019D56A /* OnceTests.swift */,
 				D04D34FB286C843B001E974C /* UtilsTests.swift */,
 				D07E53AC288309DF00921873 /* RETimerTests.swift */,
+				D0EBE242288493F8004925E5 /* DeinitObserverTests.swift */,
 			);
 			path = UtilityTests;
 			sourceTree = "<group>";
@@ -261,6 +268,7 @@
 				D0FB4055286362F10019D56A /* Once.swift */,
 				D04D34F3286C7390001E974C /* Utils.swift */,
 				D07E53AA2883083300921873 /* RETimer.swift */,
+				D0EBE240288492B2004925E5 /* DeinitObserver.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -311,6 +319,7 @@
 				D0EBE236288476DB004925E5 /* Associatable.swift */,
 				D0EBE2382884797B004925E5 /* OnceExecutable.swift */,
 				D0EBE23A28847B72004925E5 /* Swizzlable.swift */,
+				D0EBE23E28848939004925E5 /* DeinitObservable.swift */,
 			);
 			path = AnyObjectExtensions;
 			sourceTree = "<group>";
@@ -434,9 +443,11 @@
 				D04D34F7286C7A8A001E974C /* DispatchQueue+REExtensions.swift in Sources */,
 				D0C95FDA2857999D00D0522D /* Int+REExtensions.swift in Sources */,
 				D04D34F4286C7390001E974C /* Utils.swift in Sources */,
+				D0EBE241288492B2004925E5 /* DeinitObserver.swift in Sources */,
 				D0038B7D285642B600A890F9 /* Locked.swift in Sources */,
 				D0038B8128565B9500A890F9 /* ReadWriteLock.swift in Sources */,
 				D0B121122855089000B5B326 /* ReerKit.swift in Sources */,
+				D0EBE23F28848939004925E5 /* DeinitObservable.swift in Sources */,
 				D0EBE2352884765F004925E5 /* AnyObjectExtensionable.swift in Sources */,
 				D0F39A84287DF21300A754B2 /* TestHelpers.swift in Sources */,
 				D0C95FDC28579B5500D0522D /* SignedInteger+REExtensions.swift in Sources */,
@@ -477,6 +488,7 @@
 				D0C95FE22857AD5D00D0522D /* SignedNumericExtensionsTests.swift in Sources */,
 				D0EBE23D28847EC4004925E5 /* AnyObjectExtensionsTests.swift in Sources */,
 				D0C95FD8285793A000D0522D /* BoolExtensionsTests.swift in Sources */,
+				D0EBE243288493F8004925E5 /* DeinitObserverTests.swift in Sources */,
 				D04D34FC286C843B001E974C /* UtilsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

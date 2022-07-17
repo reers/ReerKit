@@ -19,10 +19,39 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-/// ReerKit: Combinations of AnyObject extension protocols.
-/// You must conform this protocol by yourself if your class is NOT inheriting from `NSObject`.
-public typealias AnyObjectExtensionable =
-    Associatable
-    & OnceExecutable
-    & Swizzlable
-    & DeinitObservable
+#if canImport(ObjectiveC)
+import ObjectiveC
+
+fileprivate final class DeinitObserver<Object> where Object: AnyObject {
+    
+    private weak var object: Object?
+    
+    private let onDeinit: () -> Void
+        
+    deinit {
+        onDeinit()
+    }
+    
+    init(for object: Object, onDeinit: @escaping () -> Void) {
+        self.object = object
+        self.onDeinit = onDeinit
+    }
+    
+    private var deinitObserveKey: Void?
+    
+    func observe() {
+        guard let object = object else { return }
+        objc_setAssociatedObject(
+            object,
+            &deinitObserveKey,
+            self,
+            .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+        )
+    }
+}
+
+/// ReerKit: Global function to observe deinit for the object.
+public func observeDeinit<Object: AnyObject>(for object: Object, onDeinit: @escaping () -> Void) {
+    DeinitObserver(for: object, onDeinit: onDeinit).observe()
+}
+#endif

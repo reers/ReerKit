@@ -19,10 +19,17 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-/// ReerKit: Combinations of AnyObject extension protocols.
+#if canImport(ObjectiveC)
+import ObjectiveC
+
+/// The ability to observe AnyObject deinit.
 /// You must conform this protocol by yourself if your class is NOT inheriting from `NSObject`.
-public typealias AnyObjectExtensionable =
-    Associatable
-    & OnceExecutable
-    & Swizzlable
-    & DeinitObservable
+public protocol DeinitObservable: ReerCompatible {}
+
+public extension Reer where Base: AnyObject {
+    
+    func onDeinit(perform action: @escaping () -> Void) {
+        observeDeinit(for: base, onDeinit: action)
+    }
+}
+#endif

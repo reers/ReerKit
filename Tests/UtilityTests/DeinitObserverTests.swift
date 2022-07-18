@@ -16,7 +16,7 @@ class DeinitObserverTests: XCTestCase {
         let expectation = self.expectation(description: "testDeinitObserver")
         var result = 0
         var foo: Foo? = Foo()
-        observeDeinit(for: foo!) {
+        observeDeinit(for: foo) {
             result = 1
         }
 

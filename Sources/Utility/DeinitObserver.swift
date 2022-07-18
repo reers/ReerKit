@@ -54,4 +54,9 @@ fileprivate final class DeinitObserver<Object> where Object: AnyObject {
 public func observeDeinit<Object: AnyObject>(for object: Object, onDeinit: @escaping () -> Void) {
     DeinitObserver(for: object, onDeinit: onDeinit).observe()
 }
+
+public func observeDeinit<Object: AnyObject>(for object: Object?, onDeinit: @escaping () -> Void) {
+    guard let object = object else { return }
+    DeinitObserver(for: object, onDeinit: onDeinit).observe()
+}
 #endif

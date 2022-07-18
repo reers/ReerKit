@@ -20,6 +20,8 @@
 		D04D34F7286C7A8A001E974C /* DispatchQueue+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34F6286C7A8A001E974C /* DispatchQueue+REExtensions.swift */; };
 		D04D34FA286C836A001E974C /* DispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34F9286C836A001E974C /* DispatchTests.swift */; };
 		D04D34FC286C843B001E974C /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34FB286C843B001E974C /* UtilsTests.swift */; };
+		D06287142885C88000401B59 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06287132885C88000401B59 /* Weak.swift */; };
+		D06287162885D83100401B59 /* WeakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06287152885D83100401B59 /* WeakTests.swift */; };
 		D07E53AB2883083300921873 /* RETimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AA2883083300921873 /* RETimer.swift */; };
 		D07E53AD288309DF00921873 /* RETimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AC288309DF00921873 /* RETimerTests.swift */; };
 		D07E53AF2883137000921873 /* WeakProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AE2883137000921873 /* WeakProxy.swift */; };
@@ -82,6 +84,8 @@
 		D04D34F6286C7A8A001E974C /* DispatchQueue+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+REExtensions.swift"; sourceTree = "<group>"; };
 		D04D34F9286C836A001E974C /* DispatchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchTests.swift; sourceTree = "<group>"; };
 		D04D34FB286C843B001E974C /* UtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTests.swift; sourceTree = "<group>"; };
+		D06287132885C88000401B59 /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
+		D06287152885D83100401B59 /* WeakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakTests.swift; sourceTree = "<group>"; };
 		D07E53AA2883083300921873 /* RETimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimer.swift; sourceTree = "<group>"; };
 		D07E53AC288309DF00921873 /* RETimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimerTests.swift; sourceTree = "<group>"; };
 		D07E53AE2883137000921873 /* WeakProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakProxy.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 				D04D34FB286C843B001E974C /* UtilsTests.swift */,
 				D07E53AC288309DF00921873 /* RETimerTests.swift */,
 				D0EBE242288493F8004925E5 /* DeinitObserverTests.swift */,
+				D06287152885D83100401B59 /* WeakTests.swift */,
 			);
 			path = UtilityTests;
 			sourceTree = "<group>";
@@ -269,6 +274,7 @@
 				D04D34F3286C7390001E974C /* Utils.swift */,
 				D07E53AA2883083300921873 /* RETimer.swift */,
 				D0EBE240288492B2004925E5 /* DeinitObserver.swift */,
+				D06287132885C88000401B59 /* Weak.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -452,6 +458,7 @@
 				D0F39A84287DF21300A754B2 /* TestHelpers.swift in Sources */,
 				D0C95FDC28579B5500D0522D /* SignedInteger+REExtensions.swift in Sources */,
 				D0CBE62328832D78006F8BCB /* Timer+REExtensions.swift in Sources */,
+				D06287142885C88000401B59 /* Weak.swift in Sources */,
 				D0038B832856662B00A890F9 /* RWLocked.swift in Sources */,
 				D0038B7F2856581600A890F9 /* UnfairLock.swift in Sources */,
 				D0EBE237288476DB004925E5 /* Associatable.swift in Sources */,
@@ -476,6 +483,7 @@
 				D019B8F5285BA02900257A7D /* ReadWriteLockTests.swift in Sources */,
 				D04D34FA286C836A001E974C /* DispatchTests.swift in Sources */,
 				D0CBE62528833BF5006F8BCB /* TimerExtensionsTests.swift in Sources */,
+				D06287162885D83100401B59 /* WeakTests.swift in Sources */,
 				D0F39A82287DD82E00A754B2 /* SequenceExtensionsTests.swift in Sources */,
 				D0A0040628620D9900D2FA7C /* TypeNameDescribableTests.swift in Sources */,
 				D0B121212855207900B5B326 /* UIViewExtensionsTests.swift in Sources */,

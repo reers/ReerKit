@@ -54,7 +54,7 @@ public class WeakSet<T: AnyObject> {
         addDeinitObservers(for: self.objectSet)
     }
     
-    public var validObjects: [T] {
+    public var allObjects: [T] {
         return objectSet.compactMap { $0.object }
     }
     

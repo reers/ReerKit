@@ -16,6 +16,8 @@
 		D019B8F7285BA3CB00257A7D /* UnfairLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B8F6285BA3CB00257A7D /* UnfairLockTests.swift */; };
 		D0397612286E111800C33E17 /* Optional+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0397611286E111800C33E17 /* Optional+REExtensions.swift */; };
 		D0397614286E12A900C33E17 /* OptionalExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0397613286E12A900C33E17 /* OptionalExtensionsTests.swift */; };
+		D03D3E80288EE2EE00C95F36 /* URL+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03D3E7F288EE2EE00C95F36 /* URL+REExtensions.swift */; };
+		D03D3E84288EE6DC00C95F36 /* URLExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03D3E83288EE6DC00C95F36 /* URLExtensionsTests.swift */; };
 		D04D34F4286C7390001E974C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34F3286C7390001E974C /* Utils.swift */; };
 		D04D34F7286C7A8A001E974C /* DispatchQueue+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34F6286C7A8A001E974C /* DispatchQueue+REExtensions.swift */; };
 		D04D34FA286C836A001E974C /* DispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34F9286C836A001E974C /* DispatchTests.swift */; };
@@ -80,6 +82,8 @@
 		D019B8F6285BA3CB00257A7D /* UnfairLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfairLockTests.swift; sourceTree = "<group>"; };
 		D0397611286E111800C33E17 /* Optional+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+REExtensions.swift"; sourceTree = "<group>"; };
 		D0397613286E12A900C33E17 /* OptionalExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalExtensionsTests.swift; sourceTree = "<group>"; };
+		D03D3E7F288EE2EE00C95F36 /* URL+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+REExtensions.swift"; sourceTree = "<group>"; };
+		D03D3E83288EE6DC00C95F36 /* URLExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensionsTests.swift; sourceTree = "<group>"; };
 		D04D34F3286C7390001E974C /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		D04D34F6286C7A8A001E974C /* DispatchQueue+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+REExtensions.swift"; sourceTree = "<group>"; };
 		D04D34F9286C836A001E974C /* DispatchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchTests.swift; sourceTree = "<group>"; };
@@ -252,6 +256,7 @@
 				D0B1211428550E1000B5B326 /* NSObject+REExtensions.swift */,
 				D07E53AE2883137000921873 /* WeakProxy.swift */,
 				D0CBE62228832D78006F8BCB /* Timer+REExtensions.swift */,
+				D03D3E7F288EE2EE00C95F36 /* URL+REExtensions.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -261,6 +266,7 @@
 			children = (
 				D0B1211A285510B200B5B326 /* NSObjectExtensionsTests.swift */,
 				D0CBE62428833BF5006F8BCB /* TimerExtensionsTests.swift */,
+				D03D3E83288EE6DC00C95F36 /* URLExtensionsTests.swift */,
 			);
 			path = FoundationTests;
 			sourceTree = "<group>";
@@ -455,6 +461,7 @@
 				D0B121122855089000B5B326 /* ReerKit.swift in Sources */,
 				D0EBE23F28848939004925E5 /* DeinitObservable.swift in Sources */,
 				D0EBE2352884765F004925E5 /* AnyObjectExtensionable.swift in Sources */,
+				D03D3E80288EE2EE00C95F36 /* URL+REExtensions.swift in Sources */,
 				D0F39A84287DF21300A754B2 /* TestHelpers.swift in Sources */,
 				D0C95FDC28579B5500D0522D /* SignedInteger+REExtensions.swift in Sources */,
 				D0CBE62328832D78006F8BCB /* Timer+REExtensions.swift in Sources */,
@@ -480,6 +487,7 @@
 			files = (
 				D0C95FDE2857A24000D0522D /* SignedIntegerExtensionsTests.swift in Sources */,
 				D019B8F7285BA3CB00257A7D /* UnfairLockTests.swift in Sources */,
+				D03D3E84288EE6DC00C95F36 /* URLExtensionsTests.swift in Sources */,
 				D019B8F5285BA02900257A7D /* ReadWriteLockTests.swift in Sources */,
 				D04D34FA286C836A001E974C /* DispatchTests.swift in Sources */,
 				D0CBE62528833BF5006F8BCB /* TimerExtensionsTests.swift in Sources */,

@@ -20,6 +20,7 @@
 		D04D34F7286C7A8A001E974C /* DispatchQueue+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34F6286C7A8A001E974C /* DispatchQueue+REExtensions.swift */; };
 		D04D34FA286C836A001E974C /* DispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34F9286C836A001E974C /* DispatchTests.swift */; };
 		D04D34FC286C843B001E974C /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34FB286C843B001E974C /* UtilsTests.swift */; };
+		D053AF0A28B86582004335DC /* Sequence+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D053AF0928B86582004335DC /* Sequence+REExtensions.swift */; };
 		D06287142885C88000401B59 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06287132885C88000401B59 /* Weak.swift */; };
 		D06287162885D83100401B59 /* WeakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06287152885D83100401B59 /* WeakTests.swift */; };
 		D07E53AB2883083300921873 /* RETimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AA2883083300921873 /* RETimer.swift */; };
@@ -53,7 +54,6 @@
 		D0EBE243288493F8004925E5 /* DeinitObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE242288493F8004925E5 /* DeinitObserverTests.swift */; };
 		D0F39A7C287DC70100A754B2 /* Character+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F39A7B287DC70100A754B2 /* Character+REExtensions.swift */; };
 		D0F39A7E287DC9B600A754B2 /* CharacterExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F39A7D287DC9B600A754B2 /* CharacterExtensionsTests.swift */; };
-		D0F39A80287DD42300A754B2 /* Sequence+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F39A7F287DD42300A754B2 /* Sequence+REExtensions.swift */; };
 		D0F39A82287DD82E00A754B2 /* SequenceExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F39A81287DD82E00A754B2 /* SequenceExtensionsTests.swift */; };
 		D0F39A84287DF21300A754B2 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F39A83287DF21300A754B2 /* TestHelpers.swift */; };
 		D0FB4056286362F10019D56A /* Once.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FB4055286362F10019D56A /* Once.swift */; };
@@ -84,6 +84,7 @@
 		D04D34F6286C7A8A001E974C /* DispatchQueue+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+REExtensions.swift"; sourceTree = "<group>"; };
 		D04D34F9286C836A001E974C /* DispatchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchTests.swift; sourceTree = "<group>"; };
 		D04D34FB286C843B001E974C /* UtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTests.swift; sourceTree = "<group>"; };
+		D053AF0928B86582004335DC /* Sequence+REExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence+REExtensions.swift"; sourceTree = "<group>"; };
 		D06287132885C88000401B59 /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		D06287152885D83100401B59 /* WeakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakTests.swift; sourceTree = "<group>"; };
 		D07E53AA2883083300921873 /* RETimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimer.swift; sourceTree = "<group>"; };
@@ -118,7 +119,6 @@
 		D0EBE242288493F8004925E5 /* DeinitObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeinitObserverTests.swift; sourceTree = "<group>"; };
 		D0F39A7B287DC70100A754B2 /* Character+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Character+REExtensions.swift"; sourceTree = "<group>"; };
 		D0F39A7D287DC9B600A754B2 /* CharacterExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterExtensionsTests.swift; sourceTree = "<group>"; };
-		D0F39A7F287DD42300A754B2 /* Sequence+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Sequence+REExtensions.swift"; path = "../../../Desktop/Sequence+REExtensions.swift"; sourceTree = "<group>"; };
 		D0F39A81287DD82E00A754B2 /* SequenceExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensionsTests.swift; sourceTree = "<group>"; };
 		D0F39A83287DF21300A754B2 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		D0FB4055286362F10019D56A /* Once.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Once.swift; sourceTree = "<group>"; };
@@ -297,7 +297,7 @@
 				D0C95FDF2857AC1A00D0522D /* SignedNumeric+REExtensions.swift */,
 				D0397611286E111800C33E17 /* Optional+REExtensions.swift */,
 				D0F39A7B287DC70100A754B2 /* Character+REExtensions.swift */,
-				D0F39A7F287DD42300A754B2 /* Sequence+REExtensions.swift */,
+				D053AF0928B86582004335DC /* Sequence+REExtensions.swift */,
 			);
 			path = StandardLibrary;
 			sourceTree = "<group>";
@@ -460,13 +460,13 @@
 				D0CBE62328832D78006F8BCB /* Timer+REExtensions.swift in Sources */,
 				D06287142885C88000401B59 /* Weak.swift in Sources */,
 				D0038B832856662B00A890F9 /* RWLocked.swift in Sources */,
+				D053AF0A28B86582004335DC /* Sequence+REExtensions.swift in Sources */,
 				D0038B7F2856581600A890F9 /* UnfairLock.swift in Sources */,
 				D0EBE237288476DB004925E5 /* Associatable.swift in Sources */,
 				D0EBE2392884797B004925E5 /* OnceExecutable.swift in Sources */,
 				D0B1211528550E1000B5B326 /* NSObject+REExtensions.swift in Sources */,
 				D0EBE23B28847B72004925E5 /* Swizzlable.swift in Sources */,
 				D0B1211E2855156200B5B326 /* TypeNameDescribable.swift in Sources */,
-				D0F39A80287DD42300A754B2 /* Sequence+REExtensions.swift in Sources */,
 				D07E53AF2883137000921873 /* WeakProxy.swift in Sources */,
 				D004CC49285A41F500C41360 /* Synchronizing.swift in Sources */,
 				D0397612286E111800C33E17 /* Optional+REExtensions.swift in Sources */,

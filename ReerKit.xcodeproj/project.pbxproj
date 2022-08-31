@@ -44,6 +44,8 @@
 		D0C95FE42857B4C400D0522D /* IntExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FE32857B4C400D0522D /* IntExtensionsTests.swift */; };
 		D0CBE62328832D78006F8BCB /* Timer+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CBE62228832D78006F8BCB /* Timer+REExtensions.swift */; };
 		D0CBE62528833BF5006F8BCB /* TimerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CBE62428833BF5006F8BCB /* TimerExtensionsTests.swift */; };
+		D0E354C828BFBBE10000030B /* WeakSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C728BFBBE10000030B /* WeakSet.swift */; };
+		D0E354CA28BFBC060000030B /* WeakMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C928BFBC060000030B /* WeakMap.swift */; };
 		D0EBE2352884765F004925E5 /* AnyObjectExtensionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE2342884765F004925E5 /* AnyObjectExtensionable.swift */; };
 		D0EBE237288476DB004925E5 /* Associatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE236288476DB004925E5 /* Associatable.swift */; };
 		D0EBE2392884797B004925E5 /* OnceExecutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE2382884797B004925E5 /* OnceExecutable.swift */; };
@@ -109,6 +111,8 @@
 		D0C95FE32857B4C400D0522D /* IntExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensionsTests.swift; sourceTree = "<group>"; };
 		D0CBE62228832D78006F8BCB /* Timer+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timer+REExtensions.swift"; sourceTree = "<group>"; };
 		D0CBE62428833BF5006F8BCB /* TimerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerExtensionsTests.swift; sourceTree = "<group>"; };
+		D0E354C728BFBBE10000030B /* WeakSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakSet.swift; sourceTree = "<group>"; };
+		D0E354C928BFBC060000030B /* WeakMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakMap.swift; sourceTree = "<group>"; };
 		D0EBE2342884765F004925E5 /* AnyObjectExtensionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyObjectExtensionable.swift; sourceTree = "<group>"; };
 		D0EBE236288476DB004925E5 /* Associatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Associatable.swift; sourceTree = "<group>"; };
 		D0EBE2382884797B004925E5 /* OnceExecutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnceExecutable.swift; sourceTree = "<group>"; };
@@ -250,7 +254,6 @@
 			isa = PBXGroup;
 			children = (
 				D0B1211428550E1000B5B326 /* NSObject+REExtensions.swift */,
-				D07E53AE2883137000921873 /* WeakProxy.swift */,
 				D0CBE62228832D78006F8BCB /* Timer+REExtensions.swift */,
 			);
 			path = Foundation;
@@ -268,13 +271,13 @@
 		D0B1211C2855154100B5B326 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				D0E354C628BFBB710000030B /* Weak */,
 				D0A0040728621C7600D2FA7C /* Lock */,
 				D0B1211D2855156200B5B326 /* TypeNameDescribable.swift */,
 				D0FB4055286362F10019D56A /* Once.swift */,
 				D04D34F3286C7390001E974C /* Utils.swift */,
 				D07E53AA2883083300921873 /* RETimer.swift */,
 				D0EBE240288492B2004925E5 /* DeinitObserver.swift */,
-				D06287132885C88000401B59 /* Weak.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -316,6 +319,17 @@
 				D0EBE23C28847EC4004925E5 /* AnyObjectExtensionsTests.swift */,
 			);
 			path = StandardLibraryExtensionsTests;
+			sourceTree = "<group>";
+		};
+		D0E354C628BFBB710000030B /* Weak */ = {
+			isa = PBXGroup;
+			children = (
+				D07E53AE2883137000921873 /* WeakProxy.swift */,
+				D06287132885C88000401B59 /* Weak.swift */,
+				D0E354C728BFBBE10000030B /* WeakSet.swift */,
+				D0E354C928BFBC060000030B /* WeakMap.swift */,
+			);
+			path = Weak;
 			sourceTree = "<group>";
 		};
 		D0EBE23328847620004925E5 /* AnyObjectExtensions */ = {
@@ -441,6 +455,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0E354C828BFBBE10000030B /* WeakSet.swift in Sources */,
 				D0C95FE02857AC1A00D0522D /* SignedNumeric+REExtensions.swift in Sources */,
 				D0C95FD52857899F00D0522D /* Bool+REExtensions.swift in Sources */,
 				D0FB4056286362F10019D56A /* Once.swift in Sources */,
@@ -454,6 +469,7 @@
 				D0038B8128565B9500A890F9 /* ReadWriteLock.swift in Sources */,
 				D0B121122855089000B5B326 /* ReerKit.swift in Sources */,
 				D0EBE23F28848939004925E5 /* DeinitObservable.swift in Sources */,
+				D0E354CA28BFBC060000030B /* WeakMap.swift in Sources */,
 				D0EBE2352884765F004925E5 /* AnyObjectExtensionable.swift in Sources */,
 				D0F39A84287DF21300A754B2 /* TestHelpers.swift in Sources */,
 				D0C95FDC28579B5500D0522D /* SignedInteger+REExtensions.swift in Sources */,

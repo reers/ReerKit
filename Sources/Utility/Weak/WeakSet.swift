@@ -19,53 +19,38 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-/// Weak wrapper for AnyObject.
-public struct Weak<T: AnyObject> {
-    public private(set) weak var object: T?
-    private let hashKey: Int
-    public init(_ object: T) {
-        self.object = object
-        self.hashKey = ObjectIdentifier(object).hashValue
-    }
-}
-
-extension Weak: Equatable, Hashable {
-    public static func == (lhs: Weak<T>, rhs: Weak<T>) -> Bool {
-        return lhs.hashKey == rhs.hashKey
-    }
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(hashKey)
-    }
-}
-
 /// A set class that weak refering every AnyObject element.
 /// If the object element released, its weak wrapper `Weak<T>` will remove from the internal set automatically.
+///
+///     var aa: NSObject? = NSObject()
+///     let bb: NSObject? = NSObject()
+///     let set = WeakSet([aa!, bb!])
+///
 public class WeakSet<T: AnyObject> {
-    
+
     fileprivate var objectSet: Set<Weak<T>>
-    
+
     public init() {
         self.objectSet = Set<Weak<T>>()
     }
-    
+
     public init(_ objects: [T]) {
         self.objectSet = Set<Weak<T>>(objects.map { Weak($0) })
         addDeinitObservers(for: self.objectSet)
     }
-    
+
     public var allObjects: [T] {
         return objectSet.compactMap { $0.object }
     }
-    
+
     public var count: Int {
         return objectSet.count
     }
-    
+
     public func contains(_ object: T) -> Bool {
         return objectSet.contains(Weak(object))
     }
-    
+
     public func add(_ object: T) {
         let weakBox = Weak(object)
         objectSet.insert(weakBox)
@@ -74,29 +59,29 @@ public class WeakSet<T: AnyObject> {
             self.objectSet.remove(weakBox)
         }
     }
-    
+
     public func addObjects(_ objects: [T]) {
         let array = objects.map { Weak($0) }
         objectSet.formUnion(array)
         addDeinitObservers(for: Set(array))
     }
-    
+
     public func remove(_ object: T) {
         objectSet.remove(Weak(object))
     }
-    
+
     public func removeObjects(_ objects: [T]) {
         objectSet.subtract(objects.map { Weak($0) })
     }
-    
+
     public func copy() -> WeakSet<T> {
         return WeakSet(objectSet)
     }
-    
+
     private init(_ set: Set<Weak<T>>) {
         self.objectSet = set
     }
-    
+
     private func addDeinitObservers(for set: Set<Weak<T>>) {
         for box in set {
             guard let obj = box.object else {
@@ -126,7 +111,7 @@ public struct WeakSetIterator<T: AnyObject>: IteratorProtocol {
     init(_ weakSet: WeakSet<T>) {
         self.weakSet = weakSet
     }
-    
+
     public mutating func next() -> T? {
         if currentIndex >= weakSet.count { return nil }
         let set = weakSet.objectSet

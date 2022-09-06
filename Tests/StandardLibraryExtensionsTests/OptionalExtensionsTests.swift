@@ -70,7 +70,7 @@ class OptionalExtensionsTests: XCTestCase {
         
         XCTAssertFalse(obj.re.boolValue)
         XCTAssertTrue(obj.re.boolValue(default: true))
-        XCTAssertTrue(any>!.re.bool!)
+        XCTAssertTrue(any~!.re.bool!)
         XCTAssertTrue(number.re.bool!)
     }
     
@@ -184,6 +184,4 @@ class OptionalExtensionsTests: XCTestCase {
         XCTAssertNil(string.re.cgFloat)
         XCTAssertEqual(string.re.cgFloatValue(default: 3.0), 3.0)
     }
-    
-
 }

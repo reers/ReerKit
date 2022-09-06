@@ -23,8 +23,8 @@
 import CoreGraphics
 #endif
 
-postfix operator >!
-public postfix func >! <T>(value: T) -> T? {
+postfix operator ~!
+public postfix func ~! <T>(value: T) -> T? {
     return Optional(value)
 }
 
@@ -120,7 +120,7 @@ public extension ReerGeneric where Base == Optional<T> {
                   let double = Double(stringConvertible.description) {
             return double != .zero
         } else if let string = base as? String {
-            if let int = string>!.re.int {
+            if let int = string~!.re.int {
                 return int != 0
             } else if string.count <= 5 {
                 let lowercased = string.lowercased()

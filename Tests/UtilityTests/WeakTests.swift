@@ -24,7 +24,9 @@ class WeakTests: XCTestCase {
     func testWeakSet() {
         var aa: NSObject? = NSObject()
         let bb: NSObject? = NSObject()
-        let set = WeakSet([aa!, bb!])
+        var set: WeakSet<NSObject> = [aa!, bb!]
+        XCTAssertEqual(set.count, 2)
+        set = WeakSet([aa!, bb!])
         for _ in set {
             
         }

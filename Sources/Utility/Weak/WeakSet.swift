@@ -26,7 +26,7 @@
 ///     let bb: NSObject? = NSObject()
 ///     let set = WeakSet([aa!, bb!])
 ///
-public class WeakSet<T: AnyObject> {
+public class WeakSet<T: AnyObject>: ExpressibleByArrayLiteral {
 
     fileprivate var objectSet: Set<Weak<T>>
 
@@ -37,6 +37,10 @@ public class WeakSet<T: AnyObject> {
     public init(_ objects: [T]) {
         self.objectSet = Set<Weak<T>>(objects.map { Weak($0) })
         addDeinitObservers(for: self.objectSet)
+    }
+
+    public required convenience init(arrayLiteral elements: T...) {
+        self.init(elements)
     }
 
     public var allObjects: [T] {

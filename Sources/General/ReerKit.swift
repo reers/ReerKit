@@ -22,7 +22,7 @@
 /// Wrapper for ReerKit compatible types. This type provides an extension point for
 /// connivence methods in ReerKit.
 public struct Reer<Base> {
-    public let base: Base
+    public internal(set) var base: Base
     public init(_ base: Base) {
         self.base = base
     }
@@ -67,7 +67,7 @@ extension ReerCompatibleValue {
 /// Wrapper for ReerKit compatible types with a generic parameter. This type provides an extension point for
 /// connivence methods in ReerKit.
 public struct ReerGeneric<Base, T> {
-    public let base: Base
+    public internal(set) var base: Base
     public init(_ base: Base) {
         self.base = base
     }

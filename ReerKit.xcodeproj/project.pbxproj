@@ -25,6 +25,8 @@
 		D06287162885D83100401B59 /* WeakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06287152885D83100401B59 /* WeakTests.swift */; };
 		D068566628D76E45001CB92A /* Array+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D068566528D76E45001CB92A /* Array+REExtensions.swift */; };
 		D068566828D77BF3001CB92A /* ArrayExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D068566728D77BF3001CB92A /* ArrayExtensionsTests.swift */; };
+		D071DEBD28D8DC1F00618A2F /* Collection+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071DEBC28D8DC1F00618A2F /* Collection+REExtensions.swift */; };
+		D071DEBF28D8DF5500618A2F /* CollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071DEBE28D8DF5500618A2F /* CollectionExtensionsTests.swift */; };
 		D07E53AB2883083300921873 /* RETimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AA2883083300921873 /* RETimer.swift */; };
 		D07E53AD288309DF00921873 /* RETimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AC288309DF00921873 /* RETimerTests.swift */; };
 		D07E53AF2883137000921873 /* WeakProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AE2883137000921873 /* WeakProxy.swift */; };
@@ -93,6 +95,8 @@
 		D06287152885D83100401B59 /* WeakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakTests.swift; sourceTree = "<group>"; };
 		D068566528D76E45001CB92A /* Array+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+REExtensions.swift"; sourceTree = "<group>"; };
 		D068566728D77BF3001CB92A /* ArrayExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionsTests.swift; sourceTree = "<group>"; };
+		D071DEBC28D8DC1F00618A2F /* Collection+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+REExtensions.swift"; sourceTree = "<group>"; };
+		D071DEBE28D8DF5500618A2F /* CollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtensionsTests.swift; sourceTree = "<group>"; };
 		D07E53AA2883083300921873 /* RETimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimer.swift; sourceTree = "<group>"; };
 		D07E53AC288309DF00921873 /* RETimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimerTests.swift; sourceTree = "<group>"; };
 		D07E53AE2883137000921873 /* WeakProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakProxy.swift; sourceTree = "<group>"; };
@@ -306,6 +310,7 @@
 				D0F39A7B287DC70100A754B2 /* Character+REExtensions.swift */,
 				D053AF0928B86582004335DC /* Sequence+REExtensions.swift */,
 				D068566528D76E45001CB92A /* Array+REExtensions.swift */,
+				D071DEBC28D8DC1F00618A2F /* Collection+REExtensions.swift */,
 			);
 			path = StandardLibrary;
 			sourceTree = "<group>";
@@ -323,6 +328,7 @@
 				D0F39A83287DF21300A754B2 /* TestHelpers.swift */,
 				D0EBE23C28847EC4004925E5 /* AnyObjectExtensionsTests.swift */,
 				D068566728D77BF3001CB92A /* ArrayExtensionsTests.swift */,
+				D071DEBE28D8DF5500618A2F /* CollectionExtensionsTests.swift */,
 			);
 			path = StandardLibraryExtensionsTests;
 			sourceTree = "<group>";
@@ -472,6 +478,7 @@
 				D0C95FDA2857999D00D0522D /* Int+REExtensions.swift in Sources */,
 				D04D34F4286C7390001E974C /* Utils.swift in Sources */,
 				D0EBE241288492B2004925E5 /* DeinitObserver.swift in Sources */,
+				D071DEBD28D8DC1F00618A2F /* Collection+REExtensions.swift in Sources */,
 				D0038B7D285642B600A890F9 /* Locked.swift in Sources */,
 				D0038B8128565B9500A890F9 /* ReadWriteLock.swift in Sources */,
 				D0B121122855089000B5B326 /* ReerKit.swift in Sources */,
@@ -518,6 +525,7 @@
 				D0F39A7E287DC9B600A754B2 /* CharacterExtensionsTests.swift in Sources */,
 				D0C95FE42857B4C400D0522D /* IntExtensionsTests.swift in Sources */,
 				D0C95FE22857AD5D00D0522D /* SignedNumericExtensionsTests.swift in Sources */,
+				D071DEBF28D8DF5500618A2F /* CollectionExtensionsTests.swift in Sources */,
 				D0EBE23D28847EC4004925E5 /* AnyObjectExtensionsTests.swift in Sources */,
 				D0C95FD8285793A000D0522D /* BoolExtensionsTests.swift in Sources */,
 				D0EBE243288493F8004925E5 /* DeinitObserverTests.swift in Sources */,

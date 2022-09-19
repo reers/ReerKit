@@ -1,5 +1,5 @@
 //
-//  Copyright © 2020 ReerKit
+//  Copyright © 2020 SwifterSwift
 //  Copyright © 2022 reers.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy

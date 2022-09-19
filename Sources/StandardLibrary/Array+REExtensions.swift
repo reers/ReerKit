@@ -20,14 +20,15 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+// MARK: ----------- Mutating -----------
 
-extension Array: ReerGenericCompatible {
+extension Array: ReerReferenceGenericCompatible {
     public typealias T = Element
 }
 
 // MARK: - Methods
 
-public extension ReerGeneric where Base == Array<T> {
+public extension ReerReferenceGeneric where Base == Array<T> {
     /// ReerKit: Insert an element at the beginning of array.
     ///
     ///     var array = [2, 3, 4, 5]
@@ -35,7 +36,7 @@ public extension ReerGeneric where Base == Array<T> {
     ///
     /// - Parameter newElement: element to insert.
     mutating func prepend(_ newElement: T) {
-        base.insert(newElement, at: 0)
+        base.pointee.insert(newElement, at: 0)
     }
 
     /// ReerKit: Safely swap values at given index positions.
@@ -49,15 +50,15 @@ public extension ReerGeneric where Base == Array<T> {
     ///   - otherIndex: index of other element.
     mutating func swapAt(_ index: Base.Index, _ otherIndex: Base.Index) {
         guard index != otherIndex else { return }
-        guard base.startIndex..<base.endIndex ~= index else { return }
-        guard base.startIndex..<base.endIndex ~= otherIndex else { return }
-        swapAt(index, otherIndex)
+        guard base.pointee.startIndex..<base.pointee.endIndex ~= index else { return }
+        guard base.pointee.startIndex..<base.pointee.endIndex ~= otherIndex else { return }
+        base.pointee.swapAt(index, otherIndex)
     }
 }
 
 // MARK: - Methods (Equatable)
 
-public extension ReerGeneric where Base == Array<T>, T: Equatable {
+public extension ReerReferenceGeneric where Base == Array<T>, T: Equatable {
     /// ReerKit: Remove all instances of an item from array.
     ///
     ///        [1, 2, 2, 3, 4, 5].re.removeAll(2) -> [1, 3, 4, 5]
@@ -67,8 +68,8 @@ public extension ReerGeneric where Base == Array<T>, T: Equatable {
     /// - Returns: self after removing all instances of item.
     @discardableResult
     mutating func removeAll(_ item: T) -> [T] {
-        base.removeAll(where: { $0 == item })
-        return base
+        base.pointee.removeAll { $0 == item }
+        return base.pointee
     }
 
     /// ReerKit: Remove all instances contained in items parameter from array.
@@ -80,9 +81,9 @@ public extension ReerGeneric where Base == Array<T>, T: Equatable {
     /// - Returns: self after removing all instances of all items in given array.
     @discardableResult
     mutating func removeAll(_ items: [T]) -> [T] {
-        guard !items.isEmpty else { return base }
-        base.removeAll(where: { items.contains($0) })
-        return base
+        guard !items.isEmpty else { return base.pointee }
+        base.pointee.removeAll { items.contains($0) }
+        return base.pointee
     }
 
     /// ReerKit: Remove all duplicate elements from Array.
@@ -93,13 +94,23 @@ public extension ReerGeneric where Base == Array<T>, T: Equatable {
     /// - Returns: Return array with all duplicate elements removed.
     @discardableResult
     mutating func removeDuplicates() -> [T] {
-        base = base.reduce(into: [T]()) {
+        base.pointee = base.pointee.reduce(into: [T]()) {
             if !$0.contains($1) {
                 $0.append($1)
             }
         }
-        return base
+        return base.pointee
     }
+}
+
+
+// MARK: --------- Nonmutating ---------
+
+extension Array: ReerGenericCompatible {}
+
+// MARK: - Methods (Equatable)
+
+public extension ReerGeneric where Base == Array<T>, T: Equatable {
 
     /// ReerKit: Return array with all duplicate elements removed.
     ///
@@ -137,4 +148,3 @@ public extension ReerGeneric where Base == Array<T>, T: Equatable {
         return base.filter { set.insert($0[keyPath: path]).inserted }
     }
 }
-

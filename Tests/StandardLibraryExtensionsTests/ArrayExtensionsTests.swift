@@ -11,27 +11,54 @@ import XCTest
 
 final class ArrayExtensionsTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testArrayExtensions() {
+        var array = [2, 3, 4, 5]
+        array.re.prepend(1)
+        XCTAssertEqual(array, [1, 2, 3, 4, 5])
+
+        array.re.swapAt(0, 1)
+        XCTAssertEqual(array, [2, 1, 3, 4, 5])
+        array.re.swapAt(0, 10)
+        XCTAssertEqual(array, [2, 1, 3, 4, 5])
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testArrayEquatableExtensions() {
+        var array = [1, 2, 2, 3, 4, 5]
+        array.re.removeAll(2)
+        XCTAssertEqual(array, [1, 3, 4, 5])
+
+        array = [1, 2, 2, 3, 4, 5]
+        array.re.removeDuplicates()
+        XCTAssertEqual(array, [1, 2, 3, 4, 5])
+
+        XCTAssertEqual([1, 1, 2, 2, 3, 3, 3, 4, 5].re.removingDuplicates(), [1, 2, 3, 4, 5])
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testWithoutDuplicatesUsingKeyPath() {
+        let array = [
+            Person(name: "Wade", age: 20, location: Location(city: "London")),
+            Person(name: "James", age: 32),
+            Person(name: "James", age: 36),
+            Person(name: "Rose", age: 29),
+            Person(name: "James", age: 72, location: Location(city: "Moscow")),
+            Person(name: "Rose", age: 56),
+            Person(name: "Wade", age: 22, location: Location(city: "Prague"))
+        ]
+        let arrayWithoutDuplicatesHashable = array.re.removingDuplicates(keyPath: \.name)
+        let arrayWithoutDuplicatesHashablePrepared = [
+            Person(name: "Wade", age: 20, location: Location(city: "London")),
+            Person(name: "James", age: 32),
+            Person(name: "Rose", age: 29)
+        ]
+        XCTAssertEqual(arrayWithoutDuplicatesHashable, arrayWithoutDuplicatesHashablePrepared)
+        let arrayWithoutDuplicatesNHashable = array.re.removingDuplicates(keyPath: \.location)
+        let arrayWithoutDuplicatesNHashablePrepared = [
+            Person(name: "Wade", age: 20, location: Location(city: "London")),
+            Person(name: "James", age: 32),
+            Person(name: "James", age: 72, location: Location(city: "Moscow")),
+            Person(name: "Wade", age: 22, location: Location(city: "Prague"))
+        ]
+        XCTAssertEqual(arrayWithoutDuplicatesNHashable, arrayWithoutDuplicatesNHashablePrepared)
     }
 
 }

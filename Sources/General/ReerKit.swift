@@ -20,9 +20,9 @@
 //  THE SOFTWARE.
 
 /// Wrapper for ReerKit compatible types. This type provides an extension point for
-/// connivence methods in ReerKit.
+/// convenience methods in ReerKit.
 public struct Reer<Base> {
-    public internal(set) var base: Base
+    public let base: Base
     public init(_ base: Base) {
         self.base = base
     }
@@ -65,7 +65,7 @@ extension ReerCompatibleValue {
 }
 
 /// Wrapper for ReerKit compatible types with a generic parameter. This type provides an extension point for
-/// connivence methods in ReerKit.
+/// convenience methods in ReerKit.
 public struct ReerGeneric<Base, T> {
     public internal(set) var base: Base
     public init(_ base: Base) {
@@ -89,6 +89,36 @@ public extension ReerGenericCompatible {
     /// Gets a namespace holder for ReerKit compatible meta types.
     static var re: ReerGeneric<Self, T>.Type {
         get { return ReerGeneric<Self, T>.self }
+        set {}
+    }
+}
+
+
+/// Wrapper for ReerKit compatible types with a generic parameter in a reference way. This type provides an extension point for
+/// convenience methods in ReerKit.
+public struct ReerReferenceGeneric<Base, T> {
+    public let base: UnsafeMutablePointer<Base>
+    public init(_ base: inout Base) {
+        self.base = withUnsafeMutablePointer(to: &base) { $0 }
+    }
+}
+
+/// Represents a type with a generic parameter that is compatible with ReerKit. You can use `re` property to get a
+/// value in the namespace of ReerKit.
+public protocol ReerReferenceGenericCompatible {
+    associatedtype T
+}
+
+public extension ReerReferenceGenericCompatible {
+    /// Gets a namespace holder for ReerKit compatible types.
+    var re: ReerReferenceGeneric<Self, T> {
+        mutating get { return ReerReferenceGeneric(&self) }
+        set {}
+    }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    static var re: ReerReferenceGeneric<Self, T>.Type {
+        get { return ReerReferenceGeneric<Self, T>.self }
         set {}
     }
 }

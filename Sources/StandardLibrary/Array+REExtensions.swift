@@ -112,26 +112,11 @@ extension Array: ReerGenericCompatible {}
 
 public extension ReerGeneric where Base == Array<T>, T: Equatable {
 
-    /// ReerKit: Return array with all duplicate elements removed.
-    ///
-    ///     [1, 1, 2, 2, 3, 3, 3, 4, 5].re.removingDuplicates() -> [1, 2, 3, 4, 5])
-    ///     ["h", "e", "l", "l", "o"].re.removingDuplicates() -> ["h", "e", "l", "o"])
-    ///
-    /// - Returns: an array of unique elements.
-    ///
-    func removingDuplicates() -> [T] {
-        return base.reduce(into: [T]()) {
-            if !$0.contains($1) {
-                $0.append($1)
-            }
-        }
-    }
-
     /// ReerKit: Returns an array with all duplicate elements removed using KeyPath to compare.
     ///
     /// - Parameter path: Key path to compare, the value must be Equatable.
     /// - Returns: an array of unique elements.
-    func removingDuplicates<U: Equatable>(keyPath path: KeyPath<T, U>) -> [T] {
+    func removingDuplicates<U: Equatable>(byKeyPath path: KeyPath<T, U>) -> [T] {
         return base.reduce(into: [T]()) { result, element in
             if !result.contains(where: { $0[keyPath: path] == element[keyPath: path] }) {
                 result.append(element)
@@ -143,7 +128,7 @@ public extension ReerGeneric where Base == Array<T>, T: Equatable {
     ///
     /// - Parameter path: Key path to compare, the value must be Hashable.
     /// - Returns: an array of unique elements.
-    func removingDuplicates<U: Hashable>(keyPath path: KeyPath<T, U>) -> [T] {
+    func removingDuplicates<U: Hashable>(byKeyPath path: KeyPath<T, U>) -> [T] {
         var set = Set<U>()
         return base.filter { set.insert($0[keyPath: path]).inserted }
     }

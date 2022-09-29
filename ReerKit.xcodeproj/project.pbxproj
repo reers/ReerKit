@@ -48,6 +48,8 @@
 		D0C95FE42857B4C400D0522D /* IntExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FE32857B4C400D0522D /* IntExtensionsTests.swift */; };
 		D0CBE62328832D78006F8BCB /* Timer+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CBE62228832D78006F8BCB /* Timer+REExtensions.swift */; };
 		D0CBE62528833BF5006F8BCB /* TimerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CBE62428833BF5006F8BCB /* TimerExtensionsTests.swift */; };
+		D0CD712728E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD712628E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift */; };
+		D0CD712928E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD712828E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift */; };
 		D0E354C828BFBBE10000030B /* WeakSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C728BFBBE10000030B /* WeakSet.swift */; };
 		D0E354CA28BFBC060000030B /* WeakMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C928BFBC060000030B /* WeakMap.swift */; };
 		D0EBE2352884765F004925E5 /* AnyObjectExtensionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE2342884765F004925E5 /* AnyObjectExtensionable.swift */; };
@@ -119,6 +121,8 @@
 		D0C95FE32857B4C400D0522D /* IntExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensionsTests.swift; sourceTree = "<group>"; };
 		D0CBE62228832D78006F8BCB /* Timer+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timer+REExtensions.swift"; sourceTree = "<group>"; };
 		D0CBE62428833BF5006F8BCB /* TimerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerExtensionsTests.swift; sourceTree = "<group>"; };
+		D0CD712628E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BidirectionalCollection+REExtensions.swift"; sourceTree = "<group>"; };
+		D0CD712828E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidirectionalCollectionExtensionsTests.swift; sourceTree = "<group>"; };
 		D0E354C728BFBBE10000030B /* WeakSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakSet.swift; sourceTree = "<group>"; };
 		D0E354C928BFBC060000030B /* WeakMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakMap.swift; sourceTree = "<group>"; };
 		D0EBE2342884765F004925E5 /* AnyObjectExtensionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyObjectExtensionable.swift; sourceTree = "<group>"; };
@@ -311,6 +315,7 @@
 				D053AF0928B86582004335DC /* Sequence+REExtensions.swift */,
 				D068566528D76E45001CB92A /* Array+REExtensions.swift */,
 				D071DEBC28D8DC1F00618A2F /* Collection+REExtensions.swift */,
+				D0CD712628E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift */,
 			);
 			path = StandardLibrary;
 			sourceTree = "<group>";
@@ -329,6 +334,7 @@
 				D0EBE23C28847EC4004925E5 /* AnyObjectExtensionsTests.swift */,
 				D068566728D77BF3001CB92A /* ArrayExtensionsTests.swift */,
 				D071DEBE28D8DF5500618A2F /* CollectionExtensionsTests.swift */,
+				D0CD712828E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift */,
 			);
 			path = StandardLibraryExtensionsTests;
 			sourceTree = "<group>";
@@ -475,6 +481,7 @@
 				D0B1210F2855079000B5B326 /* UIView+REExtensions.swift in Sources */,
 				D0F39A7C287DC70100A754B2 /* Character+REExtensions.swift in Sources */,
 				D04D34F7286C7A8A001E974C /* DispatchQueue+REExtensions.swift in Sources */,
+				D0CD712728E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift in Sources */,
 				D0C95FDA2857999D00D0522D /* Int+REExtensions.swift in Sources */,
 				D04D34F4286C7390001E974C /* Utils.swift in Sources */,
 				D0EBE241288492B2004925E5 /* DeinitObserver.swift in Sources */,
@@ -509,6 +516,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0C95FDE2857A24000D0522D /* SignedIntegerExtensionsTests.swift in Sources */,
+				D0CD712928E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift in Sources */,
 				D068566828D77BF3001CB92A /* ArrayExtensionsTests.swift in Sources */,
 				D019B8F7285BA3CB00257A7D /* UnfairLockTests.swift in Sources */,
 				D019B8F5285BA02900257A7D /* ReadWriteLockTests.swift in Sources */,

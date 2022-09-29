@@ -56,6 +56,7 @@
 		D0CD713128E5BDF2009ADA8E /* BinaryIntegerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD713028E5BDF2009ADA8E /* BinaryIntegerExtensionsTests.swift */; };
 		D0CD713528E5C0AC009ADA8E /* ComparableExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD713428E5C0AC009ADA8E /* ComparableExtensionsTests.swift */; };
 		D0CD713728E5C50C009ADA8E /* Comparable+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD713628E5C50C009ADA8E /* Comparable+REExtensions.swift */; };
+		D0CD713928E5C597009ADA8E /* StdlibProtocolWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD713828E5C597009ADA8E /* StdlibProtocolWrappers.swift */; };
 		D0E354C828BFBBE10000030B /* WeakSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C728BFBBE10000030B /* WeakSet.swift */; };
 		D0E354CA28BFBC060000030B /* WeakMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C928BFBC060000030B /* WeakMap.swift */; };
 		D0EBE2352884765F004925E5 /* AnyObjectExtensionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE2342884765F004925E5 /* AnyObjectExtensionable.swift */; };
@@ -135,6 +136,7 @@
 		D0CD713028E5BDF2009ADA8E /* BinaryIntegerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryIntegerExtensionsTests.swift; sourceTree = "<group>"; };
 		D0CD713428E5C0AC009ADA8E /* ComparableExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparableExtensionsTests.swift; sourceTree = "<group>"; };
 		D0CD713628E5C50C009ADA8E /* Comparable+REExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comparable+REExtensions.swift"; sourceTree = "<group>"; };
+		D0CD713828E5C597009ADA8E /* StdlibProtocolWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StdlibProtocolWrappers.swift; sourceTree = "<group>"; };
 		D0E354C728BFBBE10000030B /* WeakSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakSet.swift; sourceTree = "<group>"; };
 		D0E354C928BFBC060000030B /* WeakMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakMap.swift; sourceTree = "<group>"; };
 		D0EBE2342884765F004925E5 /* AnyObjectExtensionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyObjectExtensionable.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 				D0CD712A28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift */,
 				D0CD712E28E5BBFF009ADA8E /* BinaryInteger+REExtensions.swift */,
 				D0CD713628E5C50C009ADA8E /* Comparable+REExtensions.swift */,
+				D0CD713828E5C597009ADA8E /* StdlibProtocolWrappers.swift */,
 			);
 			path = StandardLibrary;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 				D0038B7F2856581600A890F9 /* UnfairLock.swift in Sources */,
 				D0EBE237288476DB004925E5 /* Associatable.swift in Sources */,
 				D0EBE2392884797B004925E5 /* OnceExecutable.swift in Sources */,
+				D0CD713928E5C597009ADA8E /* StdlibProtocolWrappers.swift in Sources */,
 				D0B1211528550E1000B5B326 /* NSObject+REExtensions.swift in Sources */,
 				D0EBE23B28847B72004925E5 /* Swizzlable.swift in Sources */,
 				D0CD712F28E5BBFF009ADA8E /* BinaryInteger+REExtensions.swift in Sources */,

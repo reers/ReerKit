@@ -20,20 +20,6 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-public extension Sequence {
-    /// Gets a namespace holder for ReerKit compatible types.
-    var re: Reer<Self> {
-        get { return Reer(self) }
-        set {}
-    }
-    
-    /// Gets a namespace holder for ReerKit compatible meta types.
-    static var re: Reer<Self>.Type {
-        get { return Reer.self }
-        set {}
-    }
-}
-
 public extension Reer where Base: Sequence {
     
     /// ReerKit: Check if all elements in collection match a condition.

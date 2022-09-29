@@ -24,20 +24,6 @@
 import Foundation
 #endif
 
-public extension Numeric {
-    /// Gets a namespace holder for ReerKit compatible types.
-    var re: Reer<Self> {
-        get { return Reer(self) }
-        set {}
-    }
-    
-    /// Gets a namespace holder for ReerKit compatible meta types.
-    static var re: Reer<Self>.Type {
-        get { return Reer.self }
-        set {}
-    }
-}
-
 // MARK: - Properties
 
 public extension Reer where Base: SignedNumeric {

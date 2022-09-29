@@ -20,27 +20,6 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-public struct ReerForEquatable<Base> {
-    public let base: Base
-    public init(_ base: Base) {
-        self.base = base
-    }
-}
-
-public extension Equatable {
-    /// Gets a namespace holder for ReerKit compatible types.
-    var re: ReerForEquatable<Self> {
-        get { return ReerForEquatable(self) }
-        set {}
-    }
-
-    /// Gets a namespace holder for ReerKit compatible meta types.
-    static var re: ReerForEquatable<Self>.Type {
-        get { return ReerForEquatable.self }
-        set {}
-    }
-}
-
 public extension ReerForEquatable where Base: Comparable {
     /// ReetKit: Returns true if value is in the provided range.
     ///

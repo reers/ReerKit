@@ -51,7 +51,6 @@ public extension Sequence {
     }
 }
 
-
 // MARK: - Equatable
 
 public struct ReerForEquatable<Base> {
@@ -71,6 +70,29 @@ public extension Equatable {
     /// Gets a namespace holder for ReerKit compatible meta types.
     static var re: ReerForEquatable<Self>.Type {
         get { return ReerForEquatable.self }
+        set {}
+    }
+}
+
+// MARK: - Codable
+
+public struct ReerForDecodable<Base> {
+    public let base: Base
+    public init(_ base: Base) {
+        self.base = base
+    }
+}
+
+public extension Decodable {
+    /// Gets a namespace holder for ReerKit compatible types.
+    var re: ReerForDecodable<Self> {
+        get { return ReerForDecodable(self) }
+        set {}
+    }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    static var re: ReerForDecodable<Self>.Type {
+        get { return ReerForDecodable.self }
         set {}
     }
 }

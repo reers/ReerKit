@@ -50,6 +50,8 @@
 		D0CBE62528833BF5006F8BCB /* TimerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CBE62428833BF5006F8BCB /* TimerExtensionsTests.swift */; };
 		D0CD712728E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD712628E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift */; };
 		D0CD712928E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD712828E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift */; };
+		D0CD712B28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD712A28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift */; };
+		D0CD712D28E5B695009ADA8E /* BinaryFloatingPointExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD712C28E5B695009ADA8E /* BinaryFloatingPointExtensionsTests.swift */; };
 		D0E354C828BFBBE10000030B /* WeakSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C728BFBBE10000030B /* WeakSet.swift */; };
 		D0E354CA28BFBC060000030B /* WeakMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C928BFBC060000030B /* WeakMap.swift */; };
 		D0EBE2352884765F004925E5 /* AnyObjectExtensionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE2342884765F004925E5 /* AnyObjectExtensionable.swift */; };
@@ -123,6 +125,8 @@
 		D0CBE62428833BF5006F8BCB /* TimerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerExtensionsTests.swift; sourceTree = "<group>"; };
 		D0CD712628E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BidirectionalCollection+REExtensions.swift"; sourceTree = "<group>"; };
 		D0CD712828E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidirectionalCollectionExtensionsTests.swift; sourceTree = "<group>"; };
+		D0CD712A28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+REExtensions.swift"; sourceTree = "<group>"; };
+		D0CD712C28E5B695009ADA8E /* BinaryFloatingPointExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryFloatingPointExtensionsTests.swift; sourceTree = "<group>"; };
 		D0E354C728BFBBE10000030B /* WeakSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakSet.swift; sourceTree = "<group>"; };
 		D0E354C928BFBC060000030B /* WeakMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakMap.swift; sourceTree = "<group>"; };
 		D0EBE2342884765F004925E5 /* AnyObjectExtensionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyObjectExtensionable.swift; sourceTree = "<group>"; };
@@ -316,6 +320,7 @@
 				D068566528D76E45001CB92A /* Array+REExtensions.swift */,
 				D071DEBC28D8DC1F00618A2F /* Collection+REExtensions.swift */,
 				D0CD712628E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift */,
+				D0CD712A28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift */,
 			);
 			path = StandardLibrary;
 			sourceTree = "<group>";
@@ -335,6 +340,7 @@
 				D068566728D77BF3001CB92A /* ArrayExtensionsTests.swift */,
 				D071DEBE28D8DF5500618A2F /* CollectionExtensionsTests.swift */,
 				D0CD712828E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift */,
+				D0CD712C28E5B695009ADA8E /* BinaryFloatingPointExtensionsTests.swift */,
 			);
 			path = StandardLibraryExtensionsTests;
 			sourceTree = "<group>";
@@ -475,6 +481,7 @@
 			files = (
 				D068566628D76E45001CB92A /* Array+REExtensions.swift in Sources */,
 				D0E354C828BFBBE10000030B /* WeakSet.swift in Sources */,
+				D0CD712B28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift in Sources */,
 				D0C95FE02857AC1A00D0522D /* SignedNumeric+REExtensions.swift in Sources */,
 				D0C95FD52857899F00D0522D /* Bool+REExtensions.swift in Sources */,
 				D0FB4056286362F10019D56A /* Once.swift in Sources */,
@@ -516,6 +523,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0C95FDE2857A24000D0522D /* SignedIntegerExtensionsTests.swift in Sources */,
+				D0CD712D28E5B695009ADA8E /* BinaryFloatingPointExtensionsTests.swift in Sources */,
 				D0CD712928E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift in Sources */,
 				D068566828D77BF3001CB92A /* ArrayExtensionsTests.swift in Sources */,
 				D019B8F7285BA3CB00257A7D /* UnfairLockTests.swift in Sources */,

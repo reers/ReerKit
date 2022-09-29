@@ -54,6 +54,8 @@
 		D0CD712D28E5B695009ADA8E /* BinaryFloatingPointExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD712C28E5B695009ADA8E /* BinaryFloatingPointExtensionsTests.swift */; };
 		D0CD712F28E5BBFF009ADA8E /* BinaryInteger+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD712E28E5BBFF009ADA8E /* BinaryInteger+REExtensions.swift */; };
 		D0CD713128E5BDF2009ADA8E /* BinaryIntegerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD713028E5BDF2009ADA8E /* BinaryIntegerExtensionsTests.swift */; };
+		D0CD713528E5C0AC009ADA8E /* ComparableExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD713428E5C0AC009ADA8E /* ComparableExtensionsTests.swift */; };
+		D0CD713728E5C50C009ADA8E /* Comparable+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD713628E5C50C009ADA8E /* Comparable+REExtensions.swift */; };
 		D0E354C828BFBBE10000030B /* WeakSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C728BFBBE10000030B /* WeakSet.swift */; };
 		D0E354CA28BFBC060000030B /* WeakMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C928BFBC060000030B /* WeakMap.swift */; };
 		D0EBE2352884765F004925E5 /* AnyObjectExtensionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE2342884765F004925E5 /* AnyObjectExtensionable.swift */; };
@@ -131,6 +133,8 @@
 		D0CD712C28E5B695009ADA8E /* BinaryFloatingPointExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryFloatingPointExtensionsTests.swift; sourceTree = "<group>"; };
 		D0CD712E28E5BBFF009ADA8E /* BinaryInteger+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryInteger+REExtensions.swift"; sourceTree = "<group>"; };
 		D0CD713028E5BDF2009ADA8E /* BinaryIntegerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryIntegerExtensionsTests.swift; sourceTree = "<group>"; };
+		D0CD713428E5C0AC009ADA8E /* ComparableExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparableExtensionsTests.swift; sourceTree = "<group>"; };
+		D0CD713628E5C50C009ADA8E /* Comparable+REExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comparable+REExtensions.swift"; sourceTree = "<group>"; };
 		D0E354C728BFBBE10000030B /* WeakSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakSet.swift; sourceTree = "<group>"; };
 		D0E354C928BFBC060000030B /* WeakMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakMap.swift; sourceTree = "<group>"; };
 		D0EBE2342884765F004925E5 /* AnyObjectExtensionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyObjectExtensionable.swift; sourceTree = "<group>"; };
@@ -326,6 +330,7 @@
 				D0CD712628E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift */,
 				D0CD712A28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift */,
 				D0CD712E28E5BBFF009ADA8E /* BinaryInteger+REExtensions.swift */,
+				D0CD713628E5C50C009ADA8E /* Comparable+REExtensions.swift */,
 			);
 			path = StandardLibrary;
 			sourceTree = "<group>";
@@ -347,6 +352,7 @@
 				D0CD712828E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift */,
 				D0CD712C28E5B695009ADA8E /* BinaryFloatingPointExtensionsTests.swift */,
 				D0CD713028E5BDF2009ADA8E /* BinaryIntegerExtensionsTests.swift */,
+				D0CD713428E5C0AC009ADA8E /* ComparableExtensionsTests.swift */,
 			);
 			path = StandardLibraryExtensionsTests;
 			sourceTree = "<group>";
@@ -508,6 +514,7 @@
 				D0F39A84287DF21300A754B2 /* TestHelpers.swift in Sources */,
 				D0C95FDC28579B5500D0522D /* SignedInteger+REExtensions.swift in Sources */,
 				D0CBE62328832D78006F8BCB /* Timer+REExtensions.swift in Sources */,
+				D0CD713728E5C50C009ADA8E /* Comparable+REExtensions.swift in Sources */,
 				D06287142885C88000401B59 /* Weak.swift in Sources */,
 				D0038B832856662B00A890F9 /* RWLocked.swift in Sources */,
 				D053AF0A28B86582004335DC /* Sequence+REExtensions.swift in Sources */,
@@ -542,6 +549,7 @@
 				D0F39A82287DD82E00A754B2 /* SequenceExtensionsTests.swift in Sources */,
 				D0A0040628620D9900D2FA7C /* TypeNameDescribableTests.swift in Sources */,
 				D0B121212855207900B5B326 /* UIViewExtensionsTests.swift in Sources */,
+				D0CD713528E5C0AC009ADA8E /* ComparableExtensionsTests.swift in Sources */,
 				D0B1211B285510B200B5B326 /* NSObjectExtensionsTests.swift in Sources */,
 				D07E53AD288309DF00921873 /* RETimerTests.swift in Sources */,
 				D0397614286E12A900C33E17 /* OptionalExtensionsTests.swift in Sources */,

@@ -24,7 +24,7 @@
 import Foundation
 #endif
 
-public extension SignedNumeric {
+public extension Numeric {
     /// Gets a namespace holder for ReerKit compatible types.
     var re: Reer<Self> {
         get { return Reer(self) }

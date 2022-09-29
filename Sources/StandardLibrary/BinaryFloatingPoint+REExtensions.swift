@@ -27,7 +27,7 @@ import Foundation
 
 public extension Reer where Base: BinaryFloatingPoint {
     #if canImport(Foundation)
-    /// SwifterSwift: Returns a rounded value with the specified number of decimal places and rounding rule. If `numberOfDecimalPlaces` is negative, `0` will be used.
+    /// ReerKit: Returns a rounded value with the specified number of decimal places and rounding rule. If `numberOfDecimalPlaces` is negative, `0` will be used.
     ///
     ///     let num = 3.1415927
     ///     num.re.rounded(3, rule: .up) -> 3.142

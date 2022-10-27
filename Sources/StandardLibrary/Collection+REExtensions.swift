@@ -52,8 +52,8 @@ public extension Reer where Base: Collection {
     /// ReerKit: Safe protects the array from out of bounds by use of optional.
     ///
     ///        let arr = [1, 2, 3, 4, 5]
-    ///        arr.re[safe: 1] -> 2
-    ///        arr.re[safe: 10] -> nil
+    ///        arr.re[1] -> 2
+    ///        arr.re[10] -> nil
     ///
     /// - Parameter index: index of element to access element.
     subscript(index: Base.Index) -> Base.Element? {

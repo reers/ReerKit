@@ -96,3 +96,26 @@ public extension Decodable {
         set {}
     }
 }
+
+// MARK: - MutableCollection
+
+public struct ReerForMutableCollection<Base> {
+    public let base: UnsafeMutablePointer<Base>
+    public init(_ base: inout Base) {
+        self.base = withUnsafeMutablePointer(to: &base) { $0 }
+    }
+}
+
+public extension MutableCollection {
+    /// Gets a namespace holder for ReerKit compatible types.
+    var re: ReerForMutableCollection<Self> {
+        mutating get { return ReerForMutableCollection(&self) }
+        set {}
+    }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    static var re: ReerForMutableCollection<Self>.Type {
+        get { return ReerForMutableCollection<Self>.self }
+        set {}
+    }
+}

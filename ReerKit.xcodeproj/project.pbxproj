@@ -50,6 +50,8 @@
 		D0C95FE42857B4C400D0522D /* IntExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FE32857B4C400D0522D /* IntExtensionsTests.swift */; };
 		D0CBE62328832D78006F8BCB /* Timer+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CBE62228832D78006F8BCB /* Timer+REExtensions.swift */; };
 		D0CBE62528833BF5006F8BCB /* TimerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CBE62428833BF5006F8BCB /* TimerExtensionsTests.swift */; };
+		D0CC5A14290ACE390038989B /* MutableCollection+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CC5A13290ACE390038989B /* MutableCollection+REExtensions.swift */; };
+		D0CC5A18290ACF550038989B /* MutableCollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CC5A17290ACF550038989B /* MutableCollectionExtensionsTests.swift */; };
 		D0CD712728E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD712628E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift */; };
 		D0CD712928E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD712828E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift */; };
 		D0CD712B28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD712A28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift */; };
@@ -137,6 +139,8 @@
 		D0C95FE32857B4C400D0522D /* IntExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensionsTests.swift; sourceTree = "<group>"; };
 		D0CBE62228832D78006F8BCB /* Timer+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timer+REExtensions.swift"; sourceTree = "<group>"; };
 		D0CBE62428833BF5006F8BCB /* TimerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerExtensionsTests.swift; sourceTree = "<group>"; };
+		D0CC5A13290ACE390038989B /* MutableCollection+REExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MutableCollection+REExtensions.swift"; sourceTree = "<group>"; };
+		D0CC5A17290ACF550038989B /* MutableCollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableCollectionExtensionsTests.swift; sourceTree = "<group>"; };
 		D0CD712628E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BidirectionalCollection+REExtensions.swift"; sourceTree = "<group>"; };
 		D0CD712828E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidirectionalCollectionExtensionsTests.swift; sourceTree = "<group>"; };
 		D0CD712A28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+REExtensions.swift"; sourceTree = "<group>"; };
@@ -354,6 +358,7 @@
 				D0CD713C28E5CC1D009ADA8E /* Float+REExtensions.swift */,
 				D0CD713E28E5CC97009ADA8E /* FloatingPoint+REExtensions.swift */,
 				D0CD714628E5D71D009ADA8E /* Decodable+REExtensions.swift */,
+				D0CC5A13290ACE390038989B /* MutableCollection+REExtensions.swift */,
 			);
 			path = StandardLibrary;
 			sourceTree = "<group>";
@@ -380,6 +385,7 @@
 				D0CD714228E5CDCD009ADA8E /* FloatExtensionsTests.swift */,
 				D0CD714128E5CDCD009ADA8E /* FloatingPointExtensionsTests.swift */,
 				D076A2D028E5DBFF00E89281 /* DecodableExtensionsTests.swift */,
+				D0CC5A17290ACF550038989B /* MutableCollectionExtensionsTests.swift */,
 			);
 			path = StandardLibraryExtensionsTests;
 			sourceTree = "<group>";
@@ -529,6 +535,7 @@
 				D0F39A7C287DC70100A754B2 /* Character+REExtensions.swift in Sources */,
 				D04D34F7286C7A8A001E974C /* DispatchQueue+REExtensions.swift in Sources */,
 				D0CD712728E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift in Sources */,
+				D0CC5A14290ACE390038989B /* MutableCollection+REExtensions.swift in Sources */,
 				D0C95FDA2857999D00D0522D /* Int+REExtensions.swift in Sources */,
 				D04D34F4286C7390001E974C /* Utils.swift in Sources */,
 				D0EBE241288492B2004925E5 /* DeinitObserver.swift in Sources */,
@@ -578,6 +585,7 @@
 				D019B8F5285BA02900257A7D /* ReadWriteLockTests.swift in Sources */,
 				D04D34FA286C836A001E974C /* DispatchTests.swift in Sources */,
 				D0CBE62528833BF5006F8BCB /* TimerExtensionsTests.swift in Sources */,
+				D0CC5A18290ACF550038989B /* MutableCollectionExtensionsTests.swift in Sources */,
 				D06287162885D83100401B59 /* WeakTests.swift in Sources */,
 				D0CD714528E5CDCD009ADA8E /* FloatExtensionsTests.swift in Sources */,
 				D0F39A82287DD82E00A754B2 /* SequenceExtensionsTests.swift in Sources */,

@@ -119,3 +119,26 @@ public extension MutableCollection {
         set {}
     }
 }
+
+// MARK: - StringProtocol
+
+public struct ReerForStringProtocol<Base> {
+    public let base: Base
+    public init(_ base: Base) {
+        self.base = base
+    }
+}
+
+public extension StringProtocol {
+    /// Gets a namespace holder for ReerKit compatible types.
+    var re: ReerForStringProtocol<Self> {
+        get { return ReerForStringProtocol(self) }
+        set {}
+    }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    static var re: ReerForStringProtocol<Self>.Type {
+        get { return ReerForStringProtocol.self }
+        set {}
+    }
+}

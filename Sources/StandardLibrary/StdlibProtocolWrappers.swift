@@ -142,3 +142,26 @@ public extension StringProtocol {
         set {}
     }
 }
+
+// MARK: - RangeReplaceableCollection
+
+public struct ReerForRangeReplaceableCollection<Base> {
+    public let base: UnsafeMutablePointer<Base>
+    public init(_ base: inout Base) {
+        self.base = withUnsafeMutablePointer(to: &base) { $0 }
+    }
+}
+
+public extension RangeReplaceableCollection {
+    /// Gets a namespace holder for ReerKit compatible types.
+    var re: ReerForRangeReplaceableCollection<Self> {
+        mutating get { return ReerForRangeReplaceableCollection(&self) }
+        set {}
+    }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    static var re: ReerForRangeReplaceableCollection<Self>.Type {
+        get { return ReerForRangeReplaceableCollection<Self>.self }
+        set {}
+    }
+}

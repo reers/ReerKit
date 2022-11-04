@@ -26,6 +26,8 @@
 		D06287162885D83100401B59 /* WeakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06287152885D83100401B59 /* WeakTests.swift */; };
 		D068566628D76E45001CB92A /* Array+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D068566528D76E45001CB92A /* Array+REExtensions.swift */; };
 		D068566828D77BF3001CB92A /* ArrayExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D068566728D77BF3001CB92A /* ArrayExtensionsTests.swift */; };
+		D06BD5E529157A8D00040407 /* Dictionary+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06BD5E429157A8D00040407 /* Dictionary+REExtensions.swift */; };
+		D06BD5E729157FE700040407 /* DictionaryExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06BD5E629157FE700040407 /* DictionaryExtensionsTests.swift */; };
 		D071DEBD28D8DC1F00618A2F /* Collection+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071DEBC28D8DC1F00618A2F /* Collection+REExtensions.swift */; };
 		D071DEBF28D8DF5500618A2F /* CollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071DEBE28D8DF5500618A2F /* CollectionExtensionsTests.swift */; };
 		D076A2D128E5DBFF00E89281 /* DecodableExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076A2D028E5DBFF00E89281 /* DecodableExtensionsTests.swift */; };
@@ -118,6 +120,8 @@
 		D06287152885D83100401B59 /* WeakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakTests.swift; sourceTree = "<group>"; };
 		D068566528D76E45001CB92A /* Array+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+REExtensions.swift"; sourceTree = "<group>"; };
 		D068566728D77BF3001CB92A /* ArrayExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionsTests.swift; sourceTree = "<group>"; };
+		D06BD5E429157A8D00040407 /* Dictionary+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+REExtensions.swift"; sourceTree = "<group>"; };
+		D06BD5E629157FE700040407 /* DictionaryExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtensionsTests.swift; sourceTree = "<group>"; };
 		D071DEBC28D8DC1F00618A2F /* Collection+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+REExtensions.swift"; sourceTree = "<group>"; };
 		D071DEBE28D8DF5500618A2F /* CollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtensionsTests.swift; sourceTree = "<group>"; };
 		D076A2D028E5DBFF00E89281 /* DecodableExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableExtensionsTests.swift; sourceTree = "<group>"; };
@@ -369,6 +373,7 @@
 				D0CD713828E5C597009ADA8E /* StdlibProtocolWrappers.swift */,
 				D0CC5A19290AD5040038989B /* StringProtocol+REExtensions.swift */,
 				D0CC5A1D290AE4CF0038989B /* RangeReplaceableCollection+REExtensions.swift */,
+				D06BD5E429157A8D00040407 /* Dictionary+REExtensions.swift */,
 			);
 			path = StandardLibrary;
 			sourceTree = "<group>";
@@ -398,6 +403,7 @@
 				D0CC5A17290ACF550038989B /* MutableCollectionExtensionsTests.swift */,
 				D0CC5A1B290AD60E0038989B /* StringProtocolExtensionsTests.swift */,
 				D0CC5A1F290AEDFC0038989B /* RangeReplaceableCollectionExtensionsTests.swift */,
+				D06BD5E629157FE700040407 /* DictionaryExtensionsTests.swift */,
 			);
 			path = StandardLibraryExtensionsTests;
 			sourceTree = "<group>";
@@ -539,6 +545,7 @@
 				D068566628D76E45001CB92A /* Array+REExtensions.swift in Sources */,
 				D0CD713B28E5CB58009ADA8E /* Double+REExtensions.swift in Sources */,
 				D0E354C828BFBBE10000030B /* WeakSet.swift in Sources */,
+				D06BD5E529157A8D00040407 /* Dictionary+REExtensions.swift in Sources */,
 				D0CD712B28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift in Sources */,
 				D0C95FE02857AC1A00D0522D /* SignedNumeric+REExtensions.swift in Sources */,
 				D0C95FD52857899F00D0522D /* Bool+REExtensions.swift in Sources */,
@@ -620,6 +627,7 @@
 				D0EBE23D28847EC4004925E5 /* AnyObjectExtensionsTests.swift in Sources */,
 				D0C95FD8285793A000D0522D /* BoolExtensionsTests.swift in Sources */,
 				D0EBE243288493F8004925E5 /* DeinitObserverTests.swift in Sources */,
+				D06BD5E729157FE700040407 /* DictionaryExtensionsTests.swift in Sources */,
 				D0CD714428E5CDCD009ADA8E /* FloatingPointExtensionsTests.swift in Sources */,
 				D04D34FC286C843B001E974C /* UtilsTests.swift in Sources */,
 			);

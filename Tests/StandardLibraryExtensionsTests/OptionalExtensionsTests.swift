@@ -48,6 +48,7 @@ class OptionalExtensionsTests: XCTestCase {
         let d: String? = "yes"
         let e: String? = "false"
         let f: String? = "true"
+        let s: String? = "11"
         let g: Bool? = false
         let h: Bool? = true
         let obj: NSObject? = NSObject()
@@ -63,6 +64,7 @@ class OptionalExtensionsTests: XCTestCase {
         XCTAssertFalse(b.re.bool!)
         XCTAssertFalse(c.re.bool!)
         XCTAssertFalse(e.re.bool!)
+        XCTAssertTrue(s.re.bool!)
         XCTAssertFalse(g.re.bool!)
         XCTAssertNil(obj.re.bool)
         XCTAssertNil(string.re.bool)

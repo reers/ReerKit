@@ -574,10 +574,14 @@ public extension Reer where Base == String {
     ///
     /// - Parameter range: Range expression.
     subscript<R>(safe range: R) -> String? where R: RangeExpression, R.Bound == Int {
-        let range = range.relative(to: Int.min..<Int.max)
-        guard range.lowerBound >= 0,
-              let lowerIndex = base.index(base.startIndex, offsetBy: range.lowerBound, limitedBy: base.endIndex),
-              let upperIndex = base.index(base.startIndex, offsetBy: range.upperBound, limitedBy: base.endIndex)
+        var rangeResult = range.relative(to: Int.min..<Int.max)
+        let start = max(0, rangeResult.lowerBound)
+        var end = min(rangeResult.upperBound, base.count)
+        if start > end { end = start }
+        rangeResult = start..<end
+        guard rangeResult.lowerBound >= 0,
+              let lowerIndex = base.index(base.startIndex, offsetBy: rangeResult.lowerBound, limitedBy: base.endIndex),
+              let upperIndex = base.index(base.startIndex, offsetBy: rangeResult.upperBound, limitedBy: base.endIndex)
         else {
             return nil
         }

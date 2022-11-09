@@ -122,9 +122,8 @@ public extension ReerGeneric where Base == Optional<T> {
         } else if let string = base as? String {
             if let int = string~!.re.int {
                 return int != 0
-            } else {
-                let lowercasedString = string.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-                switch lowercasedString {
+            } else if string.count <= 5 {
+                switch string.lowercased() {
                 case "true", "yes":
                     return true
                 case "false", "no":
@@ -132,6 +131,8 @@ public extension ReerGeneric where Base == Optional<T> {
                 default:
                     return nil
                 }
+            } else {
+                return nil
             }
         } else {
             return nil

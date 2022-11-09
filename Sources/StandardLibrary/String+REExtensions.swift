@@ -566,14 +566,14 @@ public extension Reer where Base == String {
 
     /// ReerKit: Safely subscript string within a given range.
     ///
-    ///        "Hello World!".re[6..<11] -> "World"
-    ///        "Hello World!".re[21..<110] -> nil
+    ///        "Hello World!".re[safe: 6..<11] -> "World"
+    ///        "Hello World!".re[safe: 21..<110] -> nil
     ///
-    ///        "Hello World!".re[6...11] -> "World!"
-    ///        "Hello World!".re[21...110] -> nil
+    ///        "Hello World!".re[safe: 6...11] -> "World!"
+    ///        "Hello World!".re[safe: 21...110] -> nil
     ///
     /// - Parameter range: Range expression.
-    subscript<R>(range: R) -> String? where R: RangeExpression, R.Bound == Int {
+    subscript<R>(safe range: R) -> String? where R: RangeExpression, R.Bound == Int {
         let range = range.relative(to: Int.min..<Int.max)
         guard range.lowerBound >= 0,
               let lowerIndex = base.index(base.startIndex, offsetBy: range.lowerBound, limitedBy: base.endIndex),
@@ -706,10 +706,10 @@ public extension Reer where Base == String {
     func slicing(from index: Int, length: Int) -> String? {
         guard length >= 0, index >= 0, index < base.count else { return nil }
         guard index.advanced(by: length) <= base.count else {
-            return self[index..<base.count]
+            return self[safe: index..<base.count]
         }
         guard length > 0 else { return "" }
-        return self[index..<index.advanced(by: length)]
+        return self[safe: index..<index.advanced(by: length)]
     }
 
     #if canImport(Foundation)
@@ -954,7 +954,7 @@ extension ReerReference where Base == String {
     @discardableResult
     mutating func slice(from start: Int, to end: Int) -> String {
         guard end >= start else { return base.pointee }
-        if let str = base.pointee.re[start..<end] {
+        if let str = base.pointee.re[safe: start..<end] {
             base.pointee = str
         }
         return base.pointee
@@ -970,7 +970,7 @@ extension ReerReference where Base == String {
     @discardableResult
     mutating func slice(at index: Int) -> String {
         guard index < base.pointee.count else { return base.pointee }
-        if let str = base.pointee.re[index..<base.pointee.count] {
+        if let str = base.pointee.re[safe: index..<base.pointee.count] {
             base.pointee = str
         }
         return base.pointee

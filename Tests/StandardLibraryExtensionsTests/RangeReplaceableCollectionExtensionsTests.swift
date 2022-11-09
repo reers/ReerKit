@@ -104,7 +104,7 @@ final class RangeReplaceableCollectionTests: XCTestCase {
 
         XCTAssertEqual(string.re[...11], "Hello world!")
 
-        XCTAssertEqual(string.re[..<12], "Hello world!")
+        XCTAssertEqual(string.re[..<16], "Hello world!")
 
         string.re[0] = "h"
         XCTAssertEqual(string, "hello world!")

@@ -57,18 +57,21 @@ final class StringExtensionsTests: XCTestCase {
         XCTAssert("hsj 1 wq3".re.hasLetters)
         XCTAssertFalse("123".re.hasLetters)
         XCTAssert("Hello test".re.hasLetters)
+        XCTAssertFalse("".re.hasLetters)
     }
 
     func testHasNumbers() {
         XCTAssert("hsj 1 wq3".re.hasDigits)
         XCTAssert("123".re.hasDigits)
         XCTAssertFalse("Hello test".re.hasDigits)
+        XCTAssertFalse("".re.hasDigits)
     }
 
     func testIsAlphabetic() {
-        XCTAssert("abc".re.isLettersOnly)
-        XCTAssertFalse("123abc".re.isLettersOnly)
-        XCTAssertFalse("123".re.isLettersOnly)
+        XCTAssert("abc".re.hasLettersOnly)
+        XCTAssertFalse("123abc".re.hasLettersOnly)
+        XCTAssertFalse("123".re.hasLettersOnly)
+        XCTAssertFalse("".re.hasLettersOnly)
     }
 
     func testIsPalindrome() {
@@ -148,11 +151,12 @@ final class StringExtensionsTests: XCTestCase {
     }
 
     func testIsDigits() {
-        XCTAssert("123".re.isDigitsOnly)
-        XCTAssert("987654321".re.isDigitsOnly)
-        XCTAssertFalse("123.4".re.isDigitsOnly)
-        XCTAssertFalse("1.25e2".re.isDigitsOnly)
-        XCTAssertFalse("123abc".re.isDigitsOnly)
+        XCTAssert("123".re.hasDigitsOnly)
+        XCTAssert("987654321".re.hasDigitsOnly)
+        XCTAssertFalse("123.4".re.hasDigitsOnly)
+        XCTAssertFalse("1.25e2".re.hasDigitsOnly)
+        XCTAssertFalse("123abc".re.hasDigitsOnly)
+        XCTAssertFalse("".re.hasDigitsOnly)
     }
 
     func testLastCharacter() {

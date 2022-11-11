@@ -150,23 +150,23 @@ public extension Reer where Base == String {
     #if canImport(Foundation)
     /// ReerKit: Check if string only contains letters.
     ///
-    ///     "abc".re.isLettersOnly -> true
-    ///     "123abc".re.isLettersOnly -> false
+    ///     "abc".re.hasLettersOnly -> true
+    ///     "123abc".re.hasLettersOnly -> false
     ///
-    var isLettersOnly: Bool {
-        return CharacterSet.letters.isSuperset(of: CharacterSet(charactersIn: base))
+    var hasLettersOnly: Bool {
+        return !base.isEmpty && CharacterSet.letters.isSuperset(of: CharacterSet(charactersIn: base))
     }
     #endif
 
     #if canImport(Foundation)
     /// ReerKit: Check if string only contains digits.
     ///
-    ///     "123".re.isDigitsOnly -> true
-    ///     "1.3".re.isDigitsOnly -> false
-    ///     "abc".re.isDigitsOnly -> false
+    ///     "123".re.hasDigitsOnly -> true
+    ///     "1.3".re.hasDigitsOnly -> false
+    ///     "abc".re.hasDigitsOnly -> false
     ///
-    var isDigitsOnly: Bool {
-        return CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: base))
+    var hasDigitsOnly: Bool {
+        return !base.isEmpty && CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: base))
     }
     #endif
 

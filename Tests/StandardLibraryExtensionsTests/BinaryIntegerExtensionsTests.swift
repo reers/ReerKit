@@ -26,16 +26,16 @@ final class BinaryIntegerExtensionsTests: XCTestCase {
     }
 
     func testInitBytes() {
-        let zero = Int8.re.with(bytes: [0])
+        let zero = Int8.re(bytes: [0])
         XCTAssertEqual(zero, 0)
 
-        let negativeOne = Int16.re.with(bytes: [0b1111_1111, 0b1111_1111])
+        let negativeOne = Int16.re(bytes: [0b1111_1111, 0b1111_1111])
         XCTAssertEqual(negativeOne, -1)
 
-        let fortyTwo = Int16.re.with(bytes: [0, 0b0010_1010])
+        let fortyTwo = Int16.re(bytes: [0, 0b0010_1010])
         XCTAssertEqual(fortyTwo, 42)
 
-        let uint64Max = UInt64.re.with(bytes: Array(repeating: 0xFF, count: 8))
+        let uint64Max = UInt64.re(bytes: Array(repeating: 0xFF, count: 8))
         XCTAssertEqual(uint64Max, UInt64.max)
     }
 

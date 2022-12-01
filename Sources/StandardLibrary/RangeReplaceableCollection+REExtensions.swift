@@ -21,25 +21,6 @@
 //  THE SOFTWARE.
 
 public extension ReerForRangeReplaceableCollection where Base: RangeReplaceableCollection {
-    /// ReerKit: Creates a new collection of a given size where for each position of the collection the value will be the result of a call of the given expression.
-    ///
-    ///     let values = Array.re.with(expression: "Value", count: 3)
-    ///     print(values)
-    ///     // Prints "["Value", "Value", "Value"]"
-    ///
-    /// - Parameters:
-    ///   - expression: The expression to execute for each position of the collection.
-    ///   - count: The count of the collection.
-    static func with(expression: @autoclosure () throws -> Base.Element, count: Int) rethrows -> Base {
-        var collection = Base.init()
-        if count > 0 {
-            collection.reserveCapacity(count)
-            while collection.count < count {
-                collection.append(try expression())
-            }
-        }
-        return collection
-    }
 
     /// ReerKit: Removes the first element of the collection which satisfies the given predicate.
     ///
@@ -144,5 +125,29 @@ public extension ReerForRangeReplaceableCollection where Base: RangeReplaceableC
     mutating func appendIfNonNil<S>(contentsOf newElements: S?) where Base.Element == S.Element, S : Sequence {
         guard let newElements = newElements else { return }
         base.pointee.append(contentsOf: newElements)
+    }
+}
+
+// MARK: - Initialize
+
+public extension RangeReplaceableCollection {
+    /// ReerKit: Creates a new collection of a given size where for each position of the collection the value will be the result of a call of the given expression.
+    ///
+    ///     let values = Array.re(expression: "Value", count: 3)
+    ///     print(values)
+    ///     // Prints "["Value", "Value", "Value"]"
+    ///
+    /// - Parameters:
+    ///   - expression: The expression to execute for each position of the collection.
+    ///   - count: The count of the collection.
+    static func re(expression: @autoclosure () throws -> Self.Element, count: Int) rethrows -> Self {
+        var collection = Self.init()
+        if count > 0 {
+            collection.reserveCapacity(count)
+            while collection.count < count {
+                collection.append(try expression())
+            }
+        }
+        return collection
     }
 }

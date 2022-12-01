@@ -12,10 +12,10 @@ import XCTest
 final class RangeReplaceableCollectionTests: XCTestCase {
     func testInitExpressionOfSize() {
         var array = [1, 2, 3]
-        let newArray = [Int].re.with(expression: array.removeLast(), count: array.count)
+        let newArray = [Int].re(expression: array.removeLast(), count: array.count)
         XCTAssertEqual(newArray, [3, 2, 1])
         XCTAssert(array.isEmpty)
-        let empty = [Int].re.with(expression: 1, count: 0)
+        let empty = [Int].re(expression: 1, count: 0)
         XCTAssert(empty.isEmpty)
     }
 

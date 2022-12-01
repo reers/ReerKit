@@ -37,24 +37,29 @@ public extension Reer where Base: BinaryInteger {
         }
         return result.reversed()
     }
+}
+
+// MARK: - Initialize
+
+public extension BinaryInteger {
 
     /// ReetKit: Creates a `BinaryInteger` from a raw byte representaion.
     ///
-    ///     var number = Int16.re.with(bytes: [0xFF, 0b1111_1101])
+    ///     var number = Int16.re(bytes: [0xFF, 0b1111_1101])
     ///     print(number!)
     ///     // prints "-3"
     ///
     /// - Parameter bytes: An array of bytes representing the value of the integer.
     ///
-    static func with(bytes: [UInt8]) -> Base? {
+    static func re(bytes: [UInt8]) -> Self? {
         // https://stackoverflow.com/a/43518567/9506784
-        precondition(bytes.count <= MemoryLayout<Base>.size,
-                     "Integer with a \(bytes.count) byte binary representation of '\(bytes.map({ String($0, radix: 2) }).joined(separator: " "))' overflows when stored into a \(MemoryLayout<Base>.size) byte '\(Self.self)'")
-        var value: Base = 0
+        precondition(bytes.count <= MemoryLayout<Self>.size,
+                     "Integer with a \(bytes.count) byte binary representation of '\(bytes.map({ String($0, radix: 2) }).joined(separator: " "))' overflows when stored into a \(MemoryLayout<Self>.size) byte '\(Self.self)'")
+        var value: Self = 0
         for byte in bytes {
             value <<= 8
-            value |= Base(byte)
+            value |= Self(byte)
         }
-        return Base(exactly: value)
+        return Self(exactly: value)
     }
 }

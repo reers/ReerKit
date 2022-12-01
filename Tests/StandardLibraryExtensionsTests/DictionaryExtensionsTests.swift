@@ -33,13 +33,13 @@ final class DictionaryExtensionsTests: XCTestCase {
         let array3: [String] = []
 
         XCTAssertEqual(
-            Dictionary.re.with(array1, groupBy: \String.count),
+            Dictionary.re(array1, groupBy: \String.count),
             [6: ["Bryant"], 5: ["James"], 4: ["Wade", "John"]])
         XCTAssertEqual(
-            Dictionary.re.with(array1, groupBy: \String.first),
+            Dictionary.re(array1, groupBy: \String.first),
             [Optional("B"): ["Bryant"], Optional("J"): ["James", "John"], Optional("W"): ["Wade"]])
         XCTAssertEqual(
-            Dictionary.re.with(array2, groupBy: \String.count),
+            Dictionary.re(array2, groupBy: \String.count),
             [6: ["Bryant"], 5: ["James"], 4: ["Wade", "John"], 0: ["", ""]])
         XCTAssertEqual(Dictionary(grouping: array3, by: \String.count), [:])
     }

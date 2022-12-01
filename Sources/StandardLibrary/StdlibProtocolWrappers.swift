@@ -74,29 +74,6 @@ public extension Equatable {
     }
 }
 
-// MARK: - Codable
-
-public struct ReerForDecodable<Base> {
-    public let base: Base
-    public init(_ base: Base) {
-        self.base = base
-    }
-}
-
-public extension Decodable {
-    /// Gets a namespace holder for ReerKit compatible types.
-    var re: ReerForDecodable<Self> {
-        get { return ReerForDecodable(self) }
-        set {}
-    }
-
-    /// Gets a namespace holder for ReerKit compatible meta types.
-    static var re: ReerForDecodable<Self>.Type {
-        get { return ReerForDecodable.self }
-        set {}
-    }
-}
-
 // MARK: - MutableCollection
 
 public struct ReerForMutableCollection<Base> {

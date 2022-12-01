@@ -73,14 +73,6 @@ extension Dictionary: ReerGeneric2Compatible {
 }
 
 public extension ReerGeneric2 where Base == Dictionary<T1, T2> {
-    /// ReerKit: Creates a Dictionary from a given sequence grouped by a given key path.
-    ///
-    /// - Parameters:
-    ///   - sequence: Sequence being grouped.
-    ///   - keypath: The key path to group by.
-    static func with<S: Sequence>(_ sequence: S, groupBy keyPath: KeyPath<S.Element, T1>) -> [T1: T2] where T2 == [S.Element] {
-        return Base(grouping: sequence, by: { $0[keyPath: keyPath] })
-    }
 
     /// ReerKit: Check if key exists in dictionary.
     ///
@@ -375,5 +367,18 @@ public extension Dictionary {
     ///   - keys: array with the keys to be removed.
     static func -= <S: Sequence>(lhs: inout [Key: Value], keys: S) where S.Element == Key {
         lhs.re.removeAll(keys: keys)
+    }
+}
+
+// MARK: - Initialize
+
+public extension Dictionary {
+    /// ReerKit: Creates a Dictionary from a given sequence grouped by a given key path.
+    ///
+    /// - Parameters:
+    ///   - sequence: Sequence being grouped.
+    ///   - keypath: The key path to group by.
+    static func re<S: Sequence>(_ sequence: S, groupBy keyPath: KeyPath<S.Element, Key>) -> [Key: Value] where Value == [S.Element] {
+        return Self(grouping: sequence, by: { $0[keyPath: keyPath] })
     }
 }

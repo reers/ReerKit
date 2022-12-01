@@ -24,15 +24,16 @@
 import Foundation
 #endif
 
-public extension ReerForDecodable where Base: Decodable {
+// MARK: - Initialize
+
+public extension Decodable {
     #if canImport(Foundation)
     /// ReerKit: Parsing the model in Decodable type.
     /// - Parameters:
     ///   - data: Data.
     ///   - decoder: JSONDecoder. Initialized by default.
-    static func with(_ data: Data, using decoder: JSONDecoder = .init()) -> Base? {
-        return try? decoder.decode(Base.self, from: data)
+    static func re(data: Data, using decoder: JSONDecoder = .init()) -> Self? {
+        return try? decoder.decode(Self.self, from: data)
     }
     #endif
 }
-

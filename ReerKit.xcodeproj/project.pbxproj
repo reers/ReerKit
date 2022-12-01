@@ -19,6 +19,8 @@
 		D0397614286E12A900C33E17 /* OptionalExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0397613286E12A900C33E17 /* OptionalExtensionsTests.swift */; };
 		D0421ACD2938F4DD00452845 /* Calendar+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0421ACC2938F4DD00452845 /* Calendar+REExtensions.swift */; };
 		D0421ACF2938F5D500452845 /* CalendarExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0421ACE2938F5D500452845 /* CalendarExtensionsTests.swift */; };
+		D0421AD12938F6B500452845 /* Data+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0421AD02938F6B500452845 /* Data+REExtensions.swift */; };
+		D0421AD32939033800452845 /* DataExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0421AD22939033800452845 /* DataExtensionsTests.swift */; };
 		D04D34F4286C7390001E974C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34F3286C7390001E974C /* Utils.swift */; };
 		D04D34F7286C7A8A001E974C /* DispatchQueue+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34F6286C7A8A001E974C /* DispatchQueue+REExtensions.swift */; };
 		D04D34FA286C836A001E974C /* DispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34F9286C836A001E974C /* DispatchTests.swift */; };
@@ -119,6 +121,8 @@
 		D0397613286E12A900C33E17 /* OptionalExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalExtensionsTests.swift; sourceTree = "<group>"; };
 		D0421ACC2938F4DD00452845 /* Calendar+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar+REExtensions.swift"; sourceTree = "<group>"; };
 		D0421ACE2938F5D500452845 /* CalendarExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExtensionsTests.swift; sourceTree = "<group>"; };
+		D0421AD02938F6B500452845 /* Data+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+REExtensions.swift"; sourceTree = "<group>"; };
+		D0421AD22939033800452845 /* DataExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensionsTests.swift; sourceTree = "<group>"; };
 		D04D34F3286C7390001E974C /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		D04D34F6286C7A8A001E974C /* DispatchQueue+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+REExtensions.swift"; sourceTree = "<group>"; };
 		D04D34F9286C836A001E974C /* DispatchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchTests.swift; sourceTree = "<group>"; };
@@ -336,6 +340,7 @@
 				D0B1211428550E1000B5B326 /* NSObject+REExtensions.swift */,
 				D0CBE62228832D78006F8BCB /* Timer+REExtensions.swift */,
 				D0421ACC2938F4DD00452845 /* Calendar+REExtensions.swift */,
+				D0421AD02938F6B500452845 /* Data+REExtensions.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 				D0B1211A285510B200B5B326 /* NSObjectExtensionsTests.swift */,
 				D0CBE62428833BF5006F8BCB /* TimerExtensionsTests.swift */,
 				D0421ACE2938F5D500452845 /* CalendarExtensionsTests.swift */,
+				D0421AD22939033800452845 /* DataExtensionsTests.swift */,
 			);
 			path = FoundationTests;
 			sourceTree = "<group>";
@@ -586,6 +592,7 @@
 				D04D34F4286C7390001E974C /* Utils.swift in Sources */,
 				D0EBE241288492B2004925E5 /* DeinitObserver.swift in Sources */,
 				D071DEBD28D8DC1F00618A2F /* Collection+REExtensions.swift in Sources */,
+				D0421AD12938F6B500452845 /* Data+REExtensions.swift in Sources */,
 				D0038B7D285642B600A890F9 /* Locked.swift in Sources */,
 				D0038B8128565B9500A890F9 /* ReadWriteLock.swift in Sources */,
 				D0B121122855089000B5B326 /* ReerKit.swift in Sources */,
@@ -638,6 +645,7 @@
 				D019B8F5285BA02900257A7D /* ReadWriteLockTests.swift in Sources */,
 				D04D34FA286C836A001E974C /* DispatchTests.swift in Sources */,
 				D0CBE62528833BF5006F8BCB /* TimerExtensionsTests.swift in Sources */,
+				D0421AD32939033800452845 /* DataExtensionsTests.swift in Sources */,
 				D0CC5A18290ACF550038989B /* MutableCollectionExtensionsTests.swift in Sources */,
 				D06287162885D83100401B59 /* WeakTests.swift in Sources */,
 				D0CD714528E5CDCD009ADA8E /* FloatExtensionsTests.swift in Sources */,

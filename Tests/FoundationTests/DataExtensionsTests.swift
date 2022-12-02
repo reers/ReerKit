@@ -118,6 +118,14 @@ final class DataExtensionsTests: XCTestCase {
         let encryptedWithIV = data.re.aesEncrypt(withKey: key256, iv: iv)
         XCTAssertEqual(encryptedWithIV?.re.aesDecrypt(withKey: key256, iv: iv)?.re.utf8String, "123")
     }
+
+    func testCompression() {
+        let data = "123234234234234234wfasdfasfasdfasdfasdfasdf".re.utf8Data!
+        XCTAssertEqual(data.re.zlibCompressed(level: .bestCompression)?.re.zlibDecompressed(), data)
+        XCTAssertEqual(data.re.gzipCompressed(level: .bestSpeed)?.re.gzipDecompressed(), data)
+        XCTAssertLessThan(data.re.zlibCompressed(level: .bestCompression)!.count, data.re.zlibCompressed(level: .bestSpeed)!.count)
+        XCTAssertLessThan(data.re.gzipCompressed(level: .bestCompression)!.count, data.re.gzipCompressed(level: .bestSpeed)!.count)
+    }
 }
 
 #endif

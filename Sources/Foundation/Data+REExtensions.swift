@@ -27,6 +27,10 @@ import Foundation
 import CommonCrypto
 #endif
 
+#if canImport(zlib)
+import zlib
+#endif
+
 // MARK: - Initializer
 
 public extension Data {
@@ -445,6 +449,232 @@ public extension ReerForEquatable where Base == Data {
             debugPrint("Error: \(cryptStatus)")
             return nil
         }
+    }
+}
+#endif
+
+#if canImport(zlib)
+
+// MARK: - Compression
+
+// Reference: https://github.com/1024jp/GzipSwift
+
+/// ReerKit: Compression level whose rawValue is based on the zlib's constants.
+public struct CompressionLevel: RawRepresentable {
+
+    /// Compression level in the range of `0` (no compression) to `9` (maximum compression).
+    public let rawValue: Int32
+    public init(rawValue: Int32) {
+        self.rawValue = rawValue
+    }
+
+    public static let noCompression = Self(rawValue: Z_NO_COMPRESSION)
+    public static let bestSpeed = Self(rawValue: Z_BEST_SPEED)
+    public static let bestCompression = Self(rawValue: Z_BEST_COMPRESSION)
+    public static let defaultCompression = Self(rawValue: Z_DEFAULT_COMPRESSION)
+}
+
+public extension ReerForEquatable where Base == Data {
+
+    private struct DataSize {
+        static let chunk = Int(pow(2.0, 14))
+        static let stream = MemoryLayout<z_stream>.size
+    }
+
+    /// ReerKit: Comperss data to zlib-compressed in default compresssion level.
+    ///
+    /// - Returns: Compressed data.
+    func zlibCompressed(level: CompressionLevel = .defaultCompression) -> Data? {
+        guard !base.isEmpty else { return base }
+
+        var stream = z_stream()
+        var status: Int32
+
+        status = deflateInit_(&stream, level.rawValue, ZLIB_VERSION, Int32(DataSize.stream))
+        guard status == Z_OK else { return nil }
+
+        var data = Data(capacity: DataSize.chunk)
+
+        repeat {
+            if Int(stream.total_out) >= data.count {
+                data.count += DataSize.chunk
+            }
+
+            let inputCount = base.count
+            let outputCount = data.count
+
+            base.withUnsafeBytes { (inputPointer: UnsafeRawBufferPointer) in
+                stream.next_in = UnsafeMutablePointer<Bytef>(
+                    mutating: inputPointer.bindMemory(to: Bytef.self).baseAddress!
+                )
+                .advanced(by: Int(stream.total_in))
+
+                stream.avail_in = uint(inputCount) - uInt(stream.total_in)
+                data.withUnsafeMutableBytes { (outputPointer: UnsafeMutableRawBufferPointer) in
+                    stream.next_out = outputPointer
+                        .bindMemory(to: Bytef.self).baseAddress!
+                        .advanced(by: Int(stream.total_out))
+                    stream.avail_out = uInt(outputCount) - uInt(stream.total_out)
+                    status = deflate(&stream, Z_FINISH)
+                    stream.next_out = nil
+                }
+                stream.next_in = nil
+            }
+        } while stream.avail_out == 0
+
+        guard deflateEnd(&stream) == Z_OK, status == Z_STREAM_END else { return nil }
+
+        data.count = Int(stream.total_out)
+        return data
+    }
+
+    /// ReerKit: Decompress data from zlib-compressed data.
+    ///
+    /// - Returns: Decompressed data.
+    func zlibDecompressed() -> Data? {
+        guard !base.isEmpty else { return base }
+
+        var stream = z_stream()
+        var status: Int32
+
+        status = inflateInit_(&stream, ZLIB_VERSION, Int32(DataSize.stream))
+        guard status == Z_OK else { return nil }
+
+        var data = Data(capacity: base.count * 2)
+        repeat {
+            if Int(stream.total_out) >= data.count {
+                data.count += base.count / 2
+            }
+
+            let inputCount = base.count
+            let outputCount = data.count
+
+            base.withUnsafeBytes { (inputPointer: UnsafeRawBufferPointer) in
+                stream.next_in = UnsafeMutablePointer<Bytef>(
+                    mutating: inputPointer.bindMemory(to: Bytef.self).baseAddress!
+                )
+                .advanced(by: Int(stream.total_in))
+                stream.avail_in = uint(inputCount) - uInt(stream.total_in)
+
+                data.withUnsafeMutableBytes { (outputPointer: UnsafeMutableRawBufferPointer) in
+                    stream.next_out = outputPointer
+                        .bindMemory(to: Bytef.self).baseAddress!
+                        .advanced(by: Int(stream.total_out))
+                    stream.avail_out = uInt(outputCount) - uInt(stream.total_out)
+                    status = inflate(&stream, Z_SYNC_FLUSH)
+                    stream.next_out = nil
+                }
+                stream.next_in = nil
+            }
+
+        } while status == Z_OK
+
+        guard inflateEnd(&stream) == Z_OK, status == Z_STREAM_END else { return nil }
+
+        data.count = Int(stream.total_out)
+        return data
+    }
+
+    /// ReerKit: Compress data to gzip in default compresssion level.
+    ///
+    /// - Returns: Compressed data.
+    func gzipCompressed(level: CompressionLevel = .defaultCompression) -> Data? {
+        guard !base.isEmpty else { return base }
+
+        var stream = z_stream()
+        var status: Int32
+        status = deflateInit2_(
+            &stream,
+            level.rawValue,
+            Z_DEFLATED,
+            MAX_WBITS + 16,
+            MAX_MEM_LEVEL,
+            Z_DEFAULT_STRATEGY,
+            ZLIB_VERSION,
+            Int32(DataSize.stream)
+        )
+
+        guard status == Z_OK else { return nil }
+
+        var data = Data(capacity: DataSize.chunk)
+
+        repeat {
+            if Int(stream.total_out) >= data.count {
+                data.count += DataSize.chunk
+            }
+
+            let inputCount = base.count
+            let outputCount = data.count
+
+            base.withUnsafeBytes { (inputPointer: UnsafeRawBufferPointer) in
+                stream.next_in = UnsafeMutablePointer<Bytef>(
+                    mutating: inputPointer.bindMemory(to: Bytef.self).baseAddress!
+                )
+                .advanced(by: Int(stream.total_in))
+                stream.avail_in = uint(inputCount) - uInt(stream.total_in)
+                data.withUnsafeMutableBytes { (outputPointer: UnsafeMutableRawBufferPointer) in
+                    stream.next_out = outputPointer
+                        .bindMemory(to: Bytef.self).baseAddress!
+                        .advanced(by: Int(stream.total_out))
+                    stream.avail_out = uInt(outputCount) - uInt(stream.total_out)
+                    status = deflate(&stream, Z_FINISH)
+                    stream.next_out = nil
+                }
+                stream.next_in = nil
+            }
+        } while stream.avail_out == 0
+
+        guard deflateEnd(&stream) == Z_OK, status == Z_STREAM_END else { return nil }
+
+        data.count = Int(stream.total_out)
+        return data
+    }
+
+    /// ReerKit: Decompress data from gzip data.
+    ///
+    /// - Returns: Decompressed data.
+    func gzipDecompressed() -> Data? {
+        guard !base.isEmpty else { return base }
+
+        var stream = z_stream()
+        var status: Int32
+
+        status = inflateInit2_(&stream, MAX_WBITS + 32, ZLIB_VERSION, Int32(DataSize.stream))
+
+        guard status == Z_OK else { return nil }
+
+        var data = Data(capacity: base.count * 2)
+        repeat {
+            if Int(stream.total_out) >= data.count {
+                data.count += base.count / 2
+            }
+
+            let inputCount = base.count
+            let outputCount = data.count
+
+            base.withUnsafeBytes { (inputPointer: UnsafeRawBufferPointer) in
+                stream.next_in = UnsafeMutablePointer<Bytef>(
+                    mutating: inputPointer.bindMemory(to: Bytef.self).baseAddress!
+                )
+                .advanced(by: Int(stream.total_in))
+                stream.avail_in = uint(inputCount) - uInt(stream.total_in)
+                data.withUnsafeMutableBytes { (outputPointer: UnsafeMutableRawBufferPointer) in
+                    stream.next_out = outputPointer
+                        .bindMemory(to: Bytef.self).baseAddress!
+                        .advanced(by: Int(stream.total_out))
+                    stream.avail_out = uInt(outputCount) - uInt(stream.total_out)
+                    status = inflate(&stream, Z_SYNC_FLUSH)
+                    stream.next_out = nil
+                }
+                stream.next_in = nil
+            }
+
+        } while status == Z_OK
+
+        guard inflateEnd(&stream) == Z_OK, status == Z_STREAM_END else { return nil }
+
+        data.count = Int(stream.total_out)
+        return data
     }
 }
 #endif

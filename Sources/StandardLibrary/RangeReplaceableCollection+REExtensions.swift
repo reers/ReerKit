@@ -128,7 +128,7 @@ public extension ReerForRangeReplaceableCollection where Base: RangeReplaceableC
     }
 }
 
-// MARK: - Initialize
+// MARK: - Initializer
 
 public extension RangeReplaceableCollection {
     /// ReerKit: Creates a new collection of a given size where for each position of the collection the value will be the result of a call of the given expression.

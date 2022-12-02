@@ -39,7 +39,7 @@ public extension Reer where Base: BinaryInteger {
     }
 }
 
-// MARK: - Initialize
+// MARK: - Initializer
 
 public extension BinaryInteger {
 

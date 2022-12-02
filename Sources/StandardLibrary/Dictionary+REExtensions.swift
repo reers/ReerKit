@@ -370,7 +370,7 @@ public extension Dictionary {
     }
 }
 
-// MARK: - Initialize
+// MARK: - Initializer
 
 public extension Dictionary {
     /// ReerKit: Creates a Dictionary from a given sequence grouped by a given key path.

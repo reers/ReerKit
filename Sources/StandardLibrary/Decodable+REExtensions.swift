@@ -24,7 +24,7 @@
 import Foundation
 #endif
 
-// MARK: - Initialize
+// MARK: - Initializer
 
 public extension Decodable {
     #if canImport(Foundation)

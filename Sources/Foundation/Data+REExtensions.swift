@@ -27,6 +27,34 @@ import Foundation
 import CommonCrypto
 #endif
 
+// MARK: - Initializer
+
+public extension Data {
+
+    /// ReerKit: Convert hex string to Data.
+    static func re(hexString: String) -> Data? {
+        var data = Data(capacity: hexString.count / 2)
+        let regex = try! NSRegularExpression(pattern: "[0-9a-f]{1,2}", options: .caseInsensitive)
+        regex.enumerateMatches(in: hexString, options: .reportProgress, range: NSMakeRange(0, hexString.utf16.count)) { match, flags, stop in
+            let byteString = hexString.re[safe: (match?.range.lowerBound)!..<(match?.range.upperBound)!]
+            var num = UInt8(byteString!, radix: 16)!
+            data.append(&num, count: 1)
+        }
+        guard data.count > 0 else {
+            return nil
+        }
+        return data
+    }
+
+    /// ReerKit: Create a data from a file in bundle.
+    static func re(fileName: String, inBundle bundle: Bundle = .main) -> Data? {
+        guard let url = bundle.url(forResource: fileName, withExtension: "") else {
+            return nil
+        }
+        return try? Data(contentsOf: url)
+    }
+}
+
 // MARK: - Convert to `String`, `Dictionary`, `Array`
 
 public enum JSONError: Error {
@@ -283,6 +311,11 @@ public enum HMACAlgorithm {
 
 public extension ReerForEquatable where Base == Data {
 
+    /// ReerKit: Returns a lowercase String for hmac using the algorithm with key.
+    /// - Parameters:
+    ///   - alg: HMAC algorithm.
+    ///   - key: The hmac key.
+    /// - Returns: HMAC handled string.
     func hmacString(using alg: HMACAlgorithm, key: String) -> String? {
         var digest = [UInt8](repeating: 0, count: alg.digestLenght)
         guard let cKey = key.cString(using: .utf8) else { return nil }
@@ -295,6 +328,11 @@ public extension ReerForEquatable where Base == Data {
         }
     }
 
+    /// ReerKit: Returns a Data for hmac using the algorithm with key.
+    /// - Parameters:
+    ///   - alg: HMAC algorithm.
+    ///   - key: The hmac key.
+    /// - Returns: HMAC handled data.
     func hmacData(using alg: HMACAlgorithm, key: String) -> Data? {
         var digest = [UInt8](repeating: 0, count: alg.digestLenght)
         guard let cKey = key.cString(using: .utf8) else { return nil }
@@ -303,6 +341,110 @@ public extension ReerForEquatable where Base == Data {
             CCHmac(alg.ccHMACAlgorithm, cKey, keyLength, messageBytes.baseAddress, base.count, &digest)
         }
         return Data(digest)
+    }
+}
+
+// MARK: - Crypto
+
+public extension ReerForEquatable where Base == Data {
+    /// ReerKit: Returns an encrypted Data using AES.
+    ///
+    /// - Parameters:
+    ///   - key: A key length of 16, 24 or 32 (128, 192 or 256bits).
+    ///   - iv: An initialization vector length of 16(128bits).
+    /// - Returns: A Data encrypted, or nil if an error occurs.
+    func aesEncrypt(withKey key: Data, iv: Data = .init()) -> Data? {
+        guard key.count == 16 || key.count == 24 || key.count == 32 else {
+            return nil
+        }
+        guard iv.count == 16 || iv.count == 0 else {
+            return nil
+        }
+
+        let cryptLength  = Int(base.count + kCCBlockSizeAES128)
+        var result = Data(count:cryptLength)
+        let keyLength = size_t(kCCKeySizeAES128)
+        var encryptedSize: size_t = 0
+
+        let cryptStatus = result.withUnsafeMutableBytes { cryptBytes in
+            base.withUnsafeBytes { dataBytes in
+                iv.withUnsafeBytes { ivBytes in
+                    key.withUnsafeBytes { keyBytes in
+                        CCCrypt(
+                            CCOperation(kCCEncrypt),
+                            CCAlgorithm(kCCAlgorithmAES128),
+                            CCOptions(kCCOptionPKCS7Padding),
+                            keyBytes.baseAddress!,
+                            keyLength,
+                            ivBytes.baseAddress!,
+                            dataBytes.baseAddress!,
+                            base.count,
+                            cryptBytes.baseAddress!,
+                            cryptLength,
+                            &encryptedSize
+                        )
+                    }
+                }
+            }
+        }
+
+        if UInt32(cryptStatus) == UInt32(kCCSuccess) {
+            result.removeSubrange(encryptedSize..<result.count)
+            return result
+        } else {
+            debugPrint("Error: \(cryptStatus)")
+            return nil
+        }
+    }
+
+    /// ReerKit: Returns an decrypted Data using AES.
+    ///
+    /// - Parameters:
+    ///   - key: A key length of 16, 24 or 32 (128, 192 or 256bits).
+    ///   - iv: An initialization vector length of 16(128bits).
+    /// - Returns: An Data decrypted, or nil if an error occurs.
+    func aesDecrypt(withKey key: Data, iv: Data = .init()) -> Data? {
+        guard key.count == 16 || key.count == 24 || key.count == 32 else {
+            return nil
+        }
+        guard iv.count == 16 || iv.count == 0 else {
+            return nil
+        }
+
+        let cryptLength  = Int(base.count + kCCBlockSizeAES128)
+        var result = Data(count:cryptLength)
+        let keyLength = size_t(kCCKeySizeAES128)
+        var encryptedSize: size_t = 0
+
+        let cryptStatus = result.withUnsafeMutableBytes { cryptBytes in
+            base.withUnsafeBytes { dataBytes in
+                iv.withUnsafeBytes { ivBytes in
+                    key.withUnsafeBytes { keyBytes in
+                        CCCrypt(
+                            CCOperation(kCCDecrypt),
+                            CCAlgorithm(kCCAlgorithmAES128),
+                            CCOptions(kCCOptionPKCS7Padding),
+                            keyBytes.baseAddress!,
+                            keyLength,
+                            ivBytes.baseAddress!,
+                            dataBytes.baseAddress!,
+                            base.count,
+                            cryptBytes.baseAddress!,
+                            cryptLength,
+                            &encryptedSize
+                        )
+                    }
+                }
+            }
+        }
+
+        if UInt32(cryptStatus) == UInt32(kCCSuccess) {
+            result.removeSubrange(encryptedSize..<result.count)
+            return result
+        } else {
+            debugPrint("Error: \(cryptStatus)")
+            return nil
+        }
     }
 }
 #endif

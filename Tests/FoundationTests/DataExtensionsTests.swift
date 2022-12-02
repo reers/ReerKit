@@ -13,6 +13,10 @@ import XCTest
 import Foundation
 
 final class DataExtensionsTests: XCTestCase {
+    func testInit() {
+        XCTAssertEqual(Data.re(hexString: "313233"), "123".re.utf8Data!)
+    }
+
     func testString() {
         let dataFromString = "hello".data(using: .utf8)
         XCTAssertNotNil(dataFromString)
@@ -94,6 +98,25 @@ final class DataExtensionsTests: XCTestCase {
 
         XCTAssertEqual(data.re.hmacString(using: .sha512, key: key), "81578d57bc726570d0ed620e5c487a109588ea3e85993c79ec6e46b4c7af499b947e768eb52cedab6ddcb2da5e8c20d0d3e6a039dd23d1f86d34905c844332dd")
         XCTAssertEqual(data.re.hmacData(using: .sha512, key: key)?.re.hexString, "81578d57bc726570d0ed620e5c487a109588ea3e85993c79ec6e46b4c7af499b947e768eb52cedab6ddcb2da5e8c20d0d3e6a039dd23d1f86d34905c844332dd")
+    }
+
+    func testAes() {
+        let data = "123".re.utf8Data!
+        let key128 = Data.re(hexString: "000102030405060708090a0b0c0d0e0f")!
+        let encrypted128 = data.re.aesEncrypt(withKey: key128)
+        XCTAssertEqual(encrypted128?.re.aesDecrypt(withKey: key128)?.re.utf8String, "123")
+
+        let key192 = Data.re(hexString: "000102030405060708090a0b0c0d0e0f1011121314151617")!
+        let encrypted192 = data.re.aesEncrypt(withKey: key192)
+        XCTAssertEqual(encrypted192?.re.aesDecrypt(withKey: key192)?.re.utf8String, "123")
+
+        let key256 = Data.re(hexString: "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f")!
+        let encrypted256 = data.re.aesEncrypt(withKey: key256)
+        XCTAssertEqual(encrypted256?.re.aesDecrypt(withKey: key256)?.re.utf8String, "123")
+
+        let iv = Data.re(hexString: "0f0e0d0c0b0a09080706050403020100")!
+        let encryptedWithIV = data.re.aesEncrypt(withKey: key256, iv: iv)
+        XCTAssertEqual(encryptedWithIV?.re.aesDecrypt(withKey: key256, iv: iv)?.re.utf8String, "123")
     }
 }
 

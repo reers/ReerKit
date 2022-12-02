@@ -561,8 +561,8 @@ public extension Reer where Base == String {
 
     /// ReerKit: Safely subscript string with index.
     ///
-    ///        "Hello World!".re.re[3] -> "l"
-    ///        "Hello World!".re.re[20] -> nil
+    ///        "Hello World!".re[3] -> "l"
+    ///        "Hello World!".re[20] -> nil
     ///
     /// - Parameter index: index.
     subscript(index: Int) -> Character? {

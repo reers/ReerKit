@@ -52,6 +52,8 @@
 		D0B121212855207900B5B326 /* UIViewExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B121202855207900B5B326 /* UIViewExtensionsTests.swift */; };
 		D0B4ED39293A6E4B0031BDAB /* URL+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B4ED38293A6E4B0031BDAB /* URL+REExtensions.swift */; };
 		D0B4ED3B293A73C90031BDAB /* URLExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B4ED3A293A73C90031BDAB /* URLExtensionsTests.swift */; };
+		D0B4ED3D293A7BA60031BDAB /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B4ED3C293A7BA60031BDAB /* CountdownTimer.swift */; };
+		D0B4ED3F293A7E660031BDAB /* CountdownTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B4ED3E293A7E660031BDAB /* CountdownTimerTests.swift */; };
 		D0C95FD52857899F00D0522D /* Bool+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FD42857899F00D0522D /* Bool+REExtensions.swift */; };
 		D0C95FD8285793A000D0522D /* BoolExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FD7285793A000D0522D /* BoolExtensionsTests.swift */; };
 		D0C95FDA2857999D00D0522D /* Int+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FD92857999D00D0522D /* Int+REExtensions.swift */; };
@@ -157,6 +159,8 @@
 		D0B121202855207900B5B326 /* UIViewExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensionsTests.swift; sourceTree = "<group>"; };
 		D0B4ED38293A6E4B0031BDAB /* URL+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+REExtensions.swift"; sourceTree = "<group>"; };
 		D0B4ED3A293A73C90031BDAB /* URLExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensionsTests.swift; sourceTree = "<group>"; };
+		D0B4ED3C293A7BA60031BDAB /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
+		D0B4ED3E293A7E660031BDAB /* CountdownTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimerTests.swift; sourceTree = "<group>"; };
 		D0C95FD42857899F00D0522D /* Bool+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+REExtensions.swift"; sourceTree = "<group>"; };
 		D0C95FD7285793A000D0522D /* BoolExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolExtensionsTests.swift; sourceTree = "<group>"; };
 		D0C95FD92857999D00D0522D /* Int+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+REExtensions.swift"; sourceTree = "<group>"; };
@@ -237,6 +241,7 @@
 				D07E53AC288309DF00921873 /* RETimerTests.swift */,
 				D0EBE242288493F8004925E5 /* DeinitObserverTests.swift */,
 				D06287152885D83100401B59 /* WeakTests.swift */,
+				D0B4ED3E293A7E660031BDAB /* CountdownTimerTests.swift */,
 			);
 			path = UtilityTests;
 			sourceTree = "<group>";
@@ -372,6 +377,7 @@
 				D04D34F3286C7390001E974C /* Utils.swift */,
 				D07E53AA2883083300921873 /* RETimer.swift */,
 				D0EBE240288492B2004925E5 /* DeinitObserver.swift */,
+				D0B4ED3C293A7BA60031BDAB /* CountdownTimer.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -603,6 +609,7 @@
 				D0038B7D285642B600A890F9 /* Locked.swift in Sources */,
 				D0038B8128565B9500A890F9 /* ReadWriteLock.swift in Sources */,
 				D0B121122855089000B5B326 /* ReerKit.swift in Sources */,
+				D0B4ED3D293A7BA60031BDAB /* CountdownTimer.swift in Sources */,
 				D05A881D291C106E00C53492 /* String+REExtensions.swift in Sources */,
 				D0EBE23F28848939004925E5 /* DeinitObservable.swift in Sources */,
 				D008BD6E28E5DCC500470BEB /* Decodable+REExtensions.swift in Sources */,
@@ -646,6 +653,7 @@
 				D0B4ED3B293A73C90031BDAB /* URLExtensionsTests.swift in Sources */,
 				D0CD714328E5CDCD009ADA8E /* DoubleExtensionsTests.swift in Sources */,
 				D05A881C291C106800C53492 /* StringExtensionsTests.swift in Sources */,
+				D0B4ED3F293A7E660031BDAB /* CountdownTimerTests.swift in Sources */,
 				D0CD712928E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift in Sources */,
 				D068566828D77BF3001CB92A /* ArrayExtensionsTests.swift in Sources */,
 				D019B8F7285BA3CB00257A7D /* UnfairLockTests.swift in Sources */,

@@ -32,7 +32,7 @@ import Foundation
 ///     schedule()         .beforeInterval     .afterInterval
 ///         |                     |                  |
 ///         |--------delay--------|-----interval-----|-----interval-----|
-public class RETimer {
+public final class RETimer {
 
     public enum FirstTimeCallbackMoment {
         case beforeInterval

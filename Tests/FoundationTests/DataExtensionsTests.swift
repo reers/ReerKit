@@ -125,6 +125,12 @@ final class DataExtensionsTests: XCTestCase {
         XCTAssertEqual(data.re.gzipCompressed(level: .bestSpeed)?.re.gzipDecompressed(), data)
         XCTAssertLessThan(data.re.zlibCompressed(level: .bestCompression)!.count, data.re.zlibCompressed(level: .bestSpeed)!.count)
         XCTAssertLessThan(data.re.gzipCompressed(level: .bestCompression)!.count, data.re.gzipCompressed(level: .bestSpeed)!.count)
+        XCTAssertTrue(data.re.gzipCompressed()!.re.isGzipped)
+        XCTAssertTrue(data.re.zlibCompressed(level: .defaultCompression)!.re.isZlibbed)
+        XCTAssertTrue(data.re.zlibCompressed(level: .noCompression)!.re.isZlibbed)
+        XCTAssertTrue(data.re.zlibCompressed(level: .bestSpeed)!.re.isZlibbed)
+        XCTAssertTrue(data.re.zlibCompressed(level: .bestCompression)!.re.isZlibbed)
+        XCTAssertTrue(data.re.zlibCompressed(level: CompressionLevel(rawValue: 2))!.re.isZlibbed)
     }
 }
 

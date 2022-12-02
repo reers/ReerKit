@@ -476,6 +476,19 @@ public struct CompressionLevel: RawRepresentable {
 
 public extension ReerForEquatable where Base == Data {
 
+    /// ReerKit: Whether the receiver is compressed in gzip format.
+    var isGzipped: Bool {
+        return base.starts(with: [0x1f, 0x8b])
+    }
+
+    /// ReerKit: Whether the receiver is compressed in zlib format.
+    var isZlibbed: Bool {
+        return base.starts(with: [0x78, 0x9c])
+            || base.starts(with: [0x78, 0xda])
+            || base.starts(with: [0x78, 0x01])
+            || base.starts(with: [0x78, 0x5e])
+    }
+
     private struct DataSize {
         static let chunk = Int(pow(2.0, 14))
         static let stream = MemoryLayout<z_stream>.size

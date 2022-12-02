@@ -23,6 +23,10 @@
 #if canImport(Foundation)
 import Foundation
 
+#if canImport(CommonCrypto)
+import CommonCrypto
+#endif
+
 // MARK: - Convert to `String`, `Dictionary`, `Array`
 
 public enum JSONError: Error {
@@ -49,7 +53,7 @@ public extension ReerForEquatable where Base == Data {
         return String(data: base, encoding: encoding)
     }
 
-    /// ReerKit: Returns a uppercase String in HEX.
+    /// ReerKit: Returns a lowercase String in hex.
     var hexString: String? {
         return base.reduce("") {
             $0 + String(format:"%02x", $1)
@@ -110,5 +114,139 @@ public extension ReerForEquatable where Base == Data {
         }
     }
 }
+
+// MARK: - Hash
+
+#if canImport(CommonCrypto)
+public extension ReerForEquatable where Base == Data {
+    /// ReerKit: Returns an Data for md2 hash.
+    var md2Data: Data? {
+        var digest = [UInt8](repeating: 0, count: Int(CC_MD2_DIGEST_LENGTH))
+        _ = base.withUnsafeBytes { messageBytes in
+            CC_MD2(messageBytes.baseAddress, CC_LONG(base.count), &digest)
+        }
+        return Data(digest)
+    }
+
+    /// ReerKit: Returns a lowercase String for md2 hash.
+    var md2String: String? {
+        return md2Data?.reduce("") {
+            $0 + String(format:"%02x", $1)
+        }
+    }
+
+    /// ReerKit: Returns an Data for md4 hash.
+    var md4Data: Data? {
+        var digest = [UInt8](repeating: 0, count: Int(CC_MD4_DIGEST_LENGTH))
+        _ = base.withUnsafeBytes { messageBytes in
+            CC_MD4(messageBytes.baseAddress, CC_LONG(base.count), &digest)
+        }
+        return Data(digest)
+    }
+
+    /// ReerKit: Returns a lowercase String for md4 hash.
+    var md4String: String? {
+        return md4Data?.reduce("") {
+            $0 + String(format:"%02x", $1)
+        }
+    }
+
+    /// ReerKit: Returns an Data for md5 hash.
+    var md5Data: Data? {
+        var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
+        _ = base.withUnsafeBytes { messageBytes in
+            CC_MD5(messageBytes.baseAddress, CC_LONG(base.count), &digest)
+        }
+        return Data(digest)
+    }
+
+    /// ReerKit: Returns a lowercase String for md5 hash.
+    var md5String: String? {
+        return md5Data?.reduce("") {
+            $0 + String(format:"%02x", $1)
+        }
+    }
+
+    /// ReerKit: Returns an Data for sha1 hash.
+    var sha1Data: Data? {
+        var digest = [UInt8](repeating: 0, count: Int(CC_SHA1_DIGEST_LENGTH))
+        _ = base.withUnsafeBytes { messageBytes in
+            CC_SHA1(messageBytes.baseAddress, CC_LONG(base.count), &digest)
+        }
+        return Data(digest)
+    }
+
+    /// ReerKit: Returns a lowercase String for sha1 hash.
+    var sha1String: String? {
+        return sha1Data?.reduce("") {
+            $0 + String(format:"%02x", $1)
+        }
+    }
+
+    /// ReerKit: Returns an Data for sha224 hash.
+    var sha224Data: Data? {
+        var digest = [UInt8](repeating: 0, count: Int(CC_SHA224_DIGEST_LENGTH))
+        _ = base.withUnsafeBytes { messageBytes in
+            CC_SHA224(messageBytes.baseAddress, CC_LONG(base.count), &digest)
+        }
+        return Data(digest)
+    }
+
+    /// ReerKit: Returns a lowercase String for sha224 hash.
+    var sha224String: String? {
+        return sha224Data?.reduce("") {
+            $0 + String(format:"%02x", $1)
+        }
+    }
+
+    /// ReerKit: Returns an Data for sha256 hash.
+    var sha256Data: Data? {
+        var digest = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
+        _ = base.withUnsafeBytes { messageBytes in
+            CC_SHA256(messageBytes.baseAddress, CC_LONG(base.count), &digest)
+        }
+        return Data(digest)
+    }
+
+    /// ReerKit: Returns a lowercase String for sha256 hash.
+    var sha256String: String? {
+        return sha256Data?.reduce("") {
+            $0 + String(format:"%02x", $1)
+        }
+    }
+
+    /// ReerKit: Returns an Data for sha384 hash.
+    var sha384Data: Data? {
+        var digest = [UInt8](repeating: 0, count: Int(CC_SHA384_DIGEST_LENGTH))
+        _ = base.withUnsafeBytes { messageBytes in
+            CC_SHA384(messageBytes.baseAddress, CC_LONG(base.count), &digest)
+        }
+        return Data(digest)
+    }
+
+    /// ReerKit: Returns a lowercase String for sha384 hash.
+    var sha384String: String? {
+        return sha384Data?.reduce("") {
+            $0 + String(format:"%02x", $1)
+        }
+    }
+
+    /// ReerKit: Returns an Data for sha512 hash.
+    var sha512Data: Data? {
+        var digest = [UInt8](repeating: 0, count: Int(CC_SHA512_DIGEST_LENGTH))
+        _ = base.withUnsafeBytes { messageBytes in
+            CC_SHA512(messageBytes.baseAddress, CC_LONG(base.count), &digest)
+        }
+        return Data(digest)
+    }
+
+    /// ReerKit: Returns a lowercase String for sha512 hash.
+    var sha512String: String? {
+        return sha512Data?.reduce("") {
+            $0 + String(format:"%02x", $1)
+        }
+    }
+}
+#endif
 
 #endif

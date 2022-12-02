@@ -19,6 +19,10 @@ final class StringExtensionsTests: XCTestCase {
         NSTimeZone.default = NSTimeZone.system
     }
 
+    func testUTF8Data() {
+        XCTAssertEqual("123".re.utf8Data?.re.utf8String, "123")
+    }
+
     func testBase64Decoded() {
         XCTAssertEqual("SGVsbG8gV29ybGQh".re.base64Decoded, helloWorld)
         XCTAssertEqual("http://example.com/xxx", "aHR0cDovL2V4YW1wbGUuY29tL3h4eA".re.base64Decoded)

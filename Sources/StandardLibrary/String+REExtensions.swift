@@ -39,6 +39,12 @@ import CoreGraphics
 // MARK: - Nonmutating
 
 public extension Reer where Base == String {
+    #if canImport(Foundation)
+    /// ReerKit: Returns an Data using UTF-8 encoding.
+    var utf8Data: Data? {
+        return base.data(using: .utf8)
+    }
+    #endif
 
     #if canImport(Foundation)
     /// ReerKit: String decoded from base64 (if applicable).

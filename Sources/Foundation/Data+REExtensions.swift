@@ -80,6 +80,12 @@ public extension ReerForEquatable where Base == Data {
         return try? toDictionary()
     }
 
+    /// ReerKit: Returns [String: String] for decoded self.
+    /// Returns nil if an error occurs.
+    var stringDictionary: [String: String]? {
+        return try? toDictionary() as? [String: String]
+    }
+
     /// ReerKit: Returns an Dictionary for decoded self.
     func toDictionary() throws -> [AnyHashable: Any] {
         if let value = jsonValue, let dictionary = value as? [AnyHashable: Any] {

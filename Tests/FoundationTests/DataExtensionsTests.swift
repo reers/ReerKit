@@ -48,6 +48,7 @@ final class DataExtensionsTests: XCTestCase {
         XCTAssertEqual(object?["message"], "hello")
         XCTAssertEqual(objectData?.re.dictionary?["message"] as? String, "hello")
         XCTAssertNil(objectData?.re.array)
+        XCTAssertEqual(objectData?.re.stringDictionary?["message"], "hello")
 
         let arrayData = "[\"hello\"]".data(using: .utf8)
         let array = (try? arrayData?.re.jsonValue()) as? [String]

@@ -27,6 +27,11 @@ final class DictionaryExtensionsTests: XCTestCase {
         XCTAssertFalse(testDict.re.has(key: "anotherKey"))
     }
 
+    func testQueryString() {
+        let dict = ["k1": "v1", "k2": "v2"]
+        XCTAssertEqual(dict.re.queryString, "k1=v1&k2=v2")
+    }
+
     func testInitGroupedByKeyPath() {
         let array1 = ["James", "Wade", "Bryant", "John"]
         let array2 = ["James", "Wade", "Bryant", "John", "", ""]

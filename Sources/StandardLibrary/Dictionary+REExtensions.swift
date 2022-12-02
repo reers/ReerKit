@@ -74,6 +74,11 @@ extension Dictionary: ReerGeneric2Compatible {
 
 public extension ReerGeneric2 where Base == Dictionary<T1, T2> {
 
+    /// ReerKit: Query string from dictionary.
+    var queryString: String {
+        return base.map { "\($0)=\($1)" }.joined(separator: "&")
+    }
+
     /// ReerKit: Check if key exists in dictionary.
     ///
     ///        let dict: [String: Any] = ["testKey": "testValue", "testArrayKey": [1, 2, 3, 4, 5]]

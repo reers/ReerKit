@@ -50,6 +50,8 @@
 		D0B1211B285510B200B5B326 /* NSObjectExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B1211A285510B200B5B326 /* NSObjectExtensionsTests.swift */; };
 		D0B1211E2855156200B5B326 /* TypeNameDescribable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B1211D2855156200B5B326 /* TypeNameDescribable.swift */; };
 		D0B121212855207900B5B326 /* UIViewExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B121202855207900B5B326 /* UIViewExtensionsTests.swift */; };
+		D0B4ED39293A6E4B0031BDAB /* URL+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B4ED38293A6E4B0031BDAB /* URL+REExtensions.swift */; };
+		D0B4ED3B293A73C90031BDAB /* URLExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B4ED3A293A73C90031BDAB /* URLExtensionsTests.swift */; };
 		D0C95FD52857899F00D0522D /* Bool+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FD42857899F00D0522D /* Bool+REExtensions.swift */; };
 		D0C95FD8285793A000D0522D /* BoolExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FD7285793A000D0522D /* BoolExtensionsTests.swift */; };
 		D0C95FDA2857999D00D0522D /* Int+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FD92857999D00D0522D /* Int+REExtensions.swift */; };
@@ -153,6 +155,8 @@
 		D0B1211A285510B200B5B326 /* NSObjectExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObjectExtensionsTests.swift; sourceTree = "<group>"; };
 		D0B1211D2855156200B5B326 /* TypeNameDescribable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeNameDescribable.swift; sourceTree = "<group>"; };
 		D0B121202855207900B5B326 /* UIViewExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensionsTests.swift; sourceTree = "<group>"; };
+		D0B4ED38293A6E4B0031BDAB /* URL+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+REExtensions.swift"; sourceTree = "<group>"; };
+		D0B4ED3A293A73C90031BDAB /* URLExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensionsTests.swift; sourceTree = "<group>"; };
 		D0C95FD42857899F00D0522D /* Bool+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+REExtensions.swift"; sourceTree = "<group>"; };
 		D0C95FD7285793A000D0522D /* BoolExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolExtensionsTests.swift; sourceTree = "<group>"; };
 		D0C95FD92857999D00D0522D /* Int+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+REExtensions.swift"; sourceTree = "<group>"; };
@@ -341,6 +345,7 @@
 				D0CBE62228832D78006F8BCB /* Timer+REExtensions.swift */,
 				D0421ACC2938F4DD00452845 /* Calendar+REExtensions.swift */,
 				D0421AD02938F6B500452845 /* Data+REExtensions.swift */,
+				D0B4ED38293A6E4B0031BDAB /* URL+REExtensions.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -352,6 +357,7 @@
 				D0CBE62428833BF5006F8BCB /* TimerExtensionsTests.swift */,
 				D0421ACE2938F5D500452845 /* CalendarExtensionsTests.swift */,
 				D0421AD22939033800452845 /* DataExtensionsTests.swift */,
+				D0B4ED3A293A73C90031BDAB /* URLExtensionsTests.swift */,
 			);
 			path = FoundationTests;
 			sourceTree = "<group>";
@@ -577,6 +583,7 @@
 				D068566628D76E45001CB92A /* Array+REExtensions.swift in Sources */,
 				D0CD713B28E5CB58009ADA8E /* Double+REExtensions.swift in Sources */,
 				D0E354C828BFBBE10000030B /* WeakSet.swift in Sources */,
+				D0B4ED39293A6E4B0031BDAB /* URL+REExtensions.swift in Sources */,
 				D06BD5E529157A8D00040407 /* Dictionary+REExtensions.swift in Sources */,
 				D0CD712B28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift in Sources */,
 				D0C95FE02857AC1A00D0522D /* SignedNumeric+REExtensions.swift in Sources */,
@@ -636,6 +643,7 @@
 				D0C95FDE2857A24000D0522D /* SignedIntegerExtensionsTests.swift in Sources */,
 				D0421ACF2938F5D500452845 /* CalendarExtensionsTests.swift in Sources */,
 				D0CD712D28E5B695009ADA8E /* BinaryFloatingPointExtensionsTests.swift in Sources */,
+				D0B4ED3B293A73C90031BDAB /* URLExtensionsTests.swift in Sources */,
 				D0CD714328E5CDCD009ADA8E /* DoubleExtensionsTests.swift in Sources */,
 				D05A881C291C106800C53492 /* StringExtensionsTests.swift in Sources */,
 				D0CD712928E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift in Sources */,

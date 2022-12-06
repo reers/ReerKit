@@ -33,7 +33,7 @@ public func currentQueueLabel() -> String {
 /// ReerKit: Execute a closure on main queue asynchronously.
 @inline(__always)
 public func asyncOnMainQueue(_ action: @escaping () -> Void) {
-    if DispatchQueue.re.isMainQueue {
+    if currentQueueLabel() == DispatchQueue.main.label {
         action()
     } else {
         DispatchQueue.main.async(execute: action)
@@ -43,7 +43,7 @@ public func asyncOnMainQueue(_ action: @escaping () -> Void) {
 /// ReerKit: Execute a closure on main queue synchronously.
 @inline(__always)
 public func syncOnMainQueue(_ action: @escaping () -> Void) {
-    if DispatchQueue.re.isMainQueue {
+    if currentQueueLabel() == DispatchQueue.main.label {
         action()
     } else {
         DispatchQueue.main.sync(execute: action)

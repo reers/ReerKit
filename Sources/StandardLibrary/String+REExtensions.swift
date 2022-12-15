@@ -1261,7 +1261,7 @@ public extension Reer where Base == String {
     ///
     /// - Parameter color: text color.
     /// - Returns: a NSAttributedString versions of string colored with given color.
-    func colored(with color: Color) -> NSAttributedString {
+    func colored(with color: REColor) -> NSAttributedString {
         return NSMutableAttributedString(string: base, attributes: [.foregroundColor: color])
     }
     #endif

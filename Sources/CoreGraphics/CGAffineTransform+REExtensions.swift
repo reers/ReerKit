@@ -20,18 +20,21 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#if !os(Linux)
+#if canImport(CoreGraphics)
+import CoreGraphics
 
-#if canImport(UIKit)
-import UIKit
-/// ReerKit: Color
-public typealias REColor = UIColor
+#if canImport(QuartzCore)
+
+import QuartzCore
+
+extension CGAffineTransform: ReerCompatibleValue {}
+public extension Reer where Base == CGAffineTransform {
+    /// ReerKit: Returns a transform with the same effect as the receiver.
+    @inlinable
+    func transform3D() -> CATransform3D { CATransform3DMakeAffineTransform(base) }
+}
+
 #endif
 
-#if canImport(AppKit) && !targetEnvironment(macCatalyst)
-import AppKit
-/// ReerKit: Color
-public typealias REColor = NSColor
 #endif
 
-#endif

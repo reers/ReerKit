@@ -30,6 +30,12 @@
 		D05A8819291BF58200C53492 /* Color+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A8818291BF58200C53492 /* Color+REExtensions.swift */; };
 		D05A881C291C106800C53492 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A881A291BF5CC00C53492 /* StringExtensionsTests.swift */; };
 		D05A881D291C106E00C53492 /* String+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A8751291BC4A300C53492 /* String+REExtensions.swift */; };
+		D05C866B294B4B7E0077E744 /* CGAffineTransform+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C866A294B4B7E0077E744 /* CGAffineTransform+REExtensions.swift */; };
+		D05C866E294B4C6D0077E744 /* CGAffineTransformExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C866D294B4C6D0077E744 /* CGAffineTransformExtensionsTests.swift */; };
+		D05C8671294B4E190077E744 /* CAGradientLayer+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C8670294B4E190077E744 /* CAGradientLayer+REExtensions.swift */; };
+		D05C8674294B4F610077E744 /* CAGradientLayerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C8673294B4F610077E744 /* CAGradientLayerExtensionsTests.swift */; };
+		D05C8676294B4FE80077E744 /* CATransform3D+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C8675294B4FE80077E744 /* CATransform3D+REExtensions.swift */; };
+		D05C8678294B535D0077E744 /* CATransform3DExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C8677294B535D0077E744 /* CATransform3DExtensionsTests.swift */; };
 		D06287142885C88000401B59 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06287132885C88000401B59 /* Weak.swift */; };
 		D06287162885D83100401B59 /* WeakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06287152885D83100401B59 /* WeakTests.swift */; };
 		D068566628D76E45001CB92A /* Array+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D068566528D76E45001CB92A /* Array+REExtensions.swift */; };
@@ -136,6 +142,12 @@
 		D05A8816291BF4EF00C53492 /* Font+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+REExtensions.swift"; sourceTree = "<group>"; };
 		D05A8818291BF58200C53492 /* Color+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+REExtensions.swift"; sourceTree = "<group>"; };
 		D05A881A291BF5CC00C53492 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
+		D05C866A294B4B7E0077E744 /* CGAffineTransform+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGAffineTransform+REExtensions.swift"; sourceTree = "<group>"; };
+		D05C866D294B4C6D0077E744 /* CGAffineTransformExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGAffineTransformExtensionsTests.swift; sourceTree = "<group>"; };
+		D05C8670294B4E190077E744 /* CAGradientLayer+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+REExtensions.swift"; sourceTree = "<group>"; };
+		D05C8673294B4F610077E744 /* CAGradientLayerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAGradientLayerExtensionsTests.swift; sourceTree = "<group>"; };
+		D05C8675294B4FE80077E744 /* CATransform3D+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CATransform3D+REExtensions.swift"; path = "../../../Desktop/CATransform3D+REExtensions.swift"; sourceTree = "<group>"; };
+		D05C8677294B535D0077E744 /* CATransform3DExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CATransform3DExtensionsTests.swift; sourceTree = "<group>"; };
 		D06287132885C88000401B59 /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		D06287152885D83100401B59 /* WeakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakTests.swift; sourceTree = "<group>"; };
 		D068566528D76E45001CB92A /* Array+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+REExtensions.swift"; sourceTree = "<group>"; };
@@ -271,6 +283,40 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
+		D05C8669294B4B580077E744 /* CoreGraphics */ = {
+			isa = PBXGroup;
+			children = (
+				D05C866A294B4B7E0077E744 /* CGAffineTransform+REExtensions.swift */,
+			);
+			path = CoreGraphics;
+			sourceTree = "<group>";
+		};
+		D05C866C294B4C370077E744 /* CoreGraphicsTests */ = {
+			isa = PBXGroup;
+			children = (
+				D05C866D294B4C6D0077E744 /* CGAffineTransformExtensionsTests.swift */,
+			);
+			path = CoreGraphicsTests;
+			sourceTree = "<group>";
+		};
+		D05C866F294B4DE50077E744 /* CoreAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				D05C8670294B4E190077E744 /* CAGradientLayer+REExtensions.swift */,
+				D05C8675294B4FE80077E744 /* CATransform3D+REExtensions.swift */,
+			);
+			path = CoreAnimation;
+			sourceTree = "<group>";
+		};
+		D05C8672294B4F430077E744 /* CoreAnimationTests */ = {
+			isa = PBXGroup;
+			children = (
+				D05C8673294B4F610077E744 /* CAGradientLayerExtensionsTests.swift */,
+				D05C8677294B535D0077E744 /* CATransform3DExtensionsTests.swift */,
+			);
+			path = CoreAnimationTests;
+			sourceTree = "<group>";
+		};
 		D0A0040728621C7600D2FA7C /* Lock */ = {
 			isa = PBXGroup;
 			children = (
@@ -304,6 +350,8 @@
 		D0B1210A2855067B00B5B326 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D05C866F294B4DE50077E744 /* CoreAnimation */,
+				D05C8669294B4B580077E744 /* CoreGraphics */,
 				D05A8815291BF4C500C53492 /* Shared */,
 				D04D34F5286C7A76001E974C /* Dispatch */,
 				D0C95FD32857898200D0522D /* StandardLibrary */,
@@ -318,9 +366,11 @@
 		D0B1210C2855069400B5B326 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				D05C8672294B4F430077E744 /* CoreAnimationTests */,
+				D05C866C294B4C370077E744 /* CoreGraphicsTests */,
 				D04D34F8286C8357001E974C /* DispatchTests */,
 				D019B8F3285B9FEB00257A7D /* UtilityTests */,
-				D0C95FD62857937F00D0522D /* StandardLibraryExtensionsTests */,
+				D0C95FD62857937F00D0522D /* StandardLibraryTests */,
 				D0B1211F28551FA000B5B326 /* UIKitTests */,
 				D0B1211628550EDD00B5B326 /* FoundationTests */,
 			);
@@ -421,7 +471,7 @@
 			path = StandardLibrary;
 			sourceTree = "<group>";
 		};
-		D0C95FD62857937F00D0522D /* StandardLibraryExtensionsTests */ = {
+		D0C95FD62857937F00D0522D /* StandardLibraryTests */ = {
 			isa = PBXGroup;
 			children = (
 				D0C95FD7285793A000D0522D /* BoolExtensionsTests.swift */,
@@ -449,7 +499,7 @@
 				D06BD5E629157FE700040407 /* DictionaryExtensionsTests.swift */,
 				D05A881A291BF5CC00C53492 /* StringExtensionsTests.swift */,
 			);
-			path = StandardLibraryExtensionsTests;
+			path = StandardLibraryTests;
 			sourceTree = "<group>";
 		};
 		D0E354C628BFBB710000030B /* Weak */ = {
@@ -621,15 +671,18 @@
 				D0CD713728E5C50C009ADA8E /* Comparable+REExtensions.swift in Sources */,
 				D0CC5A1E290AE4CF0038989B /* RangeReplaceableCollection+REExtensions.swift in Sources */,
 				D0CC5A1A290AD5040038989B /* StringProtocol+REExtensions.swift in Sources */,
+				D05C8676294B4FE80077E744 /* CATransform3D+REExtensions.swift in Sources */,
 				D06287142885C88000401B59 /* Weak.swift in Sources */,
 				D0038B832856662B00A890F9 /* RWLocked.swift in Sources */,
 				D053AF0A28B86582004335DC /* Sequence+REExtensions.swift in Sources */,
+				D05C8671294B4E190077E744 /* CAGradientLayer+REExtensions.swift in Sources */,
 				D05A8817291BF4EF00C53492 /* Font+REExtensions.swift in Sources */,
 				D0038B7F2856581600A890F9 /* UnfairLock.swift in Sources */,
 				D0EBE237288476DB004925E5 /* Associatable.swift in Sources */,
 				D0EBE2392884797B004925E5 /* OnceExecutable.swift in Sources */,
 				D0CD713D28E5CC1D009ADA8E /* Float+REExtensions.swift in Sources */,
 				D0CD713928E5C597009ADA8E /* StdlibProtocolWrappers.swift in Sources */,
+				D05C866B294B4B7E0077E744 /* CGAffineTransform+REExtensions.swift in Sources */,
 				D0B1211528550E1000B5B326 /* NSObject+REExtensions.swift in Sources */,
 				D0EBE23B28847B72004925E5 /* Swizzlable.swift in Sources */,
 				D0CD712F28E5BBFF009ADA8E /* BinaryInteger+REExtensions.swift in Sources */,
@@ -652,6 +705,7 @@
 				D0CD712D28E5B695009ADA8E /* BinaryFloatingPointExtensionsTests.swift in Sources */,
 				D0B4ED3B293A73C90031BDAB /* URLExtensionsTests.swift in Sources */,
 				D0CD714328E5CDCD009ADA8E /* DoubleExtensionsTests.swift in Sources */,
+				D05C8678294B535D0077E744 /* CATransform3DExtensionsTests.swift in Sources */,
 				D05A881C291C106800C53492 /* StringExtensionsTests.swift in Sources */,
 				D0B4ED3F293A7E660031BDAB /* CountdownTimerTests.swift in Sources */,
 				D0CD712928E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift in Sources */,
@@ -674,6 +728,7 @@
 				D07E53AD288309DF00921873 /* RETimerTests.swift in Sources */,
 				D0397614286E12A900C33E17 /* OptionalExtensionsTests.swift in Sources */,
 				D0FB4058286363380019D56A /* OnceTests.swift in Sources */,
+				D05C866E294B4C6D0077E744 /* CGAffineTransformExtensionsTests.swift in Sources */,
 				D0F39A7E287DC9B600A754B2 /* CharacterExtensionsTests.swift in Sources */,
 				D076A2D128E5DBFF00E89281 /* DecodableExtensionsTests.swift in Sources */,
 				D0C95FE42857B4C400D0522D /* IntExtensionsTests.swift in Sources */,
@@ -686,6 +741,7 @@
 				D06BD5E729157FE700040407 /* DictionaryExtensionsTests.swift in Sources */,
 				D0CD714428E5CDCD009ADA8E /* FloatingPointExtensionsTests.swift in Sources */,
 				D04D34FC286C843B001E974C /* UtilsTests.swift in Sources */,
+				D05C8674294B4F610077E744 /* CAGradientLayerExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

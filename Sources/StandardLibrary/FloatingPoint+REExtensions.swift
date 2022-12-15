@@ -27,41 +27,41 @@ import Foundation
 // MARK: - Properties
 
 public extension Reer where Base: FloatingPoint {
-    /// SwifterSwift: Absolute value of number.
+    /// ReerKit: Absolute value of number.
     var abs: Base {
         return Swift.abs(base)
     }
 
-    /// SwifterSwift: Check if number is positive.
+    /// ReerKit: Check if number is positive.
     var isPositive: Bool {
         return base > 0
     }
 
-    /// SwifterSwift: Check if number is negative.
+    /// ReerKit: Check if number is negative.
     var isNegative: Bool {
         return base < 0
     }
 
     #if canImport(Foundation)
-    /// SwifterSwift: Ceil of number.
+    /// ReerKit: Ceil of number.
     var ceil: Base {
         return Foundation.ceil(base)
     }
     #endif
 
-    /// SwifterSwift: Radian value of degree input.
+    /// ReerKit: Radian value of degree input.
     var degreesToRadians: Base {
         return Base.pi * base / Base(180)
     }
 
     #if canImport(Foundation)
-    /// SwifterSwift: Floor of number.
+    /// ReerKit: Floor of number.
     var floor: Base {
         return Foundation.floor(base)
     }
     #endif
 
-    /// SwifterSwift: Degree value of radian input.
+    /// ReerKit: Degree value of radian input.
     var radiansToDegrees: Base {
         return base * Base(180) / Base.pi
     }
@@ -71,7 +71,7 @@ public extension Reer where Base: FloatingPoint {
 
 // swiftlint:disable identifier_name
 infix operator ±
-/// SwifterSwift: Tuple of plus-minus operation.
+/// ReerKit: Tuple of plus-minus operation.
 ///
 /// - Parameters:
 ///   - lhs: number.
@@ -86,7 +86,7 @@ public func ± <T: FloatingPoint>(lhs: T, rhs: T) -> (T, T) {
 
 // swiftlint:disable identifier_name
 prefix operator ±
-/// SwifterSwift: Tuple of plus-minus operation.
+/// ReerKit: Tuple of plus-minus operation.
 ///
 /// - Parameter int: number.
 /// - Returns: tuple of plus-minus operation (± 2.5 -> (2.5, -2.5)).
@@ -99,7 +99,7 @@ public prefix func ± <T: FloatingPoint>(number: T) -> (T, T) {
 
 // swiftlint:disable identifier_name
 prefix operator √
-/// SwifterSwift: Square root of float.
+/// ReerKit: Square root of float.
 ///
 /// - Parameter float: float value to find square root for.
 /// - Returns: square root of given float.

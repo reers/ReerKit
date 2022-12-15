@@ -36,6 +36,8 @@
 		D05C8674294B4F610077E744 /* CAGradientLayerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C8673294B4F610077E744 /* CAGradientLayerExtensionsTests.swift */; };
 		D05C8676294B4FE80077E744 /* CATransform3D+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C8675294B4FE80077E744 /* CATransform3D+REExtensions.swift */; };
 		D05C8678294B535D0077E744 /* CATransform3DExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C8677294B535D0077E744 /* CATransform3DExtensionsTests.swift */; };
+		D05C867A294B54CD0077E744 /* CGColor+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C8679294B54CD0077E744 /* CGColor+REExtensions.swift */; };
+		D05C867C294B556D0077E744 /* CGColorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C867B294B556D0077E744 /* CGColorExtensionsTests.swift */; };
 		D06287142885C88000401B59 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06287132885C88000401B59 /* Weak.swift */; };
 		D06287162885D83100401B59 /* WeakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06287152885D83100401B59 /* WeakTests.swift */; };
 		D068566628D76E45001CB92A /* Array+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D068566528D76E45001CB92A /* Array+REExtensions.swift */; };
@@ -148,6 +150,8 @@
 		D05C8673294B4F610077E744 /* CAGradientLayerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAGradientLayerExtensionsTests.swift; sourceTree = "<group>"; };
 		D05C8675294B4FE80077E744 /* CATransform3D+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CATransform3D+REExtensions.swift"; path = "../../../Desktop/CATransform3D+REExtensions.swift"; sourceTree = "<group>"; };
 		D05C8677294B535D0077E744 /* CATransform3DExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CATransform3DExtensionsTests.swift; sourceTree = "<group>"; };
+		D05C8679294B54CD0077E744 /* CGColor+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGColor+REExtensions.swift"; sourceTree = "<group>"; };
+		D05C867B294B556D0077E744 /* CGColorExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGColorExtensionsTests.swift; sourceTree = "<group>"; };
 		D06287132885C88000401B59 /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		D06287152885D83100401B59 /* WeakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakTests.swift; sourceTree = "<group>"; };
 		D068566528D76E45001CB92A /* Array+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+REExtensions.swift"; sourceTree = "<group>"; };
@@ -287,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				D05C866A294B4B7E0077E744 /* CGAffineTransform+REExtensions.swift */,
+				D05C8679294B54CD0077E744 /* CGColor+REExtensions.swift */,
 			);
 			path = CoreGraphics;
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				D05C866D294B4C6D0077E744 /* CGAffineTransformExtensionsTests.swift */,
+				D05C867B294B556D0077E744 /* CGColorExtensionsTests.swift */,
 			);
 			path = CoreGraphicsTests;
 			sourceTree = "<group>";
@@ -654,6 +660,7 @@
 				D0C95FDA2857999D00D0522D /* Int+REExtensions.swift in Sources */,
 				D04D34F4286C7390001E974C /* Utils.swift in Sources */,
 				D0EBE241288492B2004925E5 /* DeinitObserver.swift in Sources */,
+				D05C867A294B54CD0077E744 /* CGColor+REExtensions.swift in Sources */,
 				D071DEBD28D8DC1F00618A2F /* Collection+REExtensions.swift in Sources */,
 				D0421AD12938F6B500452845 /* Data+REExtensions.swift in Sources */,
 				D0038B7D285642B600A890F9 /* Locked.swift in Sources */,
@@ -716,6 +723,7 @@
 				D04D34FA286C836A001E974C /* DispatchTests.swift in Sources */,
 				D0CBE62528833BF5006F8BCB /* TimerExtensionsTests.swift in Sources */,
 				D0421AD32939033800452845 /* DataExtensionsTests.swift in Sources */,
+				D05C867C294B556D0077E744 /* CGColorExtensionsTests.swift in Sources */,
 				D0CC5A18290ACF550038989B /* MutableCollectionExtensionsTests.swift in Sources */,
 				D06287162885D83100401B59 /* WeakTests.swift in Sources */,
 				D0CD714528E5CDCD009ADA8E /* FloatExtensionsTests.swift in Sources */,

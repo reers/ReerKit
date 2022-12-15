@@ -44,6 +44,8 @@
 		D05C8684294B58E20077E744 /* CGPointExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C8683294B58E20077E744 /* CGPointExtensionsTests.swift */; };
 		D05C8686294B5D3C0077E744 /* CGSize+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C8685294B5D3C0077E744 /* CGSize+REExtensions.swift */; };
 		D05C8688294B5E810077E744 /* CGSizeExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C8687294B5E810077E744 /* CGSizeExtensionsTests.swift */; };
+		D05C868A294B5F990077E744 /* CGRect+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C8689294B5F990077E744 /* CGRect+REExtensions.swift */; };
+		D05C868C294B61420077E744 /* CGRectExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C868B294B61420077E744 /* CGRectExtensionsTests.swift */; };
 		D06287142885C88000401B59 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06287132885C88000401B59 /* Weak.swift */; };
 		D06287162885D83100401B59 /* WeakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06287152885D83100401B59 /* WeakTests.swift */; };
 		D068566628D76E45001CB92A /* Array+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D068566528D76E45001CB92A /* Array+REExtensions.swift */; };
@@ -164,6 +166,8 @@
 		D05C8683294B58E20077E744 /* CGPointExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensionsTests.swift; sourceTree = "<group>"; };
 		D05C8685294B5D3C0077E744 /* CGSize+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+REExtensions.swift"; sourceTree = "<group>"; };
 		D05C8687294B5E810077E744 /* CGSizeExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeExtensionsTests.swift; sourceTree = "<group>"; };
+		D05C8689294B5F990077E744 /* CGRect+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+REExtensions.swift"; sourceTree = "<group>"; };
+		D05C868B294B61420077E744 /* CGRectExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRectExtensionsTests.swift; sourceTree = "<group>"; };
 		D06287132885C88000401B59 /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		D06287152885D83100401B59 /* WeakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakTests.swift; sourceTree = "<group>"; };
 		D068566528D76E45001CB92A /* Array+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+REExtensions.swift"; sourceTree = "<group>"; };
@@ -307,6 +311,7 @@
 				D05C867D294B55F10077E744 /* CGFloat+REExtensions.swift */,
 				D05C8681294B58250077E744 /* CGPoint+REExtensions.swift */,
 				D05C8685294B5D3C0077E744 /* CGSize+REExtensions.swift */,
+				D05C8689294B5F990077E744 /* CGRect+REExtensions.swift */,
 			);
 			path = CoreGraphics;
 			sourceTree = "<group>";
@@ -319,6 +324,7 @@
 				D05C867F294B57130077E744 /* CGFloatExtensionsTests.swift */,
 				D05C8683294B58E20077E744 /* CGPointExtensionsTests.swift */,
 				D05C8687294B5E810077E744 /* CGSizeExtensionsTests.swift */,
+				D05C868B294B61420077E744 /* CGRectExtensionsTests.swift */,
 			);
 			path = CoreGraphicsTests;
 			sourceTree = "<group>";
@@ -682,6 +688,7 @@
 				D05C867A294B54CD0077E744 /* CGColor+REExtensions.swift in Sources */,
 				D071DEBD28D8DC1F00618A2F /* Collection+REExtensions.swift in Sources */,
 				D0421AD12938F6B500452845 /* Data+REExtensions.swift in Sources */,
+				D05C868A294B5F990077E744 /* CGRect+REExtensions.swift in Sources */,
 				D0038B7D285642B600A890F9 /* Locked.swift in Sources */,
 				D0038B8128565B9500A890F9 /* ReadWriteLock.swift in Sources */,
 				D0B121122855089000B5B326 /* ReerKit.swift in Sources */,
@@ -738,6 +745,7 @@
 				D05C8680294B57130077E744 /* CGFloatExtensionsTests.swift in Sources */,
 				D05A881C291C106800C53492 /* StringExtensionsTests.swift in Sources */,
 				D0B4ED3F293A7E660031BDAB /* CountdownTimerTests.swift in Sources */,
+				D05C868C294B61420077E744 /* CGRectExtensionsTests.swift in Sources */,
 				D0CD712928E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift in Sources */,
 				D068566828D77BF3001CB92A /* ArrayExtensionsTests.swift in Sources */,
 				D019B8F7285BA3CB00257A7D /* UnfairLockTests.swift in Sources */,

@@ -58,6 +58,8 @@
 		D07E53AB2883083300921873 /* RETimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AA2883083300921873 /* RETimer.swift */; };
 		D07E53AD288309DF00921873 /* RETimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AC288309DF00921873 /* RETimerTests.swift */; };
 		D07E53AF2883137000921873 /* WeakProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AE2883137000921873 /* WeakProxy.swift */; };
+		D093CF87294B9D4400A830DB /* CGVector+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093CF86294B9D4400A830DB /* CGVector+REExtensions.swift */; };
+		D093CF8B294B9FC000A830DB /* CGVectorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093CF8A294B9FC000A830DB /* CGVectorExtensionsTests.swift */; };
 		D0A0040628620D9900D2FA7C /* TypeNameDescribableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */; };
 		D0B120FD285505AA00B5B326 /* ReerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B120F4285505AA00B5B326 /* ReerKit.framework */; };
 		D0B1210F2855079000B5B326 /* UIView+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B1210E2855079000B5B326 /* UIView+REExtensions.swift */; };
@@ -180,6 +182,8 @@
 		D07E53AA2883083300921873 /* RETimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimer.swift; sourceTree = "<group>"; };
 		D07E53AC288309DF00921873 /* RETimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimerTests.swift; sourceTree = "<group>"; };
 		D07E53AE2883137000921873 /* WeakProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakProxy.swift; sourceTree = "<group>"; };
+		D093CF86294B9D4400A830DB /* CGVector+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGVector+REExtensions.swift"; sourceTree = "<group>"; };
+		D093CF8A294B9FC000A830DB /* CGVectorExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGVectorExtensionsTests.swift; sourceTree = "<group>"; };
 		D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeNameDescribableTests.swift; sourceTree = "<group>"; };
 		D0B120F4285505AA00B5B326 /* ReerKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B120FC285505AA00B5B326 /* ReerKit-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ReerKit-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -312,6 +316,7 @@
 				D05C8681294B58250077E744 /* CGPoint+REExtensions.swift */,
 				D05C8685294B5D3C0077E744 /* CGSize+REExtensions.swift */,
 				D05C8689294B5F990077E744 /* CGRect+REExtensions.swift */,
+				D093CF86294B9D4400A830DB /* CGVector+REExtensions.swift */,
 			);
 			path = CoreGraphics;
 			sourceTree = "<group>";
@@ -325,6 +330,7 @@
 				D05C8683294B58E20077E744 /* CGPointExtensionsTests.swift */,
 				D05C8687294B5E810077E744 /* CGSizeExtensionsTests.swift */,
 				D05C868B294B61420077E744 /* CGRectExtensionsTests.swift */,
+				D093CF8A294B9FC000A830DB /* CGVectorExtensionsTests.swift */,
 			);
 			path = CoreGraphicsTests;
 			sourceTree = "<group>";
@@ -682,6 +688,7 @@
 				D04D34F7286C7A8A001E974C /* DispatchQueue+REExtensions.swift in Sources */,
 				D0CD712728E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift in Sources */,
 				D0CC5A14290ACE390038989B /* MutableCollection+REExtensions.swift in Sources */,
+				D093CF87294B9D4400A830DB /* CGVector+REExtensions.swift in Sources */,
 				D0C95FDA2857999D00D0522D /* Int+REExtensions.swift in Sources */,
 				D04D34F4286C7390001E974C /* Utils.swift in Sources */,
 				D0EBE241288492B2004925E5 /* DeinitObserver.swift in Sources */,
@@ -759,6 +766,7 @@
 				D06287162885D83100401B59 /* WeakTests.swift in Sources */,
 				D05C8684294B58E20077E744 /* CGPointExtensionsTests.swift in Sources */,
 				D0CD714528E5CDCD009ADA8E /* FloatExtensionsTests.swift in Sources */,
+				D093CF8B294B9FC000A830DB /* CGVectorExtensionsTests.swift in Sources */,
 				D0F39A82287DD82E00A754B2 /* SequenceExtensionsTests.swift in Sources */,
 				D0A0040628620D9900D2FA7C /* TypeNameDescribableTests.swift in Sources */,
 				D0B121212855207900B5B326 /* UIViewExtensionsTests.swift in Sources */,

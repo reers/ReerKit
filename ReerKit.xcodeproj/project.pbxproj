@@ -61,6 +61,7 @@
 		D093CF87294B9D4400A830DB /* CGVector+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093CF86294B9D4400A830DB /* CGVector+REExtensions.swift */; };
 		D093CF8B294B9FC000A830DB /* CGVectorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093CF8A294B9FC000A830DB /* CGVectorExtensionsTests.swift */; };
 		D0A0040628620D9900D2FA7C /* TypeNameDescribableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */; };
+		D0A6B3A32924AD11008B7FDA /* UIResponder+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A6B3A22924AD11008B7FDA /* UIResponder+REExtensions.swift */; };
 		D0B120FD285505AA00B5B326 /* ReerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B120F4285505AA00B5B326 /* ReerKit.framework */; };
 		D0B1210F2855079000B5B326 /* UIView+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B1210E2855079000B5B326 /* UIView+REExtensions.swift */; };
 		D0B121122855089000B5B326 /* ReerKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B121112855089000B5B326 /* ReerKit.swift */; };
@@ -185,6 +186,7 @@
 		D093CF86294B9D4400A830DB /* CGVector+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGVector+REExtensions.swift"; sourceTree = "<group>"; };
 		D093CF8A294B9FC000A830DB /* CGVectorExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGVectorExtensionsTests.swift; sourceTree = "<group>"; };
 		D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeNameDescribableTests.swift; sourceTree = "<group>"; };
+		D0A6B3A22924AD11008B7FDA /* UIResponder+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+REExtensions.swift"; sourceTree = "<group>"; };
 		D0B120F4285505AA00B5B326 /* ReerKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B120FC285505AA00B5B326 /* ReerKit-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ReerKit-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B1210E2855079000B5B326 /* UIView+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+REExtensions.swift"; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				D0B1210E2855079000B5B326 /* UIView+REExtensions.swift */,
+				D0A6B3A22924AD11008B7FDA /* UIResponder+REExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -690,6 +693,7 @@
 				D0CC5A14290ACE390038989B /* MutableCollection+REExtensions.swift in Sources */,
 				D093CF87294B9D4400A830DB /* CGVector+REExtensions.swift in Sources */,
 				D0C95FDA2857999D00D0522D /* Int+REExtensions.swift in Sources */,
+				D0A6B3A32924AD11008B7FDA /* UIResponder+REExtensions.swift in Sources */,
 				D04D34F4286C7390001E974C /* Utils.swift in Sources */,
 				D0EBE241288492B2004925E5 /* DeinitObserver.swift in Sources */,
 				D05C867A294B54CD0077E744 /* CGColor+REExtensions.swift in Sources */,

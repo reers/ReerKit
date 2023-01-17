@@ -12,6 +12,7 @@
 		D0038B8128565B9500A890F9 /* ReadWriteLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0038B8028565B9400A890F9 /* ReadWriteLock.swift */; };
 		D0038B832856662B00A890F9 /* RWLocked.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0038B822856662B00A890F9 /* RWLocked.swift */; };
 		D004CC49285A41F500C41360 /* Synchronizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D004CC48285A41F500C41360 /* Synchronizing.swift */; };
+		D00615C12976F52D003FA4CF /* CATransform3D+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00615C02976F52D003FA4CF /* CATransform3D+REExtensions.swift */; };
 		D008BD6E28E5DCC500470BEB /* Decodable+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD714628E5D71D009ADA8E /* Decodable+REExtensions.swift */; };
 		D019B8F5285BA02900257A7D /* ReadWriteLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B8F4285BA02900257A7D /* ReadWriteLockTests.swift */; };
 		D019B8F7285BA3CB00257A7D /* UnfairLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B8F6285BA3CB00257A7D /* UnfairLockTests.swift */; };
@@ -34,7 +35,6 @@
 		D05C866E294B4C6D0077E744 /* CGAffineTransformExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C866D294B4C6D0077E744 /* CGAffineTransformExtensionsTests.swift */; };
 		D05C8671294B4E190077E744 /* CAGradientLayer+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C8670294B4E190077E744 /* CAGradientLayer+REExtensions.swift */; };
 		D05C8674294B4F610077E744 /* CAGradientLayerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C8673294B4F610077E744 /* CAGradientLayerExtensionsTests.swift */; };
-		D05C8676294B4FE80077E744 /* CATransform3D+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C8675294B4FE80077E744 /* CATransform3D+REExtensions.swift */; };
 		D05C8678294B535D0077E744 /* CATransform3DExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C8677294B535D0077E744 /* CATransform3DExtensionsTests.swift */; };
 		D05C867A294B54CD0077E744 /* CGColor+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C8679294B54CD0077E744 /* CGColor+REExtensions.swift */; };
 		D05C867C294B556D0077E744 /* CGColorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C867B294B556D0077E744 /* CGColorExtensionsTests.swift */; };
@@ -138,6 +138,7 @@
 		D0038B8028565B9400A890F9 /* ReadWriteLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteLock.swift; sourceTree = "<group>"; };
 		D0038B822856662B00A890F9 /* RWLocked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RWLocked.swift; sourceTree = "<group>"; };
 		D004CC48285A41F500C41360 /* Synchronizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synchronizing.swift; sourceTree = "<group>"; };
+		D00615C02976F52D003FA4CF /* CATransform3D+REExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CATransform3D+REExtensions.swift"; sourceTree = "<group>"; };
 		D019B8F4285BA02900257A7D /* ReadWriteLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteLockTests.swift; sourceTree = "<group>"; };
 		D019B8F6285BA3CB00257A7D /* UnfairLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfairLockTests.swift; sourceTree = "<group>"; };
 		D0397611286E111800C33E17 /* Optional+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+REExtensions.swift"; sourceTree = "<group>"; };
@@ -159,7 +160,6 @@
 		D05C866D294B4C6D0077E744 /* CGAffineTransformExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGAffineTransformExtensionsTests.swift; sourceTree = "<group>"; };
 		D05C8670294B4E190077E744 /* CAGradientLayer+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+REExtensions.swift"; sourceTree = "<group>"; };
 		D05C8673294B4F610077E744 /* CAGradientLayerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAGradientLayerExtensionsTests.swift; sourceTree = "<group>"; };
-		D05C8675294B4FE80077E744 /* CATransform3D+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CATransform3D+REExtensions.swift"; path = "../../../Desktop/CATransform3D+REExtensions.swift"; sourceTree = "<group>"; };
 		D05C8677294B535D0077E744 /* CATransform3DExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CATransform3DExtensionsTests.swift; sourceTree = "<group>"; };
 		D05C8679294B54CD0077E744 /* CGColor+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGColor+REExtensions.swift"; sourceTree = "<group>"; };
 		D05C867B294B556D0077E744 /* CGColorExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGColorExtensionsTests.swift; sourceTree = "<group>"; };
@@ -341,7 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				D05C8670294B4E190077E744 /* CAGradientLayer+REExtensions.swift */,
-				D05C8675294B4FE80077E744 /* CATransform3D+REExtensions.swift */,
+				D00615C02976F52D003FA4CF /* CATransform3D+REExtensions.swift */,
 			);
 			path = CoreAnimation;
 			sourceTree = "<group>";
@@ -689,6 +689,7 @@
 				D0B1210F2855079000B5B326 /* UIView+REExtensions.swift in Sources */,
 				D0F39A7C287DC70100A754B2 /* Character+REExtensions.swift in Sources */,
 				D04D34F7286C7A8A001E974C /* DispatchQueue+REExtensions.swift in Sources */,
+				D00615C12976F52D003FA4CF /* CATransform3D+REExtensions.swift in Sources */,
 				D0CD712728E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift in Sources */,
 				D0CC5A14290ACE390038989B /* MutableCollection+REExtensions.swift in Sources */,
 				D093CF87294B9D4400A830DB /* CGVector+REExtensions.swift in Sources */,
@@ -717,7 +718,6 @@
 				D0CD713728E5C50C009ADA8E /* Comparable+REExtensions.swift in Sources */,
 				D0CC5A1E290AE4CF0038989B /* RangeReplaceableCollection+REExtensions.swift in Sources */,
 				D0CC5A1A290AD5040038989B /* StringProtocol+REExtensions.swift in Sources */,
-				D05C8676294B4FE80077E744 /* CATransform3D+REExtensions.swift in Sources */,
 				D06287142885C88000401B59 /* Weak.swift in Sources */,
 				D0038B832856662B00A890F9 /* RWLocked.swift in Sources */,
 				D053AF0A28B86582004335DC /* Sequence+REExtensions.swift in Sources */,

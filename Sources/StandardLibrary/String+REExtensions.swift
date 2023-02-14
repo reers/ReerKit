@@ -213,7 +213,7 @@ public extension Reer where Base == String {
     ///        "https://google.com".re.isValidUrl -> true
     ///
     var isValidUrl: Bool {
-        return URL(string: base) != nil
+        return URL.re(string: base) != nil
     }
     #endif
 
@@ -224,7 +224,7 @@ public extension Reer where Base == String {
     ///        "google.com".re.isValidSchemedUrl -> false
     ///
     var isValidSchemedUrl: Bool {
-        guard let url = URL(string: base) else { return false }
+        guard let url = URL.re(string: base) else { return false }
         return url.scheme != nil
     }
     #endif
@@ -235,7 +235,7 @@ public extension Reer where Base == String {
     ///        "https://google.com".re.isValidHttpsUrl -> true
     ///
     var isValidHttpsUrl: Bool {
-        guard let url = URL(string: base) else { return false }
+        guard let url = URL.re(string: base) else { return false }
         return url.scheme == "https"
     }
     #endif
@@ -246,7 +246,7 @@ public extension Reer where Base == String {
     ///        "http://google.com".re.isValidHttpUrl -> true
     ///
     var isValidHttpUrl: Bool {
-        guard let url = URL(string: base) else { return false }
+        guard let url = URL.re(string: base) else { return false }
         return url.scheme == "http"
     }
     #endif
@@ -257,7 +257,7 @@ public extension Reer where Base == String {
     ///        "file://Documents/file.txt".re.isValidFileUrl -> true
     ///
     var isValidFileUrl: Bool {
-        return URL(string: base)?.isFileURL ?? false
+        return URL.re(string: base)?.isFileURL ?? false
     }
     #endif
 
@@ -391,7 +391,7 @@ public extension Reer where Base == String {
     ///        "not url".re.url -> nil
     ///
     var url: URL? {
-        return URL(string: base)
+        return URL.re(string: base)
     }
     #endif
 

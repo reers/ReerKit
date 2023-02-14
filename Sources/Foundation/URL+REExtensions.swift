@@ -65,13 +65,6 @@ public extension URL {
                 result = URL(string: encodedURLString)
             }
         }
-
-        if result == nil {
-            if let encodedString = string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
-                result = URL(string: encodedString)
-            }
-        }
-        assert(result != nil, "Fail to create a URL.")
         return result
     }
 

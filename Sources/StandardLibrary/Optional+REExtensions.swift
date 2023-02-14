@@ -188,13 +188,13 @@ public extension ReerGeneric where Base == Optional<T> {
     var string: String? {
         if let string = base as? String {
             return string
-        } else if let bool = base as? Bool {
-            return bool ? "true" : "false"
         } else if let stringConvertible = base as? CustomStringConvertible {
             if let int = Int(stringConvertible.description) {
                 return int.description
             } else if let double = Double(stringConvertible.description) {
                 return double.description
+            } else if let bool = base as? Bool {
+                return bool ? "true" : "false"
             } else {
                 return nil
             }

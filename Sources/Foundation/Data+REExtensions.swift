@@ -119,7 +119,7 @@ public extension ReerForEquatable where Base == Data {
     /// ReerKit: Returns [String: String] for decoded self.
     /// Returns nil if an error occurs.
     var stringDictionary: [String: String]? {
-        return try? toDictionary() as? [String: String]
+        return try? toDictionary().re.stringDictionary
     }
 
     /// ReerKit: Returns an Dictionary for decoded self.

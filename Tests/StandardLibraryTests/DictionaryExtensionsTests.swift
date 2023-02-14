@@ -29,7 +29,15 @@ final class DictionaryExtensionsTests: XCTestCase {
 
     func testQueryString() {
         let dict = ["k1": "v1", "k2": "v2"]
-        XCTAssertEqual(dict.re.queryString, "k1=v1&k2=v2")
+        XCTAssertTrue(dict.re.queryString == "k1=v1&k2=v2" || dict.re.queryString == "k2=v2&k1=v1")
+    }
+
+    func testStringDict() {
+        let dict = ["k1": "v1", 1: "v2"] as [AnyHashable : String]
+        XCTAssertEqual(dict.re.stringDictionary, ["k1": "v1", "1": "v2"])
+
+        let dict1 = ["k1": "v1", false: "v2"] as [AnyHashable : String]
+        XCTAssertEqual(dict1.re.stringDictionary, ["k1": "v1", "false": "v2"])
     }
 
     func testInitGroupedByKeyPath() {

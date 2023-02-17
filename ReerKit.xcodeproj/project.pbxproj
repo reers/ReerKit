@@ -104,6 +104,8 @@
 		D0CD714328E5CDCD009ADA8E /* DoubleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD714028E5CDCD009ADA8E /* DoubleExtensionsTests.swift */; };
 		D0CD714428E5CDCD009ADA8E /* FloatingPointExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD714128E5CDCD009ADA8E /* FloatingPointExtensionsTests.swift */; };
 		D0CD714528E5CDCD009ADA8E /* FloatExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD714228E5CDCD009ADA8E /* FloatExtensionsTests.swift */; };
+		D0CDBDCA299FAB3100BD682D /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDBDC9299FAB3100BD682D /* Debouncer.swift */; };
+		D0CDBDCC299FB47500BD682D /* DebouncerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDBDCB299FB47500BD682D /* DebouncerTests.swift */; };
 		D0E354C828BFBBE10000030B /* WeakSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C728BFBBE10000030B /* WeakSet.swift */; };
 		D0E354CA28BFBC060000030B /* WeakMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C928BFBC060000030B /* WeakMap.swift */; };
 		D0EBE2352884765F004925E5 /* AnyObjectExtensionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE2342884765F004925E5 /* AnyObjectExtensionable.swift */; };
@@ -231,6 +233,8 @@
 		D0CD714128E5CDCD009ADA8E /* FloatingPointExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingPointExtensionsTests.swift; sourceTree = "<group>"; };
 		D0CD714228E5CDCD009ADA8E /* FloatExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatExtensionsTests.swift; sourceTree = "<group>"; };
 		D0CD714628E5D71D009ADA8E /* Decodable+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+REExtensions.swift"; sourceTree = "<group>"; };
+		D0CDBDC9299FAB3100BD682D /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
+		D0CDBDCB299FB47500BD682D /* DebouncerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebouncerTests.swift; sourceTree = "<group>"; };
 		D0E354C728BFBBE10000030B /* WeakSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakSet.swift; sourceTree = "<group>"; };
 		D0E354C928BFBC060000030B /* WeakMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakMap.swift; sourceTree = "<group>"; };
 		D0EBE2342884765F004925E5 /* AnyObjectExtensionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyObjectExtensionable.swift; sourceTree = "<group>"; };
@@ -280,6 +284,7 @@
 				D0EBE242288493F8004925E5 /* DeinitObserverTests.swift */,
 				D06287152885D83100401B59 /* WeakTests.swift */,
 				D0B4ED3E293A7E660031BDAB /* CountdownTimerTests.swift */,
+				D0CDBDCB299FB47500BD682D /* DebouncerTests.swift */,
 			);
 			path = UtilityTests;
 			sourceTree = "<group>";
@@ -467,6 +472,7 @@
 				D07E53AA2883083300921873 /* RETimer.swift */,
 				D0EBE240288492B2004925E5 /* DeinitObserver.swift */,
 				D0B4ED3C293A7BA60031BDAB /* CountdownTimer.swift */,
+				D0CDBDC9299FAB3100BD682D /* Debouncer.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -698,6 +704,7 @@
 				D04D34F4286C7390001E974C /* Utils.swift in Sources */,
 				D0EBE241288492B2004925E5 /* DeinitObserver.swift in Sources */,
 				D05C867A294B54CD0077E744 /* CGColor+REExtensions.swift in Sources */,
+				D0CDBDCA299FAB3100BD682D /* Debouncer.swift in Sources */,
 				D071DEBD28D8DC1F00618A2F /* Collection+REExtensions.swift in Sources */,
 				D0421AD12938F6B500452845 /* Data+REExtensions.swift in Sources */,
 				D05C868A294B5F990077E744 /* CGRect+REExtensions.swift in Sources */,
@@ -758,6 +765,7 @@
 				D0B4ED3F293A7E660031BDAB /* CountdownTimerTests.swift in Sources */,
 				D05C868C294B61420077E744 /* CGRectExtensionsTests.swift in Sources */,
 				D0CD712928E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift in Sources */,
+				D0CDBDCC299FB47500BD682D /* DebouncerTests.swift in Sources */,
 				D068566828D77BF3001CB92A /* ArrayExtensionsTests.swift in Sources */,
 				D019B8F7285BA3CB00257A7D /* UnfairLockTests.swift in Sources */,
 				D0CD713128E5BDF2009ADA8E /* BinaryIntegerExtensionsTests.swift in Sources */,

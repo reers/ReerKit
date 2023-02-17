@@ -131,7 +131,7 @@ public final class RETimer {
     ///   - action: A closure to be executed when the timer fires. The closure takes a single Timer parameter and has no return value.
     /// - Returns: A timer instance.
     public static func scheduledTimer(
-        fireDate: Date = Date(),
+        fireDate: Date,
         timeInterval: TimeInterval,
         repeats: Bool = true,
         queue: DispatchQueue = .main,

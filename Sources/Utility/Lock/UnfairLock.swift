@@ -49,13 +49,17 @@ public final class UnfairLock {
     public func unlock() {
         os_unfair_lock_unlock(unfairLock)
     }
-}
 
-/// Global function that wrapped `lock()` and `unlock()`
-public func locked<Result>(_ lock: UnfairLock, execute: () throws -> Result) rethrows -> Result {
-    lock.lock()
-    defer { lock.unlock() }
-    return try execute()
+    /// ReerKit: Executes a closure returning a value while acquiring the lock.
+    ///
+    /// - Parameter execute: The closure to run.
+    ///
+    /// - Returns: The value the closure generated.
+    public func around<Result>(_ execute: () throws -> Result) rethrows -> Result {
+        lock()
+        defer { unlock() }
+        return try execute()
+    }
 }
 
 #endif

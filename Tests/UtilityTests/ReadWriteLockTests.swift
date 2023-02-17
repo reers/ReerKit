@@ -41,7 +41,7 @@ class ReadWriteLockTests: XCTestCase {
         var result = ""
         let rwlock = ReadWriteLock()
         DispatchQueue.global().async {
-            writeLocked(rwlock) {
+            rwlock.writeAround {
                 result += "1"
                 for _ in 0...10000 {
                     // do something
@@ -51,7 +51,7 @@ class ReadWriteLockTests: XCTestCase {
         }
         for i in 0...10 {
             DispatchQueue.global().async {
-                readLocked(rwlock) {
+                rwlock.readAround {
                     result += "3"
                     for _ in 0..<i {}
                 }

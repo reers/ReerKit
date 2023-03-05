@@ -145,7 +145,7 @@ public extension Reer where Base: AnyObject {
     ///   - key: The key for the association.
     func setAssociatedWeakObject<Object: AnyObject>(_ object: Object, forKey key: AssociationKey) {
         let closure = { [weak object] in
-            return object;
+            return object
         }
         objc_setAssociatedObject(base, key.address, closure, .OBJC_ASSOCIATION_COPY_NONATOMIC)
     }

@@ -16,6 +16,8 @@
 		D008BD6E28E5DCC500470BEB /* Decodable+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD714628E5D71D009ADA8E /* Decodable+REExtensions.swift */; };
 		D019B8F5285BA02900257A7D /* ReadWriteLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B8F4285BA02900257A7D /* ReadWriteLockTests.swift */; };
 		D019B8F7285BA3CB00257A7D /* UnfairLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B8F6285BA3CB00257A7D /* UnfairLockTests.swift */; };
+		D01DABC229B4FAA700ABD25E /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01DABC129B4FAA700ABD25E /* Throttler.swift */; };
+		D01DABC429B4FE1300ABD25E /* ThrottlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01DABC329B4FE1300ABD25E /* ThrottlerTests.swift */; };
 		D0397612286E111800C33E17 /* Optional+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0397611286E111800C33E17 /* Optional+REExtensions.swift */; };
 		D0397614286E12A900C33E17 /* OptionalExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0397613286E12A900C33E17 /* OptionalExtensionsTests.swift */; };
 		D0421ACD2938F4DD00452845 /* Calendar+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0421ACC2938F4DD00452845 /* Calendar+REExtensions.swift */; };
@@ -143,6 +145,8 @@
 		D00615C02976F52D003FA4CF /* CATransform3D+REExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CATransform3D+REExtensions.swift"; sourceTree = "<group>"; };
 		D019B8F4285BA02900257A7D /* ReadWriteLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteLockTests.swift; sourceTree = "<group>"; };
 		D019B8F6285BA3CB00257A7D /* UnfairLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfairLockTests.swift; sourceTree = "<group>"; };
+		D01DABC129B4FAA700ABD25E /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
+		D01DABC329B4FE1300ABD25E /* ThrottlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrottlerTests.swift; sourceTree = "<group>"; };
 		D0397611286E111800C33E17 /* Optional+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+REExtensions.swift"; sourceTree = "<group>"; };
 		D0397613286E12A900C33E17 /* OptionalExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalExtensionsTests.swift; sourceTree = "<group>"; };
 		D0421ACC2938F4DD00452845 /* Calendar+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar+REExtensions.swift"; sourceTree = "<group>"; };
@@ -285,6 +289,7 @@
 				D06287152885D83100401B59 /* WeakTests.swift */,
 				D0B4ED3E293A7E660031BDAB /* CountdownTimerTests.swift */,
 				D0CDBDCB299FB47500BD682D /* DebouncerTests.swift */,
+				D01DABC329B4FE1300ABD25E /* ThrottlerTests.swift */,
 			);
 			path = UtilityTests;
 			sourceTree = "<group>";
@@ -473,6 +478,7 @@
 				D0EBE240288492B2004925E5 /* DeinitObserver.swift */,
 				D0B4ED3C293A7BA60031BDAB /* CountdownTimer.swift */,
 				D0CDBDC9299FAB3100BD682D /* Debouncer.swift */,
+				D01DABC129B4FAA700ABD25E /* Throttler.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -743,6 +749,7 @@
 				D0B1211E2855156200B5B326 /* TypeNameDescribable.swift in Sources */,
 				D07E53AF2883137000921873 /* WeakProxy.swift in Sources */,
 				D004CC49285A41F500C41360 /* Synchronizing.swift in Sources */,
+				D01DABC229B4FAA700ABD25E /* Throttler.swift in Sources */,
 				D0397612286E111800C33E17 /* Optional+REExtensions.swift in Sources */,
 				D0421ACD2938F4DD00452845 /* Calendar+REExtensions.swift in Sources */,
 				D07E53AB2883083300921873 /* RETimer.swift in Sources */,
@@ -765,6 +772,7 @@
 				D0B4ED3F293A7E660031BDAB /* CountdownTimerTests.swift in Sources */,
 				D05C868C294B61420077E744 /* CGRectExtensionsTests.swift in Sources */,
 				D0CD712928E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift in Sources */,
+				D01DABC429B4FE1300ABD25E /* ThrottlerTests.swift in Sources */,
 				D0CDBDCC299FB47500BD682D /* DebouncerTests.swift in Sources */,
 				D068566828D77BF3001CB92A /* ArrayExtensionsTests.swift in Sources */,
 				D019B8F7285BA3CB00257A7D /* UnfairLockTests.swift in Sources */,

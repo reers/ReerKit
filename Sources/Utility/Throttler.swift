@@ -22,13 +22,24 @@
 #if canImport(Foundation)
 import Foundation
 
-public final class Debouncer {
-    private let queue: DispatchQueue
-    private var workItem = DispatchWorkItem(block: {})
+public final class Throttler {
+
+    public enum PerformMode {
+        case first
+        case last
+    }
+
+    private var isPending = false
+    private var hasExecuted = false
+    private var latestAction: () -> Void = {}
     private let lock = UnfairLock()
 
-    public init(queue: DispatchQueue = .main) {
+    private let queue: DispatchQueue
+    private let performMode: PerformMode
+
+    public init(queue: DispatchQueue = .main, performMode: PerformMode = .first) {
         self.queue = queue
+        self.performMode = performMode
     }
 
     public func execute(interval: TimeInterval, action: @escaping () -> Void) {
@@ -44,15 +55,38 @@ public final class Debouncer {
     }
 
     private func execute<Time: Comparable>(time: Time, action: @escaping () -> Void) {
-        lock.around {
-            workItem.cancel()
-            workItem = DispatchWorkItem(block: action)
+
+        func execute(onQueue queue: DispatchQueue, after time: Time, action: DispatchWorkItem) {
             if let time = time as? TimeInterval {
-                queue.asyncAfter(deadline: .now() + time, execute: workItem)
+                queue.asyncAfter(deadline: .now() + time, execute: action)
             } else if let time = time as? DispatchTime {
-                queue.asyncAfter(deadline: time, execute: workItem)
+                queue.asyncAfter(deadline: time, execute: action)
             } else if let time = time as? DispatchWallTime {
-                queue.asyncAfter(wallDeadline: time, execute: workItem)
+                queue.asyncAfter(wallDeadline: time, execute: action)
+            }
+        }
+
+        lock.around {
+            switch performMode {
+            case .first:
+                if hasExecuted { return }
+                queue.async {
+                    action()
+                }
+                hasExecuted = true
+                let workItem = DispatchWorkItem {
+                    self.hasExecuted = false
+                }
+                execute(onQueue: queue, after: time, action: workItem)
+            case .last:
+                latestAction = action
+                if isPending { return }
+                isPending = true
+                let workItem = DispatchWorkItem {
+                    self.latestAction()
+                    self.isPending = false
+                }
+                execute(onQueue: queue, after: time, action: workItem)
             }
         }
     }

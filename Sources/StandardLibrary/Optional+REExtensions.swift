@@ -311,3 +311,20 @@ public extension ReerGeneric where Base == Optional<T>, T: Collection {
         return collection.isEmpty
     }
 }
+
+// MARK: - Operators
+
+infix operator ?! : NilCoalescingPrecedence
+public extension Optional where Wrapped: Collection {
+
+    /// ReerKit: Return the default value when the optional is nil, or it's not nil, but the collection is empty.
+    ///
+    ///     let value: String? = ""
+    ///     let result = value ?! "abc"
+    ///     // result is "abc"
+    ///     
+    /// - Returns: A non empty value.
+    static func ?! (optionalValue: Optional<Wrapped>, defaultValue: Wrapped) -> Wrapped {
+        return optionalValue.re.isEmpty ? defaultValue : optionalValue!
+    }
+}

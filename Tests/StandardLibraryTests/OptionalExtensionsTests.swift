@@ -186,4 +186,12 @@ class OptionalExtensionsTests: XCTestCase {
         XCTAssertNil(string.re.cgFloat)
         XCTAssertEqual(string.re.cgFloatValue(default: 3.0), 3.0)
     }
+
+    func testNonEmptyOperator() {
+        let value: String? = ""
+        XCTAssertEqual(value ?! "abc", "abc")
+
+        let value1: String? = "123"
+        XCTAssertEqual(value1 ?! "abc", "123")
+    }
 }

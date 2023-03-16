@@ -54,7 +54,7 @@ public extension Reer where Base == Double {
 // MARK: - Operators
 
 precedencegroup PowerPrecedence { higherThan: MultiplicationPrecedence }
-infix operator **: PowerPrecedence
+infix operator ** : PowerPrecedence
 /// ReerKit: Value of exponentiation.
 ///
 /// - Parameters:

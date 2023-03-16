@@ -64,8 +64,8 @@ public extension ReerGeneric where Base == Optional<T> {
     ///
     /// - Parameter defaultValue: default value to return if self is nil.
     /// - Returns: self if not nil or default value if nil.
-    func value(default defaultValue: T) -> T {
-        return base ?? defaultValue
+    func value(default defaultValue: @autoclosure () -> T) -> T {
+        return base ?? defaultValue()
     }
     
     /// ReerKit: Gets the wrapped value of an optional. If the optional is `nil`, throw a custom error.
@@ -147,8 +147,8 @@ public extension ReerGeneric where Base == Optional<T> {
     
     /// ReerKit: Transform the optional wrapped value to `Bool` if possible.
     /// Return the passed default value if it is nil.
-    func boolValue(default defaultValue: Bool) -> Bool {
-        guard let bool = bool else { return defaultValue }
+    func boolValue(default defaultValue: @autoclosure () -> Bool) -> Bool {
+        guard let bool = bool else { return defaultValue() }
         return bool
     }
     
@@ -176,8 +176,8 @@ public extension ReerGeneric where Base == Optional<T> {
     
     /// ReerKit: Transform the optional wrapped value to `Int` if possible.
     /// Return the passed default value if it is nil.
-    func intValue(default defaultValue: Int) -> Int {
-        guard let int = int else { return defaultValue }
+    func intValue(default defaultValue: @autoclosure () -> Int) -> Int {
+        guard let int = int else { return defaultValue() }
         return int
     }
     
@@ -211,8 +211,8 @@ public extension ReerGeneric where Base == Optional<T> {
     
     /// ReerKit: Transform the optional wrapped value to `String` if possible.
     /// Return the passed default value if it is nil.
-    func stringValue(default defaultValue: String) -> String {
-        guard let string = string else { return defaultValue }
+    func stringValue(default defaultValue: @autoclosure () -> String) -> String {
+        guard let string = string else { return defaultValue() }
         return string
     }
     
@@ -240,8 +240,8 @@ public extension ReerGeneric where Base == Optional<T> {
     
     /// ReerKit: Transform the optional wrapped value to `Double` if possible.
     /// Return the passed default value if it is nil.
-    func doubleValue(default defaultValue: Double) -> Double {
-        guard let double = double else { return defaultValue }
+    func doubleValue(default defaultValue: @autoclosure () -> Double) -> Double {
+        guard let double = double else { return defaultValue() }
         return double
     }
     
@@ -269,8 +269,8 @@ public extension ReerGeneric where Base == Optional<T> {
     
     /// ReerKit: Transform the optional wrapped value to `Float` if possible.
     /// Return the passed default value if it is nil.
-    func floatValue(default defaultValue: Float) -> Float {
-        guard let float = float else { return defaultValue }
+    func floatValue(default defaultValue: @autoclosure () -> Float) -> Float {
+        guard let float = float else { return defaultValue() }
         return float
     }
     
@@ -292,8 +292,8 @@ public extension ReerGeneric where Base == Optional<T> {
     
     /// ReerKit: Transform the optional wrapped value to `CGFloat` if possible.
     /// Return the passed default value if it is nil.
-    func cgFloatValue(default defaultValue: CGFloat) -> CGFloat {
-        guard let cgFloat = cgFloat else { return defaultValue }
+    func cgFloatValue(default defaultValue: @autoclosure () -> CGFloat) -> CGFloat {
+        guard let cgFloat = cgFloat else { return defaultValue() }
         return cgFloat
     }
     #endif

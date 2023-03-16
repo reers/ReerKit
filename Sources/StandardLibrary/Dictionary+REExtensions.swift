@@ -26,10 +26,11 @@ import Foundation
 
 // MARK: - Access dictionary value by using dynamic member lookup.
 //
-//     let dict = ["aKey": "aValue"]
+//     let dict = ["aKey": "aValue", "123": "number"]
 //     dict.dml.aKey -> Optional("aValue")
+//     dict.dml.123 -> Optional("number")
 //
-//     ** NOT Support the dict that key contains `./$#%()....` **
+//     ** NOT Support the keys that contain `./$#%()....` **
 //
 // Where the key should conform `ExpressibleByStringLiteral`
 

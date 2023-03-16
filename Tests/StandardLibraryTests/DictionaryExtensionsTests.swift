@@ -12,12 +12,13 @@ import XCTest
 final class DictionaryExtensionsTests: XCTestCase {
 
     func testDMLAccess() {
-        let dict = ["name": "phoenix", "age": "32", "666": "reer", "file_ext": "swift"]
+        let dict = ["name": "phoenix", "age": "32", "666": "reer", "file_ext": "swift", "_underscore": "_"]
         XCTAssertEqual(dict.dml.name!, "phoenix")
         XCTAssertEqual(dict.dml.age.re.intValue, 32)
         XCTAssertEqual(dict.dml.test, nil)
         XCTAssertEqual(dict.dml.666!, "reer")
         XCTAssertEqual(dict.dml.file_ext!, "swift")
+        XCTAssertEqual(dict.dml._underscore!, "_")
     }
 
     var testDict: [String: Any] = ["testKey": "testValue", "testArrayKey": [1, 2, 3, 4, 5]]

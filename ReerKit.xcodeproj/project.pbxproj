@@ -24,7 +24,7 @@
 		D0421ACF2938F5D500452845 /* CalendarExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0421ACE2938F5D500452845 /* CalendarExtensionsTests.swift */; };
 		D0421AD12938F6B500452845 /* Data+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0421AD02938F6B500452845 /* Data+REExtensions.swift */; };
 		D0421AD32939033800452845 /* DataExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0421AD22939033800452845 /* DataExtensionsTests.swift */; };
-		D04D34F4286C7390001E974C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34F3286C7390001E974C /* Utils.swift */; };
+		D04D34F4286C7390001E974C /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34F3286C7390001E974C /* GlobalFunctions.swift */; };
 		D04D34F7286C7A8A001E974C /* DispatchQueue+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34F6286C7A8A001E974C /* DispatchQueue+REExtensions.swift */; };
 		D04D34FA286C836A001E974C /* DispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34F9286C836A001E974C /* DispatchTests.swift */; };
 		D04D34FC286C843B001E974C /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34FB286C843B001E974C /* UtilsTests.swift */; };
@@ -153,7 +153,7 @@
 		D0421ACE2938F5D500452845 /* CalendarExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExtensionsTests.swift; sourceTree = "<group>"; };
 		D0421AD02938F6B500452845 /* Data+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+REExtensions.swift"; sourceTree = "<group>"; };
 		D0421AD22939033800452845 /* DataExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensionsTests.swift; sourceTree = "<group>"; };
-		D04D34F3286C7390001E974C /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		D04D34F3286C7390001E974C /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		D04D34F6286C7A8A001E974C /* DispatchQueue+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+REExtensions.swift"; sourceTree = "<group>"; };
 		D04D34F9286C836A001E974C /* DispatchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchTests.swift; sourceTree = "<group>"; };
 		D04D34FB286C843B001E974C /* UtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTests.swift; sourceTree = "<group>"; };
@@ -473,7 +473,7 @@
 				D0A0040728621C7600D2FA7C /* Lock */,
 				D0B1211D2855156200B5B326 /* TypeNameDescribable.swift */,
 				D0FB4055286362F10019D56A /* Once.swift */,
-				D04D34F3286C7390001E974C /* Utils.swift */,
+				D04D34F3286C7390001E974C /* GlobalFunctions.swift */,
 				D07E53AA2883083300921873 /* RETimer.swift */,
 				D0EBE240288492B2004925E5 /* DeinitObserver.swift */,
 				D0B4ED3C293A7BA60031BDAB /* CountdownTimer.swift */,
@@ -707,7 +707,7 @@
 				D093CF87294B9D4400A830DB /* CGVector+REExtensions.swift in Sources */,
 				D0C95FDA2857999D00D0522D /* Int+REExtensions.swift in Sources */,
 				D0A6B3A32924AD11008B7FDA /* UIResponder+REExtensions.swift in Sources */,
-				D04D34F4286C7390001E974C /* Utils.swift in Sources */,
+				D04D34F4286C7390001E974C /* GlobalFunctions.swift in Sources */,
 				D0EBE241288492B2004925E5 /* DeinitObserver.swift in Sources */,
 				D05C867A294B54CD0077E744 /* CGColor+REExtensions.swift in Sources */,
 				D0CDBDCA299FAB3100BD682D /* Debouncer.swift in Sources */,

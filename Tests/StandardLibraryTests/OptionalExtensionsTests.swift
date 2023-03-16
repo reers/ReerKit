@@ -186,4 +186,39 @@ class OptionalExtensionsTests: XCTestCase {
         XCTAssertNil(string.re.cgFloat)
         XCTAssertEqual(string.re.cgFloatValue(default: 3.0), 3.0)
     }
+
+    func testArray() {
+        let value: Any? = [1, 2]
+//        let x = value as? [Int]
+//        let q = value as? [Int] ?? [1]
+//
+//        let x = value.re.array(as: Int.self)
+//        let y = value.re.array(of: Int.self)
+//        let y = value.re.arrayValue(of: Int.self, default: [1])
+//
+//        let x = value as? [Int: String]
+//        let c = value.re.dict(of: Int.self, String.self)
+//        let retg = value.re.array() as [Int]?
+
+        let ret1: [Int]? = value.re.array()
+        let ret2: [Int] = value.re.arrayValue()
+        let ret3 = value.re.array(as: [Int].self)
+        let ret4 = value.re.arrayValue(as: [Int].self)
+        XCTAssertEqual(ret1, [1, 2])
+        XCTAssertEqual(ret2, [1, 2])
+        XCTAssertEqual(ret3, [1, 2])
+        XCTAssertEqual(ret4, [1, 2])
+
+        let value2: Any? = ["1"]
+        XCTAssertEqual(value2.re.arrayValue(as: [Int].self, default: [1]), [1])
+        XCTAssertEqual(value2.re.arrayValue(default: [1]), [1])
+    }
+
+    func testDict() {
+        let value: Any? = ["key": 23]
+        let ret1: [String: Int]? = value.re.dict()
+        let ret2: [String: Int] = value.re.dictValue()
+        let ret3 = value.re.dict(as: [String: Int].self)
+        let ret4 = value.re.dictValue(as: [String: Int].self)
+    }
 }

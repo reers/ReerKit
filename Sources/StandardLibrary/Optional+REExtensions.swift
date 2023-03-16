@@ -324,7 +324,7 @@ public extension Optional where Wrapped: Collection {
     ///     // result is "abc"
     ///     
     /// - Returns: A non empty value.
-    static func ?! (optionalValue: Optional<Wrapped>, defaultValue: Wrapped) -> Wrapped {
-        return optionalValue.re.isEmpty ? defaultValue : optionalValue!
+    static func ?! (optionalValue: Optional<Wrapped>, defaultValue: @autoclosure () -> Wrapped) -> Wrapped {
+        return optionalValue.re.isEmpty ? defaultValue() : optionalValue!
     }
 }

@@ -8,8 +8,8 @@
 
 #if os(iOS) || os(tvOS) || os(watchOS) || os(macOS)
 
-@testable import ReerKit
 import XCTest
+@testable import ReerKit
 
 final class EdgeInsetsExtensionsTests: XCTestCase {
     func testHorizontal() {

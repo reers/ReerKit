@@ -28,7 +28,6 @@
 		D04D34F7286C7A8A001E974C /* DispatchQueue+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34F6286C7A8A001E974C /* DispatchQueue+REExtensions.swift */; };
 		D04D34FA286C836A001E974C /* DispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34F9286C836A001E974C /* DispatchTests.swift */; };
 		D04D34FC286C843B001E974C /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34FB286C843B001E974C /* UtilsTests.swift */; };
-		D04EEF7F29C394F3006DC51B /* EdgeInsetsExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E129A529C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift */; };
 		D053AF0A28B86582004335DC /* Sequence+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D053AF0928B86582004335DC /* Sequence+REExtensions.swift */; };
 		D05A8817291BF4EF00C53492 /* Font+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A8816291BF4EF00C53492 /* Font+REExtensions.swift */; };
 		D05A8819291BF58200C53492 /* Color+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A8818291BF58200C53492 /* Color+REExtensions.swift */; };
@@ -110,7 +109,6 @@
 		D0CDBDCA299FAB3100BD682D /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDBDC9299FAB3100BD682D /* Debouncer.swift */; };
 		D0CDBDCC299FB47500BD682D /* DebouncerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDBDCB299FB47500BD682D /* DebouncerTests.swift */; };
 		D0E1289D29C38A390051D351 /* EdgeInsets+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E1289C29C38A390051D351 /* EdgeInsets+REExtensions.swift */; };
-		D0E128AB29C38BAE0051D351 /* ReerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0E128A329C38BAE0051D351 /* ReerKit.framework */; };
 		D0E129A629C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E129A529C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift */; };
 		D0E354C828BFBBE10000030B /* WeakSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C728BFBBE10000030B /* WeakSet.swift */; };
 		D0E354CA28BFBC060000030B /* WeakMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C928BFBC060000030B /* WeakMap.swift */; };
@@ -137,13 +135,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = D0B120F3285505AA00B5B326;
 			remoteInfo = "ReerKit-iOS";
-		};
-		D0E128AC29C38BAE0051D351 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0B120E92855057800B5B326 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D0E128A229C38BAE0051D351;
-			remoteInfo = "ReerKit-macOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -251,8 +242,6 @@
 		D0CDBDC9299FAB3100BD682D /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		D0CDBDCB299FB47500BD682D /* DebouncerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebouncerTests.swift; sourceTree = "<group>"; };
 		D0E1289C29C38A390051D351 /* EdgeInsets+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EdgeInsets+REExtensions.swift"; sourceTree = "<group>"; };
-		D0E128A329C38BAE0051D351 /* ReerKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0E128AA29C38BAE0051D351 /* ReerKit-macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ReerKit-macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0E129A529C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetsExtensionsTests.swift; sourceTree = "<group>"; };
 		D0E354C728BFBBE10000030B /* WeakSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakSet.swift; sourceTree = "<group>"; };
 		D0E354C928BFBC060000030B /* WeakMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakMap.swift; sourceTree = "<group>"; };
@@ -285,21 +274,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0B120FD285505AA00B5B326 /* ReerKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D0E128A029C38BAE0051D351 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D0E128A729C38BAE0051D351 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D0E128AB29C38BAE0051D351 /* ReerKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,8 +396,6 @@
 			children = (
 				D0B120F4285505AA00B5B326 /* ReerKit.framework */,
 				D0B120FC285505AA00B5B326 /* ReerKit-iOSTests.xctest */,
-				D0E128A329C38BAE0051D351 /* ReerKit.framework */,
-				D0E128AA29C38BAE0051D351 /* ReerKit-macOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -628,13 +600,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D0E1289E29C38BAE0051D351 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -674,42 +639,6 @@
 			productReference = D0B120FC285505AA00B5B326 /* ReerKit-iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D0E128A229C38BAE0051D351 /* ReerKit-macOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D0E128B229C38BAE0051D351 /* Build configuration list for PBXNativeTarget "ReerKit-macOS" */;
-			buildPhases = (
-				D0E1289E29C38BAE0051D351 /* Headers */,
-				D0E1289F29C38BAE0051D351 /* Sources */,
-				D0E128A029C38BAE0051D351 /* Frameworks */,
-				D0E128A129C38BAE0051D351 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "ReerKit-macOS";
-			productName = "ReerKit-macOS";
-			productReference = D0E128A329C38BAE0051D351 /* ReerKit.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		D0E128A929C38BAE0051D351 /* ReerKit-macOSTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D0E128B529C38BAE0051D351 /* Build configuration list for PBXNativeTarget "ReerKit-macOSTests" */;
-			buildPhases = (
-				D0E128A629C38BAE0051D351 /* Sources */,
-				D0E128A729C38BAE0051D351 /* Frameworks */,
-				D0E128A829C38BAE0051D351 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D0E128AD29C38BAE0051D351 /* PBXTargetDependency */,
-			);
-			name = "ReerKit-macOSTests";
-			productName = "ReerKit-macOSTests";
-			productReference = D0E128AA29C38BAE0051D351 /* ReerKit-macOSTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -729,12 +658,6 @@
 						CreatedOnToolsVersion = 13.2.1;
 						LastSwiftMigration = 1320;
 					};
-					D0E128A229C38BAE0051D351 = {
-						CreatedOnToolsVersion = 14.1;
-					};
-					D0E128A929C38BAE0051D351 = {
-						CreatedOnToolsVersion = 14.1;
-					};
 				};
 			};
 			buildConfigurationList = D0B120EC2855057800B5B326 /* Build configuration list for PBXProject "ReerKit" */;
@@ -752,8 +675,6 @@
 			targets = (
 				D0B120F3285505AA00B5B326 /* ReerKit-iOS */,
 				D0B120FB285505AA00B5B326 /* ReerKit-iOSTests */,
-				D0E128A229C38BAE0051D351 /* ReerKit-macOS */,
-				D0E128A929C38BAE0051D351 /* ReerKit-macOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -767,20 +688,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D0B120FA285505AA00B5B326 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D0E128A129C38BAE0051D351 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D0E128A829C38BAE0051D351 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -922,21 +829,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D0E1289F29C38BAE0051D351 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D0E128A629C38BAE0051D351 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D04EEF7F29C394F3006DC51B /* EdgeInsetsExtensionsTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -944,11 +836,6 @@
 			isa = PBXTargetDependency;
 			target = D0B120F3285505AA00B5B326 /* ReerKit-iOS */;
 			targetProxy = D0B120FE285505AA00B5B326 /* PBXContainerItemProxy */;
-		};
-		D0E128AD29C38BAE0051D351 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D0E128A229C38BAE0051D351 /* ReerKit-macOS */;
-			targetProxy = D0E128AC29C38BAE0051D351 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1341,194 +1228,6 @@
 			};
 			name = Release;
 		};
-		D0E128B329C38BAE0051D351 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 reers. All rights reserved.";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.phoenix.ReerKit-macOS";
-				PRODUCT_NAME = ReerKit;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		D0E128B429C38BAE0051D351 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 reers. All rights reserved.";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.phoenix.ReerKit-macOS";
-				PRODUCT_NAME = ReerKit;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		D0E128B629C38BAE0051D351 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GENERATE_INFOPLIST_FILE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.6;
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.phoenix.ReerKit-macOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		D0E128B729C38BAE0051D351 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GENERATE_INFOPLIST_FILE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.6;
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.phoenix.ReerKit-macOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1555,24 +1254,6 @@
 			buildConfigurations = (
 				D0B12106285505AA00B5B326 /* Debug */,
 				D0B12107285505AA00B5B326 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D0E128B229C38BAE0051D351 /* Build configuration list for PBXNativeTarget "ReerKit-macOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D0E128B329C38BAE0051D351 /* Debug */,
-				D0E128B429C38BAE0051D351 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D0E128B529C38BAE0051D351 /* Build configuration list for PBXNativeTarget "ReerKit-macOSTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D0E128B629C38BAE0051D351 /* Debug */,
-				D0E128B729C38BAE0051D351 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

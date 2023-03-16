@@ -9,7 +9,6 @@
 @testable import ReerKit
 import XCTest
 
-// swiftlint:disable:next type_body_length
 final class StringExtensionsTests: XCTestCase {
     let helloWorld = "Hello World!"
     let flower = "💐" // for testing multi-byte characters

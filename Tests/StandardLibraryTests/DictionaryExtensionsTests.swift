@@ -183,7 +183,6 @@ final class DictionaryExtensionsTests: XCTestCase {
     }
 
     func testCompactMapKeysAndValues() {
-        // swiftlint:disable:next nesting
         enum IntWord: String {
             case zero
             case one

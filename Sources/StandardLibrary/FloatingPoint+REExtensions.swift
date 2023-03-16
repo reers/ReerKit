@@ -69,7 +69,6 @@ public extension Reer where Base: FloatingPoint {
 
 // MARK: - Operators
 
-// swiftlint:disable identifier_name
 infix operator ±
 /// ReerKit: Tuple of plus-minus operation.
 ///
@@ -82,9 +81,7 @@ public func ± <T: FloatingPoint>(lhs: T, rhs: T) -> (T, T) {
     return (lhs + rhs, lhs - rhs)
 }
 
-// swiftlint:enable identifier_name
 
-// swiftlint:disable identifier_name
 prefix operator ±
 /// ReerKit: Tuple of plus-minus operation.
 ///
@@ -95,9 +92,7 @@ public prefix func ± <T: FloatingPoint>(number: T) -> (T, T) {
     return 0 ± number
 }
 
-// swiftlint:enable identifier_name
 
-// swiftlint:disable identifier_name
 prefix operator √
 /// ReerKit: Square root of float.
 ///

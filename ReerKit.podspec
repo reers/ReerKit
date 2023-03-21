@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   # spec.watchos.deployment_target = "2.0"
   # spec.tvos.deployment_target = "9.0"
 
-  s.swift_version = '5.3'
+  s.swift_version = '5.5'
   s.source = { :git => "https://github.com/reers/ReerKit.git", :tag => s.version.to_s }
   s.source_files = "Sources/**/*"
 

@@ -194,4 +194,13 @@ class OptionalExtensionsTests: XCTestCase {
         let value1: String? = "123"
         XCTAssertEqual(value1 ?! "abc", "123")
     }
+
+    func testOppositeOperator() {
+        var value: Bool? = nil
+        XCTAssertEqual(!value, nil)
+        value = true
+        XCTAssertFalse(!value!)
+        value = false
+        XCTAssertTrue(!value!)
+    }
 }

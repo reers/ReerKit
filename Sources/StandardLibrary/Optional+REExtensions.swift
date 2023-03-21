@@ -23,11 +23,6 @@
 import CoreGraphics
 #endif
 
-postfix operator ~!
-public postfix func ~! <T>(value: T) -> T? {
-    return Optional(value)
-}
-
 extension Optional: ReerGenericCompatible {
     public typealias T = Wrapped
 }
@@ -310,6 +305,23 @@ public extension ReerGeneric where Base == Optional<T>, T: Collection {
 }
 
 // MARK: - Operators
+
+/// Make any type to an optional value.
+postfix operator ~!
+public postfix func ~! <T>(value: T) -> T? {
+    return Optional(value)
+}
+
+/// Make `Bool?` to a oppsite value if it is not nil.
+prefix operator !
+public prefix func ! (value: Bool?) -> Bool? {
+    guard let value = value else { return nil }
+    if value {
+        return false
+    } else {
+        return true
+    }
+}
 
 infix operator ?! : NilCoalescingPrecedence
 public extension Optional where Wrapped: Collection {

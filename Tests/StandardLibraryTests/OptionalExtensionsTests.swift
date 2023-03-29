@@ -24,9 +24,9 @@ class OptionalExtensionsTests: XCTestCase {
         XCTAssertEqual(s.re.isNil, false)
         XCTAssertEqual(s.re.isValid, true)
         
-        XCTAssertEqual(s.re.value(default: "111"), "")
+        XCTAssertEqual(s.re.value(or: "111"), "")
         s = nil
-        XCTAssertEqual(s.re.value(default: "111"), "111")
+        XCTAssertEqual(s.re.value(or: "111"), "111")
         
         s = "222"
         XCTAssertEqual(try s.re.value(throw: NSError()), "222")
@@ -71,7 +71,7 @@ class OptionalExtensionsTests: XCTestCase {
         XCTAssertNil(emptyString.re.bool)
         
         XCTAssertFalse(obj.re.boolValue)
-        XCTAssertTrue(obj.re.boolValue(default: true))
+        XCTAssertTrue(obj.re.boolValue(or: true))
         XCTAssertTrue(any~!.re.bool!)
         XCTAssertTrue(number.re.bool!)
     }
@@ -95,7 +95,7 @@ class OptionalExtensionsTests: XCTestCase {
         XCTAssertEqual(f.re.int!, 0)
         XCTAssertEqual(any.re.intValue, 2)
         XCTAssertNil(string.re.int)
-        XCTAssertEqual(string.re.intValue(default: 3), 3)
+        XCTAssertEqual(string.re.intValue(or: 3), 3)
     }
     
     func testString() {
@@ -118,7 +118,7 @@ class OptionalExtensionsTests: XCTestCase {
         XCTAssertEqual(e.re.string!, "false")
         XCTAssertEqual(f.re.string!, "3.3")
         XCTAssertNil(obj.re.string)
-        XCTAssertEqual(obj.re.stringValue(default: "obj"), "obj")
+        XCTAssertEqual(obj.re.stringValue(or: "obj"), "obj")
     }
     
     func testDouble() {
@@ -140,7 +140,7 @@ class OptionalExtensionsTests: XCTestCase {
         XCTAssertEqual(f.re.double!, 0)
         XCTAssertEqual(any.re.doubleValue, 2.0)
         XCTAssertNil(string.re.double)
-        XCTAssertEqual(string.re.doubleValue(default: 3.0), 3.0)
+        XCTAssertEqual(string.re.doubleValue(or: 3.0), 3.0)
     }
     
     func testFloat() {
@@ -162,7 +162,7 @@ class OptionalExtensionsTests: XCTestCase {
         XCTAssertEqual(f.re.float!, 0)
         XCTAssertEqual(any.re.floatValue, 2.0)
         XCTAssertNil(string.re.float)
-        XCTAssertEqual(string.re.floatValue(default: 3.0), 3.0)
+        XCTAssertEqual(string.re.floatValue(or: 3.0), 3.0)
     }
     
     func testCGFloat() {
@@ -184,7 +184,7 @@ class OptionalExtensionsTests: XCTestCase {
         XCTAssertEqual(f.re.cgFloat!, 0)
         XCTAssertEqual(any.re.cgFloatValue, 2.0)
         XCTAssertNil(string.re.cgFloat)
-        XCTAssertEqual(string.re.cgFloatValue(default: 3.0), 3.0)
+        XCTAssertEqual(string.re.cgFloatValue(or: 3.0), 3.0)
     }
 
     func testNonEmptyOperator() {
@@ -202,5 +202,22 @@ class OptionalExtensionsTests: XCTestCase {
         XCTAssertFalse(!value!)
         value = false
         XCTAssertTrue(!value!)
+    }
+
+    func testAnyDictValue() {
+        var value: Any? = ["abc": 123]
+        XCTAssertEqual(value.re.anyDict!["abc"] as! Int, 123)
+        XCTAssertEqual(value.re.anyDictValue["abc"] as! Int, 123)
+        value = nil
+        XCTAssertEqual((value.re.dictValue(or: ["bcd": 456]))["bcd"], 456)
+    }
+
+    func testAnyArrayValue() {
+        var value: Any? = [123]
+        XCTAssertEqual(value.re.anyArray![0] as! Int, 123)
+        XCTAssertEqual(value.re.anyArrayValue[0] as! Int, 123)
+
+        value = nil
+        XCTAssertEqual(value.re.arrayValue(or: [123])[0], 123)
     }
 }

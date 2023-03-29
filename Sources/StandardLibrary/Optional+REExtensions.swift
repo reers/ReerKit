@@ -56,7 +56,7 @@ public extension ReerGeneric where Base == Optional<T> {
     ///
     /// - Parameter defaultValue: default value to return if self is nil.
     /// - Returns: self if not nil or default value if nil.
-    func value(default defaultValue: @autoclosure () -> T) -> T {
+    func value(or defaultValue: @autoclosure () -> T) -> T {
         return base ?? defaultValue()
     }
     
@@ -134,14 +134,13 @@ public extension ReerGeneric where Base == Optional<T> {
     /// ReerKit: Transform the optional wrapped value to `Bool` if possible.
     /// Return `false` if failed.
     var boolValue: Bool {
-        boolValue(default: false)
+        return bool ?? false
     }
     
     /// ReerKit: Transform the optional wrapped value to `Bool` if possible.
     /// Return the passed default value if it is nil.
-    func boolValue(default defaultValue: @autoclosure () -> Bool) -> Bool {
-        guard let bool = bool else { return defaultValue() }
-        return bool
+    func boolValue(or defaultValue: @autoclosure () -> Bool) -> Bool {
+        return bool ?? defaultValue()
     }
     
     /// ReerKit: Transform the optional wrapped value to `Int` if possible.
@@ -163,14 +162,13 @@ public extension ReerGeneric where Base == Optional<T> {
     /// ReerKit: Transform the optional wrapped value to `Int` if possible.
     /// Return `0` if failed.
     var intValue: Int {
-        intValue(default: 0)
+        return int ?? 0
     }
     
     /// ReerKit: Transform the optional wrapped value to `Int` if possible.
     /// Return the passed default value if it is nil.
-    func intValue(default defaultValue: @autoclosure () -> Int) -> Int {
-        guard let int = int else { return defaultValue() }
-        return int
+    func intValue(or defaultValue: @autoclosure () -> Int) -> Int {
+        return int ?? defaultValue()
     }
     
     /// ReerKit: Transform the optional wrapped value to `String` if possible.
@@ -198,14 +196,13 @@ public extension ReerGeneric where Base == Optional<T> {
     /// ReerKit: Transform the optional wrapped value to `String` if possible.
     /// Return `""` if failed.
     var stringValue: String {
-        stringValue(default: "")
+        return string ?? ""
     }
     
     /// ReerKit: Transform the optional wrapped value to `String` if possible.
     /// Return the passed default value if it is nil.
-    func stringValue(default defaultValue: @autoclosure () -> String) -> String {
-        guard let string = string else { return defaultValue() }
-        return string
+    func stringValue(or defaultValue: @autoclosure () -> String) -> String {
+        return string ?? defaultValue()
     }
     
     /// ReerKit: Transform the optional wrapped value to `Double` if possible.
@@ -227,14 +224,13 @@ public extension ReerGeneric where Base == Optional<T> {
     /// ReerKit: Transform the optional wrapped value to `Double` if possible.
     /// Return `0` if failed.
     var doubleValue: Double {
-        doubleValue(default: 0.0)
+        return double ?? 0
     }
     
     /// ReerKit: Transform the optional wrapped value to `Double` if possible.
     /// Return the passed default value if it is nil.
-    func doubleValue(default defaultValue: @autoclosure () -> Double) -> Double {
-        guard let double = double else { return defaultValue() }
-        return double
+    func doubleValue(or defaultValue: @autoclosure () -> Double) -> Double {
+        return double ?? defaultValue()
     }
     
     /// ReerKit: Transform the optional wrapped value to `Float` if possible.
@@ -256,14 +252,13 @@ public extension ReerGeneric where Base == Optional<T> {
     /// ReerKit: Transform the optional wrapped value to `Float` if possible.
     /// Return `0` if failed.
     var floatValue: Float {
-        floatValue(default: 0.0)
+        return float ?? 0
     }
     
     /// ReerKit: Transform the optional wrapped value to `Float` if possible.
     /// Return the passed default value if it is nil.
-    func floatValue(default defaultValue: @autoclosure () -> Float) -> Float {
-        guard let float = float else { return defaultValue() }
-        return float
+    func floatValue(or defaultValue: @autoclosure () -> Float) -> Float {
+        return float ?? defaultValue()
     }
     
     #if canImport(CoreGraphics)
@@ -279,16 +274,55 @@ public extension ReerGeneric where Base == Optional<T> {
     /// ReerKit: Transform the optional wrapped value to `CGFloat` if possible.
     /// Return `0` if failed.
     var cgFloatValue: CGFloat {
-        cgFloatValue(default: 0.0)
+        return cgFloat ?? 0
     }
     
     /// ReerKit: Transform the optional wrapped value to `CGFloat` if possible.
     /// Return the passed default value if it is nil.
-    func cgFloatValue(default defaultValue: @autoclosure () -> CGFloat) -> CGFloat {
-        guard let cgFloat = cgFloat else { return defaultValue() }
-        return cgFloat
+    func cgFloatValue(or defaultValue: @autoclosure () -> CGFloat) -> CGFloat {
+        return cgFloat ?? defaultValue()
     }
     #endif
+
+    /// ReerKit: Transform the optional wrapped value to `Dictionay<AnyHashable, Any>` if possible.
+    ///
+    ///     let a: Any? = ["s": 123]
+    ///     a.re.anyDict -> Optional(["s": 123])
+    var anyDict: [AnyHashable: Any]? {
+        return base as? [AnyHashable: Any]
+    }
+
+    /// ReerKit: Transform the optional wrapped value to `Dictionay<AnyHashable, Any>` if possible.
+    /// Return `[:]` if failed.
+    var anyDictValue: [AnyHashable: Any] {
+        return anyDict ?? [:]
+    }
+
+    /// ReerKit: Transform the optional wrapped value to `Dictionay<AnyHashable, Any>` if possible.
+    /// Return the passed default value if it is nil.
+    func dictValue<Key, Value>(or defaultValue: @autoclosure () -> [Key: Value]) -> [Key: Value] {
+        return base as? [Key: Value] ?? defaultValue()
+    }
+
+    /// ReerKit: Transform the optional wrapped value to `Array<Any>` if possible.
+    ///
+    ///     let a: Any? = [123]
+    ///     a.re.anyArray -> Optional([123])
+    var anyArray: [Any]? {
+        return base as? [Any]
+    }
+
+    /// ReerKit: Transform the optional wrapped value to `Array<Any>` if possible.
+    /// Return `[]` if failed.
+    var anyArrayValue: [Any] {
+        return anyArray ?? []
+    }
+
+    /// ReerKit: Transform the optional wrapped value to `Array<Any>` if possible.
+    /// Return the passed default value if it is nil.
+    func arrayValue<E>(or defaultValue: @autoclosure () -> [E]) -> [E] {
+        return base as? [E] ?? defaultValue()
+    }
 }
 
 // MARK: - Check Optional<Collection> is nil or empty.

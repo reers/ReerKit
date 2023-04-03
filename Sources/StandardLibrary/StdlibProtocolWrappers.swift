@@ -54,7 +54,7 @@ public extension Sequence {
 // MARK: - Equatable
 
 public struct ReerForEquatable<Base> {
-    public let base: Base
+    public internal(set) var base: Base
     public init(_ base: Base) {
         self.base = base
     }

@@ -36,6 +36,8 @@ final class UIColorExtensionsTests: XCTestCase {
         XCTAssertEqual(rgbaPercent.green, 0)
         XCTAssertEqual(rgbaPercent.blue, 0)
         XCTAssertEqual(rgbaPercent.alpha, 0.5)
+
+        XCTAssertEqual(UIColor.re(light: .red, dark: .blue).re.rgba.red, 255)
     }
 
     func testChangeColor() {

@@ -175,6 +175,21 @@ public extension REColor {
 
         return REColor.re(red: red, green: green, blue: blue, alpha: CGFloat(alpha) / 255)
     }
+
+    /// ReerKit: Create a dynamic color with light and dark color.
+    static func re(light: REColor, dark: REColor) -> REColor {
+        if #available(iOS 13.0, *) {
+            return REColor.init { traitCollection in
+                if traitCollection.userInterfaceStyle == .dark {
+                    return dark
+                } else {
+                    return light
+                }
+            }
+        } else {
+            return light
+        }
+    }
 }
 
 // MARK: - Properties & Functions

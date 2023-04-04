@@ -54,7 +54,8 @@ public extension URL {
                     let key = keyValue[0]
                     var value = keyValue[1]
                     value = decode(with: value)
-                    let encodedValue = value.addingPercentEncoding(withAllowedCharacters: .reerURLAllowed)
+                    let chars = CharacterSet.urlAllowed.subtracting(CharacterSet.toBeEscaped)
+                    let encodedValue = value.addingPercentEncoding(withAllowedCharacters: chars)
                     encodedParams[key] = encodedValue
                 }
             }
@@ -77,7 +78,16 @@ public extension URL {
 }
 
 private extension CharacterSet {
-    static var reerURLAllowed: CharacterSet {
+    static var urlAllowed: CharacterSet {
+        return .urlUserAllowed
+            .union(.urlPathAllowed)
+            .union(.urlHostAllowed)
+            .union(.urlQueryAllowed)
+            .union(.urlFragmentAllowed)
+            .union(.urlPasswordAllowed)
+    }
+
+    static var toBeEscaped: CharacterSet {
         return CharacterSet(charactersIn: ":/?#@!$&'(){}*+=")
     }
 }

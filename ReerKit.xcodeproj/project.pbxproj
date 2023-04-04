@@ -68,6 +68,8 @@
 		D090D96C29DC629700245538 /* NotificationCenterExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D090D96B29DC629700245538 /* NotificationCenterExtensionsTests.swift */; };
 		D090D96E29DC66BF00245538 /* NSAttributedString+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D090D96D29DC66BF00245538 /* NSAttributedString+REExtensions.swift */; };
 		D090D97029DC68CA00245538 /* NSAttributedStringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D090D96F29DC68CA00245538 /* NSAttributedStringExtensionsTests.swift */; };
+		D090D97229DC6BB000245538 /* NSPredicate+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D090D97129DC6BB000245538 /* NSPredicate+REExtensions.swift */; };
+		D090D97429DC6C2B00245538 /* NSPredicateExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D090D97329DC6C2B00245538 /* NSPredicateExtensionsTests.swift */; };
 		D093CF87294B9D4400A830DB /* CGVector+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093CF86294B9D4400A830DB /* CGVector+REExtensions.swift */; };
 		D093CF8B294B9FC000A830DB /* CGVectorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093CF8A294B9FC000A830DB /* CGVectorExtensionsTests.swift */; };
 		D0A0040628620D9900D2FA7C /* TypeNameDescribableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */; };
@@ -210,6 +212,8 @@
 		D090D96B29DC629700245538 /* NotificationCenterExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterExtensionsTests.swift; sourceTree = "<group>"; };
 		D090D96D29DC66BF00245538 /* NSAttributedString+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+REExtensions.swift"; sourceTree = "<group>"; };
 		D090D96F29DC68CA00245538 /* NSAttributedStringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtensionsTests.swift; sourceTree = "<group>"; };
+		D090D97129DC6BB000245538 /* NSPredicate+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPredicate+REExtensions.swift"; sourceTree = "<group>"; };
+		D090D97329DC6C2B00245538 /* NSPredicateExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPredicateExtensionsTests.swift; sourceTree = "<group>"; };
 		D093CF86294B9D4400A830DB /* CGVector+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGVector+REExtensions.swift"; sourceTree = "<group>"; };
 		D093CF8A294B9FC000A830DB /* CGVectorExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGVectorExtensionsTests.swift; sourceTree = "<group>"; };
 		D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeNameDescribableTests.swift; sourceTree = "<group>"; };
@@ -486,6 +490,7 @@
 				D0BDA4BC29DC5925001EA4A0 /* Locale+REExtensions.swift */,
 				D090D96929DC5B9300245538 /* NotificationCenter+REExtensions.swift */,
 				D090D96D29DC66BF00245538 /* NSAttributedString+REExtensions.swift */,
+				D090D97129DC6BB000245538 /* NSPredicate+REExtensions.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -503,6 +508,7 @@
 				D090D96729DC5A6300245538 /* LocalExtensionsTests.swift */,
 				D090D96B29DC629700245538 /* NotificationCenterExtensionsTests.swift */,
 				D090D96F29DC68CA00245538 /* NSAttributedStringExtensionsTests.swift */,
+				D090D97329DC6C2B00245538 /* NSPredicateExtensionsTests.swift */,
 			);
 			path = FoundationTests;
 			sourceTree = "<group>";
@@ -826,6 +832,7 @@
 				D0397612286E111800C33E17 /* Optional+REExtensions.swift in Sources */,
 				D0421ACD2938F4DD00452845 /* Calendar+REExtensions.swift in Sources */,
 				D07E53AB2883083300921873 /* RETimer.swift in Sources */,
+				D090D97229DC6BB000245538 /* NSPredicate+REExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -863,6 +870,7 @@
 				D0CC5A18290ACF550038989B /* MutableCollectionExtensionsTests.swift in Sources */,
 				D06287162885D83100401B59 /* WeakTests.swift in Sources */,
 				D05C8684294B58E20077E744 /* CGPointExtensionsTests.swift in Sources */,
+				D090D97429DC6C2B00245538 /* NSPredicateExtensionsTests.swift in Sources */,
 				D0CD714528E5CDCD009ADA8E /* FloatExtensionsTests.swift in Sources */,
 				D093CF8B294B9FC000A830DB /* CGVectorExtensionsTests.swift in Sources */,
 				D0E129A629C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift in Sources */,

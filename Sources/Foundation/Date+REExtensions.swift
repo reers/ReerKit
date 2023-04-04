@@ -88,79 +88,36 @@ public extension ReerForEquatable where Base == Date {
         return calendar.component(.weekOfMonth, from: base)
     }
 
-    /// ReerKit: Year.
-    ///
-    ///        Date().year -> 2017
-    ///
-    ///        var someDate = Date()
-    ///        someDate.year = 2000 // sets someDate's year to 2000
-    ///
-    var year: Int {
-        get {
-            return calendar.component(.year, from: base)
-        }
-        set {
-            guard newValue > 0 else { return }
-            let currentYear = calendar.component(.year, from: base)
-            let yearsToAdd = newValue - currentYear
-            if let date = calendar.date(byAdding: .year, value: yearsToAdd, to: base) {
-                base = date
-            }
-        }
-    }
-
-    /// ReerKit: Month.
-    ///
-    ///     Date().month -> 1
-    ///
-    ///     var someDate = Date()
-    ///     someDate.month = 10 // sets someDate's month to 10.
-    ///
-    var month: Int {
-        get {
-            return calendar.component(.month, from: base)
-        }
-        set {
-            let allowedRange = calendar.range(of: .month, in: .year, for: base)!
-            guard allowedRange.contains(newValue) else { return }
-
-            let currentMonth = calendar.component(.month, from: base)
-            let monthsToAdd = newValue - currentMonth
-            if let date = calendar.date(byAdding: .month, value: monthsToAdd, to: base) {
-                base = date
-            }
-        }
-    }
-
-    /// ReerKit: Day.
-    ///
-    ///     Date().day -> 12
-    ///
-    ///     var someDate = Date()
-    ///     someDate.day = 1 // sets someDate's day of month to 1.
-    ///
-    var day: Int {
-        get {
-            return calendar.component(.day, from: base)
-        }
-        set {
-            let allowedRange = calendar.range(of: .day, in: .month, for: base)!
-            guard allowedRange.contains(newValue) else { return }
-
-            let currentDay = calendar.component(.day, from: base)
-            let daysToAdd = newValue - currentDay
-            if let date = calendar.date(byAdding: .day, value: daysToAdd, to: base) {
-                base = date
-            }
-        }
-    }
-
     /// ReerKit: Weekday.
     ///
     ///     Date().weekday -> 5 // fifth day in the current week.
     ///
     var weekday: Int {
         return calendar.component(.weekday, from: base)
+    }
+
+    /// ReerKit: Year.
+    ///
+    ///        Date().year -> 2017
+    ///
+    var year: Int {
+        return calendar.component(.year, from: base)
+    }
+
+    /// ReerKit: Month.
+    ///
+    ///     Date().month -> 1
+    ///
+    var month: Int {
+        return calendar.component(.month, from: base)
+    }
+
+    /// ReerKit: Day.
+    ///
+    ///     Date().day -> 12
+    ///
+    var day: Int {
+        return calendar.component(.day, from: base)
     }
 
     /// ReerKit: Hour.
@@ -171,19 +128,7 @@ public extension ReerForEquatable where Base == Date {
     ///     someDate.hour = 13 // sets someDate's hour to 1 pm.
     ///
     var hour: Int {
-        get {
-            return calendar.component(.hour, from: base)
-        }
-        set {
-            let allowedRange = calendar.range(of: .hour, in: .day, for: base)!
-            guard allowedRange.contains(newValue) else { return }
-
-            let currentHour = calendar.component(.hour, from: base)
-            let hoursToAdd = newValue - currentHour
-            if let date = calendar.date(byAdding: .hour, value: hoursToAdd, to: base) {
-                base = date
-            }
-        }
+        return calendar.component(.hour, from: base)
     }
 
     /// ReerKit: Minutes.
@@ -194,19 +139,7 @@ public extension ReerForEquatable where Base == Date {
     ///     someDate.minute = 10 // sets someDate's minutes to 10.
     ///
     var minute: Int {
-        get {
-            return calendar.component(.minute, from: base)
-        }
-        set {
-            let allowedRange = calendar.range(of: .minute, in: .hour, for: base)!
-            guard allowedRange.contains(newValue) else { return }
-
-            let currentMinutes = calendar.component(.minute, from: base)
-            let minutesToAdd = newValue - currentMinutes
-            if let date = calendar.date(byAdding: .minute, value: minutesToAdd, to: base) {
-                base = date
-            }
-        }
+        return calendar.component(.minute, from: base)
     }
 
     /// ReerKit: Seconds.
@@ -217,19 +150,7 @@ public extension ReerForEquatable where Base == Date {
     ///     someDate.second = 15 // sets someDate's seconds to 15.
     ///
     var second: Int {
-        get {
-            return calendar.component(.second, from: base)
-        }
-        set {
-            let allowedRange = calendar.range(of: .second, in: .minute, for: base)!
-            guard allowedRange.contains(newValue) else { return }
-
-            let currentSeconds = calendar.component(.second, from: base)
-            let secondsToAdd = newValue - currentSeconds
-            if let date = calendar.date(byAdding: .second, value: secondsToAdd, to: base) {
-                base = date
-            }
-        }
+        return calendar.component(.second, from: base)
     }
 
     /// ReerKit: Nanoseconds.
@@ -240,25 +161,7 @@ public extension ReerForEquatable where Base == Date {
     ///     someDate.nanosecond = 981379985 // sets someDate's seconds to 981379985.
     ///
     var nanosecond: Int {
-        get {
-            return calendar.component(.nanosecond, from: base)
-        }
-        set {
-#if targetEnvironment(macCatalyst)
-            // The `Calendar` implementation in `macCatalyst` does not know that a nanosecond is 1/1,000,000,000th of a second
-            let allowedRange = 0..<1_000_000_000
-#else
-            let allowedRange = calendar.range(of: .nanosecond, in: .second, for: base)!
-#endif
-            guard allowedRange.contains(newValue) else { return }
-
-            let currentNanoseconds = calendar.component(.nanosecond, from: base)
-            let nanosecondsToAdd = newValue - currentNanoseconds
-
-            if let date = calendar.date(byAdding: .nanosecond, value: nanosecondsToAdd, to: base) {
-                base = date
-            }
-        }
+        return calendar.component(.nanosecond, from: base)
     }
 
     /// ReerKit: Milliseconds.
@@ -269,23 +172,7 @@ public extension ReerForEquatable where Base == Date {
     ///     someDate.millisecond = 68 // sets someDate's nanosecond to 68000000.
     ///
     var millisecond: Int {
-        get {
-            return calendar.component(.nanosecond, from: base) / 1_000_000
-        }
-        set {
-            let nanoSeconds = newValue * 1_000_000
-#if targetEnvironment(macCatalyst)
-            // The `Calendar` implementation in `macCatalyst` does not know that a nanosecond is 1/1,000,000,000th of a second
-            let allowedRange = 0..<1_000_000_000
-#else
-            let allowedRange = calendar.range(of: .nanosecond, in: .second, for: base)!
-#endif
-            guard allowedRange.contains(nanoSeconds) else { return }
-
-            if let date = calendar.date(bySetting: .nanosecond, value: nanoSeconds, of: base) {
-                base = date
-            }
-        }
+        return calendar.component(.nanosecond, from: base) / 1_000_000
     }
 
     /// ReerKit: Check if date is in leap year
@@ -958,6 +845,150 @@ public extension ReerReference where Base == Date {
             base.pointee = date
         }
     }
+
+    /// ReerKit: Setup year of date.
+    ///
+    ///        var someDate = Date()
+    ///        someDate.re.setYear(2000)  // sets someDate's year to 2000
+    ///
+    mutating func setYear(_ year: Int) {
+        guard year > 0 else { return }
+        let calendar = base.pointee.re.calendar
+        let currentYear = calendar.component(.year, from: base.pointee)
+        let yearsToAdd = year - currentYear
+        if let date = calendar.date(byAdding: .year, value: yearsToAdd, to: base.pointee) {
+            base.pointee = date
+        }
+    }
+
+    /// ReerKit: Setup month of date.
+    ///
+    ///        var someDate = Date()
+    ///        someDate.re.setMonth(10)  // sets someDate's month to 10.
+    ///
+    mutating func setMonth(_ month: Int) {
+        let calendar = base.pointee.re.calendar
+        let allowedRange = calendar.range(of: .month, in: .year, for: base.pointee)!
+        guard allowedRange.contains(month) else { return }
+
+        let currentMonth = calendar.component(.month, from: base.pointee)
+        let monthsToAdd = month - currentMonth
+        if let date = calendar.date(byAdding: .month, value: monthsToAdd, to: base.pointee) {
+            base.pointee = date
+        }
+    }
+
+    /// ReerKit: Setup day of date.
+    ///
+    ///        var someDate = Date()
+    ///        someDate.re.setDay(1)  // sets someDate's day of month to 1.
+    ///
+    mutating func setDay(_ day: Int) {
+        let calendar = base.pointee.re.calendar
+        let allowedRange = calendar.range(of: .day, in: .month, for: base.pointee)!
+        guard allowedRange.contains(day) else { return }
+
+        let currentDay = calendar.component(.day, from: base.pointee)
+        let daysToAdd = day - currentDay
+        if let date = calendar.date(byAdding: .day, value: daysToAdd, to: base.pointee) {
+            base.pointee = date
+        }
+    }
+
+    /// ReerKit: Setup hour of date.
+    ///
+    ///        var someDate = Date()
+    ///        someDate.re.setHour(13)  // sets someDate's hour to 1 pm.
+    ///
+    mutating func setHour(_ hour: Int) {
+        let calendar = base.pointee.re.calendar
+        let allowedRange = calendar.range(of: .hour, in: .day, for: base.pointee)!
+        guard allowedRange.contains(hour) else { return }
+
+        let currentHour = calendar.component(.hour, from: base.pointee)
+        let hoursToAdd = hour - currentHour
+        if let date = calendar.date(byAdding: .hour, value: hoursToAdd, to: base.pointee) {
+            base.pointee = date
+        }
+    }
+
+    /// ReerKit: Setup minute of date.
+    ///
+    ///        var someDate = Date()
+    ///        someDate.re.setMinute(10)  // sets someDate's minutes to 10.
+    ///
+    mutating func setMinute(_ minute: Int) {
+        let calendar = base.pointee.re.calendar
+        let allowedRange = calendar.range(of: .minute, in: .hour, for: base.pointee)!
+        guard allowedRange.contains(minute) else { return }
+
+        let currentMinutes = calendar.component(.minute, from: base.pointee)
+        let minutesToAdd = minute - currentMinutes
+        if let date = calendar.date(byAdding: .minute, value: minutesToAdd, to: base.pointee) {
+            base.pointee = date
+        }
+    }
+
+    /// ReerKit: Setup second of date.
+    ///
+    ///        var someDate = Date()
+    ///        someDate.re.setSecond(15)  // sets someDate's seconds to 15.
+    ///
+    mutating func setSecond(_ second: Int) {
+        let calendar = base.pointee.re.calendar
+        let allowedRange = calendar.range(of: .second, in: .minute, for: base.pointee)!
+        guard allowedRange.contains(second) else { return }
+
+        let currentSeconds = calendar.component(.second, from: base.pointee)
+        let secondsToAdd = second - currentSeconds
+        if let date = calendar.date(byAdding: .second, value: secondsToAdd, to: base.pointee) {
+            base.pointee = date
+        }
+    }
+
+    /// ReerKit: Setup nanosecond of date.
+    ///
+    ///        var someDate = Date()
+    ///        someDate.re.setNanosecond(981379985)  // sets someDate's nanoseconds to 981379985.
+    ///
+    mutating func setNanosecond(_ nanosecond: Int) {
+        let calendar = base.pointee.re.calendar
+#if targetEnvironment(macCatalyst)
+        // The `Calendar` implementation in `macCatalyst` does not know that a nanosecond is 1/1,000,000,000th of a second
+        let allowedRange = 0..<1_000_000_000
+#else
+        let allowedRange = calendar.range(of: .nanosecond, in: .second, for: base.pointee)!
+#endif
+        guard allowedRange.contains(nanosecond) else { return }
+
+        let currentNanoseconds = calendar.component(.nanosecond, from: base.pointee)
+        let nanosecondsToAdd = nanosecond - currentNanoseconds
+
+        if let date = calendar.date(byAdding: .nanosecond, value: nanosecondsToAdd, to: base.pointee) {
+            base.pointee = date
+        }
+    }
+
+    /// ReerKit: Setup millisecond of date.
+    ///
+    ///        var someDate = Date()
+    ///        someDate.re.setMillisecond(68)  // sets someDate's nanosecond to 68000000.
+    ///
+    mutating func setMillisecond(_ millisecond: Int) {
+        let calendar = base.pointee.re.calendar
+        let nanoSeconds = millisecond * 1_000_000
+#if targetEnvironment(macCatalyst)
+        // The `Calendar` implementation in `macCatalyst` does not know that a nanosecond is 1/1,000,000,000th of a second
+        let allowedRange = 0..<1_000_000_000
+#else
+        let allowedRange = calendar.range(of: .nanosecond, in: .second, for: base.pointee)!
+#endif
+        guard allowedRange.contains(nanoSeconds) else { return }
+
+        if let date = calendar.date(bySetting: .nanosecond, value: nanoSeconds, of: base.pointee) {
+            base.pointee = date
+        }
+    }
 }
 
 // MARK: - Initializers
@@ -1026,16 +1057,6 @@ public extension Date {
     /// - Parameter unixTimestamp: UNIX timestamp.
     static func re(unixTimestamp: Double) -> Date {
         return Date(timeIntervalSince1970: unixTimestamp)
-    }
-
-    /// ReerKit: Create date object from Int literal.
-    ///
-    ///     let date = Date(integerLiteral: 2017_12_25) // "2017-12-25 00:00:00 +0000"
-    /// - Parameter value: Int value, e.g. 20171225, or 2017_12_25 etc.
-    static func re(integerLiteral value: Int) -> Date? {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd"
-        return formatter.date(from: String(value))
     }
 }
 

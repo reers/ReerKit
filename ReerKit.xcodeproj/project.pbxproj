@@ -74,6 +74,7 @@
 		D090D97829DC6FC700245538 /* NSRegularExpressionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D090D97729DC6FC700245538 /* NSRegularExpressionExtensionsTests.swift */; };
 		D093CF87294B9D4400A830DB /* CGVector+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093CF86294B9D4400A830DB /* CGVector+REExtensions.swift */; };
 		D093CF8B294B9FC000A830DB /* CGVectorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093CF8A294B9FC000A830DB /* CGVectorExtensionsTests.swift */; };
+		D09D724029DC94BF00636935 /* big_buck_bunny_720p_1mb.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D09D723F29DC94BF00636935 /* big_buck_bunny_720p_1mb.mp4 */; };
 		D0A0040628620D9900D2FA7C /* TypeNameDescribableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */; };
 		D0A6B3A32924AD11008B7FDA /* UIResponder+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A6B3A22924AD11008B7FDA /* UIResponder+REExtensions.swift */; };
 		D0B120FD285505AA00B5B326 /* ReerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B120F4285505AA00B5B326 /* ReerKit.framework */; };
@@ -220,6 +221,7 @@
 		D090D97729DC6FC700245538 /* NSRegularExpressionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSRegularExpressionExtensionsTests.swift; sourceTree = "<group>"; };
 		D093CF86294B9D4400A830DB /* CGVector+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGVector+REExtensions.swift"; sourceTree = "<group>"; };
 		D093CF8A294B9FC000A830DB /* CGVectorExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGVectorExtensionsTests.swift; sourceTree = "<group>"; };
+		D09D723F29DC94BF00636935 /* big_buck_bunny_720p_1mb.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = big_buck_bunny_720p_1mb.mp4; sourceTree = "<group>"; };
 		D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeNameDescribableTests.swift; sourceTree = "<group>"; };
 		D0A6B3A22924AD11008B7FDA /* UIResponder+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+REExtensions.swift"; sourceTree = "<group>"; };
 		D0B120F4285505AA00B5B326 /* ReerKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -555,6 +557,7 @@
 		D0BDA4B729DC503E001EA4A0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D09D723F29DC94BF00636935 /* big_buck_bunny_720p_1mb.mp4 */,
 				D0BDA4B829DC503E001EA4A0 /* test.json */,
 			);
 			path = Resources;
@@ -755,6 +758,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D09D724029DC94BF00636935 /* big_buck_bunny_720p_1mb.mp4 in Resources */,
 				D0BDA4B929DC503E001EA4A0 /* test.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

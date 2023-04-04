@@ -1227,7 +1227,7 @@ public extension Reer where Base == String {
     var bold: NSAttributedString {
         return NSMutableAttributedString(
             string: base,
-            attributes: [.font: Font.boldSystemFont(ofSize: Font.systemFontSize)])
+            attributes: [.font: REFont.boldSystemFont(ofSize: REFont.systemFontSize)])
     }
     #endif
 

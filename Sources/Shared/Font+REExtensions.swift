@@ -23,11 +23,11 @@
 #if canImport(UIKit)
 import UIKit
 /// ReerKit: Font
-public typealias Font = UIFont
+public typealias REFont = UIFont
 #endif
 
 #if canImport(AppKit) && !targetEnvironment(macCatalyst)
 import AppKit
 /// ReerKit: Font
-public typealias Font = NSFont
+public typealias REFont = NSFont
 #endif

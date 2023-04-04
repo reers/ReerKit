@@ -66,6 +66,8 @@
 		D090D96829DC5A6300245538 /* LocalExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D090D96729DC5A6300245538 /* LocalExtensionsTests.swift */; };
 		D090D96A29DC5B9300245538 /* NotificationCenter+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D090D96929DC5B9300245538 /* NotificationCenter+REExtensions.swift */; };
 		D090D96C29DC629700245538 /* NotificationCenterExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D090D96B29DC629700245538 /* NotificationCenterExtensionsTests.swift */; };
+		D090D96E29DC66BF00245538 /* NSAttributedString+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D090D96D29DC66BF00245538 /* NSAttributedString+REExtensions.swift */; };
+		D090D97029DC68CA00245538 /* NSAttributedStringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D090D96F29DC68CA00245538 /* NSAttributedStringExtensionsTests.swift */; };
 		D093CF87294B9D4400A830DB /* CGVector+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093CF86294B9D4400A830DB /* CGVector+REExtensions.swift */; };
 		D093CF8B294B9FC000A830DB /* CGVectorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093CF8A294B9FC000A830DB /* CGVectorExtensionsTests.swift */; };
 		D0A0040628620D9900D2FA7C /* TypeNameDescribableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */; };
@@ -206,6 +208,8 @@
 		D090D96729DC5A6300245538 /* LocalExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalExtensionsTests.swift; sourceTree = "<group>"; };
 		D090D96929DC5B9300245538 /* NotificationCenter+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+REExtensions.swift"; sourceTree = "<group>"; };
 		D090D96B29DC629700245538 /* NotificationCenterExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterExtensionsTests.swift; sourceTree = "<group>"; };
+		D090D96D29DC66BF00245538 /* NSAttributedString+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+REExtensions.swift"; sourceTree = "<group>"; };
+		D090D96F29DC68CA00245538 /* NSAttributedStringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtensionsTests.swift; sourceTree = "<group>"; };
 		D093CF86294B9D4400A830DB /* CGVector+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGVector+REExtensions.swift"; sourceTree = "<group>"; };
 		D093CF8A294B9FC000A830DB /* CGVectorExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGVectorExtensionsTests.swift; sourceTree = "<group>"; };
 		D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeNameDescribableTests.swift; sourceTree = "<group>"; };
@@ -481,6 +485,7 @@
 				D0BDA4B429DC4E33001EA4A0 /* FileManager+REExtensions.swift */,
 				D0BDA4BC29DC5925001EA4A0 /* Locale+REExtensions.swift */,
 				D090D96929DC5B9300245538 /* NotificationCenter+REExtensions.swift */,
+				D090D96D29DC66BF00245538 /* NSAttributedString+REExtensions.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -497,6 +502,7 @@
 				D0BDA4BA29DC5058001EA4A0 /* FileManagerExtensionsTests.swift */,
 				D090D96729DC5A6300245538 /* LocalExtensionsTests.swift */,
 				D090D96B29DC629700245538 /* NotificationCenterExtensionsTests.swift */,
+				D090D96F29DC68CA00245538 /* NSAttributedStringExtensionsTests.swift */,
 			);
 			path = FoundationTests;
 			sourceTree = "<group>";
@@ -790,6 +796,7 @@
 				D0F39A84287DF21300A754B2 /* TestHelpers.swift in Sources */,
 				D05C8682294B58250077E744 /* CGPoint+REExtensions.swift in Sources */,
 				D0C95FDC28579B5500D0522D /* SignedInteger+REExtensions.swift in Sources */,
+				D090D96E29DC66BF00245538 /* NSAttributedString+REExtensions.swift in Sources */,
 				D0CBE62328832D78006F8BCB /* Timer+REExtensions.swift in Sources */,
 				D05C867E294B55F10077E744 /* CGFloat+REExtensions.swift in Sources */,
 				D0CD713728E5C50C009ADA8E /* Comparable+REExtensions.swift in Sources */,
@@ -831,6 +838,7 @@
 				D0CD712D28E5B695009ADA8E /* BinaryFloatingPointExtensionsTests.swift in Sources */,
 				D0B4ED3B293A73C90031BDAB /* URLExtensionsTests.swift in Sources */,
 				D05C8688294B5E810077E744 /* CGSizeExtensionsTests.swift in Sources */,
+				D090D97029DC68CA00245538 /* NSAttributedStringExtensionsTests.swift in Sources */,
 				D090D96C29DC629700245538 /* NotificationCenterExtensionsTests.swift in Sources */,
 				D0CD714328E5CDCD009ADA8E /* DoubleExtensionsTests.swift in Sources */,
 				D05C8678294B535D0077E744 /* CATransform3DExtensionsTests.swift in Sources */,

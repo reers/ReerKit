@@ -141,6 +141,8 @@
 		D0EBE243288493F8004925E5 /* DeinitObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE242288493F8004925E5 /* DeinitObserverTests.swift */; };
 		D0EED73029DD51D3005A0F31 /* Bundle+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EED72F29DD51D3005A0F31 /* Bundle+REExtensions.swift */; };
 		D0EED73229DD53BC005A0F31 /* BundleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EED73129DD53BC005A0F31 /* BundleExtensionsTests.swift */; };
+		D0EED73429DD56F5005A0F31 /* UIAlertController+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EED73329DD56F5005A0F31 /* UIAlertController+REExtensions.swift */; };
+		D0EED73629DD5819005A0F31 /* UIAlertControllerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EED73529DD5819005A0F31 /* UIAlertControllerExtensionsTests.swift */; };
 		D0F39A7C287DC70100A754B2 /* Character+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F39A7B287DC70100A754B2 /* Character+REExtensions.swift */; };
 		D0F39A7E287DC9B600A754B2 /* CharacterExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F39A7D287DC9B600A754B2 /* CharacterExtensionsTests.swift */; };
 		D0F39A82287DD82E00A754B2 /* SequenceExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F39A81287DD82E00A754B2 /* SequenceExtensionsTests.swift */; };
@@ -295,6 +297,8 @@
 		D0EBE242288493F8004925E5 /* DeinitObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeinitObserverTests.swift; sourceTree = "<group>"; };
 		D0EED72F29DD51D3005A0F31 /* Bundle+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+REExtensions.swift"; sourceTree = "<group>"; };
 		D0EED73129DD53BC005A0F31 /* BundleExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtensionsTests.swift; sourceTree = "<group>"; };
+		D0EED73329DD56F5005A0F31 /* UIAlertController+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+REExtensions.swift"; sourceTree = "<group>"; };
+		D0EED73529DD5819005A0F31 /* UIAlertControllerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtensionsTests.swift; sourceTree = "<group>"; };
 		D0F39A7B287DC70100A754B2 /* Character+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Character+REExtensions.swift"; sourceTree = "<group>"; };
 		D0F39A7D287DC9B600A754B2 /* CharacterExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterExtensionsTests.swift; sourceTree = "<group>"; };
 		D0F39A81287DD82E00A754B2 /* SequenceExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensionsTests.swift; sourceTree = "<group>"; };
@@ -479,6 +483,7 @@
 			children = (
 				D0B1210E2855079000B5B326 /* UIView+REExtensions.swift */,
 				D0A6B3A22924AD11008B7FDA /* UIResponder+REExtensions.swift */,
+				D0EED73329DD56F5005A0F31 /* UIAlertController+REExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -554,6 +559,7 @@
 			isa = PBXGroup;
 			children = (
 				D0B121202855207900B5B326 /* UIViewExtensionsTests.swift */,
+				D0EED73529DD5819005A0F31 /* UIAlertControllerExtensionsTests.swift */,
 			);
 			path = UIKitTests;
 			sourceTree = "<group>";
@@ -841,6 +847,7 @@
 				D05C8671294B4E190077E744 /* CAGradientLayer+REExtensions.swift in Sources */,
 				D05A8817291BF4EF00C53492 /* Font+REExtensions.swift in Sources */,
 				D0038B7F2856581600A890F9 /* UnfairLock.swift in Sources */,
+				D0EED73429DD56F5005A0F31 /* UIAlertController+REExtensions.swift in Sources */,
 				D0EBE237288476DB004925E5 /* Associatable.swift in Sources */,
 				D0EBE2392884797B004925E5 /* OnceExecutable.swift in Sources */,
 				D0CD713D28E5CC1D009ADA8E /* Float+REExtensions.swift in Sources */,
@@ -899,6 +906,7 @@
 				D090D97429DC6C2B00245538 /* NSPredicateExtensionsTests.swift in Sources */,
 				D0CD714528E5CDCD009ADA8E /* FloatExtensionsTests.swift in Sources */,
 				D093CF8B294B9FC000A830DB /* CGVectorExtensionsTests.swift in Sources */,
+				D0EED73629DD5819005A0F31 /* UIAlertControllerExtensionsTests.swift in Sources */,
 				D0E129A629C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift in Sources */,
 				D0F39A82287DD82E00A754B2 /* SequenceExtensionsTests.swift in Sources */,
 				D0A0040628620D9900D2FA7C /* TypeNameDescribableTests.swift in Sources */,

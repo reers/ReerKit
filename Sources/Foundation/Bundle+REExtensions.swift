@@ -23,24 +23,14 @@
 import Foundation
 
 public extension Reer where Base: Bundle {
-    /// ReerKit: Return the main bundle's `CFBundleDisplayName` or `CFBundleName`
-    static var appDisplayName: String {
-        if let displayName = Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String {
-            return displayName
-        } else if let name = Bundle.main.infoDictionary?["CFBundleName"] as? String {
-            return name
-        }
-        return ""
-    }
-    
-    /// ReerKit: Return the main bundle's `CFBundleShortVersionString`
-    static var appVersion: String {
-        return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
-    }
-    
-    /// ReerKit: Return the main bundle's bundle identifier.
-    static var appBundleID: String {
-        return Bundle.main.infoDictionary?["CFBundleIdentifier"] as? String ?? ""
+    /// ReerKit: Check file exist in the bundle.
+    ///
+    ///     Bundle.main.re.fileExists(withName: "abc.json")
+    ///
+    func fileExists(withName name: String) -> Bool {
+        let bundlePath = base.bundlePath
+        let path = "\(bundlePath)/\(name)"
+        return FileManager.default.fileExists(atPath: path)
     }
 }
 

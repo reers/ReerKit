@@ -139,10 +139,10 @@
 		D0EBE23F28848939004925E5 /* DeinitObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE23E28848939004925E5 /* DeinitObservable.swift */; };
 		D0EBE241288492B2004925E5 /* DeinitObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE240288492B2004925E5 /* DeinitObserver.swift */; };
 		D0EBE243288493F8004925E5 /* DeinitObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE242288493F8004925E5 /* DeinitObserverTests.swift */; };
-		D0EED73029DD51D3005A0F31 /* Bundle+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EED72F29DD51D3005A0F31 /* Bundle+REExtensions.swift */; };
-		D0EED73229DD53BC005A0F31 /* BundleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EED73129DD53BC005A0F31 /* BundleExtensionsTests.swift */; };
 		D0EED73429DD56F5005A0F31 /* UIAlertController+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EED73329DD56F5005A0F31 /* UIAlertController+REExtensions.swift */; };
 		D0EED73629DD5819005A0F31 /* UIAlertControllerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EED73529DD5819005A0F31 /* UIAlertControllerExtensionsTests.swift */; };
+		D0EED73829DD58B3005A0F31 /* UIApplication+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EED73729DD58B3005A0F31 /* UIApplication+REExtensions.swift */; };
+		D0EED73A29DD5E3A005A0F31 /* Bundle+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EED73929DD5E3A005A0F31 /* Bundle+REExtensions.swift */; };
 		D0F39A7C287DC70100A754B2 /* Character+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F39A7B287DC70100A754B2 /* Character+REExtensions.swift */; };
 		D0F39A7E287DC9B600A754B2 /* CharacterExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F39A7D287DC9B600A754B2 /* CharacterExtensionsTests.swift */; };
 		D0F39A82287DD82E00A754B2 /* SequenceExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F39A81287DD82E00A754B2 /* SequenceExtensionsTests.swift */; };
@@ -295,10 +295,10 @@
 		D0EBE23E28848939004925E5 /* DeinitObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeinitObservable.swift; sourceTree = "<group>"; };
 		D0EBE240288492B2004925E5 /* DeinitObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeinitObserver.swift; sourceTree = "<group>"; };
 		D0EBE242288493F8004925E5 /* DeinitObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeinitObserverTests.swift; sourceTree = "<group>"; };
-		D0EED72F29DD51D3005A0F31 /* Bundle+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+REExtensions.swift"; sourceTree = "<group>"; };
-		D0EED73129DD53BC005A0F31 /* BundleExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtensionsTests.swift; sourceTree = "<group>"; };
 		D0EED73329DD56F5005A0F31 /* UIAlertController+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+REExtensions.swift"; sourceTree = "<group>"; };
 		D0EED73529DD5819005A0F31 /* UIAlertControllerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtensionsTests.swift; sourceTree = "<group>"; };
+		D0EED73729DD58B3005A0F31 /* UIApplication+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+REExtensions.swift"; sourceTree = "<group>"; };
+		D0EED73929DD5E3A005A0F31 /* Bundle+REExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+REExtensions.swift"; sourceTree = "<group>"; };
 		D0F39A7B287DC70100A754B2 /* Character+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Character+REExtensions.swift"; sourceTree = "<group>"; };
 		D0F39A7D287DC9B600A754B2 /* CharacterExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterExtensionsTests.swift; sourceTree = "<group>"; };
 		D0F39A81287DD82E00A754B2 /* SequenceExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensionsTests.swift; sourceTree = "<group>"; };
@@ -484,6 +484,7 @@
 				D0B1210E2855079000B5B326 /* UIView+REExtensions.swift */,
 				D0A6B3A22924AD11008B7FDA /* UIResponder+REExtensions.swift */,
 				D0EED73329DD56F5005A0F31 /* UIAlertController+REExtensions.swift */,
+				D0EED73729DD58B3005A0F31 /* UIApplication+REExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -512,7 +513,7 @@
 				D090D97129DC6BB000245538 /* NSPredicate+REExtensions.swift */,
 				D090D97529DC6CD400245538 /* NSRegularExpression+REExtensions.swift */,
 				D022BED429DD47EE00245550 /* URLRequest+REExtensions.swift */,
-				D0EED72F29DD51D3005A0F31 /* Bundle+REExtensions.swift */,
+				D0EED73929DD5E3A005A0F31 /* Bundle+REExtensions.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -533,7 +534,6 @@
 				D090D97329DC6C2B00245538 /* NSPredicateExtensionsTests.swift */,
 				D090D97729DC6FC700245538 /* NSRegularExpressionExtensionsTests.swift */,
 				D022BED629DD48E200245550 /* URLRequestExtensionsTests.swift */,
-				D0EED73129DD53BC005A0F31 /* BundleExtensionsTests.swift */,
 			);
 			path = FoundationTests;
 			sourceTree = "<group>";
@@ -822,13 +822,14 @@
 				D05C868A294B5F990077E744 /* CGRect+REExtensions.swift in Sources */,
 				D0038B7D285642B600A890F9 /* Locked.swift in Sources */,
 				D0038B8128565B9500A890F9 /* ReadWriteLock.swift in Sources */,
+				D0EED73A29DD5E3A005A0F31 /* Bundle+REExtensions.swift in Sources */,
 				D0B121122855089000B5B326 /* ReerKit.swift in Sources */,
 				D0B4ED3D293A7BA60031BDAB /* CountdownTimer.swift in Sources */,
 				D05A881D291C106E00C53492 /* String+REExtensions.swift in Sources */,
 				D0EBE23F28848939004925E5 /* DeinitObservable.swift in Sources */,
+				D0EED73829DD58B3005A0F31 /* UIApplication+REExtensions.swift in Sources */,
 				D008BD6E28E5DCC500470BEB /* Decodable+REExtensions.swift in Sources */,
 				D0E354CA28BFBC060000030B /* WeakMap.swift in Sources */,
-				D0EED73029DD51D3005A0F31 /* Bundle+REExtensions.swift in Sources */,
 				D0EBE2352884765F004925E5 /* AnyObjectExtensionable.swift in Sources */,
 				D0F39A84287DF21300A754B2 /* TestHelpers.swift in Sources */,
 				D05C8682294B58250077E744 /* CGPoint+REExtensions.swift in Sources */,
@@ -911,7 +912,6 @@
 				D0F39A82287DD82E00A754B2 /* SequenceExtensionsTests.swift in Sources */,
 				D0A0040628620D9900D2FA7C /* TypeNameDescribableTests.swift in Sources */,
 				D0B121212855207900B5B326 /* UIViewExtensionsTests.swift in Sources */,
-				D0EED73229DD53BC005A0F31 /* BundleExtensionsTests.swift in Sources */,
 				D0CD713528E5C0AC009ADA8E /* ComparableExtensionsTests.swift in Sources */,
 				D0CC5A20290AEDFC0038989B /* RangeReplaceableCollectionExtensionsTests.swift in Sources */,
 				D0B1211B285510B200B5B326 /* NSObjectExtensionsTests.swift in Sources */,

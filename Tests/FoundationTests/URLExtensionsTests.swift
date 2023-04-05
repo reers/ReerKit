@@ -49,13 +49,23 @@ final class URLExtensionsTests: XCTestCase {
             "https://www.example.com/index.html")
     }
 
-    func testAppendingQueryParameters() {
-        XCTAssertEqual(url.re.appendingQueryParameters(params), queryUrl)
+    func testAppendingQueries() {
+        XCTAssertEqual(url.re.appendingQueries(params), queryUrl)
     }
 
     func testAppendQueryParameters() {
-        url.re.appendQueryParameters(params)
+        url.re.appendQueries(params)
         XCTAssertEqual(url, queryUrl)
+    }
+    
+    func testRemovingQueries() {
+        XCTAssertEqual(queryUrl.re.removingQueries(["q"]), url)
+    }
+    
+    func testRevmoeQueries() {
+        var testURL = queryUrl
+        testURL.re.removeQueries(["q"])
+        XCTAssertEqual(testURL, url)
     }
 
     func testValueForQueryKey() {

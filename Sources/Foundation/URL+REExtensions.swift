@@ -48,15 +48,30 @@ public extension ReerForEquatable where Base == URL {
     ///
     ///        let url = URL(string: "https://google.com")!
     ///        let param = ["q": "Hello Swift"]
-    ///        url.appendingQueryParameters(params) -> "https://google.com?q=Hello%20Swift"
+    ///        url.appendingQueries(params) -> "https://google.com?q=Hello%20Swift"
     ///
     /// - Parameter parameters: parameters dictionary.
     /// - Returns: URL with appending given query parameters.
-    func appendingQueryParameters(_ parameters: [String: String]) -> URL {
+    func appendingQueries(_ queries: [String: String]) -> URL {
         var urlComponents = URLComponents(url: base, resolvingAgainstBaseURL: true)!
-        urlComponents.queryItems = (urlComponents.queryItems ?? []) + parameters
+        urlComponents.queryItems = (urlComponents.queryItems ?? []) + queries
             .map { URLQueryItem(name: $0, value: $1) }
-        return urlComponents.url!
+        return urlComponents.url ?? base
+    }
+    
+    /// ReerKit: URL with removing query parameters.
+    ///
+    ///        let url = URL(string: "https://google.com?q=Hello%20Swift")!
+    ///        url.removingQueries(["q"]) -> "https://google.com"
+    ///
+    /// - Parameter parameters: parameters dictionary.
+    /// - Returns: URL with appending given query parameters.
+    func removingQueries(_ queries: [String]) -> URL {
+        var urlComponents = URLComponents(url: base, resolvingAgainstBaseURL: true)!
+        guard let queryItems = urlComponents.queryItems else { return base }
+        let filtered = queryItems.filter { !queries.contains($0.name) }
+        urlComponents.queryItems = filtered.isEmpty ? nil : filtered
+        return urlComponents.url ?? base
     }
 
     /// ReerKit: Get value of a query key.
@@ -140,8 +155,20 @@ public extension ReerReference where Base == URL {
     ///        print(url) // prints "https://google.com?q=Hello%20Swift"
     ///
     /// - Parameter parameters: parameters dictionary.
-    mutating func appendQueryParameters(_ parameters: [String: String]) {
-        base.pointee = base.pointee.re.appendingQueryParameters(parameters)
+    mutating func appendQueries(_ queries: [String: String]) {
+        base.pointee = base.pointee.re.appendingQueries(queries)
+    }
+    
+    /// ReerKit: Remove query parameters to URL.
+    ///
+    ///        let url = URL(string: "https://google.com?q=Hello%20Swift")!
+    ///        url.removeQueries(["q"])
+    ///        print(url) // "https://google.com"
+    ///
+    /// - Parameter parameters: parameters dictionary.
+    /// - Returns: URL with appending given query parameters.
+    mutating func removeQueries(_ queries: [String]) {
+        base.pointee = base.pointee.re.removingQueries(queries)
     }
 
     /// ReerKit: Remove all the path components from the URL.

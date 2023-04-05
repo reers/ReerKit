@@ -176,20 +176,20 @@ public extension REColor {
         return REColor.re(red: red, green: green, blue: blue, alpha: CGFloat(alpha) / 255)
     }
 
+    #if !os(watchOS)
     /// ReerKit: Create a dynamic color with light and dark color.
     static func re(light: REColor, dark: REColor) -> REColor {
-        if #available(iOS 13.0, *) {
-            return REColor.init { traitCollection in
-                if traitCollection.userInterfaceStyle == .dark {
-                    return dark
-                } else {
-                    return light
-                }
-            }
+        #if os(macOS)
+        return REColor(name: nil, dynamicProvider: { $0.name == .darkAqua ? dark : light })
+        #elseif os(iOS) || os(tvOS)
+        if #available(iOS 13.0, tvOS 13.0, *) {
+            return REColor(dynamicProvider: { $0.userInterfaceStyle == .dark ? dark : light })
         } else {
-            return light
+            return REColor(cgColor: light.cgColor)
         }
+        #endif
     }
+    #endif
 }
 
 // MARK: - Properties & Functions

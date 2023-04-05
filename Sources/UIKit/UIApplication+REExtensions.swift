@@ -41,6 +41,8 @@ public extension UIApplication {
     }
 }
 
+// MARK: - App info
+
 public extension Reer where Base: UIApplication {
     
     /// ReerKit: Current inferred app environment.
@@ -96,7 +98,11 @@ public extension Reer where Base: UIApplication {
     static var version: String {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
     }
-    
+}
+
+// MARK: - UI
+
+public extension Reer where Base: UIApplication {
     /// ReerKit: App's key window.
     var keyWindow: UIWindow? {
         if #available(iOS 13.0, *) {
@@ -154,6 +160,41 @@ public extension Reer where Base: UIApplication {
         }
         
         return viewController
+    }
+}
+
+// MARK: - Sandbox path
+
+public extension Reer where Base: UIApplication {
+    
+    /// ReerKit: "Documents" URL in this app's sandbox.
+    var documentsURL: URL? {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last
+    }
+    
+    /// ReerKit: "Documents" path in this app's sandbox.
+    var documentsPath: String? {
+        return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
+    }
+    
+    /// ReerKit: "Caches" URL in this app's sandbox.
+    var cachesURL: URL? {
+        return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).last
+    }
+    
+    /// ReerKit: "Caches" path in this app's sandbox.
+    var cachesPath: String? {
+        return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first
+    }
+    
+    /// ReerKit: "Library" URL in this app's sandbox.
+    var libraryURL: URL? {
+        return FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).last
+    }
+    
+    /// ReerKit: "Library" path in this app's sandbox.
+    var libraryPath: String? {
+        return NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first
     }
 }
 

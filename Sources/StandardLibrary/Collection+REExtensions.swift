@@ -57,7 +57,7 @@ public extension Reer where Base: Collection {
     ///
     /// - Parameter index: index of element to access element.
     subscript(index: Base.Index) -> Base.Element? {
-        return base.indices.contains(index) ? base[index] : nil
+        return (index >= base.startIndex && index < base.endIndex) ? base[index] : nil
     }
 
     /// ReerKit: Returns an array of slices of length "size" from the array. If array can't be split evenly, the final slice will be the remaining elements.

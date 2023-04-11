@@ -181,24 +181,24 @@ final class StringExtensionsTests: XCTestCase {
         XCTAssertNil("8s".re.bool)
     }
 
-//    func testDate() {
-//        let dateFromStr = "2015-06-01".re.date
-//        XCTAssertNotNil(dateFromStr)
-//        XCTAssertEqual(dateFromStr?.year, 2015)
-//        XCTAssertEqual(dateFromStr?.month, 6)
-//        XCTAssertEqual(dateFromStr?.day, 1)
-//    }
-//
-//    func testDateTime() {
-//        let dateFromStr = "2015-06-01 14:23:09".re.dateTime
-//        XCTAssertNotNil(dateFromStr)
-//        XCTAssertEqual(dateFromStr?.year, 2015)
-//        XCTAssertEqual(dateFromStr?.month, 6)
-//        XCTAssertEqual(dateFromStr?.day, 1)
-//        XCTAssertEqual(dateFromStr?.hour, 14)
-//        XCTAssertEqual(dateFromStr?.minute, 23)
-//        XCTAssertEqual(dateFromStr?.second, 9)
-//    }
+    func testDate() {
+        let dateFromStr = "2015-06-01".re.date
+        XCTAssertNotNil(dateFromStr)
+        XCTAssertEqual(dateFromStr?.re.year, 2015)
+        XCTAssertEqual(dateFromStr?.re.month, 6)
+        XCTAssertEqual(dateFromStr?.re.day, 1)
+    }
+
+    func testDateTime() {
+        let dateFromStr = "2015-06-01 14:23:09".re.dateTime
+        XCTAssertNotNil(dateFromStr)
+        XCTAssertEqual(dateFromStr?.re.year, 2015)
+        XCTAssertEqual(dateFromStr?.re.month, 6)
+        XCTAssertEqual(dateFromStr?.re.day, 1)
+        XCTAssertEqual(dateFromStr?.re.hour, 14)
+        XCTAssertEqual(dateFromStr?.re.minute, 23)
+        XCTAssertEqual(dateFromStr?.re.second, 9)
+    }
 
     func testInt() {
         XCTAssertNotNil("8".re.int)

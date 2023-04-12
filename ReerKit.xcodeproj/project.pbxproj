@@ -110,8 +110,6 @@
 		D0CC5A1C290AD60E0038989B /* StringProtocolExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CC5A1B290AD60E0038989B /* StringProtocolExtensionsTests.swift */; };
 		D0CC5A1E290AE4CF0038989B /* RangeReplaceableCollection+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CC5A1D290AE4CF0038989B /* RangeReplaceableCollection+REExtensions.swift */; };
 		D0CC5A20290AEDFC0038989B /* RangeReplaceableCollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CC5A1F290AEDFC0038989B /* RangeReplaceableCollectionExtensionsTests.swift */; };
-		D0CD712728E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD712628E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift */; };
-		D0CD712928E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD712828E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift */; };
 		D0CD712B28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD712A28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift */; };
 		D0CD712D28E5B695009ADA8E /* BinaryFloatingPointExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD712C28E5B695009ADA8E /* BinaryFloatingPointExtensionsTests.swift */; };
 		D0CD712F28E5BBFF009ADA8E /* BinaryInteger+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD712E28E5BBFF009ADA8E /* BinaryInteger+REExtensions.swift */; };
@@ -265,8 +263,6 @@
 		D0CC5A1B290AD60E0038989B /* StringProtocolExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringProtocolExtensionsTests.swift; sourceTree = "<group>"; };
 		D0CC5A1D290AE4CF0038989B /* RangeReplaceableCollection+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RangeReplaceableCollection+REExtensions.swift"; sourceTree = "<group>"; };
 		D0CC5A1F290AEDFC0038989B /* RangeReplaceableCollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeReplaceableCollectionExtensionsTests.swift; sourceTree = "<group>"; };
-		D0CD712628E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BidirectionalCollection+REExtensions.swift"; sourceTree = "<group>"; };
-		D0CD712828E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidirectionalCollectionExtensionsTests.swift; sourceTree = "<group>"; };
 		D0CD712A28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+REExtensions.swift"; sourceTree = "<group>"; };
 		D0CD712C28E5B695009ADA8E /* BinaryFloatingPointExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryFloatingPointExtensionsTests.swift; sourceTree = "<group>"; };
 		D0CD712E28E5BBFF009ADA8E /* BinaryInteger+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryInteger+REExtensions.swift"; sourceTree = "<group>"; };
@@ -586,7 +582,6 @@
 			children = (
 				D0EBE23328847620004925E5 /* AnyObjectExtensions */,
 				D068566528D76E45001CB92A /* Array+REExtensions.swift */,
-				D0CD712628E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift */,
 				D0CD712A28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift */,
 				D0CD712E28E5BBFF009ADA8E /* BinaryInteger+REExtensions.swift */,
 				D0C95FD42857899F00D0522D /* Bool+REExtensions.swift */,
@@ -626,7 +621,6 @@
 				D0EBE23C28847EC4004925E5 /* AnyObjectExtensionsTests.swift */,
 				D068566728D77BF3001CB92A /* ArrayExtensionsTests.swift */,
 				D071DEBE28D8DF5500618A2F /* CollectionExtensionsTests.swift */,
-				D0CD712828E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift */,
 				D0CD712C28E5B695009ADA8E /* BinaryFloatingPointExtensionsTests.swift */,
 				D0CD713028E5BDF2009ADA8E /* BinaryIntegerExtensionsTests.swift */,
 				D0CD713428E5C0AC009ADA8E /* ComparableExtensionsTests.swift */,
@@ -804,7 +798,6 @@
 				D0F39A7C287DC70100A754B2 /* Character+REExtensions.swift in Sources */,
 				D04D34F7286C7A8A001E974C /* DispatchQueue+REExtensions.swift in Sources */,
 				D00615C12976F52D003FA4CF /* CATransform3D+REExtensions.swift in Sources */,
-				D0CD712728E5ADEA009ADA8E /* BidirectionalCollection+REExtensions.swift in Sources */,
 				D0BDA4B529DC4E33001EA4A0 /* FileManager+REExtensions.swift in Sources */,
 				D090D97629DC6CD400245538 /* NSRegularExpression+REExtensions.swift in Sources */,
 				D022BED529DD47EE00245550 /* URLRequest+REExtensions.swift in Sources */,
@@ -887,7 +880,6 @@
 				D05A881C291C106800C53492 /* StringExtensionsTests.swift in Sources */,
 				D0B4ED3F293A7E660031BDAB /* CountdownTimerTests.swift in Sources */,
 				D05C868C294B61420077E744 /* CGRectExtensionsTests.swift in Sources */,
-				D0CD712928E5AECB009ADA8E /* BidirectionalCollectionExtensionsTests.swift in Sources */,
 				D01DABC429B4FE1300ABD25E /* ThrottlerTests.swift in Sources */,
 				D0BDA4BB29DC5058001EA4A0 /* FileManagerExtensionsTests.swift in Sources */,
 				D0CDBDCC299FB47500BD682D /* DebouncerTests.swift in Sources */,

@@ -79,35 +79,45 @@ public extension ReerForRangeReplaceableCollection where Base: RangeReplaceableC
         base.pointee.removeAll { !set.insert($0[keyPath: path]).inserted }
     }
 
-    /// ReerKit: Accesses the element at the specified position.
+    /// ReerKit: Safely accesses the element at the specified position.
     ///
-    /// - Parameter offset: The offset position of the element to access. `offset` must be a valid index offset of the collection that is not equal to the `endIndex` property.
-    subscript(offset: Int) -> Base.Element {
+    /// - Parameter offset: The offset position of the element to access.
+    subscript(offset: Int) -> Base.Element? {
         get {
             let collection = base.pointee
+            guard offset >= 0, offset < collection.count else { return nil }
             return collection[collection.index(collection.startIndex, offsetBy: offset)]
         }
         set {
+            guard offset >= 0, offset < base.pointee.count else { return }
             let offsetIndex = base.pointee.index(base.pointee.startIndex, offsetBy: offset)
-            base.pointee.replaceSubrange(offsetIndex..<base.pointee.index(after: offsetIndex), with: [newValue])
+            let newCollection = newValue.map { [$0] } ?? []
+            base.pointee.replaceSubrange(offsetIndex..<base.pointee.index(after: offsetIndex), with: newCollection)
         }
     }
 
-    /// ReerKit: Accesses a contiguous subrange of the collection’s elements.
+    /// ReerKit: Safely accesses a contiguous subrange of the collection’s elements.
     ///
-    /// - Parameter range: A range of the collection’s indices offsets. The bounds of the range must be valid indices of the collection.
-    subscript<R>(range: R) -> Base.SubSequence where R: RangeExpression, R.Bound == Int {
+    /// - Parameter range: A range of the collection’s indices offsets.
+    subscript<R>(range: R) -> Base? where R: RangeExpression, R.Bound == Int {
         get {
-            let indexRange = range.relative(to: 0..<base.pointee.count)
-            let start = base.pointee.index(base.pointee.startIndex, offsetBy: indexRange.lowerBound)
-            let end = base.pointee.index(base.pointee.startIndex, offsetBy: indexRange.upperBound)
-            return base.pointee[start..<end]
+            let collection = base.pointee
+            let indexRange = range.relative(to: Int.min..<Int.max)
+            if indexRange.upperBound < 0 || indexRange.lowerBound >= collection.count { return nil }
+            let lowerBound = Swift.max(0, indexRange.lowerBound)
+            let upperBound = Swift.min(indexRange.upperBound, collection.count)
+            return Base(collection[collection.index(collection.startIndex, offsetBy: lowerBound)..<collection.index(collection.startIndex, offsetBy: upperBound)])
         }
         set {
-            let indexRange = range.relative(to: 0..<base.pointee.count)
-            let start = base.pointee.index(base.pointee.startIndex, offsetBy: indexRange.lowerBound)
-            let end = base.pointee.index(base.pointee.startIndex, offsetBy: indexRange.upperBound)
-            base.pointee.replaceSubrange(start..<end, with: newValue)
+            let indexRange = range.relative(to: Int.min..<Int.max)
+            if indexRange.upperBound < 0 || indexRange.lowerBound >= base.pointee.count { return }
+            let lowerBound = Swift.max(0, indexRange.lowerBound)
+            let upperBound = Swift.min(indexRange.upperBound, base.pointee.count)
+            let newCollection = newValue ?? Base()
+            base.pointee.replaceSubrange(
+                base.pointee.index(base.pointee.startIndex, offsetBy: lowerBound)..<base.pointee.index(base.pointee.startIndex, offsetBy: upperBound),
+                with: newCollection
+            )
         }
     }
 

@@ -89,45 +89,122 @@ final class RangeReplaceableCollectionTests: XCTestCase {
         XCTAssertEqual(input, expectedResult)
     }
 
-    func testIntSubscripts() {
-        var string = "Hello world!"
-        XCTAssertEqual(string.re[0], "H")
-        XCTAssertEqual(string.re[11], "!")
-
-        XCTAssertEqual(string.re[0..<5], "Hello")
-        XCTAssertEqual(string.re[6..<12], "world!")
-
-        XCTAssertEqual(string.re[0...4], "Hello")
-        XCTAssertEqual(string.re[6...11], "world!")
-
-        XCTAssertEqual(string.re[0...], "Hello world!")
-
-        XCTAssertEqual(string.re[...11], "Hello world!")
-
-        XCTAssertEqual(string.re[..<12], "Hello world!")
-
-        string.re[0] = "h"
-        XCTAssertEqual(string, "hello world!")
-        string.re[11] = "?"
-        XCTAssertEqual(string, "hello world?")
-
-        string.re[0..<5] = "Goodbye"
-        XCTAssertEqual(string, "Goodbye world?")
-        string.re[8..<14] = "planet!"
-        XCTAssertEqual(string, "Goodbye planet!")
-
-        string.re[0...6] = "Hello"
-        XCTAssertEqual(string, "Hello planet!")
-        string.re[6...12] = "world?"
-        XCTAssertEqual(string, "Hello world?")
-
-        string.re[5...] = "!"
-        XCTAssertEqual(string, "Hello!")
-
-        string.re[..<6] = "Hello Ferris"
-        XCTAssertEqual(string, "Hello Ferris")
-
-        string.re[...4] = "Save"
-        XCTAssertEqual(string, "Save Ferris")
+    func testIntSubscriptsForString() {
+        // Getter
+        var string = "012345"
+        XCTAssertEqual(string.re[0], "0")
+        XCTAssertEqual(string.re[5], "5")
+        XCTAssertEqual(string.re[6], nil)
+        XCTAssertEqual(string.re[-1], nil)
+        
+        // Setter
+        string = "012345"
+        string.re[0] = "a"
+        XCTAssertEqual(string, "a12345")
+        
+        string = "012345"
+        string.re[0] = nil
+        XCTAssertEqual(string, "12345")
+        
+        string = "012345"
+        string.re[7] = "a"
+        XCTAssertEqual(string, "012345")
+    }
+    
+    func testIntSubscriptsForArray() {
+        // Getter
+        var array = [0, 1, 2, 3, 4, 5]
+        XCTAssertEqual(array.re[0], 0)
+        XCTAssertEqual(array.re[5], 5)
+        XCTAssertEqual(array.re[6], nil)
+        XCTAssertEqual(array.re[-1], nil)
+        
+        // Setter
+        array = [0, 1, 2, 3, 4, 5]
+        array.re[0] = 9
+        XCTAssertEqual(array, [9, 1, 2, 3, 4, 5])
+        
+        array = [0, 1, 2, 3, 4, 5]
+        array.re[0] = nil
+        XCTAssertEqual(array, [1, 2, 3, 4, 5])
+        
+        array = [0, 1, 2, 3, 4, 5]
+        array.re[7] = 9
+        XCTAssertEqual(array, [0, 1, 2, 3, 4, 5])
+    }
+    
+    func testIntRangeSubscriptsForString() {
+        // Getter
+        var string = "012345"
+        XCTAssertEqual(string.re[1..<3], "12")
+        XCTAssertEqual(string.re[..<3], "012")
+        XCTAssertEqual(string.re[-2..<3], "012")
+        XCTAssertEqual(string.re[3..<10], "345")
+        
+        XCTAssertEqual(string.re[3...], "345")
+        XCTAssertEqual(string.re[7...], nil)
+        XCTAssertEqual(string.re[-10..<(-1)], nil)
+        
+        // Setter
+        string = "012345"
+        string.re[0..<1] = "a"
+        XCTAssertEqual(string, "a12345")
+        
+        string = "012345"
+        string.re[0..<1] = nil
+        XCTAssertEqual(string, "12345")
+        
+        string = "012345"
+        string.re[0..<1] = ""
+        XCTAssertEqual(string, "12345")
+        
+        string = "012345"
+        string.re[7...] = "a"
+        XCTAssertEqual(string, "012345")
+        
+        string = "012345"
+        string.re[0...5] = "a"
+        XCTAssertEqual(string, "a")
+        
+        string = "012345"
+        string.re[-1...6] = nil
+        XCTAssertEqual(string, "")
+    }
+    
+    func testIntRangeSubscriptsForArray() {
+        // Getter
+        var array = [0, 1, 2, 3, 4, 5]
+        XCTAssertEqual(array.re[1..<3], [1, 2])
+        XCTAssertEqual(array.re[..<3], [0, 1, 2])
+        XCTAssertEqual(array.re[-2..<3], [0, 1, 2])
+        XCTAssertEqual(array.re[3..<10], [3, 4, 5])
+        XCTAssertEqual(array.re[3...], [3, 4, 5])
+        XCTAssertEqual(array.re[7...], nil)
+        XCTAssertEqual(array.re[-10..<(-1)], nil)
+        
+        // Setter
+        array = [0, 1, 2, 3, 4, 5]
+        array.re[0..<1] = [9]
+        XCTAssertEqual(array, [9, 1, 2, 3, 4, 5])
+        
+        array = [0, 1, 2, 3, 4, 5]
+        array.re[0..<1] = nil
+        XCTAssertEqual(array, [1, 2, 3, 4, 5])
+        
+        array = [0, 1, 2, 3, 4, 5]
+        array.re[0..<1] = []
+        XCTAssertEqual(array, [1, 2, 3, 4, 5])
+        
+        array = [0, 1, 2, 3, 4, 5]
+        array.re[7...] = [9]
+        XCTAssertEqual(array, [0, 1, 2, 3, 4, 5])
+        
+        array = [0, 1, 2, 3, 4, 5]
+        array.re[0...5] = [9]
+        XCTAssertEqual(array, [9])
+        
+        array = [0, 1, 2, 3, 4, 5]
+        array.re[0...5] = []
+        XCTAssertEqual(array, [])
     }
 }

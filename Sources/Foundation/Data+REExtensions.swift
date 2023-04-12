@@ -40,7 +40,7 @@ public extension Data {
         var data = Data(capacity: hexString.count / 2)
         let regex = try! NSRegularExpression(pattern: "[0-9a-f]{1,2}", options: .caseInsensitive)
         regex.enumerateMatches(in: hexString, options: .reportProgress, range: NSMakeRange(0, hexString.utf16.count)) { match, flags, stop in
-            let byteString = hexString.re[safe: (match?.range.lowerBound)!..<(match?.range.upperBound)!]
+            let byteString = hexString.re[(match?.range.lowerBound)!..<(match?.range.upperBound)!]
             var num = UInt8(byteString!, radix: 16)!
             data.append(&num, count: 1)
         }

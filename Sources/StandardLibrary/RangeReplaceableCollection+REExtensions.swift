@@ -80,6 +80,46 @@ public extension ReerForRangeReplaceableCollection where Base: RangeReplaceableC
     }
 
     /// ReerKit: Safely accesses the element at the specified position.
+    /// The collection should be a `var`, NOT work for `let`
+    /// 
+    ///     var string = "012345"
+    ///     string.re[0] -> Optional(Character("0"))
+    ///     string.re[5] -> Optional(Character("5"))
+    ///     string.re[6] -> nil
+    ///     string.re[-1] -> nil
+    ///
+    ///     string = "012345"
+    ///     string.re[0] = "a"
+    ///     // string == "a12345"
+    ///
+    ///     string = "012345"
+    ///     string.re[0] = nil
+    ///     // string == "12345"
+    ///
+    ///     string = "012345"
+    ///     string.re[7] = "a"
+    ///     // string == "012345"
+    ///
+    ///  ----------------------------------------------
+    ///
+    ///     var array = [0, 1, 2, 3, 4, 5]
+    ///     array.re[0] -> Optional(0)
+    ///     array.re[5] -> Optional(5)
+    ///     array.re[6] -> nil
+    ///     array.re[-1] -> nil
+    ///
+    ///     array = [0, 1, 2, 3, 4, 5]
+    ///     array.re[0] = 9
+    ///     // array == [9, 1, 2, 3, 4, 5]
+    ///
+    ///     array = [0, 1, 2, 3, 4, 5]
+    ///     array.re[0] = nil
+    ///     array == [1, 2, 3, 4, 5]
+    ///
+    ///     array = [0, 1, 2, 3, 4, 5]
+    ///     array.re[7] = 9
+    ///     // array == [0, 1, 2, 3, 4, 5]
+    ///
     ///
     /// - Parameter offset: The offset position of the element to access.
     subscript(offset: Int) -> Base.Element? {
@@ -97,6 +137,75 @@ public extension ReerForRangeReplaceableCollection where Base: RangeReplaceableC
     }
 
     /// ReerKit: Safely accesses a contiguous subrange of the collection’s elements.
+    /// The collection should be a `var`, NOT work for `let`
+    ///
+    ///     var string = "012345"
+    ///     string.re[1..<3] -> Optional("12")
+    ///     string.re[..<3] -> Optional("012")
+    ///     string.re[-2..<3] -> Optional("012")
+    ///     string.re[3..<10] -> Optional("345")
+    ///     string.re[3...] -> Optional("345")
+    ///     string.re[7...] -> nil
+    ///     string.re[-10..<(-1)] -> nil
+    ///
+    ///     string = "012345"
+    ///     string.re[0..<1] = "a"
+    ///     // string == "a12345"
+    ///
+    ///     string = "012345"
+    ///     string.re[0..<1] = nil
+    ///     // string == "12345"
+    ///
+    ///     string = "012345"
+    ///     string.re[0..<1] = ""
+    ///     // string == "12345"
+    ///
+    ///     string = "012345"
+    ///     string.re[7...] = "a"
+    ///     // string == "012345"
+    ///
+    ///     string = "012345"
+    ///     string.re[0...5] = "a"
+    ///     // string == "a"
+    ///
+    ///     string = "012345"
+    ///     string.re[-1...6] = nil
+    ///     // string == ""
+    ///
+    ///  -------------------------------------
+    ///
+    ///     var array = [0, 1, 2, 3, 4, 5]
+    ///     array.re[1..<3] -> Optional([1, 2])
+    ///     array.re[..<3] -> Optional([0, 1, 2])
+    ///     array.re[-2..<3] -> Optional([0, 1, 2])
+    ///     array.re[3..<10] -> Optional([3, 4, 5])
+    ///     array.re[3...] -> Optional([3, 4, 5])
+    ///     array.re[7...] -> nil
+    ///     array.re[-10..<(-1)] -> nil
+    ///
+    ///     array = [0, 1, 2, 3, 4, 5]
+    ///     array.re[0..<1] = [9]
+    ///     // array == [9, 1, 2, 3, 4, 5]
+    ///
+    ///     array = [0, 1, 2, 3, 4, 5]
+    ///     array.re[0..<1] = nil
+    ///     // array == [1, 2, 3, 4, 5]
+    ///
+    ///     array = [0, 1, 2, 3, 4, 5]
+    ///     array.re[0..<1] = []
+    ///     // array == [1, 2, 3, 4, 5]
+    ///
+    ///     array = [0, 1, 2, 3, 4, 5]
+    ///     array.re[7...] = [9]
+    ///     // array == [0, 1, 2, 3, 4, 5]
+    ///
+    ///     array = [0, 1, 2, 3, 4, 5]
+    ///     array.re[0...5] = [9]
+    ///     // array == [9]
+    ///
+    ///     array = [0, 1, 2, 3, 4, 5]
+    ///     array.re[0...5] = []
+    ///     // array == []
     ///
     /// - Parameter range: A range of the collection’s indices offsets.
     subscript<R>(range: R) -> Base? where R: RangeExpression, R.Bound == Int {

@@ -47,7 +47,7 @@ final class UICollectionViewExtensionsTests: XCTestCase {
     }
 
     func testIndexPathForLastRow() {
-        XCTAssertEqual(collectionView.re.indexPathForLastItem, IndexPath(item: 0, section: 1))
+        XCTAssertEqual(collectionView.re.indexPathOfLastItem, IndexPath(item: 0, section: 1))
     }
 
     func testLastSection() {
@@ -61,9 +61,9 @@ final class UICollectionViewExtensionsTests: XCTestCase {
     }
 
     func testIndexPathForLastRowInSection() {
-        XCTAssertNil(collectionView.re.indexPathForLastItem(inSection: -1))
-        XCTAssertNil(collectionView.re.indexPathForLastItem(inSection: 2))
-        XCTAssertEqual(collectionView.re.indexPathForLastItem(inSection: 0), IndexPath(item: 4, section: 0))
+        XCTAssertNil(collectionView.re.indexPathOfLastItem(inSection: -1))
+        XCTAssertNil(collectionView.re.indexPathOfLastItem(inSection: 2))
+        XCTAssertEqual(collectionView.re.indexPathOfLastItem(inSection: 0), IndexPath(item: 4, section: 0))
     }
 
     func testReloadData() {

@@ -43,6 +43,23 @@ public extension Reer where Base: UIImage {
     var template: UIImage {
         return base.withRenderingMode(.alwaysTemplate)
     }
+    
+    /// ReerKit: A new image rotated counterclockwise by a quarter‑turn (90°). ⤺
+    /// The width and height will be exchanged.
+    var roatatedLeft90: UIImage? {
+        return rotated(by: CGFloat(90.0).re.degreesToRadians, fitSize: true)
+    }
+    
+    /// ReerKit: A new image rotated clockwise by a quarter‑turn (90°). ⤼
+    /// The width and height will be exchanged.
+    var roatatedRight90: UIImage? {
+        return rotated(by: CGFloat(-90.0).re.degreesToRadians, fitSize: true)
+    }
+    
+    /// ReerKit: A new image rotated 180° . ↻
+    var roatated180: UIImage? {
+        return rotated(by: CGFloat(-180.0).re.degreesToRadians, fitSize: true)
+    }
 
     #if canImport(CoreImage)
     /// ReerKit: Average color for this image.
@@ -177,16 +194,16 @@ public extension Reer where Base: UIImage {
         return newImage
     }
 
-    /// ReerKit: Creates a copy of the receiver rotated by the given angle (in radians).
+    /// ReerKit: Returns a new rotated image (relative to the center).
     ///
-    ///     // Rotate the image by 180°
-    ///     image.rotated(by: .pi)
-    ///
-    /// - Parameter radians: The angle, in radians, by which to rotate the image.
-    /// - Returns: A new image rotated by the given angle.
-    func rotated(by radians: CGFloat) -> UIImage? {
+    /// - Parameters:
+    ///   - radians: Rotated radians in counterclockwise.⟲
+    ///   - fitSize: true: new image's size is extend to fit all content.
+    ///              false: image's size will not change, content may be clipped.
+    /// - Returns: The new image
+    func rotated(by radians: CGFloat, fitSize: Bool = true) -> UIImage? {
         let destRect = CGRect(origin: .zero, size: base.size)
-            .applying(CGAffineTransform(rotationAngle: radians))
+            .applying(fitSize ? CGAffineTransform.init(rotationAngle: radians) : .identity)
         let roundedDestRect = CGRect(
             x: destRect.origin.x.rounded(),
             y: destRect.origin.y.rounded(),
@@ -196,9 +213,11 @@ public extension Reer where Base: UIImage {
 
         UIGraphicsBeginImageContextWithOptions(roundedDestRect.size, false, base.scale)
         guard let contextRef = UIGraphicsGetCurrentContext() else { return nil }
-
+        contextRef.setShouldAntialias(true)
+        contextRef.setAllowsAntialiasing(true)
+        contextRef.interpolationQuality = .high
         contextRef.translateBy(x: roundedDestRect.width / 2, y: roundedDestRect.height / 2)
-        contextRef.rotate(by: radians)
+        contextRef.rotate(by: -radians)
 
         base.draw(
             in: CGRect(

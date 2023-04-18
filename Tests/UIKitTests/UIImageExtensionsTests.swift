@@ -39,14 +39,14 @@ final class UIImageExtensionsTests: XCTestCase {
     func testBytesSize() {
         let bundle = Bundle(for: UIImageExtensionsTests.self)
         let image = UIImage(named: "TestImage", in: bundle, compatibleWith: nil)!
-        XCTAssertEqual(image.re.bytesSize, 110284)
+        XCTAssertEqual(image.re.bytesSize, 99954)
         XCTAssertEqual(UIImage().re.bytesSize, 0)
     }
 
     func testKilobytesSize() {
         let bundle = Bundle(for: UIImageExtensionsTests.self)
         let image = UIImage(named: "TestImage", in: bundle, compatibleWith: nil)!
-        XCTAssertEqual(image.re.kilobytesSize, 107)
+        XCTAssertEqual(image.re.kilobytesSize, 97)
     }
 
     func testOriginal() {
@@ -141,12 +141,22 @@ final class UIImageExtensionsTests: XCTestCase {
         XCTAssertEqual(rotatedImage!.size, image.size)
         XCTAssertNotEqual(image.jpegData(compressionQuality: 1), rotatedImage!.jpegData(compressionQuality: 1))
     }
+    
+    func testRotatedByDegreee() {
+        let bundle = Bundle(for: UIImageExtensionsTests.self)
+        let image = UIImage(named: "TestImage", in: bundle, compatibleWith: nil)!
+        
+        XCTAssertEqual(image.re.roatatedRight90?.size.width, image.size.height)
+        XCTAssertEqual(image.re.roatatedLeft90?.size.height, image.size.width)
+        XCTAssertEqual(image.re.roatated180?.size.height, image.size.height)
+        XCTAssertEqual(image.re.roatated180?.size.width, image.size.width)
+    }
 
     func testRotatedByRadians() {
         let bundle = Bundle(for: UIImageExtensionsTests.self)
         let image = UIImage(named: "TestImage", in: bundle, compatibleWith: nil)!
-
-        let halfRotatedImage = image.re.rotated(by: .pi / 2)
+  
+        let halfRotatedImage = image.re.rotated(by: .pi / 2, fitSize: true)
         XCTAssertNotNil(halfRotatedImage)
         XCTAssertEqual(halfRotatedImage!.size, CGSize(width: image.size.height, height: image.size.width))
 
@@ -193,7 +203,7 @@ final class UIImageExtensionsTests: XCTestCase {
         let image = try? UIImage.re(url: reerLogo)
         XCTAssertNotNil(image)
 
-        let size = CGSize(width: 1024, height: 1024)
+        let size = CGSize(width: 1024, height: 560)
         XCTAssertEqual(image?.size, size)
 
         let scale: CGFloat = 5.0
@@ -203,7 +213,7 @@ final class UIImageExtensionsTests: XCTestCase {
         XCTAssertNotNil(scaledImage)
         XCTAssertEqual(scaledImage?.size, scaledSize)
 
-        guard let throwingURL = URL(string: "SwifterSwift://fakeurl/image1") else {
+        guard let throwingURL = URL(string: "ReerKit://fakeurl/image1") else {
             XCTAssert(false, "Fake URL cannot be made")
             return
         }

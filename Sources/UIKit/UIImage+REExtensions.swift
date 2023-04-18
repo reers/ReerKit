@@ -332,7 +332,13 @@ public extension Reer where Base: UIImage {
     /// - Parameters:
     ///   - radius: corner radius (optional), resulting image will be round if unspecified.
     /// - Returns: UIImage with all corners rounded.
-    func withRoundedCorners(radius: CGFloat? = nil) -> UIImage? {
+    func withRoundedCorners(
+        radius: CGFloat? = nil,
+        corners: UIRectCorner = .allCorners,
+        borderWidth: CGFloat = 0,
+        borderColor: UIColor? = nil,
+        borderLineJoin: CGLineJoin = .miter
+    ) -> UIImage {
         let maxRadius = min(base.size.width, base.size.height) / 2
         let cornerRadius: CGFloat
         if let radius = radius, radius > 0, radius <= maxRadius {
@@ -340,16 +346,48 @@ public extension Reer where Base: UIImage {
         } else {
             cornerRadius = maxRadius
         }
+        
+        var corners = corners
+        if corners != .allCorners && corners.contains(.allCorners) {
+            corners.remove(.allCorners)
+        }
 
         UIGraphicsBeginImageContextWithOptions(base.size, false, base.scale)
-
-        let rect = CGRect(origin: .zero, size: base.size)
-        UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius).addClip()
-        base.draw(in: rect)
-
-        let image = UIGraphicsGetImageFromCurrentImageContext()
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return base
+        }
+        let rect = CGRect(x: 0, y: 0, width: base.size.width, height: base.size.height)
+        context.scaleBy(x: 1, y: -1)
+        context.translateBy(x: 0, y: -rect.size.height)
+        
+        let minSize = min(base.size.width, base.size.height)
+        if borderWidth < minSize / 2 {
+            let path = UIBezierPath(roundedRect: rect.insetBy(dx: borderWidth, dy: borderWidth), byRoundingCorners: corners, cornerRadii: CGSize(width: cornerRadius, height: borderWidth))
+            path.close()
+            context.saveGState()
+            path.addClip()
+            guard let cgImage = base.cgImage else {
+                return base
+            }
+            context.draw(cgImage, in: rect)
+            context.restoreGState()
+        }
+        
+        if borderColor != nil && borderWidth < minSize / 2 && borderWidth > 0 {
+            let strokeInset = (Darwin.floor(borderWidth * base.scale) + 0.5) / base.scale
+            let strokeRect = rect.insetBy(dx: strokeInset, dy: strokeInset)
+            let strokeRadius = cornerRadius > base.scale / 2 ? cornerRadius - base.scale / 2 : 0
+            let path = UIBezierPath(roundedRect: strokeRect, byRoundingCorners: corners, cornerRadii: CGSize(width: strokeRadius, height: borderWidth))
+            path.close()
+            path.lineWidth = borderWidth
+            path.lineJoinStyle = borderLineJoin
+            borderColor!.setStroke()
+            path.stroke()
+        }
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return image
+        return newImage ?? base
     }
 
     /// ReerKit: Base 64 encoded PNG data of the image.

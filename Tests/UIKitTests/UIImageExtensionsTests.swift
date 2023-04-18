@@ -238,11 +238,11 @@ final class UIImageExtensionsTests: XCTestCase {
     }
 
     func testWithCornerRadius() {
-        let image = UIImage.re(color: .black, size: CGSize(width: 20, height: 20))
+        let image = UIImage.re(color: .black, size: CGSize(width: 200, height: 200))
         XCTAssertNotNil(image.re.withRoundedCorners())
         XCTAssertNotNil(image.re.withRoundedCorners(radius: 5))
         XCTAssertNotNil(image.re.withRoundedCorners(radius: -10))
-        XCTAssertNotNil(image.re.withRoundedCorners(radius: 30))
+        XCTAssertNotNil(image.re.withRoundedCorners(radius: 350))
     }
 
     func testPNGBase64String() {

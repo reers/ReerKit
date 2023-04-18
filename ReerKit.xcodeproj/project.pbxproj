@@ -30,6 +30,8 @@
 		D0122B1F29EF022C008311CF /* UIImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0122B1029EF01BA008311CF /* UIImageView.xib */; };
 		D0122B2129EF02F0008311CF /* UIFont+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B2029EF02F0008311CF /* UIFont+REExtensions.swift */; };
 		D0122B2329EF0367008311CF /* UIFontExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B2229EF0367008311CF /* UIFontExtensionsTests.swift */; };
+		D0122B2729EF0417008311CF /* UIGestureRecognizer+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B2629EF0417008311CF /* UIGestureRecognizer+REExtensions.swift */; };
+		D0122B2929EF0482008311CF /* UIGestureRecognizerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B2829EF0482008311CF /* UIGestureRecognizerExtensionsTests.swift */; };
 		D019B8F5285BA02900257A7D /* ReadWriteLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B8F4285BA02900257A7D /* ReadWriteLockTests.swift */; };
 		D019B8F7285BA3CB00257A7D /* UnfairLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B8F6285BA3CB00257A7D /* UnfairLockTests.swift */; };
 		D01DABC229B4FAA700ABD25E /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01DABC129B4FAA700ABD25E /* Throttler.swift */; };
@@ -198,6 +200,8 @@
 		D0122B1329EF01BB008311CF /* UITableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UITableViewCell.xib; sourceTree = "<group>"; };
 		D0122B2029EF02F0008311CF /* UIFont+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+REExtensions.swift"; sourceTree = "<group>"; };
 		D0122B2229EF0367008311CF /* UIFontExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtensionsTests.swift; sourceTree = "<group>"; };
+		D0122B2629EF0417008311CF /* UIGestureRecognizer+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIGestureRecognizer+REExtensions.swift"; sourceTree = "<group>"; };
+		D0122B2829EF0482008311CF /* UIGestureRecognizerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGestureRecognizerExtensionsTests.swift; sourceTree = "<group>"; };
 		D019B8F4285BA02900257A7D /* ReadWriteLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteLockTests.swift; sourceTree = "<group>"; };
 		D019B8F6285BA3CB00257A7D /* UnfairLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfairLockTests.swift; sourceTree = "<group>"; };
 		D01DABC129B4FAA700ABD25E /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
@@ -518,7 +522,7 @@
 				D0122B0629EEF7C9008311CF /* UIButton+REExtensions.swift */,
 				D0122B0A29EEFEB8008311CF /* UICollectionView+REExtensions.swift */,
 				D0122B2029EF02F0008311CF /* UIFont+REExtensions.swift */,
-				D0122B2229EF0367008311CF /* UIFontExtensionsTests.swift */,
+				D0122B2629EF0417008311CF /* UIGestureRecognizer+REExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -598,6 +602,8 @@
 				D0122B0429EEF528008311CF /* UIBezierPathExtensionsTests.swift */,
 				D0122B0829EEFCBD008311CF /* UIButtonExtensionsTests.swift */,
 				D0122B0C29EF0049008311CF /* UICollectionViewExtensionsTests.swift */,
+				D0122B2229EF0367008311CF /* UIFontExtensionsTests.swift */,
+				D0122B2829EF0482008311CF /* UIGestureRecognizerExtensionsTests.swift */,
 			);
 			path = UIKitTests;
 			sourceTree = "<group>";
@@ -853,6 +859,7 @@
 				D0B1210F2855079000B5B326 /* UIView+REExtensions.swift in Sources */,
 				D0F39A7C287DC70100A754B2 /* Character+REExtensions.swift in Sources */,
 				D04D34F7286C7A8A001E974C /* DispatchQueue+REExtensions.swift in Sources */,
+				D0122B2729EF0417008311CF /* UIGestureRecognizer+REExtensions.swift in Sources */,
 				D00615C12976F52D003FA4CF /* CATransform3D+REExtensions.swift in Sources */,
 				D0BDA4B529DC4E33001EA4A0 /* FileManager+REExtensions.swift in Sources */,
 				D0122B0729EEF7C9008311CF /* UIButton+REExtensions.swift in Sources */,
@@ -930,6 +937,7 @@
 				D0CD712D28E5B695009ADA8E /* BinaryFloatingPointExtensionsTests.swift in Sources */,
 				D0B4ED3B293A73C90031BDAB /* URLExtensionsTests.swift in Sources */,
 				D05C8688294B5E810077E744 /* CGSizeExtensionsTests.swift in Sources */,
+				D0122B2929EF0482008311CF /* UIGestureRecognizerExtensionsTests.swift in Sources */,
 				D090D97029DC68CA00245538 /* NSAttributedStringExtensionsTests.swift in Sources */,
 				D090D96C29DC629700245538 /* NotificationCenterExtensionsTests.swift in Sources */,
 				D0CD714328E5CDCD009ADA8E /* DoubleExtensionsTests.swift in Sources */,

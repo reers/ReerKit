@@ -32,6 +32,9 @@
 		D0122B2329EF0367008311CF /* UIFontExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B2229EF0367008311CF /* UIFontExtensionsTests.swift */; };
 		D0122B2729EF0417008311CF /* UIGestureRecognizer+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B2629EF0417008311CF /* UIGestureRecognizer+REExtensions.swift */; };
 		D0122B2929EF0482008311CF /* UIGestureRecognizerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B2829EF0482008311CF /* UIGestureRecognizerExtensionsTests.swift */; };
+		D0122B2B29EF04DE008311CF /* UIImage+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B2A29EF04DE008311CF /* UIImage+REExtensions.swift */; };
+		D0122B2D29EF07DF008311CF /* UIImageExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B2C29EF07DF008311CF /* UIImageExtensionsTests.swift */; };
+		D0122B3229EF0C27008311CF /* XCTestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B3029EF0B6C008311CF /* XCTestExtensions.swift */; };
 		D019B8F5285BA02900257A7D /* ReadWriteLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B8F4285BA02900257A7D /* ReadWriteLockTests.swift */; };
 		D019B8F7285BA3CB00257A7D /* UnfairLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B8F6285BA3CB00257A7D /* UnfairLockTests.swift */; };
 		D01DABC229B4FAA700ABD25E /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01DABC129B4FAA700ABD25E /* Throttler.swift */; };
@@ -202,6 +205,9 @@
 		D0122B2229EF0367008311CF /* UIFontExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtensionsTests.swift; sourceTree = "<group>"; };
 		D0122B2629EF0417008311CF /* UIGestureRecognizer+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIGestureRecognizer+REExtensions.swift"; sourceTree = "<group>"; };
 		D0122B2829EF0482008311CF /* UIGestureRecognizerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGestureRecognizerExtensionsTests.swift; sourceTree = "<group>"; };
+		D0122B2A29EF04DE008311CF /* UIImage+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+REExtensions.swift"; sourceTree = "<group>"; };
+		D0122B2C29EF07DF008311CF /* UIImageExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensionsTests.swift; sourceTree = "<group>"; };
+		D0122B3029EF0B6C008311CF /* XCTestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestExtensions.swift; sourceTree = "<group>"; };
 		D019B8F4285BA02900257A7D /* ReadWriteLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteLockTests.swift; sourceTree = "<group>"; };
 		D019B8F6285BA3CB00257A7D /* UnfairLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfairLockTests.swift; sourceTree = "<group>"; };
 		D01DABC129B4FAA700ABD25E /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
@@ -358,6 +364,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D0122B2F29EF0B55008311CF /* XCTest */ = {
+			isa = PBXGroup;
+			children = (
+				D0122B3029EF0B6C008311CF /* XCTestExtensions.swift */,
+			);
+			path = XCTest;
+			sourceTree = "<group>";
+		};
 		D019B8F3285B9FEB00257A7D /* UtilityTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -497,6 +511,7 @@
 		D0B1210C2855069400B5B326 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				D0122B2F29EF0B55008311CF /* XCTest */,
 				D0BDA4B629DC503E001EA4A0 /* ResourcesTests */,
 				D0E129A429C38E950051D351 /* SharedTests */,
 				D05C8672294B4F430077E744 /* CoreAnimationTests */,
@@ -523,6 +538,7 @@
 				D0122B0A29EEFEB8008311CF /* UICollectionView+REExtensions.swift */,
 				D0122B2029EF02F0008311CF /* UIFont+REExtensions.swift */,
 				D0122B2629EF0417008311CF /* UIGestureRecognizer+REExtensions.swift */,
+				D0122B2A29EF04DE008311CF /* UIImage+REExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -604,6 +620,7 @@
 				D0122B0C29EF0049008311CF /* UICollectionViewExtensionsTests.swift */,
 				D0122B2229EF0367008311CF /* UIFontExtensionsTests.swift */,
 				D0122B2829EF0482008311CF /* UIGestureRecognizerExtensionsTests.swift */,
+				D0122B2C29EF07DF008311CF /* UIImageExtensionsTests.swift */,
 			);
 			path = UIKitTests;
 			sourceTree = "<group>";
@@ -874,6 +891,7 @@
 				D05C867A294B54CD0077E744 /* CGColor+REExtensions.swift in Sources */,
 				D0CDBDCA299FAB3100BD682D /* Debouncer.swift in Sources */,
 				D071DEBD28D8DC1F00618A2F /* Collection+REExtensions.swift in Sources */,
+				D0122B2B29EF04DE008311CF /* UIImage+REExtensions.swift in Sources */,
 				D08F2C5B29DB437B00B4C181 /* Date+REExtensions.swift in Sources */,
 				D0421AD12938F6B500452845 /* Data+REExtensions.swift in Sources */,
 				D05C868A294B5F990077E744 /* CGRect+REExtensions.swift in Sources */,
@@ -960,6 +978,7 @@
 				D019B8F5285BA02900257A7D /* ReadWriteLockTests.swift in Sources */,
 				D04D34FA286C836A001E974C /* DispatchTests.swift in Sources */,
 				D0CBE62528833BF5006F8BCB /* TimerExtensionsTests.swift in Sources */,
+				D0122B3229EF0C27008311CF /* XCTestExtensions.swift in Sources */,
 				D0421AD32939033800452845 /* DataExtensionsTests.swift in Sources */,
 				D05C867C294B556D0077E744 /* CGColorExtensionsTests.swift in Sources */,
 				D090D97829DC6FC700245538 /* NSRegularExpressionExtensionsTests.swift in Sources */,
@@ -985,6 +1004,7 @@
 				D0122B0529EEF528008311CF /* UIBezierPathExtensionsTests.swift in Sources */,
 				D0F39A7E287DC9B600A754B2 /* CharacterExtensionsTests.swift in Sources */,
 				D076A2D128E5DBFF00E89281 /* DecodableExtensionsTests.swift in Sources */,
+				D0122B2D29EF07DF008311CF /* UIImageExtensionsTests.swift in Sources */,
 				D0C95FE42857B4C400D0522D /* IntExtensionsTests.swift in Sources */,
 				D0C95FE22857AD5D00D0522D /* SignedNumericExtensionsTests.swift in Sources */,
 				D071DEBF28D8DF5500618A2F /* CollectionExtensionsTests.swift in Sources */,

@@ -14,6 +14,8 @@
 		D004CC49285A41F500C41360 /* Synchronizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D004CC48285A41F500C41360 /* Synchronizing.swift */; };
 		D00615C12976F52D003FA4CF /* CATransform3D+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00615C02976F52D003FA4CF /* CATransform3D+REExtensions.swift */; };
 		D008BD6E28E5DCC500470BEB /* Decodable+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD714628E5D71D009ADA8E /* Decodable+REExtensions.swift */; };
+		D0122AFF29EEF059008311CF /* UIBarButtonItem+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122AFE29EEF059008311CF /* UIBarButtonItem+REExtensions.swift */; };
+		D0122B0129EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B0029EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift */; };
 		D019B8F5285BA02900257A7D /* ReadWriteLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B8F4285BA02900257A7D /* ReadWriteLockTests.swift */; };
 		D019B8F7285BA3CB00257A7D /* UnfairLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B8F6285BA3CB00257A7D /* UnfairLockTests.swift */; };
 		D01DABC229B4FAA700ABD25E /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01DABC129B4FAA700ABD25E /* Throttler.swift */; };
@@ -166,6 +168,8 @@
 		D0038B822856662B00A890F9 /* RWLocked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RWLocked.swift; sourceTree = "<group>"; };
 		D004CC48285A41F500C41360 /* Synchronizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synchronizing.swift; sourceTree = "<group>"; };
 		D00615C02976F52D003FA4CF /* CATransform3D+REExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CATransform3D+REExtensions.swift"; sourceTree = "<group>"; };
+		D0122AFE29EEF059008311CF /* UIBarButtonItem+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+REExtensions.swift"; sourceTree = "<group>"; };
+		D0122B0029EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemExtensionsTests.swift; sourceTree = "<group>"; };
 		D019B8F4285BA02900257A7D /* ReadWriteLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteLockTests.swift; sourceTree = "<group>"; };
 		D019B8F6285BA3CB00257A7D /* UnfairLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfairLockTests.swift; sourceTree = "<group>"; };
 		D01DABC129B4FAA700ABD25E /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
@@ -481,6 +485,7 @@
 				D0A6B3A22924AD11008B7FDA /* UIResponder+REExtensions.swift */,
 				D0EED73329DD56F5005A0F31 /* UIAlertController+REExtensions.swift */,
 				D0EED73729DD58B3005A0F31 /* UIApplication+REExtensions.swift */,
+				D0122AFE29EEF059008311CF /* UIBarButtonItem+REExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -556,6 +561,7 @@
 			children = (
 				D0B121202855207900B5B326 /* UIViewExtensionsTests.swift */,
 				D0EED73529DD5819005A0F31 /* UIAlertControllerExtensionsTests.swift */,
+				D0122B0029EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift */,
 			);
 			path = UIKitTests;
 			sourceTree = "<group>";
@@ -851,6 +857,7 @@
 				D0EBE23B28847B72004925E5 /* Swizzlable.swift in Sources */,
 				D0CD712F28E5BBFF009ADA8E /* BinaryInteger+REExtensions.swift in Sources */,
 				D0CD713F28E5CC97009ADA8E /* FloatingPoint+REExtensions.swift in Sources */,
+				D0122AFF29EEF059008311CF /* UIBarButtonItem+REExtensions.swift in Sources */,
 				D0B1211E2855156200B5B326 /* TypeNameDescribable.swift in Sources */,
 				D07E53AF2883137000921873 /* WeakProxy.swift in Sources */,
 				D004CC49285A41F500C41360 /* Synchronizing.swift in Sources */,
@@ -876,6 +883,7 @@
 				D0CD714328E5CDCD009ADA8E /* DoubleExtensionsTests.swift in Sources */,
 				D05C8678294B535D0077E744 /* CATransform3DExtensionsTests.swift in Sources */,
 				D05C8680294B57130077E744 /* CGFloatExtensionsTests.swift in Sources */,
+				D0122B0129EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift in Sources */,
 				D0BDA4B329DC4CA6001EA4A0 /* DateExtensionsTests.swift in Sources */,
 				D05A881C291C106800C53492 /* StringExtensionsTests.swift in Sources */,
 				D0B4ED3F293A7E660031BDAB /* CountdownTimerTests.swift in Sources */,

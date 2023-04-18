@@ -20,6 +20,14 @@
 		D0122B0529EEF528008311CF /* UIBezierPathExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B0429EEF528008311CF /* UIBezierPathExtensionsTests.swift */; };
 		D0122B0729EEF7C9008311CF /* UIButton+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B0629EEF7C9008311CF /* UIButton+REExtensions.swift */; };
 		D0122B0929EEFCBD008311CF /* UIButtonExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B0829EEFCBD008311CF /* UIButtonExtensionsTests.swift */; };
+		D0122B0B29EEFEB8008311CF /* UICollectionView+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B0A29EEFEB8008311CF /* UICollectionView+REExtensions.swift */; };
+		D0122B0D29EF0049008311CF /* UICollectionViewExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B0C29EF0049008311CF /* UICollectionViewExtensionsTests.swift */; };
+		D0122B1A29EF022C008311CF /* UITableViewHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0122B1129EF01BB008311CF /* UITableViewHeaderFooterView.xib */; };
+		D0122B1B29EF022C008311CF /* UITableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0122B1329EF01BB008311CF /* UITableViewCell.xib */; };
+		D0122B1C29EF022C008311CF /* TestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0122B1229EF01BB008311CF /* TestStoryboard.storyboard */; };
+		D0122B1D29EF022C008311CF /* UICollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0122B0E29EF01BA008311CF /* UICollectionViewCell.xib */; };
+		D0122B1E29EF022C008311CF /* TestImage.png in Resources */ = {isa = PBXBuildFile; fileRef = D0122B0F29EF01BA008311CF /* TestImage.png */; };
+		D0122B1F29EF022C008311CF /* UIImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0122B1029EF01BA008311CF /* UIImageView.xib */; };
 		D019B8F5285BA02900257A7D /* ReadWriteLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B8F4285BA02900257A7D /* ReadWriteLockTests.swift */; };
 		D019B8F7285BA3CB00257A7D /* UnfairLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B8F6285BA3CB00257A7D /* UnfairLockTests.swift */; };
 		D01DABC229B4FAA700ABD25E /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01DABC129B4FAA700ABD25E /* Throttler.swift */; };
@@ -178,6 +186,14 @@
 		D0122B0429EEF528008311CF /* UIBezierPathExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPathExtensionsTests.swift; sourceTree = "<group>"; };
 		D0122B0629EEF7C9008311CF /* UIButton+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+REExtensions.swift"; sourceTree = "<group>"; };
 		D0122B0829EEFCBD008311CF /* UIButtonExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensionsTests.swift; sourceTree = "<group>"; };
+		D0122B0A29EEFEB8008311CF /* UICollectionView+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+REExtensions.swift"; sourceTree = "<group>"; };
+		D0122B0C29EF0049008311CF /* UICollectionViewExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtensionsTests.swift; sourceTree = "<group>"; };
+		D0122B0E29EF01BA008311CF /* UICollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UICollectionViewCell.xib; sourceTree = "<group>"; };
+		D0122B0F29EF01BA008311CF /* TestImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TestImage.png; sourceTree = "<group>"; };
+		D0122B1029EF01BA008311CF /* UIImageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIImageView.xib; sourceTree = "<group>"; };
+		D0122B1129EF01BB008311CF /* UITableViewHeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UITableViewHeaderFooterView.xib; sourceTree = "<group>"; };
+		D0122B1229EF01BB008311CF /* TestStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TestStoryboard.storyboard; sourceTree = "<group>"; };
+		D0122B1329EF01BB008311CF /* UITableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UITableViewCell.xib; sourceTree = "<group>"; };
 		D019B8F4285BA02900257A7D /* ReadWriteLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteLockTests.swift; sourceTree = "<group>"; };
 		D019B8F6285BA3CB00257A7D /* UnfairLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfairLockTests.swift; sourceTree = "<group>"; };
 		D01DABC129B4FAA700ABD25E /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
@@ -496,6 +512,7 @@
 				D0122AFE29EEF059008311CF /* UIBarButtonItem+REExtensions.swift */,
 				D0122B0229EEF372008311CF /* UIBezierPath+REExtensions.swift */,
 				D0122B0629EEF7C9008311CF /* UIButton+REExtensions.swift */,
+				D0122B0A29EEFEB8008311CF /* UICollectionView+REExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -574,6 +591,7 @@
 				D0122B0029EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift */,
 				D0122B0429EEF528008311CF /* UIBezierPathExtensionsTests.swift */,
 				D0122B0829EEFCBD008311CF /* UIButtonExtensionsTests.swift */,
+				D0122B0C29EF0049008311CF /* UICollectionViewExtensionsTests.swift */,
 			);
 			path = UIKitTests;
 			sourceTree = "<group>";
@@ -591,6 +609,12 @@
 			children = (
 				D09D723F29DC94BF00636935 /* big_buck_bunny_720p_1mb.mp4 */,
 				D0BDA4B829DC503E001EA4A0 /* test.json */,
+				D0122B0F29EF01BA008311CF /* TestImage.png */,
+				D0122B1229EF01BB008311CF /* TestStoryboard.storyboard */,
+				D0122B0E29EF01BA008311CF /* UICollectionViewCell.xib */,
+				D0122B1029EF01BA008311CF /* UIImageView.xib */,
+				D0122B1329EF01BB008311CF /* UITableViewCell.xib */,
+				D0122B1129EF01BB008311CF /* UITableViewHeaderFooterView.xib */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -789,7 +813,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D09D724029DC94BF00636935 /* big_buck_bunny_720p_1mb.mp4 in Resources */,
+				D0122B1B29EF022C008311CF /* UITableViewCell.xib in Resources */,
+				D0122B1E29EF022C008311CF /* TestImage.png in Resources */,
+				D0122B1A29EF022C008311CF /* UITableViewHeaderFooterView.xib in Resources */,
+				D0122B1F29EF022C008311CF /* UIImageView.xib in Resources */,
 				D0BDA4B929DC503E001EA4A0 /* test.json in Resources */,
+				D0122B1D29EF022C008311CF /* UICollectionViewCell.xib in Resources */,
+				D0122B1C29EF022C008311CF /* TestStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -874,6 +904,7 @@
 				D0122AFF29EEF059008311CF /* UIBarButtonItem+REExtensions.swift in Sources */,
 				D0B1211E2855156200B5B326 /* TypeNameDescribable.swift in Sources */,
 				D07E53AF2883137000921873 /* WeakProxy.swift in Sources */,
+				D0122B0B29EEFEB8008311CF /* UICollectionView+REExtensions.swift in Sources */,
 				D004CC49285A41F500C41360 /* Synchronizing.swift in Sources */,
 				D01DABC229B4FAA700ABD25E /* Throttler.swift in Sources */,
 				D0397612286E111800C33E17 /* Optional+REExtensions.swift in Sources */,
@@ -895,6 +926,7 @@
 				D090D97029DC68CA00245538 /* NSAttributedStringExtensionsTests.swift in Sources */,
 				D090D96C29DC629700245538 /* NotificationCenterExtensionsTests.swift in Sources */,
 				D0CD714328E5CDCD009ADA8E /* DoubleExtensionsTests.swift in Sources */,
+				D0122B0D29EF0049008311CF /* UICollectionViewExtensionsTests.swift in Sources */,
 				D05C8678294B535D0077E744 /* CATransform3DExtensionsTests.swift in Sources */,
 				D05C8680294B57130077E744 /* CGFloatExtensionsTests.swift in Sources */,
 				D0122B0129EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift in Sources */,

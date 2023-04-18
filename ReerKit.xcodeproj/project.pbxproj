@@ -16,6 +16,8 @@
 		D008BD6E28E5DCC500470BEB /* Decodable+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD714628E5D71D009ADA8E /* Decodable+REExtensions.swift */; };
 		D0122AFF29EEF059008311CF /* UIBarButtonItem+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122AFE29EEF059008311CF /* UIBarButtonItem+REExtensions.swift */; };
 		D0122B0129EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B0029EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift */; };
+		D0122B0329EEF372008311CF /* UIBezierPath+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B0229EEF372008311CF /* UIBezierPath+REExtensions.swift */; };
+		D0122B0529EEF528008311CF /* UIBezierPathExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B0429EEF528008311CF /* UIBezierPathExtensionsTests.swift */; };
 		D019B8F5285BA02900257A7D /* ReadWriteLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B8F4285BA02900257A7D /* ReadWriteLockTests.swift */; };
 		D019B8F7285BA3CB00257A7D /* UnfairLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B8F6285BA3CB00257A7D /* UnfairLockTests.swift */; };
 		D01DABC229B4FAA700ABD25E /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01DABC129B4FAA700ABD25E /* Throttler.swift */; };
@@ -170,6 +172,8 @@
 		D00615C02976F52D003FA4CF /* CATransform3D+REExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CATransform3D+REExtensions.swift"; sourceTree = "<group>"; };
 		D0122AFE29EEF059008311CF /* UIBarButtonItem+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+REExtensions.swift"; sourceTree = "<group>"; };
 		D0122B0029EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemExtensionsTests.swift; sourceTree = "<group>"; };
+		D0122B0229EEF372008311CF /* UIBezierPath+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+REExtensions.swift"; sourceTree = "<group>"; };
+		D0122B0429EEF528008311CF /* UIBezierPathExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPathExtensionsTests.swift; sourceTree = "<group>"; };
 		D019B8F4285BA02900257A7D /* ReadWriteLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteLockTests.swift; sourceTree = "<group>"; };
 		D019B8F6285BA3CB00257A7D /* UnfairLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfairLockTests.swift; sourceTree = "<group>"; };
 		D01DABC129B4FAA700ABD25E /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
@@ -486,6 +490,7 @@
 				D0EED73329DD56F5005A0F31 /* UIAlertController+REExtensions.swift */,
 				D0EED73729DD58B3005A0F31 /* UIApplication+REExtensions.swift */,
 				D0122AFE29EEF059008311CF /* UIBarButtonItem+REExtensions.swift */,
+				D0122B0229EEF372008311CF /* UIBezierPath+REExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -562,6 +567,7 @@
 				D0B121202855207900B5B326 /* UIViewExtensionsTests.swift */,
 				D0EED73529DD5819005A0F31 /* UIAlertControllerExtensionsTests.swift */,
 				D0122B0029EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift */,
+				D0122B0429EEF528008311CF /* UIBezierPathExtensionsTests.swift */,
 			);
 			path = UIKitTests;
 			sourceTree = "<group>";
@@ -796,6 +802,7 @@
 				D06BD5E529157A8D00040407 /* Dictionary+REExtensions.swift in Sources */,
 				D0CD712B28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift in Sources */,
 				D0C95FE02857AC1A00D0522D /* SignedNumeric+REExtensions.swift in Sources */,
+				D0122B0329EEF372008311CF /* UIBezierPath+REExtensions.swift in Sources */,
 				D0C95FD52857899F00D0522D /* Bool+REExtensions.swift in Sources */,
 				D0FB4056286362F10019D56A /* Once.swift in Sources */,
 				D05C8686294B5D3C0077E744 /* CGSize+REExtensions.swift in Sources */,
@@ -920,6 +927,7 @@
 				D0397614286E12A900C33E17 /* OptionalExtensionsTests.swift in Sources */,
 				D0FB4058286363380019D56A /* OnceTests.swift in Sources */,
 				D05C866E294B4C6D0077E744 /* CGAffineTransformExtensionsTests.swift in Sources */,
+				D0122B0529EEF528008311CF /* UIBezierPathExtensionsTests.swift in Sources */,
 				D0F39A7E287DC9B600A754B2 /* CharacterExtensionsTests.swift in Sources */,
 				D076A2D128E5DBFF00E89281 /* DecodableExtensionsTests.swift in Sources */,
 				D0C95FE42857B4C400D0522D /* IntExtensionsTests.swift in Sources */,

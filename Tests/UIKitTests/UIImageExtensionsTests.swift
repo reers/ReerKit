@@ -146,10 +146,10 @@ final class UIImageExtensionsTests: XCTestCase {
         let bundle = Bundle(for: UIImageExtensionsTests.self)
         let image = UIImage(named: "TestImage", in: bundle, compatibleWith: nil)!
         
-        XCTAssertEqual(image.re.roatatedRight90?.size.width, image.size.height)
-        XCTAssertEqual(image.re.roatatedLeft90?.size.height, image.size.width)
-        XCTAssertEqual(image.re.roatated180?.size.height, image.size.height)
-        XCTAssertEqual(image.re.roatated180?.size.width, image.size.width)
+        XCTAssertEqual(image.re.roatateRight90?.size.width, image.size.height)
+        XCTAssertEqual(image.re.roatateLeft90?.size.height, image.size.width)
+        XCTAssertEqual(image.re.roatate180?.size.height, image.size.height)
+        XCTAssertEqual(image.re.roatate180?.size.width, image.size.width)
     }
 
     func testRotatedByRadians() {
@@ -164,6 +164,17 @@ final class UIImageExtensionsTests: XCTestCase {
         XCTAssertNotNil(rotatedImage)
         XCTAssertEqual(rotatedImage!.size, image.size)
         XCTAssertNotEqual(image.jpegData(compressionQuality: 1), rotatedImage!.jpegData(compressionQuality: 1))
+    }
+    
+    func testFlip() {
+        let bundle = Bundle(for: UIImageExtensionsTests.self)
+        let image = UIImage(named: "TestImage", in: bundle, compatibleWith: nil)!
+        
+        let horizontalFlippedImage = image.re.flipHorizontal
+        XCTAssertNotNil(horizontalFlippedImage)
+        
+        let verticalFlippedImage = image.re.flipVertical
+        XCTAssertNotNil(verticalFlippedImage)
     }
 
     func testFilled() {

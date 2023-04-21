@@ -43,23 +43,6 @@ public extension Reer where Base: UIImage {
     var template: UIImage {
         return base.withRenderingMode(.alwaysTemplate)
     }
-    
-    /// ReerKit: A new image rotated counterclockwise by a quarter‑turn (90°). ⤺
-    /// The width and height will be exchanged.
-    var roatatedLeft90: UIImage? {
-        return rotated(by: CGFloat(90.0).re.degreesToRadians, fitSize: true)
-    }
-    
-    /// ReerKit: A new image rotated clockwise by a quarter‑turn (90°). ⤼
-    /// The width and height will be exchanged.
-    var roatatedRight90: UIImage? {
-        return rotated(by: CGFloat(-90.0).re.degreesToRadians, fitSize: true)
-    }
-    
-    /// ReerKit: A new image rotated 180° . ↻
-    var roatated180: UIImage? {
-        return rotated(by: CGFloat(-180.0).re.degreesToRadians, fitSize: true)
-    }
 
     #if canImport(CoreImage)
     /// ReerKit: Average color for this image.
@@ -111,124 +94,6 @@ public extension Reer where Base: UIImage {
     /// - Returns: optional Data (if applicable).
     func compressedData(quality: CGFloat = 0.5) -> Data? {
         return base.jpegData(compressionQuality: quality)
-    }
-
-    /// ReerKit: UIImage Cropped to CGRect.
-    ///
-    /// - Parameter rect: CGRect to crop UIImage to.
-    /// - Returns: cropped UIImage
-    func cropped(to rect: CGRect) -> UIImage {
-        guard rect.size.width <= base.size.width, rect.size.height <= base.size.height else { return base }
-        let scaledRect = rect.applying(CGAffineTransform(scaleX: base.scale, y: base.scale))
-        guard let image = base.cgImage?.cropping(to: scaledRect) else { return base }
-        return UIImage(cgImage: image, scale: base.scale, orientation: base.imageOrientation)
-    }
-
-    /// ReerKit: UIImage scaled to height with respect to aspect ratio.
-    ///
-    /// - Parameters:
-    ///   - toHeight: new height.
-    ///   - opaque: flag indicating whether the bitmap is opaque.
-    /// - Returns: optional scaled UIImage (if applicable).
-    func scaled(toHeight: CGFloat, opaque: Bool = false) -> UIImage? {
-        let scale = toHeight / base.size.height
-        let newWidth = base.size.width * scale
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: newWidth, height: toHeight), opaque, base.scale)
-        base.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: toHeight))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage
-    }
-
-    /// ReerKit: UIImage scaled to width with respect to aspect ratio.
-    ///
-    /// - Parameters:
-    ///   - toWidth: new width.
-    ///   - opaque: flag indicating whether the bitmap is opaque.
-    /// - Returns: optional scaled UIImage (if applicable).
-    func scaled(toWidth: CGFloat, opaque: Bool = false) -> UIImage? {
-        let scale = toWidth / base.size.width
-        let newHeight = base.size.height * scale
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: toWidth, height: newHeight), opaque, base.scale)
-        base.draw(in: CGRect(x: 0, y: 0, width: toWidth, height: newHeight))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage
-    }
-
-    /// ReerKit: Creates a copy of the receiver rotated by the given angle.
-    ///
-    ///     // Rotate the image by 180°
-    ///     image.rotated(by: Measurement(value: 180, unit: .degrees))
-    ///
-    /// - Parameter angle: The angle measurement by which to rotate the image.
-    /// - Returns: A new image rotated by the given angle.
-    @available(tvOS 10.0, watchOS 3.0, *)
-    func rotated(by angle: Measurement<UnitAngle>) -> UIImage? {
-        let radians = CGFloat(angle.converted(to: .radians).value)
-
-        let destRect = CGRect(origin: .zero, size: base.size)
-            .applying(CGAffineTransform(rotationAngle: radians))
-        let roundedDestRect = CGRect(
-            x: destRect.origin.x.rounded(),
-            y: destRect.origin.y.rounded(),
-            width: destRect.width.rounded(),
-            height: destRect.height.rounded()
-        )
-
-        UIGraphicsBeginImageContextWithOptions(roundedDestRect.size, false, base.scale)
-        guard let contextRef = UIGraphicsGetCurrentContext() else { return nil }
-
-        contextRef.translateBy(x: roundedDestRect.width / 2, y: roundedDestRect.height / 2)
-        contextRef.rotate(by: radians)
-
-        base.draw(
-            in: CGRect(
-                origin: CGPoint(x: -base.size.width / 2, y: -base.size.height / 2),
-                size: base.size
-            )
-        )
-
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage
-    }
-
-    /// ReerKit: Returns a new rotated image (relative to the center).
-    ///
-    /// - Parameters:
-    ///   - radians: Rotated radians in counterclockwise.⟲
-    ///   - fitSize: true: new image's size is extend to fit all content.
-    ///              false: image's size will not change, content may be clipped.
-    /// - Returns: The new image
-    func rotated(by radians: CGFloat, fitSize: Bool = true) -> UIImage? {
-        let destRect = CGRect(origin: .zero, size: base.size)
-            .applying(fitSize ? CGAffineTransform.init(rotationAngle: radians) : .identity)
-        let roundedDestRect = CGRect(
-            x: destRect.origin.x.rounded(),
-            y: destRect.origin.y.rounded(),
-            width: destRect.width.rounded(),
-            height: destRect.height.rounded()
-        )
-
-        UIGraphicsBeginImageContextWithOptions(roundedDestRect.size, false, base.scale)
-        guard let contextRef = UIGraphicsGetCurrentContext() else { return nil }
-        contextRef.setShouldAntialias(true)
-        contextRef.setAllowsAntialiasing(true)
-        contextRef.interpolationQuality = .high
-        contextRef.translateBy(x: roundedDestRect.width / 2, y: roundedDestRect.height / 2)
-        contextRef.rotate(by: -radians)
-
-        base.draw(
-            in: CGRect(
-                origin: CGPoint(x: -base.size.width / 2, y: -base.size.height / 2),
-                size: base.size
-            )
-        )
-
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage
     }
 
     /// ReerKit: UIImage filled with color
@@ -413,6 +278,145 @@ public extension Reer where Base: UIImage {
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     func withAlwaysOriginalTintColor(_ color: UIColor) -> UIImage {
         return base.withTintColor(color, renderingMode: .alwaysOriginal)
+    }
+}
+
+// MARK: - Transform
+
+public extension Reer where Base: UIImage {
+    /// ReerKit: A new image rotated counterclockwise by a quarter‑turn (90°). ⤺
+    /// The width and height will be exchanged.
+    var roatatedLeft90: UIImage? {
+        return rotated(by: CGFloat(90.0).re.degreesToRadians, fitSize: true)
+    }
+    
+    /// ReerKit: A new image rotated clockwise by a quarter‑turn (90°). ⤼
+    /// The width and height will be exchanged.
+    var roatatedRight90: UIImage? {
+        return rotated(by: CGFloat(-90.0).re.degreesToRadians, fitSize: true)
+    }
+    
+    /// ReerKit: A new image rotated 180° . ↻
+    var roatated180: UIImage? {
+        return rotated(by: CGFloat(-180.0).re.degreesToRadians, fitSize: true)
+    }
+    
+    /// ReerKit: UIImage Cropped to CGRect.
+    ///
+    /// - Parameter rect: CGRect to crop UIImage to.
+    /// - Returns: cropped UIImage
+    func cropped(to rect: CGRect) -> UIImage {
+        guard rect.size.width <= base.size.width, rect.size.height <= base.size.height else { return base }
+        let scaledRect = rect.applying(CGAffineTransform(scaleX: base.scale, y: base.scale))
+        guard let image = base.cgImage?.cropping(to: scaledRect) else { return base }
+        return UIImage(cgImage: image, scale: base.scale, orientation: base.imageOrientation)
+    }
+
+    /// ReerKit: UIImage scaled to height with respect to aspect ratio.
+    ///
+    /// - Parameters:
+    ///   - toHeight: new height.
+    ///   - opaque: flag indicating whether the bitmap is opaque.
+    /// - Returns: optional scaled UIImage (if applicable).
+    func scaled(toHeight: CGFloat, opaque: Bool = false) -> UIImage? {
+        let scale = toHeight / base.size.height
+        let newWidth = base.size.width * scale
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: newWidth, height: toHeight), opaque, base.scale)
+        base.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: toHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+
+    /// ReerKit: UIImage scaled to width with respect to aspect ratio.
+    ///
+    /// - Parameters:
+    ///   - toWidth: new width.
+    ///   - opaque: flag indicating whether the bitmap is opaque.
+    /// - Returns: optional scaled UIImage (if applicable).
+    func scaled(toWidth: CGFloat, opaque: Bool = false) -> UIImage? {
+        let scale = toWidth / base.size.width
+        let newHeight = base.size.height * scale
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: toWidth, height: newHeight), opaque, base.scale)
+        base.draw(in: CGRect(x: 0, y: 0, width: toWidth, height: newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+
+    /// ReerKit: Creates a copy of the receiver rotated by the given angle.
+    ///
+    ///     // Rotate the image by 180°
+    ///     image.rotated(by: Measurement(value: 180, unit: .degrees))
+    ///
+    /// - Parameter angle: The angle measurement by which to rotate the image.
+    /// - Returns: A new image rotated by the given angle.
+    @available(tvOS 10.0, watchOS 3.0, *)
+    func rotated(by angle: Measurement<UnitAngle>) -> UIImage? {
+        let radians = CGFloat(angle.converted(to: .radians).value)
+
+        let destRect = CGRect(origin: .zero, size: base.size)
+            .applying(CGAffineTransform(rotationAngle: radians))
+        let roundedDestRect = CGRect(
+            x: destRect.origin.x.rounded(),
+            y: destRect.origin.y.rounded(),
+            width: destRect.width.rounded(),
+            height: destRect.height.rounded()
+        )
+
+        UIGraphicsBeginImageContextWithOptions(roundedDestRect.size, false, base.scale)
+        guard let contextRef = UIGraphicsGetCurrentContext() else { return nil }
+
+        contextRef.translateBy(x: roundedDestRect.width / 2, y: roundedDestRect.height / 2)
+        contextRef.rotate(by: radians)
+
+        base.draw(
+            in: CGRect(
+                origin: CGPoint(x: -base.size.width / 2, y: -base.size.height / 2),
+                size: base.size
+            )
+        )
+
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+
+    /// ReerKit: Returns a new rotated image (relative to the center).
+    ///
+    /// - Parameters:
+    ///   - radians: Rotated radians in counterclockwise.⟲
+    ///   - fitSize: true: new image's size is extend to fit all content.
+    ///              false: image's size will not change, content may be clipped.
+    /// - Returns: The new image
+    func rotated(by radians: CGFloat, fitSize: Bool = true) -> UIImage? {
+        let destRect = CGRect(origin: .zero, size: base.size)
+            .applying(fitSize ? CGAffineTransform.init(rotationAngle: radians) : .identity)
+        let roundedDestRect = CGRect(
+            x: destRect.origin.x.rounded(),
+            y: destRect.origin.y.rounded(),
+            width: destRect.width.rounded(),
+            height: destRect.height.rounded()
+        )
+
+        UIGraphicsBeginImageContextWithOptions(roundedDestRect.size, false, base.scale)
+        guard let contextRef = UIGraphicsGetCurrentContext() else { return nil }
+        contextRef.setShouldAntialias(true)
+        contextRef.setAllowsAntialiasing(true)
+        contextRef.interpolationQuality = .high
+        contextRef.translateBy(x: roundedDestRect.width / 2, y: roundedDestRect.height / 2)
+        contextRef.rotate(by: -radians)
+
+        base.draw(
+            in: CGRect(
+                origin: CGPoint(x: -base.size.width / 2, y: -base.size.height / 2),
+                size: base.size
+            )
+        )
+
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
     }
 }
 

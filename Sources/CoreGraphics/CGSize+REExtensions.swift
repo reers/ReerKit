@@ -23,6 +23,10 @@
 #if canImport(CoreGraphics)
 import CoreGraphics
 
+#if canImport(UIKit)
+import UIKit
+#endif
+
 extension CGSize: ReerCompatibleValue {}
 public extension Reer where Base == CGSize {
     /// ReerKit: Returns the aspect ratio.
@@ -68,6 +72,86 @@ public extension Reer where Base == CGSize {
         let maxRatio = max(boundingSize.width / base.width, boundingSize.height / base.height)
         return CGSize(width: base.width * maxRatio, height: base.height * maxRatio)
     }
+    
+    #if canImport(UIKit)
+    /// ReerKit: Returns a rectangle to fit the @param rect with specified content mode.
+    ///
+    /// - Parameters:
+    ///   - rect: The constrant rect
+    ///   - size: The content size
+    ///   - mode: The content mode
+    /// - Returns: A rectangle for the given content mode.
+    func fit(inRect rect: CGRect, mode: UIView.ContentMode) -> CGRect {
+        var rect = rect.standardized
+        var size = base
+        size.width = size.width < 0 ? -size.width : size.width
+        size.height = size.height < 0 ? -size.height : size.height
+        let center = CGPoint(x: rect.midX, y: rect.midY)
+        switch mode {
+        case .scaleAspectFit, .scaleAspectFill:
+            if (rect.size.width < 0.01 || rect.size.height < 0.01 ||
+                size.width < 0.01 || size.height < 0.01) {
+                rect.origin = center
+                rect.size = CGSize.zero
+            }
+            else {
+                var scale: CGFloat = 0
+                if (mode == .scaleAspectFit) {
+                    if (size.width / size.height < rect.size.width / rect.size.height) {
+                        scale = rect.size.height / size.height
+                    }
+                    else {
+                        scale = rect.size.width / size.width
+                    }
+                }
+                else {
+                    if (size.width / size.height < rect.size.width / rect.size.height) {
+                        scale = rect.size.width / size.width
+                    }
+                    else {
+                        scale = rect.size.height / size.height
+                    }
+                }
+                size.width *= scale
+                size.height *= scale
+                rect.size = size
+                rect.origin = CGPoint.init(x: center.x - size.width * 0.5, y: center.y - size.height * 0.5)
+            }
+        case .center:
+            rect.size = size;
+            rect.origin = CGPoint.init(x: center.x - size.width * 0.5, y: center.y - size.height * 0.5)
+        case .top:
+            rect.origin.x = center.x - size.width * 0.5
+            rect.size = size
+        case .bottom:
+            rect.origin.x = center.x - size.width * 0.5
+            rect.origin.y += rect.size.height - size.height
+            rect.size = size
+        case .left:
+            rect.origin.y = center.y - size.height * 0.5
+            rect.size = size
+        case .right:
+            rect.origin.y = center.y - size.height * 0.5
+            rect.origin.x += rect.size.width - size.width
+            rect.size = size
+        case .topLeft:
+            rect.size = size
+        case .topRight:
+            rect.origin.x += rect.size.width - size.width
+            rect.size = size
+        case .bottomLeft:
+            rect.origin.y += rect.size.height - size.height
+            rect.size = size
+        case .bottomRight:
+            rect.origin.x += rect.size.width - size.width
+            rect.origin.y += rect.size.height - size.height
+            rect.size = size
+        default:
+            break
+        }
+        return rect
+    }
+    #endif
 }
 
 // MARK: - Operators

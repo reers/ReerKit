@@ -28,6 +28,18 @@ final class CGSizeExtensionsTests: XCTestCase {
         XCTAssertEqual(newRect.width, 100)
         XCTAssertEqual(newRect.height, 600)
     }
+    
+    func testFitInRect() {
+        let size = CGSize.re(10, 40)
+        let rect = CGRect.re(0, 0, 80, 80)
+        XCTAssertEqual(size.re.fit(inRect: rect, mode: .scaleToFill), CGRect.re(0, 0, 80, 80))
+        XCTAssertEqual(size.re.fit(inRect: rect, mode: .scaleAspectFit), CGRect.re(30, 0, 20, 80))
+        XCTAssertEqual(size.re.fit(inRect: rect, mode: .scaleAspectFill), CGRect.re(0, -120, 80, 320))
+        XCTAssertEqual(size.re.fit(inRect: rect, mode: .center), CGRect.re(35, 20, 10, 40))
+        XCTAssertEqual(size.re.fit(inRect: rect, mode: .left), CGRect.re(0, 20, 10, 40))
+        XCTAssertEqual(size.re.fit(inRect: rect, mode: .right), CGRect.re(70, 20, 10, 40))
+        XCTAssertEqual(size.re.fit(inRect: rect, mode: .topLeft), CGRect.re(0, 0, 10, 40))
+    }
 
     func testAspectRatio() {
         let size1 = CGSize(width: 10, height: 0)

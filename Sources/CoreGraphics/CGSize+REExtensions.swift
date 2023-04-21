@@ -262,4 +262,21 @@ public extension CGSize {
     }
 }
 
+// MARK: - Initializers
+
+public extension CGSize {
+    /// ReerKit: Create a `CGSize` instance with side length (same width and height).
+    ///
+    /// - Parameters:
+    ///   - side: side length.
+    static func re(side: CGFloat) -> CGSize {
+        return CGSize(width: side, height: side)
+    }
+
+    /// ReerKit: Create a `CGSize` instance with width, height, but without argument label.
+    static func re(_ width: CGFloat, _ height: CGFloat) -> CGSize {
+        return CGSize(width: width, height: height)
+    }
+}
+
 #endif

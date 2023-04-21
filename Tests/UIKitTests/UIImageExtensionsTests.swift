@@ -126,6 +126,30 @@ final class UIImageExtensionsTests: XCTestCase {
         XCTAssertNotNil(scaledImage)
         XCTAssertEqual(scaledImage!.size.width, 300, accuracy: 0.1)
     }
+    
+    func testBlur() {
+        let bundle = Bundle(for: UIImageExtensionsTests.self)
+        let image = UIImage(named: "TestImage", in: bundle, compatibleWith: nil)!
+
+        
+        let grayscaleImage = image.re.grayscale
+        XCTAssertNotNil(grayscaleImage)
+        
+        let blurSoftImage = image.re.blurSoft
+        XCTAssertNotNil(blurSoftImage)
+        
+        let blurLightImage = image.re.blurLight
+        XCTAssertNotNil(blurLightImage)
+        
+        let blurExtraLightImage = image.re.blurExtraLight
+        XCTAssertNotNil(blurExtraLightImage)
+        
+        let bluredImage = image.re.blurDark
+        XCTAssertNotNil(bluredImage)
+        
+        let tintImage = image.re.blurWithTintColor(.red)
+        XCTAssertNotNil(tintImage)
+    }
 
     @available(tvOS 10.0, watchOS 3.0, *)
     func testRotatedByMeasurement() {
@@ -210,7 +234,7 @@ final class UIImageExtensionsTests: XCTestCase {
 
     func testURL() {
         let bundle = Bundle(for: UIImageExtensionsTests.self)
-        guard let reerLogo = bundle.url(forResource: "TestImage", withExtension: "png") else { XCTAssert(false, "Swifter Swift Test Image not available, or url is no longer valid."); return }
+        guard let reerLogo = bundle.url(forResource: "TestImage", withExtension: "png") else { XCTAssert(false, "Test Image not available, or url is no longer valid."); return }
         let image = try? UIImage.re(url: reerLogo)
         XCTAssertNotNil(image)
 

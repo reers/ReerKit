@@ -27,6 +27,10 @@ import UIKit
 import Accelerate
 #endif
 
+#if canImport(Darwin)
+import Darwin
+#endif
+
 public extension Reer where Base: UIImage {
     /// ReerKit: Size in bytes of UIImage.
     var bytesSize: Int {
@@ -473,6 +477,272 @@ public extension Reer where Base: UIImage {
     }
     #endif
 }
+
+// MARK: - Blur
+#if canImport(Accelerate) && canImport(Darwin)
+
+public extension Reer where Base: UIImage {
+    
+    /// ReerKit: A grayscaled image.
+    var grayscale: UIImage? {
+        return blur(radius: 0, tintColor: nil, tintBlendMode: .normal, saturation: 0, maskImage: nil)
+    }
+    
+    /// ReerKit: Applies a blur effect to this image. Suitable for blur any content.
+    var blurSoft: UIImage? {
+        return blur(radius: 60, tintColor: UIColor(white: 0.84, alpha: 0.36), tintBlendMode: .normal, saturation: 1.8, maskImage: nil)
+    }
+    
+    /// ReerKit: Applies a blur effect to this image. Suitable for blur any content except pure white.
+    /// (same as iOS Control Panel)
+    var blurLight: UIImage? {
+        return blur(radius: 60, tintColor: UIColor(white: 1.0, alpha: 0.3), tintBlendMode: .normal, saturation: 1.8, maskImage: nil)
+    }
+    
+    /// ReerKit: Applies a blur effect to this image. Suitable for displaying black text.
+    /// (same as iOS Navigation Bar White)
+    var blurExtraLight: UIImage? {
+        return blur(radius: 40, tintColor: UIColor(white: 0.97, alpha: 0.82), tintBlendMode: .normal, saturation: 1.8, maskImage: nil)
+    }
+    
+    /// ReerKit: Applies a blur effect to this image. Suitable for displaying white text.
+    /// (same as iOS Notification Center)
+    var blurDark: UIImage? {
+        return blur(radius: 40, tintColor: UIColor(white: 0.11, alpha: 0.73), tintBlendMode: .normal, saturation: 1.8, maskImage: nil)
+    }
+    
+    /// ReerKit: Applies a blur and tint color to this image.
+    ///
+    /// - Parameter tintColor: The tint color.
+    /// - Returns: The new image
+    func blurWithTintColor(_ tintColor: UIColor) -> UIImage? {
+        let effectColorAlpha: CGFloat = 0.6
+        var effectColor = tintColor
+        let componentCount = tintColor.cgColor.numberOfComponents
+        if componentCount == 2 {
+            var b: CGFloat = 0
+            if tintColor.getWhite(&b, alpha: nil) {
+                effectColor = UIColor(white: b, alpha: effectColorAlpha)
+            }
+        }
+        else {
+            var r: CGFloat = 0
+            var g: CGFloat = 0
+            var b: CGFloat = 0
+            if tintColor.getRed(&r, green: &g, blue: &b, alpha: nil) {
+                effectColor = UIColor(red: r, green: g, blue: b, alpha: effectColorAlpha)
+            }
+        }
+        return blur(radius: 20, tintColor: effectColor, tintBlendMode: .normal, saturation: -1.0, maskImage: nil)
+    }
+    
+    /// ReerKit: Applies a blur, tint color, and saturation adjustment to this image,
+    /// optionally within the area specified by @a maskImage.
+    ///
+    /// - Parameters:
+    ///   - radius: The radius of the blur in points, 0 means no blur effect.
+    ///   - tintColor: An optional UIColor object that is uniformly blended with
+    ///                the result of the blur and saturation operations. The
+    ///                alpha channel of this color determines how strong the
+    ///                tint is. nil means no tint.
+    ///   - tintBlendMode: The @a tintColor blend mode.
+    ///                    Default is CGBlendMode.normal.
+    ///   - saturation: A value of 1.0 produces no change in the resulting image.
+    ///                 Values less than 1.0 will desaturation the resulting image
+    ///                 while values greater than 1.0 will have the opposite effect.
+    ///                 0 means gray scale.
+    ///   - maskImage: If specified, @a inputImage is only modified in the area(s)
+    ///                defined by this mask.  This must be an image mask or it
+    ///                must meet the requirements of the mask parameter of
+    ///                CGContextClipToMask.
+    /// - Returns: The blured new Image
+    func blur(
+        radius: CGFloat,
+        tintColor: UIColor? = nil,
+        tintBlendMode: CGBlendMode,
+        saturation: CGFloat,
+        maskImage: UIImage? = nil
+    ) -> UIImage? {
+        if (base.size.width < 1 || base.size.height < 1) {
+            assertionFailure("*** error: invalid size: \(base.size.width) x \(base.size.height). Both dimensions must be >= 1: \(base)")
+            return nil
+        }
+        guard let cgImage = base.cgImage else {
+            assertionFailure("*** error: image must be backed by a CGImage: \(base)")
+            return nil
+        }
+        if maskImage != nil && maskImage!.cgImage == nil {
+            assertionFailure("*** error: maskImage must be backed by a CGImage: \(String(describing: maskImage))")
+            return nil
+        }
+        
+        let screenScale = UIScreen.main.scale
+        let imageRect = CGRect(origin: CGPoint.zero, size: base.size)
+        var effectImage: UIImage = base
+        
+        let hasBlur = radius > CGFloat.ulpOfOne
+        let hasSaturationChange = Swift.abs(saturation - 1.0) > CGFloat.ulpOfOne
+        
+        if hasBlur || hasSaturationChange {
+            func createEffectBuffer(_ context: CGContext) -> vImage_Buffer {
+                let data = context.data
+                let width = vImagePixelCount(context.width)
+                let height = vImagePixelCount(context.height)
+                let rowBytes = context.bytesPerRow
+                
+                return vImage_Buffer(data: data, height: height, width: width, rowBytes: rowBytes)
+            }
+            
+            UIGraphicsBeginImageContextWithOptions(base.size, false, screenScale)
+            guard let effectInContext = UIGraphicsGetCurrentContext() else { return  nil }
+            
+            effectInContext.scaleBy(x: 1.0, y: -1.0)
+            effectInContext.translateBy(x: 0, y: -base.size.height)
+            effectInContext.draw(cgImage, in: imageRect)
+            
+            var effectInBuffer = createEffectBuffer(effectInContext)
+            
+            
+            UIGraphicsBeginImageContextWithOptions(base.size, false, screenScale)
+            
+            guard let effectOutContext = UIGraphicsGetCurrentContext() else { return  nil }
+            var effectOutBuffer = createEffectBuffer(effectOutContext)
+            
+            
+            if hasBlur {
+                let inputRadius = radius * screenScale
+                let d = Darwin.floor(inputRadius * 3.0 * sqrt(2 * CGFloat.pi) / 4 + 0.5)
+                var radius = UInt32(d)
+                if radius % 2 != 1 {
+                    radius += 1
+                }
+                
+                let imageEdgeExtendFlags = vImage_Flags(kvImageEdgeExtend)
+                
+                vImageBoxConvolve_ARGB8888(&effectInBuffer, &effectOutBuffer, nil, 0, 0, radius, radius, nil, imageEdgeExtendFlags)
+                vImageBoxConvolve_ARGB8888(&effectOutBuffer, &effectInBuffer, nil, 0, 0, radius, radius, nil, imageEdgeExtendFlags)
+                vImageBoxConvolve_ARGB8888(&effectInBuffer, &effectOutBuffer, nil, 0, 0, radius, radius, nil, imageEdgeExtendFlags)
+            }
+            
+            var effectImageBuffersAreSwapped = false
+            
+            if hasSaturationChange {
+                let s: CGFloat = saturation
+                let floatingPointSaturationMatrix: [CGFloat] = [
+                    0.0722 + 0.9278 * s,  0.0722 - 0.0722 * s,  0.0722 - 0.0722 * s,  0,
+                    0.7152 - 0.7152 * s,  0.7152 + 0.2848 * s,  0.7152 - 0.7152 * s,  0,
+                    0.2126 - 0.2126 * s,  0.2126 - 0.2126 * s,  0.2126 + 0.7873 * s,  0,
+                    0,                    0,                    0,                    1
+                ]
+                
+                let divisor: CGFloat = 256
+                let matrixSize = floatingPointSaturationMatrix.count
+                var saturationMatrix = [Int16](repeating: 0, count: matrixSize)
+                
+                for i: Int in 0 ..< matrixSize {
+                    saturationMatrix[i] = Int16(round(floatingPointSaturationMatrix[i] * divisor))
+                }
+                
+                if hasBlur {
+                    vImageMatrixMultiply_ARGB8888(&effectOutBuffer, &effectInBuffer, saturationMatrix, Int32(divisor), nil, nil, vImage_Flags(kvImageNoFlags))
+                    effectImageBuffersAreSwapped = true
+                } else {
+                    vImageMatrixMultiply_ARGB8888(&effectInBuffer, &effectOutBuffer, saturationMatrix, Int32(divisor), nil, nil, vImage_Flags(kvImageNoFlags))
+                }
+            }
+            
+            if !effectImageBuffersAreSwapped {
+                effectImage = UIGraphicsGetImageFromCurrentImageContext()!
+            }
+            
+            UIGraphicsEndImageContext()
+            
+            if effectImageBuffersAreSwapped {
+                effectImage = UIGraphicsGetImageFromCurrentImageContext()!
+            }
+            
+            UIGraphicsEndImageContext()
+        }
+        
+        UIGraphicsBeginImageContextWithOptions(base.size, false, screenScale)
+        
+        guard let outputContext = UIGraphicsGetCurrentContext() else { return nil }
+        
+        outputContext.scaleBy(x: 1.0, y: -1.0)
+        outputContext.translateBy(x: 0, y: -base.size.height)
+        
+        outputContext.draw(cgImage, in: imageRect)
+        
+        if hasBlur {
+            outputContext.saveGState()
+            if let maskCGImage = maskImage?.cgImage {
+                outputContext.clip(to: imageRect, mask: maskCGImage);
+            }
+            outputContext.draw(effectImage.cgImage!, in: imageRect)
+            outputContext.restoreGState()
+        }
+        
+        if let color = tintColor {
+            outputContext.saveGState()
+            outputContext.setBlendMode(tintBlendMode)
+            outputContext.setFillColor(color.cgColor)
+            outputContext.fill(imageRect)
+            outputContext.restoreGState()
+        }
+        
+        let outputImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return outputImage
+    }
+    
+//    private func merge(effectCGImage: CGImage, tintColor: UIColor? = nil, tintBlendMode: CGBlendMode, maskImage: UIImage? = nil, opaque: Bool) -> UIImage? {
+//        guard let cgImage = base.cgImage else {
+//            return nil
+//        }
+//        let hasTint: Bool = tintColor != nil && tintColor!.cgColor.alpha > CGFloat.ulpOfOne
+//        let hasMask: Bool = maskImage != nil
+//        let size = base.size
+//        let rect = CGRect(origin: .zero, size: size)
+//        let scale = base.scale
+//
+//        if !hasTint && !hasMask {
+//            return UIImage(cgImage: effectCGImage)
+//        }
+//
+//        UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
+//        guard let context = UIGraphicsGetCurrentContext() else {
+//            return base
+//        }
+//        context.scaleBy(x: 1, y: -1)
+//        context.translateBy(x: 0, y: -size.height)
+//        if hasMask {
+//            context.draw(cgImage, in: rect)
+//            context.saveGState()
+//            context.clip(to: rect, mask: maskImage!.cgImage!)
+//        }
+//        context.draw(effectCGImage, in: rect)
+//        if hasTint {
+//            context.saveGState()
+//            context.setBlendMode(tintBlendMode)
+//            context.setFillColor(tintColor!.cgColor)
+//            context.fill(rect)
+//            context.restoreGState()
+//        }
+//        if hasMask {
+//            context.restoreGState()
+//        }
+//        let outputImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        if outputImage != nil {
+//            return outputImage!
+//        }
+//        else {
+//            return nil
+//        }
+//    }
+}
+#endif
 
 // MARK: - Initializers
 

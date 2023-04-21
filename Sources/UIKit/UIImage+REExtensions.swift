@@ -51,6 +51,18 @@ public extension Reer where Base: UIImage {
     var template: UIImage {
         return base.withRenderingMode(.alwaysTemplate)
     }
+    
+    /// ReerKit: Whether this image has alpha channel.
+    var hasAlphaChannel: Bool {
+        guard let cgImage = base.cgImage else {
+            return false
+        }
+        let alpha = CGImageAlphaInfo(rawValue: cgImage.alphaInfo.rawValue & CGBitmapInfo.alphaInfoMask.rawValue)
+        return (alpha == .first
+            || alpha == .last
+            || alpha == .premultipliedFirst
+            || alpha == .premultipliedLast)
+    }
 
     #if canImport(CoreImage)
     /// ReerKit: Average color for this image.
@@ -221,8 +233,13 @@ public extension Reer where Base: UIImage {
         }
         
         var corners = corners
-        if corners != .allCorners && corners.contains(.allCorners) {
-            corners.remove(.allCorners)
+        if corners != .allCorners {
+            var temp: UIRectCorner = []
+            if corners.contains(.topLeft) { temp.insert(.bottomLeft) }
+            if corners.contains(.topRight) { temp.insert(.bottomRight) }
+            if corners.contains(.bottomLeft) { temp.insert(.topLeft) }
+            if corners.contains(.bottomRight) { temp.insert(.topRight) }
+            corners = temp
         }
 
         UIGraphicsBeginImageContextWithOptions(base.size, false, base.scale)
@@ -261,6 +278,49 @@ public extension Reer where Base: UIImage {
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage ?? base
+    }
+    
+    /// ReerKit: Returns a new image which is edge inset from this image.
+    ///
+    /// - Parameters:
+    ///   - insets: Inset (positive) for each of the edges, values can be negative to 'outset'.
+    ///   - color: Extend edge's fill color, nil means clear color.
+    /// - Returns: The new image
+    func withEdge(byInsets insets: UIEdgeInsets, color: UIColor?) -> UIImage? {
+        let allEdgesArePositive = insets.top >= 0 && insets.left >= 0 && insets.bottom >= 0 && insets.right >= 0
+        let allEdgesAreNegative = insets.top <= 0 && insets.left <= 0 && insets.bottom <= 0 && insets.right <= 0
+        guard allEdgesArePositive || allEdgesAreNegative else { return nil }
+        var size = base.size
+        size.width -= insets.left + insets.right
+        size.height -= insets.top + insets.bottom
+        if size.width <= 0 || size.height <= 0 { return nil }
+        var rect: CGRect
+        if allEdgesArePositive {
+            rect = CGRect(x: insets.left, y: insets.top, width: size.width, height: size.height)
+        } else {
+            rect = CGRect(x: -insets.left, y: -insets.top, width: base.size.width, height: base.size.height)
+        }
+        UIGraphicsBeginImageContextWithOptions(allEdgesArePositive ? base.size : size, false, base.scale)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
+        if let color = color {
+            context.setFillColor(color.cgColor)
+            let path = CGMutablePath()
+            if allEdgesArePositive {
+                path.addRect(CGRect.init(x: 0, y: 0, width: base.size.width, height: base.size.height))
+            } else {
+                path.addRect(CGRect.init(x: 0, y: 0, width: size.width, height: size.height))
+            }
+            path.addRect(rect)
+            
+            context.addPath(path)
+            context.fillPath(using: .evenOdd)
+        }
+        base.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
     }
 
     /// ReerKit: Base 64 encoded PNG data of the image.
@@ -695,52 +755,6 @@ public extension Reer where Base: UIImage {
         
         return outputImage
     }
-    
-//    private func merge(effectCGImage: CGImage, tintColor: UIColor? = nil, tintBlendMode: CGBlendMode, maskImage: UIImage? = nil, opaque: Bool) -> UIImage? {
-//        guard let cgImage = base.cgImage else {
-//            return nil
-//        }
-//        let hasTint: Bool = tintColor != nil && tintColor!.cgColor.alpha > CGFloat.ulpOfOne
-//        let hasMask: Bool = maskImage != nil
-//        let size = base.size
-//        let rect = CGRect(origin: .zero, size: size)
-//        let scale = base.scale
-//
-//        if !hasTint && !hasMask {
-//            return UIImage(cgImage: effectCGImage)
-//        }
-//
-//        UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
-//        guard let context = UIGraphicsGetCurrentContext() else {
-//            return base
-//        }
-//        context.scaleBy(x: 1, y: -1)
-//        context.translateBy(x: 0, y: -size.height)
-//        if hasMask {
-//            context.draw(cgImage, in: rect)
-//            context.saveGState()
-//            context.clip(to: rect, mask: maskImage!.cgImage!)
-//        }
-//        context.draw(effectCGImage, in: rect)
-//        if hasTint {
-//            context.saveGState()
-//            context.setBlendMode(tintBlendMode)
-//            context.setFillColor(tintColor!.cgColor)
-//            context.fill(rect)
-//            context.restoreGState()
-//        }
-//        if hasMask {
-//            context.restoreGState()
-//        }
-//        let outputImage = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//        if outputImage != nil {
-//            return outputImage!
-//        }
-//        else {
-//            return nil
-//        }
-//    }
 }
 #endif
 
@@ -752,7 +766,7 @@ public extension UIImage {
     /// - Parameters:
     ///   - color: image fill color.
     ///   - size: image size.
-    static func re(color: UIColor, size: CGSize) -> UIImage {
+    static func re(color: UIColor, size: CGSize = .init(width: 1, height: 1)) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 1)
 
         defer {

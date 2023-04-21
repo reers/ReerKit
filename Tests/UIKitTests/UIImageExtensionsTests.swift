@@ -150,6 +150,22 @@ final class UIImageExtensionsTests: XCTestCase {
         let tintImage = image.re.blurWithTintColor(.red)
         XCTAssertNotNil(tintImage)
     }
+    
+    func testHasAlphaInfo() {
+        XCTAssertTrue(UIImage.re(color: .clear).re.hasAlphaChannel)
+        let data = UIImage.re(color: .red).re.compressedData()!
+        XCTAssertFalse(UIImage(data: data)!.re.hasAlphaChannel)
+    }
+    
+    func testEdge() {
+        let image = UIImage.re(color: .red, size: .re(side: 80))
+        
+        let insideEdgeImage = image.re.withEdge(byInsets: .re(inset: 10), color: .green)
+        XCTAssertNotNil(insideEdgeImage)
+        
+        let outsideEdgeImage = image.re.withEdge(byInsets: .re(inset: -10), color: .green)
+        XCTAssertNotNil(outsideEdgeImage)
+    }
 
     @available(tvOS 10.0, watchOS 3.0, *)
     func testRotatedByMeasurement() {
@@ -278,6 +294,9 @@ final class UIImageExtensionsTests: XCTestCase {
         XCTAssertNotNil(image.re.withRoundedCorners(radius: 5))
         XCTAssertNotNil(image.re.withRoundedCorners(radius: -10))
         XCTAssertNotNil(image.re.withRoundedCorners(radius: 350))
+        
+        let result = image.re.withRoundedCorners(radius: 50, corners: [.bottomLeft, .topRight, .topLeft], borderWidth: 10, borderColor: .red, borderLineJoin: .round)
+        XCTAssertNotNil(result)
     }
 
     func testPNGBase64String() {

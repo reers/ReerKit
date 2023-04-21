@@ -113,7 +113,7 @@ final class UIImageExtensionsTests: XCTestCase {
         let bundle = Bundle(for: UIImageExtensionsTests.self)
         let image = UIImage(named: "TestImage", in: bundle, compatibleWith: nil)!
 
-        let scaledImage = image.re.scaled(toHeight: 300)
+        let scaledImage = image.re.resize(toHeight: 300)
         XCTAssertNotNil(scaledImage)
         XCTAssertEqual(scaledImage!.size.height, 300, accuracy: 0.1)
     }
@@ -122,9 +122,20 @@ final class UIImageExtensionsTests: XCTestCase {
         let bundle = Bundle(for: UIImageExtensionsTests.self)
         let image = UIImage(named: "TestImage", in: bundle, compatibleWith: nil)!
 
-        let scaledImage = image.re.scaled(toWidth: 300)
+        let scaledImage = image.re.resize(toWidth: 300)
         XCTAssertNotNil(scaledImage)
         XCTAssertEqual(scaledImage!.size.width, 300, accuracy: 0.1)
+    }
+    
+    func testResize() {
+        let bundle = Bundle(for: UIImageExtensionsTests.self)
+        let image = UIImage(named: "TestImage", in: bundle, compatibleWith: nil)!
+        let ret = image.re.resize(to: .re(100, 400), contentMode: .scaleAspectFill)
+        XCTAssertNotNil(ret)
+        XCTAssertEqual(ret?.size, CGSize.re(100, 400))
+        
+        let ret2 = image.re.resize(to: .re(560, 560), contentMode: .scaleToFill)
+        XCTAssertEqual(ret2?.size, CGSize.re(560, 560))
     }
     
     func testBlur() {

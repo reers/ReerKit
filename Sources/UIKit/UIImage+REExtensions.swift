@@ -462,7 +462,7 @@ public extension Reer where Base: UIImage {
     ///   - toHeight: new height.
     ///   - opaque: flag indicating whether the bitmap is opaque.
     /// - Returns: optional scaled UIImage (if applicable).
-    func scaled(toHeight: CGFloat, opaque: Bool = false) -> UIImage? {
+    func resize(toHeight: CGFloat, opaque: Bool = false) -> UIImage? {
         let scale = toHeight / base.size.height
         let newWidth = base.size.width * scale
         UIGraphicsBeginImageContextWithOptions(CGSize(width: newWidth, height: toHeight), opaque, base.scale)
@@ -478,7 +478,7 @@ public extension Reer where Base: UIImage {
     ///   - toWidth: new width.
     ///   - opaque: flag indicating whether the bitmap is opaque.
     /// - Returns: optional scaled UIImage (if applicable).
-    func scaled(toWidth: CGFloat, opaque: Bool = false) -> UIImage? {
+    func resize(toWidth: CGFloat, opaque: Bool = false) -> UIImage? {
         let scale = toWidth / base.size.width
         let newHeight = base.size.height * scale
         UIGraphicsBeginImageContextWithOptions(CGSize(width: toWidth, height: newHeight), opaque, base.scale)
@@ -486,6 +486,58 @@ public extension Reer where Base: UIImage {
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage
+    }
+    
+    /// ReerKit: Returns a new image which is scaled from this image.
+    /// The image content will be changed with the contentMode.
+    ///
+    /// - Parameters:
+    ///   - size: The new size to be scaled, values should be positive.
+    ///   - contentMode: The content mode for image content.
+    ///   - opaque: flag indicating whether the bitmap is opaque.
+    /// - Returns: The new image with the given size.
+    func resize(to size: CGSize, contentMode: UIView.ContentMode = .scaleToFill, opaque: Bool = false) -> UIImage? {
+        if size.width <= 0 || size.height <= 0 {
+            return nil
+        }
+        UIGraphicsBeginImageContextWithOptions(size, opaque, base.scale)
+        base.re.draw(inRect: CGRect.init(x: 0, y: 0, width: size.width, height: size.height), contentMode: contentMode, clipsToBounds: false)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
+    /// ReerKit: Draws the entire image in the specified rectangle, content changed with
+    /// the contentMode.
+    ///
+    /// - Note: This method draws the entire image in the current graphics context,
+    /// respecting the image's orientation setting. In the default coordinate system,
+    /// images are situated down and to the right of the origin of the specified
+    /// rectangle. This method respects any transforms applied to the current graphics
+    /// context, however.
+    ///
+    /// - Parameters:
+    ///   - rect: The rectangle in which to draw the image.
+    ///   - contentMode: Draw content mode
+    ///   - clipsToBounds: A Boolean value that determines whether content are confined to the rect.
+    func draw(inRect rect: CGRect, contentMode: UIView.ContentMode, clipsToBounds: Bool) {
+        let drawRect = base.size.re.fit(inRect: rect, mode: contentMode)
+        if drawRect.size.width == 0 || drawRect.size.height == 0 {
+            return
+        }
+        if clipsToBounds {
+            guard let context = UIGraphicsGetCurrentContext() else {
+                return
+            }
+            context.saveGState()
+            context.addRect(rect)
+            context.clip()
+            base.draw(in: drawRect)
+            context.restoreGState()
+        }
+        else {
+            base.draw(in: drawRect)
+        }
     }
     
     #if canImport(Accelerate)

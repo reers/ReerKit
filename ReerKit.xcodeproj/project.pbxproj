@@ -82,6 +82,8 @@
 		D071620429F3D4BB0051C11E /* UIWindowExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071620329F3D4BB0051C11E /* UIWindowExtensionsTests.swift */; };
 		D071620629F3D5090051C11E /* UIRefreshControl+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071620529F3D5090051C11E /* UIRefreshControl+REExtensions.swift */; };
 		D071620829F3D5480051C11E /* UIRefreshControlExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071620729F3D5480051C11E /* UIRefreshControlExtensionTests.swift */; };
+		D071620B29F3D5B50051C11E /* WKWebView+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071620A29F3D5B50051C11E /* WKWebView+REExtensions.swift */; };
+		D071620E29F3D5FD0051C11E /* WKWebViewExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071620D29F3D5FD0051C11E /* WKWebViewExtensionsTests.swift */; };
 		D071DEBD28D8DC1F00618A2F /* Collection+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071DEBC28D8DC1F00618A2F /* Collection+REExtensions.swift */; };
 		D071DEBF28D8DF5500618A2F /* CollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071DEBE28D8DF5500618A2F /* CollectionExtensionsTests.swift */; };
 		D076A2D128E5DBFF00E89281 /* DecodableExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076A2D028E5DBFF00E89281 /* DecodableExtensionsTests.swift */; };
@@ -295,6 +297,8 @@
 		D071620329F3D4BB0051C11E /* UIWindowExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindowExtensionsTests.swift; sourceTree = "<group>"; };
 		D071620529F3D5090051C11E /* UIRefreshControl+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+REExtensions.swift"; sourceTree = "<group>"; };
 		D071620729F3D5480051C11E /* UIRefreshControlExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRefreshControlExtensionTests.swift; sourceTree = "<group>"; };
+		D071620A29F3D5B50051C11E /* WKWebView+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKWebView+REExtensions.swift"; sourceTree = "<group>"; };
+		D071620D29F3D5FD0051C11E /* WKWebViewExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewExtensionsTests.swift; sourceTree = "<group>"; };
 		D071DEBC28D8DC1F00618A2F /* Collection+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+REExtensions.swift"; sourceTree = "<group>"; };
 		D071DEBE28D8DF5500618A2F /* CollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtensionsTests.swift; sourceTree = "<group>"; };
 		D076A2D028E5DBFF00E89281 /* DecodableExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableExtensionsTests.swift; sourceTree = "<group>"; };
@@ -542,6 +546,22 @@
 			path = CoreAnimationTests;
 			sourceTree = "<group>";
 		};
+		D071620929F3D5A80051C11E /* WebKit */ = {
+			isa = PBXGroup;
+			children = (
+				D071620A29F3D5B50051C11E /* WKWebView+REExtensions.swift */,
+			);
+			path = WebKit;
+			sourceTree = "<group>";
+		};
+		D071620C29F3D5E80051C11E /* WebKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				D071620D29F3D5FD0051C11E /* WKWebViewExtensionsTests.swift */,
+			);
+			path = WebKitTests;
+			sourceTree = "<group>";
+		};
 		D0A0040728621C7600D2FA7C /* Lock */ = {
 			isa = PBXGroup;
 			children = (
@@ -575,6 +595,7 @@
 		D0B1210A2855067B00B5B326 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D071620929F3D5A80051C11E /* WebKit */,
 				D05C866F294B4DE50077E744 /* CoreAnimation */,
 				D05C8669294B4B580077E744 /* CoreGraphics */,
 				D05A8815291BF4C500C53492 /* Shared */,
@@ -591,6 +612,7 @@
 		D0B1210C2855069400B5B326 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				D071620C29F3D5E80051C11E /* WebKitTests */,
 				D0122B2F29EF0B55008311CF /* XCTest */,
 				D0BDA4B629DC503E001EA4A0 /* ResourcesTests */,
 				D0E129A429C38E950051D351 /* SharedTests */,
@@ -1064,6 +1086,7 @@
 				D0EBE2392884797B004925E5 /* OnceExecutable.swift in Sources */,
 				D0CD713D28E5CC1D009ADA8E /* Float+REExtensions.swift in Sources */,
 				D0CD713928E5C597009ADA8E /* StdlibProtocolWrappers.swift in Sources */,
+				D071620B29F3D5B50051C11E /* WKWebView+REExtensions.swift in Sources */,
 				D05C866B294B4B7E0077E744 /* CGAffineTransform+REExtensions.swift in Sources */,
 				D0B1211528550E1000B5B326 /* NSObject+REExtensions.swift in Sources */,
 				D0EBE23B28847B72004925E5 /* Swizzlable.swift in Sources */,
@@ -1166,6 +1189,7 @@
 				D0C95FE42857B4C400D0522D /* IntExtensionsTests.swift in Sources */,
 				D0C95FE22857AD5D00D0522D /* SignedNumericExtensionsTests.swift in Sources */,
 				D071DEBF28D8DF5500618A2F /* CollectionExtensionsTests.swift in Sources */,
+				D071620E29F3D5FD0051C11E /* WKWebViewExtensionsTests.swift in Sources */,
 				D0CC5A1C290AD60E0038989B /* StringProtocolExtensionsTests.swift in Sources */,
 				D0EBE23D28847EC4004925E5 /* AnyObjectExtensionsTests.swift in Sources */,
 				D0122B0929EEFCBD008311CF /* UIButtonExtensionsTests.swift in Sources */,

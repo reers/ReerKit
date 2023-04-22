@@ -89,6 +89,8 @@
 		D076D48F29F3BAC90008ABE0 /* UINavigationBarExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D48E29F3BAC90008ABE0 /* UINavigationBarExtensionsTests.swift */; };
 		D076D49129F3BB2D0008ABE0 /* UINavigationController+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D49029F3BB2D0008ABE0 /* UINavigationController+REExtensions.swift */; };
 		D076D49329F3BB890008ABE0 /* UINavigationControllerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D49229F3BB890008ABE0 /* UINavigationControllerExtensionsTests.swift */; };
+		D076D49529F3BBD90008ABE0 /* UINavigationItem+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D49429F3BBD90008ABE0 /* UINavigationItem+REExtensions.swift */; };
+		D076D49729F3BC020008ABE0 /* UINavigationItemExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D49629F3BC020008ABE0 /* UINavigationItemExtensionsTests.swift */; };
 		D07E53AB2883083300921873 /* RETimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AA2883083300921873 /* RETimer.swift */; };
 		D07E53AD288309DF00921873 /* RETimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AC288309DF00921873 /* RETimerTests.swift */; };
 		D07E53AF2883137000921873 /* WeakProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AE2883137000921873 /* WeakProxy.swift */; };
@@ -271,6 +273,8 @@
 		D076D48E29F3BAC90008ABE0 /* UINavigationBarExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBarExtensionsTests.swift; sourceTree = "<group>"; };
 		D076D49029F3BB2D0008ABE0 /* UINavigationController+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+REExtensions.swift"; sourceTree = "<group>"; };
 		D076D49229F3BB890008ABE0 /* UINavigationControllerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtensionsTests.swift; sourceTree = "<group>"; };
+		D076D49429F3BBD90008ABE0 /* UINavigationItem+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+REExtensions.swift"; sourceTree = "<group>"; };
+		D076D49629F3BC020008ABE0 /* UINavigationItemExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationItemExtensionsTests.swift; sourceTree = "<group>"; };
 		D07E53AA2883083300921873 /* RETimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimer.swift; sourceTree = "<group>"; };
 		D07E53AC288309DF00921873 /* RETimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimerTests.swift; sourceTree = "<group>"; };
 		D07E53AE2883137000921873 /* WeakProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakProxy.swift; sourceTree = "<group>"; };
@@ -561,6 +565,7 @@
 				D076D48429F3B8540008ABE0 /* UILabel+REExtensions.swift */,
 				D076D48C29F3BA6A0008ABE0 /* UINavigationBar+REExtensions.swift */,
 				D076D49029F3BB2D0008ABE0 /* UINavigationController+REExtensions.swift */,
+				D076D49429F3BBD90008ABE0 /* UINavigationItem+REExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -647,6 +652,7 @@
 				D076D48629F3B8A10008ABE0 /* UILabelExtensionsTests.swift */,
 				D076D48E29F3BAC90008ABE0 /* UINavigationBarExtensionsTests.swift */,
 				D076D49229F3BB890008ABE0 /* UINavigationControllerExtensionsTests.swift */,
+				D076D49629F3BC020008ABE0 /* UINavigationItemExtensionsTests.swift */,
 			);
 			path = UIKitTests;
 			sourceTree = "<group>";
@@ -907,6 +913,7 @@
 				D04D34F7286C7A8A001E974C /* DispatchQueue+REExtensions.swift in Sources */,
 				D0122B2729EF0417008311CF /* UIGestureRecognizer+REExtensions.swift in Sources */,
 				D00615C12976F52D003FA4CF /* CATransform3D+REExtensions.swift in Sources */,
+				D076D49529F3BBD90008ABE0 /* UINavigationItem+REExtensions.swift in Sources */,
 				D0BDA4B529DC4E33001EA4A0 /* FileManager+REExtensions.swift in Sources */,
 				D0122B0729EEF7C9008311CF /* UIButton+REExtensions.swift in Sources */,
 				D090D97629DC6CD400245538 /* NSRegularExpression+REExtensions.swift in Sources */,
@@ -1039,6 +1046,7 @@
 				D05C866E294B4C6D0077E744 /* CGAffineTransformExtensionsTests.swift in Sources */,
 				D0122B0529EEF528008311CF /* UIBezierPathExtensionsTests.swift in Sources */,
 				D0F39A7E287DC9B600A754B2 /* CharacterExtensionsTests.swift in Sources */,
+				D076D49729F3BC020008ABE0 /* UINavigationItemExtensionsTests.swift in Sources */,
 				D076A2D128E5DBFF00E89281 /* DecodableExtensionsTests.swift in Sources */,
 				D0122B2D29EF07DF008311CF /* UIImageExtensionsTests.swift in Sources */,
 				D0C95FE42857B4C400D0522D /* IntExtensionsTests.swift in Sources */,

@@ -95,6 +95,8 @@
 		D076D49B29F3BC740008ABE0 /* UISearchBarExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D49A29F3BC740008ABE0 /* UISearchBarExtensionsTests.swift */; };
 		D076D49D29F3BCAB0008ABE0 /* UISegmentedControl+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D49C29F3BCAB0008ABE0 /* UISegmentedControl+REExtensions.swift */; };
 		D076D49F29F3BCEF0008ABE0 /* UISegmentedControlExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D49E29F3BCEF0008ABE0 /* UISegmentedControlExtensionsTests.swift */; };
+		D076D4A129F3BD260008ABE0 /* UISlider+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D4A029F3BD260008ABE0 /* UISlider+REExtensions.swift */; };
+		D076D4A329F3BD5B0008ABE0 /* UISliderExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D4A229F3BD5B0008ABE0 /* UISliderExtensionsTests.swift */; };
 		D07E53AB2883083300921873 /* RETimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AA2883083300921873 /* RETimer.swift */; };
 		D07E53AD288309DF00921873 /* RETimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AC288309DF00921873 /* RETimerTests.swift */; };
 		D07E53AF2883137000921873 /* WeakProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AE2883137000921873 /* WeakProxy.swift */; };
@@ -283,6 +285,8 @@
 		D076D49A29F3BC740008ABE0 /* UISearchBarExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchBarExtensionsTests.swift; sourceTree = "<group>"; };
 		D076D49C29F3BCAB0008ABE0 /* UISegmentedControl+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+REExtensions.swift"; sourceTree = "<group>"; };
 		D076D49E29F3BCEF0008ABE0 /* UISegmentedControlExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISegmentedControlExtensionsTests.swift; sourceTree = "<group>"; };
+		D076D4A029F3BD260008ABE0 /* UISlider+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISlider+REExtensions.swift"; sourceTree = "<group>"; };
+		D076D4A229F3BD5B0008ABE0 /* UISliderExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISliderExtensionsTests.swift; sourceTree = "<group>"; };
 		D07E53AA2883083300921873 /* RETimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimer.swift; sourceTree = "<group>"; };
 		D07E53AC288309DF00921873 /* RETimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimerTests.swift; sourceTree = "<group>"; };
 		D07E53AE2883137000921873 /* WeakProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakProxy.swift; sourceTree = "<group>"; };
@@ -576,6 +580,7 @@
 				D076D49429F3BBD90008ABE0 /* UINavigationItem+REExtensions.swift */,
 				D076D49829F3BC3F0008ABE0 /* UISearchBar+REExtensions.swift */,
 				D076D49C29F3BCAB0008ABE0 /* UISegmentedControl+REExtensions.swift */,
+				D076D4A029F3BD260008ABE0 /* UISlider+REExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -665,6 +670,7 @@
 				D076D49629F3BC020008ABE0 /* UINavigationItemExtensionsTests.swift */,
 				D076D49A29F3BC740008ABE0 /* UISearchBarExtensionsTests.swift */,
 				D076D49E29F3BCEF0008ABE0 /* UISegmentedControlExtensionsTests.swift */,
+				D076D4A229F3BD5B0008ABE0 /* UISliderExtensionsTests.swift */,
 			);
 			path = UIKitTests;
 			sourceTree = "<group>";
@@ -970,6 +976,7 @@
 				D090D96A29DC5B9300245538 /* NotificationCenter+REExtensions.swift in Sources */,
 				D06287142885C88000401B59 /* Weak.swift in Sources */,
 				D090D96629DC5A1100245538 /* Locale+REExtensions.swift in Sources */,
+				D076D4A129F3BD260008ABE0 /* UISlider+REExtensions.swift in Sources */,
 				D0038B832856662B00A890F9 /* RWLocked.swift in Sources */,
 				D053AF0A28B86582004335DC /* Sequence+REExtensions.swift in Sources */,
 				D05C8671294B4E190077E744 /* CAGradientLayer+REExtensions.swift in Sources */,
@@ -1031,6 +1038,7 @@
 				D0CD713128E5BDF2009ADA8E /* BinaryIntegerExtensionsTests.swift in Sources */,
 				D019B8F5285BA02900257A7D /* ReadWriteLockTests.swift in Sources */,
 				D04D34FA286C836A001E974C /* DispatchTests.swift in Sources */,
+				D076D4A329F3BD5B0008ABE0 /* UISliderExtensionsTests.swift in Sources */,
 				D076D48F29F3BAC90008ABE0 /* UINavigationBarExtensionsTests.swift in Sources */,
 				D0CBE62528833BF5006F8BCB /* TimerExtensionsTests.swift in Sources */,
 				D0122B3229EF0C27008311CF /* XCTestExtensions.swift in Sources */,

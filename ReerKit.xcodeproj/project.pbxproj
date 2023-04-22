@@ -139,6 +139,9 @@
 		D090D97829DC6FC700245538 /* NSRegularExpressionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D090D97729DC6FC700245538 /* NSRegularExpressionExtensionsTests.swift */; };
 		D093CF87294B9D4400A830DB /* CGVector+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093CF86294B9D4400A830DB /* CGVector+REExtensions.swift */; };
 		D093CF8B294B9FC000A830DB /* CGVectorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093CF8A294B9FC000A830DB /* CGVectorExtensionsTests.swift */; };
+		D094C84B29F451CA00491CD8 /* UIControl+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D094C84A29F451CA00491CD8 /* UIControl+REExtensions.swift */; };
+		D094C84D29F4559D00491CD8 /* OptionSet+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D094C84C29F4559D00491CD8 /* OptionSet+REExtensions.swift */; };
+		D094C84F29F456A400491CD8 /* OptionSetExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D094C84E29F456A400491CD8 /* OptionSetExtensionsTests.swift */; };
 		D09D724029DC94BF00636935 /* big_buck_bunny_720p_1mb.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D09D723F29DC94BF00636935 /* big_buck_bunny_720p_1mb.mp4 */; };
 		D0A0040628620D9900D2FA7C /* TypeNameDescribableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */; };
 		D0A6B3A32924AD11008B7FDA /* UIResponder+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A6B3A22924AD11008B7FDA /* UIResponder+REExtensions.swift */; };
@@ -353,6 +356,9 @@
 		D090D97729DC6FC700245538 /* NSRegularExpressionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSRegularExpressionExtensionsTests.swift; sourceTree = "<group>"; };
 		D093CF86294B9D4400A830DB /* CGVector+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGVector+REExtensions.swift"; sourceTree = "<group>"; };
 		D093CF8A294B9FC000A830DB /* CGVectorExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGVectorExtensionsTests.swift; sourceTree = "<group>"; };
+		D094C84A29F451CA00491CD8 /* UIControl+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+REExtensions.swift"; sourceTree = "<group>"; };
+		D094C84C29F4559D00491CD8 /* OptionSet+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionSet+REExtensions.swift"; sourceTree = "<group>"; };
+		D094C84E29F456A400491CD8 /* OptionSetExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSetExtensionsTests.swift; sourceTree = "<group>"; };
 		D09D723F29DC94BF00636935 /* big_buck_bunny_720p_1mb.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = big_buck_bunny_720p_1mb.mp4; sourceTree = "<group>"; };
 		D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeNameDescribableTests.swift; sourceTree = "<group>"; };
 		D0A6B3A22924AD11008B7FDA /* UIResponder+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+REExtensions.swift"; sourceTree = "<group>"; };
@@ -660,6 +666,7 @@
 				D076D4C929F3CF180008ABE0 /* UIScrollView+REExtensions.swift */,
 				D071620129F3D47C0051C11E /* UIWindow+REExtensions.swift */,
 				D071620529F3D5090051C11E /* UIRefreshControl+REExtensions.swift */,
+				D094C84A29F451CA00491CD8 /* UIControl+REExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -816,6 +823,7 @@
 				D0CD713828E5C597009ADA8E /* StdlibProtocolWrappers.swift */,
 				D05A8751291BC4A300C53492 /* String+REExtensions.swift */,
 				D0CC5A19290AD5040038989B /* StringProtocol+REExtensions.swift */,
+				D094C84C29F4559D00491CD8 /* OptionSet+REExtensions.swift */,
 			);
 			path = StandardLibrary;
 			sourceTree = "<group>";
@@ -846,6 +854,7 @@
 				D0CC5A1F290AEDFC0038989B /* RangeReplaceableCollectionExtensionsTests.swift */,
 				D06BD5E629157FE700040407 /* DictionaryExtensionsTests.swift */,
 				D05A881A291BF5CC00C53492 /* StringExtensionsTests.swift */,
+				D094C84E29F456A400491CD8 /* OptionSetExtensionsTests.swift */,
 			);
 			path = StandardLibraryTests;
 			sourceTree = "<group>";
@@ -1008,6 +1017,7 @@
 				D0E354C828BFBBE10000030B /* WeakSet.swift in Sources */,
 				D0B4ED39293A6E4B0031BDAB /* URL+REExtensions.swift in Sources */,
 				D06BD5E529157A8D00040407 /* Dictionary+REExtensions.swift in Sources */,
+				D094C84D29F4559D00491CD8 /* OptionSet+REExtensions.swift in Sources */,
 				D0CD712B28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift in Sources */,
 				D0C95FE02857AC1A00D0522D /* SignedNumeric+REExtensions.swift in Sources */,
 				D0122B0329EEF372008311CF /* UIBezierPath+REExtensions.swift in Sources */,
@@ -1015,6 +1025,7 @@
 				D0FB4056286362F10019D56A /* Once.swift in Sources */,
 				D076D48529F3B8540008ABE0 /* UILabel+REExtensions.swift in Sources */,
 				D076D4B129F3BF790008ABE0 /* UITableView+REExtensions.swift in Sources */,
+				D094C84B29F451CA00491CD8 /* UIControl+REExtensions.swift in Sources */,
 				D0122B2129EF02F0008311CF /* UIFont+REExtensions.swift in Sources */,
 				D05C8686294B5D3C0077E744 /* CGSize+REExtensions.swift in Sources */,
 				D05A8819291BF58200C53492 /* Color+REExtensions.swift in Sources */,
@@ -1202,6 +1213,7 @@
 				D05C8674294B4F610077E744 /* CAGradientLayerExtensionsTests.swift in Sources */,
 				D090D96829DC5A6300245538 /* LocalExtensionsTests.swift in Sources */,
 				D076D4BD29F3C24C0008ABE0 /* UITextViewExtensionsTests.swift in Sources */,
+				D094C84F29F456A400491CD8 /* OptionSetExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

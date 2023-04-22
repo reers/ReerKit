@@ -142,3 +142,26 @@ public extension RangeReplaceableCollection {
         set {}
     }
 }
+
+// MARK: - OptionSet
+
+public struct ReerForOptionSet<Base> {
+    public let base: Base
+    public init(_ base: Base) {
+        self.base = base
+    }
+}
+
+public extension OptionSet {
+    /// Gets a namespace holder for ReerKit compatible types.
+    var re: ReerForOptionSet<Self> {
+        get { return ReerForOptionSet(self) }
+        set {}
+    }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    static var re: ReerForOptionSet<Self>.Type {
+        get { return ReerForOptionSet.self }
+        set {}
+    }
+}

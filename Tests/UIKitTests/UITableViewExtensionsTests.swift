@@ -155,16 +155,16 @@ final class UITableViewExtensionsTests: XCTestCase {
     #if os(iOS)
     func testRegisterCellWithClassAndNib() {
         let nib = UINib(nibName: "UITableViewCell", bundle: Bundle(for: UITableViewExtensionsTests.self))
-        tableView.register(nib: nib, withCellClass: UITableViewCell.self)
-        let cell = tableView.dequeueReusableCell(withClass: UITableViewCell.self)
+        tableView.re.register(nib: nib, withCellClass: UITableViewCell.self)
+        let cell = tableView.re.dequeueReusableCell(withClass: UITableViewCell.self)
         XCTAssertNotNil(cell)
     }
     #endif
 
     #if os(iOS)
     func testRegisterCellWithNibUsingClass() {
-        tableView.register(nibWithCellClass: UITableViewCell.self, at: UITableViewExtensionsTests.self)
-        let cell = tableView.dequeueReusableCell(withClass: UITableViewCell.self)
+        tableView.re.register(nibWithCellClass: UITableViewCell.self, at: UITableViewExtensionsTests.self)
+        let cell = tableView.re.dequeueReusableCell(withClass: UITableViewCell.self)
         XCTAssertNotNil(cell)
     }
     #endif

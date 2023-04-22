@@ -85,6 +85,8 @@
 		D076D48329F3B6B10008ABE0 /* UIImageViewExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D48229F3B6B10008ABE0 /* UIImageViewExtensionsTests.swift */; };
 		D076D48529F3B8540008ABE0 /* UILabel+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D48429F3B8540008ABE0 /* UILabel+REExtensions.swift */; };
 		D076D48729F3B8A10008ABE0 /* UILabelExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D48629F3B8A10008ABE0 /* UILabelExtensionsTests.swift */; };
+		D076D48D29F3BA6A0008ABE0 /* UINavigationBar+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D48C29F3BA6A0008ABE0 /* UINavigationBar+REExtensions.swift */; };
+		D076D48F29F3BAC90008ABE0 /* UINavigationBarExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D48E29F3BAC90008ABE0 /* UINavigationBarExtensionsTests.swift */; };
 		D07E53AB2883083300921873 /* RETimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AA2883083300921873 /* RETimer.swift */; };
 		D07E53AD288309DF00921873 /* RETimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AC288309DF00921873 /* RETimerTests.swift */; };
 		D07E53AF2883137000921873 /* WeakProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AE2883137000921873 /* WeakProxy.swift */; };
@@ -263,6 +265,8 @@
 		D076D48229F3B6B10008ABE0 /* UIImageViewExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensionsTests.swift; sourceTree = "<group>"; };
 		D076D48429F3B8540008ABE0 /* UILabel+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+REExtensions.swift"; sourceTree = "<group>"; };
 		D076D48629F3B8A10008ABE0 /* UILabelExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtensionsTests.swift; sourceTree = "<group>"; };
+		D076D48C29F3BA6A0008ABE0 /* UINavigationBar+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+REExtensions.swift"; sourceTree = "<group>"; };
+		D076D48E29F3BAC90008ABE0 /* UINavigationBarExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBarExtensionsTests.swift; sourceTree = "<group>"; };
 		D07E53AA2883083300921873 /* RETimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimer.swift; sourceTree = "<group>"; };
 		D07E53AC288309DF00921873 /* RETimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimerTests.swift; sourceTree = "<group>"; };
 		D07E53AE2883137000921873 /* WeakProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakProxy.swift; sourceTree = "<group>"; };
@@ -551,6 +555,7 @@
 				D0122B2A29EF04DE008311CF /* UIImage+REExtensions.swift */,
 				D076D47F29F3B5F60008ABE0 /* UIImageView+REExtensions.swift */,
 				D076D48429F3B8540008ABE0 /* UILabel+REExtensions.swift */,
+				D076D48C29F3BA6A0008ABE0 /* UINavigationBar+REExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -635,6 +640,7 @@
 				D0122B2C29EF07DF008311CF /* UIImageExtensionsTests.swift */,
 				D076D48229F3B6B10008ABE0 /* UIImageViewExtensionsTests.swift */,
 				D076D48629F3B8A10008ABE0 /* UILabelExtensionsTests.swift */,
+				D076D48E29F3BAC90008ABE0 /* UINavigationBarExtensionsTests.swift */,
 			);
 			path = UIKitTests;
 			sourceTree = "<group>";
@@ -951,6 +957,7 @@
 				D0EBE23B28847B72004925E5 /* Swizzlable.swift in Sources */,
 				D0CD712F28E5BBFF009ADA8E /* BinaryInteger+REExtensions.swift in Sources */,
 				D0CD713F28E5CC97009ADA8E /* FloatingPoint+REExtensions.swift in Sources */,
+				D076D48D29F3BA6A0008ABE0 /* UINavigationBar+REExtensions.swift in Sources */,
 				D0122AFF29EEF059008311CF /* UIBarButtonItem+REExtensions.swift in Sources */,
 				D0B1211E2855156200B5B326 /* TypeNameDescribable.swift in Sources */,
 				D07E53AF2883137000921873 /* WeakProxy.swift in Sources */,
@@ -995,6 +1002,7 @@
 				D0CD713128E5BDF2009ADA8E /* BinaryIntegerExtensionsTests.swift in Sources */,
 				D019B8F5285BA02900257A7D /* ReadWriteLockTests.swift in Sources */,
 				D04D34FA286C836A001E974C /* DispatchTests.swift in Sources */,
+				D076D48F29F3BAC90008ABE0 /* UINavigationBarExtensionsTests.swift in Sources */,
 				D0CBE62528833BF5006F8BCB /* TimerExtensionsTests.swift in Sources */,
 				D0122B3229EF0C27008311CF /* XCTestExtensions.swift in Sources */,
 				D0421AD32939033800452845 /* DataExtensionsTests.swift in Sources */,

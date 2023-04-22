@@ -340,6 +340,12 @@ final class UIImageExtensionsTests: XCTestCase {
         let resizedImage = UIImage.re(pdf: path, size: .re(100, 100))
         XCTAssertNotNil(resizedImage)
     }
+    
+    func testEmoji() {
+        let emoji = "😄"
+        let image = UIImage.re(emoji: emoji, size: 100)
+        XCTAssertNotNil(image)
+    }
 }
 
 #endif

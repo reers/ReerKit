@@ -907,6 +907,41 @@ public extension UIImage {
         guard let image = context.makeImage() else { return nil }
         return UIImage(cgImage: image, scale: scale, orientation: .up)
     }
+    
+    /// ReerKit: Create a square image from apple emoji.
+    ///
+    /// - Parameters:
+    ///   - emoji: single emoji, such as "😄".
+    ///   - size: image's size.
+    /// - Returns: Image from emoji, or nil when an error occurs.
+    static func re(emoji: String, size: CGFloat) -> UIImage? {
+        if emoji.count == 0 || size < 1 {
+            return nil
+        }
+        let scale = UIScreen.main.scale
+        let font = CTFontCreateWithName("AppleColorEmoji" as CFString, size * scale, nil)
+        let str = NSAttributedString(string: emoji, attributes: [kCTFontAttributeName as NSAttributedString.Key: font, kCTForegroundColorAttributeName as NSAttributedString.Key: UIColor.white.cgColor])
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        guard let context = CGContext(
+            data: nil,
+            width: Int(size * scale),
+            height: Int(size * scale),
+            bitsPerComponent: 8,
+            bytesPerRow: 0,
+            space: colorSpace,
+            bitmapInfo:  CGBitmapInfo.byteOrderDefault.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue
+        ) else { return nil }
+        
+        context.interpolationQuality = .high
+        let line = CTLineCreateWithAttributedString(str as CFAttributedString)
+        let bounds = CTLineGetBoundsWithOptions(line, .useGlyphPathBounds)
+        context.textPosition = CGPoint(x: 0, y: -bounds.origin.y)
+        CTLineDraw(line, context)
+        guard let cgImage = context.makeImage() else {
+            return nil
+        }
+        return UIImage(cgImage: cgImage, scale: scale, orientation: .up)
+    }
 }
 
 #endif

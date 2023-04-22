@@ -26,7 +26,7 @@ import UIKit
 // MARK: - Methods
 
 public extension Reer where Base: UITabBar {
-    /// SwifterSwift: Set tabBar colors.
+   /// ReerKit: Set tabBar colors.
     ///
     /// - Parameters:
     ///   - background: background color.

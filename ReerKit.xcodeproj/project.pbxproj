@@ -103,6 +103,8 @@
 		D076D4AB29F3BE600008ABE0 /* UISwitchExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D4AA29F3BE600008ABE0 /* UISwitchExtensionsTests.swift */; };
 		D076D4AD29F3BED70008ABE0 /* UITabBar+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D4AC29F3BED70008ABE0 /* UITabBar+REExtensions.swift */; };
 		D076D4AF29F3BF400008ABE0 /* UITabBarExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D4AE29F3BF400008ABE0 /* UITabBarExtensionsTests.swift */; };
+		D076D4B129F3BF790008ABE0 /* UITableView+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D4B029F3BF790008ABE0 /* UITableView+REExtensions.swift */; };
+		D076D4B329F3C0200008ABE0 /* UITableViewExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D4B229F3C0200008ABE0 /* UITableViewExtensionsTests.swift */; };
 		D07E53AB2883083300921873 /* RETimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AA2883083300921873 /* RETimer.swift */; };
 		D07E53AD288309DF00921873 /* RETimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AC288309DF00921873 /* RETimerTests.swift */; };
 		D07E53AF2883137000921873 /* WeakProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AE2883137000921873 /* WeakProxy.swift */; };
@@ -299,6 +301,8 @@
 		D076D4AA29F3BE600008ABE0 /* UISwitchExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISwitchExtensionsTests.swift; sourceTree = "<group>"; };
 		D076D4AC29F3BED70008ABE0 /* UITabBar+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBar+REExtensions.swift"; sourceTree = "<group>"; };
 		D076D4AE29F3BF400008ABE0 /* UITabBarExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarExtensionsTests.swift; sourceTree = "<group>"; };
+		D076D4B029F3BF790008ABE0 /* UITableView+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+REExtensions.swift"; sourceTree = "<group>"; };
+		D076D4B229F3C0200008ABE0 /* UITableViewExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtensionsTests.swift; sourceTree = "<group>"; };
 		D07E53AA2883083300921873 /* RETimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimer.swift; sourceTree = "<group>"; };
 		D07E53AC288309DF00921873 /* RETimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimerTests.swift; sourceTree = "<group>"; };
 		D07E53AE2883137000921873 /* WeakProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakProxy.swift; sourceTree = "<group>"; };
@@ -596,6 +600,7 @@
 				D076D4A429F3BD940008ABE0 /* UIStoryboard+REExtensions.swift */,
 				D076D4A829F3BE330008ABE0 /* UISwitch+REExtensions.swift */,
 				D076D4AC29F3BED70008ABE0 /* UITabBar+REExtensions.swift */,
+				D076D4B029F3BF790008ABE0 /* UITableView+REExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -689,6 +694,7 @@
 				D076D4A629F3BDE10008ABE0 /* UIStoryboardExtensionsTests.swift */,
 				D076D4AA29F3BE600008ABE0 /* UISwitchExtensionsTests.swift */,
 				D076D4AE29F3BF400008ABE0 /* UITabBarExtensionsTests.swift */,
+				D076D4B229F3C0200008ABE0 /* UITableViewExtensionsTests.swift */,
 			);
 			path = UIKitTests;
 			sourceTree = "<group>";
@@ -941,6 +947,7 @@
 				D0C95FD52857899F00D0522D /* Bool+REExtensions.swift in Sources */,
 				D0FB4056286362F10019D56A /* Once.swift in Sources */,
 				D076D48529F3B8540008ABE0 /* UILabel+REExtensions.swift in Sources */,
+				D076D4B129F3BF790008ABE0 /* UITableView+REExtensions.swift in Sources */,
 				D0122B2129EF02F0008311CF /* UIFont+REExtensions.swift in Sources */,
 				D05C8686294B5D3C0077E744 /* CGSize+REExtensions.swift in Sources */,
 				D05A8819291BF58200C53492 /* Color+REExtensions.swift in Sources */,
@@ -1093,6 +1100,7 @@
 				D0F39A7E287DC9B600A754B2 /* CharacterExtensionsTests.swift in Sources */,
 				D076D49729F3BC020008ABE0 /* UINavigationItemExtensionsTests.swift in Sources */,
 				D076D4AB29F3BE600008ABE0 /* UISwitchExtensionsTests.swift in Sources */,
+				D076D4B329F3C0200008ABE0 /* UITableViewExtensionsTests.swift in Sources */,
 				D076A2D128E5DBFF00E89281 /* DecodableExtensionsTests.swift in Sources */,
 				D0122B2D29EF07DF008311CF /* UIImageExtensionsTests.swift in Sources */,
 				D076D4A729F3BDE10008ABE0 /* UIStoryboardExtensionsTests.swift in Sources */,

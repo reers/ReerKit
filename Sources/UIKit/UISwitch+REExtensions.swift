@@ -26,7 +26,7 @@ import UIKit
 // MARK: - Methods
 
 public extension Reer where Base: UISwitch {
-    /// SwifterSwift: Toggle a UISwitch.
+   /// ReerKit: Toggle a UISwitch.
     ///
     /// - Parameter animated: set true to animate the change (default is true).
     func toggle(animated: Bool = true) {

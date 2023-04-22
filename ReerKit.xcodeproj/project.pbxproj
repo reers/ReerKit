@@ -78,6 +78,8 @@
 		D06BD5E529157A8D00040407 /* Dictionary+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06BD5E429157A8D00040407 /* Dictionary+REExtensions.swift */; };
 		D06BD5E729157FE700040407 /* DictionaryExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06BD5E629157FE700040407 /* DictionaryExtensionsTests.swift */; };
 		D07161FC29F3D2980051C11E /* UIScrollViewExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07161FB29F3D2980051C11E /* UIScrollViewExtensionsTest.swift */; };
+		D07161FE29F3D34A0051C11E /* UIDatePicker+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07161FD29F3D34A0051C11E /* UIDatePicker+REExtensions.swift */; };
+		D071620029F3D3780051C11E /* UIDatePickerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07161FF29F3D3780051C11E /* UIDatePickerExtensionsTests.swift */; };
 		D071DEBD28D8DC1F00618A2F /* Collection+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071DEBC28D8DC1F00618A2F /* Collection+REExtensions.swift */; };
 		D071DEBF28D8DF5500618A2F /* CollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071DEBE28D8DF5500618A2F /* CollectionExtensionsTests.swift */; };
 		D076A2D128E5DBFF00E89281 /* DecodableExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076A2D028E5DBFF00E89281 /* DecodableExtensionsTests.swift */; };
@@ -287,6 +289,8 @@
 		D06BD5E429157A8D00040407 /* Dictionary+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+REExtensions.swift"; sourceTree = "<group>"; };
 		D06BD5E629157FE700040407 /* DictionaryExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtensionsTests.swift; sourceTree = "<group>"; };
 		D07161FB29F3D2980051C11E /* UIScrollViewExtensionsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensionsTest.swift; sourceTree = "<group>"; };
+		D07161FD29F3D34A0051C11E /* UIDatePicker+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDatePicker+REExtensions.swift"; sourceTree = "<group>"; };
+		D07161FF29F3D3780051C11E /* UIDatePickerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDatePickerExtensionsTests.swift; sourceTree = "<group>"; };
 		D071DEBC28D8DC1F00618A2F /* Collection+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+REExtensions.swift"; sourceTree = "<group>"; };
 		D071DEBE28D8DF5500618A2F /* CollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtensionsTests.swift; sourceTree = "<group>"; };
 		D076A2D028E5DBFF00E89281 /* DecodableExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableExtensionsTests.swift; sourceTree = "<group>"; };
@@ -628,6 +632,7 @@
 				D076D4BE29F3C2B90008ABE0 /* UIViewController+REExtensions.swift */,
 				D076D4C429F3CE1C0008ABE0 /* UIStackView+REExtensions.swift */,
 				D076D4C929F3CF180008ABE0 /* UIScrollView+REExtensions.swift */,
+				D07161FD29F3D34A0051C11E /* UIDatePicker+REExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -727,6 +732,7 @@
 				D076D4C029F3C38A0008ABE0 /* UIViewControllerExtensionsTests.swift */,
 				D076D4C729F3CECD0008ABE0 /* UIStackViewExtensionsTest.swift */,
 				D07161FB29F3D2980051C11E /* UIScrollViewExtensionsTest.swift */,
+				D07161FF29F3D3780051C11E /* UIDatePickerExtensionsTests.swift */,
 			);
 			path = UIKitTests;
 			sourceTree = "<group>";
@@ -1032,6 +1038,7 @@
 				D076D4CB29F3CF430008ABE0 /* UIScrollView+REExtensions.swift in Sources */,
 				D090D96E29DC66BF00245538 /* NSAttributedString+REExtensions.swift in Sources */,
 				D0CBE62328832D78006F8BCB /* Timer+REExtensions.swift in Sources */,
+				D07161FE29F3D34A0051C11E /* UIDatePicker+REExtensions.swift in Sources */,
 				D05C867E294B55F10077E744 /* CGFloat+REExtensions.swift in Sources */,
 				D0CD713728E5C50C009ADA8E /* Comparable+REExtensions.swift in Sources */,
 				D0CC5A1E290AE4CF0038989B /* RangeReplaceableCollection+REExtensions.swift in Sources */,
@@ -1090,6 +1097,7 @@
 				D05C8678294B535D0077E744 /* CATransform3DExtensionsTests.swift in Sources */,
 				D05C8680294B57130077E744 /* CGFloatExtensionsTests.swift in Sources */,
 				D0122B0129EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift in Sources */,
+				D071620029F3D3780051C11E /* UIDatePickerExtensionsTests.swift in Sources */,
 				D0BDA4B329DC4CA6001EA4A0 /* DateExtensionsTests.swift in Sources */,
 				D05A881C291C106800C53492 /* StringExtensionsTests.swift in Sources */,
 				D0B4ED3F293A7E660031BDAB /* CountdownTimerTests.swift in Sources */,

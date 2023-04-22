@@ -26,7 +26,7 @@ import UIKit
 // MARK: - Methods
 
 public extension Reer where Base: UISlider {
-    /// SwifterSwift: Set slide bar value with completion handler.
+    /// ReerKit: Set slide bar value with completion handler.
     ///
     /// - Parameters:
     ///   - value: slider value.

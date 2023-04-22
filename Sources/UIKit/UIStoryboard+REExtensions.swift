@@ -20,32 +20,25 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#if canImport(UIKit) && os(iOS)
+#if canImport(UIKit) && !os(watchOS)
 import UIKit
 
-// MARK: - Properties
+// MARK: - Methods
 
-public extension Reer where Base: UISearchBar {
-    /// ReerKit: Text field inside search bar (if applicable).
-    var textField: UITextField? {
-        if #available(iOS 13.0, *) {
-            return base.searchTextField
-        }
-        let subViews = base.subviews.flatMap(\.subviews)
-        guard let textField = (subViews.filter { $0 is UITextField }).first as? UITextField else {
-            return nil
-        }
-        return textField
+public extension Reer where Base: UIStoryboard {
+    /// ReerKit: Get main storyboard for application.
+    static var main: UIStoryboard? {
+        let bundle = Bundle.main
+        guard let name = bundle.object(forInfoDictionaryKey: "UIMainStoryboardFile") as? String else { return nil }
+        return UIStoryboard(name: name, bundle: bundle)
     }
 
-    /// ReerKit: Text with no spaces or new lines in beginning and end (if applicable).
-    var trimmedText: String? {
-        return base.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-    
-    /// ReerKit: Clear text.
-    func clear() {
-        base.text = ""
+    /// ReerKit: Instantiate a UIViewController using its class name.
+    ///
+    /// - Parameter name: UIViewController type.
+    /// - Returns: The view controller corresponding to specified class name.
+    func instantiateViewController<T: UIViewController>(withClass name: T.Type) -> T? {
+        return base.instantiateViewController(withIdentifier: String(describing: name)) as? T
     }
 }
 

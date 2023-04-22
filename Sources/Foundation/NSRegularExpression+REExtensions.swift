@@ -24,7 +24,7 @@
 import Foundation
 
 public extension Reer where Base: NSRegularExpression {
-    /// SwifterSwift: Enumerates the string allowing the Block to handle each regular expression match.
+    /// ReerKit: Enumerates the string allowing the Block to handle each regular expression match.
     ///
     /// - Parameters:
     ///   - string: The string.
@@ -82,7 +82,7 @@ public extension Reer where Base: NSRegularExpression {
     }
 #endif
 
-    /// SwifterSwift: Returns an array containing all the matches of the regular expression in the string.
+    /// ReerKit: Returns an array containing all the matches of the regular expression in the string.
     ///
     /// - Parameters:
     ///   - string: The string to search.
@@ -101,7 +101,7 @@ public extension Reer where Base: NSRegularExpression {
         )
     }
 
-    /// SwifterSwift: Returns the number of matches of the regular expression within the specified range of the string.
+    /// ReerKit: Returns the number of matches of the regular expression within the specified range of the string.
     ///
     /// - Parameters:
     ///   - string: The string to search.
@@ -120,7 +120,7 @@ public extension Reer where Base: NSRegularExpression {
         )
     }
 
-    /// SwifterSwift: Returns the first match of the regular expression within the specified range of the string.
+    /// ReerKit: Returns the first match of the regular expression within the specified range of the string.
     ///
     /// - Parameters:
     ///   - string: The string to search.
@@ -139,7 +139,7 @@ public extension Reer where Base: NSRegularExpression {
         )
     }
 
-    /// SwifterSwift: Returns the range of the first match of the regular expression within the specified range of the string.
+    /// ReerKit: Returns the range of the first match of the regular expression within the specified range of the string.
     ///
     /// - Parameters:
     ///   - string: The string to search.
@@ -154,7 +154,7 @@ public extension Reer where Base: NSRegularExpression {
         return Range(base.rangeOfFirstMatch(in: string, options: options, range: NSRange(range, in: string)), in: string)
     }
 
-    /// SwifterSwift: Returns a new string containing matching regular expressions replaced with the template string.
+    /// ReerKit: Returns a new string containing matching regular expressions replaced with the template string.
     ///
     /// - Parameters:
     ///   - string: The string to search for values within.
@@ -176,7 +176,7 @@ public extension Reer where Base: NSRegularExpression {
         )
     }
 
-    /// SwifterSwift: Replaces regular expression matches within the mutable string using the template string.
+    /// ReerKit: Replaces regular expression matches within the mutable string using the template string.
     ///
     /// - Parameters:
     ///   - string: The mutable string to search and replace values within.

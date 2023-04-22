@@ -127,7 +127,7 @@ public extension ReerGeneric2Compatible {
 /// Wrapper for ReerKit compatible types in a reference way. This type provides an extension point for
 /// convenience methods in ReerKit.
 public struct ReerReference<Base> {
-    public let base: UnsafeMutablePointer<Base>
+    public internal(set) var base: UnsafeMutablePointer<Base>
     public init(_ base: inout Base) {
         self.base = withUnsafeMutablePointer(to: &base) { $0 }
     }

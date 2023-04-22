@@ -144,6 +144,8 @@
 		D094C84F29F456A400491CD8 /* OptionSetExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D094C84E29F456A400491CD8 /* OptionSetExtensionsTests.swift */; };
 		D094C85129F45C7600491CD8 /* UIDevice+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D094C85029F45C7600491CD8 /* UIDevice+REExtensions.swift */; };
 		D094C96229F4606600491CD8 /* UIDeviceExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D094C96129F4606600491CD8 /* UIDeviceExtensionsTests.swift */; };
+		D094C96429F4631200491CD8 /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D094C96329F4631200491CD8 /* Memory.swift */; };
+		D094C96629F46A0C00491CD8 /* MemoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D094C96529F46A0C00491CD8 /* MemoryTests.swift */; };
 		D09D724029DC94BF00636935 /* big_buck_bunny_720p_1mb.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D09D723F29DC94BF00636935 /* big_buck_bunny_720p_1mb.mp4 */; };
 		D0A0040628620D9900D2FA7C /* TypeNameDescribableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */; };
 		D0A6B3A32924AD11008B7FDA /* UIResponder+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A6B3A22924AD11008B7FDA /* UIResponder+REExtensions.swift */; };
@@ -363,6 +365,8 @@
 		D094C84E29F456A400491CD8 /* OptionSetExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSetExtensionsTests.swift; sourceTree = "<group>"; };
 		D094C85029F45C7600491CD8 /* UIDevice+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+REExtensions.swift"; sourceTree = "<group>"; };
 		D094C96129F4606600491CD8 /* UIDeviceExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtensionsTests.swift; sourceTree = "<group>"; };
+		D094C96329F4631200491CD8 /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
+		D094C96529F46A0C00491CD8 /* MemoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryTests.swift; sourceTree = "<group>"; };
 		D09D723F29DC94BF00636935 /* big_buck_bunny_720p_1mb.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = big_buck_bunny_720p_1mb.mp4; sourceTree = "<group>"; };
 		D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeNameDescribableTests.swift; sourceTree = "<group>"; };
 		D0A6B3A22924AD11008B7FDA /* UIResponder+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+REExtensions.swift"; sourceTree = "<group>"; };
@@ -480,6 +484,7 @@
 				D0B4ED3E293A7E660031BDAB /* CountdownTimerTests.swift */,
 				D0CDBDCB299FB47500BD682D /* DebouncerTests.swift */,
 				D01DABC329B4FE1300ABD25E /* ThrottlerTests.swift */,
+				D094C96529F46A0C00491CD8 /* MemoryTests.swift */,
 			);
 			path = UtilityTests;
 			sourceTree = "<group>";
@@ -738,6 +743,7 @@
 				D0B4ED3C293A7BA60031BDAB /* CountdownTimer.swift */,
 				D0CDBDC9299FAB3100BD682D /* Debouncer.swift */,
 				D01DABC129B4FAA700ABD25E /* Throttler.swift */,
+				D094C96329F4631200491CD8 /* Memory.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1053,6 +1059,7 @@
 				D076D49929F3BC3F0008ABE0 /* UISearchBar+REExtensions.swift in Sources */,
 				D0A6B3A32924AD11008B7FDA /* UIResponder+REExtensions.swift in Sources */,
 				D04D34F4286C7390001E974C /* GlobalFunctions.swift in Sources */,
+				D094C96429F4631200491CD8 /* Memory.swift in Sources */,
 				D0EBE241288492B2004925E5 /* DeinitObserver.swift in Sources */,
 				D076D4BF29F3C2B90008ABE0 /* UIViewController+REExtensions.swift in Sources */,
 				D05C867A294B54CD0077E744 /* CGColor+REExtensions.swift in Sources */,
@@ -1167,6 +1174,7 @@
 				D0CBE62528833BF5006F8BCB /* TimerExtensionsTests.swift in Sources */,
 				D0122B3229EF0C27008311CF /* XCTestExtensions.swift in Sources */,
 				D0421AD32939033800452845 /* DataExtensionsTests.swift in Sources */,
+				D094C96629F46A0C00491CD8 /* MemoryTests.swift in Sources */,
 				D05C867C294B556D0077E744 /* CGColorExtensionsTests.swift in Sources */,
 				D090D97829DC6FC700245538 /* NSRegularExpressionExtensionsTests.swift in Sources */,
 				D076D48329F3B6B10008ABE0 /* UIImageViewExtensionsTests.swift in Sources */,

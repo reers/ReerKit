@@ -488,5 +488,278 @@ public extension Reer where Base: UIView {
         base.layer.maskedCorners = caCorners
         base.layer.cornerRadius = radius
     }
+    
+    /// ReerKit: Add shadow to view.
+    ///
+    /// - Note: This method only works with non-clear background color, or if the view has a `shadowPath` set.
+    /// See parameter `opacity` for detail.
+    ///
+    /// - Parameters:
+    ///   - color: shadow color (default is #137992).
+    ///   - radius: shadow radius (default is 3).
+    ///   - offset: shadow offset (default is .zero).
+    ///   - opacity: shadow opacity (default is 0.5). It will also be affected by the `alpha` of `backgroundColor`.
+    func addShadow(
+        ofColor color: UIColor = UIColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0),
+        radius: CGFloat = 3,
+        offset: CGSize = .zero,
+        opacity: Float = 0.5
+    ) {
+        base.layer.shadowColor = color.cgColor
+        base.layer.shadowOffset = offset
+        base.layer.shadowRadius = radius
+        base.layer.shadowOpacity = opacity
+        base.layer.masksToBounds = false
+    }
+    
+    /// ReerKit: Fade in view.
+    ///
+    /// - Parameters:
+    ///   - duration: animation duration in seconds (default is 1 second).
+    ///   - completion: optional completion handler to run with animation finishes (default is nil).
+    func fadeIn(duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
+        if base.isHidden {
+            base.isHidden = false
+        }
+        UIView.animate(withDuration: duration, animations: {
+            base.alpha = 1
+        }, completion: completion)
+    }
+
+    /// ReerKit: Fade out view.
+    ///
+    /// - Parameters:
+    ///   - duration: animation duration in seconds (default is 1 second).
+    ///   - completion: optional completion handler to run with animation finishes (default is nil).
+    func fadeOut(duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
+        if base.isHidden {
+            base.isHidden = false
+        }
+        UIView.animate(withDuration: duration, animations: {
+            base.alpha = 0
+        }, completion: completion)
+    }
+    
+    /// ReerKit: Load view from nib.
+    ///
+    /// - Parameters:
+    ///   - name: nib name.
+    ///   - bundle: bundle of nib (default is nil).
+    /// - Returns: optional UIView (if applicable).
+    static func loadFromNib(named name: String, bundle: Bundle? = nil) -> UIView? {
+        return UINib(nibName: name, bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as? UIView
+    }
+
+    /// ReerKit: Load view of a certain type from nib
+    ///
+    /// - Parameters:
+    ///   - withClass: UIView type.
+    ///   - bundle: bundle of nib (default is nil).
+    /// - Returns: UIView
+    static func loadFromNib<T: UIView>(withClass name: T.Type, bundle: Bundle? = nil) -> T {
+        let named = String(describing: name)
+        guard let view = UINib(nibName: named, bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as? T else {
+            fatalError("First element in xib file \(named) is not of type \(named)")
+        }
+        return view
+    }
+    
+    /// ReerKit: Remove all gesture recognizers from view.
+    func removeGestureRecognizers() {
+        base.gestureRecognizers?.forEach(base.removeGestureRecognizer)
+    }
+
+    /// ReerKit: Attaches gesture recognizers to the view. Attaching gesture recognizers to a view defines the scope of the represented gesture, causing it to receive touches hit-tested to that view and all of its subviews. The view establishes a strong reference to the gesture recognizers.
+    ///
+    /// - Parameter gestureRecognizers: The array of gesture recognizers to be added to the view.
+    func addGestureRecognizers(_ gestureRecognizers: [UIGestureRecognizer]) {
+        for recognizer in gestureRecognizers {
+            base.addGestureRecognizer(recognizer)
+        }
+    }
+
+    /// ReerKit: Detaches gesture recognizers from the receiving view. This method releases gestureRecognizers in addition to detaching them from the view.
+    ///
+    /// - Parameter gestureRecognizers: The array of gesture recognizers to be removed from the view.
+    func removeGestureRecognizers(_ gestureRecognizers: [UIGestureRecognizer]) {
+        for recognizer in gestureRecognizers {
+            base.removeGestureRecognizer(recognizer)
+        }
+    }
+}
+
+// MARK: - Layout
+
+public extension Reer where Base: UIView {
+    /// ReerKit: Check if view is in RTL format.
+    var isRightToLeft: Bool {
+        if #available(iOS 10.0, macCatalyst 13.0, tvOS 10.0, *) {
+            return base.effectiveUserInterfaceLayoutDirection == .rightToLeft
+        } else {
+            return false
+        }
+    }
+    
+    /// ReerKit: Add Visual Format constraints.
+    ///
+    /// - Parameters:
+    ///   - withFormat: visual Format language.
+    ///   - views: array of views which will be accessed starting with index 0 (example: [v0], [v1], [v2]..).
+    func addConstraints(withFormat: String, views: UIView...) {
+        var viewsDictionary: [String: UIView] = [:]
+        for (index, view) in views.enumerated() {
+            let key = "v\(index)"
+            view.translatesAutoresizingMaskIntoConstraints = false
+            viewsDictionary[key] = view
+        }
+        base.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: withFormat,
+            options: NSLayoutConstraint.FormatOptions(),
+            metrics: nil,
+            views: viewsDictionary))
+    }
+
+    /// ReerKit: Anchor all sides of the view into it's superview.
+    func fillToSuperview() {
+        base.translatesAutoresizingMaskIntoConstraints = false
+        if let superview = base.superview {
+            let left = base.leftAnchor.constraint(equalTo: superview.leftAnchor)
+            let right = base.rightAnchor.constraint(equalTo: superview.rightAnchor)
+            let top = base.topAnchor.constraint(equalTo: superview.topAnchor)
+            let bottom = base.bottomAnchor.constraint(equalTo: superview.bottomAnchor)
+            NSLayoutConstraint.activate([left, right, top, bottom])
+        }
+    }
+
+    /// ReerKit: Add anchors from any side of the current view into the specified anchors and returns the newly added constraints.
+    ///
+    /// - Parameters:
+    ///   - top: current view's top anchor will be anchored into the specified anchor.
+    ///   - left: current view's left anchor will be anchored into the specified anchor.
+    ///   - bottom: current view's bottom anchor will be anchored into the specified anchor.
+    ///   - right: current view's right anchor will be anchored into the specified anchor.
+    ///   - topConstant: current view's top anchor margin.
+    ///   - leftConstant: current view's left anchor margin.
+    ///   - bottomConstant: current view's bottom anchor margin.
+    ///   - rightConstant: current view's right anchor margin.
+    ///   - widthConstant: current view's width.
+    ///   - heightConstant: current view's height.
+    /// - Returns: array of newly added constraints (if applicable).
+    @discardableResult
+    func anchor(
+        top: NSLayoutYAxisAnchor? = nil,
+        left: NSLayoutXAxisAnchor? = nil,
+        bottom: NSLayoutYAxisAnchor? = nil,
+        right: NSLayoutXAxisAnchor? = nil,
+        topConstant: CGFloat = 0,
+        leftConstant: CGFloat = 0,
+        bottomConstant: CGFloat = 0,
+        rightConstant: CGFloat = 0,
+        widthConstant: CGFloat = 0,
+        heightConstant: CGFloat = 0
+    ) -> [NSLayoutConstraint] {
+        base.translatesAutoresizingMaskIntoConstraints = false
+
+        var anchors = [NSLayoutConstraint]()
+
+        if let top = top {
+            anchors.append(base.topAnchor.constraint(equalTo: top, constant: topConstant))
+        }
+
+        if let left = left {
+            anchors.append(base.leftAnchor.constraint(equalTo: left, constant: leftConstant))
+        }
+
+        if let bottom = bottom {
+            anchors.append(base.bottomAnchor.constraint(equalTo: bottom, constant: -bottomConstant))
+        }
+
+        if let right = right {
+            anchors.append(base.rightAnchor.constraint(equalTo: right, constant: -rightConstant))
+        }
+
+        if widthConstant > 0 {
+            anchors.append(base.widthAnchor.constraint(equalToConstant: widthConstant))
+        }
+
+        if heightConstant > 0 {
+            anchors.append(base.heightAnchor.constraint(equalToConstant: heightConstant))
+        }
+
+        anchors.forEach { $0.isActive = true }
+
+        return anchors
+    }
+
+    /// ReerKit: Anchor center X into current view's superview with a constant margin value.
+    ///
+    /// - Parameter constant: constant of the anchor constraint (default is 0).
+    func anchorCenterXToSuperview(constant: CGFloat = 0) {
+        base.translatesAutoresizingMaskIntoConstraints = false
+        if let anchor = base.superview?.centerXAnchor {
+            base.centerXAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
+        }
+    }
+
+    /// ReerKit: Anchor center Y into current view's superview with a constant margin value.
+    ///
+    /// - Parameter withConstant: constant of the anchor constraint (default is 0).
+    func anchorCenterYToSuperview(constant: CGFloat = 0) {
+        base.translatesAutoresizingMaskIntoConstraints = false
+        if let anchor = base.superview?.centerYAnchor {
+            base.centerYAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
+        }
+    }
+
+    /// ReerKit: Anchor center X and Y into current view's superview.
+    func anchorCenterSuperview() {
+        anchorCenterXToSuperview()
+        anchorCenterYToSuperview()
+    }
+    
+    /// ReerKit: Search constraints until we find one for the given view
+    /// and attribute. This will enumerate ancestors since constraints are
+    /// always added to the common ancestor.
+    ///
+    /// - Parameter attribute: the attribute to find.
+    /// - Parameter at: the view to find.
+    /// - Returns: matching constraint.
+    func findConstraint(attribute: NSLayoutConstraint.Attribute, for view: UIView) -> NSLayoutConstraint? {
+        let constraint = base.constraints.first {
+            ($0.firstAttribute == attribute && $0.firstItem as? UIView == view) ||
+                ($0.secondAttribute == attribute && $0.secondItem as? UIView == view)
+        }
+        return constraint ?? base.superview?.re.findConstraint(attribute: attribute, for: view)
+    }
+
+    /// ReerKit: First width constraint for this view.
+    var widthConstraint: NSLayoutConstraint? {
+        findConstraint(attribute: .width, for: base)
+    }
+
+    /// ReerKit: First height constraint for this view.
+    var heightConstraint: NSLayoutConstraint? {
+        findConstraint(attribute: .height, for: base)
+    }
+
+    /// ReerKit: First leading constraint for this view.
+    var leadingConstraint: NSLayoutConstraint? {
+        findConstraint(attribute: .leading, for: base)
+    }
+
+    /// ReerKit: First trailing constraint for this view.
+    var trailingConstraint: NSLayoutConstraint? {
+        findConstraint(attribute: .trailing, for: base)
+    }
+
+    /// ReerKit: First top constraint for this view.
+    var topConstraint: NSLayoutConstraint? {
+        findConstraint(attribute: .top, for: base)
+    }
+
+    /// ReerKit: First bottom constraint for this view.
+    var bottomConstraint: NSLayoutConstraint? {
+        findConstraint(attribute: .bottom, for: base)
+    }
 }
 #endif

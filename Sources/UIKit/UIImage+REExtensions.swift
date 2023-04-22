@@ -901,8 +901,7 @@ public extension UIImage {
             space: colorSpace,
             bitmapInfo: CGBitmapInfo.byteOrderDefault.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue
         ) else { return nil }
-        context.scaleBy(x: scale, y: scale)
-        context.translateBy(x: -(pdfRect.origin.x + pdfRect.size.width/2 - pdfSize.width/2), y: -(pdfRect.origin.y + pdfRect.size.height/2 - pdfSize.height/2))
+        context.scaleBy(x: CGFloat(context.width) / pdfRect.width, y: CGFloat(context.height) / pdfRect.height)
         context.drawPDFPage(page)
         guard let image = context.makeImage() else { return nil }
         return UIImage(cgImage: image, scale: scale, orientation: .up)

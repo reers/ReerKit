@@ -858,6 +858,55 @@ public extension UIImage {
         let data = try Data(contentsOf: url)
         return UIImage(data: data, scale: scale)
     }
+    
+    /// ReerKit: Create an image from a PDF file data or path.
+    ///
+    /// - Parameter dataOrPath: PDF data in `Data`, or PDF file path in `String`.
+    /// - Returns: A new image create from PDF, or nil when an error occurs.
+    static func re(pdf dataOrPath: Any) -> UIImage? {
+        return image(withPDF: dataOrPath, resize: false, size: CGSize.zero)
+    }
+    
+    /// ReerKit: Create an image from a PDF file data or path.
+    ///
+    /// - Parameters:
+    ///   - dataOrPath: PDF data in `Data`, or PDF file path in `String`.
+    ///   - size: The new image's size, PDF's content will be stretched as needed.
+    /// - Returns: A new image create from PDF, or nil when an error occurs.
+    static func re(pdf dataOrPath: Any, size: CGSize) -> UIImage? {
+        return image(withPDF: dataOrPath, resize: true, size: size)
+    }
+    
+    private static func image(withPDF dataOrPath: Any, resize: Bool, size: CGSize) -> UIImage? {
+        var pdf: CGPDFDocument?
+        if dataOrPath is Data {
+            let provider = CGDataProvider(data: dataOrPath as! CFData)
+            pdf = CGPDFDocument.init(provider!)
+        }
+        else if dataOrPath is String {
+            pdf = CGPDFDocument.init(URL(fileURLWithPath: dataOrPath as! String) as CFURL)
+        }
+        if pdf == nil { return nil }
+        guard let page = pdf?.page(at: 1) else { return nil }
+        let pdfRect = page.getBoxRect(.cropBox)
+        let pdfSize = resize ? size : pdfRect.size
+        let scale = UIScreen.main.scale
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        guard let context = CGContext(
+            data: nil,
+            width: Int(pdfSize.width * scale),
+            height: Int(pdfSize.height * scale),
+            bitsPerComponent: 8,
+            bytesPerRow: 0,
+            space: colorSpace,
+            bitmapInfo: CGBitmapInfo.byteOrderDefault.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue
+        ) else { return nil }
+        context.scaleBy(x: scale, y: scale)
+        context.translateBy(x: -(pdfRect.origin.x + pdfRect.size.width/2 - pdfSize.width/2), y: -(pdfRect.origin.y + pdfRect.size.height/2 - pdfSize.height/2))
+        context.drawPDFPage(page)
+        guard let image = context.makeImage() else { return nil }
+        return UIImage(cgImage: image, scale: scale, orientation: .up)
+    }
 }
 
 #endif

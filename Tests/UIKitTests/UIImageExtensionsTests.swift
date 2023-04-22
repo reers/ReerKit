@@ -331,6 +331,15 @@ final class UIImageExtensionsTests: XCTestCase {
             image.re.withAlwaysOriginalTintColor(.red),
             image.withTintColor(.red, renderingMode: .alwaysOriginal))
     }
+    
+    func testPDF() {
+        let bundle = Bundle(for: UIImageExtensionsTests.self)
+        let path = bundle.path(forResource: "test", ofType: "pdf")!
+        let image = UIImage.re(pdf: path)
+        XCTAssertNotNil(image)
+        let resizedImage = UIImage.re(pdf: path, size: .re(100, 100))
+        XCTAssertNotNil(resizedImage)
+    }
 }
 
 #endif

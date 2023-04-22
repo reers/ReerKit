@@ -26,19 +26,19 @@ import UIKit
 // MARK: - Enums
 
 public extension UITextField {
-    /// SwifterSwift: UITextField text type.
+    /// ReerKit: UITextField text type.
     ///
     /// - emailAddress: UITextField is used to enter email addresses.
     /// - password: UITextField is used to enter passwords.
     /// - generic: UITextField is used to enter generic text.
     enum TextType {
-        /// SwifterSwift: UITextField is used to enter email addresses.
+        /// ReerKit: UITextField is used to enter email addresses.
         case emailAddress
 
-        /// SwifterSwift: UITextField is used to enter passwords.
+        /// ReerKit: UITextField is used to enter passwords.
         case password
 
-        /// SwifterSwift: UITextField is used to enter generic text.
+        /// ReerKit: UITextField is used to enter generic text.
         case generic
     }
 }
@@ -46,7 +46,7 @@ public extension UITextField {
 // MARK: - Properties
 
 public extension Reer where Base: UITextField {
-    /// SwifterSwift: Set textField for common text types.
+    /// ReerKit: Set textField for common text types.
     var textType: UITextField.TextType {
         get {
             if base.keyboardType == .emailAddress {
@@ -78,17 +78,17 @@ public extension Reer where Base: UITextField {
         }
     }
 
-    /// SwifterSwift: Check if text field is empty.
+    /// ReerKit: Check if text field is empty.
     var isEmpty: Bool {
         return base.text?.isEmpty == true
     }
 
-    /// SwifterSwift: Return text with no spaces or new lines in beginning and end.
+    /// ReerKit: Return text with no spaces or new lines in beginning and end.
     var trimmedText: String? {
         return base.text?.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    /// SwifterSwift: Check if textFields text is a valid email format.
+    /// ReerKit: Check if textFields text is a valid email format.
     ///
     ///        textField.text = "john@doe.com"
     ///        textField.hasValidEmail -> true
@@ -103,7 +103,7 @@ public extension Reer where Base: UITextField {
                            range: nil, locale: nil) != nil
     }
 
-    /// SwifterSwift: Left view tint color.
+    /// ReerKit: Left view tint color.
     var leftViewTintColor: UIColor? {
         get {
             guard let iconView = base.leftView as? UIImageView else { return nil }
@@ -116,7 +116,7 @@ public extension Reer where Base: UITextField {
         }
     }
 
-    /// SwifterSwift: Right view tint color.
+    /// ReerKit: Right view tint color.
     var rightViewTintColor: UIColor? {
         get {
             guard let iconView = base.rightView as? UIImageView else { return nil }
@@ -129,13 +129,13 @@ public extension Reer where Base: UITextField {
         }
     }
     
-    /// SwifterSwift: Clear text.
+    /// ReerKit: Clear text.
     func clear() {
         base.text = ""
         base.attributedText = NSAttributedString(string: "")
     }
 
-    /// SwifterSwift: Set placeholder text color.
+    /// ReerKit: Set placeholder text color.
     ///
     /// - Parameter color: placeholder text color.
     func setPlaceHolderTextColor(_ color: UIColor) {
@@ -143,7 +143,7 @@ public extension Reer where Base: UITextField {
         base.attributedPlaceholder = NSAttributedString(string: holder, attributes: [.foregroundColor: color])
     }
 
-    /// SwifterSwift: Add padding to the left of the textfield rect.
+    /// ReerKit: Add padding to the left of the textfield rect.
     ///
     /// - Parameter padding: amount of padding to apply to the left of the textfield rect.
     func addPaddingLeft(_ padding: CGFloat) {
@@ -151,7 +151,7 @@ public extension Reer where Base: UITextField {
         base.leftViewMode = .always
     }
 
-    /// SwifterSwift: Add padding to the right of the textfield rect.
+    /// ReerKit: Add padding to the right of the textfield rect.
     ///
     /// - Parameter padding: amount of padding to apply to the right of the textfield rect.
     func addPaddingRight(_ padding: CGFloat) {
@@ -159,7 +159,7 @@ public extension Reer where Base: UITextField {
         base.rightViewMode = .always
     }
 
-    /// SwifterSwift: Add padding to the left of the textfield rect.
+    /// ReerKit: Add padding to the left of the textfield rect.
     ///
     /// - Parameters:
     ///   - image: left image.
@@ -174,7 +174,7 @@ public extension Reer where Base: UITextField {
         base.leftViewMode = .always
     }
 
-    /// SwifterSwift: Add padding to the right of the textfield rect.
+    /// ReerKit: Add padding to the right of the textfield rect.
     ///
     /// - Parameters:
     ///   - image: right image.

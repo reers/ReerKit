@@ -107,6 +107,8 @@
 		D076D4B329F3C0200008ABE0 /* UITableViewExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D4B229F3C0200008ABE0 /* UITableViewExtensionsTests.swift */; };
 		D076D4B529F3C0BD0008ABE0 /* UITextField+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D4B429F3C0BD0008ABE0 /* UITextField+REExtensions.swift */; };
 		D076D4B729F3C1680008ABE0 /* UITextFieldExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D4B629F3C1680008ABE0 /* UITextFieldExtensionsTests.swift */; };
+		D076D4BB29F3C1F10008ABE0 /* UITextView+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D4BA29F3C1F10008ABE0 /* UITextView+REExtensions.swift */; };
+		D076D4BD29F3C24C0008ABE0 /* UITextViewExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D4BC29F3C24C0008ABE0 /* UITextViewExtensionsTests.swift */; };
 		D07E53AB2883083300921873 /* RETimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AA2883083300921873 /* RETimer.swift */; };
 		D07E53AD288309DF00921873 /* RETimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AC288309DF00921873 /* RETimerTests.swift */; };
 		D07E53AF2883137000921873 /* WeakProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AE2883137000921873 /* WeakProxy.swift */; };
@@ -307,6 +309,8 @@
 		D076D4B229F3C0200008ABE0 /* UITableViewExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtensionsTests.swift; sourceTree = "<group>"; };
 		D076D4B429F3C0BD0008ABE0 /* UITextField+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+REExtensions.swift"; sourceTree = "<group>"; };
 		D076D4B629F3C1680008ABE0 /* UITextFieldExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtensionsTests.swift; sourceTree = "<group>"; };
+		D076D4BA29F3C1F10008ABE0 /* UITextView+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+REExtensions.swift"; sourceTree = "<group>"; };
+		D076D4BC29F3C24C0008ABE0 /* UITextViewExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewExtensionsTests.swift; sourceTree = "<group>"; };
 		D07E53AA2883083300921873 /* RETimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimer.swift; sourceTree = "<group>"; };
 		D07E53AC288309DF00921873 /* RETimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimerTests.swift; sourceTree = "<group>"; };
 		D07E53AE2883137000921873 /* WeakProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakProxy.swift; sourceTree = "<group>"; };
@@ -606,6 +610,7 @@
 				D076D4AC29F3BED70008ABE0 /* UITabBar+REExtensions.swift */,
 				D076D4B029F3BF790008ABE0 /* UITableView+REExtensions.swift */,
 				D076D4B429F3C0BD0008ABE0 /* UITextField+REExtensions.swift */,
+				D076D4BA29F3C1F10008ABE0 /* UITextView+REExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -701,6 +706,7 @@
 				D076D4AE29F3BF400008ABE0 /* UITabBarExtensionsTests.swift */,
 				D076D4B229F3C0200008ABE0 /* UITableViewExtensionsTests.swift */,
 				D076D4B629F3C1680008ABE0 /* UITextFieldExtensionsTests.swift */,
+				D076D4BC29F3C24C0008ABE0 /* UITextViewExtensionsTests.swift */,
 			);
 			path = UIKitTests;
 			sourceTree = "<group>";
@@ -1035,6 +1041,7 @@
 				D004CC49285A41F500C41360 /* Synchronizing.swift in Sources */,
 				D01DABC229B4FAA700ABD25E /* Throttler.swift in Sources */,
 				D0397612286E111800C33E17 /* Optional+REExtensions.swift in Sources */,
+				D076D4BB29F3C1F10008ABE0 /* UITextView+REExtensions.swift in Sources */,
 				D0421ACD2938F4DD00452845 /* Calendar+REExtensions.swift in Sources */,
 				D07E53AB2883083300921873 /* RETimer.swift in Sources */,
 				D090D97229DC6BB000245538 /* NSPredicate+REExtensions.swift in Sources */,
@@ -1126,6 +1133,7 @@
 				D04D34FC286C843B001E974C /* UtilsTests.swift in Sources */,
 				D05C8674294B4F610077E744 /* CAGradientLayerExtensionsTests.swift in Sources */,
 				D090D96829DC5A6300245538 /* LocalExtensionsTests.swift in Sources */,
+				D076D4BD29F3C24C0008ABE0 /* UITextViewExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

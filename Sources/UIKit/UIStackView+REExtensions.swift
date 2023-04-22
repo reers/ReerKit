@@ -26,7 +26,7 @@ import UIKit
 // MARK: - Initializers
 
 public extension UIStackView {
-    /// SwifterSwift: Initialize an UIStackView with an array of UIView and common parameters.
+    /// ReerKit: Initialize an UIStackView with an array of UIView and common parameters.
     ///
     ///     let stackView = UIStackView(arrangedSubviews: [UIView(), UIView()], axis: .vertical)
     ///
@@ -53,7 +53,7 @@ public extension UIStackView {
 }
 
 public extension Reer where Base: UIStackView {
-    /// SwifterSwift: Adds array of views to the end of the arrangedSubviews array.
+    /// ReerKit: Adds array of views to the end of the arrangedSubviews array.
     ///
     /// - Parameter views: views array.
     func addArrangedSubviews(_ views: [UIView]) {
@@ -62,14 +62,14 @@ public extension Reer where Base: UIStackView {
         }
     }
 
-    /// SwifterSwift: Removes all views in stack’s array of arranged subviews.
+    /// ReerKit: Removes all views in stack’s array of arranged subviews.
     func removeArrangedSubviews() {
         for view in base.arrangedSubviews {
             base.removeArrangedSubview(view)
         }
     }
     
-    /// SwifterSwift: Exchanges two views of the arranged subviews.
+    /// ReerKit: Exchanges two views of the arranged subviews.
     /// - Parameters:
     ///   - view1: first view to swap.
     ///   - view2: second view to swap.

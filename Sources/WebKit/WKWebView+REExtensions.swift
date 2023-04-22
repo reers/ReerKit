@@ -26,7 +26,7 @@ import WebKit
 // MARK: - Methods
 
 public extension Reer where Base: WKWebView {
-    /// SwifterSwift: Navigate to `url`.
+    /// ReerKit: Navigate to `url`.
     /// - Parameter url: URL to navigate.
     /// - Returns: A new navigation for given `url`.
     @discardableResult
@@ -34,7 +34,7 @@ public extension Reer where Base: WKWebView {
         return base.load(URLRequest(url: url))
     }
 
-    /// SwifterSwift: Navigate to url using `String`.
+    /// ReerKit: Navigate to url using `String`.
     /// - Parameter urlString: The string specifying the URL to navigate to.
     /// - Returns: A new navigation for given `urlString`.
     @discardableResult

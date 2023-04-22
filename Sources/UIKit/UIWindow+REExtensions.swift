@@ -24,7 +24,7 @@
 import UIKit
 
 public extension Reer where Base: UIWindow {
-    /// SwifterSwift: Switch current root view controller with a new view controller.
+    /// ReerKit: Switch current root view controller with a new view controller.
     ///
     /// - Parameters:
     ///   - viewController: new view controller.

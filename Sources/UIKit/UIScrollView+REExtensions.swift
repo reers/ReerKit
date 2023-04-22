@@ -25,7 +25,7 @@ import UIKit
 
 public extension Reer where Base: UIScrollView {
     
-    /// SwifterSwift: Takes a snapshot of an entire ScrollView.
+    /// ReerKit: Takes a snapshot of an entire ScrollView.
     ///
     ///    AnySubclassOfUIScrollView().snapshot
     ///    UITableView().snapshot
@@ -45,7 +45,7 @@ public extension Reer where Base: UIScrollView {
         return UIGraphicsGetImageFromCurrentImageContext()
     }
 
-    /// SwifterSwift: The currently visible region of the scroll view.
+    /// ReerKit: The currently visible region of the scroll view.
     var visibleRect: CGRect {
         let contentWidth = base.contentSize.width - base.contentOffset.x
         let contentHeight = base.contentSize.height - base.contentOffset.y
@@ -58,19 +58,19 @@ public extension Reer where Base: UIScrollView {
         )
     }
     
-    /// SwifterSwift: Scroll to the top-most content offset.
+    /// ReerKit: Scroll to the top-most content offset.
     /// - Parameter animated: `true` to animate the transition at a constant velocity to the new offset, `false` to make the transition immediate.
     func scrollToTop(animated: Bool = true) {
         base.setContentOffset(CGPoint(x: base.contentOffset.x, y: -base.contentInset.top), animated: animated)
     }
 
-    /// SwifterSwift: Scroll to the left-most content offset.
+    /// ReerKit: Scroll to the left-most content offset.
     /// - Parameter animated: `true` to animate the transition at a constant velocity to the new offset, `false` to make the transition immediate.
     func scrollToLeft(animated: Bool = true) {
         base.setContentOffset(CGPoint(x: -base.contentInset.left, y: base.contentOffset.y), animated: animated)
     }
 
-    /// SwifterSwift: Scroll to the bottom-most content offset.
+    /// ReerKit: Scroll to the bottom-most content offset.
     /// - Parameter animated: `true` to animate the transition at a constant velocity to the new offset, `false` to make the transition immediate.
     func scrollToBottom(animated: Bool = true) {
         base.setContentOffset(
@@ -78,7 +78,7 @@ public extension Reer where Base: UIScrollView {
             animated: animated)
     }
 
-    /// SwifterSwift: Scroll to the right-most content offset.
+    /// ReerKit: Scroll to the right-most content offset.
     /// - Parameter animated: `true` to animate the transition at a constant velocity to the new offset, `false` to make the transition immediate.
     func scrollToRight(animated: Bool = true) {
         base.setContentOffset(
@@ -86,7 +86,7 @@ public extension Reer where Base: UIScrollView {
             animated: animated)
     }
 
-    /// SwifterSwift: Scroll up one page of the scroll view.
+    /// ReerKit: Scroll up one page of the scroll view.
     /// If `isPagingEnabled` is `true`, the previous page location is used.
     /// - Parameter animated: `true` to animate the transition at a constant velocity to the new offset, `false` to make the transition immediate.
     func scrollUp(animated: Bool = true) {
@@ -102,7 +102,7 @@ public extension Reer where Base: UIScrollView {
         base.setContentOffset(CGPoint(x: base.contentOffset.x, y: y), animated: animated)
     }
 
-    /// SwifterSwift: Scroll left one page of the scroll view.
+    /// ReerKit: Scroll left one page of the scroll view.
     /// If `isPagingEnabled` is `true`, the previous page location is used.
     /// - Parameter animated: `true` to animate the transition at a constant velocity to the new offset, `false` to make the transition immediate.
     func scrollLeft(animated: Bool = true) {
@@ -118,7 +118,7 @@ public extension Reer where Base: UIScrollView {
         base.setContentOffset(CGPoint(x: x, y: base.contentOffset.y), animated: animated)
     }
 
-    /// SwifterSwift: Scroll down one page of the scroll view.
+    /// ReerKit: Scroll down one page of the scroll view.
     /// If `isPagingEnabled` is `true`, the next page location is used.
     /// - Parameter animated: `true` to animate the transition at a constant velocity to the new offset, `false` to make the transition immediate.
     func scrollDown(animated: Bool = true) {
@@ -134,7 +134,7 @@ public extension Reer where Base: UIScrollView {
         base.setContentOffset(CGPoint(x: base.contentOffset.x, y: y), animated: animated)
     }
 
-    /// SwifterSwift: Scroll right one page of the scroll view.
+    /// ReerKit: Scroll right one page of the scroll view.
     /// If `isPagingEnabled` is `true`, the next page location is used.
     /// - Parameter animated: `true` to animate the transition at a constant velocity to the new offset, `false` to make the transition immediate.
     func scrollRight(animated: Bool = true) {

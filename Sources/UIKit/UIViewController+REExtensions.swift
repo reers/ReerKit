@@ -25,13 +25,13 @@ import UIKit
 
 public extension Reer where Base: UIViewController {
     
-    /// SwifterSwift: Check if ViewController is onscreen and not hidden.
+    /// ReerKit: Check if ViewController is onscreen and not hidden.
     var isVisible: Bool {
         // http://stackoverflow.com/questions/2777438/how-to-tell-if-uiviewcontrollers-view-is-visible
         return base.isViewLoaded && base.view.window != nil
     }
     
-    /// SwifterSwift: Instantiate UIViewController from storyboard.
+    /// ReerKit: Instantiate UIViewController from storyboard.
     ///
     /// - Parameters:
     ///   - storyboard: Name of the storyboard where the UIViewController is located.
@@ -49,7 +49,7 @@ public extension Reer where Base: UIViewController {
         return viewController
     }
 
-    /// SwifterSwift: Assign as listener to notification.
+    /// ReerKit: Assign as listener to notification.
     ///
     /// - Parameters:
     ///   - name: notification name.
@@ -58,19 +58,19 @@ public extension Reer where Base: UIViewController {
         NotificationCenter.default.addObserver(base, selector: selector, name: name, object: nil)
     }
 
-    /// SwifterSwift: Unassign as listener to notification.
+    /// ReerKit: Unassign as listener to notification.
     ///
     /// - Parameter name: notification name.
     func removeNotificationObserver(name: Notification.Name) {
         NotificationCenter.default.removeObserver(base, name: name, object: nil)
     }
 
-    /// SwifterSwift: Unassign as listener from all notifications.
+    /// ReerKit: Unassign as listener from all notifications.
     func removeNotificationsObserver() {
         NotificationCenter.default.removeObserver(base)
     }
 
-    /// SwifterSwift: Helper method to display an alert on any UIViewController subclass. Uses UIAlertController to show an alert.
+    /// ReerKit: Helper method to display an alert on any UIViewController subclass. Uses UIAlertController to show an alert.
     ///
     /// - Parameters:
     ///   - title: title of the alert.
@@ -108,7 +108,7 @@ public extension Reer where Base: UIViewController {
         return alertController
     }
 
-    /// SwifterSwift: Helper method to add a UIViewController as a childViewController.
+    /// ReerKit: Helper method to add a UIViewController as a childViewController.
     ///
     /// - Parameters:
     ///   - child: the view controller to add as a child.
@@ -119,7 +119,7 @@ public extension Reer where Base: UIViewController {
         child.didMove(toParent: base)
     }
 
-    /// SwifterSwift: Helper method to remove a UIViewController from its parent.
+    /// ReerKit: Helper method to remove a UIViewController from its parent.
     func removeViewAndControllerFromParentViewController() {
         guard base.parent != nil else { return }
 
@@ -129,7 +129,7 @@ public extension Reer where Base: UIViewController {
     }
 
     #if os(iOS)
-    /// SwifterSwift: Helper method to present a UIViewController as a popover.
+    /// ReerKit: Helper method to present a UIViewController as a popover.
     ///
     /// - Parameters:
     ///   - popoverContent: the view controller to add as a popover.

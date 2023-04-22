@@ -26,7 +26,7 @@ import UIKit
 // MARK: - Methods
 
 public extension Reer where Base: UIRefreshControl {
-    /// SwifterSwift: Programmatically begin refresh control inside of UITableView.
+    /// ReerKit: Programmatically begin refresh control inside of UITableView.
     ///
     /// - Parameters:
     ///   - tableView: UITableView instance, inside which the refresh control is contained.
@@ -44,7 +44,7 @@ public extension Reer where Base: UIRefreshControl {
         }
     }
 
-    /// SwifterSwift: Programmatically begin refresh control inside of UIScrollView.
+    /// ReerKit: Programmatically begin refresh control inside of UIScrollView.
     ///
     /// - Parameters:
     ///   - animated: Boolean, indicates that is the content offset changing should be animated or not.

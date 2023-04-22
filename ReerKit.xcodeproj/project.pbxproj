@@ -80,6 +80,8 @@
 		D07161FC29F3D2980051C11E /* UIScrollViewExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07161FB29F3D2980051C11E /* UIScrollViewExtensionsTest.swift */; };
 		D071620229F3D47C0051C11E /* UIWindow+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071620129F3D47C0051C11E /* UIWindow+REExtensions.swift */; };
 		D071620429F3D4BB0051C11E /* UIWindowExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071620329F3D4BB0051C11E /* UIWindowExtensionsTests.swift */; };
+		D071620629F3D5090051C11E /* UIRefreshControl+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071620529F3D5090051C11E /* UIRefreshControl+REExtensions.swift */; };
+		D071620829F3D5480051C11E /* UIRefreshControlExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071620729F3D5480051C11E /* UIRefreshControlExtensionTests.swift */; };
 		D071DEBD28D8DC1F00618A2F /* Collection+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071DEBC28D8DC1F00618A2F /* Collection+REExtensions.swift */; };
 		D071DEBF28D8DF5500618A2F /* CollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071DEBE28D8DF5500618A2F /* CollectionExtensionsTests.swift */; };
 		D076A2D128E5DBFF00E89281 /* DecodableExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076A2D028E5DBFF00E89281 /* DecodableExtensionsTests.swift */; };
@@ -291,6 +293,8 @@
 		D07161FB29F3D2980051C11E /* UIScrollViewExtensionsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensionsTest.swift; sourceTree = "<group>"; };
 		D071620129F3D47C0051C11E /* UIWindow+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+REExtensions.swift"; sourceTree = "<group>"; };
 		D071620329F3D4BB0051C11E /* UIWindowExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindowExtensionsTests.swift; sourceTree = "<group>"; };
+		D071620529F3D5090051C11E /* UIRefreshControl+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+REExtensions.swift"; sourceTree = "<group>"; };
+		D071620729F3D5480051C11E /* UIRefreshControlExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRefreshControlExtensionTests.swift; sourceTree = "<group>"; };
 		D071DEBC28D8DC1F00618A2F /* Collection+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+REExtensions.swift"; sourceTree = "<group>"; };
 		D071DEBE28D8DF5500618A2F /* CollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtensionsTests.swift; sourceTree = "<group>"; };
 		D076A2D028E5DBFF00E89281 /* DecodableExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableExtensionsTests.swift; sourceTree = "<group>"; };
@@ -633,6 +637,7 @@
 				D076D4C429F3CE1C0008ABE0 /* UIStackView+REExtensions.swift */,
 				D076D4C929F3CF180008ABE0 /* UIScrollView+REExtensions.swift */,
 				D071620129F3D47C0051C11E /* UIWindow+REExtensions.swift */,
+				D071620529F3D5090051C11E /* UIRefreshControl+REExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -733,6 +738,7 @@
 				D076D4C729F3CECD0008ABE0 /* UIStackViewExtensionsTest.swift */,
 				D07161FB29F3D2980051C11E /* UIScrollViewExtensionsTest.swift */,
 				D071620329F3D4BB0051C11E /* UIWindowExtensionsTests.swift */,
+				D071620729F3D5480051C11E /* UIRefreshControlExtensionTests.swift */,
 			);
 			path = UIKitTests;
 			sourceTree = "<group>";
@@ -1071,6 +1077,7 @@
 				D0122B0B29EEFEB8008311CF /* UICollectionView+REExtensions.swift in Sources */,
 				D004CC49285A41F500C41360 /* Synchronizing.swift in Sources */,
 				D01DABC229B4FAA700ABD25E /* Throttler.swift in Sources */,
+				D071620629F3D5090051C11E /* UIRefreshControl+REExtensions.swift in Sources */,
 				D0397612286E111800C33E17 /* Optional+REExtensions.swift in Sources */,
 				D076D4BB29F3C1F10008ABE0 /* UITextView+REExtensions.swift in Sources */,
 				D0421ACD2938F4DD00452845 /* Calendar+REExtensions.swift in Sources */,
@@ -1088,6 +1095,7 @@
 				D0CD712D28E5B695009ADA8E /* BinaryFloatingPointExtensionsTests.swift in Sources */,
 				D0B4ED3B293A73C90031BDAB /* URLExtensionsTests.swift in Sources */,
 				D05C8688294B5E810077E744 /* CGSizeExtensionsTests.swift in Sources */,
+				D071620829F3D5480051C11E /* UIRefreshControlExtensionTests.swift in Sources */,
 				D0122B2929EF0482008311CF /* UIGestureRecognizerExtensionsTests.swift in Sources */,
 				D090D97029DC68CA00245538 /* NSAttributedStringExtensionsTests.swift in Sources */,
 				D090D96C29DC629700245538 /* NotificationCenterExtensionsTests.swift in Sources */,

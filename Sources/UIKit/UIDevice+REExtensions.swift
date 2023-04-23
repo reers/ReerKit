@@ -454,6 +454,11 @@ public extension Reer where Base: UIDevice {
         return Locale.preferredLanguages.first ?? "en"
     }
     
+    /// ReerKit: Whether the device is iPhone or iPod touch.
+    static var isPhone: Bool {
+        return UI_USER_INTERFACE_IDIOM() == .phone
+    }
+    
     /// ReerKit: Whether the device is iPad/iPad mini.
     static var isPad: Bool {
         return UI_USER_INTERFACE_IDIOM() == .pad
@@ -504,24 +509,46 @@ public extension Reer where Base: UIDevice {
         return false
     }
     
-    /// YYSwift: Wherher the device can make phone calls.
+    /// ReerKit: Wherher the device can make phone calls.
     var canMakePhoneCalls: Bool {
         return UIApplication.shared.canOpenURL(URL(string: "tel://")!)
     }
 
     #if canImport(Darwin)
-    /// YYSwift: WIFI IP address of this device (can be nil). e.g. @"192.168.1.111"
+    /// ReerKit: WIFI IP address of this device (can be nil). e.g. @"192.168.1.111"
     var ipAddressWIFI: String? {
         return ipAddress(withIfaName: "en0")
     }
     
-    /// YYSwift: Cell IP address of this device (can be nil). e.g. @"10.2.2.222"
+    /// ReerKit: Cell IP address of this device (can be nil). e.g. @"10.2.2.222"
     var ipAddressCell: String? {
         return ipAddress(withIfaName: "pdp_ip0")
     }
     #endif
     
-    /// YYSwift: The device's machine model.  e.g. "iPhone6,1" "iPad4,6"
+    var isNotchScreen: Bool {
+        switch name {
+        case .iPhoneX, .iPhoneXS, .iPhoneXSMax,
+             .iPhoneXR, .iPhone11, .iPhone11Pro, .iPhone11ProMax,
+             .iPhone12, .iPhone12Mini, .iPhone12Pro, .iPhone12ProMax,
+             .iPhone13, .iPhone13Mini, .iPhone13Pro, .iPhone13ProMax,
+             .iPhone14, .iPhone14Plus:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    var isDynamicIslandScreen: Bool {
+        switch name {
+        case .iPhone14Pro, .iPhone14ProMax:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    /// ReerKit: The device's machine model.  e.g. "iPhone6,1" "iPad4,6"
     ///
     /// [reference](http://theiphonewiki.com/wiki/Models)
     var machineModel: String {
@@ -655,7 +682,7 @@ public extension Reer where Base: UIDevice {
         #endif
     }
     
-    /// YYSwift: Total disk space in byte. (-1 when error occurs)
+    /// ReerKit: Total disk space in byte. (-1 when error occurs)
     var diskSpace: Int64 {
         do {
             let attrs = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())
@@ -669,7 +696,7 @@ public extension Reer where Base: UIDevice {
         }
     }
     
-    /// YYSwift: Free disk space in byte. (-1 when error occurs)
+    /// ReerKit: Free disk space in byte. (-1 when error occurs)
     var diskSpaceFree: Int64 {
         do {
             let attrs = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())
@@ -683,7 +710,7 @@ public extension Reer where Base: UIDevice {
         }
     }
     
-    /// YYSwift: Used disk space in byte. (-1 when error occurs)
+    /// ReerKit: Used disk space in byte. (-1 when error occurs)
     var diskSpaceUsed: Int64 {
         let total = diskSpace
         let free = diskSpaceFree
@@ -697,7 +724,7 @@ public extension Reer where Base: UIDevice {
         return used
     }
     
-    /// YYSwift: Total physical memory in byte. (-1 when error occurs)
+    /// ReerKit: Total physical memory in byte. (-1 when error occurs)
     var memoryTotal: Int64 {
         let mem = ProcessInfo.processInfo.physicalMemory
         guard mem > 0 else {
@@ -707,7 +734,7 @@ public extension Reer where Base: UIDevice {
     }
     
     #if canImport(Darwin)
-    /// YYSwift: Used app memory and total memory
+    /// ReerKit: Used app memory and total memory
     ///
     /// [Reference](https://github.com/zixun/SystemEye/blob/master/SystemEye/Classes/Memory.swift)
     var appMemoryUsage: (used: Int64, total: Int64) {
@@ -725,7 +752,7 @@ public extension Reer where Base: UIDevice {
         return (Int64(info.resident_size), self.memoryTotal)
     }
 
-    /// YYSwift: System memory usage
+    /// ReerKit: System memory usage
     var systemMemoryUsage: (
         free: Int64,
         active: Int64,
@@ -769,7 +796,7 @@ public extension Reer where Base: UIDevice {
         )
     }
     
-    /// YYSwift: App CPU usage
+    /// ReerKit: App CPU usage
     var appCPUUsage: Double {
         let threads = UIDevice.re.threadBasicInfos()
         var result : Double = 0.0
@@ -781,7 +808,7 @@ public extension Reer where Base: UIDevice {
         return result * 100
     }
     
-    /// YYSwift: System CPU usage
+    /// ReerKit: System CPU usage
     var systemCPUUsage: (
         system: Double,
         user: Double,

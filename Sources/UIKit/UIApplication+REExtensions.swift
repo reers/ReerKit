@@ -75,7 +75,7 @@ public extension Reer where Base: UIApplication {
     }
 
     /// ReerKit: Return the main bundle's `CFBundleDisplayName` or `CFBundleName`.
-    static var displayName: String {
+    static var name: String {
         if let displayName = Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String {
             return displayName
         } else if let name = Bundle.main.infoDictionary?["CFBundleName"] as? String {
@@ -97,6 +97,16 @@ public extension Reer where Base: UIApplication {
     /// ReerKit: App's current version number.
     static var version: String {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+    }
+    
+    /// ReerKit: App's scheme list.
+    static var schemes: [String] {
+        guard let infoDictionary = Bundle.main.infoDictionary,
+              let urlTypes = infoDictionary["CFBundleURLTypes"] as? [AnyObject],
+              let urlType = urlTypes.first as? [String : AnyObject],
+              let urlSchemes = urlType["CFBundleURLSchemes"] as? [String]
+        else { return [] }
+        return urlSchemes
     }
 }
 

@@ -49,4 +49,9 @@ public func syncOnMainQueue(_ action: @escaping () -> Void) {
         DispatchQueue.main.sync(execute: action)
     }
 }
+
+/// ReerKit: Delay to execute a closure on the queue.
+public func delay(_ interval: Double, onQueue queue: DispatchQueue = .main, action: @escaping () -> Void) {
+    queue.asyncAfter(deadline: .now() + interval, execute: action)
+}
 #endif

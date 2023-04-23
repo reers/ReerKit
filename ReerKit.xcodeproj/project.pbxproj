@@ -164,6 +164,8 @@
 		D0BDA4B529DC4E33001EA4A0 /* FileManager+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BDA4B429DC4E33001EA4A0 /* FileManager+REExtensions.swift */; };
 		D0BDA4B929DC503E001EA4A0 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = D0BDA4B829DC503E001EA4A0 /* test.json */; };
 		D0BDA4BB29DC5058001EA4A0 /* FileManagerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BDA4BA29DC5058001EA4A0 /* FileManagerExtensionsTests.swift */; };
+		D0C3306629F57BA5007BE677 /* NanoID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C3306529F57BA5007BE677 /* NanoID.swift */; };
+		D0C3306829F59275007BE677 /* NanoIDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C3306729F59275007BE677 /* NanoIDTests.swift */; };
 		D0C95FD52857899F00D0522D /* Bool+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FD42857899F00D0522D /* Bool+REExtensions.swift */; };
 		D0C95FD8285793A000D0522D /* BoolExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FD7285793A000D0522D /* BoolExtensionsTests.swift */; };
 		D0C95FDA2857999D00D0522D /* Int+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FD92857999D00D0522D /* Int+REExtensions.swift */; };
@@ -387,6 +389,8 @@
 		D0BDA4B829DC503E001EA4A0 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		D0BDA4BA29DC5058001EA4A0 /* FileManagerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtensionsTests.swift; sourceTree = "<group>"; };
 		D0BDA4BC29DC5925001EA4A0 /* Locale+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locale+REExtensions.swift"; sourceTree = "<group>"; };
+		D0C3306529F57BA5007BE677 /* NanoID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NanoID.swift; sourceTree = "<group>"; };
+		D0C3306729F59275007BE677 /* NanoIDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NanoIDTests.swift; sourceTree = "<group>"; };
 		D0C95FD42857899F00D0522D /* Bool+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+REExtensions.swift"; sourceTree = "<group>"; };
 		D0C95FD7285793A000D0522D /* BoolExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolExtensionsTests.swift; sourceTree = "<group>"; };
 		D0C95FD92857999D00D0522D /* Int+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+REExtensions.swift"; sourceTree = "<group>"; };
@@ -485,6 +489,7 @@
 				D0CDBDCB299FB47500BD682D /* DebouncerTests.swift */,
 				D01DABC329B4FE1300ABD25E /* ThrottlerTests.swift */,
 				D094C96529F46A0C00491CD8 /* MemoryTests.swift */,
+				D0C3306729F59275007BE677 /* NanoIDTests.swift */,
 			);
 			path = UtilityTests;
 			sourceTree = "<group>";
@@ -744,6 +749,7 @@
 				D0CDBDC9299FAB3100BD682D /* Debouncer.swift */,
 				D01DABC129B4FAA700ABD25E /* Throttler.swift */,
 				D094C96329F4631200491CD8 /* Memory.swift */,
+				D0C3306529F57BA5007BE677 /* NanoID.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1051,6 +1057,7 @@
 				D076D49529F3BBD90008ABE0 /* UINavigationItem+REExtensions.swift in Sources */,
 				D0BDA4B529DC4E33001EA4A0 /* FileManager+REExtensions.swift in Sources */,
 				D0122B0729EEF7C9008311CF /* UIButton+REExtensions.swift in Sources */,
+				D0C3306629F57BA5007BE677 /* NanoID.swift in Sources */,
 				D090D97629DC6CD400245538 /* NSRegularExpression+REExtensions.swift in Sources */,
 				D022BED529DD47EE00245550 /* URLRequest+REExtensions.swift in Sources */,
 				D0CC5A14290ACE390038989B /* MutableCollection+REExtensions.swift in Sources */,
@@ -1162,6 +1169,7 @@
 				D0BDA4BB29DC5058001EA4A0 /* FileManagerExtensionsTests.swift in Sources */,
 				D0CDBDCC299FB47500BD682D /* DebouncerTests.swift in Sources */,
 				D0122B2329EF0367008311CF /* UIFontExtensionsTests.swift in Sources */,
+				D0C3306829F59275007BE677 /* NanoIDTests.swift in Sources */,
 				D076D4B729F3C1680008ABE0 /* UITextFieldExtensionsTests.swift in Sources */,
 				D068566828D77BF3001CB92A /* ArrayExtensionsTests.swift in Sources */,
 				D08B843A29D66C4200D7EC17 /* ColorExtensionsTests.swift in Sources */,

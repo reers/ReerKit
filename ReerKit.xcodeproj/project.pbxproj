@@ -166,6 +166,7 @@
 		D0BDA4BB29DC5058001EA4A0 /* FileManagerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BDA4BA29DC5058001EA4A0 /* FileManagerExtensionsTests.swift */; };
 		D0C3306629F57BA5007BE677 /* NanoID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C3306529F57BA5007BE677 /* NanoID.swift */; };
 		D0C3306829F59275007BE677 /* NanoIDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C3306729F59275007BE677 /* NanoIDTests.swift */; };
+		D0C3306A29F5A7ED007BE677 /* UIScreen+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C3306929F5A7ED007BE677 /* UIScreen+REExtensions.swift */; };
 		D0C95FD52857899F00D0522D /* Bool+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FD42857899F00D0522D /* Bool+REExtensions.swift */; };
 		D0C95FD8285793A000D0522D /* BoolExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FD7285793A000D0522D /* BoolExtensionsTests.swift */; };
 		D0C95FDA2857999D00D0522D /* Int+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C95FD92857999D00D0522D /* Int+REExtensions.swift */; };
@@ -391,6 +392,7 @@
 		D0BDA4BC29DC5925001EA4A0 /* Locale+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locale+REExtensions.swift"; sourceTree = "<group>"; };
 		D0C3306529F57BA5007BE677 /* NanoID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NanoID.swift; sourceTree = "<group>"; };
 		D0C3306729F59275007BE677 /* NanoIDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NanoIDTests.swift; sourceTree = "<group>"; };
+		D0C3306929F5A7ED007BE677 /* UIScreen+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+REExtensions.swift"; sourceTree = "<group>"; };
 		D0C95FD42857899F00D0522D /* Bool+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+REExtensions.swift"; sourceTree = "<group>"; };
 		D0C95FD7285793A000D0522D /* BoolExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolExtensionsTests.swift; sourceTree = "<group>"; };
 		D0C95FD92857999D00D0522D /* Int+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+REExtensions.swift"; sourceTree = "<group>"; };
@@ -682,6 +684,7 @@
 				D071620529F3D5090051C11E /* UIRefreshControl+REExtensions.swift */,
 				D094C84A29F451CA00491CD8 /* UIControl+REExtensions.swift */,
 				D094C85029F45C7600491CD8 /* UIDevice+REExtensions.swift */,
+				D0C3306929F5A7ED007BE677 /* UIScreen+REExtensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1127,6 +1130,7 @@
 				D076D4AD29F3BED70008ABE0 /* UITabBar+REExtensions.swift in Sources */,
 				D076D48D29F3BA6A0008ABE0 /* UINavigationBar+REExtensions.swift in Sources */,
 				D0122AFF29EEF059008311CF /* UIBarButtonItem+REExtensions.swift in Sources */,
+				D0C3306A29F5A7ED007BE677 /* UIScreen+REExtensions.swift in Sources */,
 				D0B1211E2855156200B5B326 /* TypeNameDescribable.swift in Sources */,
 				D07E53AF2883137000921873 /* WeakProxy.swift in Sources */,
 				D0122B0B29EEFEB8008311CF /* UICollectionView+REExtensions.swift in Sources */,

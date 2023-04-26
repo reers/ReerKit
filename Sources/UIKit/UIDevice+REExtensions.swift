@@ -1,4 +1,5 @@
 //
+//  Copyright © 2015 Dennis Weissmann
 //  Copyright © 2022 reers.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,6 +28,7 @@ import Darwin
 #endif
 
 public extension UIDevice {
+    // https://github.com/devicekit/DeviceKit
     enum Name {
         #if os(iOS)
         /// Device is an [iPod touch (5th generation)](https://support.apple.com/kb/SP657)

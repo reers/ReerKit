@@ -1,5 +1,5 @@
 //
-//  UtilsTests.swift
+//  GlobalFunctions.swift
 //  ReerKit-iOSTests
 //
 //  Created by phoenix on 2022/6/29.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import ReerKit
 
-class UtilsTests: XCTestCase {
+class GlobalFunctions: XCTestCase {
     
     func testQueueLabel() {
         XCTAssertEqual("com.apple.main-thread", currentQueueLabel())

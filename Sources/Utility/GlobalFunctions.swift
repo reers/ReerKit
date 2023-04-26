@@ -24,14 +24,12 @@ import Dispatch
 
 /// ReerKit: Get current queue label.
 /// - Returns: Queue label string.
-@inline(__always)
 public func currentQueueLabel() -> String {
     let label = __dispatch_queue_get_label(nil)
     return String(cString: label, encoding: .utf8) ?? ""
 }
 
 /// ReerKit: Execute a closure on main queue asynchronously.
-@inline(__always)
 public func asyncOnMainQueue(_ action: @escaping () -> Void) {
     if currentQueueLabel() == DispatchQueue.main.label {
         action()
@@ -41,7 +39,6 @@ public func asyncOnMainQueue(_ action: @escaping () -> Void) {
 }
 
 /// ReerKit: Execute a closure on main queue synchronously.
-@inline(__always)
 public func syncOnMainQueue(_ action: @escaping () -> Void) {
     if currentQueueLabel() == DispatchQueue.main.label {
         action()

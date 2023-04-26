@@ -44,7 +44,7 @@ public extension REColor {
     ///   - green: green component.
     ///   - blue: blue component.
     ///   - alpha: optional transparency value (default is 1).
-    static func re(red: Int, green: Int, blue: Int, alpha: CGFloat = 1) -> UIColor {
+    static func re(red: Int, green: Int, blue: Int, alpha: CGFloat = 1) -> REColor {
         let red = max(0, min(255, red))
         let green = max(0, min(255, green))
         let blue = max(0, min(255, blue))

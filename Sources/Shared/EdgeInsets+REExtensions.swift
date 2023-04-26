@@ -34,7 +34,7 @@ public extension NSEdgeInsets {
     static let zero = NSEdgeInsets()
 }
 
-public extension NSEdgeInsets: Equatable {
+extension NSEdgeInsets: Equatable {
     /// ReerKit: Returns a Boolean value indicating whether two values are equal.
     ///
     /// Equality is the inverse of inequality. For any values `a` and `b`,
@@ -43,7 +43,7 @@ public extension NSEdgeInsets: Equatable {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    static func == (lhs: NSEdgeInsets, rhs: NSEdgeInsets) -> Bool {
+    public static func == (lhs: NSEdgeInsets, rhs: NSEdgeInsets) -> Bool {
         return lhs.top == rhs.top
             && lhs.left == rhs.left
             && lhs.bottom == rhs.bottom

@@ -20,7 +20,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#if canImport(UIKit)
+#if canImport(UIKit) && !os(watchOS)
 import UIKit
 
 #if canImport(Darwin)
@@ -528,6 +528,7 @@ public extension Reer where Base: UIDevice {
     }
     #endif
     
+    #if os(iOS)
     var isNotchScreen: Bool {
         switch name {
         case .iPhoneX, .iPhoneXS, .iPhoneXSMax,
@@ -549,6 +550,7 @@ public extension Reer where Base: UIDevice {
             return false
         }
     }
+    #endif
     
     /// ReerKit: The device's machine model.  e.g. "iPhone6,1" "iPad4,6"
     ///

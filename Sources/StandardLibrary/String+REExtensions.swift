@@ -452,7 +452,7 @@ public extension Reer where Base == String {
     }
     #endif
 
-    #if canImport(Foundation) && canImport(UIKit)
+    #if canImport(Foundation) && canImport(UIKit) && !os(watchOS)
     /// ReerKit: Check if the given string spelled correctly.
     var isSpelledCorrectly: Bool {
         let checker = UITextChecker()
@@ -594,7 +594,7 @@ public extension Reer where Base == String {
         UIPasteboard.general.string = base
         #elseif os(macOS)
         NSPasteboard.general.clearContents()
-        NSPasteboard.general.setString(self, forType: .string)
+        NSPasteboard.general.setString(base, forType: .string)
         #endif
     }
     #endif

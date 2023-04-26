@@ -35,8 +35,9 @@ Pod::Spec.new do |s|
 
   # StandardLibrary Extensions
   s.subspec 'StandardLibrary' do |ss|
-    ss.source_files  = 'Sources/StandardLibrary/*.swift'
+    ss.source_files  = 'Sources/Shared/*.swift', 'Sources/StandardLibrary/*.swift'
     ss.dependency 'ReerKit/General'
+    ss.dependency 'ReerKit/Foundation'
   end
 
   # Foundation Extensions
@@ -51,6 +52,7 @@ Pod::Spec.new do |s|
   s.subspec 'UIKit' do |ss|
     ss.source_files  = 'Sources/Shared/*.swift', 'Sources/UIKit/*.swift'
     ss.dependency 'ReerKit/General'
+    ss.dependency 'ReerKit/StandardLibrary'
     ss.dependency 'ReerKit/Utility'
     ss.dependency 'ReerKit/CoreGraphics'
   end
@@ -77,6 +79,7 @@ Pod::Spec.new do |s|
   s.subspec 'Dispatch' do |ss|
     ss.source_files = 'Sources/Dispatch/*.swift'
     ss.dependency 'ReerKit/General'
+    ss.dependency 'ReerKit/Utility'
   end
 
   # WebKit Extensions

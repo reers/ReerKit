@@ -488,6 +488,7 @@ public extension Reer where Base: UIImage {
         return newImage
     }
     
+    #if !os(watchOS)
     /// ReerKit: Returns a new image which is scaled from this image.
     /// The image content will be changed with the contentMode.
     ///
@@ -539,6 +540,7 @@ public extension Reer where Base: UIImage {
             base.draw(in: drawRect)
         }
     }
+    #endif
     
     #if canImport(Accelerate)
     /// ReerKit: A vertically flipped image. ⥯
@@ -591,7 +593,7 @@ public extension Reer where Base: UIImage {
 }
 
 // MARK: - Blur
-#if canImport(Accelerate) && canImport(Darwin)
+#if canImport(Accelerate) && canImport(Darwin) && !os(watchOS)
 
 public extension Reer where Base: UIImage {
     
@@ -859,6 +861,7 @@ public extension UIImage {
         return UIImage(data: data, scale: scale)
     }
     
+    #if !os(watchOS)
     /// ReerKit: Create an image from a PDF file data or path.
     ///
     /// - Parameter dataOrPath: PDF data in `Data`, or PDF file path in `String`.
@@ -941,6 +944,7 @@ public extension UIImage {
         }
         return UIImage(cgImage: cgImage, scale: scale, orientation: .up)
     }
+    #endif
 }
 
 #endif

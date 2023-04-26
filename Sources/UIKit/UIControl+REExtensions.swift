@@ -19,7 +19,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#if canImport(UIKit) && canImport(ObjectiveC)
+#if canImport(UIKit) && canImport(ObjectiveC) && !os(watchOS)
 import UIKit
 import ObjectiveC
 

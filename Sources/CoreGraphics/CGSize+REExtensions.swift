@@ -73,7 +73,7 @@ public extension Reer where Base == CGSize {
         return CGSize(width: base.width * maxRatio, height: base.height * maxRatio)
     }
     
-    #if canImport(UIKit)
+    #if canImport(UIKit) && !os(watchOS)
     /// ReerKit: Returns a rectangle to fit the @param rect with specified content mode.
     ///
     /// - Parameters:

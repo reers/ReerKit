@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ReerKit"
-  s.version      = "0.0.2"
+  s.version      = "1.0.0"
   s.summary      = "Collections of Swift extensions and utils."
 
   s.description  = <<-DESC
@@ -43,12 +43,16 @@ Pod::Spec.new do |s|
   s.subspec 'Foundation' do |ss|
     ss.source_files  = 'Sources/Shared/*.swift', 'Sources/Foundation/*.swift'
     ss.dependency 'ReerKit/General'
+    ss.dependency 'ReerKit/StandardLibrary'
+    ss.dependency 'ReerKit/Utility'
   end
 
   # UIKit Extensions
   s.subspec 'UIKit' do |ss|
     ss.source_files  = 'Sources/Shared/*.swift', 'Sources/UIKit/*.swift'
     ss.dependency 'ReerKit/General'
+    ss.dependency 'ReerKit/Utility'
+    ss.dependency 'ReerKit/CoreGraphics'
   end
 
   # Utility
@@ -63,27 +67,9 @@ Pod::Spec.new do |s|
     ss.dependency 'ReerKit/General'
   end
 
-  # CoreLocation Extensions
-  s.subspec 'CoreLocation' do |ss|
-    ss.source_files  = 'Sources/CoreLocation/*.swift'
-    ss.dependency 'ReerKit/General'
-  end
-
   # CoreAnimation Extensions
   s.subspec 'CoreAnimation' do |ss|
     ss.source_files  = 'Sources/Shared/*.swift', 'Sources/CoreAnimation/*.swift'
-    ss.dependency 'ReerKit/General'
-  end
-
-  # CryptoKit Extensions
-  s.subspec 'CryptoKit' do |ss|
-    ss.source_files  = 'Sources/Shared/*.swift', 'Sources/CryptoKit/*.swift'
-    ss.dependency 'ReerKit/General'
-  end
-
-  # MapKit Extensions
-  s.subspec 'MapKit' do |ss|
-    ss.source_files = 'Sources/Shared/*.swift', 'Sources/MapKit/*.swift'
     ss.dependency 'ReerKit/General'
   end
 
@@ -96,6 +82,7 @@ Pod::Spec.new do |s|
   # WebKit Extensions
   s.subspec 'WebKit' do |ss|
     ss.source_files = 'Sources/WebKit/*.swift'
+    ss.dependency 'ReerKit/General'
   end
 
 end

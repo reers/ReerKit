@@ -29,4 +29,73 @@ Pod::Spec.new do |s|
   s.source = { :git => "https://github.com/reers/ReerKit.git", :tag => s.version.to_s }
   s.source_files = "Sources/**/*"
 
+  s.subspec 'General' do |ss|
+    ss.source_files  = 'Sources/General/*.swift'
+  end
+
+  # StandardLibrary Extensions
+  s.subspec 'StandardLibrary' do |ss|
+    ss.source_files  = 'Sources/StandardLibrary/*.swift'
+    ss.dependency 'ReerKit/General'
+  end
+
+  # Foundation Extensions
+  s.subspec 'Foundation' do |ss|
+    ss.source_files  = 'Sources/Shared/*.swift', 'Sources/Foundation/*.swift'
+    ss.dependency 'ReerKit/General'
+  end
+
+  # UIKit Extensions
+  s.subspec 'UIKit' do |ss|
+    ss.source_files  = 'Sources/Shared/*.swift', 'Sources/UIKit/*.swift'
+    ss.dependency 'ReerKit/General'
+  end
+
+  # Utility
+  s.subspec 'Utility' do |ss|
+    ss.source_files  = 'Sources/Utility/*.swift'
+    ss.dependency 'ReerKit/General'
+  end
+
+  # CoreGraphics Extensions
+  s.subspec 'CoreGraphics' do |ss|
+    ss.source_files  = 'Sources/CoreGraphics/*.swift'
+    ss.dependency 'ReerKit/General'
+  end
+
+  # CoreLocation Extensions
+  s.subspec 'CoreLocation' do |ss|
+    ss.source_files  = 'Sources/CoreLocation/*.swift'
+    ss.dependency 'ReerKit/General'
+  end
+
+  # CoreAnimation Extensions
+  s.subspec 'CoreAnimation' do |ss|
+    ss.source_files  = 'Sources/Shared/*.swift', 'Sources/CoreAnimation/*.swift'
+    ss.dependency 'ReerKit/General'
+  end
+
+  # CryptoKit Extensions
+  s.subspec 'CryptoKit' do |ss|
+    ss.source_files  = 'Sources/Shared/*.swift', 'Sources/CryptoKit/*.swift'
+    ss.dependency 'ReerKit/General'
+  end
+
+  # MapKit Extensions
+  s.subspec 'MapKit' do |ss|
+    ss.source_files = 'Sources/Shared/*.swift', 'Sources/MapKit/*.swift'
+    ss.dependency 'ReerKit/General'
+  end
+
+  # Dispatch Extensions
+  s.subspec 'Dispatch' do |ss|
+    ss.source_files = 'Sources/Dispatch/*.swift'
+    ss.dependency 'ReerKit/General'
+  end
+
+  # WebKit Extensions
+  s.subspec 'WebKit' do |ss|
+    ss.source_files = 'Sources/WebKit/*.swift'
+  end
+
 end

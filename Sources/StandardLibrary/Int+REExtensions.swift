@@ -70,6 +70,7 @@ public extension Reer where Base == Int {
     }
     #endif
     
+    #if !os(watchOS)
     /// ReerKit: String formatted for values over ±1000 (example: 1k, -2k, 100k, 1m, -5m..)
     var metricFormatted: String {
         var sign: String {
@@ -89,6 +90,7 @@ public extension Reer where Base == Int {
         }
         return String(format: "\(sign)%it", abs / 1_000_000_000_000)
     }
+    #endif
     
     /// ReerKit: Array of digits of integer value.
     var digits: [Int] {

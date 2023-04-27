@@ -21,28 +21,27 @@ Pod::Spec.new do |s|
   s.author = { "phoenix" => "x.rhythm@qq.com" }
 
   s.ios.deployment_target = "11.0"
-  # spec.osx.deployment_target = "10.7"
-  # spec.watchos.deployment_target = "2.0"
-  # spec.tvos.deployment_target = "9.0"
+  s.osx.deployment_target = "10.10"
+  s.watchos.deployment_target = "2.0"
+  s.tvos.deployment_target = "9.0"
 
   s.swift_version = '5.5'
   s.source = { :git => "https://github.com/reers/ReerKit.git", :tag => s.version.to_s }
   s.source_files = "Sources/**/*"
 
   s.subspec 'General' do |ss|
-    ss.source_files  = 'Sources/General/*.swift'
+    ss.source_files  = 'Sources/General/**/*'
   end
 
   # StandardLibrary Extensions
   s.subspec 'StandardLibrary' do |ss|
-    ss.source_files  = 'Sources/Shared/*.swift', 'Sources/StandardLibrary/*.swift'
+    ss.source_files  = 'Sources/Shared/**/*', 'Sources/StandardLibrary/**/*'
     ss.dependency 'ReerKit/General'
-    ss.dependency 'ReerKit/Foundation'
   end
 
   # Foundation Extensions
   s.subspec 'Foundation' do |ss|
-    ss.source_files  = 'Sources/Shared/*.swift', 'Sources/Foundation/*.swift'
+    ss.source_files  = 'Sources/Shared/**/*', 'Sources/Foundation/**/*'
     ss.dependency 'ReerKit/General'
     ss.dependency 'ReerKit/StandardLibrary'
     ss.dependency 'ReerKit/Utility'
@@ -50,7 +49,7 @@ Pod::Spec.new do |s|
 
   # UIKit Extensions
   s.subspec 'UIKit' do |ss|
-    ss.source_files  = 'Sources/Shared/*.swift', 'Sources/UIKit/*.swift'
+    ss.source_files  = 'Sources/Shared/**/*', 'Sources/UIKit/**/*'
     ss.dependency 'ReerKit/General'
     ss.dependency 'ReerKit/StandardLibrary'
     ss.dependency 'ReerKit/Utility'
@@ -59,32 +58,32 @@ Pod::Spec.new do |s|
 
   # Utility
   s.subspec 'Utility' do |ss|
-    ss.source_files  = 'Sources/Utility/*.swift'
+    ss.source_files  = 'Sources/Utility/**/*'
     ss.dependency 'ReerKit/General'
   end
 
   # CoreGraphics Extensions
   s.subspec 'CoreGraphics' do |ss|
-    ss.source_files  = 'Sources/CoreGraphics/*.swift'
+    ss.source_files  = 'Sources/CoreGraphics/**/*'
     ss.dependency 'ReerKit/General'
   end
 
   # CoreAnimation Extensions
   s.subspec 'CoreAnimation' do |ss|
-    ss.source_files  = 'Sources/Shared/*.swift', 'Sources/CoreAnimation/*.swift'
+    ss.source_files  = 'Sources/Shared/**/*', 'Sources/CoreAnimation/**/*'
     ss.dependency 'ReerKit/General'
   end
 
   # Dispatch Extensions
   s.subspec 'Dispatch' do |ss|
-    ss.source_files = 'Sources/Dispatch/*.swift'
+    ss.source_files = 'Sources/Dispatch/**/*'
     ss.dependency 'ReerKit/General'
     ss.dependency 'ReerKit/Utility'
   end
 
   # WebKit Extensions
   s.subspec 'WebKit' do |ss|
-    ss.source_files = 'Sources/WebKit/*.swift'
+    ss.source_files = 'Sources/WebKit/**/*'
     ss.dependency 'ReerKit/General'
   end
 

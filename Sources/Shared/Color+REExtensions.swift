@@ -180,7 +180,11 @@ public extension REColor {
     /// ReerKit: Create a dynamic color with light and dark color.
     static func re(light: REColor, dark: REColor) -> REColor {
         #if os(macOS)
-        return REColor(name: nil, dynamicProvider: { $0.name == .darkAqua ? dark : light })
+        if #available(macOS 10.15, *) {
+            return REColor(name: nil, dynamicProvider: { $0.name == .darkAqua ? dark : light })
+        } else {
+            return REColor(cgColor: light.cgColor) ?? .clear
+        }
         #elseif os(iOS) || os(tvOS)
         if #available(iOS 13.0, tvOS 13.0, *) {
             return REColor(dynamicProvider: { $0.userInterfaceStyle == .dark ? dark : light })

@@ -115,7 +115,7 @@ public extension Reer where Base: UIApplication {
 public extension Reer where Base: UIApplication {
     /// ReerKit: App's key window.
     var keyWindow: UIWindow? {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, tvOS 13.0, *) {
             return UIApplication.shared.connectedScenes
                 .filter { $0.activationState == .foregroundActive }
                 .first(where: { $0 is UIWindowScene })

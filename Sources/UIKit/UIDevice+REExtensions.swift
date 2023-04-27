@@ -458,12 +458,12 @@ public extension Reer where Base: UIDevice {
     
     /// ReerKit: Whether the device is iPhone or iPod touch.
     static var isPhone: Bool {
-        return UI_USER_INTERFACE_IDIOM() == .phone
+        return UIDevice.current.userInterfaceIdiom == .phone
     }
     
     /// ReerKit: Whether the device is iPad/iPad mini.
     static var isPad: Bool {
-        return UI_USER_INTERFACE_IDIOM() == .pad
+        return UIDevice.current.userInterfaceIdiom == .pad
     }
     
     /// ReerKit: Whether the device is a simulator.

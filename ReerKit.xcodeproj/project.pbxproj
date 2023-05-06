@@ -14,6 +14,19 @@
 		D004CC49285A41F500C41360 /* Synchronizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D004CC48285A41F500C41360 /* Synchronizing.swift */; };
 		D00615C12976F52D003FA4CF /* CATransform3D+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00615C02976F52D003FA4CF /* CATransform3D+REExtensions.swift */; };
 		D008BD6E28E5DCC500470BEB /* Decodable+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD714628E5D71D009ADA8E /* Decodable+REExtensions.swift */; };
+		D00D638B2A069AB600A9EEF4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00D63882A069AB600A9EEF4 /* LinkedList.swift */; };
+		D00D638C2A069AB600A9EEF4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00D63882A069AB600A9EEF4 /* LinkedList.swift */; };
+		D00D638D2A069AB600A9EEF4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00D63882A069AB600A9EEF4 /* LinkedList.swift */; };
+		D00D638E2A069AB600A9EEF4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00D63882A069AB600A9EEF4 /* LinkedList.swift */; };
+		D00D638F2A069AB600A9EEF4 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00D63892A069AB600A9EEF4 /* Stack.swift */; };
+		D00D63902A069AB600A9EEF4 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00D63892A069AB600A9EEF4 /* Stack.swift */; };
+		D00D63912A069AB600A9EEF4 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00D63892A069AB600A9EEF4 /* Stack.swift */; };
+		D00D63922A069AB600A9EEF4 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00D63892A069AB600A9EEF4 /* Stack.swift */; };
+		D00D63932A069AB600A9EEF4 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00D638A2A069AB600A9EEF4 /* Queue.swift */; };
+		D00D63942A069AB600A9EEF4 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00D638A2A069AB600A9EEF4 /* Queue.swift */; };
+		D00D63952A069AB600A9EEF4 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00D638A2A069AB600A9EEF4 /* Queue.swift */; };
+		D00D63962A069AB600A9EEF4 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00D638A2A069AB600A9EEF4 /* Queue.swift */; };
+		D00D63982A069B4500A9EEF4 /* DataStructuresTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00D63972A069B4500A9EEF4 /* DataStructuresTest.swift */; };
 		D0122AFF29EEF059008311CF /* UIBarButtonItem+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122AFE29EEF059008311CF /* UIBarButtonItem+REExtensions.swift */; };
 		D0122B0129EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B0029EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift */; };
 		D0122B0329EEF372008311CF /* UIBezierPath+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B0229EEF372008311CF /* UIBezierPath+REExtensions.swift */; };
@@ -590,6 +603,10 @@
 		D0038B822856662B00A890F9 /* RWLocked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RWLocked.swift; sourceTree = "<group>"; };
 		D004CC48285A41F500C41360 /* Synchronizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synchronizing.swift; sourceTree = "<group>"; };
 		D00615C02976F52D003FA4CF /* CATransform3D+REExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CATransform3D+REExtensions.swift"; sourceTree = "<group>"; };
+		D00D63882A069AB600A9EEF4 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		D00D63892A069AB600A9EEF4 /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		D00D638A2A069AB600A9EEF4 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		D00D63972A069B4500A9EEF4 /* DataStructuresTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructuresTest.swift; sourceTree = "<group>"; };
 		D0122AFE29EEF059008311CF /* UIBarButtonItem+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+REExtensions.swift"; sourceTree = "<group>"; };
 		D0122B0029EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemExtensionsTests.swift; sourceTree = "<group>"; };
 		D0122B0229EEF372008311CF /* UIBezierPath+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+REExtensions.swift"; sourceTree = "<group>"; };
@@ -870,6 +887,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D00D63872A06997F00A9EEF4 /* DataStructure */ = {
+			isa = PBXGroup;
+			children = (
+				D00D63882A069AB600A9EEF4 /* LinkedList.swift */,
+				D00D638A2A069AB600A9EEF4 /* Queue.swift */,
+				D00D63892A069AB600A9EEF4 /* Stack.swift */,
+			);
+			path = DataStructure;
+			sourceTree = "<group>";
+		};
 		D0122B2F29EF0B55008311CF /* XCTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -894,6 +921,7 @@
 				D01DABC329B4FE1300ABD25E /* ThrottlerTests.swift */,
 				D094C96529F46A0C00491CD8 /* MemoryTests.swift */,
 				D0C3306729F59275007BE677 /* NanoIDTests.swift */,
+				D00D63972A069B4500A9EEF4 /* DataStructuresTest.swift */,
 			);
 			path = UtilityTests;
 			sourceTree = "<group>";
@@ -1149,6 +1177,7 @@
 		D0B1211C2855154100B5B326 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				D00D63872A06997F00A9EEF4 /* DataStructure */,
 				D0E354C628BFBB710000030B /* Weak */,
 				D0A0040728621C7600D2FA7C /* Lock */,
 				D0B1211D2855156200B5B326 /* TypeNameDescribable.swift */,
@@ -1677,9 +1706,12 @@
 				D04B85E829F9A50B00177357 /* ReadWriteLock.swift in Sources */,
 				D04B85E329F9A50600177357 /* Memory.swift in Sources */,
 				D04B85DF29F9A50600177357 /* TypeNameDescribable.swift in Sources */,
+				D00D638C2A069AB600A9EEF4 /* LinkedList.swift in Sources */,
+				D00D63942A069AB600A9EEF4 /* Queue.swift in Sources */,
 				D04B85E129F9A50600177357 /* CountdownTimer.swift in Sources */,
 				D04B85F729F9A57800177357 /* CGColor+REExtensions.swift in Sources */,
 				D04B862329F9A59600177357 /* UIRefreshControl+REExtensions.swift in Sources */,
+				D00D63902A069AB600A9EEF4 /* Stack.swift in Sources */,
 				D04B85E729F9A50B00177357 /* Synchronizing.swift in Sources */,
 				D04B860A29F9A59600177357 /* UIView+REExtensions.swift in Sources */,
 				D04B85D629F9A40000177357 /* DeinitObservable.swift in Sources */,
@@ -1800,9 +1832,12 @@
 				D04B868929F9A6EA00177357 /* AnyObjectExtensionable.swift in Sources */,
 				D04B86C629F9A70000177357 /* ReadWriteLock.swift in Sources */,
 				D04B86C729F9A70000177357 /* Synchronizing.swift in Sources */,
+				D00D638D2A069AB600A9EEF4 /* LinkedList.swift in Sources */,
+				D00D63952A069AB600A9EEF4 /* Queue.swift in Sources */,
 				D04B86F229F9A71100177357 /* NSRegularExpression+REExtensions.swift in Sources */,
 				D04B867A29F9A6D400177357 /* CGAffineTransform+REExtensions.swift in Sources */,
 				D04B866B29F9A6CF00177357 /* CATransform3D+REExtensions.swift in Sources */,
+				D00D63912A069AB600A9EEF4 /* Stack.swift in Sources */,
 				D04B868D29F9A6EA00177357 /* DeinitObservable.swift in Sources */,
 				D04B872629F9A71900177357 /* UIImageView+REExtensions.swift in Sources */,
 				D04B86D629F9A70600177357 /* CountdownTimer.swift in Sources */,
@@ -1923,9 +1958,12 @@
 				D04B868429F9A6EA00177357 /* AnyObjectExtensionable.swift in Sources */,
 				D04B86CB29F9A70100177357 /* ReadWriteLock.swift in Sources */,
 				D04B86CC29F9A70100177357 /* Synchronizing.swift in Sources */,
+				D00D638E2A069AB600A9EEF4 /* LinkedList.swift in Sources */,
+				D00D63962A069AB600A9EEF4 /* Queue.swift in Sources */,
 				D04B86E429F9A71000177357 /* NSRegularExpression+REExtensions.swift in Sources */,
 				D04B867329F9A6D300177357 /* CGAffineTransform+REExtensions.swift in Sources */,
 				D04B866D29F9A6D000177357 /* CATransform3D+REExtensions.swift in Sources */,
+				D00D63922A069AB600A9EEF4 /* Stack.swift in Sources */,
 				D04B868829F9A6EA00177357 /* DeinitObservable.swift in Sources */,
 				D04B870529F9A71900177357 /* UIImageView+REExtensions.swift in Sources */,
 				D04B86E029F9A70600177357 /* CountdownTimer.swift in Sources */,
@@ -2015,6 +2053,7 @@
 				D0C95FE02857AC1A00D0522D /* SignedNumeric+REExtensions.swift in Sources */,
 				D0122B0329EEF372008311CF /* UIBezierPath+REExtensions.swift in Sources */,
 				D0C95FD52857899F00D0522D /* Bool+REExtensions.swift in Sources */,
+				D00D63932A069AB600A9EEF4 /* Queue.swift in Sources */,
 				D0FB4056286362F10019D56A /* Once.swift in Sources */,
 				D076D48529F3B8540008ABE0 /* UILabel+REExtensions.swift in Sources */,
 				D076D4B129F3BF790008ABE0 /* UITableView+REExtensions.swift in Sources */,
@@ -2048,6 +2087,7 @@
 				D0CDBDCA299FAB3100BD682D /* Debouncer.swift in Sources */,
 				D076D49129F3BB2D0008ABE0 /* UINavigationController+REExtensions.swift in Sources */,
 				D071DEBD28D8DC1F00618A2F /* Collection+REExtensions.swift in Sources */,
+				D00D638F2A069AB600A9EEF4 /* Stack.swift in Sources */,
 				D0122B2B29EF04DE008311CF /* UIImage+REExtensions.swift in Sources */,
 				D08F2C5B29DB437B00B4C181 /* Date+REExtensions.swift in Sources */,
 				D0421AD12938F6B500452845 /* Data+REExtensions.swift in Sources */,
@@ -2088,6 +2128,7 @@
 				D071620229F3D47C0051C11E /* UIWindow+REExtensions.swift in Sources */,
 				D05A8817291BF4EF00C53492 /* Font+REExtensions.swift in Sources */,
 				D0038B7F2856581600A890F9 /* UnfairLock.swift in Sources */,
+				D00D638B2A069AB600A9EEF4 /* LinkedList.swift in Sources */,
 				D0EED73429DD56F5005A0F31 /* UIAlertController+REExtensions.swift in Sources */,
 				D0EBE237288476DB004925E5 /* Associatable.swift in Sources */,
 				D0EBE2392884797B004925E5 /* OnceExecutable.swift in Sources */,
@@ -2178,6 +2219,7 @@
 				D071620429F3D4BB0051C11E /* UIWindowExtensionsTests.swift in Sources */,
 				D076D48729F3B8A10008ABE0 /* UILabelExtensionsTests.swift in Sources */,
 				D07161FC29F3D2980051C11E /* UIScrollViewExtensionsTest.swift in Sources */,
+				D00D63982A069B4500A9EEF4 /* DataStructuresTest.swift in Sources */,
 				D0CD713528E5C0AC009ADA8E /* ComparableExtensionsTests.swift in Sources */,
 				D0CC5A20290AEDFC0038989B /* RangeReplaceableCollectionExtensionsTests.swift in Sources */,
 				D0B1211B285510B200B5B326 /* NSObjectExtensionsTests.swift in Sources */,

@@ -50,6 +50,10 @@
 		D0122B3229EF0C27008311CF /* XCTestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B3029EF0B6C008311CF /* XCTestExtensions.swift */; };
 		D019B8F5285BA02900257A7D /* ReadWriteLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B8F4285BA02900257A7D /* ReadWriteLockTests.swift */; };
 		D019B8F7285BA3CB00257A7D /* UnfairLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B8F6285BA3CB00257A7D /* UnfairLockTests.swift */; };
+		D01D6DCD2A06CBE000AEDA3D /* Vibrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01D6DCC2A06CBE000AEDA3D /* Vibrator.swift */; };
+		D01D6DCE2A06CBE000AEDA3D /* Vibrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01D6DCC2A06CBE000AEDA3D /* Vibrator.swift */; };
+		D01D6DCF2A06CBE000AEDA3D /* Vibrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01D6DCC2A06CBE000AEDA3D /* Vibrator.swift */; };
+		D01D6DD02A06CBE000AEDA3D /* Vibrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01D6DCC2A06CBE000AEDA3D /* Vibrator.swift */; };
 		D01DABC229B4FAA700ABD25E /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01DABC129B4FAA700ABD25E /* Throttler.swift */; };
 		D01DABC429B4FE1300ABD25E /* ThrottlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01DABC329B4FE1300ABD25E /* ThrottlerTests.swift */; };
 		D022BED529DD47EE00245550 /* URLRequest+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D022BED429DD47EE00245550 /* URLRequest+REExtensions.swift */; };
@@ -630,6 +634,7 @@
 		D0122B3029EF0B6C008311CF /* XCTestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestExtensions.swift; sourceTree = "<group>"; };
 		D019B8F4285BA02900257A7D /* ReadWriteLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteLockTests.swift; sourceTree = "<group>"; };
 		D019B8F6285BA3CB00257A7D /* UnfairLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfairLockTests.swift; sourceTree = "<group>"; };
+		D01D6DCC2A06CBE000AEDA3D /* Vibrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vibrator.swift; sourceTree = "<group>"; };
 		D01DABC129B4FAA700ABD25E /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
 		D01DABC329B4FE1300ABD25E /* ThrottlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrottlerTests.swift; sourceTree = "<group>"; };
 		D022BED429DD47EE00245550 /* URLRequest+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+REExtensions.swift"; sourceTree = "<group>"; };
@@ -1190,6 +1195,7 @@
 				D01DABC129B4FAA700ABD25E /* Throttler.swift */,
 				D094C96329F4631200491CD8 /* Memory.swift */,
 				D0C3306529F57BA5007BE677 /* NanoID.swift */,
+				D01D6DCC2A06CBE000AEDA3D /* Vibrator.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1752,6 +1758,7 @@
 				D04B860B29F9A59600177357 /* UIBarButtonItem+REExtensions.swift in Sources */,
 				D04B861E29F9A59600177357 /* UIWindow+REExtensions.swift in Sources */,
 				D04B85DA29F9A40E00177357 /* EdgeInsets+REExtensions.swift in Sources */,
+				D01D6DCE2A06CBE000AEDA3D /* Vibrator.swift in Sources */,
 				D04B85DC29F9A50600177357 /* Throttler.swift in Sources */,
 				D04B861029F9A59600177357 /* UIViewController+REExtensions.swift in Sources */,
 				D04B85DD29F9A50600177357 /* Debouncer.swift in Sources */,
@@ -1878,6 +1885,7 @@
 				D04B868129F9A6D900177357 /* EdgeInsets+REExtensions.swift in Sources */,
 				D04B874029F9A71900177357 /* UIWindow+REExtensions.swift in Sources */,
 				D04B872529F9A71900177357 /* UIBarButtonItem+REExtensions.swift in Sources */,
+				D01D6DCF2A06CBE000AEDA3D /* Vibrator.swift in Sources */,
 				D04B86F929F9A71100177357 /* URLRequest+REExtensions.swift in Sources */,
 				D04B868029F9A6D900177357 /* Color+REExtensions.swift in Sources */,
 				D04B86BC29F9A6FC00177357 /* WeakProxy.swift in Sources */,
@@ -2004,6 +2012,7 @@
 				D04B867E29F9A6D800177357 /* EdgeInsets+REExtensions.swift in Sources */,
 				D04B871F29F9A71900177357 /* UIWindow+REExtensions.swift in Sources */,
 				D04B870429F9A71900177357 /* UIBarButtonItem+REExtensions.swift in Sources */,
+				D01D6DD02A06CBE000AEDA3D /* Vibrator.swift in Sources */,
 				D04B86EB29F9A71000177357 /* URLRequest+REExtensions.swift in Sources */,
 				D04B867D29F9A6D800177357 /* Color+REExtensions.swift in Sources */,
 				D04B86C029F9A6FD00177357 /* WeakProxy.swift in Sources */,
@@ -2084,6 +2093,7 @@
 				D0EBE241288492B2004925E5 /* DeinitObserver.swift in Sources */,
 				D076D4BF29F3C2B90008ABE0 /* UIViewController+REExtensions.swift in Sources */,
 				D05C867A294B54CD0077E744 /* CGColor+REExtensions.swift in Sources */,
+				D01D6DCD2A06CBE000AEDA3D /* Vibrator.swift in Sources */,
 				D0CDBDCA299FAB3100BD682D /* Debouncer.swift in Sources */,
 				D076D49129F3BB2D0008ABE0 /* UINavigationController+REExtensions.swift in Sources */,
 				D071DEBD28D8DC1F00618A2F /* Collection+REExtensions.swift in Sources */,

@@ -354,9 +354,9 @@ public extension ReerForEquatable where Base == Data {
     /// ReerKit: Returns an encrypted Data using AES.
     ///
     /// - Parameters:
-    ///   - key: A key length of 16, 24 or 32 (128, 192 or 256bits).
-    ///   - iv: An initialization vector length of 16(128bits).
-    /// - Returns: A Data encrypted, or nil if an error occurs.
+    ///   - key: A key length of 16(AES128), 24(AES192) or 32(AES256)
+    ///   - iv: An initialization vector length of 16(CBC), or use the default data that length of 0(EBC)
+    /// - Returns: A `Data` encrypted, or nil if an error occurs.
     func aesEncrypt(withKey key: Data, iv: Data = .init()) -> Data? {
         guard key.count == 16 || key.count == 24 || key.count == 32 else {
             return nil
@@ -404,9 +404,9 @@ public extension ReerForEquatable where Base == Data {
     /// ReerKit: Returns an decrypted Data using AES.
     ///
     /// - Parameters:
-    ///   - key: A key length of 16, 24 or 32 (128, 192 or 256bits).
-    ///   - iv: An initialization vector length of 16(128bits).
-    /// - Returns: An Data decrypted, or nil if an error occurs.
+    ///   - key: A key length of 16(AES128), 24(AES192) or 32(AES256)
+    ///   - iv: An initialization vector length of 16(CBC), or use the default data that length of 0(EBC)
+    /// - Returns: An `Data` decrypted, or nil if an error occurs.
     func aesDecrypt(withKey key: Data, iv: Data = .init()) -> Data? {
         guard key.count == 16 || key.count == 24 || key.count == 32 else {
             return nil

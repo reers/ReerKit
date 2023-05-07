@@ -36,6 +36,10 @@ import AppKit
 import CoreGraphics
 #endif
 
+#if canImport(CommonCrypto)
+import CommonCrypto
+#endif
+
 // MARK: - Nonmutating
 
 public extension Reer where Base == String {
@@ -1256,5 +1260,42 @@ public extension Reer where Base == String {
         return NSMutableAttributedString(string: base, attributes: [.foregroundColor: color])
     }
     #endif
+}
+#endif
+
+// MARK: - Crypto
+
+#if canImport(CommonCrypto)
+
+public extension Reer where Base == String {
+    /// ReerKit: Returns a base64 encoded string of the encrypted Data using AES.
+    ///
+    /// - Parameters:
+    ///   - key: A key with a length of 16(AES128), 24(AES192) or 32(AES256) after conversion to data
+    ///   - iv: An initialization vector with a length of 16(CBC) after conversion to data, or use the default data that length of 0(EBC)
+    /// - Returns: A base64 encoded string of the encrypted Data encrypted, or nil if an error occurs.
+    func aesEncrypt(withKey key: String, iv: String = "") -> String? {
+        guard let data = base.re.utf8Data,
+              let keyData = key.re.utf8Data,
+              let ivData = iv.re.utf8Data
+        else { return nil }
+        let resultData = data.re.aesEncrypt(withKey: keyData, iv: ivData)
+        return resultData?.base64EncodedString()
+    }
+    
+    /// ReerKit: Returns an decrypted `String` using AES.
+    ///
+    /// - Parameters:
+    ///   - key: A key with a length of 16(AES128), 24(AES192) or 32(AES256) after conversion to data
+    ///   - iv: An initialization vector with a length of 16(CBC) after conversion to data, or use the default data that length of 0(EBC)
+    /// - Returns: A decrypted string, or nil if an error occurs.
+    func aesDecrypt(withKey key: String, iv: String = "") -> String? {
+        guard let data = Data(base64Encoded: base, options: .ignoreUnknownCharacters),
+              let keyData = key.re.utf8Data,
+              let ivData = iv.re.utf8Data
+        else { return nil }
+        guard let resultData = data.re.aesDecrypt(withKey: keyData, iv: ivData) else { return nil }
+        return resultData.re.utf8String
+    }
 }
 #endif

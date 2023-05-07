@@ -900,4 +900,18 @@ final class StringExtensionsTests: XCTestCase {
         XCTAssertEqual(String(helloWorld.re[NSRange(location: 6, length: 6)]), "World!")
         XCTAssertEqual(String(flower.re[NSRange(location: 0, length: 2)]), flower)
     }
+    
+    func testAes() {
+        /// AES 128
+        XCTAssertEqual("123".re.aesEncrypt(withKey: "abcdefghijklmnop")!.re.aesDecrypt(withKey: "abcdefghijklmnop"), "123")
+        
+        /// AES 192
+        XCTAssertEqual("123".re.aesEncrypt(withKey: "abcdefghijklmnopqrstuvwx")!.re.aesDecrypt(withKey: "abcdefghijklmnopqrstuvwx"), "123")
+        
+        /// AES 256
+        XCTAssertEqual("123".re.aesEncrypt(withKey: "abcdefghijklmnopabcdefghijklmnop")!.re.aesDecrypt(withKey: "abcdefghijklmnopabcdefghijklmnop"), "123")
+        
+        /// AES 256 with iv
+        XCTAssertEqual("123".re.aesEncrypt(withKey: "abcdefghijklmnopabcdefghijklmnop", iv: "0123456789abcdef")!.re.aesDecrypt(withKey: "abcdefghijklmnopabcdefghijklmnop", iv: "0123456789abcdef"), "123")
+    }
 }

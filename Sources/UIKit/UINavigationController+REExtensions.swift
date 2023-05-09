@@ -32,10 +32,12 @@ public extension Reer where Base: UINavigationController {
     ///   - animated: Set this value to true to animate the transition (default is true).
     ///   - completion: optional completion handler (default is nil).
     func popViewController(animated: Bool = true, _ completion: (() -> Void)? = nil) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock(completion)
         base.popViewController(animated: animated)
-        CATransaction.commit()
+        guard animated, let coordinator = base.transitionCoordinator else {
+            DispatchQueue.main.async { completion?() }
+            return
+        }
+        coordinator.animate(alongsideTransition: nil) { _ in completion?() }
     }
 
     /// ReerKit: Push ViewController with completion handler.
@@ -44,10 +46,12 @@ public extension Reer where Base: UINavigationController {
     ///   - viewController: viewController to push.
     ///   - completion: optional completion handler (default is nil).
     func pushViewController(_ viewController: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock(completion)
         base.pushViewController(viewController, animated: animated)
-        CATransaction.commit()
+        guard animated, let coordinator = base.transitionCoordinator else {
+            DispatchQueue.main.async { completion?() }
+            return
+        }
+        coordinator.animate(alongsideTransition: nil) { _ in completion?() }
     }
 
     /// ReerKit: Make navigation controller's navigation bar transparent.

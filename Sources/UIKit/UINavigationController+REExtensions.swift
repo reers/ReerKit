@@ -43,10 +43,10 @@ public extension Reer where Base: UINavigationController {
     /// - Parameters:
     ///   - viewController: viewController to push.
     ///   - completion: optional completion handler (default is nil).
-    func pushViewController(_ viewController: UIViewController, completion: (() -> Void)? = nil) {
+    func pushViewController(_ viewController: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
-        base.pushViewController(viewController, animated: true)
+        base.pushViewController(viewController, animated: animated)
         CATransaction.commit()
     }
 

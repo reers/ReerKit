@@ -28,7 +28,8 @@ public enum WeakKeyValue: WeakOption {}
 
 /// A map class that weak refering every AnyObject element.
 /// If the object element's key or value released, its weak wrapper `Weak<T>` will remove from the internal map automatically.
-///
+/// This class is not thread-safe and should not be accessed concurrently from multiple threads.
+/// 
 ///     var aa: NSObject? = NSObject()
 ///     let bb: NSObject? = NSObject()
 ///     let map: WeakMap<WeakValue, String, NSObject> = .init(["aa": aa!, "bb": bb!])

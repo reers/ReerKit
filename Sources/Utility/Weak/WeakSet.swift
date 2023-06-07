@@ -21,6 +21,7 @@
 
 /// A set class that weak refering every AnyObject element.
 /// If the object element released, its weak wrapper `Weak<T>` will remove from the internal set automatically.
+/// This class is not thread-safe and should not be accessed concurrently from multiple threads.
 ///
 ///     var aa: NSObject? = NSObject()
 ///     let bb: NSObject? = NSObject()

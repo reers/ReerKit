@@ -37,17 +37,17 @@ public protocol KeyboardObserver: AnyObject {
 /// System keyboard transition information.
 /// Use `convert(rect:toView:)` to convert frame to specified view.
 public struct KeyboardTransition {
-    var fromVisible: Bool
-    var toVisible: Bool
-    var fromFrame: CGRect
-    var toFrame: CGRect
-    var animationDuration: TimeInterval
-    var animationCurve: UIView.AnimationCurve
-    var animationOption: UIView.AnimationOptions
+    public var toHidden: Bool
+    public var toVisible: Bool
+    public var fromFrame: CGRect
+    public var toFrame: CGRect
+    public var animationDuration: TimeInterval
+    public var animationCurve: UIView.AnimationCurve
+    public var animationOption: UIView.AnimationOptions
     
     fileprivate static var `default`: Self {
         return Self(
-            fromVisible: false,
+            toHidden: false,
             toVisible: false,
             fromFrame: .zero,
             toFrame: .zero,
@@ -63,14 +63,14 @@ public struct KeyboardTransition {
 /// A KeyboardManager object lets you get the system keyboard information,
 /// and track the keyboard visible/frame/transition.
 ///
-/// You should access this class in main thread.
+/// You should access this class in main thread and add observer before keyboard will show.
 public final class KeyboardManager: NSObject {
     
     // MARK: - Properties
     
     private var observers: WeakSet<AnyObject> = []
     private var fromFrame = CGRect.zero
-    private var fromVisible = false
+    private var toHidden = false
     private var fromOrientation = UIInterfaceOrientation.portrait
     private var notificationFromFrame = CGRect.zero
     private var notificationToFrame = CGRect.zero
@@ -192,6 +192,7 @@ public final class KeyboardManager: NSObject {
     }
     
     /// Remove an observer from manager.
+    /// No need to remove observer in `deinit` method, ``KeyboardManager`` will remove observer automatically.
     public func removeObserver(_ observer: KeyboardObserver) {
         observers.remove(observer)
     }
@@ -320,7 +321,7 @@ public final class KeyboardManager: NSObject {
             fromFrame.origin.y = window.bounds.size.height
         }
         trans.fromFrame = fromFrame
-        trans.fromVisible = fromVisible
+        trans.toHidden = toHidden
         // to
         if lastIsNotification || (hasObservedChange && observedToFrame.equalTo(notificationToFrame)) {
             trans.toFrame = notificationToFrame
@@ -344,7 +345,7 @@ public final class KeyboardManager: NSObject {
         hasNotification = false
         hasObservedChange = false
         fromFrame = trans.toFrame
-        fromVisible = trans.toVisible
+        toHidden = trans.toVisible
         fromOrientation = UIApplication.shared.statusBarOrientation
     }
     

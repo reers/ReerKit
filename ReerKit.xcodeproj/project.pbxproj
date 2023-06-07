@@ -472,6 +472,7 @@
 		D07E53AB2883083300921873 /* RETimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AA2883083300921873 /* RETimer.swift */; };
 		D07E53AD288309DF00921873 /* RETimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AC288309DF00921873 /* RETimerTests.swift */; };
 		D07E53AF2883137000921873 /* WeakProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AE2883137000921873 /* WeakProxy.swift */; };
+		D08416A42A30CE560078919B /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08416A32A30CE560078919B /* KeyboardManager.swift */; };
 		D08B843A29D66C4200D7EC17 /* ColorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08B843929D66C4200D7EC17 /* ColorExtensionsTests.swift */; };
 		D08F2C5B29DB437B00B4C181 /* Date+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08F2C5A29DB437B00B4C181 /* Date+REExtensions.swift */; };
 		D090D96629DC5A1100245538 /* Locale+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BDA4BC29DC5925001EA4A0 /* Locale+REExtensions.swift */; };
@@ -729,6 +730,7 @@
 		D07E53AA2883083300921873 /* RETimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimer.swift; sourceTree = "<group>"; };
 		D07E53AC288309DF00921873 /* RETimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimerTests.swift; sourceTree = "<group>"; };
 		D07E53AE2883137000921873 /* WeakProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakProxy.swift; sourceTree = "<group>"; };
+		D08416A32A30CE560078919B /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 		D08B843929D66C4200D7EC17 /* ColorExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensionsTests.swift; sourceTree = "<group>"; };
 		D08F2C5A29DB437B00B4C181 /* Date+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+REExtensions.swift"; sourceTree = "<group>"; };
 		D090D96729DC5A6300245538 /* LocalExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalExtensionsTests.swift; sourceTree = "<group>"; };
@@ -1196,6 +1198,7 @@
 				D094C96329F4631200491CD8 /* Memory.swift */,
 				D0C3306529F57BA5007BE677 /* NanoID.swift */,
 				D01D6DCC2A06CBE000AEDA3D /* Vibrator.swift */,
+				D08416A32A30CE560078919B /* KeyboardManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -2126,6 +2129,7 @@
 				D05C867E294B55F10077E744 /* CGFloat+REExtensions.swift in Sources */,
 				D0CD713728E5C50C009ADA8E /* Comparable+REExtensions.swift in Sources */,
 				D0CC5A1E290AE4CF0038989B /* RangeReplaceableCollection+REExtensions.swift in Sources */,
+				D08416A42A30CE560078919B /* KeyboardManager.swift in Sources */,
 				D0CC5A1A290AD5040038989B /* StringProtocol+REExtensions.swift in Sources */,
 				D090D96A29DC5B9300245538 /* NotificationCenter+REExtensions.swift in Sources */,
 				D076D4B529F3C0BD0008ABE0 /* UITextField+REExtensions.swift in Sources */,

@@ -103,8 +103,8 @@ public extension Reer where Base: AnyObject {
     ///   - value: The source value for the association.
     ///   - key: The key for the association.
     ///   - policy: The policy for the association. For possible values, see `AssociationPolicy`
-    func setAssociatedValue<Value>(
-        _ value: Value,
+    func setAssociatedValue(
+        _ value: Any?,
         forKey key: AssociationKey,
         withPolicy policy: AssociationPolicy = .retain
     ) {
@@ -118,7 +118,7 @@ public extension Reer where Base: AnyObject {
     /// - Parameter key: The key for the association.
     /// - Returns: The value associated with the key.
     func associatedValue<Value>(forKey key: AssociationKey) -> Value? {
-        return objc_getAssociatedObject(base, key.address) as! Value?
+        return (objc_getAssociatedObject(base, key.address) as? Value?) ?? nil
     }
     
     /// ReerKit: Returns the value associated on self for a given key.
@@ -130,7 +130,7 @@ public extension Reer where Base: AnyObject {
     ///   - default: Default value for the result.
     /// - Returns: The value associated with the key.
     func associatedValue<Value>(forKey key: AssociationKey, `default`: Value) -> Value {
-        return (objc_getAssociatedObject(base, key.address) as! Value?) ?? `default`
+        return ((objc_getAssociatedObject(base, key.address) as? Value?) ?? nil) ?? `default`
     }
     
     /// ReerKit: Sets an associated weak object for self using a given key.

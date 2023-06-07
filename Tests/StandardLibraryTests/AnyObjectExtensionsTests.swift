@@ -31,6 +31,13 @@ class AnyObjectExtensionsTests: XCTestCase {
         obj.re.setAssociatedValue(22, forKey: key)
         XCTAssertEqual(obj.re.associatedValue(forKey: key, default: 11), 22)
         
+        let string: String? = obj.re.associatedValue(forKey: key)
+        XCTAssertNil(string)
+        
+        XCTAssertEqual(obj.re.associatedValue(forKey: key), 22)
+        obj.re.setAssociatedValue(nil, forKey: key)
+        XCTAssertNil(obj.re.associatedValue(forKey: key))
+        
         let closure = {
             return "11"
         }

@@ -126,6 +126,21 @@ public extension Reer where Base: UIApplication {
         }
     }
     
+    /// ReerKit: The app's visible and hidden windows.
+    var windows: [UIWindow] {
+        if #available(iOS 15.0, tvOS 13.0, *) {
+            var windows: [UIWindow] = []
+            for windowScene in UIApplication.shared.connectedScenes {
+                if let scene = windowScene as? UIWindowScene {
+                    windows += scene.windows
+                }
+            }
+            return windows
+        } else {
+            return UIApplication.shared.windows
+        }
+    }
+    
     /// ReerKit: App's top most view controller.
     var topMostViewController: UIViewController? {
         guard let rootViewController = keyWindow?.rootViewController else { return nil }

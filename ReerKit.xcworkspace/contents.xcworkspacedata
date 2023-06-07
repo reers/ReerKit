@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Example/iOS_Example/iOS_Example.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:ReerKit.xcodeproj">
    </FileRef>
 </Workspace>

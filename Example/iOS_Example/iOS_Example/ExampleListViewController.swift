@@ -17,6 +17,7 @@ class ExampleListViewController: UIViewController {
     
     let demos = [
         Example(title: "KeyboardManager", vcName: "KeyboardManagerDemoViewController"),
+        Example(title: "Send Event by Responder Chain", vcName: "ResponderChainEventViewController"),
     ]
     
     

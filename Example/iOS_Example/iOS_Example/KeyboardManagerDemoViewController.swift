@@ -59,7 +59,7 @@ extension KeyboardManagerDemoViewController: KeyboardObserver {
     func keyboardChanged(with transition: KeyboardTransition) {
         print(#function)
         if transition.toVisible {
-            print(KeyboardManager.shared.keyboardView)
+            print(KeyboardManager.shared.keyboardView as Any)
         }
         UIView.animate(withDuration: transition.animationDuration, delay: 0, options: transition.animationOption) {
             let kbFrame = KeyboardManager.shared.convertRect(transition.toFrame, toView: self.view)

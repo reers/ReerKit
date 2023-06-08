@@ -44,7 +44,7 @@ public extension Reer where Base: UIControl {
     ///             sent  (cannot be nil). The action is retained.
     ///   - action: A bitmask specifying the control events for which the
     ///            action message is sent.
-    func addAction(forControlEvents events: UIControl.Event, action: @escaping (Any) -> Void) {
+    func addAction(forControlEvents events: UIControl.Event, action: @escaping (UIControl) -> Void) {
         let target = UIControlActionTarget(action: action, events: events)
         base.addTarget(target, action: #selector(target.invoke(with:)), for: events)
         var targets = allTargetsAction
@@ -60,7 +60,7 @@ public extension Reer where Base: UIControl {
     ///             action message is sent.
     ///   - action: The action which is invoked then the action message is
     ///            sent (cannot be nil). The action is retained.
-    func setAction(forControlEvents events: UIControl.Event, action: @escaping (Any) -> Void) {
+    func setAction(forControlEvents events: UIControl.Event, action: @escaping (UIControl) -> Void) {
         removeAllActions(forControlEvents: UIControl.Event.allEvents)
         addAction(forControlEvents: events, action: action)
     }
@@ -127,16 +127,16 @@ public extension Reer where Base: UIControl {
 
 private class UIControlActionTarget: NSObject {
     
-    var action: (Any) -> Void
+    var action: (UIControl) -> Void
     var events: UIControl.Event
     
-    public init(action: @escaping (Any) -> Void, events: UIControl.Event) {
+    public init(action: @escaping (UIControl) -> Void, events: UIControl.Event) {
         self.action = action
         self.events = events
     }
     
     @objc
-    func invoke(with sender: Any) {
+    func invoke(with sender: UIControl) {
         self.action(sender)
     }
     

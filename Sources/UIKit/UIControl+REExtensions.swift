@@ -117,21 +117,12 @@ public extension Reer where Base: UIControl {
     
     private var allTargetsAction: [UIControlActionTarget] {
         get {
-            guard let targets = objc_getAssociatedObject(self, Key.Associated) as? [UIControlActionTarget] else {
-                let newTargets: [UIControlActionTarget] = []
-                objc_setAssociatedObject(self, Key.Associated, newTargets, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-                return newTargets
-            }
-            return targets
+            base.re.associatedValue(forKey: AssociationKey(#function as StaticString), default: [])
         }
         set {
-            objc_setAssociatedObject(self, Key.Associated, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            base.re.setAssociatedValue(newValue, forKey: AssociationKey(#function as StaticString))
         }
     }
-}
-
-private struct Key {
-    static let Associated = "\(#file)+\(#line)"
 }
 
 private class UIControlActionTarget: NSObject {

@@ -14,9 +14,6 @@ Swift 5.5+
 <p>要使用 <a href="http://cocoapods.org">CocoaPods</a> 将 ReerKit 集成到您的 Xcode 项目，请在您的 <code>Podfile</code> 中设置:</p>
 <h4>- 集成所有扩展（推荐）:</h4>
 <pre><code class="ruby language-ruby">pod 'ReerKit'</code></pre>
-<h4>- 也可以仅集成你需要的 subspec:</h4>
-<pre><code class="ruby language-ruby">pod 'ReerKit/StandardLibrary'
-pod 'ReerKit/Foundation'
 </code></pre>
 </details>
 
@@ -24,7 +21,7 @@ pod 'ReerKit/Foundation'
 <summary>Carthage</summary>
 </br>
 <p>要使用 <a href="https://github.com/Carthage/Carthage">Carthage</a> 将 SwifterSwift 集成到您的 Xcode 项目中，请在您的 <code>Cartfile</code> 中设置:</p>
-<pre><code class="ogdl language-ogdl">github "ReerKit/ReerKit" ~&gt; 1.0
+<pre><code class="ogdl language-ogdl">github "ReerKit/ReerKit" ~&gt; 1.0.3
 </code></pre>
 </details>
 
@@ -37,7 +34,7 @@ let package = Package(
     name: "YOUR_PROJECT_NAME",
     targets: [],
     dependencies: [
-        .package(url: "https://github.com/reers/ReerKit.git", from: "1.0.0")
+        .package(url: "https://github.com/reers/ReerKit.git", from: "1.0.3")
     ]
 )
 </code></pre>

@@ -249,7 +249,7 @@ extension LinkedList: ExpressibleByArrayLiteral {
 
 extension LinkedList {
     
-    var array: [E] {
+    public var array: [E] {
         var array = [E]()
         var node = head
         while let next = node {

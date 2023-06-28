@@ -1,4 +1,5 @@
 //
+//  Copyright © 2015 ibireme
 //  Copyright © 2022 reers.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy

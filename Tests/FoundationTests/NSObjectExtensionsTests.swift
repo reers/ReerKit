@@ -20,7 +20,57 @@ fileprivate extension NSObject {
     }
 }
 
+@objc protocol TestProtocol {}
+
+class SubClass: NSObject, TestProtocol {
+    var name: String = ""
+    
+    @objc
+    var age: Int
+    
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+    }
+    
+    @objc
+    func test() {
+        
+    }
+}
+
 class NSObjectExtensionsTests: XCTestCase {
+    
+    func testRuntime() {
+        XCTAssertEqual(SubClass.re.ivars, ["name", "age"])
+        XCTAssertEqual(SubClass.re.ocProtocols, ["ReerKit_iOSTests.TestProtocol"])
+        XCTAssertEqual(SubClass.re.ocProperties, ["age"])
+        XCTAssertEqual(SubClass.re.ocSelectors.map { NSStringFromSelector($0) }, ["init", ".cxx_destruct", "age", "setAge:", "test"])
+    }
+    
+    dynamic func aTestSelector() {
+        print("test selector")
+    }
+    
+    func testAddSelector() {
+        let view = UIView()
+        XCTAssertFalse(view.responds(to: #selector(aTestSelector)))
+        UIView.re.addSelector(#selector(aTestSelector), from: self.classForCoder)
+        XCTAssert(view.responds(to: #selector(aTestSelector)))
+        UIView().perform(#selector(aTestSelector))
+    }
+    
+    let methodName = "random"
+    
+    func testAddMethod() {
+        let methodExpectation = expectation(description: "Method was called")
+        UIView.re.addMethod(methodName, implementation: {
+            methodExpectation.fulfill()
+        })
+        let view = UIView()
+        view.re.performMethod(methodName)
+        waitForExpectations(timeout: 0.1, handler:nil)
+    }
 
     func testOCClassName() {
         XCTAssertEqual(UIView().typeName, "UIView")

@@ -50,7 +50,7 @@ public final class Throttler {
         execute(time: deadline, action: action)
     }
 
-    public func execute(wallDeadline: DispatchTime, action: @escaping () -> Void) {
+    public func execute(wallDeadline: DispatchWallTime, action: @escaping () -> Void) {
         execute(time: wallDeadline, action: action)
     }
 

@@ -378,7 +378,7 @@ public extension Dictionary {
     /// ReerKit: Remove keys contained in the sequence from the dictionary.
     ///
     ///        var dict: [String: String] = ["key1": "value1", "key2": "value2", "key3": "value3"]
-    ///        dict -=["key1", "key2"]
+    ///        dict -= ["key1", "key2"]
     ///        dict.keys.contains("key3") -> true
     ///        dict.keys.contains("key1") -> false
     ///        dict.keys.contains("key2") -> false

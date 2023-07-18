@@ -468,11 +468,11 @@ public extension Reer where Base: UIDevice {
     
     /// ReerKit: Whether the device is a simulator.
     static var isSimulator: Bool {
-        var isSim = false
-        #if arch(i386) || arch(x86_64)
-            isSim = true
+        #if targetEnvironment(simulator)
+        return true
+        #else
+        return false
         #endif
-        return isSim
     }
     
     /// ReerKit: Whether the device is jailbroken.

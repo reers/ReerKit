@@ -1,4 +1,4 @@
-//
+6//
 //  Copyright © 2022 reers.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -39,7 +39,7 @@ public final class Debouncer {
         execute(time: deadline, action: action)
     }
 
-    public func execute(wallDeadline: DispatchTime, action: @escaping () -> Void) {
+    public func execute(wallDeadline: DispatchWallTime, action: @escaping () -> Void) {
         execute(time: wallDeadline, action: action)
     }
 

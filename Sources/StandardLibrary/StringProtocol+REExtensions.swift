@@ -20,7 +20,12 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+#if canImport(Foundation)
+import Foundation
+#endif
+
 public extension ReerForStringProtocol where Base: StringProtocol {
+    #if canImport(Foundation)
     /// ReerKit: The longest common suffix.
     ///
     ///        "Hello world!".re.commonSuffix(with: "It's cold!") = "ld!"
@@ -38,4 +43,5 @@ public extension ReerForStringProtocol where Base: StringProtocol {
             .map { (lhs: Character, _: Character) in lhs }
             .reversed())
     }
+    #endif
 }

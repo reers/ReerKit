@@ -81,7 +81,7 @@ public extension Reer where Base: UICollectionView {
     ///   - name: UICollectionViewCell type.
     ///   - indexPath: location of cell in collectionView.
     /// - Returns: UICollectionViewCell object with associated class name.
-    func dequeueReusableCell<T: UICollectionViewCell>(withClass name: T.Type, for indexPath: IndexPath) -> T {
+    func dequeueReusableCell<T: UICollectionViewCell>(_ name: T.Type, for indexPath: IndexPath) -> T {
         guard let cell = base.dequeueReusableCell(
             withReuseIdentifier: String(describing: name),
             for: indexPath
@@ -99,8 +99,10 @@ public extension Reer where Base: UICollectionView {
     ///   - name: UICollectionReusableView type.
     ///   - indexPath: location of cell in collectionView.
     /// - Returns: UICollectionReusableView object with associated class name.
-    func dequeueReusableSupplementaryView<T: UICollectionReusableView>(ofKind kind: String, withClass name: T.Type,
-                                                                       for indexPath: IndexPath) -> T {
+    func dequeueReusableSupplementaryView<T: UICollectionReusableView>(
+        ofKind kind: String, withClass name: T.Type,
+        for indexPath: IndexPath
+    ) -> T {
         guard let cell = base.dequeueReusableSupplementaryView(
             ofKind: kind,
             withReuseIdentifier: String(describing: name),
@@ -133,7 +135,7 @@ public extension Reer where Base: UICollectionView {
     /// ReerKit: Register UICollectionViewCell using class name.
     ///
     /// - Parameter name: UICollectionViewCell type.
-    func register<T: UICollectionViewCell>(cellWithClass name: T.Type) {
+    func register<T: UICollectionViewCell>(cell name: T.Type) {
         base.register(T.self, forCellWithReuseIdentifier: String(describing: name))
     }
 

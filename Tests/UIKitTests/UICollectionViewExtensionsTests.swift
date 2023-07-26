@@ -77,8 +77,8 @@ final class UICollectionViewExtensionsTests: XCTestCase {
     #if os(iOS)
     func testRegisterCellWithClass() {
         let indexPath = IndexPath(row: 0, section: 0)
-        collectionView.re.register(cellWithClass: TestCell.self)
-        let cell = collectionView.re.dequeueReusableCell(withClass: TestCell.self, for: indexPath)
+        collectionView.re.register(cell: TestCell.self)
+        let cell = collectionView.re.dequeueReusableCell(TestCell.self, for: indexPath)
         XCTAssertNotNil(cell)
     }
     #endif
@@ -87,7 +87,7 @@ final class UICollectionViewExtensionsTests: XCTestCase {
     func testRegisterCellWithNibUsingClass() {
         let indexPath = IndexPath(row: 0, section: 0)
         collectionView.re.register(nibWithCellClass: UICollectionViewCell.self, at: UICollectionViewExtensionsTests.self)
-        let cell = collectionView.re.dequeueReusableCell(withClass: UICollectionViewCell.self, for: indexPath)
+        let cell = collectionView.re.dequeueReusableCell(UICollectionViewCell.self, for: indexPath)
         XCTAssertNotNil(cell)
     }
     #endif

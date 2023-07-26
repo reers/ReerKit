@@ -100,7 +100,7 @@ public extension Reer where Base: UITableView {
     ///   - name: UITableViewCell type.
     ///   - indexPath: location of cell in tableView.
     /// - Returns: UITableViewCell object with associated class name.
-    func dequeueReusableCell<T: UITableViewCell>(withClass name: T.Type, for indexPath: IndexPath) -> T {
+    func dequeueReusableCell<T: UITableViewCell>(_ name: T.Type, for indexPath: IndexPath) -> T {
         guard let cell = base.dequeueReusableCell(withIdentifier: String(describing: name), for: indexPath) as? T else {
             fatalError(
                 "Couldn't find UITableViewCell for \(String(describing: name)), make sure the cell is registered with table view")
@@ -112,7 +112,7 @@ public extension Reer where Base: UITableView {
     ///
     /// - Parameter name: UITableViewHeaderFooterView type.
     /// - Returns: UITableViewHeaderFooterView object with associated class name.
-    func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>(withClass name: T.Type) -> T {
+    func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>(_ name: T.Type) -> T {
         guard let headerFooterView = base.dequeueReusableHeaderFooterView(withIdentifier: String(describing: name)) as? T else {
             fatalError(
                 "Couldn't find UITableViewHeaderFooterView for \(String(describing: name)), make sure the view is registered with table view")
@@ -132,14 +132,14 @@ public extension Reer where Base: UITableView {
    /// ReerKit: Register UITableViewHeaderFooterView using class name.
     ///
     /// - Parameter name: UITableViewHeaderFooterView type.
-    func register<T: UITableViewHeaderFooterView>(headerFooterViewClassWith name: T.Type) {
+    func register<T: UITableViewHeaderFooterView>(headerFooterView name: T.Type) {
         base.register(T.self, forHeaderFooterViewReuseIdentifier: String(describing: name))
     }
 
    /// ReerKit: Register UITableViewCell using class name.
     ///
     /// - Parameter name: UITableViewCell type.
-    func register<T: UITableViewCell>(cellWithClass name: T.Type) {
+    func register<T: UITableViewCell>(cell name: T.Type) {
         base.register(T.self, forCellReuseIdentifier: String(describing: name))
     }
 

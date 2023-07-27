@@ -1,12 +1,15 @@
 # ReerKit
 ReerKit is a collection of native Swift extensions that provide convenient methods, syntactic sugar, and performance improvements for various native data types, UIKit, and Cocoa classes for iOS, macOS, tvOS, watchOS, and Linux platforms.
-Around 60% of the content in the framework comes from the excellent open-source library [SwifterSwift](https://github.com/SwifterSwift/SwifterSwift), with some code removal, optimization, and bug fixes. Another 10% of the content is gathered from various sources on the internet for utility classes or extension methods. The remaining content is developed by myself. All system type extensions in the framework have the `re` infix added to avoid ambiguity issues when calling the same name extension, such as `"SGVsbG\n8gV29ybGQh".re.base64Decoded`.
+Around 60% of the content in the framework comes from the excellent open-source library [SwifterSwift](https://github.com/SwifterSwift/SwifterSwift), with some code removal, optimization, and bug fixes. Another 10% of the content is gathered from various sources on the internet for utility classes or extension methods. The remaining content is developed by myself. All system type extensions in the framework have the `re` infix added to avoid ambiguity issues when calling the same name extension, such as `"SGVsbG\n8gV29ybGQh".re.base64Decoded`, `"123".re.utf8Data?.re.md5String`.
 
 [简体中文](README_CN.md)
 
 ## Requirements
 iOS 11.0+ / tvOS 9.0+ / watchOS 2.0+ / macOS 10.10+ / Ubuntu 14.04+
 Swift 5.5+
+
+## Package Size
+224KB
 
 ## Installation
 
@@ -23,7 +26,7 @@ Swift 5.5+
 <summary>Carthage</summary>
 </br>
 <p>To integrate ReerKit into your Xcode project using <a href="https://github.com/Carthage/Carthage">Carthage</a>, specify it in your `Cartfile`:</p>
-<pre><code class="ogdl language-ogdl">github "ReerKit/ReerKit" ~> 1.0.3
+<pre><code class="ogdl language-ogdl">github "ReerKit/ReerKit" ~> 1.0.4
 </code></pre>
 </details>
 
@@ -36,7 +39,7 @@ let package = Package(
     name: "YOUR_PROJECT_NAME",
     targets: [],
     dependencies: [
-        .package(url: "https://github.com/reers/ReerKit.git", from: "1.0.3")
+        .package(url: "https://github.com/reers/ReerKit.git", from: "1.0.4")
     ]
 )
 </code></pre>
@@ -48,7 +51,7 @@ let package = Package(
     ]
 ),</code></pre>
 <p>Then run `swift package update`.</p>
-<p>Please note that [Swift Package Manager](https://swift.org/package-manager) does not support building for iOS/tvOS/macOS/watchOS applications.</p>
+<p>Please note that <a href="https://swift.org/package-manager">Swift Package Manager</a> does not support building for iOS/tvOS/macOS/watchOS applications.</p>
 </details>
 
 <details>

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import os.log
 
 struct Example {
     var title: String
@@ -18,6 +19,7 @@ class ExampleListViewController: UIViewController {
     let demos = [
         Example(title: "KeyboardManager", vcName: "KeyboardManagerDemoViewController"),
         Example(title: "Send Event by Responder Chain", vcName: "ResponderChainEventViewController"),
+        Example(title: "Push Completion Test", vcName: "PushCompletionViewController")
     ]
     
     
@@ -83,7 +85,10 @@ extension ExampleListViewController: UITableViewDelegate {
         let demo = demos[indexPath.row]
         guard let clazz = NSClassFromString(demo.vcName) as? UIViewController.Type else { return }
         let viewController = clazz.init()
-        navigationController?.pushViewController(viewController, animated: true)
+        os_log("push start")
+        navigationController?.re.pushViewController(viewController, animated: true) {
+            os_log("push completion after animation")
+        }
     }
 }
 

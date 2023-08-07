@@ -127,6 +127,15 @@ public extension Reer where Base: UIViewController {
         base.removeFromParent()
         base.view.removeFromSuperview()
     }
+    
+    /// ReerKit: Helper method for a UIViewController to close itself.
+    func closeSelf(animated: Bool = true, completion: (() -> Void)? = nil) {
+        if let navigationController = base.navigationController, navigationController.viewControllers.count > 1 {
+            navigationController.re.popViewController(animated: animated, completion)
+        } else if let presentingViewController = base.presentingViewController {
+            presentingViewController.dismiss(animated: animated, completion: completion)
+        }
+    }
 
     #if os(iOS)
     /// ReerKit: Helper method to present a UIViewController as a popover.

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D05E46272A813F1000C8A536 /* PushCompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E46262A813F1000C8A536 /* PushCompletionViewController.swift */; };
 		D08416D42A30E2C80078919B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08416D32A30E2C80078919B /* AppDelegate.swift */; };
 		D08416D62A30E2C80078919B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08416D52A30E2C80078919B /* SceneDelegate.swift */; };
 		D08416DD2A30E2CA0078919B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D08416DC2A30E2CA0078919B /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D05E46262A813F1000C8A536 /* PushCompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushCompletionViewController.swift; sourceTree = "<group>"; };
 		D08416D02A30E2C80078919B /* iOS_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D08416D32A30E2C80078919B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D08416D52A30E2C80078919B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				D08416EF2A30E6A60078919B /* ExampleListViewController.swift */,
 				D08416F62A30EBAF0078919B /* KeyboardManagerDemoViewController.swift */,
 				D0C9C0F52A3239EE007C2C36 /* ResponderChainEventViewController.swift */,
+				D05E46262A813F1000C8A536 /* PushCompletionViewController.swift */,
 				D08416DC2A30E2CA0078919B /* Assets.xcassets */,
 				D08416DE2A30E2CA0078919B /* LaunchScreen.storyboard */,
 				D08416E12A30E2CA0078919B /* Info.plist */,
@@ -167,6 +170,7 @@
 				D08416D42A30E2C80078919B /* AppDelegate.swift in Sources */,
 				D08416D62A30E2C80078919B /* SceneDelegate.swift in Sources */,
 				D0C9C0F62A3239EE007C2C36 /* ResponderChainEventViewController.swift in Sources */,
+				D05E46272A813F1000C8A536 /* PushCompletionViewController.swift in Sources */,
 				D08416F72A30EBAF0078919B /* KeyboardManagerDemoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

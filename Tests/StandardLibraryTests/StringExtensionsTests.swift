@@ -901,6 +901,20 @@ final class StringExtensionsTests: XCTestCase {
         XCTAssertEqual(String(flower.re[NSRange(location: 0, length: 2)]), flower)
     }
     
+    func testHash() {
+        let string = "123"
+        
+        // https://www.tools4noobs.com/online_tools/hash/
+        XCTAssertEqual(string.re.md2String, "ef1fedf5d32ead6b7aaf687de4ed1b71")
+        XCTAssertEqual(string.re.md4String, "c58cda49f00748a3bc0fcfa511d516cb")
+        XCTAssertEqual(string.re.md5String, "202cb962ac59075b964b07152d234b70")
+        XCTAssertEqual(string.re.sha1String, "40bd001563085fc35165329ea1ff5c5ecbdbbeef")
+        XCTAssertEqual(string.re.sha224String, "78d8045d684abd2eece923758f3cd781489df3a48e1278982466017f")
+        XCTAssertEqual(string.re.sha256String, "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3")
+        XCTAssertEqual(string.re.sha384String, "9a0a82f0c0cf31470d7affede3406cc9aa8410671520b727044eda15b4c25532a9b5cd8aaf9cec4919d76255b6bfb00f")
+        XCTAssertEqual(string.re.sha512String, "3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2")
+    }
+    
     func testAes() {
         /// AES 128
         XCTAssertEqual("123".re.aesEncrypt(withKey: "abcdefghijklmnop")!.re.aesDecrypt(withKey: "abcdefghijklmnop"), "123")

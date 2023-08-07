@@ -1268,6 +1268,46 @@ public extension Reer where Base == String {
 #if canImport(CommonCrypto)
 
 public extension Reer where Base == String {
+    /// ReerKit: Returns a lowercase String for md2 hash.
+    var md2String: String? {
+        return utf8Data?.re.md2String
+    }
+
+    /// ReerKit: Returns a lowercase String for md4 hash.
+    var md4String: String? {
+        return utf8Data?.re.md4String
+    }
+
+    /// ReerKit: Returns a lowercase String for md5 hash.
+    var md5String: String? {
+        return utf8Data?.re.md5String
+    }
+
+    /// ReerKit: Returns a lowercase String for sha1 hash.
+    var sha1String: String? {
+        return utf8Data?.re.sha1String
+    }
+
+    /// ReerKit: Returns a lowercase String for sha224 hash.
+    var sha224String: String? {
+        return utf8Data?.re.sha224String
+    }
+
+    /// ReerKit: Returns a lowercase String for sha256 hash.
+    var sha256String: String? {
+        return utf8Data?.re.sha256String
+    }
+
+    /// ReerKit: Returns a lowercase String for sha384 hash.
+    var sha384String: String? {
+        return utf8Data?.re.sha384String
+    }
+
+    /// ReerKit: Returns a lowercase String for sha512 hash.
+    var sha512String: String? {
+        return utf8Data?.re.sha512String
+    }
+    
     /// ReerKit: Returns a base64 encoded string of the encrypted Data using AES.
     ///
     /// - Parameters:

@@ -38,7 +38,7 @@ class KeyboardManagerDemoViewController: UIViewController {
         textField.backgroundColor = .lightGray
         textField.re.size = .re(200, 30)
         textField.re.centerX = view.re.centerX
-        textField.re.bottom = view.re.height - (UIApplication.shared.re.keyWindow?.safeAreaInsets.bottom ?? 0)
+        textField.re.bottom = view.re.height - (UIApplication.re.keyWindow?.safeAreaInsets.bottom ?? 0)
         defaultFrame = textField.frame
         view.addSubview(textField)
         textField.becomeFirstResponder()

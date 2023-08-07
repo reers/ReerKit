@@ -114,7 +114,7 @@ public extension Reer where Base: UIApplication {
 
 public extension Reer where Base: UIApplication {
     /// ReerKit: App's key window.
-    var keyWindow: UIWindow? {
+    static var keyWindow: UIWindow? {
         if #available(iOS 13.0, tvOS 13.0, *) {
             return UIApplication.shared.connectedScenes
                 .filter { $0.activationState == .foregroundActive }
@@ -127,7 +127,7 @@ public extension Reer where Base: UIApplication {
     }
     
     /// ReerKit: The app's visible and hidden windows.
-    var windows: [UIWindow] {
+    static var windows: [UIWindow] {
         if #available(iOS 15.0, tvOS 13.0, *) {
             var windows: [UIWindow] = []
             for windowScene in UIApplication.shared.connectedScenes {
@@ -142,45 +142,45 @@ public extension Reer where Base: UIApplication {
     }
     
     /// ReerKit: App's top most view controller.
-    var topMostViewController: UIViewController? {
+    static var topViewController: UIViewController? {
         guard let rootViewController = keyWindow?.rootViewController else { return nil }
-        return topMost(of: rootViewController)
+        return topViewController(of: rootViewController)
     }
     
     /// ReerKit: App's top most navigation controller.
-    var topMostNavigationController: UINavigationController? {
-        return topMostViewController?.navigationController
+    static var topNavigationController: UINavigationController? {
+        return topViewController?.navigationController
     }
     
     /// ReerKit: A view controller's top most view controller.
-    func topMost(of viewController: UIViewController?) -> UIViewController? {
+    static func topViewController(of viewController: UIViewController?) -> UIViewController? {
         // presented view controller
         if let presentedViewController = viewController?.presentedViewController {
-            return self.topMost(of: presentedViewController)
+            return self.topViewController(of: presentedViewController)
         }
         
         // UITabBarController
         if let tabBarController = viewController as? UITabBarController,
            let selectedViewController = tabBarController.selectedViewController {
-            return self.topMost(of: selectedViewController)
+            return self.topViewController(of: selectedViewController)
         }
         
         // UINavigationController
         if let navigationController = viewController as? UINavigationController,
            let visibleViewController = navigationController.visibleViewController {
-            return self.topMost(of: visibleViewController)
+            return self.topViewController(of: visibleViewController)
         }
         
         // UIPageController
         if let pageViewController = viewController as? UIPageViewController,
            pageViewController.viewControllers?.count == 1 {
-            return self.topMost(of: pageViewController.viewControllers?.first)
+            return self.topViewController(of: pageViewController.viewControllers?.first)
         }
         
         // child view controller
         for subview in viewController?.view?.subviews ?? [] {
             if let childViewController = subview.next as? UIViewController {
-                return self.topMost(of: childViewController)
+                return self.topViewController(of: childViewController)
             }
         }
         

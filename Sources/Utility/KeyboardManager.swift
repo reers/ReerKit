@@ -114,17 +114,17 @@ public final class KeyboardManager: NSObject {
     /// Get the keyboard window. nil if there's no keyboard window.
     public var keyboardWindow: UIWindow? {
         var window: UIWindow? = nil
-        for window in UIApplication.shared.re.windows {
+        for window in UIApplication.re.windows {
             if let _ = getKeyboardViewFromWindow(window: window) {
                 return window
             }
         }
-        window = UIApplication.shared.re.keyWindow
+        window = UIApplication.re.keyWindow
         if let _ = getKeyboardViewFromWindow(window: window) {
             return window
         }
         var keyboardWindows: [UIWindow] = []
-        for window in UIApplication.shared.re.windows {
+        for window in UIApplication.re.windows {
             // Get the window
             let windowName = String(describing: type(of: window))
             if systemVersion < 16 {
@@ -153,11 +153,11 @@ public final class KeyboardManager: NSObject {
     public var keyboardView: UIView? {
         var window: UIWindow? = nil
         var view: UIView? = nil
-        for window in UIApplication.shared.re.windows {
+        for window in UIApplication.re.windows {
             view = getKeyboardViewFromWindow(window: window)
             if view != nil { return view }
         }
-        window = UIApplication.shared.re.keyWindow
+        window = UIApplication.re.keyWindow
         view = getKeyboardViewFromWindow(window: window)
         if view != nil { return view }
         return nil
@@ -201,7 +201,7 @@ public final class KeyboardManager: NSObject {
     public func convertRect(_ rect: CGRect, toView view: UIView?) -> CGRect {
         if rect.isNull || rect.isInfinite { return rect }
         var rect = rect
-        guard let mainWindow = UIApplication.shared.re.keyWindow ?? UIApplication.shared.re.windows.first else {
+        guard let mainWindow = UIApplication.re.keyWindow ?? UIApplication.re.windows.first else {
             if let view = view {
                 return view.convert(rect, from: nil)
             } else {
@@ -309,7 +309,7 @@ public final class KeyboardManager: NSObject {
     @objc
     private func notifyAllObservers() {
         guard let keyboard = keyboardView,
-              let window = keyboard.window ?? UIApplication.shared.re.keyWindow ?? UIApplication.shared.re.windows.first
+              let window = keyboard.window ?? UIApplication.re.keyWindow ?? UIApplication.re.windows.first
         else {
             return
         }

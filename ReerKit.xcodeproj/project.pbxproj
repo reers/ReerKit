@@ -399,6 +399,11 @@
 		D04D34FA286C836A001E974C /* DispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34F9286C836A001E974C /* DispatchTests.swift */; };
 		D04D34FC286C843B001E974C /* GlobalFunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04D34FB286C843B001E974C /* GlobalFunctionsTests.swift */; };
 		D053AF0A28B86582004335DC /* Sequence+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D053AF0928B86582004335DC /* Sequence+REExtensions.swift */; };
+		D05897472A84E03E008381BB /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05897462A84E03E008381BB /* Reachability.swift */; };
+		D05897482A84E03E008381BB /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05897462A84E03E008381BB /* Reachability.swift */; };
+		D05897492A84E03E008381BB /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05897462A84E03E008381BB /* Reachability.swift */; };
+		D058974A2A84E03E008381BB /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05897462A84E03E008381BB /* Reachability.swift */; };
+		D058974C2A84FA45008381BB /* ReachabilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D058974B2A84FA45008381BB /* ReachabilityTests.swift */; };
 		D05A8817291BF4EF00C53492 /* Font+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A8816291BF4EF00C53492 /* Font+REExtensions.swift */; };
 		D05A8819291BF58200C53492 /* Color+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A8818291BF58200C53492 /* Color+REExtensions.swift */; };
 		D05A881C291C106800C53492 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A881A291BF5CC00C53492 /* StringExtensionsTests.swift */; };
@@ -657,6 +662,8 @@
 		D04D34F9286C836A001E974C /* DispatchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchTests.swift; sourceTree = "<group>"; };
 		D04D34FB286C843B001E974C /* GlobalFunctionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctionsTests.swift; sourceTree = "<group>"; };
 		D053AF0928B86582004335DC /* Sequence+REExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence+REExtensions.swift"; sourceTree = "<group>"; };
+		D05897462A84E03E008381BB /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		D058974B2A84FA45008381BB /* ReachabilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityTests.swift; sourceTree = "<group>"; };
 		D05A8751291BC4A300C53492 /* String+REExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+REExtensions.swift"; sourceTree = "<group>"; };
 		D05A8816291BF4EF00C53492 /* Font+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+REExtensions.swift"; sourceTree = "<group>"; };
 		D05A8818291BF58200C53492 /* Color+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+REExtensions.swift"; sourceTree = "<group>"; };
@@ -929,6 +936,7 @@
 				D094C96529F46A0C00491CD8 /* MemoryTests.swift */,
 				D0C3306729F59275007BE677 /* NanoIDTests.swift */,
 				D00D63972A069B4500A9EEF4 /* DataStructuresTest.swift */,
+				D058974B2A84FA45008381BB /* ReachabilityTests.swift */,
 			);
 			path = UtilityTests;
 			sourceTree = "<group>";
@@ -1199,6 +1207,7 @@
 				D0C3306529F57BA5007BE677 /* NanoID.swift */,
 				D01D6DCC2A06CBE000AEDA3D /* Vibrator.swift */,
 				D08416A32A30CE560078919B /* KeyboardManager.swift */,
+				D05897462A84E03E008381BB /* Reachability.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1675,6 +1684,7 @@
 			files = (
 				D04B85F129F9A57800177357 /* CGFloat+REExtensions.swift in Sources */,
 				D04B861C29F9A59600177357 /* UIFont+REExtensions.swift in Sources */,
+				D05897482A84E03E008381BB /* Reachability.swift in Sources */,
 				D04B85C029F9A3FC00177357 /* Comparable+REExtensions.swift in Sources */,
 				D04B860C29F9A59600177357 /* UIGestureRecognizer+REExtensions.swift in Sources */,
 				D04B861D29F9A59600177357 /* UIAlertController+REExtensions.swift in Sources */,
@@ -1802,6 +1812,7 @@
 			files = (
 				D04B86D429F9A70600177357 /* RETimer.swift in Sources */,
 				D04B873A29F9A71900177357 /* UIViewController+REExtensions.swift in Sources */,
+				D05897492A84E03E008381BB /* Reachability.swift in Sources */,
 				D04B869329F9A6F100177357 /* SignedNumeric+REExtensions.swift in Sources */,
 				D04B86A129F9A6F100177357 /* Int+REExtensions.swift in Sources */,
 				D04B86F529F9A71100177357 /* NSObject+REExtensions.swift in Sources */,
@@ -1929,6 +1940,7 @@
 			files = (
 				D04B86DE29F9A70600177357 /* RETimer.swift in Sources */,
 				D04B871929F9A71900177357 /* UIViewController+REExtensions.swift in Sources */,
+				D058974A2A84E03E008381BB /* Reachability.swift in Sources */,
 				D04B86AA29F9A6F100177357 /* SignedNumeric+REExtensions.swift in Sources */,
 				D04B86B829F9A6F100177357 /* Int+REExtensions.swift in Sources */,
 				D04B86E729F9A71000177357 /* NSObject+REExtensions.swift in Sources */,
@@ -2148,6 +2160,7 @@
 				D0EBE2392884797B004925E5 /* OnceExecutable.swift in Sources */,
 				D0CD713D28E5CC1D009ADA8E /* Float+REExtensions.swift in Sources */,
 				D0CD713928E5C597009ADA8E /* StdlibProtocolWrappers.swift in Sources */,
+				D05897472A84E03E008381BB /* Reachability.swift in Sources */,
 				D071620B29F3D5B50051C11E /* WKWebView+REExtensions.swift in Sources */,
 				D05C866B294B4B7E0077E744 /* CGAffineTransform+REExtensions.swift in Sources */,
 				D0B1211528550E1000B5B326 /* NSObject+REExtensions.swift in Sources */,
@@ -2254,6 +2267,7 @@
 				D0122B2D29EF07DF008311CF /* UIImageExtensionsTests.swift in Sources */,
 				D076D4A729F3BDE10008ABE0 /* UIStoryboardExtensionsTests.swift in Sources */,
 				D0C95FE42857B4C400D0522D /* IntExtensionsTests.swift in Sources */,
+				D058974C2A84FA45008381BB /* ReachabilityTests.swift in Sources */,
 				D0C95FE22857AD5D00D0522D /* SignedNumericExtensionsTests.swift in Sources */,
 				D071DEBF28D8DF5500618A2F /* CollectionExtensionsTests.swift in Sources */,
 				D071620E29F3D5FD0051C11E /* WKWebViewExtensionsTests.swift in Sources */,

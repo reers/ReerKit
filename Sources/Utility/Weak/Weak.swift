@@ -20,7 +20,7 @@
 //  THE SOFTWARE.
 
 /// Weak wrapper for AnyObject.
-public struct Weak<T: AnyObject> {
+public final class Weak<T: AnyObject> {
     public private(set) weak var object: T?
     private let hashKey: Int
     public init(_ object: T) {

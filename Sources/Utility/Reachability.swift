@@ -96,11 +96,7 @@ open class Reachability {
     
     /// The current network reachability status.
     open var status: Status {
-        guard let flags = flags else { return .unknown }
-        if !flags.contains(.reachable) { return .none }
-        if flags.contains(.connectionRequired) && flags.contains(.transientConnection) { return .none }
-        if flags.contains(.isWWAN) { return .reachable(.cellular) }
-        return .reachable(.ethernetOrWiFi)
+        return flags.map(Status.init) ?? .unknown
     }
     
     /// Mutable state storage.

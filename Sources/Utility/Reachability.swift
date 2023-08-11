@@ -191,7 +191,6 @@ open class Reachability {
             copyDescription: { info in
                 let unmanaged = Unmanaged<Weak<Reachability>>.fromOpaque(info)
                 let weakSelf = unmanaged.takeUnretainedValue()
-                let flags = weakSelf.object?.flags
                 let description = weakSelf.object?.flags?.readableDescription ?? "nil"
                 return Unmanaged.passRetained(description as CFString)
             }

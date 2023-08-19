@@ -260,6 +260,31 @@ public extension Reer where Base: UIView {
         return UIGraphicsGetImageFromCurrentImageContext()
     }
     
+    func color(at point: CGPoint) -> UIColor? {
+        guard base.bounds.contains(point) else { return nil }
+        var pixel: [UInt8] = [0, 0, 0, 0]
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        if let context = CGContext(
+            data: &pixel,
+            width: 1,
+            height: 1,
+            bitsPerComponent: 8,
+            bytesPerRow: 4,
+            space: colorSpace,
+            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+        ) {
+            context.translateBy(x: -point.x, y: -point.y)
+            base.layer.render(in: context)
+            return UIColor(
+                red: CGFloat(pixel[0]) / 255.0,
+                green: CGFloat(pixel[1]) / 255.0,
+                blue: CGFloat(pixel[2]) / 255.0,
+                alpha: CGFloat(pixel[3]) / 255.0
+            )
+        }
+        return nil
+    }
+    
     /// ReerKit: Add array of views to the view.
     ///
     /// - Parameter subviews: array of subviews to add to view.

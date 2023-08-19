@@ -506,4 +506,15 @@ class UIViewExtensionsTests: XCTestCase {
         // simple empty case test
         XCTAssertNil(container.re.widthConstraint)
     }
+    
+    func testPickColor() {
+        let view = UIView()
+        view.backgroundColor = .red
+        view.frame = .re(0, 0, 100, 100)
+        XCTAssertEqual(view.re.color(at: .re(10, 10)), UIColor.red)
+        view.backgroundColor = .blue
+        XCTAssertEqual(view.re.color(at: .re(10, 10)), UIColor.blue)
+        
+        XCTAssertNil(view.re.color(at: .re(200, 200)))
+    }
 }

@@ -163,4 +163,14 @@ public extension CGPoint {
     }
 }
 
+// MARK: - Initializers
+
+public extension CGPoint {
+
+    /// ReerKit: Create a `CGPoint` instance with x, y, but without argument label.
+    static func re(_ x: CGFloat, _ y: CGFloat) -> CGPoint {
+        return CGPoint(x: x, y: y)
+    }
+}
+
 #endif

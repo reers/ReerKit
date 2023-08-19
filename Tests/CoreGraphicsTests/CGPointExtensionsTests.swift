@@ -68,6 +68,11 @@ final class CGPointExtensionsTests: XCTestCase {
         let result = CGPoint(x: 50, y: 50)
         XCTAssertEqual(point, result)
     }
+    
+    func testInit() {
+        let point: CGPoint = .re(2, 3)
+        XCTAssertEqual(point, CGPoint(x: 2, y: 3))
+    }
 }
 
 #endif

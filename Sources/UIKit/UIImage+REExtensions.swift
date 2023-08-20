@@ -99,6 +99,114 @@ public extension Reer where Base: UIImage {
     }
     #endif
     
+    /// ReerKit: Pick the color at a point of the image.
+    /// It will return nil if the point is out of bounds.
+    func color(at point: CGPoint) -> UIColor? {
+        guard point.x >= 0 && point.x <= base.size.width && point.y >= 0 && point.y <= base.size.height,
+              let cgImage = base.cgImage,
+              let provider = cgImage.dataProvider,
+              let providerData = provider.data,
+              let data = CFDataGetBytePtr(providerData)
+        else {
+            return nil
+        }
+        
+        let width = cgImage.width
+        let bytesPerPixel = 4
+        
+        let pixelDataIndex = ((width * Int(point.y)) + Int(point.x)) * bytesPerPixel
+        
+        var rIndex = 0
+        var gIndex = 1
+        var bIndex = 2
+        var aIndex = 3
+        
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 1.0
+        
+        var littleEndian = false
+        if cgImage.bitmapInfo.contains(.byteOrder32Little) || cgImage.bitmapInfo.contains(.byteOrder16Little) {
+            littleEndian = true
+        }
+        
+        let alphaInfo = cgImage.alphaInfo
+        
+        // Check the alphaInfo
+        switch alphaInfo {
+            
+        // RGB
+        case .none:
+            // BGR
+            if littleEndian {
+                rIndex = 2
+                gIndex = 1
+                bIndex = 0
+            }
+            r = CGFloat(data[pixelDataIndex + rIndex]) / 255.0
+            g = CGFloat(data[pixelDataIndex + gIndex]) / 255.0
+            b = CGFloat(data[pixelDataIndex + bIndex]) / 255.0
+        
+        // A
+        case .alphaOnly:
+            return .clear
+        
+        // RGBA or RGBX
+        case .last, .premultipliedLast, .noneSkipLast:
+            // ABGR or XBGR
+            if littleEndian {
+                aIndex = 0
+                bIndex = 1
+                gIndex = 2
+                rIndex = 3
+            }
+            if alphaInfo != .noneSkipLast {
+                a = CGFloat(data[pixelDataIndex + aIndex]) / 255.0
+            }
+            r = CGFloat(data[pixelDataIndex + rIndex]) / 255.0
+            g = CGFloat(data[pixelDataIndex + gIndex]) / 255.0
+            b = CGFloat(data[pixelDataIndex + bIndex]) / 255.0
+            
+            if alphaInfo == .premultipliedLast && a != .zero {
+                r = r / a
+                g = g / a
+                b = b / a
+            }
+        
+        // ARGB or XRGB
+        case .first, .premultipliedFirst, .noneSkipFirst:
+            // BGRA or BGRX
+            if littleEndian {
+                bIndex = 0
+                gIndex = 1
+                rIndex = 2
+                aIndex = 3
+            } else {
+                aIndex = 0
+                rIndex = 1
+                gIndex = 2
+                bIndex = 3
+            }
+            if alphaInfo != .noneSkipFirst {
+                a = CGFloat(data[pixelDataIndex + aIndex]) / 255.0
+            }
+            r = CGFloat(data[pixelDataIndex + rIndex]) / 255.0
+            g = CGFloat(data[pixelDataIndex + gIndex]) / 255.0
+            b = CGFloat(data[pixelDataIndex + bIndex]) / 255.0
+            
+            if alphaInfo == .premultipliedFirst && a != .zero {
+                r = r / a
+                g = g / a
+                b = b / a
+            }
+        default:
+            break
+        }
+        
+        return UIColor(red: r, green: g, blue: b, alpha: a)
+    }
+    
     /// ReerKit: Compressed UIImage from original UIImage.
     ///
     /// - Parameter quality: The quality of the resulting JPEG image, expressed as a value from 0.0 to 1.0. The value 0.0 represents the maximum compression (or lowest quality) while the value 1.0 represents the least compression (or best quality), (default is 0.5).

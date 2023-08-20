@@ -514,6 +514,8 @@ class UIViewExtensionsTests: XCTestCase {
         XCTAssertEqual(view.re.color(at: .re(10, 10)), UIColor.red)
         view.backgroundColor = .blue
         XCTAssertEqual(view.re.color(at: .re(10, 10)), UIColor.blue)
+        view.backgroundColor = .clear
+        XCTAssertEqual(view.re.color(at: .re(10, 10))!.re.rgba.alpha, 0)
         
         XCTAssertNil(view.re.color(at: .re(200, 200)))
     }

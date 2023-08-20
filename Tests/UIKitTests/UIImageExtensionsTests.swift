@@ -35,6 +35,48 @@ final class UIImageExtensionsTests: XCTestCase {
         }
         XCTAssertEqual(UIColor(red: 0.5, green: 0.5, blue: 0, alpha: 1), yellow.re.averageColor()!, accuracy: 0.01)
     }
+    
+    func testPickColor() {
+        let targetColor = UIColor.re(argbHex: 0x33bb2391)
+        var image: UIImage = .re(color: targetColor, size: .re(20, 20))
+        let pickedColor = image.re.color(at: .re(2, 2))!
+        XCTAssertTrue(pickedColor.re.rgba.red - targetColor.re.rgba.red < 3)
+        XCTAssertTrue(pickedColor.re.rgba.green - targetColor.re.rgba.green < 3)
+        XCTAssertTrue(pickedColor.re.rgba.blue - targetColor.re.rgba.blue < 3)
+        XCTAssertTrue(pickedColor.re.rgba.alpha - targetColor.re.rgba.alpha < 0.05)
+        
+        image = .re(color: .blue, size: .re(20, 20))
+        let pickedColor2 = image.re.color(at: .re(2, 2))!
+        XCTAssertTrue(pickedColor2.re.rgba.red - UIColor.blue.re.rgba.red < 3)
+        XCTAssertTrue(pickedColor2.re.rgba.green - UIColor.blue.re.rgba.green < 3)
+        XCTAssertTrue(pickedColor2.re.rgba.blue - UIColor.blue.re.rgba.blue < 3)
+        XCTAssertTrue(pickedColor2.re.rgba.alpha - UIColor.blue.re.rgba.alpha < 0.05)
+        
+        image = .re(color: .clear, size: .re(20, 20))
+        XCTAssertEqual(image.re.color(at: .re(2, 2))!.re.rgba.alpha, 0)
+        
+        let bundle = Bundle(for: UIImageExtensionsTests.self)
+        image = UIImage(named: "TestImage", in: bundle, compatibleWith: nil)!
+        let pickedColor3 = image.re.color(at: .re(2, 2))!
+        XCTAssertTrue(pickedColor3.re.rgba.red - UIColor.white.re.rgba.red < 3)
+        XCTAssertTrue(pickedColor3.re.rgba.green - UIColor.white.re.rgba.green < 3)
+        XCTAssertTrue(pickedColor3.re.rgba.blue - UIColor.white.re.rgba.blue < 3)
+        XCTAssertTrue(pickedColor3.re.rgba.alpha - UIColor.white.re.rgba.alpha < 0.05)
+        
+        let targetColor4 = UIColor.re(hex: 0x26125B)
+        let pickedColor4 = image.re.color(at: .re(130, 200))!
+        XCTAssertTrue(pickedColor4.re.rgba.red - targetColor4.re.rgba.red < 3)
+        XCTAssertTrue(pickedColor4.re.rgba.green - targetColor4.re.rgba.green < 3)
+        XCTAssertTrue(pickedColor4.re.rgba.blue - targetColor4.re.rgba.blue < 3)
+        XCTAssertTrue(pickedColor4.re.rgba.alpha - targetColor4.re.rgba.alpha < 0.05)
+        
+        let targetColor5 = UIColor.re(hex: 0xBB2E2D)
+        let pickedColor5 = image.re.color(at: .re(915, 145))!
+        XCTAssertTrue(pickedColor5.re.rgba.red - targetColor5.re.rgba.red < 3)
+        XCTAssertTrue(pickedColor5.re.rgba.green - targetColor5.re.rgba.green < 3)
+        XCTAssertTrue(pickedColor5.re.rgba.blue - targetColor5.re.rgba.blue < 3)
+        XCTAssertTrue(pickedColor5.re.rgba.alpha - targetColor5.re.rgba.alpha < 0.05)
+    }
 
     func testBytesSize() {
         let bundle = Bundle(for: UIImageExtensionsTests.self)

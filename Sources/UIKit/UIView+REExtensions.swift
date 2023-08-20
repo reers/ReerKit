@@ -260,6 +260,8 @@ public extension Reer where Base: UIView {
         return UIGraphicsGetImageFromCurrentImageContext()
     }
     
+    /// ReerKit: Pick the color at a point of the view.
+    /// It will return nil if the point is out of bounds.
     func color(at point: CGPoint) -> UIColor? {
         guard base.bounds.contains(point) else { return nil }
         var pixel: [UInt8] = [0, 0, 0, 0]

@@ -45,4 +45,12 @@ final class UIColorExtensionsTests: XCTestCase {
         XCTAssertEqual(UIColor.red.re.darken(by: 0.5).re.rgba.red, 127)
         XCTAssertEqual(UIColor.black.re.blend(with: .white).re.rgba.red, 127)
     }
+    
+    func testHSBColor() {
+        let color = UIColor(hue: 0.5, saturation: 0.9, brightness: 0.8, alpha: 0.7)
+        XCTAssertEqual(color.re.hsba.hue, 0.5)
+        XCTAssertEqual(color.re.hsba.saturation, 0.9)
+        XCTAssertEqual(color.re.hsba.brightness, 0.8)
+        XCTAssertEqual(color.re.hsba.alpha, 0.7)
+    }
 }

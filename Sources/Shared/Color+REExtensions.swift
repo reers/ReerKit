@@ -211,6 +211,17 @@ public extension Reer where Base: REColor {
     var alpha: CGFloat {
         return base.cgColor.alpha
     }
+    
+    /// ReerKit: Get components of hue, saturation, and brightness, and alpha (read-only).
+    var hsba: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
+        var h: CGFloat = 0.0
+        var s: CGFloat = 0.0
+        var b: CGFloat = 0.0
+        var a: CGFloat = 0.0
+        
+        base.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+        return (hue: h, saturation: s, brightness: b, alpha: a)
+    }
 
     /// ReerKit: RGBA components for a Color (RGB between 0 and 255).
     ///

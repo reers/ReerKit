@@ -6,6 +6,12 @@ ReerKit 是许多个原生 Swift 扩展的集合，为 iOS、macOS、tvOS、watc
 iOS 11.0+ / tvOS 9.0+ / watchOS 2.0+ / macOS 10.10+ / Ubuntu 14.04+
 Swift 5.5+
 
+## 包大小
+224KB
+
+## 单元测试覆盖率
+75%
+
 ## 安装
 
 <details>
@@ -21,7 +27,7 @@ Swift 5.5+
 <summary>Carthage</summary>
 </br>
 <p>要使用 <a href="https://github.com/Carthage/Carthage">Carthage</a> 将 SwifterSwift 集成到您的 Xcode 项目中，请在您的 <code>Cartfile</code> 中设置:</p>
-<pre><code class="ogdl language-ogdl">github "ReerKit/ReerKit" ~&gt; 1.0.7
+<pre><code class="ogdl language-ogdl">github "ReerKit/ReerKit" ~&gt; 1.0.8
 </code></pre>
 </details>
 
@@ -34,7 +40,7 @@ let package = Package(
     name: "YOUR_PROJECT_NAME",
     targets: [],
     dependencies: [
-        .package(url: "https://github.com/reers/ReerKit.git", from: "1.0.7")
+        .package(url: "https://github.com/reers/ReerKit.git", from: "1.0.8")
     ]
 )
 </code></pre>

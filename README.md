@@ -11,6 +11,9 @@ Swift 5.5+
 ## Package Size
 224KB
 
+## Code coverage
+75%
+
 ## Installation
 
 <details>
@@ -26,7 +29,7 @@ Swift 5.5+
 <summary>Carthage</summary>
 </br>
 <p>To integrate ReerKit into your Xcode project using <a href="https://github.com/Carthage/Carthage">Carthage</a>, specify it in your `Cartfile`:</p>
-<pre><code class="ogdl language-ogdl">github "ReerKit/ReerKit" ~> 1.0.7
+<pre><code class="ogdl language-ogdl">github "ReerKit/ReerKit" ~> 1.0.8
 </code></pre>
 </details>
 
@@ -39,7 +42,7 @@ let package = Package(
     name: "YOUR_PROJECT_NAME",
     targets: [],
     dependencies: [
-        .package(url: "https://github.com/reers/ReerKit.git", from: "1.0.7")
+        .package(url: "https://github.com/reers/ReerKit.git", from: "1.0.8")
     ]
 )
 </code></pre>

@@ -1,6 +1,6 @@
 # ReerKit
 ReerKit is a collection of native Swift extensions that provide convenient methods, syntactic sugar, and performance improvements for various native data types, UIKit, and Cocoa classes for iOS, macOS, tvOS, watchOS, and Linux platforms.
-Around 60% of the content in the framework comes from the excellent open-source library [SwifterSwift](https://github.com/SwifterSwift/SwifterSwift), with some code removal, optimization, and bug fixes. Another 10% of the content is gathered from various sources on the internet for utility classes or extension methods. The remaining content is developed by myself. All system type extensions in the framework have the `re` infix added to avoid ambiguity issues when calling the same name extension, such as `"SGVsbG\n8gV29ybGQh".re.base64Decoded`, `"123".re.utf8Data?.re.md5String`.
+Around 60% of the content in the framework comes from the excellent open-source library [SwifterSwift](https://github.com/SwifterSwift/SwifterSwift), with some code removal, optimization, and bug fixes. Another 10% of the content is gathered from various sources on the internet for utility classes or extension methods. The remaining content is developed by myself. All system type extensions in the framework have the `re` infix added to avoid ambiguity issues when calling the same name extension, such as `"SGVsbG\n8gV29ybGQh".re.base64Decoded`, `"123".re.md5String`.
 
 [简体中文](README_CN.md)
 
@@ -26,7 +26,7 @@ Swift 5.5+
 <summary>Carthage</summary>
 </br>
 <p>To integrate ReerKit into your Xcode project using <a href="https://github.com/Carthage/Carthage">Carthage</a>, specify it in your `Cartfile`:</p>
-<pre><code class="ogdl language-ogdl">github "ReerKit/ReerKit" ~> 1.0.5
+<pre><code class="ogdl language-ogdl">github "ReerKit/ReerKit" ~> 1.0.7
 </code></pre>
 </details>
 
@@ -39,7 +39,7 @@ let package = Package(
     name: "YOUR_PROJECT_NAME",
     targets: [],
     dependencies: [
-        .package(url: "https://github.com/reers/ReerKit.git", from: "1.0.5")
+        .package(url: "https://github.com/reers/ReerKit.git", from: "1.0.7")
     ]
 )
 </code></pre>

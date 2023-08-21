@@ -103,7 +103,8 @@ public extension Reer where Base: UIControl {
     ///   - action: A selector identifying an action message.
     ///   - events: A bitmask specifying the control events for which the
     ///             action message is sent.
-    func setTarget(_ target: Any, action: Selector, forControlEvents events: UIControl.Event) {
+    func setTarget(_ target: Any?, action: Selector, forControlEvents events: UIControl.Event) {
+        guard let target = target else { return }
         let targets = base.allTargets
         for currentTarget in targets {
             guard let actions = base.actions(forTarget: currentTarget, forControlEvent: events) else {

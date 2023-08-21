@@ -138,7 +138,7 @@ public extension Reer where Base: UITextField {
     /// ReerKit: Set placeholder text color.
     ///
     /// - Parameter color: placeholder text color.
-    func setPlaceHolderTextColor(_ color: UIColor) {
+    func setPlaceHolderTextColor(_ color: UIColor?) {
         guard let holder = base.placeholder, !holder.isEmpty else { return }
         base.attributedPlaceholder = NSAttributedString(string: holder, attributes: [.foregroundColor: color])
     }

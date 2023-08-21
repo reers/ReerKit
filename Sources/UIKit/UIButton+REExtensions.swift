@@ -151,28 +151,28 @@ public extension Reer where Base: UIButton {
     /// ReerKit: Set image for all states.
     ///
     /// - Parameter image: UIImage.
-    func setImageForAllStates(_ image: UIImage) {
+    func setImageForAllStates(_ image: UIImage?) {
         states.forEach { base.setImage(image, for: $0) }
     }
 
     /// ReerKit: Set title color for all states.
     ///
     /// - Parameter color: UIColor.
-    func setTitleColorForAllStates(_ color: UIColor) {
+    func setTitleColorForAllStates(_ color: UIColor?) {
         states.forEach { base.setTitleColor(color, for: $0) }
     }
 
     /// ReerKit: Set title for all states.
     ///
     /// - Parameter title: title string.
-    func setTitleForAllStates(_ title: String) {
+    func setTitleForAllStates(_ title: String?) {
         states.forEach { base.setTitle(title, for: $0) }
     }
 
     /// ReerKit: Set attributed title for all states.
     ///
     /// - Parameter title: title string.
-    func setAttributedTitleForAllStates(_ title: NSAttributedString) {
+    func setAttributedTitleForAllStates(_ title: NSAttributedString?) {
         states.forEach { base.setAttributedTitle(title, for: $0) }
     }
     
@@ -210,7 +210,8 @@ public extension Reer where Base: UIButton {
     /// - Parameters:
     ///   - color: The color of the image that will be set as background for the button in the given state.
     ///   - forState: set the UIControl.State for the desired color.
-    func setBackgroundColor(color: UIColor, forState: UIControl.State) {
+    func setBackgroundColor(color: UIColor?, forState: UIControl.State) {
+        guard let color = color else { return }
         base.clipsToBounds = true
         
         if #available(iOS 10.0, tvOS 10.0, *) {

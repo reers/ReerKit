@@ -53,4 +53,12 @@ final class UIColorExtensionsTests: XCTestCase {
         XCTAssertEqual(color.re.hsba.brightness, 0.8)
         XCTAssertEqual(color.re.hsba.alpha, 0.7)
     }
+    
+    func testBrightness() {
+        var color: UIColor = .re(red: 200, green: 200, blue: 200)
+        XCTAssertTrue(color.re.brightness > 128)
+        
+        color = .re(red: 20, green: 20, blue: 20)
+        XCTAssertTrue(color.re.brightness < 128)
+    }
 }

@@ -206,6 +206,12 @@ public extension Reer where Base: REColor {
         let blue = Int.random(in: 0...255)
         return REColor.re(red: red, green: green, blue: blue)
     }
+    
+    /// ReerKit: Get brightness of color.
+    var brightness: CGFloat {
+        let rgbValue = base.re.rgba
+        return (299 * rgbValue.red.re.cgFloat + 587 * rgbValue.green.re.cgFloat + 114 * rgbValue.blue.re.cgFloat) / 1000.0
+    }
 
     /// ReerKit: Alpha of Color (read-only).
     var alpha: CGFloat {

@@ -25,18 +25,18 @@ import UIKit
 
 public extension Reer where Base: UITableView {
     
-   /// ReerKit: Index path of last row in tableView.
+    /// ReerKit: Index path of last row in tableView.
     var indexPathForLastRow: IndexPath? {
         guard let lastSection = lastSection else { return nil }
         return indexPathForLastRow(inSection: lastSection)
     }
 
-   /// ReerKit: Index of last section in tableView.
+    /// ReerKit: Index of last section in tableView.
     var lastSection: Int? {
         return base.numberOfSections > 0 ? base.numberOfSections - 1 : nil
     }
     
-   /// ReerKit: Number of all rows in all sections of tableView.
+    /// ReerKit: Number of all rows in all sections of tableView.
     ///
     /// - Returns: The count of all rows in the tableView.
     func numberOfRows() -> Int {
@@ -49,7 +49,7 @@ public extension Reer where Base: UITableView {
         return rowCount
     }
 
-   /// ReerKit: IndexPath for last row in section.
+    /// ReerKit: IndexPath for last row in section.
     ///
     /// - Parameter section: section to get last row in.
     /// - Returns: optional last indexPath for last row in section (if applicable).
@@ -61,7 +61,7 @@ public extension Reer where Base: UITableView {
         return IndexPath(row: base.numberOfRows(inSection: section) - 1, section: section)
     }
 
-   /// ReerKit: Reload data with a completion handler.
+    /// ReerKit: Reload data with a completion handler.
     ///
     /// - Parameter completion: completion handler to run after reloadData finishes.
     func reloadData(_ completion: @escaping () -> Void) {
@@ -71,18 +71,23 @@ public extension Reer where Base: UITableView {
             completion()
         })
     }
+    
+    /// ReerKit: Reload tableView height only animatablly. It will not trigger `cellForRow` to reload data.
+    func reloadHeight() {
+        base.performBatchUpdates(nil)
+    }
 
-   /// ReerKit: Remove TableFooterView.
+    /// ReerKit: Remove TableFooterView.
     func removeTableFooterView() {
         base.tableFooterView = nil
     }
 
-   /// ReerKit: Remove TableHeaderView.
+    /// ReerKit: Remove TableHeaderView.
     func removeTableHeaderView() {
         base.tableHeaderView = nil
     }
 
-   /// ReerKit: Dequeue reusable UITableViewCell using class name.
+    /// ReerKit: Dequeue reusable UITableViewCell using class name.
     ///
     /// - Parameter name: UITableViewCell type.
     /// - Returns: UITableViewCell object with associated class name.
@@ -94,7 +99,7 @@ public extension Reer where Base: UITableView {
         return cell
     }
 
-   /// ReerKit: Dequeue reusable UITableViewCell using class name for indexPath.
+    /// ReerKit: Dequeue reusable UITableViewCell using class name for indexPath.
     ///
     /// - Parameters:
     ///   - name: UITableViewCell type.
@@ -108,7 +113,7 @@ public extension Reer where Base: UITableView {
         return cell
     }
 
-   /// ReerKit: Dequeue reusable UITableViewHeaderFooterView using class name.
+    /// ReerKit: Dequeue reusable UITableViewHeaderFooterView using class name.
     ///
     /// - Parameter name: UITableViewHeaderFooterView type.
     /// - Returns: UITableViewHeaderFooterView object with associated class name.
@@ -120,7 +125,7 @@ public extension Reer where Base: UITableView {
         return headerFooterView
     }
 
-   /// ReerKit: Register UITableViewHeaderFooterView using class name.
+    /// ReerKit: Register UITableViewHeaderFooterView using class name.
     ///
     /// - Parameters:
     ///   - nib: Nib file used to create the header or footer view.
@@ -129,21 +134,21 @@ public extension Reer where Base: UITableView {
         base.register(nib, forHeaderFooterViewReuseIdentifier: String(describing: name))
     }
 
-   /// ReerKit: Register UITableViewHeaderFooterView using class name.
+    /// ReerKit: Register UITableViewHeaderFooterView using class name.
     ///
     /// - Parameter name: UITableViewHeaderFooterView type.
     func register<T: UITableViewHeaderFooterView>(headerFooterView name: T.Type) {
         base.register(T.self, forHeaderFooterViewReuseIdentifier: String(describing: name))
     }
 
-   /// ReerKit: Register UITableViewCell using class name.
+    /// ReerKit: Register UITableViewCell using class name.
     ///
     /// - Parameter name: UITableViewCell type.
     func register<T: UITableViewCell>(cell name: T.Type) {
         base.register(T.self, forCellReuseIdentifier: String(describing: name))
     }
 
-   /// ReerKit: Register UITableViewCell using class name.
+    /// ReerKit: Register UITableViewCell using class name.
     ///
     /// - Parameters:
     ///   - nib: Nib file used to create the tableView cell.
@@ -152,7 +157,7 @@ public extension Reer where Base: UITableView {
         base.register(nib, forCellReuseIdentifier: String(describing: name))
     }
 
-   /// ReerKit: Register UITableViewCell with .xib file using only its corresponding class.
+    /// ReerKit: Register UITableViewCell with .xib file using only its corresponding class.
     ///               Assumes that the .xib filename and cell class has the same name.
     ///
     /// - Parameters:
@@ -169,7 +174,7 @@ public extension Reer where Base: UITableView {
         base.register(UINib(nibName: identifier, bundle: bundle), forCellReuseIdentifier: identifier)
     }
 
-   /// ReerKit: Check whether IndexPath is valid within the tableView.
+    /// ReerKit: Check whether IndexPath is valid within the tableView.
     ///
     /// - Parameter indexPath: An IndexPath to check.
     /// - Returns: Boolean value for valid or invalid IndexPath.
@@ -180,7 +185,7 @@ public extension Reer where Base: UITableView {
         indexPath.row < base.numberOfRows(inSection: indexPath.section)
     }
 
-   /// ReerKit: Safely scroll to possibly invalid IndexPath.
+    /// ReerKit: Safely scroll to possibly invalid IndexPath.
     ///
     /// - Parameters:
     ///   - indexPath: Target IndexPath to scroll to.

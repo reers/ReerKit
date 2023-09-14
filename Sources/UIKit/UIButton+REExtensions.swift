@@ -176,34 +176,80 @@ public extension Reer where Base: UIButton {
         states.forEach { base.setAttributedTitle(title, for: $0) }
     }
     
-    /// ReerKit: Center align title text and image.
+    enum ContentLayoutType {
+        case leftImageRightText
+        case leftTextRightImage
+        case topImageBottomText
+        case topTextBottomImage
+    }
+    
+    /// ReerKit: Layout button's image and text. Setup title, font, image before invoking this method.
     /// - Parameters:
-    ///   - imageAboveText: set true to make image above title text, default is false, image on left of text.
+    ///   - type: layout type.
     ///   - spacing: spacing between title text and image.
-    func centerTextAndImage(imageAboveText: Bool = false, spacing: CGFloat) {
-        if imageAboveText {
-            // https://stackoverflow.com/questions/2451223/#7199529
-            guard let imageSize = base.imageView?.image?.size,
-                  let text = base.titleLabel?.text,
-                  let font = base.titleLabel?.font
-            else { return }
-
-            let titleSize = text.size(withAttributes: [.font: font])
-
-            let titleOffset = -(imageSize.height + spacing)
-            base.titleEdgeInsets = UIEdgeInsets(top: 0.0, left: -imageSize.width, bottom: titleOffset, right: 0.0)
-
-            let imageOffset = -(titleSize.height + spacing)
-            base.imageEdgeInsets = UIEdgeInsets(top: imageOffset, left: 0.0, bottom: 0.0, right: -titleSize.width)
-
-            let edgeOffset = Swift.abs(titleSize.height - imageSize.height) / 2.0
-            base.contentEdgeInsets = UIEdgeInsets(top: edgeOffset, left: 0.0, bottom: edgeOffset, right: 0.0)
-        } else {
-            let insetAmount = spacing / 2
+    ///   - offsetFromCenter: offset from center of button.
+    func layoutContent(with type: ContentLayoutType, spacing: CGFloat = 0, offsetFromCenter: CGVector = .init(dx: 0, dy: 0)) {
+        guard let imageSize = base.imageView?.image?.size,
+              let text = base.titleLabel?.text,
+              let font = base.titleLabel?.font
+        else { return }
+        
+        let titleSize = text.size(withAttributes: [.font: font])
+        let insetAmount = Swift.abs(spacing / 2)
+        switch type {
+        case .leftImageRightText:
             base.imageEdgeInsets = UIEdgeInsets(top: 0, left: -insetAmount, bottom: 0, right: insetAmount)
             base.titleEdgeInsets = UIEdgeInsets(top: 0, left: insetAmount, bottom: 0, right: -insetAmount)
-            base.contentEdgeInsets = UIEdgeInsets(top: 0, left: insetAmount, bottom: 0, right: insetAmount)
+        case .leftTextRightImage:
+            base.imageEdgeInsets = UIEdgeInsets(
+                top: 0,
+                left: titleSize.width + insetAmount,
+                bottom: 0,
+                right: -(titleSize.width + insetAmount)
+            )
+            base.titleEdgeInsets = UIEdgeInsets(
+                top: 0,
+                left: -(imageSize.width + insetAmount),
+                bottom: 0,
+                right: imageSize.width + insetAmount
+            )
+        case .topImageBottomText:
+            let centerXOffset = (titleSize.width + imageSize.width) / 2
+            let centerYOffset = (titleSize.height + imageSize.height) / 2
+            base.imageEdgeInsets = UIEdgeInsets(
+                top: (imageSize.height / 2) - centerYOffset - insetAmount,
+                left: centerXOffset - (imageSize.width / 2),
+                bottom: insetAmount + centerYOffset - (imageSize.height / 2),
+                right: (imageSize.width / 2) - centerXOffset
+            )
+            base.titleEdgeInsets = UIEdgeInsets(
+                top: insetAmount + centerYOffset - (titleSize.height / 2),
+                left: -centerXOffset + (titleSize.width / 2),
+                bottom: (titleSize.height / 2) - centerYOffset - insetAmount,
+                right: centerXOffset - (titleSize.width / 2)
+            )
+        case .topTextBottomImage:
+            let centerXOffset = (titleSize.width + imageSize.width) / 2
+            let centerYOffset = (titleSize.height + imageSize.height) / 2
+            base.imageEdgeInsets = UIEdgeInsets(
+                top: insetAmount + centerYOffset - (imageSize.height / 2),
+                left: centerXOffset - (imageSize.width / 2),
+                bottom: (imageSize.height / 2) - centerYOffset - insetAmount,
+                right: (imageSize.width / 2) - centerXOffset
+            )
+            base.titleEdgeInsets = UIEdgeInsets(
+                top: (titleSize.height / 2) - centerYOffset - insetAmount,
+                left: -centerXOffset + (titleSize.width / 2),
+                bottom: insetAmount + centerYOffset - (titleSize.height / 2),
+                right: centerXOffset - (titleSize.width / 2)
+            )
         }
+        base.contentEdgeInsets = .init(
+            top: offsetFromCenter.dy,
+            left: offsetFromCenter.dx,
+            bottom: -offsetFromCenter.dy,
+            right: -offsetFromCenter.dx
+        )
     }
     
     /// ReerKit: Set background color for specified state.

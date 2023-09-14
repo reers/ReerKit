@@ -223,36 +223,6 @@ final class UIButtonExtensionsTests: XCTestCase {
         XCTAssertEqual(button.re.titleForSelected, title)
         XCTAssertEqual(button.re.titleForFocused, title)
     }
-
-    func testCenterTextAndImage() {
-//        let button = UIButton(frame: CGRect(x: 10, y: 10, width: 100, height: 100))
-//        let image = UIImage(color: .green, size: CGSize(width: 10, height: 10))
-//        button.re.setTitleForAllStates("Title")
-//        button.re.setImageForAllStates(image)
-//
-//        XCTAssertNotNil(button.imageView)
-//        XCTAssertNotNil(button.titleLabel)
-//
-//        let spacing: CGFloat = 20
-//
-//        // Image on the left of text
-//        button.re.centerTextAndImage(spacing: spacing)
-//        var imageFrame = button.imageView!.frame
-//        var titleFrame = button.titleLabel!.frame
-//
-//        XCTAssert(titleFrame.midX > imageFrame.midX)
-//        XCTAssertEqual(titleFrame.midY, imageFrame.midY, accuracy: 1.0)
-//        XCTAssertEqual(titleFrame.minX - spacing, imageFrame.maxX, accuracy: 1.0)
-//
-//        // Image above text
-//        button.re.centerTextAndImage(imageAboveText: true, spacing: spacing)
-//        imageFrame = button.imageView!.frame
-//        titleFrame = button.titleLabel!.frame
-//
-//        XCTAssert(titleFrame.midY > imageFrame.midY)
-//        XCTAssertEqual(titleFrame.midX, imageFrame.midX, accuracy: 1.5)
-//        XCTAssertEqual(titleFrame.minY - spacing, imageFrame.maxY, accuracy: 1.0)
-    }
     
     func testSetAttrbiutedTitleForAllStates() {
         let button = UIButton()

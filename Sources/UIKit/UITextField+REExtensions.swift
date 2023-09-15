@@ -140,7 +140,7 @@ public extension Reer where Base: UITextField {
     /// - Parameter color: placeholder text color.
     func setPlaceHolderTextColor(_ color: UIColor?) {
         guard let holder = base.placeholder, !holder.isEmpty else { return }
-        base.attributedPlaceholder = NSAttributedString(string: holder, attributes: [.foregroundColor: color])
+        base.attributedPlaceholder = NSAttributedString(string: holder, attributes: [.foregroundColor: color ?? .lightGray])
     }
 
     /// ReerKit: Add padding to the left of the textfield rect.

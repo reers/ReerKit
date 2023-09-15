@@ -188,6 +188,14 @@ final class UIImageExtensionsTests: XCTestCase {
         let grayscaleImage = image.re.grayscale
         XCTAssertNotNil(grayscaleImage)
         
+        let mono = image.re.with(filter: .mono)
+        XCTAssertNotNil(mono)
+        
+        let chrome = image.re.with(filter: .chrome)
+        XCTAssertNotNil(chrome)
+        
+        XCTAssertNil(image.re.with(filter: "xxxx"))
+        
         let blurSoftImage = image.re.blurSoft
         XCTAssertNotNil(blurSoftImage)
         
@@ -327,9 +335,15 @@ final class UIImageExtensionsTests: XCTestCase {
 
     func testTinted() {
         let baseImage = UIImage.re(color: .white, size: CGSize(width: 20, height: 20))
-        let tintedImage = baseImage.re.tint(.black, blendMode: .overlay)
+        let tintedImage = baseImage.re.blend(.black, mode: .overlay)
         let testImage = UIImage.re(color: .black, size: CGSize(width: 20, height: 20))
         XCTAssertEqual(testImage.re.averageColor()!, tintedImage.re.averageColor()!, accuracy: 0.01)
+        
+        if #available(iOS 13.0, *) {
+            let original = UIImage(systemName: "star")!
+            let tinted = original.re.withAlwaysOriginalTintColor(.red)
+            XCTAssertNotNil(tinted)
+        }
     }
 
     func testWithBackgroundColor() {

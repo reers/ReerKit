@@ -259,14 +259,14 @@ public extension Reer where Base: UIImage {
         return newImage
     }
 
-    /// ReerKit: UIImage tinted with color.
+    /// ReerKit: UIImage blended with color.
     ///
     /// - Parameters:
-    ///   - color: color to tint image with.
-    ///   - blendMode: how to blend the tint.
+    ///   - color: color to blend image with.
+    ///   - mode: how to blend the tint.
     ///   - alpha: alpha value used to draw.
     /// - Returns: UIImage tinted with given color.
-    func tint(_ color: UIColor, blendMode: CGBlendMode, alpha: CGFloat = 1.0) -> UIImage {
+    func blend(_ color: UIColor, mode: CGBlendMode, alpha: CGFloat = 1.0) -> UIImage {
         let drawRect = CGRect(origin: .zero, size: base.size)
 
         #if !os(watchOS)
@@ -276,7 +276,7 @@ public extension Reer where Base: UIImage {
             return UIGraphicsImageRenderer(size: base.size, format: format).image { context in
                 color.setFill()
                 context.fill(drawRect)
-                base.draw(in: drawRect, blendMode: blendMode, alpha: alpha)
+                base.draw(in: drawRect, blendMode: mode, alpha: alpha)
             }
         }
         #endif
@@ -288,7 +288,7 @@ public extension Reer where Base: UIImage {
         let context = UIGraphicsGetCurrentContext()
         color.setFill()
         context?.fill(drawRect)
-        base.draw(in: drawRect, blendMode: blendMode, alpha: alpha)
+        base.draw(in: drawRect, blendMode: mode, alpha: alpha)
         return UIGraphicsGetImageFromCurrentImageContext()!
     }
 
@@ -705,11 +705,6 @@ public extension Reer where Base: UIImage {
 
 public extension Reer where Base: UIImage {
     
-    /// ReerKit: A grayscaled image.
-    var grayscale: UIImage? {
-        return blur(radius: 0, tintColor: nil, tintBlendMode: .normal, saturation: 0, maskImage: nil)
-    }
-    
     /// ReerKit: Applies a blur effect to this image. Suitable for blur any content.
     var blurSoft: UIImage? {
         return blur(radius: 60, tintColor: UIColor(white: 0.84, alpha: 0.36), tintBlendMode: .normal, saturation: 1.8, maskImage: nil)
@@ -916,6 +911,138 @@ public extension Reer where Base: UIImage {
         UIGraphicsEndImageContext()
         
         return outputImage
+    }
+}
+#endif
+
+// MARK: - Filter
+#if canImport(Accelerate) && canImport(CoreImage)
+
+public struct ImageFilterName: ExpressibleByStringLiteral, Hashable, RawRepresentable {
+    
+    public static let chrome: Self = "CIPhotoEffectChrome"
+    public static let fade: Self = "CIPhotoEffectFade"
+    public static let instant: Self = "CIPhotoEffectInstant"
+    public static let mono: Self = "CIPhotoEffectMono"
+    public static let noir: Self = "CIPhotoEffectNoir"
+    public static let process: Self = "CIPhotoEffectProcess"
+    public static let tonal: Self = "CIPhotoEffectTonal"
+    public static let transfer: Self =  "CIPhotoEffectTransfer"
+        
+    public typealias StringLiteralType = String
+    
+    public private(set) var rawValue: String
+    
+    public init(stringLiteral value: String) {
+        self.rawValue = value
+    }
+    
+    public init?(rawValue: String) {
+        self.rawValue = rawValue
+    }
+    
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.rawValue == rhs.rawValue
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(rawValue)
+    }
+}
+
+public extension Reer where Base: UIImage {
+    /// ReerKit: A grayscaled image.
+    var grayscale: UIImage? {
+        if #available(iOS 13.0, *) {
+            guard let cgImage = base.cgImage else { return nil }
+            guard let format = vImage_CGImageFormat(cgImage: cgImage),
+                  // The source image bufffer
+                  var sourceBuffer = try? vImage_Buffer(
+                      cgImage: cgImage,
+                      format: format
+                  ),
+                  // The 1-channel, 8-bit vImage buffer used as the operation destination.
+                  var destinationBuffer = try? vImage_Buffer(
+                      width: Int(sourceBuffer.width),
+                      height: Int(sourceBuffer.height),
+                      bitsPerPixel: 8
+                  )
+            else {
+                return .init(cgImage: cgImage)
+            }
+            
+            // Declare the three coefficients that model the eye's sensitivity
+            // to color.
+            let redCoefficient: Float = 0.2126
+            let greenCoefficient: Float = 0.7152
+            let blueCoefficient: Float = 0.0722
+            
+            // Create a 1D matrix containing the three luma coefficients that
+            // specify the color-to-grayscale conversion.
+            let divisor: Int32 = 0x1000
+            let fDivisor = Float(divisor)
+            
+            var coefficientsMatrix = [
+                Int16(redCoefficient * fDivisor),
+                Int16(greenCoefficient * fDivisor),
+                Int16(blueCoefficient * fDivisor)
+            ]
+            
+            // Use the matrix of coefficients to compute the scalar luminance by
+            // returning the dot product of each RGB pixel and the coefficients
+            // matrix.
+            let preBias: [Int16] = [0, 0, 0, 0]
+            let postBias: Int32 = 0
+            
+            vImageMatrixMultiply_ARGB8888ToPlanar8(
+                &sourceBuffer,
+                &destinationBuffer,
+                &coefficientsMatrix,
+                divisor,
+                preBias,
+                postBias,
+                vImage_Flags(kvImageNoFlags)
+            )
+            
+            // Create a 1-channel, 8-bit grayscale format that's used to
+            // generate a displayable image.
+            guard let monoFormat = vImage_CGImageFormat(
+                bitsPerComponent: 8,
+                bitsPerPixel: 8,
+                colorSpace: CGColorSpaceCreateDeviceGray(),
+                bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.none.rawValue),
+                renderingIntent: .defaultIntent
+            ) else {
+                return .init(cgImage: cgImage)
+            }
+            
+            // Create a Core Graphics image from the grayscale destination buffer.
+            guard let result = try? destinationBuffer.createCGImage(format: monoFormat) else {
+                return .init(cgImage: cgImage)
+            }
+            
+            return .init(cgImage: result)
+        } else {
+            return base.re.with(filter: .mono)
+        }
+    }
+    
+    /// ReerKit:
+    /// - Parameter filterName: Name of the filter.
+    /// - Returns: A filtered image.
+    func with(filter filterName: ImageFilterName) -> UIImage? {
+        guard let cgImage = base.cgImage,
+              let filter = CIFilter(name: filterName.rawValue)
+        else { return nil }
+        let original = CIImage(cgImage: cgImage)
+        filter.setValue(original, forKey: kCIInputImageKey)
+        guard let filtered = filter.outputImage else { return nil }
+        let context = CIContext(options: nil)
+        let cgimage = context.createCGImage(
+            filtered,
+            from: CGRect(x: 0, y: 0, width: base.size.width * base.scale, height: base.size.height * base.scale)
+        )
+        return UIImage(cgImage: cgimage!, scale: base.scale, orientation: base.imageOrientation)
     }
 }
 #endif

@@ -551,6 +551,10 @@
 		D0CD714528E5CDCD009ADA8E /* FloatExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD714228E5CDCD009ADA8E /* FloatExtensionsTests.swift */; };
 		D0CDBDCA299FAB3100BD682D /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDBDC9299FAB3100BD682D /* Debouncer.swift */; };
 		D0CDBDCC299FB47500BD682D /* DebouncerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDBDCB299FB47500BD682D /* DebouncerTests.swift */; };
+		D0D311242AB4458F00E54361 /* CALayer+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311232AB4458F00E54361 /* CALayer+REExtensions.swift */; };
+		D0D311252AB4458F00E54361 /* CALayer+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311232AB4458F00E54361 /* CALayer+REExtensions.swift */; };
+		D0D311262AB4458F00E54361 /* CALayer+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311232AB4458F00E54361 /* CALayer+REExtensions.swift */; };
+		D0D311272AB4458F00E54361 /* CALayer+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311232AB4458F00E54361 /* CALayer+REExtensions.swift */; };
 		D0E1289D29C38A390051D351 /* EdgeInsets+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E1289C29C38A390051D351 /* EdgeInsets+REExtensions.swift */; };
 		D0E129A629C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E129A529C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift */; };
 		D0E354C828BFBBE10000030B /* WeakSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C728BFBBE10000030B /* WeakSet.swift */; };
@@ -813,6 +817,7 @@
 		D0CD714628E5D71D009ADA8E /* Decodable+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+REExtensions.swift"; sourceTree = "<group>"; };
 		D0CDBDC9299FAB3100BD682D /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		D0CDBDCB299FB47500BD682D /* DebouncerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebouncerTests.swift; sourceTree = "<group>"; };
+		D0D311232AB4458F00E54361 /* CALayer+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+REExtensions.swift"; sourceTree = "<group>"; };
 		D0E1289C29C38A390051D351 /* EdgeInsets+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EdgeInsets+REExtensions.swift"; sourceTree = "<group>"; };
 		D0E129A529C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetsExtensionsTests.swift; sourceTree = "<group>"; };
 		D0E354C728BFBBE10000030B /* WeakSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakSet.swift; sourceTree = "<group>"; };
@@ -1000,6 +1005,7 @@
 			children = (
 				D05C8670294B4E190077E744 /* CAGradientLayer+REExtensions.swift */,
 				D00615C02976F52D003FA4CF /* CATransform3D+REExtensions.swift */,
+				D0D311232AB4458F00E54361 /* CALayer+REExtensions.swift */,
 			);
 			path = CoreAnimation;
 			sourceTree = "<group>";
@@ -1757,6 +1763,7 @@
 				D04B85E029F9A50600177357 /* RETimer.swift in Sources */,
 				D04B860E29F9A59600177357 /* UIApplication+REExtensions.swift in Sources */,
 				D04B85ED29F9A50E00177357 /* WeakSet.swift in Sources */,
+				D0D311252AB4458F00E54361 /* CALayer+REExtensions.swift in Sources */,
 				D04B860029F9A59000177357 /* Data+REExtensions.swift in Sources */,
 				D04B85A429F9A3C400177357 /* WKWebView+REExtensions.swift in Sources */,
 				D04B85E629F9A50B00177357 /* RWLocked.swift in Sources */,
@@ -1885,6 +1892,7 @@
 				D04B86FF29F9A71400177357 /* ReerKit.swift in Sources */,
 				D04B869129F9A6F100177357 /* OptionSet+REExtensions.swift in Sources */,
 				D04B86BF29F9A6FC00177357 /* WeakSet.swift in Sources */,
+				D0D311262AB4458F00E54361 /* CALayer+REExtensions.swift in Sources */,
 				D04B86BE29F9A6FC00177357 /* WeakMap.swift in Sources */,
 				D04B873B29F9A71900177357 /* UIStackView+REExtensions.swift in Sources */,
 				D04B867529F9A6D400177357 /* CGPoint+REExtensions.swift in Sources */,
@@ -2013,6 +2021,7 @@
 				D04B86FE29F9A71400177357 /* ReerKit.swift in Sources */,
 				D04B86A829F9A6F100177357 /* OptionSet+REExtensions.swift in Sources */,
 				D04B86C329F9A6FD00177357 /* WeakSet.swift in Sources */,
+				D0D311272AB4458F00E54361 /* CALayer+REExtensions.swift in Sources */,
 				D04B86C229F9A6FD00177357 /* WeakMap.swift in Sources */,
 				D04B871A29F9A71900177357 /* UIStackView+REExtensions.swift in Sources */,
 				D04B866E29F9A6D300177357 /* CGPoint+REExtensions.swift in Sources */,
@@ -2171,6 +2180,7 @@
 				D076D48D29F3BA6A0008ABE0 /* UINavigationBar+REExtensions.swift in Sources */,
 				D0122AFF29EEF059008311CF /* UIBarButtonItem+REExtensions.swift in Sources */,
 				D0C3306A29F5A7ED007BE677 /* UIScreen+REExtensions.swift in Sources */,
+				D0D311242AB4458F00E54361 /* CALayer+REExtensions.swift in Sources */,
 				D0B1211E2855156200B5B326 /* TypeNameDescribable.swift in Sources */,
 				D07E53AF2883137000921873 /* WeakProxy.swift in Sources */,
 				D0122B0B29EEFEB8008311CF /* UICollectionView+REExtensions.swift in Sources */,

@@ -534,12 +534,14 @@ public extension Reer where Base: UIView {
         ofColor color: UIColor = UIColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0),
         radius: CGFloat = 3,
         offset: CGSize = .zero,
-        opacity: Float = 0.5
+        opacity: Float = 0.5,
+        path: CGPath? = nil
     ) {
         base.layer.shadowColor = color.cgColor
         base.layer.shadowOffset = offset
         base.layer.shadowRadius = radius
         base.layer.shadowOpacity = opacity
+        base.layer.shadowPath = path
         base.layer.masksToBounds = false
     }
     

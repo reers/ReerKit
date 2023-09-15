@@ -23,6 +23,10 @@
 #if canImport(UIKit) && !os(watchOS)
 import UIKit
 
+#if canImport(SwiftUI)
+import SwiftUI
+#endif
+
 // MARK: - Frame
 
 public extension Reer where Base: UIView {
@@ -789,4 +793,55 @@ public extension Reer where Base: UIView {
         findConstraint(attribute: .bottom, for: base)
     }
 }
+
+#if canImport(SwiftUI)
+
+@available(iOS 13.0, *)
+public extension Reer where Base: UIView {
+    
+    /// ReerKit: Adds a SwiftUI view to the end of the receiver’s list of subviews.
+    /// - Parameter view: The SwiftUI view to be added. After being added, this view appears on top of any other subviews.
+    /// - Returns: A UIKit view that represent a SwiftUI view hierarchy.
+    func addSwiftUIView(_ view: some View) -> UIView {
+        let childVC = UIHostingController(rootView: view)
+        base.addSubview(childVC.view)
+        return childVC.view
+    }
+    
+    /// ReerKit: Inserts a SwiftUI at the specified index.
+    /// - Parameters:
+    ///   - view: The SwiftUI view to insert.
+    ///   - index: The index in the array of the subviews property at which to insert the view. Subview indices start at 0 and cannot be greater than the number of subviews.
+    /// - Returns: A UIKit view that represent a SwiftUI view hierarchy.
+    func insertSwiftUIView(_ view: some View, at index: Int) -> UIView {
+        let childVC = UIHostingController(rootView: view)
+        base.insertSubview(childVC.view, at: index)
+        return childVC.view
+    }
+    
+    /// ReerKit: Inserts a SwiftUI view below another view in the view hierarchy.
+    /// - Parameters:
+    ///   - view: The SwiftUI view to insert below another view. It’s removed from its superview if it’s not a sibling of siblingSubview.
+    ///   - siblingSubview: The sibling view that will be above the inserted view.
+    /// - Returns: A UIKit view that represent a SwiftUI view hierarchy.
+    func insertSwiftUIView(_ view: some View, belowSubview siblingSubview: UIView) -> UIView {
+        let childVC = UIHostingController(rootView: view)
+        base.insertSubview(childVC.view, belowSubview: siblingSubview)
+        return childVC.view
+    }
+    
+    /// ReerKit: Inserts a view above another view in the view hierarchy.
+    /// - Parameters:
+    ///   - view: The SwiftUI view to insert. It’s removed from its superview if it’s not a sibling of siblingSubview.
+    ///   - siblingSubview: The sibling view that will be behind the inserted view.
+    /// - Returns: A UIKit view that represent a SwiftUI view hierarchy.
+    func insertSwiftUIView(_ view: some View, aboveSubview siblingSubview: UIView) -> UIView {
+        let childVC = UIHostingController(rootView: view)
+        base.insertSubview(childVC.view, aboveSubview: siblingSubview)
+        return childVC.view
+    }
+}
+
+#endif
+
 #endif

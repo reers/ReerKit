@@ -798,7 +798,7 @@ public extension Reer where Base: UIView {
 
 #if canImport(SwiftUI)
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, tvOS 13.0, *)
 public extension Reer where Base: UIView {
     
     /// ReerKit: Adds a SwiftUI view to the end of the receiver’s list of subviews.

@@ -953,7 +953,7 @@ public struct ImageFilterName: ExpressibleByStringLiteral, Hashable, RawRepresen
 public extension Reer where Base: UIImage {
     /// ReerKit: A grayscaled image.
     var grayscale: UIImage? {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, tvOS 13.0, *) {
             guard let cgImage = base.cgImage else { return nil }
             guard let format = vImage_CGImageFormat(cgImage: cgImage),
                   // The source image bufffer

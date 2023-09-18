@@ -555,6 +555,11 @@
 		D0D311252AB4458F00E54361 /* CALayer+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311232AB4458F00E54361 /* CALayer+REExtensions.swift */; };
 		D0D311262AB4458F00E54361 /* CALayer+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311232AB4458F00E54361 /* CALayer+REExtensions.swift */; };
 		D0D311272AB4458F00E54361 /* CALayer+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311232AB4458F00E54361 /* CALayer+REExtensions.swift */; };
+		D0D3112C2AB83D9900E54361 /* Clamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3112B2AB83D9900E54361 /* Clamped.swift */; };
+		D0D3112D2AB83D9900E54361 /* Clamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3112B2AB83D9900E54361 /* Clamped.swift */; };
+		D0D3112E2AB83D9900E54361 /* Clamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3112B2AB83D9900E54361 /* Clamped.swift */; };
+		D0D3112F2AB83D9900E54361 /* Clamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3112B2AB83D9900E54361 /* Clamped.swift */; };
+		D0D311312AB83E1D00E54361 /* PropertyWrappersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311302AB83E1D00E54361 /* PropertyWrappersTests.swift */; };
 		D0E1289D29C38A390051D351 /* EdgeInsets+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E1289C29C38A390051D351 /* EdgeInsets+REExtensions.swift */; };
 		D0E129A629C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E129A529C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift */; };
 		D0E354C828BFBBE10000030B /* WeakSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C728BFBBE10000030B /* WeakSet.swift */; };
@@ -818,6 +823,8 @@
 		D0CDBDC9299FAB3100BD682D /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		D0CDBDCB299FB47500BD682D /* DebouncerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebouncerTests.swift; sourceTree = "<group>"; };
 		D0D311232AB4458F00E54361 /* CALayer+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+REExtensions.swift"; sourceTree = "<group>"; };
+		D0D3112B2AB83D9900E54361 /* Clamped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clamped.swift; sourceTree = "<group>"; };
+		D0D311302AB83E1D00E54361 /* PropertyWrappersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyWrappersTests.swift; sourceTree = "<group>"; };
 		D0E1289C29C38A390051D351 /* EdgeInsets+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EdgeInsets+REExtensions.swift"; sourceTree = "<group>"; };
 		D0E129A529C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetsExtensionsTests.swift; sourceTree = "<group>"; };
 		D0E354C728BFBBE10000030B /* WeakSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakSet.swift; sourceTree = "<group>"; };
@@ -942,6 +949,7 @@
 				D0C3306729F59275007BE677 /* NanoIDTests.swift */,
 				D00D63972A069B4500A9EEF4 /* DataStructuresTest.swift */,
 				D058974B2A84FA45008381BB /* ReachabilityTests.swift */,
+				D0D311302AB83E1D00E54361 /* PropertyWrappersTests.swift */,
 			);
 			path = UtilityTests;
 			sourceTree = "<group>";
@@ -1040,8 +1048,6 @@
 			children = (
 				D0038B7E2856581600A890F9 /* UnfairLock.swift */,
 				D0038B8028565B9400A890F9 /* ReadWriteLock.swift */,
-				D0038B7C285642B600A890F9 /* Locked.swift */,
-				D0038B822856662B00A890F9 /* RWLocked.swift */,
 				D004CC48285A41F500C41360 /* Synchronizing.swift */,
 			);
 			path = Lock;
@@ -1198,6 +1204,7 @@
 		D0B1211C2855154100B5B326 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				D0D3112A2AB83D6400E54361 /* PropertyWrapper */,
 				D00D63872A06997F00A9EEF4 /* DataStructure */,
 				D0E354C628BFBB710000030B /* Weak */,
 				D0A0040728621C7600D2FA7C /* Lock */,
@@ -1339,6 +1346,16 @@
 				D094C84E29F456A400491CD8 /* OptionSetExtensionsTests.swift */,
 			);
 			path = StandardLibraryTests;
+			sourceTree = "<group>";
+		};
+		D0D3112A2AB83D6400E54361 /* PropertyWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				D0038B7C285642B600A890F9 /* Locked.swift */,
+				D0038B822856662B00A890F9 /* RWLocked.swift */,
+				D0D3112B2AB83D9900E54361 /* Clamped.swift */,
+			);
+			path = PropertyWrapper;
 			sourceTree = "<group>";
 		};
 		D0E129A429C38E950051D351 /* SharedTests */ = {
@@ -1726,6 +1743,7 @@
 				D04B861129F9A59600177357 /* UISwitch+REExtensions.swift in Sources */,
 				D04B862629F9A59600177357 /* UIStoryboard+REExtensions.swift in Sources */,
 				D04B861229F9A59600177357 /* UITextField+REExtensions.swift in Sources */,
+				D0D3112D2AB83D9900E54361 /* Clamped.swift in Sources */,
 				D04B85BD29F9A3FC00177357 /* FloatingPoint+REExtensions.swift in Sources */,
 				D04B85F829F9A57D00177357 /* DispatchQueue+REExtensions.swift in Sources */,
 				D04B85E829F9A50B00177357 /* ReadWriteLock.swift in Sources */,
@@ -1855,6 +1873,7 @@
 				D04B869D29F9A6F100177357 /* RangeReplaceableCollection+REExtensions.swift in Sources */,
 				D04B873629F9A71900177357 /* UIButton+REExtensions.swift in Sources */,
 				D04B867829F9A6D400177357 /* CGVector+REExtensions.swift in Sources */,
+				D0D3112E2AB83D9900E54361 /* Clamped.swift in Sources */,
 				D04B869429F9A6F100177357 /* Double+REExtensions.swift in Sources */,
 				D04B872E29F9A71900177357 /* UIDevice+REExtensions.swift in Sources */,
 				D04B868929F9A6EA00177357 /* AnyObjectExtensionable.swift in Sources */,
@@ -1984,6 +2003,7 @@
 				D04B86B429F9A6F100177357 /* RangeReplaceableCollection+REExtensions.swift in Sources */,
 				D04B871529F9A71900177357 /* UIButton+REExtensions.swift in Sources */,
 				D04B867129F9A6D300177357 /* CGVector+REExtensions.swift in Sources */,
+				D0D3112F2AB83D9900E54361 /* Clamped.swift in Sources */,
 				D04B86AB29F9A6F100177357 /* Double+REExtensions.swift in Sources */,
 				D04B870D29F9A71900177357 /* UIDevice+REExtensions.swift in Sources */,
 				D04B868429F9A6EA00177357 /* AnyObjectExtensionable.swift in Sources */,
@@ -2129,6 +2149,7 @@
 				D0038B7D285642B600A890F9 /* Locked.swift in Sources */,
 				D0038B8128565B9500A890F9 /* ReadWriteLock.swift in Sources */,
 				D0EED73A29DD5E3A005A0F31 /* Bundle+REExtensions.swift in Sources */,
+				D0D3112C2AB83D9900E54361 /* Clamped.swift in Sources */,
 				D0B121122855089000B5B326 /* ReerKit.swift in Sources */,
 				D0B4ED3D293A7BA60031BDAB /* CountdownTimer.swift in Sources */,
 				D05A881D291C106E00C53492 /* String+REExtensions.swift in Sources */,
@@ -2265,6 +2286,7 @@
 				D07E53AD288309DF00921873 /* RETimerTests.swift in Sources */,
 				D094C96229F4606600491CD8 /* UIDeviceExtensionsTests.swift in Sources */,
 				D0397614286E12A900C33E17 /* OptionalExtensionsTests.swift in Sources */,
+				D0D311312AB83E1D00E54361 /* PropertyWrappersTests.swift in Sources */,
 				D0FB4058286363380019D56A /* OnceTests.swift in Sources */,
 				D05C866E294B4C6D0077E744 /* CGAffineTransformExtensionsTests.swift in Sources */,
 				D0122B0529EEF528008311CF /* UIBezierPathExtensionsTests.swift in Sources */,

@@ -22,5 +22,19 @@ final class PropertyWrappersTests: XCTestCase {
         age = 80
         XCTAssertEqual(age, 80)
     }
+    
+    @Trimmed
+    var userName: String = ""
+    
+    func testTrimmed() {
+        userName = "abc"
+        XCTAssertEqual(userName, "abc")
+        
+        userName = " aaa "
+        XCTAssertEqual(userName, "aaa")
+        
+        userName = " b bb \n"
+        XCTAssertEqual(userName, "b bb")
+    }
 
 }

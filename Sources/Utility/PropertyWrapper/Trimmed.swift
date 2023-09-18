@@ -20,17 +20,15 @@
 //  THE SOFTWARE.
 
 @propertyWrapper
-public struct Clamped<Value: Comparable> {
-    private var value: Value
-    private let range: ClosedRange<Value>
+public struct Trimmed {
+    private var value: String
     
-    public init(wrappedValue: Value, _ range: ClosedRange<Value>) {
+    public init(wrappedValue: String) {
         self.value = wrappedValue
-        self.range = range
     }
 
-    public var wrappedValue: Value {
+    public var wrappedValue: String {
         get { return value }
-        set { value = min(max(range.lowerBound, newValue), range.upperBound) }
+        set { value = newValue.trimmingCharacters(in: .whitespacesAndNewlines) }
     }
 }

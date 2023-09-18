@@ -560,6 +560,10 @@
 		D0D3112E2AB83D9900E54361 /* Clamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3112B2AB83D9900E54361 /* Clamped.swift */; };
 		D0D3112F2AB83D9900E54361 /* Clamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3112B2AB83D9900E54361 /* Clamped.swift */; };
 		D0D311312AB83E1D00E54361 /* PropertyWrappersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311302AB83E1D00E54361 /* PropertyWrappersTests.swift */; };
+		D0D311332AB8438C00E54361 /* Trimmed.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311322AB8438C00E54361 /* Trimmed.swift */; };
+		D0D311342AB8438C00E54361 /* Trimmed.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311322AB8438C00E54361 /* Trimmed.swift */; };
+		D0D311352AB8438C00E54361 /* Trimmed.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311322AB8438C00E54361 /* Trimmed.swift */; };
+		D0D311362AB8438C00E54361 /* Trimmed.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311322AB8438C00E54361 /* Trimmed.swift */; };
 		D0E1289D29C38A390051D351 /* EdgeInsets+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E1289C29C38A390051D351 /* EdgeInsets+REExtensions.swift */; };
 		D0E129A629C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E129A529C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift */; };
 		D0E354C828BFBBE10000030B /* WeakSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C728BFBBE10000030B /* WeakSet.swift */; };
@@ -825,6 +829,7 @@
 		D0D311232AB4458F00E54361 /* CALayer+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+REExtensions.swift"; sourceTree = "<group>"; };
 		D0D3112B2AB83D9900E54361 /* Clamped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clamped.swift; sourceTree = "<group>"; };
 		D0D311302AB83E1D00E54361 /* PropertyWrappersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyWrappersTests.swift; sourceTree = "<group>"; };
+		D0D311322AB8438C00E54361 /* Trimmed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trimmed.swift; sourceTree = "<group>"; };
 		D0E1289C29C38A390051D351 /* EdgeInsets+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EdgeInsets+REExtensions.swift"; sourceTree = "<group>"; };
 		D0E129A529C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetsExtensionsTests.swift; sourceTree = "<group>"; };
 		D0E354C728BFBBE10000030B /* WeakSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakSet.swift; sourceTree = "<group>"; };
@@ -1354,6 +1359,7 @@
 				D0038B7C285642B600A890F9 /* Locked.swift */,
 				D0038B822856662B00A890F9 /* RWLocked.swift */,
 				D0D3112B2AB83D9900E54361 /* Clamped.swift */,
+				D0D311322AB8438C00E54361 /* Trimmed.swift */,
 			);
 			path = PropertyWrapper;
 			sourceTree = "<group>";
@@ -1763,6 +1769,7 @@
 				D04B862729F9A59600177357 /* UINavigationItem+REExtensions.swift in Sources */,
 				D04B85FA29F9A59000177357 /* NSPredicate+REExtensions.swift in Sources */,
 				D04B860129F9A59000177357 /* NSRegularExpression+REExtensions.swift in Sources */,
+				D0D311342AB8438C00E54361 /* Trimmed.swift in Sources */,
 				D04B860529F9A59000177357 /* Timer+REExtensions.swift in Sources */,
 				D04B860629F9A59000177357 /* NSObject+REExtensions.swift in Sources */,
 				D04B85C829F9A3FC00177357 /* SignedInteger+REExtensions.swift in Sources */,
@@ -1893,6 +1900,7 @@
 				D04B868E29F9A6F100177357 /* MutableCollection+REExtensions.swift in Sources */,
 				D04B872C29F9A71900177357 /* UILabel+REExtensions.swift in Sources */,
 				D04B872229F9A71900177357 /* UINavigationController+REExtensions.swift in Sources */,
+				D0D311352AB8438C00E54361 /* Trimmed.swift in Sources */,
 				D04B869B29F9A6F100177357 /* FloatingPoint+REExtensions.swift in Sources */,
 				D04B867B29F9A6D400177357 /* CGFloat+REExtensions.swift in Sources */,
 				D04B869629F9A6F100177357 /* Comparable+REExtensions.swift in Sources */,
@@ -2023,6 +2031,7 @@
 				D04B86A529F9A6F100177357 /* MutableCollection+REExtensions.swift in Sources */,
 				D04B870B29F9A71900177357 /* UILabel+REExtensions.swift in Sources */,
 				D04B870129F9A71900177357 /* UINavigationController+REExtensions.swift in Sources */,
+				D0D311362AB8438C00E54361 /* Trimmed.swift in Sources */,
 				D04B86B229F9A6F100177357 /* FloatingPoint+REExtensions.swift in Sources */,
 				D04B867429F9A6D300177357 /* CGFloat+REExtensions.swift in Sources */,
 				D04B86AD29F9A6F100177357 /* Comparable+REExtensions.swift in Sources */,
@@ -2191,6 +2200,7 @@
 				D0CD713D28E5CC1D009ADA8E /* Float+REExtensions.swift in Sources */,
 				D0CD713928E5C597009ADA8E /* StdlibProtocolWrappers.swift in Sources */,
 				D05897472A84E03E008381BB /* Reachability.swift in Sources */,
+				D0D311332AB8438C00E54361 /* Trimmed.swift in Sources */,
 				D071620B29F3D5B50051C11E /* WKWebView+REExtensions.swift in Sources */,
 				D05C866B294B4B7E0077E744 /* CGAffineTransform+REExtensions.swift in Sources */,
 				D0B1211528550E1000B5B326 /* NSObject+REExtensions.swift in Sources */,

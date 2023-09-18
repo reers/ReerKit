@@ -44,8 +44,8 @@ class SwiftUITestViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        redView.frame = .init(x: 30, y: 150, width: 100, height: 100)
-        blueView.frame = .init(x: 80, y: 200, width: 100, height: 100)
+        redView.frame = .init(x: 30, y: 150, width: 150, height: 100)
+        blueView.frame = .init(x: 80, y: 230, width: 150, height: 100)
     }
 
 }

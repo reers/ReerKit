@@ -18,6 +18,7 @@
 		D0C9C0F62A3239EE007C2C36 /* ResponderChainEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0F52A3239EE007C2C36 /* ResponderChainEventViewController.swift */; };
 		D0D311202AB2D76F00E54361 /* ButtonExtensionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3111F2AB2D76F00E54361 /* ButtonExtensionsViewController.swift */; };
 		D0D311222AB4351700E54361 /* SwiftUITestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311212AB4351700E54361 /* SwiftUITestViewController.swift */; };
+		D0D311292AB4798700E54361 /* BlurImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311282AB4798700E54361 /* BlurImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		D0C9C0F52A3239EE007C2C36 /* ResponderChainEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponderChainEventViewController.swift; sourceTree = "<group>"; };
 		D0D3111F2AB2D76F00E54361 /* ButtonExtensionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtensionsViewController.swift; sourceTree = "<group>"; };
 		D0D311212AB4351700E54361 /* SwiftUITestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUITestViewController.swift; sourceTree = "<group>"; };
+		D0D311282AB4798700E54361 /* BlurImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				D05E46262A813F1000C8A536 /* PushCompletionViewController.swift */,
 				D0D3111F2AB2D76F00E54361 /* ButtonExtensionsViewController.swift */,
 				D0D311212AB4351700E54361 /* SwiftUITestViewController.swift */,
+				D0D311282AB4798700E54361 /* BlurImageViewController.swift */,
 				D08416DC2A30E2CA0078919B /* Assets.xcassets */,
 				D08416DE2A30E2CA0078919B /* LaunchScreen.storyboard */,
 				D08416E12A30E2CA0078919B /* Info.plist */,
@@ -172,6 +175,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0D311292AB4798700E54361 /* BlurImageViewController.swift in Sources */,
 				D08416F02A30E6A60078919B /* ExampleListViewController.swift in Sources */,
 				D08416D42A30E2C80078919B /* AppDelegate.swift in Sources */,
 				D0D311202AB2D76F00E54361 /* ButtonExtensionsViewController.swift in Sources */,

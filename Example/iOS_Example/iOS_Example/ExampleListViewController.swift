@@ -21,7 +21,8 @@ class ExampleListViewController: UIViewController {
         Example(title: "Send Event by Responder Chain", vcName: "ResponderChainEventViewController"),
         Example(title: "Push Completion Test", vcName: "PushCompletionViewController"),
         Example(title: "Button Layout Test", vcName: "ButtonExtensionsViewController"),
-        Example(title: "Use SwiftUI view in UIKit", vcName: "SwiftUITestViewController")
+        Example(title: "Use SwiftUI view in UIKit", vcName: "SwiftUITestViewController"),
+        Example(title: "Blur image", vcName: "BlurImageViewController")
     ]
     
     

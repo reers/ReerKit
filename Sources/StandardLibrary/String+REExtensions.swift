@@ -1260,6 +1260,15 @@ public extension Reer where Base == String {
         return NSMutableAttributedString(string: base, attributes: [.foregroundColor: color])
     }
     #endif
+    
+    #if canImport(Foundation)
+    /// ReerKit: Add attributes to string.
+    /// - Parameter attributes: The attributes for the new attributed string. For a list of attributes that you can include in this dictionary, see NSAttributedString.Key.
+    /// - Returns: A attributed string.
+    func apply(attributes: [NSAttributedString.Key : Any]?) -> NSAttributedString {
+        return NSMutableAttributedString(string: base, attributes: attributes)
+    }
+    #endif
 }
 #endif
 

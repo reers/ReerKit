@@ -765,6 +765,12 @@ final class StringExtensionsTests: XCTestCase {
         XCTAssertEqual(color, .orange)
         #endif
     }
+    
+    func testAttributedString() {
+        let result = "hello".re.apply(attributes: [.foregroundColor: UIColor.red])
+            + " world".re.apply(attributes: [.foregroundColor: UIColor.blue])
+        XCTAssertEqual(result.string, "hello world")
+    }
 
     func testNSString() {
         XCTAssertEqual("Hello".re.nsString, NSString(string: "Hello"))

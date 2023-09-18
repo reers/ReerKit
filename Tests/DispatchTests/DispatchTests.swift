@@ -12,16 +12,16 @@ import XCTest
 class DispatchTests: XCTestCase {
 
     func testMainQueue() {
-        XCTAssertEqual(DispatchQueue.re.isMainQueue, true)
+        XCTAssertEqual(DispatchQueue.re.isOnMainQueue, true)
         DispatchQueue.global().sync {
-            XCTAssertEqual(false, DispatchQueue.re.isMainQueue)
+            XCTAssertEqual(false, DispatchQueue.re.isOnMainQueue)
         }
     }
     
     func testCurrentQueue() {
-        XCTAssertEqual(true, DispatchQueue.main.re.isCurrentQueue)
+        XCTAssertEqual(true, DispatchQueue.main.re.isExecuting)
         DispatchQueue.global().sync {
-            XCTAssertEqual(false, DispatchQueue.re.isMainQueue)
+            XCTAssertEqual(false, DispatchQueue.re.isOnMainQueue)
         }
     }
 

@@ -47,6 +47,16 @@ public func syncOnMainQueue(_ action: @escaping () -> Void) {
     }
 }
 
+/// ReerKit: Execute a closure on global queue asynchronously.
+public func asyncOnGlobalQueue(qos: DispatchQoS.QoSClass = .default, action: @escaping () -> Void) {
+    DispatchQueue.global(qos: qos).async(execute: action)
+}
+
+/// ReerKit: Execute a closure on global queue synchronously.
+public func syncOnGlobalQueue(qos: DispatchQoS.QoSClass = .default, action: @escaping () -> Void) {
+    DispatchQueue.global(qos: qos).sync(execute: action)
+}
+
 /// ReerKit: Delay to execute a closure on the queue.
 public func delay(_ interval: Double, onQueue queue: DispatchQueue = .main, action: @escaping () -> Void) {
     queue.asyncAfter(deadline: .now() + interval, execute: action)

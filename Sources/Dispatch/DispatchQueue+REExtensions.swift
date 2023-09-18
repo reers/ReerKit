@@ -26,14 +26,14 @@ import Dispatch
 public extension Reer where Base: DispatchQueue {
     
     /// ReerKit: A Boolean value indicating whether the current dispatch queue is the main queue.
-    static var isMainQueue: Bool {
+    static var isOnMainQueue: Bool {
         return currentQueueLabel() == DispatchQueue.main.label
     }
     
     /// ReerKit: Returns a Boolean value indicating whether the current dispatch queue is the specified queue.
     ///
     /// - Returns: `true` if the current queue is the specified queue, otherwise `false`.
-    var isCurrentQueue: Bool {
+    var isExecuting: Bool {
         let key = DispatchSpecificKey<Void>()
         base.setSpecific(key: key, value: ())
         defer { base.setSpecific(key: key, value: nil) }

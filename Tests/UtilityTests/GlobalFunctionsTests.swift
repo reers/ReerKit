@@ -21,7 +21,7 @@ class GlobalFunctions: XCTestCase {
     func testAsyncOnMainQueue() {
         DispatchQueue.global().async {
             asyncOnMainQueue {
-                XCTAssertEqual(true, DispatchQueue.re.isMainQueue)
+                XCTAssertEqual(true, DispatchQueue.re.isOnMainQueue)
             }
         }
     }
@@ -29,8 +29,23 @@ class GlobalFunctions: XCTestCase {
     func testSyncOnMainQueue() {
         DispatchQueue.global().async {
             syncOnMainQueue {
-                XCTAssertEqual(true, DispatchQueue.re.isMainQueue)
+                XCTAssertEqual(true, DispatchQueue.re.isOnMainQueue)
             }
+        }
+    }
+    
+    func testAsyncOnGlobalQueue() {
+        asyncOnGlobalQueue {
+            XCTAssertEqual(false, DispatchQueue.re.isOnMainQueue)
+            asyncOnMainQueue {
+                XCTAssertEqual(true, DispatchQueue.re.isOnMainQueue)
+            }
+        }
+    }
+    
+    func testsyncOnGlobalQueue() {
+        syncOnGlobalQueue {
+            XCTAssertEqual(false, DispatchQueue.re.isOnMainQueue)
         }
     }
 }

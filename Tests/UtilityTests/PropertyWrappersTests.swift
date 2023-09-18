@@ -36,5 +36,19 @@ final class PropertyWrappersTests: XCTestCase {
         userName = " b bb \n"
         XCTAssertEqual(userName, "b bb")
     }
+    
+    @Rounded(rule: .down)
+    var weight: Double = 0
+    
+    func testRounded() {
+        weight = 90.4
+        XCTAssertEqual(weight, 90)
+        
+        weight = -22.5
+        XCTAssertEqual(weight, -23)
+        
+        weight = 0
+        XCTAssertEqual(weight, 0)
+    }
 
 }

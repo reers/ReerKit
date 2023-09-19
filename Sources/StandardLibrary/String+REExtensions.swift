@@ -1217,55 +1217,12 @@ public extension Reer where Base == String {
 #if !os(Linux)
 
 public extension Reer where Base == String {
-    #if os(iOS) || os(macOS)
-    /// ReerKit: Bold string.
-    var bold: NSAttributedString {
-        return NSMutableAttributedString(
-            string: base,
-            attributes: [.font: REFont.boldSystemFont(ofSize: REFont.systemFontSize)])
-    }
-    #endif
-
-    #if canImport(Foundation)
-    /// ReerKit: Underlined string
-    var underline: NSAttributedString {
-        return NSAttributedString(string: base, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
-    }
-    #endif
-
-    #if canImport(Foundation)
-    /// ReerKit: Strikethrough string.
-    var strikethrough: NSAttributedString {
-        return NSAttributedString(
-            string: base,
-            attributes: [.strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue as Int)])
-    }
-    #endif
-
-    #if os(iOS)
-    /// ReerKit: Italic string.
-    var italic: NSAttributedString {
-        return NSMutableAttributedString(
-            string: base,
-            attributes: [.font: UIFont.italicSystemFont(ofSize: UIFont.systemFontSize)])
-    }
-    #endif
-
-    #if canImport(AppKit) || canImport(UIKit)
-    /// ReerKit: Add color to string.
-    ///
-    /// - Parameter color: text color.
-    /// - Returns: a NSAttributedString versions of string colored with given color.
-    func colored(with color: REColor) -> NSAttributedString {
-        return NSMutableAttributedString(string: base, attributes: [.foregroundColor: color])
-    }
-    #endif
     
     #if canImport(Foundation)
     /// ReerKit: Add attributes to string.
     /// - Parameter attributes: The attributes for the new attributed string. For a list of attributes that you can include in this dictionary, see NSAttributedString.Key.
     /// - Returns: A attributed string.
-    func apply(attributes: [NSAttributedString.Key : Any]?) -> NSAttributedString {
+    func with(attributes: [NSAttributedString.Key : Any]?) -> NSMutableAttributedString {
         return NSMutableAttributedString(string: base, attributes: attributes)
     }
     #endif

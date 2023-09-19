@@ -32,57 +32,6 @@ import AppKit
 #endif
 
 public extension Reer where Base: NSAttributedString {
-    /// ReerKit: Bolded string using the system font.
-    #if !os(Linux)
-    var bolded: NSAttributedString {
-        guard !base.string.isEmpty else { return base }
-
-        let pointSize: CGFloat
-        if let font = base.attribute(.font, at: 0, effectiveRange: nil) as? REFont {
-            pointSize = font.pointSize
-        } else {
-            #if os(tvOS) || os(watchOS)
-            pointSize = REFont.preferredFont(forTextStyle: .headline).pointSize
-            #else
-            pointSize = REFont.systemFontSize
-            #endif
-        }
-        return applying(attributes: [.font: REFont.boldSystemFont(ofSize: pointSize)])
-    }
-    #endif
-
-    #if !os(Linux)
-    /// ReerKit: Underlined string.
-    var underlined: NSAttributedString {
-        return applying(attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
-    }
-    #endif
-
-    #if canImport(UIKit)
-    /// ReerKit: Italicized string using the system font.
-    var italicized: NSAttributedString {
-        guard !base.string.isEmpty else { return base }
-
-        let pointSize: CGFloat
-        if let font = base.attribute(.font, at: 0, effectiveRange: nil) as? UIFont {
-            pointSize = font.pointSize
-        } else {
-            #if os(tvOS) || os(watchOS)
-            pointSize = UIFont.preferredFont(forTextStyle: .headline).pointSize
-            #else
-            pointSize = UIFont.systemFontSize
-            #endif
-        }
-        return applying(attributes: [.font: UIFont.italicSystemFont(ofSize: pointSize)])
-    }
-    #endif
-
-    #if !os(Linux)
-    /// ReerKit: Struckthrough string.
-    var struckthrough: NSAttributedString {
-        return applying(attributes: [.strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue)])
-    }
-    #endif
 
     /// ReerKit: Dictionary of the attributes applied across the whole string.
     var attributes: [NSAttributedString.Key: Any] {
@@ -94,23 +43,13 @@ public extension Reer where Base: NSAttributedString {
     ///
     /// - Parameter attributes: Dictionary of attributes.
     /// - Returns: NSAttributedString with applied attributes.
-    func applying(attributes: [NSAttributedString.Key: Any]) -> NSAttributedString {
-        guard !base.string.isEmpty else { return base }
+    func with(attributes: [NSAttributedString.Key: Any]) -> NSMutableAttributedString {
+        guard !base.string.isEmpty else { return NSMutableAttributedString() }
 
         let copy = NSMutableAttributedString(attributedString: base)
         copy.addAttributes(attributes, range: NSRange(0..<base.length))
         return copy
     }
-
-    #if canImport(AppKit) || canImport(UIKit)
-    /// ReerKit: Add color to NSAttributedString.
-    ///
-    /// - Parameter color: text color.
-    /// - Returns: a NSAttributedString colored with given color.
-    func colored(with color: REColor) -> NSAttributedString {
-        return applying(attributes: [.foregroundColor: color])
-    }
-    #endif
 
     /// ReerKit: Apply attributes to substrings matching a regular expression.
     ///
@@ -119,12 +58,12 @@ public extension Reer where Base: NSAttributedString {
     ///   - pattern: a regular expression to target.
     ///   - options: The regular expression options that are applied to the expression during matching. See NSRegularExpression.Options for possible values.
     /// - Returns: An NSAttributedString with attributes applied to substrings matching the pattern.
-    func applying(
+    func with(
         attributes: [NSAttributedString.Key: Any],
         toRangesMatching pattern: String,
         options: NSRegularExpression.Options = []
-    ) -> NSAttributedString {
-        guard let pattern = try? NSRegularExpression(pattern: pattern, options: options) else { return base }
+    ) -> NSMutableAttributedString {
+        guard let pattern = try? NSRegularExpression(pattern: pattern, options: options) else { return NSMutableAttributedString() }
 
         let matches = pattern.matches(in: base.string, options: [], range: NSRange(0..<base.length))
         let result = NSMutableAttributedString(attributedString: base)
@@ -142,12 +81,12 @@ public extension Reer where Base: NSAttributedString {
     ///   - attributes: Dictionary of attributes.
     ///   - target: a subsequence string for the attributes to be applied to.
     /// - Returns: An NSAttributedString with attributes applied on the target string.
-    func applying<T: StringProtocol>(
+    func with<T: StringProtocol>(
         attributes: [NSAttributedString.Key: Any],
         toOccurrencesOf target: T
-    ) -> NSAttributedString {
+    ) -> NSMutableAttributedString {
         let pattern = "\\Q\(target)\\E"
-        return applying(attributes: attributes, toRangesMatching: pattern)
+        return with(attributes: attributes, toRangesMatching: pattern)
     }
 }
 
@@ -171,10 +110,10 @@ public extension NSAttributedString {
     ///   - lhs: NSAttributedString to add.
     ///   - rhs: NSAttributedString to add.
     /// - Returns: New instance with added NSAttributedString.
-    static func + (lhs: NSAttributedString, rhs: NSAttributedString) -> NSAttributedString {
+    static func + (lhs: NSAttributedString, rhs: NSAttributedString) -> NSMutableAttributedString {
         let string = NSMutableAttributedString(attributedString: lhs)
         string.append(rhs)
-        return NSAttributedString(attributedString: string)
+        return string
     }
 
     /// ReerKit: Add a NSAttributedString to another NSAttributedString.
@@ -192,7 +131,7 @@ public extension NSAttributedString {
     ///   - lhs: NSAttributedString to add.
     ///   - rhs: String to add.
     /// - Returns: New instance with added NSAttributedString.
-    static func + (lhs: NSAttributedString, rhs: String) -> NSAttributedString {
+    static func + (lhs: NSAttributedString, rhs: String) -> NSMutableAttributedString {
         return lhs + NSAttributedString(string: rhs)
     }
 }
@@ -202,7 +141,7 @@ public extension ReerGeneric where Base == Array<T>, T: NSAttributedString {
     ///
     /// - Parameter separator: An `NSAttributedString` to add between the elements of the sequence.
     /// - Returns: NSAttributedString with applied attributes.
-    func joined(separator: NSAttributedString) -> NSAttributedString {
+    func joined(separator: NSAttributedString) -> NSMutableAttributedString {
         guard let firstElement = base.first else { return NSMutableAttributedString(string: "") }
         return base.dropFirst().reduce(into: NSMutableAttributedString(attributedString: firstElement)) { result, element in
             result.append(separator)
@@ -210,7 +149,7 @@ public extension ReerGeneric where Base == Array<T>, T: NSAttributedString {
         }
     }
 
-    func joined(separator: String) -> NSAttributedString {
+    func joined(separator: String) -> NSMutableAttributedString {
         guard let firstElement = base.first else { return NSMutableAttributedString(string: "") }
         let attributedStringSeparator = NSAttributedString(string: separator)
         return base.dropFirst().reduce(into: NSMutableAttributedString(attributedString: firstElement)) { result, element in

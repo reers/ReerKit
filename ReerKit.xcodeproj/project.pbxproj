@@ -64,6 +64,14 @@
 		D0421ACF2938F5D500452845 /* CalendarExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0421ACE2938F5D500452845 /* CalendarExtensionsTests.swift */; };
 		D0421AD12938F6B500452845 /* Data+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0421AD02938F6B500452845 /* Data+REExtensions.swift */; };
 		D0421AD32939033800452845 /* DataExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0421AD22939033800452845 /* DataExtensionsTests.swift */; };
+		D048D7DE2AB9FD50007B87EB /* Range+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048D7DD2AB9FD50007B87EB /* Range+REExtensions.swift */; };
+		D048D7DF2AB9FD50007B87EB /* Range+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048D7DD2AB9FD50007B87EB /* Range+REExtensions.swift */; };
+		D048D7E02AB9FD50007B87EB /* Range+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048D7DD2AB9FD50007B87EB /* Range+REExtensions.swift */; };
+		D048D7E12AB9FD50007B87EB /* Range+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048D7DD2AB9FD50007B87EB /* Range+REExtensions.swift */; };
+		D048D7E32ABA0012007B87EB /* NSRange+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048D7E22ABA0012007B87EB /* NSRange+REExtensions.swift */; };
+		D048D7E42ABA0012007B87EB /* NSRange+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048D7E22ABA0012007B87EB /* NSRange+REExtensions.swift */; };
+		D048D7E52ABA0012007B87EB /* NSRange+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048D7E22ABA0012007B87EB /* NSRange+REExtensions.swift */; };
+		D048D7E62ABA0012007B87EB /* NSRange+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048D7E22ABA0012007B87EB /* NSRange+REExtensions.swift */; };
 		D04B859629F9A19200177357 /* ReerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D04B858E29F9A19200177357 /* ReerKit.framework */; };
 		D04B85A429F9A3C400177357 /* WKWebView+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071620A29F3D5B50051C11E /* WKWebView+REExtensions.swift */; };
 		D04B85A529F9A3E300177357 /* ReerKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B121112855089000B5B326 /* ReerKit.swift */; };
@@ -668,6 +676,8 @@
 		D0421ACE2938F5D500452845 /* CalendarExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExtensionsTests.swift; sourceTree = "<group>"; };
 		D0421AD02938F6B500452845 /* Data+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+REExtensions.swift"; sourceTree = "<group>"; };
 		D0421AD22939033800452845 /* DataExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensionsTests.swift; sourceTree = "<group>"; };
+		D048D7DD2AB9FD50007B87EB /* Range+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Range+REExtensions.swift"; sourceTree = "<group>"; };
+		D048D7E22ABA0012007B87EB /* NSRange+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRange+REExtensions.swift"; sourceTree = "<group>"; };
 		D04B858E29F9A19200177357 /* ReerKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D04B859529F9A19200177357 /* ReerKit-macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ReerKit-macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D04B863929F9A60B00177357 /* ReerKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1187,6 +1197,7 @@
 				D090D97529DC6CD400245538 /* NSRegularExpression+REExtensions.swift */,
 				D022BED429DD47EE00245550 /* URLRequest+REExtensions.swift */,
 				D0EED73929DD5E3A005A0F31 /* Bundle+REExtensions.swift */,
+				D048D7E22ABA0012007B87EB /* NSRange+REExtensions.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1323,6 +1334,7 @@
 				D05A8751291BC4A300C53492 /* String+REExtensions.swift */,
 				D0CC5A19290AD5040038989B /* StringProtocol+REExtensions.swift */,
 				D094C84C29F4559D00491CD8 /* OptionSet+REExtensions.swift */,
+				D048D7DD2AB9FD50007B87EB /* Range+REExtensions.swift */,
 			);
 			path = StandardLibrary;
 			sourceTree = "<group>";
@@ -1762,6 +1774,7 @@
 				D04B85E329F9A50600177357 /* Memory.swift in Sources */,
 				D04B85DF29F9A50600177357 /* TypeNameDescribable.swift in Sources */,
 				D00D638C2A069AB600A9EEF4 /* LinkedList.swift in Sources */,
+				D048D7DF2AB9FD50007B87EB /* Range+REExtensions.swift in Sources */,
 				D00D63942A069AB600A9EEF4 /* Queue.swift in Sources */,
 				D04B85E129F9A50600177357 /* CountdownTimer.swift in Sources */,
 				D04B85F729F9A57800177357 /* CGColor+REExtensions.swift in Sources */,
@@ -1825,6 +1838,7 @@
 				D04B85F629F9A57800177357 /* CGVector+REExtensions.swift in Sources */,
 				D04B85D029F9A3FC00177357 /* BinaryFloatingPoint+REExtensions.swift in Sources */,
 				D04B85C429F9A3FC00177357 /* Optional+REExtensions.swift in Sources */,
+				D048D7E42ABA0012007B87EB /* NSRange+REExtensions.swift in Sources */,
 				D04B85CD29F9A3FC00177357 /* Sequence+REExtensions.swift in Sources */,
 				D04B85EA29F9A50B00177357 /* Locked.swift in Sources */,
 				D04B861329F9A59600177357 /* UIStackView+REExtensions.swift in Sources */,
@@ -1894,6 +1908,7 @@
 				D04B86C629F9A70000177357 /* ReadWriteLock.swift in Sources */,
 				D04B86C729F9A70000177357 /* Synchronizing.swift in Sources */,
 				D00D638D2A069AB600A9EEF4 /* LinkedList.swift in Sources */,
+				D048D7E02AB9FD50007B87EB /* Range+REExtensions.swift in Sources */,
 				D00D63952A069AB600A9EEF4 /* Queue.swift in Sources */,
 				D04B86F229F9A71100177357 /* NSRegularExpression+REExtensions.swift in Sources */,
 				D04B867A29F9A6D400177357 /* CGAffineTransform+REExtensions.swift in Sources */,
@@ -1957,6 +1972,7 @@
 				D04B869929F9A6F100177357 /* StringProtocol+REExtensions.swift in Sources */,
 				D04B86D329F9A70600177357 /* Memory.swift in Sources */,
 				D04B873429F9A71900177357 /* UINavigationItem+REExtensions.swift in Sources */,
+				D048D7E52ABA0012007B87EB /* NSRange+REExtensions.swift in Sources */,
 				D04B872429F9A71900177357 /* UIGestureRecognizer+REExtensions.swift in Sources */,
 				D04B868229F9A6E000177357 /* DispatchQueue+REExtensions.swift in Sources */,
 				D04B86A229F9A6F100177357 /* Collection+REExtensions.swift in Sources */,
@@ -2026,6 +2042,7 @@
 				D04B86CB29F9A70100177357 /* ReadWriteLock.swift in Sources */,
 				D04B86CC29F9A70100177357 /* Synchronizing.swift in Sources */,
 				D00D638E2A069AB600A9EEF4 /* LinkedList.swift in Sources */,
+				D048D7E12AB9FD50007B87EB /* Range+REExtensions.swift in Sources */,
 				D00D63962A069AB600A9EEF4 /* Queue.swift in Sources */,
 				D04B86E429F9A71000177357 /* NSRegularExpression+REExtensions.swift in Sources */,
 				D04B867329F9A6D300177357 /* CGAffineTransform+REExtensions.swift in Sources */,
@@ -2089,6 +2106,7 @@
 				D04B86B029F9A6F100177357 /* StringProtocol+REExtensions.swift in Sources */,
 				D04B86DD29F9A70600177357 /* Memory.swift in Sources */,
 				D04B871329F9A71900177357 /* UINavigationItem+REExtensions.swift in Sources */,
+				D048D7E62ABA0012007B87EB /* NSRange+REExtensions.swift in Sources */,
 				D04B870329F9A71900177357 /* UIGestureRecognizer+REExtensions.swift in Sources */,
 				D04B868329F9A6E100177357 /* DispatchQueue+REExtensions.swift in Sources */,
 				D04B86B929F9A6F100177357 /* Collection+REExtensions.swift in Sources */,
@@ -2132,6 +2150,7 @@
 				D0122B2129EF02F0008311CF /* UIFont+REExtensions.swift in Sources */,
 				D05C8686294B5D3C0077E744 /* CGSize+REExtensions.swift in Sources */,
 				D05A8819291BF58200C53492 /* Color+REExtensions.swift in Sources */,
+				D048D7E32ABA0012007B87EB /* NSRange+REExtensions.swift in Sources */,
 				D0B1210F2855079000B5B326 /* UIView+REExtensions.swift in Sources */,
 				D0F39A7C287DC70100A754B2 /* Character+REExtensions.swift in Sources */,
 				D094C85129F45C7600491CD8 /* UIDevice+REExtensions.swift in Sources */,
@@ -2164,6 +2183,7 @@
 				D08F2C5B29DB437B00B4C181 /* Date+REExtensions.swift in Sources */,
 				D0D311382AB8522F00E54361 /* Rounded.swift in Sources */,
 				D0421AD12938F6B500452845 /* Data+REExtensions.swift in Sources */,
+				D048D7DE2AB9FD50007B87EB /* Range+REExtensions.swift in Sources */,
 				D05C868A294B5F990077E744 /* CGRect+REExtensions.swift in Sources */,
 				D0038B7D285642B600A890F9 /* Locked.swift in Sources */,
 				D0038B8128565B9500A890F9 /* ReadWriteLock.swift in Sources */,

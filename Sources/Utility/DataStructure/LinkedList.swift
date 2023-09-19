@@ -19,19 +19,19 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-public final class LinkedList<E> {
+fileprivate class LinkedListNode<E> {
+    var value: E
+    var next: LinkedListNode?
+    weak var previous: LinkedListNode?
     
-    fileprivate class LinkedListNode<E> {
-        var value: E
-        var next: LinkedListNode?
-        weak var previous: LinkedListNode?
-        
-        public init(value: E, previous: LinkedListNode? = nil, next: LinkedListNode? = nil) {
-            self.value = value
-            self.previous = previous
-            self.next = next
-        }
+    public init(value: E, previous: LinkedListNode? = nil, next: LinkedListNode? = nil) {
+        self.value = value
+        self.previous = previous
+        self.next = next
     }
+}
+
+public final class LinkedList<E> {
     
     fileprivate typealias Node = LinkedListNode<E>
     
@@ -321,7 +321,7 @@ extension LinkedList: Sequence {
 
 public struct LinkedListIterator<E>: IteratorProtocol {
     let linkedList: LinkedList<E>
-    fileprivate var current: LinkedList<E>.LinkedListNode<E>?
+    fileprivate var current: LinkedListNode<E>?
     
     init(linkedList: LinkedList<E>) {
         self.linkedList = linkedList

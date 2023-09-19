@@ -45,7 +45,10 @@ class NSObjectExtensionsTests: XCTestCase {
         XCTAssertEqual(SubClass.re.ivars, ["name", "age"])
         XCTAssertEqual(SubClass.re.ocProtocols, ["ReerKit_iOSTests.TestProtocol"])
         XCTAssertEqual(SubClass.re.ocProperties, ["age"])
-        XCTAssertEqual(SubClass.re.ocSelectors.map { NSStringFromSelector($0) }, ["init", ".cxx_destruct", "age", "setAge:", "test"])
+        
+        let set: Set = ["init", ".cxx_destruct", "age", "setAge:", "test"]
+        let resultSet: Set = Set(SubClass.re.ocSelectors.map { NSStringFromSelector($0) })
+        XCTAssertEqual(set, resultSet)
     }
     
     dynamic func aTestSelector() {

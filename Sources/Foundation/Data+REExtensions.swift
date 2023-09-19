@@ -364,36 +364,30 @@ public extension ReerForEquatable where Base == Data {
         guard iv.count == 16 || iv.count == 0 else {
             return nil
         }
-
-        let cryptLength  = Int(base.count + kCCBlockSizeAES128)
-        var result = Data(count:cryptLength)
-        let keyLength = size_t(kCCKeySizeAES128)
-        var encryptedSize: size_t = 0
-
-        let cryptStatus = result.withUnsafeMutableBytes { cryptBytes in
-            base.withUnsafeBytes { dataBytes in
-                iv.withUnsafeBytes { ivBytes in
-                    key.withUnsafeBytes { keyBytes in
-                        CCCrypt(
-                            CCOperation(kCCEncrypt),
-                            CCAlgorithm(kCCAlgorithmAES128),
-                            CCOptions(kCCOptionPKCS7Padding),
-                            keyBytes.baseAddress!,
-                            keyLength,
-                            ivBytes.baseAddress!,
-                            dataBytes.baseAddress!,
-                            base.count,
-                            cryptBytes.baseAddress!,
-                            cryptLength,
-                            &encryptedSize
-                        )
-                    }
+        
+        var result = Data(count: base.count + kCCBlockSizeAES128)
+        var resultLength: size_t = 0
+        
+        let cryptStatus = key.withUnsafeBytes { keyBytes in
+            iv.withUnsafeBytes { ivBytes in
+                base.withUnsafeBytes { dataBytes in
+                    CCCrypt(
+                        CCOperation(kCCEncrypt),
+                        CCAlgorithm(kCCAlgorithmAES),
+                        CCOptions(kCCOptionPKCS7Padding),
+                        keyBytes.baseAddress, key.count,
+                        ivBytes.baseAddress,
+                        dataBytes.baseAddress, base.count,
+                        result.withUnsafeMutableBytes { $0.baseAddress },
+                        result.count,
+                        &resultLength
+                    )
                 }
             }
         }
 
         if UInt32(cryptStatus) == UInt32(kCCSuccess) {
-            result.removeSubrange(encryptedSize..<result.count)
+            result.removeSubrange(resultLength..<result.count)
             return result
         } else {
             debugPrint("Error: \(cryptStatus)")
@@ -414,36 +408,30 @@ public extension ReerForEquatable where Base == Data {
         guard iv.count == 16 || iv.count == 0 else {
             return nil
         }
-
-        let cryptLength  = Int(base.count + kCCBlockSizeAES128)
-        var result = Data(count:cryptLength)
-        let keyLength = size_t(kCCKeySizeAES128)
-        var encryptedSize: size_t = 0
-
-        let cryptStatus = result.withUnsafeMutableBytes { cryptBytes in
-            base.withUnsafeBytes { dataBytes in
-                iv.withUnsafeBytes { ivBytes in
-                    key.withUnsafeBytes { keyBytes in
-                        CCCrypt(
-                            CCOperation(kCCDecrypt),
-                            CCAlgorithm(kCCAlgorithmAES128),
-                            CCOptions(kCCOptionPKCS7Padding),
-                            keyBytes.baseAddress!,
-                            keyLength,
-                            ivBytes.baseAddress!,
-                            dataBytes.baseAddress!,
-                            base.count,
-                            cryptBytes.baseAddress!,
-                            cryptLength,
-                            &encryptedSize
-                        )
-                    }
+        
+        var result = Data(count: base.count + kCCBlockSizeAES128)
+        var resultLength: size_t = 0
+        
+        let cryptStatus = key.withUnsafeBytes { keyBytes in
+            iv.withUnsafeBytes { ivBytes in
+                base.withUnsafeBytes { dataBytes in
+                    CCCrypt(
+                        CCOperation(kCCDecrypt),
+                        CCAlgorithm(kCCAlgorithmAES),
+                        CCOptions(kCCOptionPKCS7Padding),
+                        keyBytes.baseAddress, key.count,
+                        ivBytes.baseAddress,
+                        dataBytes.baseAddress, base.count,
+                        result.withUnsafeMutableBytes { $0.baseAddress },
+                        result.count,
+                        &resultLength
+                    )
                 }
             }
         }
 
         if UInt32(cryptStatus) == UInt32(kCCSuccess) {
-            result.removeSubrange(encryptedSize..<result.count)
+            result.removeSubrange(resultLength..<result.count)
             return result
         } else {
             debugPrint("Error: \(cryptStatus)")

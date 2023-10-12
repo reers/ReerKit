@@ -183,6 +183,22 @@ public extension UIDevice {
         ///
         /// ![Image](https://km.support.apple.com/resources/sites/APPLE/content/live/IMAGES/1000/IM1095/en_US/TODO)
         case iPhone14ProMax
+        /// Device is an [iPhone 15]()
+        ///
+        /// ![Image]()
+        case iPhone15
+        /// Device is an [iPhone 15 Plus]()
+        ///
+        /// ![Image]()
+        case iPhone15Plus
+        /// Device is an [iPhone 15 Pro]()
+        ///
+        /// ![Image]()
+        case iPhone15Pro
+        /// Device is an [iPhone 15 Pro Max]()
+        ///
+        /// ![Image]()
+        case iPhone15ProMax
         /// Device is an [iPad 2](https://support.apple.com/kb/SP622)
         ///
         /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP622/SP622_01-ipad2-mul.png)
@@ -544,7 +560,7 @@ public extension Reer where Base: UIDevice {
     
     var isDynamicIslandScreen: Bool {
         switch name {
-        case .iPhone14Pro, .iPhone14ProMax:
+        case .iPhone14Pro, .iPhone14ProMax, .iPhone15, .iPhone15Plus, .iPhone15Pro, .iPhone15ProMax:
             return true
         default:
             return false
@@ -610,6 +626,10 @@ public extension Reer where Base: UIDevice {
         case "iPhone14,8": return .iPhone14Plus
         case "iPhone15,2": return .iPhone14Pro
         case "iPhone15,3": return .iPhone14ProMax
+        case "iPhone15,4": return .iPhone15
+        case "iPhone15,5": return .iPhone15Plus
+        case "iPhone16,1": return .iPhone15Pro
+        case "iPhone16,2": return .iPhone15ProMax
         case "iPad2,1", "iPad2,2", "iPad2,3", "iPad2,4": return .iPad2
         case "iPad3,1", "iPad3,2", "iPad3,3": return .iPad3
         case "iPad3,4", "iPad3,5", "iPad3,6": return .iPad4
@@ -1007,6 +1027,10 @@ extension UIDevice.Name: CustomStringConvertible {
         case .iPhone14Plus: return "iPhone 14 Plus"
         case .iPhone14Pro: return "iPhone 14 Pro"
         case .iPhone14ProMax: return "iPhone 14 Pro Max"
+        case .iPhone15: return "iPhone 15"
+        case .iPhone15Plus: return "iPhone 15 Plus"
+        case .iPhone15Pro: return "iPhone 15 Pro"
+        case .iPhone15ProMax: return "iPhone 15 Pro Max"
         case .iPad2: return "iPad 2"
         case .iPad3: return "iPad (3rd generation)"
         case .iPad4: return "iPad (4th generation)"

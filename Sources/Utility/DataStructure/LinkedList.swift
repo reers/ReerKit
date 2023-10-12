@@ -19,12 +19,12 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-fileprivate class LinkedListNode<E> {
-    var value: E
+fileprivate class LinkedListNode<T> {
+    var value: T
     var next: LinkedListNode?
     weak var previous: LinkedListNode?
     
-    public init(value: E, previous: LinkedListNode? = nil, next: LinkedListNode? = nil) {
+    public init(value: T, previous: LinkedListNode? = nil, next: LinkedListNode? = nil) {
         self.value = value
         self.previous = previous
         self.next = next

@@ -62,3 +62,24 @@ public func delay(_ interval: Double, onQueue queue: DispatchQueue = .main, acti
     queue.asyncAfter(deadline: .now() + interval, execute: action)
 }
 #endif
+
+
+#if canImport(Darwin)
+import Darwin
+
+/// ReerKit: Get info by name via `sysctl`
+/// e.g.
+/// hw.model
+/// kern.osversion
+/// kern.hostname
+public func sysctl(by name: String) -> String {
+    var result: String?
+    var size: size_t = 0
+    sysctlbyname(name, nil, &size, nil, 0)
+    var machine = [CChar](repeating: 0, count: Int(size))
+    guard let last = machine.last, last == 0 else { return "" }
+    sysctlbyname(name, &machine, &size, nil, 0)
+    result = String(cString: machine, encoding: .utf8)
+    return result ?? ""
+}
+#endif

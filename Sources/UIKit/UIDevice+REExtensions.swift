@@ -546,7 +546,7 @@ public extension Reer where Base: UIDevice {
     
     #if os(iOS)
     var isNotchScreen: Bool {
-        switch name {
+        switch modelName {
         case .iPhoneX, .iPhoneXS, .iPhoneXSMax,
              .iPhoneXR, .iPhone11, .iPhone11Pro, .iPhone11ProMax,
              .iPhone12, .iPhone12Mini, .iPhone12Pro, .iPhone12ProMax,
@@ -559,7 +559,7 @@ public extension Reer where Base: UIDevice {
     }
     
     var isDynamicIslandScreen: Bool {
-        switch name {
+        switch modelName {
         case .iPhone14Pro, .iPhone14ProMax, .iPhone15, .iPhone15Plus, .iPhone15Pro, .iPhone15ProMax:
             return true
         default:
@@ -568,26 +568,27 @@ public extension Reer where Base: UIDevice {
     }
     #endif
     
-    /// ReerKit: The device's machine model.  e.g. "iPhone6,1" "iPad4,6"
+    /// ReerKit: The device's hardware machine id.  e.g. "iPhone6,1" "iPad4,6"
     ///
     /// [reference](http://theiphonewiki.com/wiki/Models)
-    var machineModel: String {
-        var machineSwiftString: String?
-        var size: size_t = 0
-        sysctlbyname("hw.machine", nil, &size, nil, 0)
-        var machine = [CChar](repeating: 0, count: Int(size))
-        sysctlbyname("hw.machine", &machine, &size, nil, 0)
-        machineSwiftString = String(cString: machine, encoding: .utf8)
-        return machineSwiftString ?? ""
+    var machineModelIdentifier: String {
+        return sysctl(by: "hw.machine")
     }
     
-    var name: UIDevice.Name {
-        return getName(ofMachineModel: machineModel)
+    /// ReerKit: The device's machine model internal name.  e.g. "D83AP" "D16AP"
+    var machineModelName: String {
+        return sysctl(by: "hw.model")
     }
     
-    private func getName(ofMachineModel modelName: String) -> UIDevice.Name {
+    /// ReerKit: Get product model name of the device. e.g `.iPhone13ProMax`
+    /// or get string version `UIDevice.current.re.modelName.description` -> "iPhone13 Pro Max"
+    var modelName: UIDevice.Name {
+        return getName(ofMachineModel: machineModelIdentifier)
+    }
+    
+    private func getName(ofMachineModel modelIdentifier: String) -> UIDevice.Name {
         #if os(iOS)
-        switch modelName {
+        switch modelIdentifier {
         case "iPod5,1": return .iPodTouch5
         case "iPod7,1": return .iPodTouch6
         case "iPod9,1": return .iPodTouch7
@@ -664,7 +665,7 @@ public extension Reer where Base: UIDevice {
         case "iPad14,5", "iPad14,6": return .iPadPro12Inch6
         case "AudioAccessory1,1": return .homePod
         case "i386", "x86_64", "arm64": return .simulator(getName(ofMachineModel: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "iOS"))
-        default: return .unknown(machineModel)
+        default: return .unknown(machineModelIdentifier)
         }
         #elseif os(tvOS)
         switch modelName {
@@ -673,7 +674,7 @@ public extension Reer where Base: UIDevice {
         case "AppleTV11,1": return .appleTV4K2
         case "AppleTV14,1": return .appleTV4K3
         case "i386", "x86_64", "arm64": return .simulator(getName(ofMachineModel: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "tvOS"))
-        default: return .unknown(machineModel)
+        default: return .unknown(machineModelIdentifier)
         }
         #elseif os(watchOS)
         switch modelName {

@@ -707,6 +707,22 @@ public extension Reer where Base: UIDevice {
         #endif
     }
     
+    /// ReerKit: Mount id
+    var mntID: String {
+        var buf = statfs()
+        if statfs("/", &buf) == 0 {
+            let prefix = "com.apple.os.update-"
+            let cChars = Mirror(reflecting: buf.f_mntfromname).children.compactMap { $0.value as? CChar }
+            let mntfromname = cChars.reduce("") { $0 + String(format: "%c", UInt8(bitPattern: $1)) }
+            if mntfromname.contains(prefix) {
+                let index = mntfromname.index(mntfromname.startIndex, offsetBy: prefix.count)
+                let id = String(mntfromname[index...])
+                return id
+            }
+        }
+        return ""
+    }
+    
     /// ReerKit: Total disk space in byte. (-1 when error occurs)
     var diskSpace: Int64 {
         do {

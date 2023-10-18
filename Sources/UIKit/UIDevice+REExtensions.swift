@@ -668,7 +668,7 @@ public extension Reer where Base: UIDevice {
         default: return .unknown(machineModelIdentifier)
         }
         #elseif os(tvOS)
-        switch modelName {
+        switch modelIdentifier {
         case "AppleTV5,3": return .appleTVHD
         case "AppleTV6,2": return .appleTV4K
         case "AppleTV11,1": return .appleTV4K2
@@ -677,7 +677,7 @@ public extension Reer where Base: UIDevice {
         default: return .unknown(machineModelIdentifier)
         }
         #elseif os(watchOS)
-        switch modelName {
+        switch modelIdentifier {
         case "Watch1,1": return .appleWatchSeries0_38mm
         case "Watch1,2": return .appleWatchSeries0_42mm
         case "Watch2,6": return .appleWatchSeries1_38mm

@@ -47,9 +47,12 @@ public extension Reer where Base: NotificationCenter {
         queue: OperationQueue? = nil,
         using block: @escaping (_ notification: Notification) -> Void
     ) {
-        var handler: NSObjectProtocol!
-        handler = base.addObserver(forName: name, object: obj, queue: queue) { [unowned base] in
+        var handler: (any NSObjectProtocol)!
+        let removeObserver = { [unowned base] in
             base.removeObserver(handler!)
+        }
+        handler = base.addObserver(forName: name, object: obj, queue: queue) {
+            removeObserver()
             block($0)
         }
     }

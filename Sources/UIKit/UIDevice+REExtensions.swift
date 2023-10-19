@@ -469,7 +469,11 @@ public extension Reer where Base: UIDevice {
     
     /// ReerKit: Get current device's current language.
     static var currentLanguage: String {
-        return Locale.preferredLanguages.first ?? "en"
+        if #available(macOS 13, iOS 16, tvOS 16, watchOS 9, *) {
+            return Locale.preferredLanguages.first ?? Locale.current.language.languageCode?.identifier ?? "en"
+        } else {
+            return Locale.preferredLanguages.first ?? Locale.current.languageCode ?? "en"
+        }
     }
     
     /// ReerKit: Whether the device is iPhone or iPod touch.

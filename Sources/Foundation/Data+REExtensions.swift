@@ -351,6 +351,9 @@ public extension ReerForEquatable where Base == Data {
 // MARK: - Crypto
 
 public extension ReerForEquatable where Base == Data {
+    
+    // MARK: - AES
+    
     /// ReerKit: Returns an encrypted Data using AES.
     ///
     /// - Parameters:
@@ -438,6 +441,195 @@ public extension ReerForEquatable where Base == Data {
             return nil
         }
     }
+    
+    // MARK: - RSA
+   
+    /// ReerKit: Returns an RSA encrypted data.
+    /// - Parameter publicKey: RSA public key.
+    /// - Returns: A `Data` encrypted, or nil if an error occurs.
+    func rsaEncrypt(withPublicKey publicKey: String) -> Data? {
+        guard let secKey = base.re.publicSecKey(withKey: publicKey) else { return nil }
+        return encryptData(base, withKeyRef: secKey, requireSigning: false)
+    }
+    
+    /// ReerKit: Returns an RSA decrypted data.
+    /// - Parameter publicKey: RSA private key.
+    /// - Returns: A `Data` decrypted, or nil if an error occurs.
+    func rsaDecrypt(withPrivateKey privateKey: String) -> Data? {
+        guard let secKey = base.re.privateSecKey(withKey: privateKey) else { return nil }
+        return decryptData(base, withKeyRef: secKey)
+    }
+    
+    /// ReerKit: Returns an RSA encrypted data.
+    /// - Parameter privateKey: RSA private key.
+    /// - Returns: A `Data` encrypted, or nil if an error occurs.
+    func rsaEncrypt(withPrivateKey privateKey: String) -> Data? {
+        guard let secKey = base.re.privateSecKey(withKey: privateKey) else { return nil }
+        return encryptData(base, withKeyRef: secKey, requireSigning: true)
+    }
+    
+    /// ReerKit: Returns an RSA decrypted data.
+    /// - Parameter publicKey: RSA public key.
+    /// - Returns: A `Data` decrypted, or nil if an error occurs.
+    func rsaDecrypt(withPublicKey publicKey: String) -> Data? {
+        guard let secKey = base.re.publicSecKey(withKey: publicKey) else { return nil }
+        return decryptData(base, withKeyRef: secKey)
+    }
+        
+    private func publicSecKey(withKey key: String) -> SecKey? {
+        var key = key
+        if let start = key.range(of: "-----BEGIN PUBLIC KEY-----"),
+           let end = key.range(of: "-----END PUBLIC KEY-----") {
+            key = String(key[start.upperBound..<end.lowerBound])
+        }
+        key.removeAll { ["\r", "\n", "\t", " "].contains($0) }
+        guard let keyData = Data(base64Encoded: key, options: .ignoreUnknownCharacters),
+              let data = keyData.re.strippedHeaderPublicKey
+        else { return nil }
+
+        let options: [CFString: Any] = [
+            kSecAttrKeyType: kSecAttrKeyTypeRSA,
+            kSecAttrKeyClass: kSecAttrKeyClassPublic
+        ]
+        
+        return SecKeyCreateWithData(data as CFData, options as CFDictionary, nil)
+    }
+    
+    private func privateSecKey(withKey key: String) -> SecKey? {
+        var key = key
+        if let start = key.range(of: "-----BEGIN RSA PRIVATE KEY-----"),
+           let end = key.range(of: "-----END RSA PRIVATE KEY-----") {
+            key = String(key[start.upperBound..<end.lowerBound])
+        } else if let start = key.range(of: "-----BEGIN PRIVATE KEY-----"),
+                  let end = key.range(of: "-----END PRIVATE KEY-----") {
+            key = String(key[start.upperBound..<end.lowerBound])
+        }
+        key.removeAll { ["\r", "\n", "\t", " "].contains($0) }
+        guard let keyData = Data(base64Encoded: key, options: .ignoreUnknownCharacters) else { return nil }
+
+        let options: [CFString: Any] = [
+            kSecAttrKeyType: kSecAttrKeyTypeRSA,
+            kSecAttrKeyClass: kSecAttrKeyClassPrivate
+        ]
+        return SecKeyCreateWithData(keyData as CFData, options as CFDictionary, nil)
+    }
+    
+    private var strippedHeaderPublicKey: Data? {
+        // Skip ASN.1 public key header
+        guard !base.isEmpty else { return nil }
+        
+        let keyBytes = [UInt8](base)
+        var index = 0
+        
+        guard keyBytes[index] == 0x30 else { return nil }
+        index += 1
+        
+        if keyBytes[index] > 0x80 {
+            index += Int(keyBytes[index]) - 0x80 + 1
+        } else {
+            index += 1
+        }
+        
+        let seqiod: [UInt8] = [0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00]
+        for (i, byte) in seqiod.enumerated() {
+            if keyBytes[index + i] != byte {
+                return nil
+            }
+        }
+        index += 15
+        
+        guard keyBytes[index] == 0x03 else { return nil }
+        index += 1
+        
+        if keyBytes[index] > 0x80 {
+            index += Int(keyBytes[index]) - 0x80 + 1
+        } else {
+            index += 1
+        }
+        
+        guard keyBytes[index] == 0x00 else { return nil }
+        index += 1
+        
+        let strippedKeyBytes = Array(keyBytes[index...])
+        return Data(strippedKeyBytes)
+    }
+    
+    private func encryptData(_ data: Data, withKeyRef keyRef: SecKey, requireSigning: Bool) -> Data? {
+        var result = Data()
+        var isSuccess = true
+        data.withUnsafeBytes { (buffer: UnsafeRawBufferPointer) in
+            guard let ptr = buffer.bindMemory(to: UInt8.self).baseAddress else { return }
+            let srcLength = data.count
+            var blockSize = SecKeyGetBlockSize(keyRef) * MemoryLayout<UInt8>.size
+            let output = UnsafeMutablePointer<UInt8>.allocate(capacity: blockSize)
+            let srcBlockSize = blockSize - 11
+            var index = 0
+            while index < srcLength {
+                var dataLength = srcLength - index
+                if dataLength > srcBlockSize {
+                    dataLength = srcBlockSize
+                }
+                var status: OSStatus
+                if requireSigning {
+                    status = SecKeyRawSign(keyRef, .PKCS1, ptr.advanced(by: index), dataLength, output, &blockSize)
+                } else {
+                    status = SecKeyEncrypt(keyRef, .PKCS1, ptr.advanced(by: index), dataLength, output, &blockSize)
+                }
+                if status == errSecSuccess {
+                    result.append(output, count: blockSize)
+                } else {
+                    isSuccess = false
+                    break
+                }
+                index += srcBlockSize
+            }
+            output.deallocate()
+        }
+        return isSuccess ? result : nil
+    }
+    
+    private func decryptData(_ data: Data, withKeyRef keyRef: SecKey) -> Data? {
+        var result = Data()
+        var isSuccess = true
+        data.withUnsafeBytes { (buffer: UnsafeRawBufferPointer) in
+            guard let ptr = buffer.bindMemory(to: UInt8.self).baseAddress else { return }
+            let srcLength = data.count
+            var blockSize = SecKeyGetBlockSize(keyRef) * MemoryLayout<UInt8>.size
+            let output = UnsafeMutablePointer<UInt8>.allocate(capacity: blockSize)
+            
+            let srcBlockSize = blockSize
+            var index = 0
+            while index < srcLength {
+                var dataLength = srcLength - index
+                if dataLength > srcBlockSize {
+                    dataLength = srcBlockSize
+                }
+                if SecKeyDecrypt(keyRef, [], ptr.advanced(by: index), dataLength, output, &blockSize) == errSecSuccess {
+                    var idxFirstZero = -1
+                    var idxNextZero = blockSize
+                    for i in 0..<blockSize {
+                        if output[i] == 0 {
+                            if idxFirstZero < 0 {
+                                idxFirstZero = i
+                            } else {
+                                idxNextZero = i
+                                break
+                            }
+                        }
+                    }
+                    result.append(&output[idxFirstZero + 1], count: idxNextZero - idxFirstZero - 1)
+                } else {
+                    isSuccess = false
+                    break
+                }
+                
+                index += srcBlockSize
+            }
+            output.deallocate()
+        }
+        return isSuccess ? result : nil
+    }
+
 }
 #endif
 

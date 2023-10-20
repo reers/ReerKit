@@ -863,4 +863,167 @@ final class StringExtensionsTests: XCTestCase {
         /// AES 256 with iv
         XCTAssertEqual("123".re.aesEncrypt(withKey: "abcdefghijklmnopabcdefghijklmnop", iv: "0123456789abcdef")!.re.aesDecrypt(withKey: "abcdefghijklmnopabcdefghijklmnop", iv: "0123456789abcdef"), "123")
     }
+    
+    func testRSA() {
+        // 512 bit
+        do {
+            let publicKey = """
+            -----BEGIN PUBLIC KEY-----
+            MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAOp23au8FSO6GoU6WL7XJOKX6FzME5VR
+            5GZfy9cdDxaixJTiYE+yqPVPuvuT7np9/uVAPNS5fhMcQ+irU+44SVECAwEAAQ==
+            -----END PUBLIC KEY-----
+            """
+            let privateKey = """
+            -----BEGIN RSA PRIVATE KEY-----
+            MIIBOwIBAAJBAOp23au8FSO6GoU6WL7XJOKX6FzME5VR5GZfy9cdDxaixJTiYE+y
+            qPVPuvuT7np9/uVAPNS5fhMcQ+irU+44SVECAwEAAQJAJ5bukyLtBt1TwQ87EO5P
+            AhvYVmL3I41yXX7rcmUruQxsHGF+BiqQRs9wC+YAFnPo6Mg6VTr+Bom56ZJb+JXN
+            KQIhAPQ68HoPCFjBLF+8B2Ixxa+khp2cVn06V3oorRj4si9vAiEA9cNx3e6qQbx+
+            /kPlqQGDiGCrfAXguvJoJkFxubYMsz8CIQClKba21LOwUfLQSzgzD7XAsmLW84MJ
+            7Qp7ckadPJJDwQIgQRazOJD2HJTcmWDIGVuiR2M654zy+PAsbz1T7lhtwqcCIQCf
+            /gVQunFsqciQXZFrC3STSjn+tpcR5BqSjL5oxHtVgA==
+            -----END RSA PRIVATE KEY-----
+            """
+            let original = String.re.random(ofLength: Int.random(in: 1...100))
+            let encrypted1 = original.re.rsaEncrypt(withPublicKey: publicKey)
+            let ret1 = encrypted1!.re.rsaDecrypt(withPrivateKey: privateKey)
+            XCTAssertEqual(original, ret1)
+            
+            let encrypted2 = original.re.rsaEncrypt(withPrivateKey: privateKey)
+            let ret2 = encrypted2!.re.rsaDecrypt(withPublicKey: publicKey)
+            XCTAssertEqual(original, ret2)
+        }
+        // 2048 bit
+        do {
+            let publicKey = """
+            -----BEGIN PUBLIC KEY-----
+            MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm0bdWFyPZiY/zqV8sYB+
+            7j4tYzacgKs2pI10s0gw730dxYuqIUzLvobWT9KzbYcSwuodw8wNHrUazakJ7Va6
+            J/FSBgrUldpnnoW2CjUwrqrz5vaThKeHhIwKvQBTcik4kIXQxYtfO+jkSzo+ix/0
+            KxZLGV282awg7U0Ny0H7lnCqTBQ0vkf3k9UkEruyTq7FdXwMH9o7sfDNJYWzfugv
+            MQIEVUxxQJSg0R35fxtZKNrp57u1ALx9VS6MsdudL73cQ7vK/U+6XfiBOfeoZYv7
+            jFYX9kjeRX0AERv6IYR7fynTpYj6ybuTODTRH1ye967Ga5YPZX7mV8VyxdX7ulAH
+            0QIDAQAB
+            -----END PUBLIC KEY-----
+            """
+            let privateKey = """
+            -----BEGIN RSA PRIVATE KEY-----
+            MIIEogIBAAKCAQEAm0bdWFyPZiY/zqV8sYB+7j4tYzacgKs2pI10s0gw730dxYuq
+            IUzLvobWT9KzbYcSwuodw8wNHrUazakJ7Va6J/FSBgrUldpnnoW2CjUwrqrz5vaT
+            hKeHhIwKvQBTcik4kIXQxYtfO+jkSzo+ix/0KxZLGV282awg7U0Ny0H7lnCqTBQ0
+            vkf3k9UkEruyTq7FdXwMH9o7sfDNJYWzfugvMQIEVUxxQJSg0R35fxtZKNrp57u1
+            ALx9VS6MsdudL73cQ7vK/U+6XfiBOfeoZYv7jFYX9kjeRX0AERv6IYR7fynTpYj6
+            ybuTODTRH1ye967Ga5YPZX7mV8VyxdX7ulAH0QIDAQABAoIBADP33bDrGZtIheZ1
+            gGwv40t9R9eCuZJeuyULqtkt+iLNLx+khMYsW6ximGuSyzaHFIJjtJ6JNoLmfhgC
+            0S277wXbQGaBTXDx7egiPDDiaG6tDIBqWij1oOd9r0JeT49PuHy2LI9Q/AijA3Ui
+            Aziw8xlQlsXgl4oKj+Kb/Vfft4I7ngFmfRjsxBtwlfX64k9z4uEf/guOFvQIe7Nf
+            zapKLbtDyGJXWfBFlwfIpDeL5fmpt2ecnJ2aSqs6Cgsa13qDto8soOeRKITCqzg7
+            ytBx8gCFKLaNbk6ytTufiwxt/53jjyLaHQOxonSvk3rKTIMYWsbzir6aeIjMa03n
+            LboN0lkCgYEAnweocIAs6IfkCjK/FSqa6vA2PjCfbW90AT27zopVwfck9x9NKvJz
+            aXdNQpUTSdMeu5Hwie4lFaXVzopxlLgiq9U2PFUrS5CqmSUnzZwvTwW+Ch2OO+6K
+            hR2eiMw+Gz3otmtjh7YRNa5k/w5U0x3/ex2Wt49pPL+Y6N32lhy//4sCgYEA+fVa
+            cMCd3ApStEHgXZ8ReACbCdxSDJVcYGPuY+pffhYDwgu5/XT0SiAvlFdkFScBqPBq
+            dOFB8atqs67co6JPPh+h9uc8r1h7uodvt4lG+7joSsZJXXQjGqKTMLh+JCwFpfDb
+            2fNZ/pl/bRrWRWczpimsITZn7rKQQfujaQ5KQZMCgYAAiAsFDTiZMlMNwauny3On
+            E1RrEsiFmhi+JFGrWAT/V+8UsFMWsKa4FID6lvrwhTcWE1/FZjlTgDFdtlK414Cu
+            KFE9FF/Hqd0YE+q1Ii96SR+gcwbVpm9qEHZGKMCQYL2VVniHrJEUJ9gIjii0Z+ZB
+            qBCn3l/QpydAp/U5/TCbDwKBgFCnnd5CGO32msc1dotfF4jsURq2b/dFfsBPno25
+            A8Uwn1fO5t3lDiqZBiFMrauxoXR81y0NvnSXxl9ibimS5xT5qg58gPVnjM0chKzp
+            a/EvsizmnKe+INGoYexXq8RKPCxWcup5/rELoLV48mkEqwLT8Ynp/1FjZu8Tnp/4
+            j3dnAoGAYXZ3vZPMC4Ky1rTnbkxHaW2NFfeEI5qYHyrsFbtAbTADWsG+c9olbiNE
+            AeG3kQ5Ujw/eRQnlx6nsk540daRv96keDd1uYI/TrouMiOlLYWGoRCQa5vWG36bR
+            XXo/5+87g2ye/govr7AuKODitG+Brq6d5SH5n/OMfz0rzVNuSIA=
+            -----END RSA PRIVATE KEY-----
+            """
+            let original = String.re.random(ofLength: Int.random(in: 1...100))
+            let encrypted1 = original.re.rsaEncrypt(withPublicKey: publicKey)
+            let ret1 = encrypted1!.re.rsaDecrypt(withPrivateKey: privateKey)
+            XCTAssertEqual(original, ret1)
+            
+            let encrypted2 = original.re.rsaEncrypt(withPrivateKey: privateKey)
+            let ret2 = encrypted2!.re.rsaDecrypt(withPublicKey: publicKey)
+            XCTAssertEqual(original, ret2)
+        }
+        
+        // 4096 bit
+        do {
+            let publicKey = """
+            -----BEGIN PUBLIC KEY-----
+            MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAyIGqMNKBhWZ+8QsH0Cvf
+            R2WhN4l07yFj1VTYYy+mm1tPJ9Nt0UK31TWRdNlMDdkRiD/bBpOtwS7eQmyLdd/G
+            Rj7VM7YwgOSCqhlNBqT49zCjrY5rq6ikVTKEuuwpD6z5LURqBduNwynkauf7eJKC
+            Wy4BL45agFqJEDC/cQIoTi3G+03PWo+ig2zF2fpLt/9mm/vx06hAka2zOSJmfcJr
+            l8RYj5NCaTztur1/cRNYNwrStdam0T1i0IE7ZF9Zegsbzs58kk18kOabGA3yAOox
+            5QoYP2qt/JORfi6fZ3PsQ+ORJqWanF8ruvatwgrKSfZ0rEpDmN7R9nY+vPLKlP8P
+            VF8HVkNjTqSdBBVweYUmD245WRVmV7yI2FwDEbsL+Nt/8Z1gwGxgUSsFYDolycch
+            NdE65MGpJpClxL+XA+xhspTSaJ39ajW409IPoL4C3dIpFamb1+aYCRLtnQUvZIZg
+            DmHWRffUG11g3RwoGPqnBxE+JlsdI0Cwiq7DuyX6x+00M5uh2UoANzG7K25Mlq+9
+            arazr0uu/szTnXvIUH7IffIvPMUBuzVUeTAt8sjoZ7JXJ7pzC5RGb4p54WQNCJqH
+            ++Waie/lQ/TcOq1Kl/2/qyN91vMvTdfuJBwex6d5pze1ez64nNclkmOUSLWfYBdl
+            1VaeURrWoJPkSYQvb52Qf1MCAwEAAQ==
+            -----END PUBLIC KEY-----
+            """
+            let privateKey = """
+            -----BEGIN RSA PRIVATE KEY-----
+            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
+            -----END RSA PRIVATE KEY-----
+            """
+            let original = String.re.random(ofLength: Int.random(in: 1...100))
+            let encrypted1 = original.re.rsaEncrypt(withPublicKey: publicKey)
+            let ret1 = encrypted1!.re.rsaDecrypt(withPrivateKey: privateKey)
+            XCTAssertEqual(original, ret1)
+            
+            let encrypted2 = original.re.rsaEncrypt(withPrivateKey: privateKey)
+            let ret2 = encrypted2!.re.rsaDecrypt(withPublicKey: publicKey)
+            XCTAssertEqual(original, ret2)
+        }
+    }
 }

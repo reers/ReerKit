@@ -455,20 +455,17 @@ public extension ReerForEquatable where Base == Data {
                 if dataLength > srcBlockSize {
                     dataLength = srcBlockSize
                 }
+                var status: OSStatus
                 if requireSigning {
-                    if SecKeyRawSign(keyRef, .PKCS1, ptr.advanced(by: index), dataLength, output, &blockSize) == errSecSuccess {
-                        result.append(output, count: blockSize)
-                    } else {
-                        isSuccess = false
-                        break
-                    }
+                    status = SecKeyRawSign(keyRef, .PKCS1, ptr.advanced(by: index), dataLength, output, &blockSize)
                 } else {
-                    if SecKeyEncrypt(keyRef, .PKCS1, ptr.advanced(by: index), dataLength, output, &blockSize) == errSecSuccess {
-                        result.append(output, count: blockSize)
-                    } else {
-                        isSuccess = false
-                        break
-                    }
+                    status = SecKeyEncrypt(keyRef, .PKCS1, ptr.advanced(by: index), dataLength, output, &blockSize)
+                }
+                if status == errSecSuccess {
+                    result.append(output, count: blockSize)
+                } else {
+                    isSuccess = false
+                    break
                 }
                 index += srcBlockSize
             }

@@ -351,6 +351,9 @@ public extension ReerForEquatable where Base == Data {
 // MARK: - Crypto
 
 public extension ReerForEquatable where Base == Data {
+    
+    // MARK: - AES
+    
     /// ReerKit: Returns an encrypted Data using AES.
     ///
     /// - Parameters:
@@ -439,101 +442,37 @@ public extension ReerForEquatable where Base == Data {
         }
     }
     
-    
-    private func encryptData(_ data: Data, withKeyRef keyRef: SecKey, requireSigning: Bool) -> Data? {
-        var result = Data()
-        var isSuccess = true
-        data.withUnsafeBytes { (buffer: UnsafeRawBufferPointer) in
-            guard let ptr = buffer.bindMemory(to: UInt8.self).baseAddress else { return }
-            let srcLength = data.count
-            var blockSize = SecKeyGetBlockSize(keyRef) * MemoryLayout<UInt8>.size
-            let output = UnsafeMutablePointer<UInt8>.allocate(capacity: blockSize)
-            let srcBlockSize = blockSize - 11
-            var index = 0
-            while index < srcLength {
-                var dataLength = srcLength - index
-                if dataLength > srcBlockSize {
-                    dataLength = srcBlockSize
-                }
-                var status: OSStatus
-                if requireSigning {
-                    status = SecKeyRawSign(keyRef, .PKCS1, ptr.advanced(by: index), dataLength, output, &blockSize)
-                } else {
-                    status = SecKeyEncrypt(keyRef, .PKCS1, ptr.advanced(by: index), dataLength, output, &blockSize)
-                }
-                if status == errSecSuccess {
-                    result.append(output, count: blockSize)
-                } else {
-                    isSuccess = false
-                    break
-                }
-                index += srcBlockSize
-            }
-            output.deallocate()
-        }
-        return isSuccess ? result : nil
-    }
-    
-    private func decryptData(_ data: Data, withKeyRef keyRef: SecKey) -> Data? {
-        var result = Data()
-        var isSuccess = true
-        data.withUnsafeBytes { (buffer: UnsafeRawBufferPointer) in
-            guard let ptr = buffer.bindMemory(to: UInt8.self).baseAddress else { return }
-            let srcLength = data.count
-            var blockSize = SecKeyGetBlockSize(keyRef) * MemoryLayout<UInt8>.size
-            let output = UnsafeMutablePointer<UInt8>.allocate(capacity: blockSize)
-            
-            let srcBlockSize = blockSize
-            var index = 0
-            while index < srcLength {
-                var dataLength = srcLength - index
-                if dataLength > srcBlockSize {
-                    dataLength = srcBlockSize
-                }
-                if SecKeyDecrypt(keyRef, [], ptr.advanced(by: index), dataLength, output, &blockSize) == errSecSuccess {
-                    var idxFirstZero = -1
-                    var idxNextZero = blockSize
-                    for i in 0..<blockSize {
-                        if output[i] == 0 {
-                            if idxFirstZero < 0 {
-                                idxFirstZero = i
-                            } else {
-                                idxNextZero = i
-                                break
-                            }
-                        }
-                    }
-                    result.append(&output[idxFirstZero + 1], count: idxNextZero - idxFirstZero - 1)
-                } else {
-                    isSuccess = false
-                    break
-                }
-                
-                index += srcBlockSize
-            }
-            output.deallocate()
-        }
-        return isSuccess ? result : nil
-    }
-
-    
+    // MARK: - RSA
+   
+    /// ReerKit: Returns an RSA encrypted data.
+    /// - Parameter publicKey: RSA public key.
+    /// - Returns: A `Data` encrypted, or nil if an error occurs.
     func rsaEncrypt(withPublicKey publicKey: String) -> Data? {
         guard let secKey = base.re.publicSecKey(withKey: publicKey) else { return nil }
         return encryptData(base, withKeyRef: secKey, requireSigning: false)
     }
     
+    /// ReerKit: Returns an RSA decrypted data.
+    /// - Parameter publicKey: RSA private key.
+    /// - Returns: A `Data` decrypted, or nil if an error occurs.
+    func rsaDecrypt(withPrivateKey privateKey: String) -> Data? {
+        guard let secKey = base.re.privateSecKey(withKey: privateKey) else { return nil }
+        return decryptData(base, withKeyRef: secKey)
+    }
+    
+    /// ReerKit: Returns an RSA encrypted data.
+    /// - Parameter privateKey: RSA private key.
+    /// - Returns: A `Data` encrypted, or nil if an error occurs.
     func rsaEncrypt(withPrivateKey privateKey: String) -> Data? {
         guard let secKey = base.re.privateSecKey(withKey: privateKey) else { return nil }
         return encryptData(base, withKeyRef: secKey, requireSigning: true)
     }
     
+    /// ReerKit: Returns an RSA decrypted data.
+    /// - Parameter publicKey: RSA public key.
+    /// - Returns: A `Data` decrypted, or nil if an error occurs.
     func rsaDecrypt(withPublicKey publicKey: String) -> Data? {
         guard let secKey = base.re.publicSecKey(withKey: publicKey) else { return nil }
-        return decryptData(base, withKeyRef: secKey)
-    }
-    
-    func rsaDecrypt(withPrivateKey privateKey: String) -> Data? {
-        guard let secKey = base.re.privateSecKey(withKey: privateKey) else { return nil }
         return decryptData(base, withKeyRef: secKey)
     }
         
@@ -614,6 +553,83 @@ public extension ReerForEquatable where Base == Data {
         let strippedKeyBytes = Array(keyBytes[index...])
         return Data(strippedKeyBytes)
     }
+    
+    private func encryptData(_ data: Data, withKeyRef keyRef: SecKey, requireSigning: Bool) -> Data? {
+        var result = Data()
+        var isSuccess = true
+        data.withUnsafeBytes { (buffer: UnsafeRawBufferPointer) in
+            guard let ptr = buffer.bindMemory(to: UInt8.self).baseAddress else { return }
+            let srcLength = data.count
+            var blockSize = SecKeyGetBlockSize(keyRef) * MemoryLayout<UInt8>.size
+            let output = UnsafeMutablePointer<UInt8>.allocate(capacity: blockSize)
+            let srcBlockSize = blockSize - 11
+            var index = 0
+            while index < srcLength {
+                var dataLength = srcLength - index
+                if dataLength > srcBlockSize {
+                    dataLength = srcBlockSize
+                }
+                var status: OSStatus
+                if requireSigning {
+                    status = SecKeyRawSign(keyRef, .PKCS1, ptr.advanced(by: index), dataLength, output, &blockSize)
+                } else {
+                    status = SecKeyEncrypt(keyRef, .PKCS1, ptr.advanced(by: index), dataLength, output, &blockSize)
+                }
+                if status == errSecSuccess {
+                    result.append(output, count: blockSize)
+                } else {
+                    isSuccess = false
+                    break
+                }
+                index += srcBlockSize
+            }
+            output.deallocate()
+        }
+        return isSuccess ? result : nil
+    }
+    
+    private func decryptData(_ data: Data, withKeyRef keyRef: SecKey) -> Data? {
+        var result = Data()
+        var isSuccess = true
+        data.withUnsafeBytes { (buffer: UnsafeRawBufferPointer) in
+            guard let ptr = buffer.bindMemory(to: UInt8.self).baseAddress else { return }
+            let srcLength = data.count
+            var blockSize = SecKeyGetBlockSize(keyRef) * MemoryLayout<UInt8>.size
+            let output = UnsafeMutablePointer<UInt8>.allocate(capacity: blockSize)
+            
+            let srcBlockSize = blockSize
+            var index = 0
+            while index < srcLength {
+                var dataLength = srcLength - index
+                if dataLength > srcBlockSize {
+                    dataLength = srcBlockSize
+                }
+                if SecKeyDecrypt(keyRef, [], ptr.advanced(by: index), dataLength, output, &blockSize) == errSecSuccess {
+                    var idxFirstZero = -1
+                    var idxNextZero = blockSize
+                    for i in 0..<blockSize {
+                        if output[i] == 0 {
+                            if idxFirstZero < 0 {
+                                idxFirstZero = i
+                            } else {
+                                idxNextZero = i
+                                break
+                            }
+                        }
+                    }
+                    result.append(&output[idxFirstZero + 1], count: idxNextZero - idxFirstZero - 1)
+                } else {
+                    isSuccess = false
+                    break
+                }
+                
+                index += srcBlockSize
+            }
+            output.deallocate()
+        }
+        return isSuccess ? result : nil
+    }
+
 }
 #endif
 

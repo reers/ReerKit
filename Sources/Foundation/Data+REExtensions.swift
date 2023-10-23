@@ -348,6 +348,17 @@ public extension ReerForEquatable where Base == Data {
     }
 }
 
+#if os(macOS)
+@_silgen_name("SecKeyRawSign")
+func SecKeyRawSign(_ key: SecKey, _ padding: SecPadding, _ dataToSign: UnsafePointer<UInt8>, _ dataToSignLen: Int, _ sig: UnsafeMutablePointer<UInt8>, _ sigLen: UnsafeMutablePointer<Int>) -> OSStatus
+
+@_silgen_name("SecKeyEncrypt")
+func SecKeyEncrypt(_ key: SecKey, _ padding: SecPadding, _ plainText: UnsafePointer<UInt8>, _ plainTextLen: Int, _ cipherText: UnsafeMutablePointer<UInt8>, _ cipherTextLen: UnsafeMutablePointer<Int>) -> OSStatus
+
+@_silgen_name("SecKeyDecrypt")
+func SecKeyDecrypt(_ key: SecKey, _ padding: SecPadding, _ cipherText: UnsafePointer<UInt8>, _ cipherTextLen: Int, _ plainText: UnsafeMutablePointer<UInt8>, _ plainTextLen: UnsafeMutablePointer<Int>) -> OSStatus
+#endif
+
 // MARK: - Crypto
 
 public extension ReerForEquatable where Base == Data {

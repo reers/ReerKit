@@ -60,6 +60,7 @@
 		D022BED729DD48E200245550 /* URLRequestExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D022BED629DD48E200245550 /* URLRequestExtensionsTests.swift */; };
 		D0397612286E111800C33E17 /* Optional+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0397611286E111800C33E17 /* Optional+REExtensions.swift */; };
 		D0397614286E12A900C33E17 /* OptionalExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0397613286E12A900C33E17 /* OptionalExtensionsTests.swift */; };
+		D03CC8ED2AE6816C00FCF78D /* DataExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0421AD22939033800452845 /* DataExtensionsTests.swift */; };
 		D0421ACD2938F4DD00452845 /* Calendar+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0421ACC2938F4DD00452845 /* Calendar+REExtensions.swift */; };
 		D0421ACF2938F5D500452845 /* CalendarExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0421ACE2938F5D500452845 /* CalendarExtensionsTests.swift */; };
 		D0421AD12938F6B500452845 /* Data+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0421AD02938F6B500452845 /* Data+REExtensions.swift */; };
@@ -1856,6 +1857,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D03CC8ED2AE6816C00FCF78D /* DataExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

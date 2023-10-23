@@ -439,215 +439,105 @@ public extension ReerForEquatable where Base == Data {
         }
     }
     
-    func encryptData(_ data: Data, withKeyRef keyRef: SecKey, isSign: Bool, error: inout Error?) -> Data? {
-        var final = Data()
-        data.withUnsafeBytes { (ptr: UnsafePointer<UInt8>) in
-            var length = 128
-            var output = UnsafeMutablePointer<UInt8>.allocate(capacity: length)
-            
-            
-            if SecKeyEncrypt(keyRef, .PKCS1, ptr, 3, output, &length) == errSecSuccess {
-                final.append(output, count: length)
-                return Data()
-            }
-            // 在这里使用 ptr，它是一个 UnsafePointer<UInt8>
-            // 可以访问数据的原始字节
-            // 注意：在这个闭包作用域结束后，ptr 将不再有效
-            return Data()
-        }
-        
-        return final
-        
-        
-        
-        guard let srcbuf = data.withUnsafeBytes({ $0.baseAddress?.assumingMemoryBound(to: UInt8.self) }) else {
-            return nil
-        }
-        let srclen = data.count
-        
-        let block_size = SecKeyGetBlockSize(keyRef) * MemoryLayout<UInt8>.size
-        let outbuf = UnsafeMutablePointer<UInt8>.allocate(capacity: block_size)
-        let src_block_size = block_size - 11
-        
-        var ret = Data()
-        var idx = 0
-        while idx < srclen {
-            var data_len = srclen - idx
-            if data_len > src_block_size {
-                data_len = src_block_size
-            }
-            
-            var outlen = block_size
-            var status: OSStatus = noErr
-            
-            if isSign {
-                status = SecKeyRawSign(keyRef,
-                                       .PKCS1,
-                                       srcbuf + idx,
-                                       data_len,
-                                       outbuf,
-                                       &outlen)
-            } else {
-                status = SecKeyEncrypt(keyRef,
-                                       .PKCS1,
-                                       srcbuf + idx,
-                                       data_len,
-                                       outbuf,
-                                       &outlen)
-            }
-            
-            if status != errSecSuccess {
-                error = NSError(domain: "BTDRSADecryptionErrorDomain", code: Int(status), userInfo: [NSLocalizedDescriptionKey: "SecKeyEncrypt"])
-                print("SecKeyEncrypt fail. Error Code: \(status)")
-                ret = Data()
-                break
-            } else {
-                ret.append(outbuf, count: outlen)
-            }
-            
-            idx += src_block_size
-        }
-        
-        outbuf.deallocate()
-        return ret
-    }
     
-
-    func decryptData(_ data: Data, withKeyRef keyRef: SecKey, error: inout Error?) -> Data? {
-        
-        
-//        data.withUnsafeBytes { (buffer: UnsafeRawBufferPointer) in
-//            let ptr = buffer.bindMemory(to: UInt8.self).baseAddress
-//            // 在这里使用 ptr，它是一个 UnsafePointer<UInt8>
-//            // 可以访问数据的原始字节
-//        }
-        
-        var final = Data()
-        data.withUnsafeBytes { (ptr: UnsafePointer<UInt8>) in
-            var length = 128
-            var output = UnsafeMutablePointer<UInt8>.allocate(capacity: length)
-            
-            
-            if SecKeyDecrypt(keyRef, [], ptr, length, output, &length) == errSecSuccess {
-                final.append(&output[124], count: 3)
-                return Data()
-            }
-            // 在这里使用 ptr，它是一个 UnsafePointer<UInt8>
-            // 可以访问数据的原始字节
-            // 注意：在这个闭包作用域结束后，ptr 将不再有效
-            return Data()
-        }
-        
-        return final
-        
-        
-        guard let srcbuf = data.withUnsafeBytes({ $0.baseAddress?.assumingMemoryBound(to: UInt8.self) }) else {
-            return nil
-        }
-        let srclen = data.count
-        
-        let block_size = SecKeyGetBlockSize(keyRef) * MemoryLayout<UInt8>.size
-        let outbuf = UnsafeMutablePointer<UInt8>.allocate(capacity: block_size)
-        let src_block_size = block_size
-        
-        let ret = NSMutableData()
-        var idx = 0
-        while idx < srclen {
-            let data_len = srclen - idx
-            var outlen = block_size
-            var status: OSStatus = noErr
-            
-            status = SecKeyDecrypt(keyRef,
-                                   [],
-                                   srcbuf + idx,
-                                   data_len,
-                                   outbuf,
-                                   &outlen)
-            
-            if status != errSecSuccess {
-                print("SecKeyEncrypt fail. Error Code: \(status)")
-                error = NSError(domain: "BTDRSADecryptionErrorDomain", code: Int(status), userInfo: [NSLocalizedDescriptionKey: "SecKeyDecrypt"])
-                ret.length = 0
-                break
-            } else {
-                var idxFirstZero = -1
-                var idxNextZero = outlen
-                for i in 0..<outlen {
-                    if outbuf[i] == 0 {
-                        if idxFirstZero < 0 {
-                            idxFirstZero = i
-                        } else {
-                            idxNextZero = i
-                            break
-                        }
+    private func encryptData(_ data: Data, withKeyRef keyRef: SecKey, requireSigning: Bool) -> Data? {
+        var result = Data()
+        var isSuccess = true
+        data.withUnsafeBytes { (buffer: UnsafeRawBufferPointer) in
+            guard let ptr = buffer.bindMemory(to: UInt8.self).baseAddress else { return }
+            let srcLength = data.count
+            var blockSize = SecKeyGetBlockSize(keyRef) * MemoryLayout<UInt8>.size
+            let output = UnsafeMutablePointer<UInt8>.allocate(capacity: blockSize)
+            let srcBlockSize = blockSize - 11
+            var index = 0
+            while index < srcLength {
+                var dataLength = srcLength - index
+                if dataLength > srcBlockSize {
+                    dataLength = srcBlockSize
+                }
+                if requireSigning {
+                    if SecKeyRawSign(keyRef, .PKCS1, ptr.advanced(by: index), dataLength, output, &blockSize) == errSecSuccess {
+                        result.append(output, count: blockSize)
+                    } else {
+                        isSuccess = false
+                        break
+                    }
+                } else {
+                    if SecKeyEncrypt(keyRef, .PKCS1, ptr.advanced(by: index), dataLength, output, &blockSize) == errSecSuccess {
+                        result.append(output, count: blockSize)
+                    } else {
+                        isSuccess = false
+                        break
                     }
                 }
-                
-                ret.append(outbuf + idxFirstZero + 1, length: idxNextZero - idxFirstZero - 1)
+                index += srcBlockSize
             }
-            
-            idx += src_block_size
+            output.deallocate()
         }
-        
-        outbuf.deallocate()
-        return ret as Data
+        return isSuccess ? result : nil
+    }
+    
+    private func decryptData(_ data: Data, withKeyRef keyRef: SecKey) -> Data? {
+        var result = Data()
+        var isSuccess = true
+        data.withUnsafeBytes { (buffer: UnsafeRawBufferPointer) in
+            guard let ptr = buffer.bindMemory(to: UInt8.self).baseAddress else { return }
+            let srcLength = data.count
+            var blockSize = SecKeyGetBlockSize(keyRef) * MemoryLayout<UInt8>.size
+            let output = UnsafeMutablePointer<UInt8>.allocate(capacity: blockSize)
+            
+            let srcBlockSize = blockSize
+            var index = 0
+            while index < srcLength {
+                var dataLength = srcLength - index
+                if dataLength > srcBlockSize {
+                    dataLength = srcBlockSize
+                }
+                if SecKeyDecrypt(keyRef, [], ptr.advanced(by: index), dataLength, output, &blockSize) == errSecSuccess {
+                    var idxFirstZero = -1
+                    var idxNextZero = blockSize
+                    for i in 0..<blockSize {
+                        if output[i] == 0 {
+                            if idxFirstZero < 0 {
+                                idxFirstZero = i
+                            } else {
+                                idxNextZero = i
+                                break
+                            }
+                        }
+                    }
+                    result.append(&output[idxFirstZero + 1], count: idxNextZero - idxFirstZero - 1)
+                } else {
+                    isSuccess = false
+                    break
+                }
+                
+                index += srcBlockSize
+            }
+            output.deallocate()
+        }
+        return isSuccess ? result : nil
     }
 
     
     func rsaEncrypt(withPublicKey publicKey: String) -> Data? {
         guard let secKey = base.re.publicSecKey(withKey: publicKey) else { return nil }
-//        guard let encryptedData = SecKeyCreateEncryptedData(
-//            secKey,
-//            .rsaEncryptionPKCS1,
-//            base as CFData,
-//            nil
-//        ) else {
-//            return nil
-//        }
-        var error: Error?
-        return encryptData(base, withKeyRef: secKey, isSign: false, error: &error)
-//        return encryptedData as Data
+        return encryptData(base, withKeyRef: secKey, requireSigning: false)
     }
     
     func rsaEncrypt(withPrivateKey privateKey: String) -> Data? {
         guard let secKey = base.re.privateSecKey(withKey: privateKey) else { return nil }
-        guard let encryptedData = SecKeyCreateSignature(
-            secKey,
-            .rsaEncryptionPKCS1,
-            base as CFData,
-            nil
-        ) else {
-            return nil
-        }
-        return encryptedData as Data
+        return encryptData(base, withKeyRef: secKey, requireSigning: true)
     }
     
     func rsaDecrypt(withPublicKey publicKey: String) -> Data? {
         guard let secKey = base.re.publicSecKey(withKey: publicKey) else { return nil }
-        guard let encryptedData = SecKeyCreateDecryptedData(
-            secKey,
-            .rsaEncryptionPKCS1,
-            base as CFData,
-            nil
-        ) else {
-            return nil
-        }
-        return encryptedData as Data
+        return decryptData(base, withKeyRef: secKey)
     }
     
     func rsaDecrypt(withPrivateKey privateKey: String) -> Data? {
         guard let secKey = base.re.privateSecKey(withKey: privateKey) else { return nil }
-//        guard let encryptedData = SecKeyCreateDecryptedData(
-//            secKey,
-//            .rsaEncryptionPKCS1,
-//            base as CFData,
-//            nil
-//        ) else {
-//            return nil
-//        }
-//        return encryptedData as Data
-        var error: Error?
-        return decryptData(base, withKeyRef: secKey, error: &error)
+        return decryptData(base, withKeyRef: secKey)
     }
         
     private func publicSecKey(withKey key: String) -> SecKey? {
@@ -660,62 +550,13 @@ public extension ReerForEquatable where Base == Data {
         guard let keyData = Data(base64Encoded: key, options: .ignoreUnknownCharacters),
               let data = keyData.re.strippedHeaderPublicKey
         else { return nil }
-        #if os(macOS)
-        //
-        #endif
 
         let options: [CFString: Any] = [
             kSecAttrKeyType: kSecAttrKeyTypeRSA,
             kSecAttrKeyClass: kSecAttrKeyClassPublic
         ]
         
-        guard let ret = SecKeyCreateWithData(data as CFData, options as CFDictionary, nil) else {
-            return nil
-        }
-        
-        return ret
-        
-        let tag = "RSAUtil_PubKey"
-        let dTag = Data(tag.utf8)
-
-        // Delete any old lingering key with the same tag
-        var publicKey: [String: Any] = [
-            kSecClass as String: kSecClassKey,
-            kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
-            kSecAttrApplicationTag as String: dTag
-        ]
-        SecItemDelete(publicKey as CFDictionary)
-
-        // Add persistent version of the key to system keychain
-        publicKey[kSecValueData as String] = data
-        publicKey[kSecAttrKeyClass as String] = kSecAttrKeyClassPublic
-        publicKey[kSecReturnPersistentRef as String] = true
-
-        var persistKey: CFTypeRef?
-        let status = SecItemAdd(publicKey as CFDictionary, &persistKey)
-//        if let persistKey = persistKey {
-//            CFRelease(persistKey)
-//        }
-        if status != errSecSuccess && status != errSecDuplicateItem {
-            let error = NSError(domain: "BTDRSADecryptionErrorDomain", code: Int(status), userInfo: [NSLocalizedDescriptionKey: "SecItemAdd"])
-            // handle error
-            return nil
-        }
-
-        publicKey.removeValue(forKey: kSecValueData as String)
-        publicKey.removeValue(forKey: kSecReturnPersistentRef as String)
-        publicKey[kSecReturnRef as String] = true
-        publicKey[kSecAttrKeyType as String] = kSecAttrKeyTypeRSA
-
-        // Now fetch the SecKeyRef version of the key
-        var keyRef: CFTypeRef?
-        let status2 = SecItemCopyMatching(publicKey as CFDictionary, &keyRef)
-        if status2 != errSecSuccess {
-            let error = NSError(domain: "BTDRSADecryptionErrorDomain", code: Int(status), userInfo: [NSLocalizedDescriptionKey: "SecItemCopyMatching"])
-            // handle error
-            return nil
-        }
-        return keyRef as! SecKey
+        return SecKeyCreateWithData(data as CFData, options as CFDictionary, nil)
     }
     
     private func privateSecKey(withKey key: String) -> SecKey? {
@@ -728,65 +569,13 @@ public extension ReerForEquatable where Base == Data {
             key = String(key[start.upperBound..<end.lowerBound])
         }
         key.removeAll { ["\r", "\n", "\t", " "].contains($0) }
-        guard let keyData = Data(base64Encoded: key, options: .ignoreUnknownCharacters)
-        else { return nil }
-        #if os(macOS)
-        //
-        #endif
+        guard let keyData = Data(base64Encoded: key, options: .ignoreUnknownCharacters) else { return nil }
 
-//        let options: [CFString: Any] = [
-//            kSecAttrKeyType: kSecAttrKeyTypeRSA,
-//            kSecAttrKeyClass: kSecAttrKeyClassPrivate,
-//            kSecAttrKeySizeInBits: 2048
-//        ]
-//        
-//        guard let ret = SecKeyCreateWithData(keyData as CFData, options as CFDictionary, nil) else {
-//            return nil
-//        }
-//        
-//        return ret
-        
-        let tag = "RSAUtil_PubKey"
-        let dTag = Data(tag.utf8)
-
-        // Delete any old lingering key with the same tag
-        var publicKey: [String: Any] = [
-            kSecClass as String: kSecClassKey,
-            kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
-            kSecAttrApplicationTag as String: dTag
+        let options: [CFString: Any] = [
+            kSecAttrKeyType: kSecAttrKeyTypeRSA,
+            kSecAttrKeyClass: kSecAttrKeyClassPrivate
         ]
-        SecItemDelete(publicKey as CFDictionary)
-
-        // Add persistent version of the key to system keychain
-        publicKey[kSecValueData as String] = keyData
-        publicKey[kSecAttrKeyClass as String] = kSecAttrKeyClassPrivate
-        publicKey[kSecReturnPersistentRef as String] = true
-
-        var persistKey: CFTypeRef?
-        let status = SecItemAdd(publicKey as CFDictionary, &persistKey)
-//        if let persistKey = persistKey {
-//            CFRelease(persistKey)
-//        }
-        if status != errSecSuccess && status != errSecDuplicateItem {
-            let error = NSError(domain: "BTDRSADecryptionErrorDomain", code: Int(status), userInfo: [NSLocalizedDescriptionKey: "SecItemAdd"])
-            // handle error
-            return nil
-        }
-
-        publicKey.removeValue(forKey: kSecValueData as String)
-        publicKey.removeValue(forKey: kSecReturnPersistentRef as String)
-        publicKey[kSecReturnRef as String] = true
-        publicKey[kSecAttrKeyType as String] = kSecAttrKeyTypeRSA
-
-        // Now fetch the SecKeyRef version of the key
-        var keyRef: CFTypeRef?
-        let status2 = SecItemCopyMatching(publicKey as CFDictionary, &keyRef)
-        if status2 != errSecSuccess {
-            let error = NSError(domain: "BTDRSADecryptionErrorDomain", code: Int(status), userInfo: [NSLocalizedDescriptionKey: "SecItemCopyMatching"])
-            // handle error
-            return nil
-        }
-        return keyRef as! SecKey
+        return SecKeyCreateWithData(keyData as CFData, options as CFDictionary, nil)
     }
     
     private var strippedHeaderPublicKey: Data? {

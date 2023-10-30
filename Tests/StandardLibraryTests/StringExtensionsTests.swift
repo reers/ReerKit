@@ -885,12 +885,12 @@ final class StringExtensionsTests: XCTestCase {
             -----END RSA PRIVATE KEY-----
             """
             let original = String.re.random(ofLength: Int.random(in: 1...100))
-            let encrypted1 = original.re.rsaEncrypt(withPublicKey: publicKey)
-            let ret1 = encrypted1!.re.rsaDecrypt(withPrivateKey: privateKey)
+            let encrypted1 = original.re.rsaEncrypt(with: publicKey)
+            let ret1 = encrypted1!.re.rsaDecrypt(with: privateKey)
             XCTAssertEqual(original, ret1)
             
-            let encrypted2 = original.re.rsaEncrypt(withPrivateKey: privateKey)
-            let ret2 = encrypted2!.re.rsaDecrypt(withPublicKey: publicKey)
+            let encrypted2 = original.re.rsaSigned(with: privateKey)
+            let ret2 = encrypted2!.re.rsaVerified(with: publicKey)
             XCTAssertEqual(original, ret2)
         }
         // 2048 bit
@@ -936,12 +936,12 @@ final class StringExtensionsTests: XCTestCase {
             -----END RSA PRIVATE KEY-----
             """
             let original = String.re.random(ofLength: Int.random(in: 1...100))
-            let encrypted1 = original.re.rsaEncrypt(withPublicKey: publicKey)
-            let ret1 = encrypted1!.re.rsaDecrypt(withPrivateKey: privateKey)
+            let encrypted1 = original.re.rsaEncrypt(with: publicKey)
+            let ret1 = encrypted1!.re.rsaDecrypt(with: privateKey)
             XCTAssertEqual(original, ret1)
             
-            let encrypted2 = original.re.rsaEncrypt(withPrivateKey: privateKey)
-            let ret2 = encrypted2!.re.rsaDecrypt(withPublicKey: publicKey)
+            let encrypted2 = original.re.rsaSigned(with: privateKey)
+            let ret2 = encrypted2!.re.rsaVerified(with: publicKey)
             XCTAssertEqual(original, ret2)
         }
         
@@ -1017,12 +1017,64 @@ final class StringExtensionsTests: XCTestCase {
             -----END RSA PRIVATE KEY-----
             """
             let original = String.re.random(ofLength: Int.random(in: 1...100))
-            let encrypted1 = original.re.rsaEncrypt(withPublicKey: publicKey)
-            let ret1 = encrypted1!.re.rsaDecrypt(withPrivateKey: privateKey)
+            let encrypted1 = original.re.rsaEncrypt(with: publicKey)
+            let ret1 = encrypted1!.re.rsaDecrypt(with: privateKey)
             XCTAssertEqual(original, ret1)
             
-            let encrypted2 = original.re.rsaEncrypt(withPrivateKey: privateKey)
-            let ret2 = encrypted2!.re.rsaDecrypt(withPublicKey: publicKey)
+            let encrypted2 = original.re.rsaSigned(with: privateKey)
+            let ret2 = encrypted2!.re.rsaVerified(with: publicKey)
+            XCTAssertEqual(original, ret2)
+        }
+        
+        do {
+            let publicKey = """
+            -----BEGIN PUBLIC KEY-----
+            MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2m+iao4xD1QjU1nro17E
+            HbYQNmOE3DMniv7uXsz5SLIYOhnMAeV65JQ1J/QD0iUXxbuCnyahu/EYRgmSvw3K
+            f1dlNESVVSCsH1CkJtd+Q3wWxSEtcy+PT050mcNqPqLPmZp1n0YY3xMIWabILQTZ
+            niby13kW9CmdtYS9+DmyunvR/QpQIk5OmQYx8feZ1KDuRE/UcW3YtcfTIPbLypFl
+            vQska9B+DId0KGDCfUdfUmKqhlcryBgoyeSfVVK4FfeqedCgCVl3hOaaw0+WwwFU
+            mqIiPO/1Kg/cAsfkvOiLFY7SxjAHslNEu7932p07cBefIAre/6r2PdnPzv/VJJNi
+            PwIDAQAB
+            -----END PUBLIC KEY-----
+            """
+            let privateKey = """
+            -----BEGIN PRIVATE KEY-----
+            MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDab6JqjjEPVCNT
+            WeujXsQdthA2Y4TcMyeK/u5ezPlIshg6GcwB5XrklDUn9APSJRfFu4KfJqG78RhG
+            CZK/Dcp/V2U0RJVVIKwfUKQm135DfBbFIS1zL49PTnSZw2o+os+ZmnWfRhjfEwhZ
+            psgtBNmeJvLXeRb0KZ21hL34ObK6e9H9ClAiTk6ZBjHx95nUoO5ET9Rxbdi1x9Mg
+            9svKkWW9CyRr0H4Mh3QoYMJ9R19SYqqGVyvIGCjJ5J9VUrgV96p50KAJWXeE5prD
+            T5bDAVSaoiI87/UqD9wCx+S86IsVjtLGMAeyU0S7v3fanTtwF58gCt7/qvY92c/O
+            /9Ukk2I/AgMBAAECggEAfXRwS9KuyqcAQvb6JzJeYNIYLaSqwe1/YI1aSohfBCmF
+            UJlQWiZ6lp2oifHT3/X92UsAkneVnGO0FUWaSrCZBNok/ggF3IaPVMzz+nr5wbib
+            O0z61ZUTMfFVdpqNgrvvj8DunTOdRUGhIhxwC6slcXfdMXQSgtkEAyTiFpbM190F
+            4w/TBtwPiQUCnPHkDbtaoAOPpKPpxeHvyOoPjtOvCaERBnjtM9X/DJMh+dXO18XL
+            pIUgN5Thdfd/SWuVBWqyXjp/XEdvd4mTtPPerrBBUkJkmRkR9aJB1o/N3nViHCqd
+            NPUO5cZ3omDaRJKy/j2BOg5W5n4rK1wUPKAIFF+AwQKBgQDxvDM4TkhJRM6YJhoo
+            YsLiW20ZDKN/9dsuulJNk0BRZl4NN/AlS5zoExddsufG2qRB+0XcrfbwdwN/2CnH
+            AFmL7WBknHBNO81AFtSBtehnbfuVDZu917neRz1MlkCsoVCJBgJ+xETUGKKtap5N
+            QvhjRMAUcD2bCyV/pADo/yxkCwKBgQDnU3bMzjU0k67X3XaZ38euduicUvleLbLt
+            x+paPrHH6RfhOxmBvxlSAo4DzDmO6HM+obJwljRrczFJtHnAYWm5SO/JOguiwbgn
+            z2o+qFY/J0sKk59x0kevUmjiYNo/up40NQkbtZi2xCLaZa2y6srm0QL2mYNTn+kl
+            8NtOYYdHHQKBgQDcTRWoxL7f9xMIWgEQuSC+RW/hmkEPBrJfnXIQPJgrFs2z4jy6
+            4HP4lB2BSOAtu2hisWpzuR8I+o133zoDn+/7s7NbPa6i1FMzixrTs0I/sF3M8v/y
+            PT2osufMekoqiUDp/04a1Sec2261+CqYYuYXIbqjZb7fI4NjFcW2kYaVDQKBgGUE
+            Oq3HIs7Z6xFTIbaiVWWngX66cTEiTa+ujHVqSWJeNNJjZ4kUNW9ttCyOY1g3xBPG
+            stCdlziQ7iYcjMpo/60s36GFGo2xgMTJu8Cu7DLZ6tgsjQU8aZdzKmApIUWRLgLo
+            YhjanVy6m+m5Wzf1djODdILRmNrMyxiJbIt25Yc1AoGBAMexoq6M1bUltc6v/LZ9
+            qgUhKgUOTiueWvL4JKdRQsvpecYdPolWtw2A+pHxjAsKD+PT2ps/afOVcvvSEoeu
+            EN0dU90buZCht0Gzf2fhdGtgJfE9WitXMrCkqYHmrwF6FXJCt9BWYwdcycofcwLB
+            jaJHumiFMlHeFuxrmDpXd9tu
+            -----END PRIVATE KEY-----
+            """
+            let original = String.re.random(ofLength: Int.random(in: 1...100))
+            let encrypted1 = original.re.rsaEncrypt(with: publicKey)
+            let ret1 = encrypted1!.re.rsaDecrypt(with: privateKey)
+            XCTAssertEqual(original, ret1)
+            
+            let encrypted2 = original.re.rsaSigned(with: privateKey)
+            let ret2 = encrypted2!.re.rsaVerified(with: publicKey)
             XCTAssertEqual(original, ret2)
         }
     }

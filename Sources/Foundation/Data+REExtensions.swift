@@ -458,111 +458,33 @@ public extension ReerForEquatable where Base == Data {
     /// ReerKit: Returns an RSA encrypted data.
     /// - Parameter publicKey: RSA public key.
     /// - Returns: A `Data` encrypted, or nil if an error occurs.
-    func rsaEncrypt(withPublicKey publicKey: String) -> Data? {
-        guard let secKey = base.re.publicSecKey(withKey: publicKey) else { return nil }
+    func rsaEncrypt(with publicKey: String) -> Data? {
+        guard let secKey = publicKey.publicSecKey else { return nil }
         return encryptData(base, withKeyRef: secKey, requireSigning: false)
     }
     
     /// ReerKit: Returns an RSA decrypted data.
     /// - Parameter publicKey: RSA private key.
     /// - Returns: A `Data` decrypted, or nil if an error occurs.
-    func rsaDecrypt(withPrivateKey privateKey: String) -> Data? {
-        guard let secKey = base.re.privateSecKey(withKey: privateKey) else { return nil }
+    func rsaDecrypt(with privateKey: String) -> Data? {
+        guard let secKey = privateKey.privateSecKey else { return nil }
         return decryptData(base, withKeyRef: secKey)
     }
     
-    /// ReerKit: Returns an RSA encrypted data.
+    /// ReerKit: Returns an RSA signed data.
     /// - Parameter privateKey: RSA private key.
-    /// - Returns: A `Data` encrypted, or nil if an error occurs.
-    func rsaEncrypt(withPrivateKey privateKey: String) -> Data? {
-        guard let secKey = base.re.privateSecKey(withKey: privateKey) else { return nil }
+    /// - Returns: A signature, or nil if an error occurs.
+    func rsaSigned(with privateKey: String) -> Data? {
+        guard let secKey = privateKey.privateSecKey else { return nil }
         return encryptData(base, withKeyRef: secKey, requireSigning: true)
     }
     
-    /// ReerKit: Returns an RSA decrypted data.
+    /// ReerKit: Returns an RSA verified data.
     /// - Parameter publicKey: RSA public key.
-    /// - Returns: A `Data` decrypted, or nil if an error occurs.
-    func rsaDecrypt(withPublicKey publicKey: String) -> Data? {
-        guard let secKey = base.re.publicSecKey(withKey: publicKey) else { return nil }
+    /// - Returns: A verified `Data`, or nil if an error occurs.
+    func rsaVerified(with publicKey: String) -> Data? {
+        guard let secKey = publicKey.publicSecKey else { return nil }
         return decryptData(base, withKeyRef: secKey)
-    }
-        
-    private func publicSecKey(withKey key: String) -> SecKey? {
-        var key = key
-        if let start = key.range(of: "-----BEGIN PUBLIC KEY-----"),
-           let end = key.range(of: "-----END PUBLIC KEY-----") {
-            key = String(key[start.upperBound..<end.lowerBound])
-        }
-        key.removeAll { ["\r", "\n", "\t", " "].contains($0) }
-        guard let keyData = Data(base64Encoded: key, options: .ignoreUnknownCharacters),
-              let data = keyData.re.strippedHeaderPublicKey
-        else { return nil }
-
-        let options: [CFString: Any] = [
-            kSecAttrKeyType: kSecAttrKeyTypeRSA,
-            kSecAttrKeyClass: kSecAttrKeyClassPublic
-        ]
-        
-        return SecKeyCreateWithData(data as CFData, options as CFDictionary, nil)
-    }
-    
-    private func privateSecKey(withKey key: String) -> SecKey? {
-        var key = key
-        if let start = key.range(of: "-----BEGIN RSA PRIVATE KEY-----"),
-           let end = key.range(of: "-----END RSA PRIVATE KEY-----") {
-            key = String(key[start.upperBound..<end.lowerBound])
-        } else if let start = key.range(of: "-----BEGIN PRIVATE KEY-----"),
-                  let end = key.range(of: "-----END PRIVATE KEY-----") {
-            key = String(key[start.upperBound..<end.lowerBound])
-        }
-        key.removeAll { ["\r", "\n", "\t", " "].contains($0) }
-        guard let keyData = Data(base64Encoded: key, options: .ignoreUnknownCharacters) else { return nil }
-
-        let options: [CFString: Any] = [
-            kSecAttrKeyType: kSecAttrKeyTypeRSA,
-            kSecAttrKeyClass: kSecAttrKeyClassPrivate
-        ]
-        return SecKeyCreateWithData(keyData as CFData, options as CFDictionary, nil)
-    }
-    
-    private var strippedHeaderPublicKey: Data? {
-        // Skip ASN.1 public key header
-        guard !base.isEmpty else { return nil }
-        
-        let keyBytes = [UInt8](base)
-        var index = 0
-        
-        guard keyBytes[index] == 0x30 else { return nil }
-        index += 1
-        
-        if keyBytes[index] > 0x80 {
-            index += Int(keyBytes[index]) - 0x80 + 1
-        } else {
-            index += 1
-        }
-        
-        let seqiod: [UInt8] = [0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00]
-        for (i, byte) in seqiod.enumerated() {
-            if keyBytes[index + i] != byte {
-                return nil
-            }
-        }
-        index += 15
-        
-        guard keyBytes[index] == 0x03 else { return nil }
-        index += 1
-        
-        if keyBytes[index] > 0x80 {
-            index += Int(keyBytes[index]) - 0x80 + 1
-        } else {
-            index += 1
-        }
-        
-        guard keyBytes[index] == 0x00 else { return nil }
-        index += 1
-        
-        let strippedKeyBytes = Array(keyBytes[index...])
-        return Data(strippedKeyBytes)
     }
     
     private func encryptData(_ data: Data, withKeyRef keyRef: SecKey, requireSigning: Bool) -> Data? {

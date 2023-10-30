@@ -1323,33 +1323,33 @@ public extension Reer where Base == String {
     /// ReerKit: Returns an RSA encrypted data string.
     /// - Parameter publicKey: RSA public key.
     /// - Returns: A base64 string represent the ecrypted data, or nil if an error occurs.
-    func rsaEncrypt(withPublicKey publicKey: String) -> String? {
+    func rsaEncrypt(with publicKey: String) -> String? {
         guard let data = base.re.utf8Data else { return nil }
-        return data.re.rsaEncrypt(withPublicKey: publicKey)?.base64EncodedString()
+        return data.re.rsaEncrypt(with: publicKey)?.base64EncodedString()
     }
     
     /// ReerKit: Returns an RSA decrypted data string.
     /// - Parameter publicKey: RSA private key.
     /// - Returns: A `String` decrypted, or nil if an error occurs.
-    func rsaDecrypt(withPrivateKey privateKey: String) -> String? {
+    func rsaDecrypt(with privateKey: String) -> String? {
         guard let data = base.re.base64DecodedData else { return nil }
-        return data.re.rsaDecrypt(withPrivateKey: privateKey)?.re.utf8String
+        return data.re.rsaDecrypt(with: privateKey)?.re.utf8String
     }
     
-    /// ReerKit: Returns an RSA encrypted data string.
+    /// ReerKit: Returns an RSA signed data string.
     /// - Parameter privateKey: RSA private key.
-    /// - Returns: A base64 string represent the ecrypted data, or nil if an error occurs.
-    func rsaEncrypt(withPrivateKey privateKey: String) -> String? {
+    /// - Returns: A base64 string represent the signature data, or nil if an error occurs.
+    func rsaSigned(with privateKey: String) -> String? {
         guard let data = base.re.utf8Data else { return nil }
-        return data.re.rsaEncrypt(withPrivateKey: privateKey)?.base64EncodedString()
+        return data.re.rsaSigned(with: privateKey)?.base64EncodedString()
     }
     
-    /// ReerKit: Returns an RSA decrypted data string.
+    /// ReerKit: Returns an RSA verified data string.
     /// - Parameter publicKey: RSA public key.
-    /// - Returns: A `String` decrypted, or nil if an error occurs.
-    func rsaDecrypt(withPublicKey publicKey: String) -> String? {
+    /// - Returns: A verified `String`, or nil if an error occurs.
+    func rsaVerified(with publicKey: String) -> String? {
         guard let data = base.re.base64DecodedData else { return nil }
-        return data.re.rsaDecrypt(withPublicKey: publicKey)?.re.utf8String
+        return data.re.rsaVerified(with: publicKey)?.re.utf8String
     }
 }
 #endif

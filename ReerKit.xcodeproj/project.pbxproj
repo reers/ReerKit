@@ -483,6 +483,10 @@
 		D076D4C629F3CE800008ABE0 /* UIStackView+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D4C429F3CE1C0008ABE0 /* UIStackView+REExtensions.swift */; };
 		D076D4C829F3CECD0008ABE0 /* UIStackViewExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D4C729F3CECD0008ABE0 /* UIStackViewExtensionsTest.swift */; };
 		D076D4CB29F3CF430008ABE0 /* UIScrollView+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D4C929F3CF180008ABE0 /* UIScrollView+REExtensions.swift */; };
+		D07CD1752AEFDF930035247F /* RSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07CD1742AEFDF930035247F /* RSA.swift */; };
+		D07CD1762AEFDF930035247F /* RSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07CD1742AEFDF930035247F /* RSA.swift */; };
+		D07CD1772AEFDF930035247F /* RSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07CD1742AEFDF930035247F /* RSA.swift */; };
+		D07CD1782AEFDF930035247F /* RSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07CD1742AEFDF930035247F /* RSA.swift */; };
 		D07E53AB2883083300921873 /* RETimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AA2883083300921873 /* RETimer.swift */; };
 		D07E53AD288309DF00921873 /* RETimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AC288309DF00921873 /* RETimerTests.swift */; };
 		D07E53AF2883137000921873 /* WeakProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AE2883137000921873 /* WeakProxy.swift */; };
@@ -762,6 +766,7 @@
 		D076D4C429F3CE1C0008ABE0 /* UIStackView+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+REExtensions.swift"; sourceTree = "<group>"; };
 		D076D4C729F3CECD0008ABE0 /* UIStackViewExtensionsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExtensionsTest.swift; sourceTree = "<group>"; };
 		D076D4C929F3CF180008ABE0 /* UIScrollView+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+REExtensions.swift"; sourceTree = "<group>"; };
+		D07CD1742AEFDF930035247F /* RSA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSA.swift; sourceTree = "<group>"; };
 		D07E53AA2883083300921873 /* RETimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimer.swift; sourceTree = "<group>"; };
 		D07E53AC288309DF00921873 /* RETimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimerTests.swift; sourceTree = "<group>"; };
 		D07E53AE2883137000921873 /* WeakProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakProxy.swift; sourceTree = "<group>"; };
@@ -1064,6 +1069,14 @@
 			path = WebKitTests;
 			sourceTree = "<group>";
 		};
+		D07CD1732AEFDF6A0035247F /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				D07CD1742AEFDF930035247F /* RSA.swift */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
 		D0A0040728621C7600D2FA7C /* Lock */ = {
 			isa = PBXGroup;
 			children = (
@@ -1101,16 +1114,17 @@
 		D0B1210A2855067B00B5B326 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				D071620929F3D5A80051C11E /* WebKit */,
 				D05C866F294B4DE50077E744 /* CoreAnimation */,
 				D05C8669294B4B580077E744 /* CoreGraphics */,
-				D05A8815291BF4C500C53492 /* Shared */,
 				D04D34F5286C7A76001E974C /* Dispatch */,
-				D0C95FD32857898200D0522D /* StandardLibrary */,
-				D0B1211C2855154100B5B326 /* Utility */,
 				D0B1211328550DF800B5B326 /* Foundation */,
 				D0B121102855086B00B5B326 /* General */,
+				D07CD1732AEFDF6A0035247F /* Internal */,
+				D05A8815291BF4C500C53492 /* Shared */,
+				D0C95FD32857898200D0522D /* StandardLibrary */,
 				D0B1210D2855077B00B5B326 /* UIKit */,
+				D0B1211C2855154100B5B326 /* Utility */,
+				D071620929F3D5A80051C11E /* WebKit */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -1831,6 +1845,7 @@
 				D04B861929F9A59600177357 /* UITableView+REExtensions.swift in Sources */,
 				D04B85FB29F9A59000177357 /* URLRequest+REExtensions.swift in Sources */,
 				D04B861629F9A59600177357 /* UIButton+REExtensions.swift in Sources */,
+				D07CD1762AEFDF930035247F /* RSA.swift in Sources */,
 				D04B85DE29F9A50600177357 /* NanoID.swift in Sources */,
 				D04B860929F9A59600177357 /* UIImage+REExtensions.swift in Sources */,
 				D04B85CA29F9A3FC00177357 /* Float+REExtensions.swift in Sources */,
@@ -1966,6 +1981,7 @@
 				D04B872929F9A71900177357 /* UIResponder+REExtensions.swift in Sources */,
 				D04B86F129F9A71100177357 /* Data+REExtensions.swift in Sources */,
 				D04B86CF29F9A70600177357 /* TypeNameDescribable.swift in Sources */,
+				D07CD1772AEFDF930035247F /* RSA.swift in Sources */,
 				D04B867929F9A6D400177357 /* CGRect+REExtensions.swift in Sources */,
 				D04B869E29F9A6F100177357 /* SignedInteger+REExtensions.swift in Sources */,
 				D04B867629F9A6D400177357 /* CGColor+REExtensions.swift in Sources */,
@@ -2100,6 +2116,7 @@
 				D04B870829F9A71900177357 /* UIResponder+REExtensions.swift in Sources */,
 				D04B86E329F9A71000177357 /* Data+REExtensions.swift in Sources */,
 				D04B86D929F9A70600177357 /* TypeNameDescribable.swift in Sources */,
+				D07CD1782AEFDF930035247F /* RSA.swift in Sources */,
 				D04B867229F9A6D300177357 /* CGRect+REExtensions.swift in Sources */,
 				D04B86B529F9A6F100177357 /* SignedInteger+REExtensions.swift in Sources */,
 				D04B866F29F9A6D300177357 /* CGColor+REExtensions.swift in Sources */,
@@ -2201,6 +2218,7 @@
 				D076D48129F3B62E0008ABE0 /* UIImageView+REExtensions.swift in Sources */,
 				D076D4A529F3BD940008ABE0 /* UIStoryboard+REExtensions.swift in Sources */,
 				D0E354CA28BFBC060000030B /* WeakMap.swift in Sources */,
+				D07CD1752AEFDF930035247F /* RSA.swift in Sources */,
 				D0EBE2352884765F004925E5 /* AnyObjectExtensionable.swift in Sources */,
 				D0F39A84287DF21300A754B2 /* TestHelpers.swift in Sources */,
 				D05C8682294B58250077E744 /* CGPoint+REExtensions.swift in Sources */,

@@ -145,6 +145,19 @@ public extension ReerForEquatable where Base == Data {
             throw JSONError.invalidArray
         }
     }
+    
+    /// ReerKit: Generate a random length of Data.
+    static func random(ofLength length: Int) -> Data {
+        var randomData = Data(count: length)
+        let result = randomData.withUnsafeMutableBytes { mutableBytes in
+            SecRandomCopyBytes(kSecRandomDefault, length, mutableBytes.baseAddress!)
+        }
+        if result == errSecSuccess {
+            return randomData
+        } else {
+            return Data((0..<length).map { _ in UInt8.random(in: UInt8.min ... UInt8.max) })
+        }
+    }
 }
 
 #if canImport(CommonCrypto)
@@ -369,7 +382,7 @@ public extension ReerForEquatable where Base == Data {
     ///
     /// - Parameters:
     ///   - key: A key length of 16(AES128), 24(AES192) or 32(AES256)
-    ///   - iv: An initialization vector length of 16(CBC), or use the default data that length of 0(EBC)
+    ///   - iv: An initialization vector length of 16(CBC), or use the default data that length of 0(ECB)
     /// - Returns: A `Data` encrypted, or nil if an error occurs.
     func aesEncrypt(withKey key: Data, iv: Data = .init()) -> Data? {
         guard key.count == 16 || key.count == 24 || key.count == 32 else {
@@ -413,7 +426,7 @@ public extension ReerForEquatable where Base == Data {
     ///
     /// - Parameters:
     ///   - key: A key length of 16(AES128), 24(AES192) or 32(AES256)
-    ///   - iv: An initialization vector length of 16(CBC), or use the default data that length of 0(EBC)
+    ///   - iv: An initialization vector length of 16(CBC), or use the default data that length of 0(ECB)
     /// - Returns: An `Data` decrypted, or nil if an error occurs.
     func aesDecrypt(withKey key: Data, iv: Data = .init()) -> Data? {
         guard key.count == 16 || key.count == 24 || key.count == 32 else {

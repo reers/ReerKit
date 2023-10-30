@@ -347,6 +347,10 @@ final class DataExtensionsTests: XCTestCase {
             XCTAssertEqual(original, ret2)
         }
     }
+    
+    func testRandom() {
+        XCTAssertNotNil(Data.re.random(ofLength: 12))
+    }
 }
 
 #endif

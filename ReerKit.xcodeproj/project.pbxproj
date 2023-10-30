@@ -487,6 +487,11 @@
 		D07CD1762AEFDF930035247F /* RSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07CD1742AEFDF930035247F /* RSA.swift */; };
 		D07CD1772AEFDF930035247F /* RSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07CD1742AEFDF930035247F /* RSA.swift */; };
 		D07CD1782AEFDF930035247F /* RSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07CD1742AEFDF930035247F /* RSA.swift */; };
+		D07CD17A2AEFE9D20035247F /* ContiguousBytes+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07CD1792AEFE9D20035247F /* ContiguousBytes+REExtensions.swift */; };
+		D07CD17B2AEFE9D20035247F /* ContiguousBytes+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07CD1792AEFE9D20035247F /* ContiguousBytes+REExtensions.swift */; };
+		D07CD17C2AEFE9D20035247F /* ContiguousBytes+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07CD1792AEFE9D20035247F /* ContiguousBytes+REExtensions.swift */; };
+		D07CD17D2AEFE9D20035247F /* ContiguousBytes+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07CD1792AEFE9D20035247F /* ContiguousBytes+REExtensions.swift */; };
+		D07CD17F2AEFEA940035247F /* ContiguousBytesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07CD17E2AEFEA940035247F /* ContiguousBytesExtensions.swift */; };
 		D07E53AB2883083300921873 /* RETimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AA2883083300921873 /* RETimer.swift */; };
 		D07E53AD288309DF00921873 /* RETimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AC288309DF00921873 /* RETimerTests.swift */; };
 		D07E53AF2883137000921873 /* WeakProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AE2883137000921873 /* WeakProxy.swift */; };
@@ -767,6 +772,8 @@
 		D076D4C729F3CECD0008ABE0 /* UIStackViewExtensionsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExtensionsTest.swift; sourceTree = "<group>"; };
 		D076D4C929F3CF180008ABE0 /* UIScrollView+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+REExtensions.swift"; sourceTree = "<group>"; };
 		D07CD1742AEFDF930035247F /* RSA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSA.swift; sourceTree = "<group>"; };
+		D07CD1792AEFE9D20035247F /* ContiguousBytes+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContiguousBytes+REExtensions.swift"; sourceTree = "<group>"; };
+		D07CD17E2AEFEA940035247F /* ContiguousBytesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContiguousBytesExtensions.swift; sourceTree = "<group>"; };
 		D07E53AA2883083300921873 /* RETimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimer.swift; sourceTree = "<group>"; };
 		D07E53AC288309DF00921873 /* RETimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimerTests.swift; sourceTree = "<group>"; };
 		D07E53AE2883137000921873 /* WeakProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakProxy.swift; sourceTree = "<group>"; };
@@ -1213,6 +1220,7 @@
 				D022BED429DD47EE00245550 /* URLRequest+REExtensions.swift */,
 				D0EED73929DD5E3A005A0F31 /* Bundle+REExtensions.swift */,
 				D048D7E22ABA0012007B87EB /* NSRange+REExtensions.swift */,
+				D07CD1792AEFE9D20035247F /* ContiguousBytes+REExtensions.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1233,6 +1241,7 @@
 				D090D97329DC6C2B00245538 /* NSPredicateExtensionsTests.swift */,
 				D090D97729DC6FC700245538 /* NSRegularExpressionExtensionsTests.swift */,
 				D022BED629DD48E200245550 /* URLRequestExtensionsTests.swift */,
+				D07CD17E2AEFEA940035247F /* ContiguousBytesExtensions.swift */,
 			);
 			path = FoundationTests;
 			sourceTree = "<group>";
@@ -1756,6 +1765,7 @@
 				D04B861F29F9A59600177357 /* UIResponder+REExtensions.swift in Sources */,
 				D04B85C929F9A3FC00177357 /* String+REExtensions.swift in Sources */,
 				D04B85E529F9A50600177357 /* GlobalFunctions.swift in Sources */,
+				D07CD17B2AEFE9D20035247F /* ContiguousBytes+REExtensions.swift in Sources */,
 				D04B85E429F9A50600177357 /* Once.swift in Sources */,
 				D04B85D829F9A40000177357 /* Swizzlable.swift in Sources */,
 				D04B85D329F9A3FC00177357 /* Int+REExtensions.swift in Sources */,
@@ -1892,6 +1902,7 @@
 				D04B873229F9A71900177357 /* UIAlertController+REExtensions.swift in Sources */,
 				D04B873029F9A71900177357 /* UISegmentedControl+REExtensions.swift in Sources */,
 				D04B86D029F9A70600177357 /* Throttler.swift in Sources */,
+				D07CD17C2AEFE9D20035247F /* ContiguousBytes+REExtensions.swift in Sources */,
 				D04B868F29F9A6F100177357 /* Dictionary+REExtensions.swift in Sources */,
 				D04B873F29F9A71900177357 /* UISearchBar+REExtensions.swift in Sources */,
 				D04B869C29F9A6F100177357 /* BinaryInteger+REExtensions.swift in Sources */,
@@ -2027,6 +2038,7 @@
 				D04B871129F9A71900177357 /* UIAlertController+REExtensions.swift in Sources */,
 				D04B870F29F9A71900177357 /* UISegmentedControl+REExtensions.swift in Sources */,
 				D04B86DA29F9A70600177357 /* Throttler.swift in Sources */,
+				D07CD17D2AEFE9D20035247F /* ContiguousBytes+REExtensions.swift in Sources */,
 				D04B86A629F9A6F100177357 /* Dictionary+REExtensions.swift in Sources */,
 				D04B871E29F9A71900177357 /* UISearchBar+REExtensions.swift in Sources */,
 				D04B86B329F9A6F100177357 /* BinaryInteger+REExtensions.swift in Sources */,
@@ -2160,6 +2172,7 @@
 				D0CD712B28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift in Sources */,
 				D0C95FE02857AC1A00D0522D /* SignedNumeric+REExtensions.swift in Sources */,
 				D0122B0329EEF372008311CF /* UIBezierPath+REExtensions.swift in Sources */,
+				D07CD17A2AEFE9D20035247F /* ContiguousBytes+REExtensions.swift in Sources */,
 				D0C95FD52857899F00D0522D /* Bool+REExtensions.swift in Sources */,
 				D00D63932A069AB600A9EEF4 /* Queue.swift in Sources */,
 				D0FB4056286362F10019D56A /* Once.swift in Sources */,
@@ -2314,6 +2327,7 @@
 				D04D34FA286C836A001E974C /* DispatchTests.swift in Sources */,
 				D076D4A329F3BD5B0008ABE0 /* UISliderExtensionsTests.swift in Sources */,
 				D076D48F29F3BAC90008ABE0 /* UINavigationBarExtensionsTests.swift in Sources */,
+				D07CD17F2AEFEA940035247F /* ContiguousBytesExtensions.swift in Sources */,
 				D0CBE62528833BF5006F8BCB /* TimerExtensionsTests.swift in Sources */,
 				D0122B3229EF0C27008311CF /* XCTestExtensions.swift in Sources */,
 				D0421AD32939033800452845 /* DataExtensionsTests.swift in Sources */,

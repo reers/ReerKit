@@ -332,7 +332,7 @@ public extension ReerForEquatable where Base == Data {
     /// - Parameters:
     ///   - alg: HMAC algorithm.
     ///   - key: The hmac key.
-    /// - Returns: HMAC handled string.
+    /// - Returns: HMAC handled hex string.
     func hmacString(using alg: HMACAlgorithm, key: String) -> String? {
         var digest = [UInt8](repeating: 0, count: alg.digestLenght)
         guard let cKey = key.cString(using: .utf8) else { return nil }
@@ -356,6 +356,38 @@ public extension ReerForEquatable where Base == Data {
         let keyLength = key.lengthOfBytes(using: .utf8)
         base.withUnsafeBytes { messageBytes in
             CCHmac(alg.ccHMACAlgorithm, cKey, keyLength, messageBytes.baseAddress, base.count, &digest)
+        }
+        return Data(digest)
+    }
+    
+    /// ReerKit: Returns a lowercase String for hmac using the algorithm with key data.
+    /// - Parameters:
+    ///   - alg: HMAC algorithm.
+    ///   - key: The hmac key.
+    /// - Returns: HMAC handled hex string.
+    func hmacString(using alg: HMACAlgorithm, key: Data) -> String? {
+        var digest = [UInt8](repeating: 0, count: alg.digestLenght)
+        key.withUnsafeBytes { keyBytes in
+            base.withUnsafeBytes { messageBytes in
+                CCHmac(alg.ccHMACAlgorithm, keyBytes.baseAddress, key.count, messageBytes.baseAddress, base.count, &digest)
+            }
+        }
+        return Data(digest).reduce("") {
+            $0 + String(format:"%02x", $1)
+        }
+    }
+
+    /// ReerKit: Returns a Data for hmac using the algorithm with key data.
+    /// - Parameters:
+    ///   - alg: HMAC algorithm.
+    ///   - key: The hmac key.
+    /// - Returns: HMAC handled data.
+    func hmacData(using alg: HMACAlgorithm, key: Data) -> Data? {
+        var digest = [UInt8](repeating: 0, count: alg.digestLenght)
+        key.withUnsafeBytes { keyBytes in
+            base.withUnsafeBytes { messageBytes in
+                CCHmac(alg.ccHMACAlgorithm, keyBytes.baseAddress, key.count, messageBytes.baseAddress, base.count, &digest)
+            }
         }
         return Data(digest)
     }

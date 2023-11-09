@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import ReerKit
+import CryptoKit
 
 #if canImport(Foundation)
 import Foundation
@@ -98,6 +99,12 @@ final class DataExtensionsTests: XCTestCase {
 
         XCTAssertEqual(data.re.hmacString(using: .sha512, key: key), "81578d57bc726570d0ed620e5c487a109588ea3e85993c79ec6e46b4c7af499b947e768eb52cedab6ddcb2da5e8c20d0d3e6a039dd23d1f86d34905c844332dd")
         XCTAssertEqual(data.re.hmacData(using: .sha512, key: key)?.re.hexString, "81578d57bc726570d0ed620e5c487a109588ea3e85993c79ec6e46b4c7af499b947e768eb52cedab6ddcb2da5e8c20d0d3e6a039dd23d1f86d34905c844332dd")
+        
+        let keyData = Data.re.random(ofLength: Int.random(in: 10..<21))
+        let hmac = HMAC<SHA256>.authenticationCode(for: data, using: SymmetricKey(data: keyData))
+        
+        XCTAssertEqual(data.re.hmacData(using: .sha256, key: keyData), hmac.re.data)
+        XCTAssertEqual(data.re.hmacString(using: .sha256, key: keyData), hmac.re.data.re.hexString)
     }
 
     func testAes() {

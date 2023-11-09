@@ -91,8 +91,8 @@ public extension ReerGeneric where Base == Optional<T> {
     ///        }
     ///
     /// - Parameter block: a block to run if self is not nil.
-    func run(_ action: (T) -> Void) {
-        _ = base.map(action)
+    func run<U>(_ action: (T) throws -> U?) rethrows -> U? {
+        return try base.flatMap(action)
     }
 }
 

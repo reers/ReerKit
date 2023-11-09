@@ -39,6 +39,12 @@ class OptionalExtensionsTests: XCTestCase {
         XCTAssertTrue(s.re.isEmpty)
         s = ""
         XCTAssertTrue(s.re.isEmpty)
+        
+        let age: String? = "123"
+        let ret = age.re.run { value in
+            return Int(value)
+        }
+        XCTAssertEqual(ret!, 123)
     }
     
     func testBool() {

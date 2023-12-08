@@ -182,13 +182,16 @@ final class UIImageExtensionsTests: XCTestCase {
     
     func testBlur() {
         let bundle = Bundle(for: UIImageExtensionsTests.self)
-        let image = UIImage(named: "TestImage", in: bundle, compatibleWith: nil)!
+        let image = UIImage(named: "test_gray", in: bundle, compatibleWith: nil)!
 
-        
+        var start = Date()
         let grayscaleImage = image.re.grayscale
+        print(Date().timeIntervalSince(start) * 1000)
         XCTAssertNotNil(grayscaleImage)
         
+        start = Date()
         let mono = image.re.with(filter: .mono)
+        print(Date().timeIntervalSince(start) * 1000)
         XCTAssertNotNil(mono)
         
         let chrome = image.re.with(filter: .chrome)

@@ -608,6 +608,7 @@
 		D0F39A84287DF21300A754B2 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F39A83287DF21300A754B2 /* TestHelpers.swift */; };
 		D0FB4056286362F10019D56A /* Once.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FB4055286362F10019D56A /* Once.swift */; };
 		D0FB4058286363380019D56A /* OnceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FB4057286363380019D56A /* OnceTests.swift */; };
+		D0FD1FF52B232796000A433D /* test_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D0FD1FF42B232796000A433D /* test_gray.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -880,6 +881,7 @@
 		D0F39A83287DF21300A754B2 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		D0FB4055286362F10019D56A /* Once.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Once.swift; sourceTree = "<group>"; };
 		D0FB4057286363380019D56A /* OnceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnceTests.swift; sourceTree = "<group>"; };
+		D0FD1FF42B232796000A433D /* test_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_gray.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1322,6 +1324,7 @@
 				D0BDA4B829DC503E001EA4A0 /* test.json */,
 				D076D47D29F3911D0008ABE0 /* test.pdf */,
 				D0122B0F29EF01BA008311CF /* TestImage.png */,
+				D0FD1FF42B232796000A433D /* test_gray.png */,
 				D0122B1229EF01BB008311CF /* TestStoryboard.storyboard */,
 				D0122B0E29EF01BA008311CF /* UICollectionViewCell.xib */,
 				D0122B1029EF01BA008311CF /* UIImageView.xib */,
@@ -1738,6 +1741,7 @@
 				D0122B1B29EF022C008311CF /* UITableViewCell.xib in Resources */,
 				D0122B1E29EF022C008311CF /* TestImage.png in Resources */,
 				D0122B1A29EF022C008311CF /* UITableViewHeaderFooterView.xib in Resources */,
+				D0FD1FF52B232796000A433D /* test_gray.png in Resources */,
 				D0122B1F29EF022C008311CF /* UIImageView.xib in Resources */,
 				D0BDA4B929DC503E001EA4A0 /* test.json in Resources */,
 				D0122B1D29EF022C008311CF /* UICollectionViewCell.xib in Resources */,

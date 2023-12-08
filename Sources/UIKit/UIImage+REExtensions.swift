@@ -953,77 +953,25 @@ public struct ImageFilterName: ExpressibleByStringLiteral, Hashable, RawRepresen
 public extension Reer where Base: UIImage {
     /// ReerKit: A grayscaled image.
     var grayscale: UIImage? {
-        if #available(iOS 13.0, tvOS 13.0, *) {
+        // A value of experience
+        if base.size.width * base.size.height < 670 * 670 {
             guard let cgImage = base.cgImage else { return nil }
-            guard let format = vImage_CGImageFormat(cgImage: cgImage),
-                  // The source image bufffer
-                  var sourceBuffer = try? vImage_Buffer(
-                      cgImage: cgImage,
-                      format: format
-                  ),
-                  // The 1-channel, 8-bit vImage buffer used as the operation destination.
-                  var destinationBuffer = try? vImage_Buffer(
-                      width: Int(sourceBuffer.width),
-                      height: Int(sourceBuffer.height),
-                      bitsPerPixel: 8
-                  )
-            else {
-                return .init(cgImage: cgImage)
-            }
-            
-            // Declare the three coefficients that model the eye's sensitivity
-            // to color.
-            let redCoefficient: Float = 0.2126
-            let greenCoefficient: Float = 0.7152
-            let blueCoefficient: Float = 0.0722
-            
-            // Create a 1D matrix containing the three luma coefficients that
-            // specify the color-to-grayscale conversion.
-            let divisor: Int32 = 0x1000
-            let fDivisor = Float(divisor)
-            
-            var coefficientsMatrix = [
-                Int16(redCoefficient * fDivisor),
-                Int16(greenCoefficient * fDivisor),
-                Int16(blueCoefficient * fDivisor)
-            ]
-            
-            // Use the matrix of coefficients to compute the scalar luminance by
-            // returning the dot product of each RGB pixel and the coefficients
-            // matrix.
-            let preBias: [Int16] = [0, 0, 0, 0]
-            let postBias: Int32 = 0
-            
-            vImageMatrixMultiply_ARGB8888ToPlanar8(
-                &sourceBuffer,
-                &destinationBuffer,
-                &coefficientsMatrix,
-                divisor,
-                preBias,
-                postBias,
-                vImage_Flags(kvImageNoFlags)
-            )
-            
-            // Create a 1-channel, 8-bit grayscale format that's used to
-            // generate a displayable image.
-            guard let monoFormat = vImage_CGImageFormat(
+            let colorSpace = CGColorSpaceCreateDeviceGray()
+            guard let context = CGContext(
+                data: nil,
+                width: cgImage.width,
+                height: cgImage.height,
                 bitsPerComponent: 8,
-                bitsPerPixel: 8,
-                colorSpace: CGColorSpaceCreateDeviceGray(),
-                bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.none.rawValue),
-                renderingIntent: .defaultIntent
-            ) else {
-                return .init(cgImage: cgImage)
-            }
-            
-            // Create a Core Graphics image from the grayscale destination buffer.
-            guard let result = try? destinationBuffer.createCGImage(format: monoFormat) else {
-                return .init(cgImage: cgImage)
-            }
-            
-            return .init(cgImage: result)
+                bytesPerRow: cgImage.width,
+                space: colorSpace,
+                bitmapInfo: CGImageAlphaInfo.none.rawValue
+            ) else { return nil }
+
+            context.draw(cgImage, in: CGRect(x: 0, y: 0, width: cgImage.width, height: cgImage.height))
+            guard let grayscaleImage = context.makeImage() else { return nil }
+            return applyAlpha(from: cgImage, to: grayscaleImage)
         } else {
-            return base.re.with(filter: .mono)
+            return with(filter: .mono)
         }
     }
     
@@ -1043,6 +991,29 @@ public extension Reer where Base: UIImage {
             from: CGRect(x: 0, y: 0, width: base.size.width * base.scale, height: base.size.height * base.scale)
         )
         return UIImage(cgImage: cgimage!, scale: base.scale, orientation: base.imageOrientation)
+    }
+    
+    private func applyAlpha(from originalCGImage: CGImage, to grayscaleCGImage: CGImage) -> UIImage? {
+        guard let alphaData = originalCGImage.alphaData else { return UIImage(cgImage: grayscaleCGImage) }
+
+        guard let context = CGContext(
+            data: nil,
+            width: originalCGImage.width,
+            height: originalCGImage.height,
+            bitsPerComponent: 8,
+            bytesPerRow: originalCGImage.width,
+            space: CGColorSpaceCreateDeviceGray(),
+            bitmapInfo: CGImageAlphaInfo.alphaOnly.rawValue
+        ) else { return nil }
+
+        alphaData.withUnsafeBytes { buffer in
+            if let baseAddress = buffer.baseAddress {
+                context.data?.copyMemory(from: baseAddress, byteCount: alphaData.count)
+            }
+        }
+        guard let alphaMask = context.makeImage() else { return nil }
+        guard let finalCGImage = grayscaleCGImage.masking(alphaMask) else { return nil }
+        return UIImage(cgImage: finalCGImage)
     }
 }
 #endif
@@ -1180,6 +1151,38 @@ public extension UIImage {
         return UIImage(cgImage: cgImage, scale: scale, orientation: .up)
     }
     #endif
+}
+
+/// A combination data of every pixel's alpha data.
+fileprivate extension CGImage {
+    var alphaData: Data? {
+        guard let dataProvider = self.dataProvider,
+              let data = dataProvider.data,
+              let rawData = CFDataGetBytePtr(data)
+        else { return nil }
+
+        var alphaData = Data(capacity: width * height)
+        let bytesPerPixel = bitsPerPixel / bitsPerComponent
+        let alphaOffset: Int
+
+        switch alphaInfo {
+        case .premultipliedLast, .last, .noneSkipLast:
+            alphaOffset = bytesPerPixel - 1
+        case .premultipliedFirst, .first, .noneSkipFirst:
+            alphaOffset = 0
+        default:
+            return nil
+        }
+
+        for y in 0 ..< height {
+            for x in 0 ..< width {
+                let pixelIndex = (width * y + x) * bytesPerPixel
+                alphaData.append(rawData[pixelIndex + alphaOffset])
+            }
+        }
+
+        return alphaData
+    }
 }
 
 #endif

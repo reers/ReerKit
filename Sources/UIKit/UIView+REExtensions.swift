@@ -27,6 +27,10 @@ import UIKit
 import SwiftUI
 #endif
 
+#if canImport(CoreImage)
+import CoreImage
+#endif
+
 // MARK: - Frame
 
 public extension Reer where Base: UIView {
@@ -211,7 +215,7 @@ public extension Reer where Base: UIView {
 
 // MARK: - Properties
 
-extension Reer where Base: UIView {
+public extension Reer where Base: UIView {
     
     /// ReerKit: Create a snapshot image of the complete view hierarchy.
     var snapshotImage: UIImage? {
@@ -246,6 +250,43 @@ extension Reer where Base: UIView {
         }
         return nil
     }
+    
+    #if canImport(CoreImage)
+    var isGrayModelEnabled: Bool {
+        get {
+            return base.re.associatedValue(forKey: AssociationKey(#function as StaticString), default: false)
+        }
+        set {
+            if newValue {
+                // CAFilter
+                let clsName = String("retliFAC".reversed())
+                // colorSaturate
+                var filterName: NSObjectProtocol = String("etarutaSroloc".reversed()) as NSObjectProtocol
+                // inputAmount
+                let keyPath = String("tnuomAtupni".reversed())
+                let cls: AnyClass? = NSClassFromString(clsName)
+                let sel = NSSelectorFromString("filterWithName:")
+                if let cls, let sig = Invocation.classMethodSignatureForSelector(sel, of: cls) {
+                    let invocation = Invocation(signature: sig)
+                    invocation.setSelector(sel)
+                    invocation.setArgument(&filterName, atIndex: 2)
+                    invocation.retainArguments()
+                    invocation.invoke(withTarget: cls)
+                    var ret: Any = NSObject()
+                    invocation.getReturnValue(&ret)
+                    if let filter = ret as? NSObject {
+                        filter.setValue(0, forKey: keyPath)
+                        base.layer.filters = [filter]
+                        base.re.setAssociatedValue(true, forKey: AssociationKey(#function as StaticString))
+                    }
+                }
+            } else {
+                base.layer.filters = nil
+                base.re.setAssociatedValue(false, forKey: AssociationKey(#function as StaticString))
+            }
+        }
+    }
+    #endif
 }
 
 // MARK: - Method

@@ -23,7 +23,8 @@ class ExampleListViewController: UIViewController {
         Example(title: "Push Completion Test", vcName: "PushCompletionViewController"),
         Example(title: "Button Layout Test", vcName: "ButtonExtensionsViewController"),
         Example(title: "Use SwiftUI view in UIKit", vcName: "SwiftUITestViewController"),
-        Example(title: "Blur image", vcName: "BlurImageViewController")
+        Example(title: "Blur image", vcName: "BlurImageViewController"),
+        Example(title: "Gray model for UIView", vcName: "GrayModeViewController")
     ]
     
     

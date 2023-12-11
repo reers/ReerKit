@@ -15,6 +15,7 @@
 		D08416F02A30E6A60078919B /* ExampleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08416EF2A30E6A60078919B /* ExampleListViewController.swift */; };
 		D08416F52A30EB2F0078919B /* ReerKit in Frameworks */ = {isa = PBXBuildFile; productRef = D08416F42A30EB2F0078919B /* ReerKit */; };
 		D08416F72A30EBAF0078919B /* KeyboardManagerDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08416F62A30EBAF0078919B /* KeyboardManagerDemoViewController.swift */; };
+		D0A08C342B236D9B00B89DA9 /* GrayModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A08C332B236D9B00B89DA9 /* GrayModeViewController.swift */; };
 		D0C9C0F62A3239EE007C2C36 /* ResponderChainEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0F52A3239EE007C2C36 /* ResponderChainEventViewController.swift */; };
 		D0D311202AB2D76F00E54361 /* ButtonExtensionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3111F2AB2D76F00E54361 /* ButtonExtensionsViewController.swift */; };
 		D0D311222AB4351700E54361 /* SwiftUITestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311212AB4351700E54361 /* SwiftUITestViewController.swift */; };
@@ -32,6 +33,7 @@
 		D08416EE2A30E4410078919B /* ReerKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ReerKit; path = ../..; sourceTree = "<group>"; };
 		D08416EF2A30E6A60078919B /* ExampleListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleListViewController.swift; sourceTree = "<group>"; };
 		D08416F62A30EBAF0078919B /* KeyboardManagerDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManagerDemoViewController.swift; sourceTree = "<group>"; };
+		D0A08C332B236D9B00B89DA9 /* GrayModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayModeViewController.swift; sourceTree = "<group>"; };
 		D0C9C0F52A3239EE007C2C36 /* ResponderChainEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponderChainEventViewController.swift; sourceTree = "<group>"; };
 		D0D3111F2AB2D76F00E54361 /* ButtonExtensionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtensionsViewController.swift; sourceTree = "<group>"; };
 		D0D311212AB4351700E54361 /* SwiftUITestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUITestViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				D0D3111F2AB2D76F00E54361 /* ButtonExtensionsViewController.swift */,
 				D0D311212AB4351700E54361 /* SwiftUITestViewController.swift */,
 				D0D311282AB4798700E54361 /* BlurImageViewController.swift */,
+				D0A08C332B236D9B00B89DA9 /* GrayModeViewController.swift */,
 				D08416DC2A30E2CA0078919B /* Assets.xcassets */,
 				D08416DE2A30E2CA0078919B /* LaunchScreen.storyboard */,
 				D08416E12A30E2CA0078919B /* Info.plist */,
@@ -183,6 +186,7 @@
 				D0D311222AB4351700E54361 /* SwiftUITestViewController.swift in Sources */,
 				D0C9C0F62A3239EE007C2C36 /* ResponderChainEventViewController.swift in Sources */,
 				D05E46272A813F1000C8A536 /* PushCompletionViewController.swift in Sources */,
+				D0A08C342B236D9B00B89DA9 /* GrayModeViewController.swift in Sources */,
 				D08416F72A30EBAF0078919B /* KeyboardManagerDemoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

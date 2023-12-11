@@ -58,6 +58,11 @@
 		D01DABC429B4FE1300ABD25E /* ThrottlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01DABC329B4FE1300ABD25E /* ThrottlerTests.swift */; };
 		D022BED529DD47EE00245550 /* URLRequest+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D022BED429DD47EE00245550 /* URLRequest+REExtensions.swift */; };
 		D022BED729DD48E200245550 /* URLRequestExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D022BED629DD48E200245550 /* URLRequestExtensionsTests.swift */; };
+		D036EAF92B26FB4100D451D6 /* Invocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D036EAF82B26FB4100D451D6 /* Invocation.swift */; };
+		D036EAFA2B26FB4100D451D6 /* Invocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D036EAF82B26FB4100D451D6 /* Invocation.swift */; };
+		D036EAFB2B26FB4100D451D6 /* Invocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D036EAF82B26FB4100D451D6 /* Invocation.swift */; };
+		D036EAFC2B26FB4100D451D6 /* Invocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D036EAF82B26FB4100D451D6 /* Invocation.swift */; };
+		D036EAFE2B26FE5C00D451D6 /* InvocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D036EAFD2B26FE5C00D451D6 /* InvocationTests.swift */; };
 		D0397612286E111800C33E17 /* Optional+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0397611286E111800C33E17 /* Optional+REExtensions.swift */; };
 		D0397614286E12A900C33E17 /* OptionalExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0397613286E12A900C33E17 /* OptionalExtensionsTests.swift */; };
 		D03CC8ED2AE6816C00FCF78D /* DataExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0421AD22939033800452845 /* DataExtensionsTests.swift */; };
@@ -681,6 +686,8 @@
 		D01DABC329B4FE1300ABD25E /* ThrottlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrottlerTests.swift; sourceTree = "<group>"; };
 		D022BED429DD47EE00245550 /* URLRequest+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+REExtensions.swift"; sourceTree = "<group>"; };
 		D022BED629DD48E200245550 /* URLRequestExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestExtensionsTests.swift; sourceTree = "<group>"; };
+		D036EAF82B26FB4100D451D6 /* Invocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invocation.swift; sourceTree = "<group>"; };
+		D036EAFD2B26FE5C00D451D6 /* InvocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvocationTests.swift; sourceTree = "<group>"; };
 		D0397611286E111800C33E17 /* Optional+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+REExtensions.swift"; sourceTree = "<group>"; };
 		D0397613286E12A900C33E17 /* OptionalExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalExtensionsTests.swift; sourceTree = "<group>"; };
 		D0421ACC2938F4DD00452845 /* Calendar+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar+REExtensions.swift"; sourceTree = "<group>"; };
@@ -985,6 +992,7 @@
 				D00D63972A069B4500A9EEF4 /* DataStructuresTest.swift */,
 				D058974B2A84FA45008381BB /* ReachabilityTests.swift */,
 				D0D311302AB83E1D00E54361 /* PropertyWrappersTests.swift */,
+				D036EAFD2B26FE5C00D451D6 /* InvocationTests.swift */,
 			);
 			path = UtilityTests;
 			sourceTree = "<group>";
@@ -1268,6 +1276,7 @@
 				D01D6DCC2A06CBE000AEDA3D /* Vibrator.swift */,
 				D08416A32A30CE560078919B /* KeyboardManager.swift */,
 				D05897462A84E03E008381BB /* Reachability.swift */,
+				D036EAF82B26FB4100D451D6 /* Invocation.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1800,6 +1809,7 @@
 				D04B85BD29F9A3FC00177357 /* FloatingPoint+REExtensions.swift in Sources */,
 				D04B85F829F9A57D00177357 /* DispatchQueue+REExtensions.swift in Sources */,
 				D04B85E829F9A50B00177357 /* ReadWriteLock.swift in Sources */,
+				D036EAFA2B26FB4100D451D6 /* Invocation.swift in Sources */,
 				D04B85E329F9A50600177357 /* Memory.swift in Sources */,
 				D04B85DF29F9A50600177357 /* TypeNameDescribable.swift in Sources */,
 				D00D638C2A069AB600A9EEF4 /* LinkedList.swift in Sources */,
@@ -1937,6 +1947,7 @@
 				D04B869429F9A6F100177357 /* Double+REExtensions.swift in Sources */,
 				D04B872E29F9A71900177357 /* UIDevice+REExtensions.swift in Sources */,
 				D04B868929F9A6EA00177357 /* AnyObjectExtensionable.swift in Sources */,
+				D036EAFB2B26FB4100D451D6 /* Invocation.swift in Sources */,
 				D04B86C629F9A70000177357 /* ReadWriteLock.swift in Sources */,
 				D04B86C729F9A70000177357 /* Synchronizing.swift in Sources */,
 				D00D638D2A069AB600A9EEF4 /* LinkedList.swift in Sources */,
@@ -2073,6 +2084,7 @@
 				D04B86AB29F9A6F100177357 /* Double+REExtensions.swift in Sources */,
 				D04B870D29F9A71900177357 /* UIDevice+REExtensions.swift in Sources */,
 				D04B868429F9A6EA00177357 /* AnyObjectExtensionable.swift in Sources */,
+				D036EAFC2B26FB4100D451D6 /* Invocation.swift in Sources */,
 				D04B86CB29F9A70100177357 /* ReadWriteLock.swift in Sources */,
 				D04B86CC29F9A70100177357 /* Synchronizing.swift in Sources */,
 				D00D638E2A069AB600A9EEF4 /* LinkedList.swift in Sources */,
@@ -2207,6 +2219,7 @@
 				D0A6B3A32924AD11008B7FDA /* UIResponder+REExtensions.swift in Sources */,
 				D04D34F4286C7390001E974C /* GlobalFunctions.swift in Sources */,
 				D094C96429F4631200491CD8 /* Memory.swift in Sources */,
+				D036EAF92B26FB4100D451D6 /* Invocation.swift in Sources */,
 				D0EBE241288492B2004925E5 /* DeinitObserver.swift in Sources */,
 				D076D4BF29F3C2B90008ABE0 /* UIViewController+REExtensions.swift in Sources */,
 				D05C867A294B54CD0077E744 /* CGColor+REExtensions.swift in Sources */,
@@ -2362,6 +2375,7 @@
 				D076D4C829F3CECD0008ABE0 /* UIStackViewExtensionsTest.swift in Sources */,
 				D022BED729DD48E200245550 /* URLRequestExtensionsTests.swift in Sources */,
 				D07E53AD288309DF00921873 /* RETimerTests.swift in Sources */,
+				D036EAFE2B26FE5C00D451D6 /* InvocationTests.swift in Sources */,
 				D094C96229F4606600491CD8 /* UIDeviceExtensionsTests.swift in Sources */,
 				D0397614286E12A900C33E17 /* OptionalExtensionsTests.swift in Sources */,
 				D0D311312AB83E1D00E54361 /* PropertyWrappersTests.swift in Sources */,

@@ -83,3 +83,18 @@ public func sysctl(by name: String) -> String {
     return result ?? ""
 }
 #endif
+
+
+/// ReerKit: Return a `Bool` value, the probability of it being `true` is the input value.
+func trueWithProbability(_ percent: Double) -> Bool {
+    let total = 1_000_000.0
+    let max = total * percent
+    return Double.random(in: 0...total) <= max
+}
+
+/// ReerKit: Return a `Bool` value, the probability of it being `false` is the input value.
+func falseWithProbability(_ percent: Double) -> Bool {
+    let total = 1_000_000.0
+    let min = total * percent
+    return Double.random(in: 0...total) > min
+}

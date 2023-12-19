@@ -23,6 +23,8 @@ public struct Queue<E> {
     private var array: [E?] = []
     private var head = 0
     
+    public init() {}
+    
     public var count: Int {
         return array.count - head
     }

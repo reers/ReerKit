@@ -22,6 +22,8 @@
 public struct Stack<E> {
     fileprivate var array = [E]()
     
+    public init() {}
+    
     public var count: Int {
         return array.count
     }

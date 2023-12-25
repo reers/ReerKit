@@ -298,6 +298,20 @@ public extension ReerGeneric where Base == Optional<T> {
         return anyDict ?? [:]
     }
 
+    /// ReerKit: Transform the optional wrapped value to `Dictionay<String, Any>` if possible.
+    ///
+    ///     let a: Any? = ["s": 123]
+    ///     a.re.anyDict -> Optional(["s": 123])
+    var stringAnyDict: [String: Any]? {
+        return base as? [String: Any]
+    }
+
+    /// ReerKit: Transform the optional wrapped value to `Dictionay<String, Any>` if possible.
+    /// Return `[:]` if failed.
+    var stringAnyDictValue: [String: Any] {
+        return stringAnyDict ?? [:]
+    }
+    
     /// ReerKit: Transform the optional wrapped value to `Dictionay<AnyHashable, Any>` if possible.
     /// Return the passed default value if it is nil.
     func dictValue<Key, Value>(or defaultValue: @autoclosure () -> [Key: Value]) -> [Key: Value] {

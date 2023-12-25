@@ -115,6 +115,12 @@ public extension ReerForEquatable where Base == Data {
     var dictionary: [AnyHashable: Any]? {
         return try? toDictionary()
     }
+    
+    /// ReerKit: Returns [String: Any] for decoded self.
+    /// Returns nil if an error occurs.
+    var stringAnyDictionary: [String: Any]? {
+        return try? toDictionary() as? [String: Any]
+    }
 
     /// ReerKit: Returns [String: String] for decoded self.
     /// Returns nil if an error occurs.

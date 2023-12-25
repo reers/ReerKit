@@ -49,5 +49,43 @@ public extension Reer where Base: AnyObject {
             return result
         }
     }
+    
+    /// ReerKit: Execute the passed closure once by a auto generated key during the object life time.
+    ///
+    ///     let obj = NSObject()
+    ///     func test() {
+    ///         obj.re.executeOnce { print("once") }
+    ///     }
+    ///     test()
+    ///     test()
+    ///     // output: once
+    func executeOnce<Result>(
+        fileID: String = #fileID,
+        function: String = #function,
+        line: Int = #line,
+        _ execute: @escaping () throws -> Result
+    ) rethrows -> Result {
+        var keyDict: [String: OnceKey]
+        if let dict = objc_getAssociatedObject(base, &keyOfOnceKeyDict) as? [String: OnceKey] {
+            keyDict = dict
+        } else {
+            keyDict = .init()
+        }
+        let key = "\(fileID)_\(function)_\(line)"
+        let onceKey: OnceKey = keyDict[key] ?? .init()
+        keyDict[key] = onceKey
+        objc_setAssociatedObject(base, &keyOfOnceKeyDict, keyDict, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        
+        if let lastExecutedResult = objc_getAssociatedObject(base, onceKey.address) as! Result? {
+            return lastExecutedResult
+        } else {
+            let result = try execute()
+            defer { objc_setAssociatedObject(base, onceKey.address, result, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+            return result
+        }
+    }
 }
+
+fileprivate var keyOfOnceKeyDict: UInt8 = 0
+
 #endif

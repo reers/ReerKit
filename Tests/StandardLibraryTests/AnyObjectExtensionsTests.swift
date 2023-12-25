@@ -75,6 +75,17 @@ class AnyObjectExtensionsTests: XCTestCase {
             result += 1
         }
         XCTAssertEqual(result, 1)
+        
+        var ret = 0
+        func test2() {
+            obj.re.executeOnce {
+                ret += 1
+            }
+        }
+        test2()
+        test2()
+        test2()
+        XCTAssertEqual(ret, 1)
     }
     
     func testSwizzle() {

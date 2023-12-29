@@ -390,7 +390,7 @@ public final class KeyboardManager: NSObject {
         return nil
     }
     
-    private let systemVersion = Float(UIDevice.current.systemVersion) ?? 0
+    private let systemVersion = (UIDevice.current.systemVersion as NSString).floatValue
 }
 
 // MARK: - KeyboardViewFrameObserver

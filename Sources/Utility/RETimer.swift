@@ -47,11 +47,7 @@ public final class RETimer {
     private var isRunning = false
     private var callbackImmediatelyWhenFired: Bool = false
     private let delay: TimeInterval
-    
-    deinit {
-        invalidate()
-    }
-    
+
     /// ReerKit: Initializes a timer object with the specified time interval and block.
     /// You must call `schedule()` by yourself after creating the timer.
     ///

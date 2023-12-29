@@ -76,6 +76,42 @@ public final class CountdownTimer {
         timer.fire()
         return timer
     }
+    
+    /// ReerKit: Countdown timer with a total seconds be set, and call back every second.
+    ///
+    /// ```
+    /// var countdownTimer = CountdownTimer.scheduledTimer(withTotalSeconds: 60) {
+    ///     [weak self] displaySeconds, leftDuration, passedDuration in
+    ///
+    ///     let minutes = Int(Double(displaySeconds) / 60.0)
+    ///     let seconds = Int(Double(displaySeconds) - minutes.re.double * 60.0)
+    ///     self?.timeLabel.text = String(format: "%02d:%02d", minutes, seconds)
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - totalSeconds: Total seconds with `Int`
+    ///   - action: Called back every second, carrying the displayed number of seconds, remaining time, and elapsed time.
+    /// - Returns: A countdown timer.
+    public static func scheduledTimer(
+        withTotalSeconds totalSeconds: Int,
+        action: @escaping (_ displaySeconds: Int, _ leftDuration: TimeInterval, _ passedDuration: TimeInterval) -> Void
+    ) -> CountdownTimer {
+        let accuracy: TimeInterval = 0.1
+        let multiple = Int(1.0 / accuracy)
+        let totalTimes = totalSeconds * multiple
+        var times = 0
+        let timer = CountdownTimer(interval: accuracy, times: totalTimes) { countDownTimer in
+            times += 1
+            if times % multiple == 0 {
+                let displaySeconds = Int(countDownTimer.leftDuration.rounded(.up))
+                let passedDuration = Double(totalSeconds) - countDownTimer.leftDuration
+                action(displaySeconds, countDownTimer.leftDuration, passedDuration)
+            }
+        }
+        timer.fire()
+        return timer
+    }
 
     public func fire() {
         timer = RETimer.scheduledTimer(timeInterval: interval, repeats: times > 1) { [weak self] timer in
@@ -98,6 +134,13 @@ public final class CountdownTimer {
 
     public func invalidate() {
         timer?.invalidate()
+    }
+    
+    public func reset() {
+        resume()
+        invalidate()
+        timer = nil
+        leftTimes = times
     }
 }
 

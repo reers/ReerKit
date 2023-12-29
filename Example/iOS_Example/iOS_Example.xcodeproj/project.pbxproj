@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D05100092B3F0C6F001F576D /* CountdownTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05100082B3F0C6F001F576D /* CountdownTimerViewController.swift */; };
 		D05E46272A813F1000C8A536 /* PushCompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E46262A813F1000C8A536 /* PushCompletionViewController.swift */; };
 		D08416D42A30E2C80078919B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08416D32A30E2C80078919B /* AppDelegate.swift */; };
 		D08416D62A30E2C80078919B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08416D52A30E2C80078919B /* SceneDelegate.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D05100082B3F0C6F001F576D /* CountdownTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimerViewController.swift; sourceTree = "<group>"; };
 		D05E46262A813F1000C8A536 /* PushCompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushCompletionViewController.swift; sourceTree = "<group>"; };
 		D08416D02A30E2C80078919B /* iOS_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D08416D32A30E2C80078919B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				D0D311212AB4351700E54361 /* SwiftUITestViewController.swift */,
 				D0D311282AB4798700E54361 /* BlurImageViewController.swift */,
 				D0A08C332B236D9B00B89DA9 /* GrayModeViewController.swift */,
+				D05100082B3F0C6F001F576D /* CountdownTimerViewController.swift */,
 				D08416DC2A30E2CA0078919B /* Assets.xcassets */,
 				D08416DE2A30E2CA0078919B /* LaunchScreen.storyboard */,
 				D08416E12A30E2CA0078919B /* Info.plist */,
@@ -188,6 +191,7 @@
 				D05E46272A813F1000C8A536 /* PushCompletionViewController.swift in Sources */,
 				D0A08C342B236D9B00B89DA9 /* GrayModeViewController.swift in Sources */,
 				D08416F72A30EBAF0078919B /* KeyboardManagerDemoViewController.swift in Sources */,
+				D05100092B3F0C6F001F576D /* CountdownTimerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

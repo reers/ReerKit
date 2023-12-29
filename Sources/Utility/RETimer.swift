@@ -29,16 +29,11 @@ import Foundation
 /// ReerKit: A timer based on `DispatchSource`.
 ///
 ///                           fireDate
-///     schedule()         .beforeInterval     .afterInterval
-///         |                     |                  |
-///         |--------delay--------|-----interval-----|-----interval-----|
+///     schedule()   callbackImmediatelyWhenFired  default first callback
+///         |                     |                      |
+///         |--------delay--------|-------interval-------|-------interval-------|
 public final class RETimer {
 
-    public enum FirstTimeCallbackMoment {
-        case beforeInterval
-        case afterInterval
-    }
-    
     /// A number of seconds.
     public typealias TimeInterval = Double
 
@@ -50,8 +45,8 @@ public final class RETimer {
     private let timer: DispatchSourceTimer
     private var action: RETimerAction
     private var isRunning = false
-    private var firstTimeCallbackMoment: FirstTimeCallbackMoment = .afterInterval
-    private var delay: TimeInterval
+    private var callbackImmediatelyWhenFired: Bool = false
+    private let delay: TimeInterval
     
     deinit {
         invalidate()
@@ -65,20 +60,20 @@ public final class RETimer {
     ///   - timeInterval: The number of seconds between firings of the timer. If timeInterval is less than or equal to 0.0, this method chooses the nonnegative value of 0.0001 seconds instead.
     ///   - repeats: If true, the timer will repeatedly reschedule itself until invalidated. If false, the timer will be invalidated after it fires.
     ///   - queue: The dispatch queue to which to execute the installed handlers.
-    ///   - firstTimeCallbackMoment: The moment that the passed action executed.
+    ///   - callbackImmediatelyWhenFired: When should callback when time is fired, default is `false`, and its behavior is same like `Foundation.Timer`
     ///   - action: A closure to be executed when the timer fires. The closure takes a single Timer parameter and has no return value.
     public init(
         delay: TimeInterval = 0,
         timeInterval: TimeInterval,
         repeats: Bool = true,
         queue: DispatchQueue = .main,
-        firstTimeCallbackMoment: FirstTimeCallbackMoment = .afterInterval,
+        callbackImmediatelyWhenFired: Bool = false,
         action: @escaping RETimerAction
     ) {
         self.repeats = repeats
         self.action = action
         self.timeInterval = max(0.0001, timeInterval)
-        self.firstTimeCallbackMoment = firstTimeCallbackMoment
+        self.callbackImmediatelyWhenFired = callbackImmediatelyWhenFired
         self.delay = delay
 
         self.timer = DispatchSource.makeTimerSource(queue: queue)
@@ -97,7 +92,7 @@ public final class RETimer {
     ///   - timeInterval: The number of seconds between firings of the timer. If timeInterval is less than or equal to 0.0, this method chooses the nonnegative value of 0.0001 seconds instead.
     ///   - repeats: If true, the timer will repeatedly reschedule itself until invalidated. If false, the timer will be invalidated after it fires.
     ///   - queue: The dispatch queue to which to execute the installed handlers.
-    ///   - firstTimeCallbackMoment: The moment that the passed action executed.
+    ///   - callbackImmediatelyWhenFired: When should callback when time is fired, default is `false`, and its behavior is same like `Foundation.Timer`
     ///   - action: A closure to be executed when the timer fires. The closure takes a single Timer parameter and has no return value.
     /// - Returns: A timer instance.
     public class func scheduledTimer(
@@ -105,7 +100,7 @@ public final class RETimer {
         timeInterval: TimeInterval,
         repeats: Bool = true,
         queue: DispatchQueue = .main,
-        firstTimeCallbackMoment: FirstTimeCallbackMoment = .afterInterval,
+        callbackImmediatelyWhenFired: Bool = false,
         action: @escaping RETimerAction
     ) -> RETimer {
         let timer = RETimer(
@@ -113,7 +108,7 @@ public final class RETimer {
             timeInterval: timeInterval,
             repeats: repeats,
             queue: queue,
-            firstTimeCallbackMoment: firstTimeCallbackMoment,
+            callbackImmediatelyWhenFired: callbackImmediatelyWhenFired,
             action: action
         )
         timer.schedule()
@@ -127,7 +122,7 @@ public final class RETimer {
     ///   - timeInterval: The number of seconds between firings of the timer. If timeInterval is less than or equal to 0.0, this method chooses the nonnegative value of 0.0001 seconds instead.
     ///   - repeats: If true, the timer will repeatedly reschedule itself until invalidated. If false, the timer will be invalidated after it fires.
     ///   - queue: The dispatch queue to which to execute the installed handlers.
-    ///   - firstTimeCallbackMoment: The moment that the passed action executed.
+    ///   - callbackImmediatelyWhenFired: When should callback when time is fired, default is `false`, and its behavior is same like `Foundation.Timer`
     ///   - action: A closure to be executed when the timer fires. The closure takes a single Timer parameter and has no return value.
     /// - Returns: A timer instance.
     public static func scheduledTimer(
@@ -135,7 +130,7 @@ public final class RETimer {
         timeInterval: TimeInterval,
         repeats: Bool = true,
         queue: DispatchQueue = .main,
-        firstTimeCallbackMoment: FirstTimeCallbackMoment = .afterInterval,
+        callbackImmediatelyWhenFired: Bool = false,
         action: @escaping RETimerAction
     ) -> RETimer {
         let delay = max(0, fireDate.timeIntervalSince(Date()))
@@ -144,7 +139,7 @@ public final class RETimer {
             timeInterval: timeInterval,
             repeats: repeats,
             queue: queue,
-            firstTimeCallbackMoment: firstTimeCallbackMoment,
+            callbackImmediatelyWhenFired: callbackImmediatelyWhenFired,
             action: action
         )
         timer.schedule()
@@ -164,7 +159,7 @@ public final class RETimer {
 
     private lazy var scheduleTimerOnce: Void = {
         var deadlineTime: DispatchTimeInterval
-        if firstTimeCallbackMoment == .beforeInterval {
+        if callbackImmediatelyWhenFired {
             deadlineTime = .milliseconds(0)
         } else {
             deadlineTime = .milliseconds(Int(timeInterval * 1000))

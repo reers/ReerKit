@@ -16,7 +16,7 @@ class RETimerTests: XCTestCase {
         let expectation = self.expectation(description: "RETimer")
         var times = 0
         let start = Date()
-        timer = RETimer.scheduledTimer(delay: 1, timeInterval: 0.5, repeats: true, queue: .main, firstTimeCallbackMoment: .beforeInterval) { timer in
+        timer = RETimer.scheduledTimer(delay: 1, timeInterval: 0.5, repeats: true, queue: .main, callbackImmediatelyWhenFired: true) { timer in
             times += 1
             if times == 2 {
                 XCTAssertEqual((Date().timeIntervalSince(start) - 2) < 0.1, true)

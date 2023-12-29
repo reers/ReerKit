@@ -77,6 +77,9 @@ public final class CountdownTimer {
         return timer
     }
     
+    /// A record for count down timer when call back every second.
+    private static var secondsCount = 0
+    
     /// ReerKit: Countdown timer with a total seconds be set, and call back every second.
     ///
     /// ```
@@ -100,10 +103,9 @@ public final class CountdownTimer {
         let accuracy: TimeInterval = 0.1
         let multiple = Int(1.0 / accuracy)
         let totalTimes = totalSeconds * multiple
-        var times = 0
         let timer = CountdownTimer(interval: accuracy, times: totalTimes) { countDownTimer in
-            times += 1
-            if times % multiple == 0 {
+            secondsCount += 1
+            if secondsCount % multiple == 0 {
                 let displaySeconds = Int(countDownTimer.leftDuration.rounded(.up))
                 let passedDuration = Double(totalSeconds) - countDownTimer.leftDuration
                 action(displaySeconds, countDownTimer.leftDuration, passedDuration)
@@ -141,6 +143,7 @@ public final class CountdownTimer {
         invalidate()
         timer = nil
         leftTimes = times
+        Self.secondsCount = 0
     }
 }
 

@@ -19,8 +19,9 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#if canImport(Foundation)
+#if canImport(Foundation) && canImport(Dispatch)
 import Foundation
+import Dispatch
 
 public final class CountdownTimer {
     public let interval: TimeInterval
@@ -38,7 +39,7 @@ public final class CountdownTimer {
         return leftTimes == 0
     }
 
-    private var nsTimer: Timer?
+    private var timer: RETimer?
 
     public init(interval: TimeInterval, times: Int, action: @escaping (CountdownTimer) -> Void) {
         self.interval = interval
@@ -77,7 +78,7 @@ public final class CountdownTimer {
     }
 
     public func fire() {
-        nsTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: times > 1) { [weak self] timer in
+        timer = RETimer.scheduledTimer(timeInterval: interval, repeats: times > 1) { [weak self] timer in
             guard let self = self else { return }
             self.leftTimes -= 1
             if self.leftTimes == 0 {
@@ -85,13 +86,18 @@ public final class CountdownTimer {
             }
             self.action(self)
         }
-        if let timer = nsTimer {
-            RunLoop.current.add(timer, forMode: .common)
-        }
+    }
+    
+    public func resume() {
+        timer?.schedule()
+    }
+
+    public func suspend() {
+        timer?.suspend()
     }
 
     public func invalidate() {
-        nsTimer?.invalidate()
+        timer?.invalidate()
     }
 }
 

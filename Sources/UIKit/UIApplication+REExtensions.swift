@@ -114,13 +114,14 @@ public extension Reer where Base: UIApplication {
 
 public extension Reer where Base: UIApplication {
     /// ReerKit: App's key window.
+    /// https://github.com/SwiftKickMobile/SwiftMessages/blob/master/SwiftMessages/UIWindow%2BExtensions.swift
     static var keyWindow: UIWindow? {
         if #available(iOS 13.0, tvOS 13.0, *) {
             return UIApplication.shared.connectedScenes
-                .filter { $0.activationState == .foregroundActive }
-                .first(where: { $0 is UIWindowScene })
-                .flatMap({ $0 as? UIWindowScene })?.windows
-                .first(where: \.isKeyWindow)
+                .sorted { $0.activationState.sortPriority < $1.activationState.sortPriority }
+                .compactMap { $0 as? UIWindowScene }
+                .compactMap { $0.windows.first { $0.isKeyWindow } }
+                .first
         } else {
             return UIApplication.shared.keyWindow
         }
@@ -220,6 +221,19 @@ public extension Reer where Base: UIApplication {
     /// ReerKit: "Library" path in this app's sandbox.
     var libraryPath: String? {
         return NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first
+    }
+}
+
+@available(iOS 13.0, *)
+private extension UIScene.ActivationState {
+    var sortPriority: Int {
+        switch self {
+        case .foregroundActive: return 1
+        case .foregroundInactive: return 2
+        case .background: return 3
+        case .unattached: return 4
+        @unknown default: return 5
+        }
     }
 }
 

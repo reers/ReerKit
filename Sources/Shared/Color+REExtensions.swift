@@ -185,7 +185,7 @@ public extension REColor {
         } else {
             return REColor(cgColor: light.cgColor) ?? .clear
         }
-        #elseif os(iOS) || os(tvOS)
+        #elseif os(iOS) || os(tvOS) || os(visionOS)
         if #available(iOS 13.0, tvOS 13.0, *) {
             return REColor(dynamicProvider: { $0.userInterfaceStyle == .dark ? dark : light })
         } else {

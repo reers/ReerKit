@@ -1,14 +1,15 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.9
 
 import PackageDescription
 
 let package = Package(
     name: "ReerKit",
     platforms: [
-        .iOS(.v11),
-        .tvOS(.v9),
-        .watchOS(.v2),
-        .macOS(.v10_10)
+        .iOS(.v12),
+        .tvOS(.v12),
+        .watchOS(.v4),
+        .macOS(.v10_13),
+        .visionOS(.v1)
     ],
     products: [
         .library(name: "ReerKit", targets: ["ReerKit"])

@@ -46,7 +46,9 @@ public extension Reer where Base: UITabBar {
         base.tintColor = selectedItem ?? base.tintColor
         // shadowImage = UIImage()
         base.backgroundImage = UIImage()
+        #if !os(visionOS)
         base.isTranslucent = false
+        #endif
 
         // selectedBackgoundColor
         guard let barItems = base.items else {

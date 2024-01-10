@@ -792,8 +792,11 @@ public extension Reer where Base: UIImage {
             assertionFailure("*** error: maskImage must be backed by a CGImage: \(String(describing: maskImage))")
             return nil
         }
-        
+        #if os(visionOS)
+        let screenScale: CGFloat = 1.0
+        #else
         let screenScale = UIScreen.main.scale
+        #endif
         let imageRect = CGRect(origin: CGPoint.zero, size: base.size)
         var effectImage: UIImage = base
         
@@ -1099,7 +1102,11 @@ public extension UIImage {
         guard let page = pdf?.page(at: 1) else { return nil }
         let pdfRect = page.getBoxRect(.cropBox)
         let pdfSize = resize ? size : pdfRect.size
+        #if os(visionOS)
+        let scale: CGFloat = 1.0
+        #else
         let scale = UIScreen.main.scale
+        #endif
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         guard let context = CGContext(
             data: nil,
@@ -1126,7 +1133,11 @@ public extension UIImage {
         if emoji.count == 0 || size < 1 {
             return nil
         }
+        #if os(visionOS)
+        let scale: CGFloat = 1.0
+        #else
         let scale = UIScreen.main.scale
+        #endif
         let font = CTFontCreateWithName("AppleColorEmoji" as CFString, size * scale, nil)
         let str = NSAttributedString(string: emoji, attributes: [kCTFontAttributeName as NSAttributedString.Key: font, kCTForegroundColorAttributeName as NSAttributedString.Key: UIColor.white.cgColor])
         let colorSpace = CGColorSpaceCreateDeviceRGB()

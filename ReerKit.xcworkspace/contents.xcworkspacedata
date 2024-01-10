@@ -5,6 +5,9 @@
       location = "group:Example/iOS_Example/iOS_Example.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:Example/visionOS_Example/visionOS_Example.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:ReerKit.xcodeproj">
    </FileRef>
 </Workspace>

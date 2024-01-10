@@ -20,7 +20,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#if canImport(UIKit) && canImport(ObjectiveC) && canImport(CoreFoundation) && !os(watchOS) && !os(tvOS)
+#if canImport(UIKit) && canImport(ObjectiveC) && canImport(CoreFoundation) && !os(watchOS) && !os(tvOS) && !os(visionOS)
 import UIKit
 import ObjectiveC
 import CoreFoundation

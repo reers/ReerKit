@@ -441,6 +441,8 @@ public extension UIDevice {
         ///
         /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP827/TODO)
         case appleWatchUltra
+        #elseif os(visionOS)
+        case appleVisionPro
         #endif
         
         /// Device is [Simulator](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/iOS_Simulator_Guide/Introduction/Introduction.html)
@@ -464,7 +466,7 @@ public extension Reer where Base: UIDevice {
     
     /// ReerKit: Get current device's os version number.
     static var osVersionNumber: Float {
-        return Float(osVersion) ?? 0
+        return (UIDevice.current.systemVersion as NSString).floatValue
     }
     
     /// ReerKit: Get current device's current language.
@@ -484,6 +486,29 @@ public extension Reer where Base: UIDevice {
     /// ReerKit: Whether the device is iPad/iPad mini.
     static var isPad: Bool {
         return UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
+    /// ReerKit: Whether the device is Mac.
+    static var isMac: Bool {
+        if #available(iOS 14.0, *) {
+            return UIDevice.current.userInterfaceIdiom == .mac
+        } else {
+            return false
+        }
+    }
+    
+    /// ReerKit: Whether the device is Apple TV.
+    static var isTV: Bool {
+        return UIDevice.current.userInterfaceIdiom == .tv
+    }
+    
+    /// ReerKit: Whether the device is Vision Pro.
+    static var isVision: Bool {
+        if #available(iOS 17.0, *) {
+            return UIDevice.current.userInterfaceIdiom == .vision
+        } else {
+            return false
+        }
     }
     
     /// ReerKit: Whether the device is a simulator.
@@ -707,6 +732,11 @@ public extension Reer where Base: UIDevice {
         case "Watch6,18": return .appleWatchUltra
         case "i386", "x86_64", "arm64": return .simulator(mapToDevice(identifier: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "watchOS"))
         default: return .unknown(identifier)
+        }
+        #elseif os(visionOS)
+        switch modelIdentifier {
+        case "i386", "x86_64", "arm64": return .simulator(.appleVisionPro)
+        default: return .appleVisionPro
         }
         #endif
     }
@@ -1122,6 +1152,12 @@ extension UIDevice.Name: CustomStringConvertible {
         case .appleTV4K: return "Apple TV 4K"
         case .appleTV4K2: return "Apple TV 4K (2nd generation)"
         case .appleTV4K3: return "Apple TV 4K (3rd generation)"
+        case .simulator(let model): return "Simulator (\(model.description))"
+        case .unknown(let identifier): return identifier
+        }
+        #elseif os(visionOS)
+        switch self {
+        case .appleVisionPro: return "Apple Vision Pro"
         case .simulator(let model): return "Simulator (\(model.description))"
         case .unknown(let identifier): return identifier
         }

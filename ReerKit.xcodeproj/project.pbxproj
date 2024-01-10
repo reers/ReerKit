@@ -501,6 +501,7 @@
 		D07E53AD288309DF00921873 /* RETimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AC288309DF00921873 /* RETimerTests.swift */; };
 		D07E53AF2883137000921873 /* WeakProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E53AE2883137000921873 /* WeakProxy.swift */; };
 		D08416A42A30CE560078919B /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08416A32A30CE560078919B /* KeyboardManager.swift */; };
+		D087D49A2B4E5CAE005918E9 /* ReerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D087D4922B4E5CAE005918E9 /* ReerKit.framework */; };
 		D08B843A29D66C4200D7EC17 /* ColorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08B843929D66C4200D7EC17 /* ColorExtensionsTests.swift */; };
 		D08F2C5B29DB437B00B4C181 /* Date+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08F2C5A29DB437B00B4C181 /* Date+REExtensions.swift */; };
 		D090D96629DC5A1100245538 /* Locale+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BDA4BC29DC5925001EA4A0 /* Locale+REExtensions.swift */; };
@@ -637,6 +638,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = D04B865229F9A65800177357;
 			remoteInfo = "ReerKit-tvOS";
+		};
+		D087D49B2B4E5CAE005918E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0B120E92855057800B5B326 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D087D4912B4E5CAE005918E9;
+			remoteInfo = "ReerKit-visionOS";
 		};
 		D0B120FE285505AA00B5B326 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -786,6 +794,8 @@
 		D07E53AC288309DF00921873 /* RETimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimerTests.swift; sourceTree = "<group>"; };
 		D07E53AE2883137000921873 /* WeakProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakProxy.swift; sourceTree = "<group>"; };
 		D08416A32A30CE560078919B /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
+		D087D4922B4E5CAE005918E9 /* ReerKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D087D4992B4E5CAE005918E9 /* ReerKit-visionOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ReerKit-visionOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D08B843929D66C4200D7EC17 /* ColorExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensionsTests.swift; sourceTree = "<group>"; };
 		D08F2C5A29DB437B00B4C181 /* Date+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+REExtensions.swift"; sourceTree = "<group>"; };
 		D090D96729DC5A6300245538 /* LocalExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalExtensionsTests.swift; sourceTree = "<group>"; };
@@ -934,6 +944,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				D04B865B29F9A65800177357 /* ReerKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D087D48F2B4E5CAE005918E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D087D4962B4E5CAE005918E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D087D49A2B4E5CAE005918E9 /* ReerKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1124,6 +1149,8 @@
 				D04B864029F9A60B00177357 /* ReerKit-watchOSTests.xctest */,
 				D04B865329F9A65800177357 /* ReerKit.framework */,
 				D04B865A29F9A65800177357 /* ReerKit-tvOSTests.xctest */,
+				D087D4922B4E5CAE005918E9 /* ReerKit.framework */,
+				D087D4992B4E5CAE005918E9 /* ReerKit-visionOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1474,6 +1501,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D087D48D2B4E5CAE005918E9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0B120EF285505AA00B5B326 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1592,6 +1626,42 @@
 			productReference = D04B865A29F9A65800177357 /* ReerKit-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		D087D4912B4E5CAE005918E9 /* ReerKit-visionOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D087D4A52B4E5CAE005918E9 /* Build configuration list for PBXNativeTarget "ReerKit-visionOS" */;
+			buildPhases = (
+				D087D48D2B4E5CAE005918E9 /* Headers */,
+				D087D48E2B4E5CAE005918E9 /* Sources */,
+				D087D48F2B4E5CAE005918E9 /* Frameworks */,
+				D087D4902B4E5CAE005918E9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ReerKit-visionOS";
+			productName = "ReerKit-visionOS";
+			productReference = D087D4922B4E5CAE005918E9 /* ReerKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D087D4982B4E5CAE005918E9 /* ReerKit-visionOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D087D4A62B4E5CAE005918E9 /* Build configuration list for PBXNativeTarget "ReerKit-visionOSTests" */;
+			buildPhases = (
+				D087D4952B4E5CAE005918E9 /* Sources */,
+				D087D4962B4E5CAE005918E9 /* Frameworks */,
+				D087D4972B4E5CAE005918E9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D087D49C2B4E5CAE005918E9 /* PBXTargetDependency */,
+			);
+			name = "ReerKit-visionOSTests";
+			productName = "ReerKit-visionOSTests";
+			productReference = D087D4992B4E5CAE005918E9 /* ReerKit-visionOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D0B120F3285505AA00B5B326 /* ReerKit-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0B12108285505AA00B5B326 /* Build configuration list for PBXNativeTarget "ReerKit-iOS" */;
@@ -1635,7 +1705,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = reers;
 				TargetAttributes = {
@@ -1656,6 +1726,12 @@
 					};
 					D04B865929F9A65800177357 = {
 						CreatedOnToolsVersion = 14.2;
+					};
+					D087D4912B4E5CAE005918E9 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+					D087D4982B4E5CAE005918E9 = {
+						CreatedOnToolsVersion = 15.2;
 					};
 					D0B120F3285505AA00B5B326 = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -1688,6 +1764,8 @@
 				D04B863F29F9A60B00177357 /* ReerKit-watchOSTests */,
 				D04B865229F9A65800177357 /* ReerKit-tvOS */,
 				D04B865929F9A65800177357 /* ReerKit-tvOSTests */,
+				D087D4912B4E5CAE005918E9 /* ReerKit-visionOS */,
+				D087D4982B4E5CAE005918E9 /* ReerKit-visionOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1729,6 +1807,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D04B865829F9A65800177357 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D087D4902B4E5CAE005918E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D087D4972B4E5CAE005918E9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2174,6 +2266,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D087D48E2B4E5CAE005918E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D087D4952B4E5CAE005918E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0B120F0285505AA00B5B326 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2428,6 +2534,11 @@
 			isa = PBXTargetDependency;
 			target = D04B865229F9A65800177357 /* ReerKit-tvOS */;
 			targetProxy = D04B865C29F9A65800177357 /* PBXContainerItemProxy */;
+		};
+		D087D49C2B4E5CAE005918E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D087D4912B4E5CAE005918E9 /* ReerKit-visionOS */;
+			targetProxy = D087D49B2B4E5CAE005918E9 /* PBXContainerItemProxy */;
 		};
 		D0B120FF285505AA00B5B326 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3015,6 +3126,218 @@
 			};
 			name = Release;
 		};
+		D087D4A12B4E5CAE005918E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 reers. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.phoenix.ReerKit-visionOS";
+				PRODUCT_NAME = ReerKit;
+				SDKROOT = xros;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				XROS_DEPLOYMENT_TARGET = 1.0;
+			};
+			name = Debug;
+		};
+		D087D4A22B4E5CAE005918E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 reers. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.phoenix.ReerKit-visionOS";
+				PRODUCT_NAME = ReerKit;
+				SDKROOT = xros;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				XROS_DEPLOYMENT_TARGET = 1.0;
+			};
+			name = Release;
+		};
+		D087D4A32B4E5CAE005918E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.phoenix.ReerKit-visionOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 1.0;
+			};
+			name = Debug;
+		};
+		D087D4A42B4E5CAE005918E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.phoenix.ReerKit-visionOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				VALIDATE_PRODUCT = YES;
+				XROS_DEPLOYMENT_TARGET = 1.0;
+			};
+			name = Release;
+		};
 		D0B120ED2855057800B5B326 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3456,6 +3779,24 @@
 			buildConfigurations = (
 				D04B866629F9A65900177357 /* Debug */,
 				D04B866729F9A65900177357 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D087D4A52B4E5CAE005918E9 /* Build configuration list for PBXNativeTarget "ReerKit-visionOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D087D4A12B4E5CAE005918E9 /* Debug */,
+				D087D4A22B4E5CAE005918E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D087D4A62B4E5CAE005918E9 /* Build configuration list for PBXNativeTarget "ReerKit-visionOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D087D4A32B4E5CAE005918E9 /* Debug */,
+				D087D4A42B4E5CAE005918E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

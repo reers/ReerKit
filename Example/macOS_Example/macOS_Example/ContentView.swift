@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  watchOS_Example Watch App
+//  macOS_Example
 //
-//  Created by phoenix on 2024/1/10.
+//  Created by phoenix on 2024/1/11.
 //
 
 import SwiftUI

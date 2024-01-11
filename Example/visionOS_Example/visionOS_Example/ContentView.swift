@@ -35,9 +35,8 @@ struct ContentView: View {
             VStack {
                 Toggle("Enlarge RealityView Content", isOn: $enlarge)
                     .toggleStyle(.button)
+                Text("SGVsbG8sIHdvcmxkIQ==".re.base64Decoded!)
             }.padding().glassBackgroundEffect()
-        }.onAppear {
-            print("123".re.md5String!)
         }
     }
 }

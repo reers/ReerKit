@@ -5,6 +5,9 @@
       location = "group:Example/iOS_Example/iOS_Example.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:Example/macOS_Example/macOS_Example.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Example/tvOS_Example/tvOS_Example.xcodeproj">
    </FileRef>
    <FileRef

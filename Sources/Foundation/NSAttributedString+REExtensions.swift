@@ -38,6 +38,39 @@ public extension Reer where Base: NSAttributedString {
         guard base.length > 0 else { return [:] }
         return base.attributes(at: 0, effectiveRange: nil)
     }
+    
+    /// ReerKit: Calculate lines for a `NSAttributedString` with a width limitation.
+    /// - Parameters:
+    ///   - width: A limitation of container view width.
+    ///   - ignoreBlankLines: Whether should ignore blank lines.
+    /// - Returns: Total lines of the attributed string after rendering.
+    func lines(forWidth width: CGFloat, ignoreBlankLines: Bool = false) -> Int {
+        let framesetter = CTFramesetterCreateWithAttributedString(base as! CFAttributedString)
+        let path = CGPath(rect: .init(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude), transform: nil)
+        let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, nil)
+        let lines = CTFrameGetLines(frame) as Array
+        var numberOfLines = lines.count
+        
+        if base.string.hasSuffix("\n") {
+            numberOfLines += 1
+        }
+        
+        if ignoreBlankLines, let ctLines = lines as? [CTLine] {
+            numberOfLines = 0
+            for ctLine in ctLines {
+                let lineRange = CTLineGetStringRange(ctLine)
+                let startIndex = base.string.index(base.string.startIndex, offsetBy: Int(lineRange.location))
+                let endIndex = base.string.index(startIndex, offsetBy: Int(lineRange.length))
+                let lineString = base.string[startIndex..<endIndex]
+                let trimmed = lineString.trimmingCharacters(in: .whitespacesAndNewlines)
+                if !trimmed.isEmpty {
+                    numberOfLines += 1
+                }
+            }
+        }
+        
+        return numberOfLines
+    }
 
     /// ReerKit: Applies given attributes to the new instance of NSAttributedString initialized with self object.
     ///

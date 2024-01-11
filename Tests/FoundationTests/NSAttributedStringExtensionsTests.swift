@@ -143,6 +143,63 @@ final class NSAttributedStringExtensionsTests: XCTestCase {
             NSAttributedString(string: "")
         )
     }
+    
+    func testCalculateLinesOfAttributedString() {
+        let attr1 = NSAttributedString(string: "1231fsfkjalskj1l2kj312l312afasldfkj1l2k3j12l3kj")
+            .re.with(attributes: [.font: UIFont.systemFont(ofSize: 15)])
+        let label = UILabel()
+        label.backgroundColor = .red
+        label.numberOfLines = 0
+        label.attributedText = attr1
+        label.frame = attr1.boundingRect(with: .init(width: 80, height: CGFloat.greatestFiniteMagnitude), options: [.usesFontLeading, .usesLineFragmentOrigin], context: nil)
+        let lines = attr1.re.lines(forWidth: 80)
+        XCTAssertEqual(lines, 4)
+        
+        do {
+            let multilineString = """
+                
+                
+                131123
+                abdcassdf
+                
+                ssssdfasdfaasefasdfasdfasdf
+                123
+                
+                
+                fsdlkfj1231
+                
+                """
+            let attr2 = NSAttributedString(string: multilineString)
+                .re.with(attributes: [.font: UIFont.systemFont(ofSize: 15)])
+            label.attributedText = attr2
+            label.frame = attr2.boundingRect(with: .init(width: 80, height: CGFloat.greatestFiniteMagnitude), options: [.usesFontLeading, .usesLineFragmentOrigin], context: nil)
+            let lines2 = attr2.re.lines(forWidth: 80)
+            XCTAssertEqual(lines2, 13)
+        }
+        
+        do {
+            let multilineString = """
+                
+                
+                131123
+                abdcassdf
+                
+                ssssdfasdfaasefasdfasdfasdf
+                123
+                
+                
+                fsdlkfj1231
+                
+                """
+            let attr2 = NSAttributedString(string: multilineString)
+                .re.with(attributes: [.font: UIFont.systemFont(ofSize: 15)])
+            label.attributedText = attr2
+            label.frame = attr2.boundingRect(with: .init(width: 80, height: CGFloat.greatestFiniteMagnitude), options: [.usesFontLeading, .usesLineFragmentOrigin], context: nil)
+            let lines2 = attr2.re.lines(forWidth: 80, ignoreBlankLines: true)
+            XCTAssertEqual(lines2, 7)
+        }
+        
+    }
     #endif
 }
 

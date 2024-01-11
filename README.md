@@ -5,7 +5,7 @@ Part of the content in the framework comes from the excellent open-source librar
 [简体中文](README_CN.md)
 
 ## Requirements
-iOS 12.0+ / tvOS 12.0+ / watchOS 4.0+ / macOS 10.13+ / visionOS 1.0+ / Ubuntu 14.04+
+iOS 11.0+ / tvOS 11.0+ / watchOS 4.0+ / macOS 10.13+ / visionOS 1.0+ / Ubuntu 14.04+
 Swift 5.9+
 XCode 15.2+
 

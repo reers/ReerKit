@@ -3,7 +3,7 @@ ReerKit 是许多个原生 Swift 扩展的集合，为 iOS、macOS、tvOS、watc
 部分内容来自优秀的开源库 [SwifterSwift](https://github.com/SwifterSwift/SwifterSwift), 对其中的代码进行了一定的删减, 优化和 bug 修复, 还有一些内容是从互联网各处整理到的一些工具类或扩展方法, 剩下的内容由本人自己开发完成. 框架中所有的系统类型 extension 都添加了 `re` 中缀, 避免了同名扩展调用时的歧义问题, 如 `"SGVsbG\n8gV29ybGQh".re.base64Decoded`, `"123".re.md5String`.
 
 ## 要求
-iOS 12.0+ / tvOS 12.0+ / watchOS 4.0+ / macOS 10.13+ / visionOS 1.0+ / Ubuntu 14.04+
+iOS 11.0+ / tvOS 11.0+ / watchOS 4.0+ / macOS 10.13+ / visionOS 1.0+ / Ubuntu 14.04+
 Swift 5.9+
 XCode 15.2+
 

@@ -490,7 +490,7 @@ public extension Reer where Base: UIDevice {
     
     /// ReerKit: Whether the device is Mac.
     static var isMac: Bool {
-        if #available(iOS 14.0, *) {
+        if #available(iOS 14.0, tvOS 14.0, *) {
             return UIDevice.current.userInterfaceIdiom == .mac
         } else {
             return false
@@ -504,7 +504,7 @@ public extension Reer where Base: UIDevice {
     
     /// ReerKit: Whether the device is Vision Pro.
     static var isVision: Bool {
-        if #available(iOS 17.0, *) {
+        if #available(iOS 17.0, tvOS 17.0, *) {
             return UIDevice.current.userInterfaceIdiom == .vision
         } else {
             return false

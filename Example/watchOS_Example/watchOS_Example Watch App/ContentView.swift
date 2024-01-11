@@ -14,7 +14,7 @@ struct ContentView: View {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text("Hello, world!".re.md5String!)
+            Text("aGVsbG8gd29ybGQ=".re.base64Decoded!)
         }
         .padding()
     }

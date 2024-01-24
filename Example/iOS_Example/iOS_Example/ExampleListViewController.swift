@@ -25,7 +25,8 @@ class ExampleListViewController: UIViewController {
         Example(title: "Use SwiftUI view in UIKit", vcName: "SwiftUITestViewController"),
         Example(title: "Blur image", vcName: "BlurImageViewController"),
         Example(title: "Gray model for UIView", vcName: "GrayModeViewController"),
-        Example(title: "CountdownTimer", vcName: "CountdownTimerViewController")
+        Example(title: "CountdownTimer", vcName: "CountdownTimerViewController"),
+        Example(title: "Squircle Rounded Corner", vcName: "SquircleCornerViewController"),
     ]
     
     

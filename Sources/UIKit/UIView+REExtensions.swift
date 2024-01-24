@@ -547,7 +547,7 @@ public extension Reer where Base: UIView {
     /// - Parameters:
     ///   - corners: array of corners to change (example: [.bottomLeft, .topRight]).
     ///   - radius: radius for selected corners.
-    func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
+    func roundCorners(_ corners: UIRectCorner = .allCorners, radius: CGFloat) {
         var caCorners = CACornerMask()
         if corners.contains(.allCorners) {
             caCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
@@ -559,6 +559,29 @@ public extension Reer where Base: UIView {
         }
         base.layer.maskedCorners = caCorners
         base.layer.cornerRadius = radius
+    }
+    
+    /// ReerKit: Set some or all corners radiuses of view with a continuous curve.
+    /// It will make the rectangle to squircle, just like the iPhone/iPad...and all of Apple products's rounded corner.
+    /// https://medium.com/minimal-notes/rounded-corners-in-the-apple-ecosystem-1b3f45e18fcc
+    ///
+    /// - Parameters:
+    ///   - corners: array of corners to change (example: [.bottomLeft, .topRight]).
+    ///   - radius: radius for selected corners.
+    @available(iOS 13.0, tvOS 13.0, *)
+    func squircleRoundCorners(_ corners: UIRectCorner = .allCorners, radius: CGFloat) {
+        var caCorners = CACornerMask()
+        if corners.contains(.allCorners) {
+            caCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        } else {
+            if corners.contains(.topLeft) { caCorners.insert(.layerMinXMinYCorner) }
+            if corners.contains(.topRight) { caCorners.insert(.layerMaxXMinYCorner) }
+            if corners.contains(.bottomLeft) { caCorners.insert(.layerMinXMaxYCorner) }
+            if corners.contains(.bottomRight) { caCorners.insert(.layerMaxXMaxYCorner) }
+        }
+        base.layer.maskedCorners = caCorners
+        base.layer.cornerRadius = radius
+        base.layer.cornerCurve = .continuous
     }
     
     /// ReerKit: Add shadow to view.

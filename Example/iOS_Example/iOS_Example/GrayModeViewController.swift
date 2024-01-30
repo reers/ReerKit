@@ -29,7 +29,7 @@ class GrayModeViewController: UIViewController {
     
     @objc
     func toggle(_ sender: UIButton) {
-        let previous = sender.re.isGrayModelEnabled
-        sender.re.isGrayModelEnabled = !previous
+        let previous = sender.re.isGrayModeEnabled
+        sender.re.isGrayModeEnabled = !previous
     }
 }

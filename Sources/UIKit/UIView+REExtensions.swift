@@ -252,7 +252,7 @@ public extension Reer where Base: UIView {
     }
     
     #if canImport(CoreImage)
-    var isGrayModelEnabled: Bool {
+    var isGrayModeEnabled: Bool {
         get {
             return base.re.associatedValue(forKey: AssociationKey(#function as StaticString), default: false)
         }

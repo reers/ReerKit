@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ReerKit"
-  s.version      = "1.0.25"
+  s.version      = "1.0.26"
   s.summary      = "Collections of Swift extensions and utils."
 
   s.description  = <<-DESC
@@ -24,9 +24,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = "10.13"
   s.watchos.deployment_target = "4.0"
   s.tvos.deployment_target = "11.0"
-  
-  # Wait for Cocoapods 1.15.0
-  # s.visionos.deployment_target = "1.0"
+  s.visionos.deployment_target = "1.0"
 
   s.swift_version = '5.9'
   s.source = { :git => "https://github.com/reers/ReerKit.git", :tag => s.version.to_s }

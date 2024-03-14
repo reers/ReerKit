@@ -452,6 +452,11 @@
 		D071620E29F3D5FD0051C11E /* WKWebViewExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071620D29F3D5FD0051C11E /* WKWebViewExtensionsTests.swift */; };
 		D071DEBD28D8DC1F00618A2F /* Collection+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071DEBC28D8DC1F00618A2F /* Collection+REExtensions.swift */; };
 		D071DEBF28D8DF5500618A2F /* CollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071DEBE28D8DF5500618A2F /* CollectionExtensionsTests.swift */; };
+		D07562F42BA2EED500640242 /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07562F32BA2EED500640242 /* OrderedDictionary.swift */; };
+		D07562F52BA2EED500640242 /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07562F32BA2EED500640242 /* OrderedDictionary.swift */; };
+		D07562F62BA2EED500640242 /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07562F32BA2EED500640242 /* OrderedDictionary.swift */; };
+		D07562F72BA2EED500640242 /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07562F32BA2EED500640242 /* OrderedDictionary.swift */; };
+		D07562F82BA2EED500640242 /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07562F32BA2EED500640242 /* OrderedDictionary.swift */; };
 		D076A2D128E5DBFF00E89281 /* DecodableExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076A2D028E5DBFF00E89281 /* DecodableExtensionsTests.swift */; };
 		D076D47E29F3911D0008ABE0 /* test.pdf in Resources */ = {isa = PBXBuildFile; fileRef = D076D47D29F3911D0008ABE0 /* test.pdf */; };
 		D076D48129F3B62E0008ABE0 /* UIImageView+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076D47F29F3B5F60008ABE0 /* UIImageView+REExtensions.swift */; };
@@ -751,6 +756,7 @@
 		D071620D29F3D5FD0051C11E /* WKWebViewExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewExtensionsTests.swift; sourceTree = "<group>"; };
 		D071DEBC28D8DC1F00618A2F /* Collection+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+REExtensions.swift"; sourceTree = "<group>"; };
 		D071DEBE28D8DF5500618A2F /* CollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtensionsTests.swift; sourceTree = "<group>"; };
+		D07562F32BA2EED500640242 /* OrderedDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedDictionary.swift; sourceTree = "<group>"; };
 		D076A2D028E5DBFF00E89281 /* DecodableExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableExtensionsTests.swift; sourceTree = "<group>"; };
 		D076D47D29F3911D0008ABE0 /* test.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = test.pdf; sourceTree = "<group>"; };
 		D076D47F29F3B5F60008ABE0 /* UIImageView+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+REExtensions.swift"; sourceTree = "<group>"; };
@@ -986,6 +992,7 @@
 				D00D63882A069AB600A9EEF4 /* LinkedList.swift */,
 				D00D638A2A069AB600A9EEF4 /* Queue.swift */,
 				D00D63892A069AB600A9EEF4 /* Stack.swift */,
+				D07562F32BA2EED500640242 /* OrderedDictionary.swift */,
 			);
 			path = DataStructure;
 			sourceTree = "<group>";
@@ -1729,6 +1736,7 @@
 					};
 					D087D4912B4E5CAE005918E9 = {
 						CreatedOnToolsVersion = 15.2;
+						LastSwiftMigration = 1520;
 					};
 					D087D4982B4E5CAE005918E9 = {
 						CreatedOnToolsVersion = 15.2;
@@ -1967,6 +1975,7 @@
 				D04B85CA29F9A3FC00177357 /* Float+REExtensions.swift in Sources */,
 				D04B85C229F9A3FC00177357 /* StdlibProtocolWrappers.swift in Sources */,
 				D04B85D429F9A40000177357 /* AnyObjectExtensionable.swift in Sources */,
+				D07562F52BA2EED500640242 /* OrderedDictionary.swift in Sources */,
 				D04B85F629F9A57800177357 /* CGVector+REExtensions.swift in Sources */,
 				D04B85D029F9A3FC00177357 /* BinaryFloatingPoint+REExtensions.swift in Sources */,
 				D04B85C429F9A3FC00177357 /* Optional+REExtensions.swift in Sources */,
@@ -2105,6 +2114,7 @@
 				D04B867629F9A6D400177357 /* CGColor+REExtensions.swift in Sources */,
 				D04B869829F9A6F100177357 /* StdlibProtocolWrappers.swift in Sources */,
 				D04B86F029F9A71100177357 /* Timer+REExtensions.swift in Sources */,
+				D07562F62BA2EED500640242 /* OrderedDictionary.swift in Sources */,
 				D04B869929F9A6F100177357 /* StringProtocol+REExtensions.swift in Sources */,
 				D04B86D329F9A70600177357 /* Memory.swift in Sources */,
 				D04B873429F9A71900177357 /* UINavigationItem+REExtensions.swift in Sources */,
@@ -2242,6 +2252,7 @@
 				D04B866F29F9A6D300177357 /* CGColor+REExtensions.swift in Sources */,
 				D04B86AF29F9A6F100177357 /* StdlibProtocolWrappers.swift in Sources */,
 				D04B86E229F9A71000177357 /* Timer+REExtensions.swift in Sources */,
+				D07562F72BA2EED500640242 /* OrderedDictionary.swift in Sources */,
 				D04B86B029F9A6F100177357 /* StringProtocol+REExtensions.swift in Sources */,
 				D04B86DD29F9A70600177357 /* Memory.swift in Sources */,
 				D04B871329F9A71900177357 /* UINavigationItem+REExtensions.swift in Sources */,
@@ -2270,6 +2281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D07562F82BA2EED500640242 /* OrderedDictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2311,6 +2323,7 @@
 				D04D34F7286C7A8A001E974C /* DispatchQueue+REExtensions.swift in Sources */,
 				D076D4A929F3BE330008ABE0 /* UISwitch+REExtensions.swift in Sources */,
 				D0122B2729EF0417008311CF /* UIGestureRecognizer+REExtensions.swift in Sources */,
+				D07562F42BA2EED500640242 /* OrderedDictionary.swift in Sources */,
 				D00615C12976F52D003FA4CF /* CATransform3D+REExtensions.swift in Sources */,
 				D076D49529F3BBD90008ABE0 /* UINavigationItem+REExtensions.swift in Sources */,
 				D0BDA4B529DC4E33001EA4A0 /* FileManager+REExtensions.swift in Sources */,
@@ -3252,6 +3265,7 @@
 		D087D4A32B4E5CAE005918E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -3299,6 +3313,7 @@
 		D087D4A42B4E5CAE005918E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;

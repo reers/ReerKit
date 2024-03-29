@@ -22,7 +22,7 @@ XCode 15.2+
 <summary>Carthage</summary>
 </br>
 <p>要使用 <a href="https://github.com/Carthage/Carthage">Carthage</a> 将 ReerKit 集成到您的 Xcode 项目中，请在您的 <code>Cartfile</code> 中设置:</p>
-<pre><code class="ogdl language-ogdl">github "ReerKit/ReerKit" ~&gt; 1.0.26
+<pre><code class="ogdl language-ogdl">github "ReerKit/ReerKit" ~&gt; 1.0.27
 </code></pre>
 </details>
 
@@ -35,7 +35,7 @@ let package = Package(
     name: "YOUR_PROJECT_NAME",
     targets: [],
     dependencies: [
-        .package(url: "https://github.com/reers/ReerKit.git", from: "1.0.26")
+        .package(url: "https://github.com/reers/ReerKit.git", from: "1.0.27")
     ]
 )
 </code></pre>

@@ -19,11 +19,23 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-public struct Queue<E> {
+/// ReerKit: A first-in-first-out queue with a fixed capacity.
+public struct BoundedQueue<E> {
+    
+    public enum OverflowBehavior {
+        case rejectNew
+        case dequeueOldest
+    }
+    
     private var array: [E?] = []
     private var head = 0
+    private let maxSize: Int
+    private let overflowBehavior: OverflowBehavior
     
-    public init() {}
+    public init(maxSize: Int, overflowBehavior: OverflowBehavior) {
+        self.maxSize = maxSize
+        self.overflowBehavior = overflowBehavior
+    }
     
     public var count: Int {
         return array.count - head
@@ -33,8 +45,18 @@ public struct Queue<E> {
         return count == 0
     }
     
-    public mutating func enqueue(_ element: E) {
+    @discardableResult
+    public mutating func enqueue(_ element: E) -> Bool {
+        if count >= maxSize {
+            switch overflowBehavior {
+            case .rejectNew:
+                return false
+            case .dequeueOldest:
+                _ = dequeue()
+            }
+        }
         array.append(element)
+        return true
     }
     
     @discardableResult
@@ -61,7 +83,7 @@ public struct Queue<E> {
 }
 
 #if DEBUG
-extension Queue: CustomStringConvertible {
+extension BoundedQueue: CustomStringConvertible {
     public var description: String {
         if isEmpty {
             return "Empty queue"

@@ -457,6 +457,11 @@
 		D071620E29F3D5FD0051C11E /* WKWebViewExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071620D29F3D5FD0051C11E /* WKWebViewExtensionsTests.swift */; };
 		D071DEBD28D8DC1F00618A2F /* Collection+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071DEBC28D8DC1F00618A2F /* Collection+REExtensions.swift */; };
 		D071DEBF28D8DF5500618A2F /* CollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D071DEBE28D8DF5500618A2F /* CollectionExtensionsTests.swift */; };
+		D0737E862BC9262D00B6D89E /* BoundedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0737E852BC9262D00B6D89E /* BoundedQueue.swift */; };
+		D0737E872BC9262D00B6D89E /* BoundedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0737E852BC9262D00B6D89E /* BoundedQueue.swift */; };
+		D0737E882BC9262D00B6D89E /* BoundedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0737E852BC9262D00B6D89E /* BoundedQueue.swift */; };
+		D0737E892BC9262D00B6D89E /* BoundedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0737E852BC9262D00B6D89E /* BoundedQueue.swift */; };
+		D0737E8A2BC9262D00B6D89E /* BoundedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0737E852BC9262D00B6D89E /* BoundedQueue.swift */; };
 		D07562F42BA2EED500640242 /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07562F32BA2EED500640242 /* OrderedDictionary.swift */; };
 		D07562F52BA2EED500640242 /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07562F32BA2EED500640242 /* OrderedDictionary.swift */; };
 		D07562F62BA2EED500640242 /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07562F32BA2EED500640242 /* OrderedDictionary.swift */; };
@@ -762,6 +767,7 @@
 		D071620D29F3D5FD0051C11E /* WKWebViewExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewExtensionsTests.swift; sourceTree = "<group>"; };
 		D071DEBC28D8DC1F00618A2F /* Collection+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+REExtensions.swift"; sourceTree = "<group>"; };
 		D071DEBE28D8DF5500618A2F /* CollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtensionsTests.swift; sourceTree = "<group>"; };
+		D0737E852BC9262D00B6D89E /* BoundedQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundedQueue.swift; sourceTree = "<group>"; };
 		D07562F32BA2EED500640242 /* OrderedDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedDictionary.swift; sourceTree = "<group>"; };
 		D076A2D028E5DBFF00E89281 /* DecodableExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableExtensionsTests.swift; sourceTree = "<group>"; };
 		D076D47D29F3911D0008ABE0 /* test.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = test.pdf; sourceTree = "<group>"; };
@@ -1000,6 +1006,7 @@
 				D00D63892A069AB600A9EEF4 /* Stack.swift */,
 				D07562F32BA2EED500640242 /* OrderedDictionary.swift */,
 				D01D002B2BB6E5130067B6FE /* OrderedSet.swift */,
+				D0737E852BC9262D00B6D89E /* BoundedQueue.swift */,
 			);
 			path = DataStructure;
 			sourceTree = "<group>";
@@ -1996,6 +2003,7 @@
 				D04B861729F9A59600177357 /* UINavigationBar+REExtensions.swift in Sources */,
 				D04B85E229F9A50600177357 /* DeinitObserver.swift in Sources */,
 				D04B85C529F9A3FC00177357 /* Character+REExtensions.swift in Sources */,
+				D0737E872BC9262D00B6D89E /* BoundedQueue.swift in Sources */,
 				D04B85C329F9A3FC00177357 /* OptionSet+REExtensions.swift in Sources */,
 				D04B85D529F9A40000177357 /* OnceExecutable.swift in Sources */,
 			);
@@ -2136,6 +2144,7 @@
 				D04B873129F9A71900177357 /* UINavigationBar+REExtensions.swift in Sources */,
 				D04B86F329F9A71100177357 /* NSPredicate+REExtensions.swift in Sources */,
 				D04B86F629F9A71100177357 /* Calendar+REExtensions.swift in Sources */,
+				D0737E882BC9262D00B6D89E /* BoundedQueue.swift in Sources */,
 				D04B867F29F9A6D900177357 /* Font+REExtensions.swift in Sources */,
 				D04B872829F9A71900177357 /* UIStoryboard+REExtensions.swift in Sources */,
 			);
@@ -2275,6 +2284,7 @@
 				D04B871029F9A71900177357 /* UINavigationBar+REExtensions.swift in Sources */,
 				D04B86E529F9A71000177357 /* NSPredicate+REExtensions.swift in Sources */,
 				D04B86E829F9A71000177357 /* Calendar+REExtensions.swift in Sources */,
+				D0737E892BC9262D00B6D89E /* BoundedQueue.swift in Sources */,
 				D04B867C29F9A6D800177357 /* Font+REExtensions.swift in Sources */,
 				D04B870729F9A71900177357 /* UIStoryboard+REExtensions.swift in Sources */,
 			);
@@ -2291,6 +2301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0737E8A2BC9262D00B6D89E /* BoundedQueue.swift in Sources */,
 				D01D00302BB6E5130067B6FE /* OrderedSet.swift in Sources */,
 				D07562F82BA2EED500640242 /* OrderedDictionary.swift in Sources */,
 			);
@@ -2358,6 +2369,7 @@
 				D076D49129F3BB2D0008ABE0 /* UINavigationController+REExtensions.swift in Sources */,
 				D071DEBD28D8DC1F00618A2F /* Collection+REExtensions.swift in Sources */,
 				D00D638F2A069AB600A9EEF4 /* Stack.swift in Sources */,
+				D0737E862BC9262D00B6D89E /* BoundedQueue.swift in Sources */,
 				D0122B2B29EF04DE008311CF /* UIImage+REExtensions.swift in Sources */,
 				D08F2C5B29DB437B00B4C181 /* Date+REExtensions.swift in Sources */,
 				D0D311382AB8522F00E54361 /* Rounded.swift in Sources */,

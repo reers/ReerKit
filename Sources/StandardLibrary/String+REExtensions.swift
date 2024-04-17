@@ -889,7 +889,7 @@ public extension Reer where Base == String {
 
 // MARK: - Mutating
 extension String: ReerReferenceCompatible {}
-extension ReerReference where Base == String {
+public extension ReerReference where Base == String {
 
     /// ReerKit: Converts string format to CamelCase.
     ///

@@ -23,7 +23,7 @@
 #if canImport(Foundation)
 import Foundation
 
-extension Reer where Base: FileManager {
+public extension Reer where Base: FileManager {
     /// ReerKit: Read from a JSON file at a given path.
     ///
     /// - Parameters:

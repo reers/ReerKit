@@ -44,9 +44,9 @@ public extension Reer where Base: NSAttributedString {
         return numberOfLines(forWidth: width, ignoreBlankLines: ignoreBlankLines)
     }
     
-    /// ReerKit: Calculate lines for a `NSAttributedString` with a width limitation.
+    /// ReerKit: Calculate lines for a `NSAttributedString` with a width constrained.
     /// - Parameters:
-    ///   - width: A limitation of container view width.
+    ///   - width: A constrained of container view width.
     ///   - ignoreBlankLines: Whether should ignore blank lines.
     /// - Returns: Total lines of the attributed string after rendering.
     func numberOfLines(forWidth width: CGFloat, ignoreBlankLines: Bool = false) -> Int {
@@ -75,6 +75,15 @@ public extension Reer where Base: NSAttributedString {
         }
         
         return numberOfLines
+    }
+    
+    /// ReerKit: Calculate height for a `NSAttributedString` with a constrained width.
+    /// - Parameter width: A constrained of container view width.
+    /// - Returns: Total height of the attributed string after rendering.
+    func height(forWidth width: CGFloat) -> CGFloat {
+        let maxSize = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let rect = base.boundingRect(with: maxSize, options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
+        return rect.height
     }
 
     /// ReerKit: Applies given attributes to the new instance of NSAttributedString initialized with self object.

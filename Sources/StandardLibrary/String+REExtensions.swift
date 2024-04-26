@@ -367,7 +367,23 @@ public extension Reer where Base == String {
         return formatter.number(from: base) as? CGFloat
     }
     #endif
-
+    
+    #if canImport(CoreGraphics) && canImport(UIKit)
+    /// ReerKit: Calculate height for a `String` with a constrained width.
+    /// - Parameter width: A constrained of container view width.
+    /// - Returns: Total height of the attributed string after rendering.
+    func height(forWidth width: CGFloat, font: UIFont) -> CGFloat {
+        let maxSize = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let rect = base.boundingRect(
+            with: maxSize,
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            attributes: [.font: font],
+            context: nil
+        )
+        return rect.height
+    }
+    #endif
+    
     #if canImport(Foundation)
     private static var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()

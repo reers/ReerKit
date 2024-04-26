@@ -39,12 +39,17 @@ public extension Reer where Base: NSAttributedString {
         return base.attributes(at: 0, effectiveRange: nil)
     }
     
+    @available(*, deprecated, renamed: "numberOfLines(forWidth:ignoreBlankLines:)", message: "Use numberOfLines(forWidth:ignoringBlankLines:) instead.")
+    func lines(forWidth width: CGFloat, ignoreBlankLines: Bool = false) -> Int {
+        return numberOfLines(forWidth: width, ignoreBlankLines: ignoreBlankLines)
+    }
+    
     /// ReerKit: Calculate lines for a `NSAttributedString` with a width limitation.
     /// - Parameters:
     ///   - width: A limitation of container view width.
     ///   - ignoreBlankLines: Whether should ignore blank lines.
     /// - Returns: Total lines of the attributed string after rendering.
-    func lines(forWidth width: CGFloat, ignoreBlankLines: Bool = false) -> Int {
+    func numberOfLines(forWidth width: CGFloat, ignoreBlankLines: Bool = false) -> Int {
         let framesetter = CTFramesetterCreateWithAttributedString(base as! CFAttributedString)
         let path = CGPath(rect: .init(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude), transform: nil)
         let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, nil)

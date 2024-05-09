@@ -20,6 +20,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+#if canImport(Foundation)
+import Foundation
+#endif
+
 // MARK: ----------- Mutating -----------
 
 extension Array: ReerReferenceGenericCompatible {
@@ -132,4 +136,41 @@ public extension ReerGeneric where Base == Array<T>, T: Equatable {
         var set = Set<U>()
         return base.filter { set.insert($0[keyPath: path]).inserted }
     }
+}
+
+// MARK: - JSON Data and String
+
+public extension ReerGeneric where Base == Array<T> {
+    #if canImport(Foundation)
+    /// ReerKit: JSON Data from array.
+    ///
+    /// - Parameter prettify: set true to prettify data (default is false).
+    /// - Returns: optional JSON Data (if applicable).
+    func jsonData(prettify: Bool = false) -> Data? {
+        guard JSONSerialization.isValidJSONObject(base) else {
+            return nil
+        }
+        let options = (prettify == true)
+        ? JSONSerialization.WritingOptions.prettyPrinted
+        : JSONSerialization.WritingOptions()
+        return try? JSONSerialization.data(withJSONObject: base, options: options)
+    }
+    #endif
+    
+    #if canImport(Foundation)
+    /// ReerKit: JSON String from array.
+    ///
+    ///        array.re.jsonString() -> "[{\"abc\":123}]"
+    ///
+    /// - Parameter prettify: set true to prettify string (default is false).
+    /// - Returns: optional JSON String (if applicable).
+    func jsonString(prettify: Bool = false) -> String? {
+        guard JSONSerialization.isValidJSONObject(base) else { return nil }
+        let options = (prettify == true)
+        ? JSONSerialization.WritingOptions.prettyPrinted
+        : JSONSerialization.WritingOptions()
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: base, options: options) else { return nil }
+        return String(data: jsonData, encoding: .utf8)
+    }
+    #endif
 }

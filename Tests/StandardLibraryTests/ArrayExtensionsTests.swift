@@ -58,5 +58,19 @@ final class ArrayExtensionsTests: XCTestCase {
         ]
         XCTAssertEqual(arrayWithoutDuplicatesNHashable, arrayWithoutDuplicatesNHashablePrepared)
     }
+    
+    func testJSON() {
+        let array = [
+            [
+            "abc":123,
+            "haha": ["name":"phoenix"]
+            ]
+        ]
+        let jsonString = array.re.jsonString()
+        XCTAssert((jsonString == "[{\"haha\":{\"name\":\"phoenix\"},\"abc\":123}]") || (jsonString == "[{\"abc\":123,\"haha\":{\"name\":\"phoenix\"}}]"))
+        let data = array.re.jsonData()!
+        let dict = data.re.array?[0] as? Dictionary<String, Any>
+        XCTAssertEqual(dict?["abc"] as! Int, 123)
+    }
 
 }

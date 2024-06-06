@@ -97,6 +97,29 @@ public extension Reer where Base: UIAlertController {
 // MARK: - Initializers
 
 public extension UIAlertController {
+    
+    /// ReerKit: Create a alert view controller with actions.
+    /// - Parameters:
+    ///   - title: alert controller's title.
+    ///   - message: alert controller's message (default is nil).
+    ///   - preferredStyle: alert controller's display style.
+    ///   - tintColor: alert controller's tint color (default is nil).
+    ///   - actions: button clicked actions.
+    static func re(
+        title: String? = nil,
+        message: String? = nil,
+        preferredStyle: UIAlertController.Style = .alert,
+        tintColor: UIColor? = nil,
+        actions: [UIAlertAction]
+    ) -> UIAlertController {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
+        actions.forEach { alert.addAction($0) }
+        if let color = tintColor {
+            alert.view.tintColor = color
+        }
+        return alert
+    }
+    
     /// ReerKit: Create new alert view controller with default OK action.
     ///
     /// - Parameters:
@@ -105,7 +128,7 @@ public extension UIAlertController {
     ///   - defaultActionButtonTitle: default action button title (default is "OK").
     ///   - tintColor: alert controller's tint color (default is nil).
     static func re(
-        title: String,
+        title: String? = nil,
         message: String? = nil,
         defaultActionButtonTitle: String = "OK",
         tintColor: UIColor? = nil

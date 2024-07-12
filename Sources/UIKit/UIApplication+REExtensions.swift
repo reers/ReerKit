@@ -142,6 +142,15 @@ public extension Reer where Base: UIApplication {
         }
     }
     
+    /// ReerKit: The app's main screen.
+    static var mainScreen: UIScreen? {
+        if #available(iOS 13.0, *) {
+            return keyWindow?.windowScene?.screen
+        } else {
+            return keyWindow?.screen
+        }
+    }
+    
     /// ReerKit: App's top most view controller.
     static var topViewController: UIViewController? {
         guard let rootViewController = keyWindow?.rootViewController else { return nil }

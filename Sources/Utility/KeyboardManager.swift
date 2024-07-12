@@ -127,20 +127,17 @@ public final class KeyboardManager: NSObject {
         for window in UIApplication.re.windows {
             // Get the window
             let windowName = String(describing: type(of: window))
-            if systemVersion < 16 {
-                // UIRemoteKeyboardWindow
-                if windowName.count == 22,
-                   windowName.hasPrefix("UI"),
-                   windowName.hasSuffix("RemoteKeyboardWindow") {
-                    keyboardWindows.append(window)
-                }
-            } else {
-                // UITextEffectsWindow
-                if windowName.count == 19,
-                   windowName.hasPrefix("UI"),
-                   windowName.hasSuffix("TextEffectsWindow") {
-                    keyboardWindows.append(window)
-                }
+            // UITextEffectsWindow
+            if windowName.count == 19,
+               windowName.hasPrefix("UI"),
+               windowName.hasSuffix("TextEffectsWindow") {
+                keyboardWindows.append(window)
+            }
+            // UIRemoteKeyboardWindow
+            if windowName.count == 22,
+               windowName.hasPrefix("UI"),
+               windowName.hasSuffix("RemoteKeyboardWindow") {
+                keyboardWindows.append(window)
             }
         }
         if keyboardWindows.count == 1 {
@@ -354,21 +351,19 @@ public final class KeyboardManager: NSObject {
         guard let window = window else { return nil }
         // Get the window
         let windowName = String(describing: type(of: window))
-        if systemVersion < 16 {
-            // UIRemoteKeyboardWindow
-            guard windowName.count == 22,
-                  windowName.hasPrefix("UI"),
-                  windowName.hasSuffix("RemoteKeyboardWindow")
-            else { return nil }
-            return findUIInputSetHostViewInWindow(window)
-        } else {
-            // UITextEffectsWindow
-            guard windowName.count == 19,
-                  windowName.hasPrefix("UI"),
-                  windowName.hasSuffix("TextEffectsWindow")
-            else { return nil }
+        // UITextEffectsWindow
+        if windowName.count == 19,
+           windowName.hasPrefix("UI"),
+           windowName.hasSuffix("TextEffectsWindow") {
             return findUIInputSetHostViewInWindow(window)
         }
+        // UIRemoteKeyboardWindow
+        if windowName.count == 22,
+           windowName.hasPrefix("UI"),
+           windowName.hasSuffix("RemoteKeyboardWindow") {
+            return findUIInputSetHostViewInWindow(window)
+        }
+        return nil
     }
     
     private func findUIInputSetHostViewInWindow(_ window: UIWindow) -> UIView? {

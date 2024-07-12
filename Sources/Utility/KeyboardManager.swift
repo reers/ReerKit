@@ -305,18 +305,18 @@ public final class KeyboardManager: NSObject {
     
     @objc
     private func notifyAllObservers() {
-        guard let keyboard = keyboardView,
-              let window = keyboard.window ?? UIApplication.re.keyWindow ?? UIApplication.re.windows.first
-        else {
-            return
+        var windowRect: CGRect = windowBounds
+        if let keyboard = keyboardView,
+           let window = keyboard.window ?? UIApplication.re.keyWindow ?? UIApplication.re.windows.first {
+            windowRect = window.bounds
         }
         var trans = KeyboardTransition.default
         // from, first notify
         if fromFrame.size.width == 0 && fromFrame.size.height == 0 {
-            fromFrame.size.width = window.bounds.size.width
+            fromFrame.size.width = windowRect.size.width
             fromFrame.size.height = trans.toFrame.size.height
             fromFrame.origin.x = trans.toFrame.origin.x
-            fromFrame.origin.y = window.bounds.size.height
+            fromFrame.origin.y = windowRect.size.height
         }
         trans.fromFrame = fromFrame
         trans.toHidden = toHidden
@@ -330,7 +330,7 @@ public final class KeyboardManager: NSObject {
             trans.toFrame = observedToFrame
         }
         if trans.toFrame.size.width > 0 && trans.toFrame.size.height > 0 {
-            let rect = window.bounds.intersection(trans.toFrame)
+            let rect = windowRect.intersection(trans.toFrame)
             if !rect.isNull && !rect.isEmpty {
                 trans.toVisible = true
             }
@@ -386,6 +386,10 @@ public final class KeyboardManager: NSObject {
     }
     
     private let systemVersion = (UIDevice.current.systemVersion as NSString).floatValue
+    
+    private var windowBounds: CGRect {
+        return UIApplication.re.mainScreen?.bounds ?? UIScreen.main.bounds
+    }
 }
 
 // MARK: - KeyboardViewFrameObserver

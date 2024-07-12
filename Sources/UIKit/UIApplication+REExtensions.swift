@@ -144,7 +144,7 @@ public extension Reer where Base: UIApplication {
     
     /// ReerKit: The app's main screen.
     static var mainScreen: UIScreen? {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, tvOS 13.0, *) {
             return keyWindow?.windowScene?.screen
         } else {
             return keyWindow?.screen

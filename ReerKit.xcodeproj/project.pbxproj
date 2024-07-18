@@ -518,6 +518,10 @@
 		D08416A42A30CE560078919B /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08416A32A30CE560078919B /* KeyboardManager.swift */; };
 		D087D49A2B4E5CAE005918E9 /* ReerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D087D4922B4E5CAE005918E9 /* ReerKit.framework */; };
 		D08B843A29D66C4200D7EC17 /* ColorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08B843929D66C4200D7EC17 /* ColorExtensionsTests.swift */; };
+		D08E03EC2C4948F200C07389 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08E03EB2C4948F200C07389 /* MulticastDelegate.swift */; };
+		D08E03ED2C4948F200C07389 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08E03EB2C4948F200C07389 /* MulticastDelegate.swift */; };
+		D08E03EE2C4948F200C07389 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08E03EB2C4948F200C07389 /* MulticastDelegate.swift */; };
+		D08E03EF2C4948F200C07389 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08E03EB2C4948F200C07389 /* MulticastDelegate.swift */; };
 		D08F2C5B29DB437B00B4C181 /* Date+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08F2C5A29DB437B00B4C181 /* Date+REExtensions.swift */; };
 		D090D96629DC5A1100245538 /* Locale+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BDA4BC29DC5925001EA4A0 /* Locale+REExtensions.swift */; };
 		D090D96829DC5A6300245538 /* LocalExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D090D96729DC5A6300245538 /* LocalExtensionsTests.swift */; };
@@ -815,6 +819,7 @@
 		D087D4922B4E5CAE005918E9 /* ReerKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D087D4992B4E5CAE005918E9 /* ReerKit-visionOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ReerKit-visionOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D08B843929D66C4200D7EC17 /* ColorExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensionsTests.swift; sourceTree = "<group>"; };
+		D08E03EB2C4948F200C07389 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		D08F2C5A29DB437B00B4C181 /* Date+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+REExtensions.swift"; sourceTree = "<group>"; };
 		D090D96729DC5A6300245538 /* LocalExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalExtensionsTests.swift; sourceTree = "<group>"; };
 		D090D96929DC5B9300245538 /* NotificationCenter+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+REExtensions.swift"; sourceTree = "<group>"; };
@@ -1325,6 +1330,7 @@
 				D08416A32A30CE560078919B /* KeyboardManager.swift */,
 				D05897462A84E03E008381BB /* Reachability.swift */,
 				D036EAF82B26FB4100D451D6 /* Invocation.swift */,
+				D08E03EB2C4948F200C07389 /* MulticastDelegate.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1991,6 +1997,7 @@
 				D04B85C229F9A3FC00177357 /* StdlibProtocolWrappers.swift in Sources */,
 				D04B85D429F9A40000177357 /* AnyObjectExtensionable.swift in Sources */,
 				D07562F52BA2EED500640242 /* OrderedDictionary.swift in Sources */,
+				D08E03ED2C4948F200C07389 /* MulticastDelegate.swift in Sources */,
 				D04B85F629F9A57800177357 /* CGVector+REExtensions.swift in Sources */,
 				D04B85D029F9A3FC00177357 /* BinaryFloatingPoint+REExtensions.swift in Sources */,
 				D04B85C429F9A3FC00177357 /* Optional+REExtensions.swift in Sources */,
@@ -2132,6 +2139,7 @@
 				D04B869829F9A6F100177357 /* StdlibProtocolWrappers.swift in Sources */,
 				D04B86F029F9A71100177357 /* Timer+REExtensions.swift in Sources */,
 				D07562F62BA2EED500640242 /* OrderedDictionary.swift in Sources */,
+				D08E03EE2C4948F200C07389 /* MulticastDelegate.swift in Sources */,
 				D04B869929F9A6F100177357 /* StringProtocol+REExtensions.swift in Sources */,
 				D04B86D329F9A70600177357 /* Memory.swift in Sources */,
 				D04B873429F9A71900177357 /* UINavigationItem+REExtensions.swift in Sources */,
@@ -2272,6 +2280,7 @@
 				D04B86AF29F9A6F100177357 /* StdlibProtocolWrappers.swift in Sources */,
 				D04B86E229F9A71000177357 /* Timer+REExtensions.swift in Sources */,
 				D07562F72BA2EED500640242 /* OrderedDictionary.swift in Sources */,
+				D08E03EF2C4948F200C07389 /* MulticastDelegate.swift in Sources */,
 				D04B86B029F9A6F100177357 /* StringProtocol+REExtensions.swift in Sources */,
 				D04B86DD29F9A70600177357 /* Memory.swift in Sources */,
 				D04B871329F9A71900177357 /* UINavigationItem+REExtensions.swift in Sources */,
@@ -2440,6 +2449,7 @@
 				D004CC49285A41F500C41360 /* Synchronizing.swift in Sources */,
 				D01DABC229B4FAA700ABD25E /* Throttler.swift in Sources */,
 				D071620629F3D5090051C11E /* UIRefreshControl+REExtensions.swift in Sources */,
+				D08E03EC2C4948F200C07389 /* MulticastDelegate.swift in Sources */,
 				D0397612286E111800C33E17 /* Optional+REExtensions.swift in Sources */,
 				D076D4BB29F3C1F10008ABE0 /* UITextView+REExtensions.swift in Sources */,
 				D01D002C2BB6E5130067B6FE /* OrderedSet.swift in Sources */,

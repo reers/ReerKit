@@ -152,7 +152,7 @@ final class NSAttributedStringExtensionsTests: XCTestCase {
         label.numberOfLines = 0
         label.attributedText = attr1
         label.frame = attr1.boundingRect(with: .init(width: 80, height: CGFloat.greatestFiniteMagnitude), options: [.usesFontLeading, .usesLineFragmentOrigin], context: nil)
-        let lines = attr1.re.lines(forWidth: 80)
+        let lines = attr1.re.numberOfLines(forWidth: 80)
         XCTAssertEqual(lines, 4)
         
         do {
@@ -173,7 +173,7 @@ final class NSAttributedStringExtensionsTests: XCTestCase {
                 .re.with(attributes: [.font: UIFont.systemFont(ofSize: 15)])
             label.attributedText = attr2
             label.frame = attr2.boundingRect(with: .init(width: 80, height: CGFloat.greatestFiniteMagnitude), options: [.usesFontLeading, .usesLineFragmentOrigin], context: nil)
-            let lines2 = attr2.re.lines(forWidth: 80)
+            let lines2 = attr2.re.numberOfLines(forWidth: 80)
             XCTAssertEqual(lines2, 13)
         }
         
@@ -195,7 +195,7 @@ final class NSAttributedStringExtensionsTests: XCTestCase {
                 .re.with(attributes: [.font: UIFont.systemFont(ofSize: 15)])
             label.attributedText = attr2
             label.frame = attr2.boundingRect(with: .init(width: 80, height: CGFloat.greatestFiniteMagnitude), options: [.usesFontLeading, .usesLineFragmentOrigin], context: nil)
-            let lines2 = attr2.re.lines(forWidth: 80, ignoreBlankLines: true)
+            let lines2 = attr2.re.numberOfLines(forWidth: 80, ignoreBlankLines: true)
             XCTAssertEqual(lines2, 7)
         }
         

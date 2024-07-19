@@ -327,6 +327,14 @@ public extension UIDevice {
         ///
         /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP844/TODO.png)
         case iPadPro12Inch6
+        /// Device is an [iPad Pro 11-inch (M4)](https://support.apple.com/en-us/119892)
+        ///
+        /// ![Image](https://cdsassets.apple.com/content/services/pub/image?productid=301031&size=240x240)
+        case iPadPro11M4
+        /// Device is an [iPad Pro 13-inch (M4)](https://support.apple.com/en-us/119891)
+        ///
+        /// ![Image](https://cdsassets.apple.com/content/services/pub/image?productid=301033&size=240x240)
+        case iPadPro13M4
         /// Device is a [HomePod](https://support.apple.com/kb/SP773)
         ///
         /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP773/homepod_space_gray_large_2x.jpg)
@@ -692,6 +700,8 @@ public extension Reer where Base: UIDevice {
         case "iPad13,8", "iPad13,9", "iPad13,10", "iPad13,11": return .iPadPro12Inch5
         case "iPad14,3", "iPad14,4": return .iPadPro11Inch4
         case "iPad14,5", "iPad14,6": return .iPadPro12Inch6
+        case "iPad16,3", "iPad16,4": return .iPadPro11M4
+        case "iPad16,5", "iPad16,6": return .iPadPro13M4
         case "AudioAccessory1,1": return .homePod
         case "i386", "x86_64", "arm64": return .simulator(getName(ofMachineModel: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "iOS"))
         default: return .unknown(machineModelIdentifier)
@@ -1114,6 +1124,8 @@ extension UIDevice.Name: CustomStringConvertible {
         case .iPadPro12Inch5: return "iPad Pro (12.9-inch) (5th generation)"
         case .iPadPro11Inch4: return "iPad Pro (11-inch) (4th generation)"
         case .iPadPro12Inch6: return "iPad Pro (12.9-inch) (6th generation)"
+        case .iPadPro11M4: return "iPad Pro (11-inch) (M4)"
+        case .iPadPro13M4: return "iPad Pro (13-inch) (M4)"
         case .homePod: return "HomePod"
         case .simulator(let model): return "Simulator (\(model.description))"
         case .unknown(let identifier): return identifier

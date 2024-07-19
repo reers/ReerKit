@@ -15,14 +15,18 @@ class OptionalExtensionsTests: XCTestCase {
     func testOptional() {
         var s: String? = nil
         XCTAssertEqual(s.re.isNil, true)
-        XCTAssertEqual(s.re.isValid, false)
+        XCTAssertEqual(s.re.isNone, true)
+        XCTAssertEqual(s.re.isNotNil, false)
+        XCTAssertEqual(s.re.isSome, false)
         var temp = ""
         s.re.run { _ in temp = "sss" }
         XCTAssertNotEqual(temp, "sss")
         
         s = ""
         XCTAssertEqual(s.re.isNil, false)
-        XCTAssertEqual(s.re.isValid, true)
+        XCTAssertEqual(s.re.isNone, false)
+        XCTAssertEqual(s.re.isNotNil, true)
+        XCTAssertEqual(s.re.isSome, true)
         
         XCTAssertEqual(s.re.value(or: "111"), "")
         s = nil

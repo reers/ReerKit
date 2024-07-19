@@ -37,7 +37,17 @@ public extension ReerGeneric where Base == Optional<T> {
     }
     
     /// ReerKit: Contains a valid value.
-    var isValid: Bool {
+    var isNotNil: Bool {
+        return base != nil
+    }
+    
+    /// ReerKit: Contains a nil value.
+    var isNone: Bool {
+        return base == nil
+    }
+    
+    /// ReerKit: Contains a valid value.
+    var isSome: Bool {
         return base != nil
     }
 }

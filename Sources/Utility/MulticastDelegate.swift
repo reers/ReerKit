@@ -22,7 +22,7 @@
 /// `MulticastDelegate` lets you easily create a "multicast delegate" for a given protocol or class.
 /// The delegate will be a weak reference in `MulticastDelegate`, and will be removed automatically
 /// from `delegates` after it released.
-open class MulticastDelegate<T> {
+public final class MulticastDelegate<T> {
     
     private let delegates: WeakSet<AnyObject>
     

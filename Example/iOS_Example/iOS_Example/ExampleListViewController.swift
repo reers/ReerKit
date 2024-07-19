@@ -27,6 +27,7 @@ class ExampleListViewController: UIViewController {
         Example(title: "Gray model for UIView", vcName: "GrayModeViewController"),
         Example(title: "CountdownTimer", vcName: "CountdownTimerViewController"),
         Example(title: "Squircle Rounded Corner", vcName: "SquircleCornerViewController"),
+        Example(title: "Multicast Delegate Test", vcName: "MulticastDelegateExampleViewController")
     ]
     
     

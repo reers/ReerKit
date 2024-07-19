@@ -203,33 +203,33 @@ public extension Reer where Base: UIApplication {
 public extension Reer where Base: UIApplication {
     
     /// ReerKit: "Documents" URL in this app's sandbox.
-    var documentsURL: URL? {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last
+    static var documentsURL: URL {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
     }
     
     /// ReerKit: "Documents" path in this app's sandbox.
-    var documentsPath: String? {
-        return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
+    static var documentsPath: String {
+        return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
     }
     
     /// ReerKit: "Caches" URL in this app's sandbox.
-    var cachesURL: URL? {
-        return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).last
+    static var cachesURL: URL {
+        return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).last!
     }
     
     /// ReerKit: "Caches" path in this app's sandbox.
-    var cachesPath: String? {
-        return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first
+    static var cachesPath: String {
+        return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!
     }
     
     /// ReerKit: "Library" URL in this app's sandbox.
-    var libraryURL: URL? {
-        return FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).last
+    static var libraryURL: URL {
+        return FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).last!
     }
     
     /// ReerKit: "Library" path in this app's sandbox.
-    var libraryPath: String? {
-        return NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first
+    static var libraryPath: String {
+        return NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!
     }
 }
 

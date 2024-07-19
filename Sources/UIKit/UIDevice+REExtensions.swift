@@ -582,6 +582,15 @@ public extension Reer where Base: UIDevice {
     #endif
     
     #if os(iOS)
+    static var isRectangularScreen: Bool {
+        switch modelName {
+        case .iPodTouch5, .iPodTouch6, .iPodTouch7, .iPhone4, .iPhone4s, .iPhone5, .iPhone5c, .iPhone5s, .iPhone6, .iPhone6Plus, .iPhone6s, .iPhone6sPlus, .iPhone7, .iPhone7Plus, .iPhoneSE, .iPhone8, .iPhone8Plus, .iPhoneSE2, .iPhoneSE3:
+            return true
+        default:
+            return false
+        }
+    }
+    
     static var isNotchScreen: Bool {
         switch modelName {
         case .iPhoneX, .iPhoneXS, .iPhoneXSMax,

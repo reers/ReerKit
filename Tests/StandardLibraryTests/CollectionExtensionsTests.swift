@@ -147,5 +147,22 @@ final class CollectionExtensionsTests: XCTestCase {
         XCTAssertEqual([1, 2, 3, 4, 5].re.average(), 3)
         XCTAssertEqual([Int]().re.average(), 0)
     }
+    
+    func testForEachWithIndex() {
+        var ret: [Int] = []
+        ["a", "b", "c"].re.forEach { item, index in
+            ret.append(index)
+        }
+        XCTAssertEqual(ret, [0, 1, 2])
+        
+        ret.removeAll()
+        var retString = ""
+        ["a", "b", "c"].re.forEach {
+            retString += $0
+            ret.append($1)
+        }
+        XCTAssertEqual(retString, "abc")
+        XCTAssertEqual(ret, [0, 1, 2])
+    }
 }
 

@@ -107,6 +107,12 @@ public extension Reer where Base: Collection {
             start = end
         }
     }
+    
+    func forEach(_ body: (Base.Element, Int) throws  -> Void) rethrows {
+        for (index, item) in base.enumerated() {
+            try body(item, index)
+        }
+    }
 }
 
 // MARK: - Methods (Equatable)

@@ -565,24 +565,24 @@ public extension Reer where Base: UIDevice {
     }
     
     /// ReerKit: Wherher the device can make phone calls.
-    var canMakePhoneCalls: Bool {
+    static var canMakePhoneCalls: Bool {
         return UIApplication.shared.canOpenURL(URL(string: "tel://")!)
     }
 
     #if canImport(Darwin)
     /// ReerKit: WIFI IP address of this device (can be nil). e.g. @"192.168.1.111"
-    var ipAddressWIFI: String? {
+    static var ipAddressWIFI: String? {
         return ipAddress(withIfaName: "en0")
     }
     
     /// ReerKit: Cell IP address of this device (can be nil). e.g. @"10.2.2.222"
-    var ipAddressCell: String? {
+    static var ipAddressCell: String? {
         return ipAddress(withIfaName: "pdp_ip0")
     }
     #endif
     
     #if os(iOS)
-    var isNotchScreen: Bool {
+    static var isNotchScreen: Bool {
         switch modelName {
         case .iPhoneX, .iPhoneXS, .iPhoneXSMax,
              .iPhoneXR, .iPhone11, .iPhone11Pro, .iPhone11ProMax,
@@ -595,7 +595,7 @@ public extension Reer where Base: UIDevice {
         }
     }
     
-    var isDynamicIslandScreen: Bool {
+    static var isDynamicIslandScreen: Bool {
         switch modelName {
         case .iPhone14Pro, .iPhone14ProMax, .iPhone15, .iPhone15Plus, .iPhone15Pro, .iPhone15ProMax:
             return true
@@ -608,22 +608,22 @@ public extension Reer where Base: UIDevice {
     /// ReerKit: The device's hardware machine id.  e.g. "iPhone6,1" "iPad4,6"
     ///
     /// [reference](http://theiphonewiki.com/wiki/Models)
-    var machineModelIdentifier: String {
+    static var machineModelIdentifier: String {
         return sysctl(by: "hw.machine")
     }
     
     /// ReerKit: The device's machine model internal name.  e.g. "D83AP" "D16AP"
-    var machineModelName: String {
+    static var machineModelName: String {
         return sysctl(by: "hw.model")
     }
     
     /// ReerKit: Get product model name of the device. e.g `.iPhone13ProMax`
     /// or get string version `UIDevice.current.re.modelName.description` -> "iPhone13 Pro Max"
-    var modelName: UIDevice.Name {
+    static var modelName: UIDevice.Name {
         return getName(ofMachineModel: machineModelIdentifier)
     }
     
-    private func getName(ofMachineModel modelIdentifier: String) -> UIDevice.Name {
+    private static func getName(ofMachineModel modelIdentifier: String) -> UIDevice.Name {
         #if os(iOS)
         switch modelIdentifier {
         case "iPod5,1": return .iPodTouch5
@@ -752,7 +752,7 @@ public extension Reer where Base: UIDevice {
     }
     
     /// ReerKit: Mount id
-    var mntID: String {
+    static var mntID: String {
         var buf = statfs()
         if statfs("/", &buf) == 0 {
             let prefix = "com.apple.os.update-"
@@ -768,7 +768,7 @@ public extension Reer where Base: UIDevice {
     }
     
     /// ReerKit: Total disk space in byte. (-1 when error occurs)
-    var diskSpace: Int64 {
+    static var diskSpace: Int64 {
         do {
             let attrs = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())
             var space = attrs[.systemSize] as! Int64
@@ -782,7 +782,7 @@ public extension Reer where Base: UIDevice {
     }
     
     /// ReerKit: Free disk space in byte. (-1 when error occurs)
-    var diskSpaceFree: Int64 {
+    static var diskSpaceFree: Int64 {
         do {
             let attrs = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())
             var space = attrs[.systemFreeSize] as! Int64
@@ -796,7 +796,7 @@ public extension Reer where Base: UIDevice {
     }
     
     /// ReerKit: Used disk space in byte. (-1 when error occurs)
-    var diskSpaceUsed: Int64 {
+    static var diskSpaceUsed: Int64 {
         let total = diskSpace
         let free = diskSpaceFree
         if total < 0 || free < 0 {
@@ -810,7 +810,7 @@ public extension Reer where Base: UIDevice {
     }
     
     /// ReerKit: Total physical memory in byte. (-1 when error occurs)
-    var memoryTotal: Int64 {
+    static var memoryTotal: Int64 {
         let mem = ProcessInfo.processInfo.physicalMemory
         guard mem > 0 else {
             return -1
@@ -822,7 +822,7 @@ public extension Reer where Base: UIDevice {
     /// ReerKit: Used app memory and total memory
     ///
     /// [Reference](https://github.com/zixun/SystemEye/blob/master/SystemEye/Classes/Memory.swift)
-    var appMemoryUsage: (used: Int64, total: Int64) {
+    static var appMemoryUsage: (used: Int64, total: Int64) {
         var info = mach_task_basic_info()
         var count = mach_msg_type_number_t(MemoryLayout.size(ofValue: info) / MemoryLayout<integer_t>.size)
         let kerr = withUnsafeMutablePointer(to: &info) {
@@ -838,7 +838,7 @@ public extension Reer where Base: UIDevice {
     }
 
     /// ReerKit: System memory usage
-    var systemMemoryUsage: (
+    static var systemMemoryUsage: (
         free: Int64,
         active: Int64,
         inactive: Int64,
@@ -882,7 +882,7 @@ public extension Reer where Base: UIDevice {
     }
     
     /// ReerKit: App CPU usage
-    var appCPUUsage: Double {
+    static var appCPUUsage: Double {
         let threads = UIDevice.re.threadBasicInfos()
         var result : Double = 0.0
         threads.forEach { (thread: thread_basic_info) in
@@ -894,7 +894,7 @@ public extension Reer where Base: UIDevice {
     }
     
     /// ReerKit: System CPU usage
-    var systemCPUUsage: (
+    static var systemCPUUsage: (
         system: Double,
         user: Double,
         idle: Double,
@@ -944,7 +944,7 @@ public extension Reer where Base: UIDevice {
 extension Reer where Base: UIDevice {
     #if canImport(Darwin)
     // https://stackoverflow.com/questions/30748480/swift-get-devices-ip-address/30748582
-    private func ipAddress(withIfaName ifaName: String) -> String? {
+    private static func ipAddress(withIfaName ifaName: String) -> String? {
         if ifaName.count == 0 { return nil }
         var address: String?
         

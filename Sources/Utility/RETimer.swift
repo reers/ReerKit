@@ -33,18 +33,24 @@ import Foundation
 ///         |                     |                      |
 ///         |--------delay--------|-------interval-------|-------interval-------|
 public final class RETimer {
+    
+    public enum State {
+        case initial
+        case running
+        case suspended
+        case invalidated
+    }
 
     /// A number of seconds.
     public typealias TimeInterval = Double
 
     public private(set) var repeats: Bool
     public private(set) var timeInterval: TimeInterval
-    public private(set) var isValid = true
+    public private(set) var state: State = .initial
     public typealias RETimerAction = (_ timer: RETimer) -> Void
     
     private let timer: DispatchSourceTimer
     private var action: RETimerAction
-    private var isRunning = false
     private var callbackImmediatelyWhenFired: Bool = false
     private let delay: TimeInterval
 
@@ -74,7 +80,7 @@ public final class RETimer {
 
         self.timer = DispatchSource.makeTimerSource(queue: queue)
         timer.setEventHandler { [weak self] in
-            guard let self = self else { return }
+            guard let self = self, self.state != .invalidated else { return }
             action(self)
             if !repeats {
                 self.invalidate()
@@ -146,10 +152,10 @@ public final class RETimer {
     /// ReerKit: Schedules a timer.
     @discardableResult
     public func schedule() -> Bool {
-        guard isValid, !isRunning else { return false }
+        guard state == .initial || state == .suspended else { return false }
         let _ = scheduleTimerOnce
         timer.resume()
-        isRunning = true
+        state = .running
         return true
     }
 
@@ -176,16 +182,19 @@ public final class RETimer {
 
     /// ReerKit: Suspends the timer.
     public func suspend() {
-        guard isValid, isRunning else { return }
+        guard state == .running else { return }
         timer.suspend()
-        isRunning = false
+        state = .suspended
     }
     
     /// ReerKit: Stops the timer from ever firing again.
     public func invalidate() {
+        guard state != .invalidated else { return }
+        if state == .suspended {
+            timer.resume()
+        }
         timer.cancel()
-        isRunning = false
-        isValid = false
+        state = .invalidated
     }
 }
 

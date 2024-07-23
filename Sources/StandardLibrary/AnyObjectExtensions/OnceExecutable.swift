@@ -40,6 +40,7 @@ public extension Reer where Base: AnyObject {
     ///     test()
     ///     obj.re.executeOnce(byKey: key) { print("once") }
     ///     // output: once
+    @discardableResult
     func executeOnce<Result>(byKey key: OnceKey, _ execute: @escaping () throws -> Result) rethrows -> Result {
         if let lastExecutedResult = objc_getAssociatedObject(base, key.address) as! Result? {
             return lastExecutedResult
@@ -59,6 +60,7 @@ public extension Reer where Base: AnyObject {
     ///     test()
     ///     test()
     ///     // output: once
+    @discardableResult
     func executeOnce<Result>(
         fileID: String = #fileID,
         function: String = #function,

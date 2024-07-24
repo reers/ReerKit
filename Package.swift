@@ -15,10 +15,15 @@ let package = Package(
         .library(name: "ReerKit", targets: ["ReerKit"])
     ],
     targets: [
-        .target(name: "ReerKit", path: "Sources"),
+        .target(
+            name: "ReerKit",
+            path: "Sources",
+            resources: [.process("Resources/PrivacyInfo.xcprivacy")]
+        ),
         .testTarget(
             name: "ReerKitTests",
             dependencies: ["ReerKit"],
             path: "Tests",
             resources: [.process("ResourcesTests/Resources")])
-    ])
+    ]
+)

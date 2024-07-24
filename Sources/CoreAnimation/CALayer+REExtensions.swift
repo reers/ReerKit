@@ -51,4 +51,121 @@ public extension Reer where Base: CALayer {
     }
 }
 
+// MARK: - Frame
+
+public extension Reer where Base: CALayer {
+    
+    /// ReerKit: Shortcut for frame.origin.x
+    var x: CGFloat {
+        get { return base.frame.origin.x }
+        set {
+            var frame = base.frame
+            frame.origin.x = newValue
+            base.frame = frame
+        }
+    }
+    
+    /// ReerKit: Shortcut for frame.origin.y
+    var y: CGFloat {
+        get { return base.frame.origin.y }
+        set {
+            var frame = base.frame
+            frame.origin.y = newValue
+            base.frame = frame
+        }
+    }
+    
+    /// ReerKit: Shortcut for frame.size.width
+    var width: CGFloat {
+        get { return base.frame.size.width }
+        set {
+            var frame = base.frame
+            frame.size.width = newValue
+            base.frame = frame
+        }
+    }
+    
+    /// ReerKit: Shortcut for frame.size.height
+    var height: CGFloat {
+        get { return base.frame.size.height }
+        set {
+            var frame = base.frame
+            frame.size.height = newValue
+            base.frame = frame
+        }
+    }
+    
+    /// ReerKit: Shortcut for frame.origin.x
+    var left: CGFloat {
+        get { return base.frame.origin.x }
+        set {
+            var frame = base.frame
+            frame.origin.x = newValue
+            base.frame = frame
+        }
+    }
+    
+    /// ReerKit: Shortcut for frame.origin.x + frame.size.width
+    var right: CGFloat {
+        get { return base.frame.origin.x + base.frame.size.width }
+        set {
+            var frame = base.frame
+            frame.origin.x = newValue - frame.size.width
+            base.frame = frame
+        }
+    }
+    
+    /// ReerKit: Shortcut for frame.origin.y
+    var top: CGFloat {
+        get { return base.frame.origin.y }
+        set {
+            var frame = base.frame
+            frame.origin.y = newValue
+            base.frame = frame
+        }
+    }
+    
+    /// ReerKit: Shortcut for frame.origin.y + frame.size.height
+    var bottom: CGFloat {
+        get { return base.frame.origin.y + base.frame.size.height }
+        set {
+            var frame = base.frame
+            frame.origin.y = newValue - frame.size.height
+            base.frame = frame
+        }
+    }
+    
+    /// ReerKit: Shortcut for position.x
+    var centerX: CGFloat {
+        get { return base.position.x }
+        set { base.position = CGPoint.init(x: newValue, y: base.position.y) }
+    }
+    
+    /// ReerKit: Shortcut for position.y
+    var centerY: CGFloat {
+        get { return base.position.y }
+        set { base.position = CGPoint.init(x: base.position.x, y: newValue) }
+    }
+    
+    /// ReerKit: Shortcut for frame.origin
+    var origin: CGPoint {
+        get { return base.frame.origin }
+        set {
+            var frame = base.frame
+            frame.origin = newValue
+            base.frame = frame
+        }
+    }
+    
+    /// ReerKit: Shortcut for frame.size
+    var size: CGSize {
+        get { return base.frame.size }
+        set {
+            var frame = base.frame
+            frame.size = newValue
+            base.frame = frame
+        }
+    }
+}
+
 #endif

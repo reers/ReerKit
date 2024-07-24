@@ -30,7 +30,7 @@ public extension Reer where Base: AnyObject {
     
     
     /// ReerKit: Swizzle instance method of the class.
-    /// Also you can use ability from Apple, see `@_dynamicReplacement(for: )`
+    /// Also you can use ability from Swift, see `@_dynamicReplacement(for: )`
     ///
     /// - Parameters:
     ///   - originalSelector: The selector must be a `@objc dynamic` method.
@@ -61,7 +61,7 @@ public extension Reer where Base: AnyObject {
     }
     
     /// ReerKit: Swizzle class method of the class.
-    /// Also you can use ability from Apple, see `@_dynamicReplacement(for: )`
+    /// Also you can use ability from Swift, see `@_dynamicReplacement(for: )`
     ///
     /// - Parameters:
     ///   - originalSelector: The selector must be a `@objc dynamic` method.

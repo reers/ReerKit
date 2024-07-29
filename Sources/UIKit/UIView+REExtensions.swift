@@ -415,23 +415,23 @@ public extension Reer where Base: UIView {
     /// ReerKit: Search all superviews until a view with the condition is found.
     ///
     /// - Parameter predicate: predicate to evaluate on superviews.
-    func ancestorView(matching condition: (UIView) -> Bool) -> UIView? {
+    func superview(matching condition: (UIView) -> Bool) -> UIView? {
         guard let superview = base.superview else { return nil }
         if condition(superview) {
             return superview
         }
-        return superview.re.ancestorView(matching: condition)
+        return superview.re.superview(matching: condition)
     }
     
     /// ReerKit: Search all superviews until a view with this class is found.
     ///
     /// - Parameter name: type of the view to search.
-    func ancestorView<T: UIView>(ofType _: T.Type) -> T? {
+    func superview<T: UIView>(ofType _: T.Type) -> T? {
         guard let superview = base.superview else { return nil }
         if superview is T {
             return superview as? T
         }
-        return superview.re.ancestorView(ofType: T.self)
+        return superview.re.superview(ofType: T.self)
     }
     
     /// ReerKit: Converts a point from the receiver's coordinate system to that of the specified view or window.

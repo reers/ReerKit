@@ -409,7 +409,7 @@ class UIViewExtensionsTests: XCTestCase {
         XCTAssertNotNil(subview.centerYAnchor)
     }
 
-    func testAncestorViewWhere() {
+    func testSuperViewWhere() {
         let tableView = UITableView(frame: .zero)
         let tableViewCell = UITableViewCell(frame: .zero)
         tableView.addSubview(tableViewCell)
@@ -419,14 +419,14 @@ class UIViewExtensionsTests: XCTestCase {
         button.tag = 1
         let buttonSubview = UIView(frame: .zero)
         button.addSubview(buttonSubview)
-        XCTAssertEqual(buttonSubview.re.ancestorView { $0.tag == 1 }, button)
-        XCTAssertEqual(buttonSubview.re.ancestorView { $0.tag == 2 }, tableView)
-        XCTAssertNil(buttonSubview.re.ancestorView { $0.tag == 3 })
-        XCTAssertEqual(button.re.ancestorView { $0 is UITableViewCell }, tableViewCell)
-        XCTAssertEqual(button.re.ancestorView { $0.superview == nil }, tableView)
+        XCTAssertEqual(buttonSubview.re.superview { $0.tag == 1 }, button)
+        XCTAssertEqual(buttonSubview.re.superview { $0.tag == 2 }, tableView)
+        XCTAssertNil(buttonSubview.re.superview { $0.tag == 3 })
+        XCTAssertEqual(button.re.superview { $0 is UITableViewCell }, tableViewCell)
+        XCTAssertEqual(button.re.superview { $0.superview == nil }, tableView)
     }
 
-    func testAncestorViewWithClass() {
+    func testSuperrViewWithClass() {
         let tableView = UITableView(frame: .zero)
         let tableViewCell = UITableViewCell(frame: .zero)
         tableView.addSubview(tableViewCell)
@@ -435,12 +435,12 @@ class UIViewExtensionsTests: XCTestCase {
         let buttonSubview = UIView(frame: .zero)
         button.addSubview(buttonSubview)
 
-        XCTAssertEqual(button.re.ancestorView(ofType: UITableViewCell.self), tableViewCell)
-        XCTAssertEqual(button.re.ancestorView(ofType: UITableView.self), tableView)
-        XCTAssertNil(button.re.ancestorView(ofType: UIButton.self))
-        XCTAssertNil(tableView.re.ancestorView(ofType: UIButton.self))
-        XCTAssertEqual(buttonSubview.re.ancestorView(ofType: UITableViewCell.self), tableViewCell)
-        XCTAssertEqual(buttonSubview.re.ancestorView(ofType: UITableView.self), tableView)
+        XCTAssertEqual(button.re.superview(ofType: UITableViewCell.self), tableViewCell)
+        XCTAssertEqual(button.re.superview(ofType: UITableView.self), tableView)
+        XCTAssertNil(button.re.superview(ofType: UIButton.self))
+        XCTAssertNil(tableView.re.superview(ofType: UIButton.self))
+        XCTAssertEqual(buttonSubview.re.superview(ofType: UITableViewCell.self), tableViewCell)
+        XCTAssertEqual(buttonSubview.re.superview(ofType: UITableView.self), tableView)
     }
 
     func testSubviewsOfType() {

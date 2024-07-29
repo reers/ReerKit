@@ -506,6 +506,21 @@ public extension Reer where Base: UIView {
         return superview.re.superview(ofType: T.self)
     }
     
+    /// ReerKit: Returns all superviews of the current view
+    /// - Parameter maxLevel: The maximum number of levels to traverse upwards. Defaults to Int.max.
+    /// - Returns: An array of superviews, ordered from the immediate superview to the highest level ancestor.
+    func superviews(maxLevel: Int = Int.max) -> [UIView] {
+        var superviews: [UIView] = []
+        var currentView: UIView? = base.superview
+        var currentLevel = 0
+        while let superview = currentView, currentLevel < maxLevel {
+            superviews.append(superview)
+            currentView = superview.superview
+            currentLevel += 1
+        }
+        return superviews
+    }
+    
     /// ReerKit: Converts a point from the receiver's coordinate system to that of the specified view or window.
     ///
     /// - Parameters:

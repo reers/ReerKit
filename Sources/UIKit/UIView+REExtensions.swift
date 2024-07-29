@@ -412,6 +412,78 @@ public extension Reer where Base: UIView {
         return nil
     }
     
+    /// ReerKit: Return the string of subviews tree.
+    ///
+    /// ```
+    /// UIView (0x0000000107c102f0) - frame: (0.0, 0.0, 430.0, 932.0)
+    /// ├── UILabel (0x0000000107f08900) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// ├── UIButton (0x0000000107c18550) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// │   ├── UIImageView (0x0000000107c19660) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// │   └── UIImageView (0x0000000107c19bf0) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// └── UILabel (0x0000000107c19df0) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// ```
+    ///
+    /// - Parameter maxDepth: The maximum depth you want to find in the view hierarchy
+    /// - Returns: The string of subviews tree.
+    func subviewTree(maxDepth: Int = Int.max) -> String {
+        return viewHierarchyString(
+            indent: "",
+            isLast: true,
+            maxDepth: maxDepth,
+            isRoot: true,
+            accumulator: ""
+        )
+    }
+    
+    /// ReerKit: Print the subviews tree.
+    ///
+    /// ```
+    /// UIView (0x0000000107c102f0) - frame: (0.0, 0.0, 430.0, 932.0)
+    /// ├── UILabel (0x0000000107f08900) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// ├── UIButton (0x0000000107c18550) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// │   ├── UIImageView (0x0000000107c19660) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// │   └── UIImageView (0x0000000107c19bf0) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// └── UILabel (0x0000000107c19df0) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// ```
+    ///
+    /// - Parameter maxDepth: The maximum depth you want to find in the view hierarchy
+    func printSubviewTree(maxDepth: Int = Int.max) {
+        print(subviewTree(maxDepth: maxDepth))
+    }
+    
+    private func viewHierarchyString(
+        indent: String,
+        isLast: Bool,
+        maxDepth: Int,
+        isRoot: Bool,
+        accumulator: String
+    ) -> String {
+        let className = String(describing: type(of: base))
+        let address = "\(Memory.pointer(ofRef: base))"
+        let frame = base.frame
+        let prefix = isRoot ? "" : (isLast ? "└── " : "├── ")
+        let viewInfoString = "\(indent)\(prefix)\(className) (\(address)) - frame: \(frame)\n"
+        
+        var newAccumulator = accumulator + viewInfoString
+        
+        guard maxDepth > 0 else { return newAccumulator }
+        
+        let childIndent = isRoot ? "" : indent + (isLast ? "    " : "│   ")
+        
+        for (index, subview) in base.subviews.enumerated() {
+            let isLastChild = index == base.subviews.count - 1
+            newAccumulator = subview.re.viewHierarchyString(
+                indent: childIndent,
+                isLast: isLastChild,
+                maxDepth: maxDepth - 1,
+                isRoot: false,
+                accumulator: newAccumulator
+            )
+        }
+        
+        return newAccumulator
+    }
+    
     /// ReerKit: Search all superviews until a view with the condition is found.
     ///
     /// - Parameter predicate: predicate to evaluate on superviews.

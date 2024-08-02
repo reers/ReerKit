@@ -611,6 +611,12 @@
 		D0D311392AB8522F00E54361 /* Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311372AB8522F00E54361 /* Rounded.swift */; };
 		D0D3113A2AB8522F00E54361 /* Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311372AB8522F00E54361 /* Rounded.swift */; };
 		D0D3113B2AB8522F00E54361 /* Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311372AB8522F00E54361 /* Rounded.swift */; };
+		D0D84C6F2C5CCF5300B24DB7 /* LinearFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D84C6E2C5CCF5300B24DB7 /* LinearFunction.swift */; };
+		D0D84C702C5CCF5C00B24DB7 /* LinearFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D84C6E2C5CCF5300B24DB7 /* LinearFunction.swift */; };
+		D0D84C712C5CCF5C00B24DB7 /* LinearFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D84C6E2C5CCF5300B24DB7 /* LinearFunction.swift */; };
+		D0D84C722C5CCF5D00B24DB7 /* LinearFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D84C6E2C5CCF5300B24DB7 /* LinearFunction.swift */; };
+		D0D84C732C5CCF5E00B24DB7 /* LinearFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D84C6E2C5CCF5300B24DB7 /* LinearFunction.swift */; };
+		D0D84C752C5CD0E800B24DB7 /* MathFunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D84C742C5CD0E800B24DB7 /* MathFunctionsTests.swift */; };
 		D0E1289D29C38A390051D351 /* EdgeInsets+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E1289C29C38A390051D351 /* EdgeInsets+REExtensions.swift */; };
 		D0E129A629C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E129A529C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift */; };
 		D0E354C828BFBBE10000030B /* WeakSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C728BFBBE10000030B /* WeakSet.swift */; };
@@ -899,6 +905,8 @@
 		D0D311302AB83E1D00E54361 /* PropertyWrappersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyWrappersTests.swift; sourceTree = "<group>"; };
 		D0D311322AB8438C00E54361 /* Trimmed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trimmed.swift; sourceTree = "<group>"; };
 		D0D311372AB8522F00E54361 /* Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rounded.swift; sourceTree = "<group>"; };
+		D0D84C6E2C5CCF5300B24DB7 /* LinearFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearFunction.swift; sourceTree = "<group>"; };
+		D0D84C742C5CD0E800B24DB7 /* MathFunctionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathFunctionsTests.swift; sourceTree = "<group>"; };
 		D0E1289C29C38A390051D351 /* EdgeInsets+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EdgeInsets+REExtensions.swift"; sourceTree = "<group>"; };
 		D0E129A529C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetsExtensionsTests.swift; sourceTree = "<group>"; };
 		D0E354C728BFBBE10000030B /* WeakSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakSet.swift; sourceTree = "<group>"; };
@@ -1044,6 +1052,7 @@
 				D058974B2A84FA45008381BB /* ReachabilityTests.swift */,
 				D0D311302AB83E1D00E54361 /* PropertyWrappersTests.swift */,
 				D036EAFD2B26FE5C00D451D6 /* InvocationTests.swift */,
+				D0D84C742C5CD0E800B24DB7 /* MathFunctionsTests.swift */,
 			);
 			path = UtilityTests;
 			sourceTree = "<group>";
@@ -1312,6 +1321,7 @@
 		D0B1211C2855154100B5B326 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				D0D84C6D2C5CCF4000B24DB7 /* Math */,
 				D0D3112A2AB83D6400E54361 /* PropertyWrapper */,
 				D00D63872A06997F00A9EEF4 /* DataStructure */,
 				D0E354C628BFBB710000030B /* Weak */,
@@ -1470,6 +1480,14 @@
 				D0D311372AB8522F00E54361 /* Rounded.swift */,
 			);
 			path = PropertyWrapper;
+			sourceTree = "<group>";
+		};
+		D0D84C6D2C5CCF4000B24DB7 /* Math */ = {
+			isa = PBXGroup;
+			children = (
+				D0D84C6E2C5CCF5300B24DB7 /* LinearFunction.swift */,
+			);
+			path = Math;
 			sourceTree = "<group>";
 		};
 		D0E129A429C38E950051D351 /* SharedTests */ = {
@@ -1902,6 +1920,7 @@
 				D04B85E429F9A50600177357 /* Once.swift in Sources */,
 				D04B85D829F9A40000177357 /* Swizzlable.swift in Sources */,
 				D04B85D329F9A3FC00177357 /* Int+REExtensions.swift in Sources */,
+				D0D84C702C5CCF5C00B24DB7 /* LinearFunction.swift in Sources */,
 				D04B85FF29F9A59000177357 /* Locale+REExtensions.swift in Sources */,
 				D04B85F929F9A59000177357 /* Calendar+REExtensions.swift in Sources */,
 				D04B861829F9A59600177357 /* UISlider+REExtensions.swift in Sources */,
@@ -2044,6 +2063,7 @@
 				D04B868F29F9A6F100177357 /* Dictionary+REExtensions.swift in Sources */,
 				D04B873F29F9A71900177357 /* UISearchBar+REExtensions.swift in Sources */,
 				D04B869C29F9A6F100177357 /* BinaryInteger+REExtensions.swift in Sources */,
+				D0D84C712C5CCF5C00B24DB7 /* LinearFunction.swift in Sources */,
 				D04B872D29F9A71900177357 /* UIImage+REExtensions.swift in Sources */,
 				D04B866A29F9A6CF00177357 /* CAGradientLayer+REExtensions.swift in Sources */,
 				D04B873829F9A71900177357 /* UITextView+REExtensions.swift in Sources */,
@@ -2185,6 +2205,7 @@
 				D04B86A629F9A6F100177357 /* Dictionary+REExtensions.swift in Sources */,
 				D04B871E29F9A71900177357 /* UISearchBar+REExtensions.swift in Sources */,
 				D04B86B329F9A6F100177357 /* BinaryInteger+REExtensions.swift in Sources */,
+				D0D84C722C5CCF5D00B24DB7 /* LinearFunction.swift in Sources */,
 				D04B870C29F9A71900177357 /* UIImage+REExtensions.swift in Sources */,
 				D04B866C29F9A6D000177357 /* CAGradientLayer+REExtensions.swift in Sources */,
 				D04B871729F9A71900177357 /* UITextView+REExtensions.swift in Sources */,
@@ -2310,6 +2331,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0D84C732C5CCF5E00B24DB7 /* LinearFunction.swift in Sources */,
 				D0737E8A2BC9262D00B6D89E /* BoundedQueue.swift in Sources */,
 				D01D00302BB6E5130067B6FE /* OrderedSet.swift in Sources */,
 				D07562F82BA2EED500640242 /* OrderedDictionary.swift in Sources */,
@@ -2377,6 +2399,7 @@
 				D0CDBDCA299FAB3100BD682D /* Debouncer.swift in Sources */,
 				D076D49129F3BB2D0008ABE0 /* UINavigationController+REExtensions.swift in Sources */,
 				D071DEBD28D8DC1F00618A2F /* Collection+REExtensions.swift in Sources */,
+				D0D84C6F2C5CCF5300B24DB7 /* LinearFunction.swift in Sources */,
 				D00D638F2A069AB600A9EEF4 /* Stack.swift in Sources */,
 				D0737E862BC9262D00B6D89E /* BoundedQueue.swift in Sources */,
 				D0122B2B29EF04DE008311CF /* UIImage+REExtensions.swift in Sources */,
@@ -2501,6 +2524,7 @@
 				D0CBE62528833BF5006F8BCB /* TimerExtensionsTests.swift in Sources */,
 				D0122B3229EF0C27008311CF /* XCTestExtensions.swift in Sources */,
 				D0421AD32939033800452845 /* DataExtensionsTests.swift in Sources */,
+				D0D84C752C5CD0E800B24DB7 /* MathFunctionsTests.swift in Sources */,
 				D094C96629F46A0C00491CD8 /* MemoryTests.swift in Sources */,
 				D05C867C294B556D0077E744 /* CGColorExtensionsTests.swift in Sources */,
 				D090D97829DC6FC700245538 /* NSRegularExpressionExtensionsTests.swift in Sources */,

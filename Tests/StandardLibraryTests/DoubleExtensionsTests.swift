@@ -31,4 +31,12 @@ final class DoubleExtensionsTests: XCTestCase {
     func testOperators() {
         XCTAssertEqual(Double(5.0) ** Double(2.0), Double(25.0))
     }
+    
+    func testNormalized() {
+        let ret = 5.0.re.normalized(from: 0...10)
+        XCTAssertEqual(ret, 0.5)
+        
+        let ret2 = 5.0.re.normalized(from: 0...10, to: 0...100)
+        XCTAssertEqual(ret2, 50)
+    }
 }

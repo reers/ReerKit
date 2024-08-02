@@ -51,6 +51,29 @@ public extension Reer where Base == Double {
     #endif
 }
 
+// MARK: - Functions
+
+public extension Reer where Base == Double {
+    /// ReerKit: Normalizes a Double value from an input range to an output range.
+    ///
+    /// - Parameters:
+    ///   - inputRange: The range of the input value. This is the original range of the value.
+    ///   - outputRange: The desired range for the output value. Defaults to 0...1 if not specified.
+    /// - Returns: The normalized value within the output range.
+    func normalized(
+        from inputRange: ClosedRange<Double>,
+        to outputRange: ClosedRange<Double> = 0...1
+    ) -> Double {
+        let inputMin = inputRange.lowerBound
+        let inputMax = inputRange.upperBound
+        let outputMin = outputRange.lowerBound
+        let outputMax = outputRange.upperBound
+        let normalizedValue = (base - inputMin) / (inputMax - inputMin)
+        let scaledValue = normalizedValue * (outputMax - outputMin) + outputMin
+        return min(max(scaledValue, outputMin), outputMax)
+    }
+}
+
 // MARK: - Operators
 
 precedencegroup PowerPrecedence { higherThan: MultiplicationPrecedence }

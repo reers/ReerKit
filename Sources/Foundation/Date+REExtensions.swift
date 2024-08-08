@@ -384,6 +384,23 @@ public extension ReerForEquatable where Base == Date {
     var unixTimestamp: Double {
         return base.timeIntervalSince1970
     }
+    
+    /// ReerKit: Return Int milliseconds timestamp.
+    var millisecondsSince1970: Int {
+        return Int(base.timeIntervalSince1970 * 1000)
+    }
+    
+    /// ReerKit: Calculates the number of milliseconds from this date to now
+    ///
+    /// - Returns: An integer representing the number of milliseconds from this date to now.
+    ///            If this date is in the future, the returned value will be negative.
+    ///
+    /// - Note: This method uses `timeIntervalSince` to calculate the time difference,
+    ///         then multiplies the result by 1000 to convert it to milliseconds.
+    ///         The result is rounded to the nearest integer.
+    var millisecondsToNow: Int {
+        return Int(Date().timeIntervalSince(base) * 1000)
+    }
 
     /// ReerKit: Date by adding multiples of calendar component.
     ///
@@ -714,6 +731,14 @@ public extension ReerForEquatable where Base == Date {
         }
         dateFormatter.setLocalizedDateFormatFromTemplate(format)
         return dateFormatter.string(from: base)
+    }
+    
+    /// ReerKit: get number of milliseconds between two date
+    ///
+    /// - Parameter date: date to compare self to.
+    /// - Returns: number of milliseconds between self and given date.
+    func millisecondsSince(_ date: Date) -> Double {
+        return base.timeIntervalSince(date) * 1000
     }
 
     /// ReerKit: get number of seconds between two date

@@ -13,7 +13,13 @@ import Foundation
 final class URLExtensionsTests: XCTestCase {
 
     func testInit() {
-        XCTAssertNotNil(URL.re(string: "myapp://example.com/over/there?hello=你好#nose"))
+        XCTAssertEqual(URL.re(string: "myapp://example.com/over/there?hello=123"), URL(string: "myapp://example.com/over/there?hello=123"))
+        XCTAssertEqual(URL.re(string: "myapp://example.com/over/there?hello=你好#nose"), URL(string: "myapp://example.com/over/there?hello=%E4%BD%A0%E5%A5%BD#nose"))
+        XCTAssertEqual(URL.re(string: "https://example.com/audio/嗯好的.ogg"), URL(string: "https://example.com/audio/%E5%97%AF%E5%A5%BD%E7%9A%84.ogg"))
+        XCTAssertEqual(URL.re(string: "https://example.com/嗯好的/audio.ogg"), URL(string: "https://example.com/%E5%97%AF%E5%A5%BD%E7%9A%84/audio.ogg"))
+        XCTAssertEqual(URL.re(string: "https://example.com/嗯好的/audio.ogg?key="), URL(string: "https://example.com/%E5%97%AF%E5%A5%BD%E7%9A%84/audio.ogg?key="))
+        XCTAssertEqual(URL.re(string: "https://上来看对方就爱上了对方/嗯好的/audio.ogg"), URL(string: "https://xn--fhqa68ag85bca74aj38cea959a2t9ai1l/%E5%97%AF%E5%A5%BD%E7%9A%84/audio.ogg"))
+        XCTAssertEqual(URL.re(string: "https://例子.测试/路径/子路径?参数1=值1&参数2=值2#片段"), URL(string: "https://xn--fsqu00a.xn--0zwm56d/%E8%B7%AF%E5%BE%84/%E5%AD%90%E8%B7%AF%E5%BE%84?%E5%8F%82%E6%95%B01=%E5%80%BC1&%E5%8F%82%E6%95%B02=%E5%80%BC2#%E7%89%87%E6%AE%B5"))
     }
 
     var url = URL(string: "https://www.google.com")!

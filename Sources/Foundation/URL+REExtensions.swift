@@ -189,69 +189,84 @@ public extension ReerReference where Base == URL {
 
 public extension URL {
     static func re(string: String?, relativeTo url: URL? = nil) -> URL? {
-        guard var string = string else { return nil }
-        string = string.trimmingCharacters(in: .whitespacesAndNewlines)
-        var result: URL? = nil
-        if url != nil {
-            result = URL(string: string, relativeTo: url)
-        } else {
-            result = URL(string: string)
+        guard var string = string?.trimmingCharacters(in: .whitespacesAndNewlines) else { return nil }
+        
+        if let directURL = URL(string: string, relativeTo: url) {
+            return directURL
         }
-        if result != nil { return result }
-
-        var sourceString = string
-        var fragment = ""
+        
+        var scheme = "", host = "", path = "", query = "", fragment = ""
+        
+        if let schemeRange = string.range(of: "://") {
+            scheme = String(string[..<schemeRange.lowerBound])
+            string = String(string[schemeRange.upperBound...])
+        }
+        
         if let fragmentRange = string.range(of: "#") {
-            sourceString = String(string[..<fragmentRange.lowerBound])
-            fragment = String(string[fragmentRange.lowerBound...])
+            fragment = String(string[fragmentRange.upperBound...])
+            string = String(string[..<fragmentRange.lowerBound])
         }
-        let substrings = sourceString.components(separatedBy: "?")
-        if substrings.count > 1 {
-            let beforeQuery = substrings[0]
-            let queryString = substrings[1]
-            let params = queryString.components(separatedBy: "&")
-            var encodedParams: [String: String] = [:]
-            for param in params {
-                let keyValue = param.components(separatedBy: "=")
-                if keyValue.count > 1 {
-                    let key = keyValue[0]
-                    var value = keyValue[1]
-                    value = decode(with: value)
-                    let chars = CharacterSet.urlAllowed.subtracting(CharacterSet.toBeEscaped)
-                    let encodedValue = value.addingPercentEncoding(withAllowedCharacters: chars)
-                    encodedParams[key] = encodedValue
+        
+        if let queryRange = string.range(of: "?") {
+            query = String(string[queryRange.upperBound...])
+            string = String(string[..<queryRange.lowerBound])
+        }
+        
+        let components = string.split(separator: "/", maxSplits: 1)
+        host = String(components.first ?? "")
+        path = components.count > 1 ? "/" + components[1] : ""
+        
+        let encodedHost = encodeHost(host)
+        let encodedPath = encodePath(path)
+        let encodedQuery = encodeQuery(query)
+        let encodedFragment = encodeFragment(fragment)
+        
+        var urlString = ""
+        if !scheme.isEmpty { urlString += "\(scheme)://" }
+        urlString += encodedHost
+        urlString += encodedPath
+        if !encodedQuery.isEmpty { urlString += "?\(encodedQuery)" }
+        if !encodedFragment.isEmpty { urlString += "#\(encodedFragment)" }
+        
+        return URL(string: urlString, relativeTo: url)
+    }
+    
+    private static func encodeHost(_ host: String) -> String {
+        return host.re.idnaEncoded ?? host
+    }
+    
+    private static func encodePath(_ path: String) -> String {
+        let allowedCharacters = CharacterSet.urlPathAllowed.subtracting(.init(charactersIn: "/"))
+        return path
+            .components(separatedBy: "/")
+            .map { $0.addingPercentEncoding(withAllowedCharacters: allowedCharacters) ?? $0 }
+            .joined(separator: "/")
+    }
+    
+    private static func encodeQuery(_ query: String) -> String {
+        guard !query.isEmpty else { return "" }
+        
+        return query
+            .components(separatedBy: "&")
+            .compactMap { component -> String? in
+                let parts = component.components(separatedBy: "=")
+                guard let key = parts.first, !key.isEmpty else { return nil }
+                
+                let encodedKey = key.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? key
+                
+                if parts.count > 1 {
+                    let value = parts[1]
+                    let encodedValue = value.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? value
+                    return "\(encodedKey)=\(encodedValue)"
+                } else {
+                    return encodedKey
                 }
             }
-            let encodedURLString = "\(beforeQuery)?\(encodedParams.re.queryString)\(fragment))"
-            if let url = url {
-                result = URL(string: encodedURLString, relativeTo: url)
-            } else {
-                result = URL(string: encodedURLString)
-            }
-        }
-        return result
+            .joined(separator: "&")
     }
-
-    private static func decode(with urlString: String) -> String {
-        guard let _ = urlString.range(of: "%") else {
-            return urlString
-        }
-        return urlString.removingPercentEncoding ?? urlString
-    }
-}
-
-private extension CharacterSet {
-    static var urlAllowed: CharacterSet {
-        return .urlUserAllowed
-            .union(.urlPathAllowed)
-            .union(.urlHostAllowed)
-            .union(.urlQueryAllowed)
-            .union(.urlFragmentAllowed)
-            .union(.urlPasswordAllowed)
-    }
-
-    static var toBeEscaped: CharacterSet {
-        return CharacterSet(charactersIn: ":/?#@!$&'(){}*+=")
+    
+    private static func encodeFragment(_ fragment: String) -> String {
+        return fragment.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? fragment
     }
 }
 

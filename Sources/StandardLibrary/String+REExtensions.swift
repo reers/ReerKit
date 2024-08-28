@@ -86,9 +86,7 @@ public extension Reer where Base == String {
 
         return Data(base64Encoded: base + padding, options: .ignoreUnknownCharacters)
     }
-    #endif
-
-    #if canImport(Foundation)
+    
     /// ReerKit: String encoded in base64 (if applicable).
     ///
     ///        "Hello World!".re.base64Encoded -> Optional("SGVsbG8gV29ybGQh")
@@ -98,7 +96,37 @@ public extension Reer where Base == String {
         return plainData?.base64EncodedString()
     }
     #endif
+    
+    #if canImport(Foundation)
+    /// ReerKit: Returns new string in punycode encoding (RFC 3492)
+    ///
+    /// - Returns: Punycode encoded string or nil if the string can't be encoded
+    var punycodeEncoded: String? {
+        return Puny().encodePunycode(base[..<base.endIndex])
+    }
 
+    /// ReerKit: Returns new string decoded from punycode representation (RFC 3492)
+    ///
+    /// - Returns: Original string or nil if the string doesn't contain correct encoding
+    var punycodeDecoded: String? {
+        return Puny().decodePunycode(base[..<base.endIndex])
+    }
+
+    /// ReerKit: Returns new string containing IDNA-encoded hostname
+    ///
+    /// - Returns: IDNA encoded hostname or nil if the string can't be encoded
+    var idnaEncoded: String? {
+        return Puny().encodeIDNA(base[..<base.endIndex])
+    }
+
+    /// ReerKit: Returns new string containing hostname decoded from IDNA representation
+    ///
+    /// - Returns: Original hostname or nil if the string doesn't contain correct encoding
+    var idnaDecoded: String? {
+        return Puny().decodedIDNA(base[..<base.endIndex])
+    }
+    #endif
+    
     /// ReerKit: Array of characters of a string.
     var characters: [Character] {
         return Array(base)

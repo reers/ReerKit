@@ -1078,4 +1078,13 @@ final class StringExtensionsTests: XCTestCase {
             XCTAssertEqual(original, ret2)
         }
     }
+    
+    func testPunycode() {
+        var hello = "你好"
+        XCTAssertEqual(hello.re.punycodeEncoded?.re.punycodeDecoded, hello)
+        XCTAssertEqual(hello.re.idnaEncoded?.re.idnaDecoded, hello)
+        
+        XCTAssertEqual("寿司".re.punycodeEncoded, "sprr0q")
+        XCTAssertEqual("寿司".re.idnaEncoded, "xn--sprr0q")
+    }
 }

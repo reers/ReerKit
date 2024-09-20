@@ -252,7 +252,7 @@ public extension ReerForEquatable where Base == Date {
     ///
     var iso8601String: String {
         // https://github.com/justinmakaila/NSDate-ISO-8601/blob/master/NSDateISO8601.swift
-        let dateFormatter = DateFormatter()
+        let dateFormatter = Date.dateFormatter
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
@@ -630,7 +630,7 @@ public extension ReerForEquatable where Base == Date {
     /// - Parameter format: Date format (default is "dd/MM/yyyy").
     /// - Returns: date string.
     func string(withFormat format: String = "dd/MM/yyyy HH:mm") -> String {
-        let dateFormatter = DateFormatter()
+        let dateFormatter = Date.dateFormatter
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: base)
     }
@@ -645,7 +645,7 @@ public extension ReerForEquatable where Base == Date {
     /// - Parameter style: DateFormatter style (default is .medium).
     /// - Returns: date string.
     func dateString(ofStyle style: DateFormatter.Style = .medium) -> String {
-        let dateFormatter = DateFormatter()
+        let dateFormatter = Date.dateFormatter
         dateFormatter.timeStyle = .none
         dateFormatter.dateStyle = style
         return dateFormatter.string(from: base)
@@ -661,7 +661,7 @@ public extension ReerForEquatable where Base == Date {
     /// - Parameter style: DateFormatter style (default is .medium).
     /// - Returns: date and time string.
     func dateTimeString(ofStyle style: DateFormatter.Style = .medium) -> String {
-        let dateFormatter = DateFormatter()
+        let dateFormatter = Date.dateFormatter
         dateFormatter.timeStyle = style
         dateFormatter.dateStyle = style
         return dateFormatter.string(from: base)
@@ -677,7 +677,7 @@ public extension ReerForEquatable where Base == Date {
     /// - Parameter style: DateFormatter style (default is .medium).
     /// - Returns: time string.
     func timeString(ofStyle style: DateFormatter.Style = .medium) -> String {
-        let dateFormatter = DateFormatter()
+        let dateFormatter = Date.dateFormatter
         dateFormatter.timeStyle = style
         dateFormatter.dateStyle = .none
         return dateFormatter.string(from: base)
@@ -693,7 +693,7 @@ public extension ReerForEquatable where Base == Date {
     /// - Returns: day name string (example: W, Wed, Wednesday).
     func dayName(ofStyle style: Date.NameStyle = .full) -> String {
         // http://www.codingexplorer.com/swiftly-getting-human-readable-date-nsdateformatter/
-        let dateFormatter = DateFormatter()
+        let dateFormatter = Date.dateFormatter
         var format: String {
             switch style {
             case .oneLetter:
@@ -718,7 +718,7 @@ public extension ReerForEquatable where Base == Date {
     /// - Returns: month name string (example: D, Dec, December).
     func monthName(ofStyle style: Date.NameStyle = .full) -> String {
         // http://www.codingexplorer.com/swiftly-getting-human-readable-date-nsdateformatter/
-        let dateFormatter = DateFormatter()
+        let dateFormatter = Date.dateFormatter
         var format: String {
             switch style {
             case .oneLetter:
@@ -796,8 +796,10 @@ public extension ReerForEquatable where Base == Date {
     /// - Returns: true if the date is within a number of components of another date.
     func isWithin(_ value: UInt, _ component: Calendar.Component, of date: Date) -> Bool {
         let components = calendar.dateComponents([component], from: base, to: date)
-        let componentValue = components.value(for: component)!
-        return abs(componentValue) <= value
+        guard let componentValue = components.value(for: component) else {
+            return false
+        }
+        return abs(componentValue) <= Int(value)
     }
 
     /// ReerKit: Returns a random date within the specified range.
@@ -1068,7 +1070,7 @@ public extension Date {
     /// - Parameter iso8601String: ISO8601 string of format (yyyy-MM-dd'T'HH:mm:ss.SSSZ).
     static func re(iso8601String: String) -> Date? {
         // https://github.com/justinmakaila/NSDate-ISO-8601/blob/master/NSDateISO8601.swift
-        let dateFormatter = DateFormatter()
+        let dateFormatter = Date.dateFormatter
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
@@ -1082,6 +1084,14 @@ public extension Date {
     /// - Parameter unixTimestamp: UNIX timestamp.
     static func re(unixTimestamp: Double) -> Date {
         return Date(timeIntervalSince1970: unixTimestamp)
+    }
+}
+
+extension Date {
+    fileprivate static let sharedDateFormatter = DateFormatter()
+    
+    fileprivate static var dateFormatter: DateFormatter {
+        return Thread.isMainThread ? sharedDateFormatter: DateFormatter()
     }
 }
 

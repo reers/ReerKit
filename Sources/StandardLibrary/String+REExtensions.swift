@@ -414,7 +414,7 @@ public extension Reer where Base == String {
     
     #if canImport(Foundation)
     private static var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
+        let formatter = Date.dateFormatter
         formatter.timeZone = TimeZone.current
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
@@ -432,7 +432,7 @@ public extension Reer where Base == String {
 
     #if canImport(Foundation)
     private static var dateTimeFormatter: DateFormatter = {
-        let formatter = DateFormatter()
+        let formatter = Date.dateFormatter
         formatter.timeZone = TimeZone.current
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return formatter
@@ -786,7 +786,7 @@ public extension Reer where Base == String {
     /// - Parameter format: date format.
     /// - Returns: Date object from string (if applicable).
     func date(withFormat format: String) -> Date? {
-        let dateFormatter = DateFormatter()
+        let dateFormatter = Date.dateFormatter
         dateFormatter.dateFormat = format
         return dateFormatter.date(from: base)
     }

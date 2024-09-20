@@ -1088,9 +1088,9 @@ public extension Date {
 }
 
 extension Date {
-    fileprivate static let sharedDateFormatter = DateFormatter()
+    static let sharedDateFormatter = DateFormatter()
     
-    fileprivate static var dateFormatter: DateFormatter {
+    static var dateFormatter: DateFormatter {
         return Thread.isMainThread ? sharedDateFormatter: DateFormatter()
     }
 }

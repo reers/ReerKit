@@ -25,6 +25,7 @@ class ExampleListViewController: UIViewController {
         Example(title: "Use SwiftUI view in UIKit", vcName: "SwiftUITestViewController"),
         Example(title: "Blur image", vcName: "BlurImageViewController"),
         Example(title: "Gray model for UIView", vcName: "GrayModeViewController"),
+        Example(title: "RETimer", vcName: "RETimerViewController"),
         Example(title: "CountdownTimer", vcName: "CountdownTimerViewController"),
         Example(title: "Squircle Rounded Corner", vcName: "SquircleCornerViewController"),
         Example(title: "Multicast Delegate Test", vcName: "MulticastDelegateExampleViewController")
@@ -53,6 +54,11 @@ class ExampleListViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "user")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
    
     // MARK: Layout

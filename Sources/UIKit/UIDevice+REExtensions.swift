@@ -199,6 +199,22 @@ public extension UIDevice {
         ///
         /// ![Image]()
         case iPhone15ProMax
+        /// Device is an [iPhone 16]()
+        ///
+        /// ![Image](https://support.apple.com/en-us/121029)
+        case iPhone16
+        /// Device is an [iPhone 16 Plus](https://support.apple.com/en-us/121030)
+        ///
+        /// ![Image]()
+        case iPhone16Plus
+        /// Device is an [iPhone 16 Pro](https://support.apple.com/en-us/121031)
+        ///
+        /// ![Image]()
+        case iPhone16Pro
+        /// Device is an [iPhone 16 Pro Max](https://support.apple.com/en-us/121032)
+        ///
+        /// ![Image]()
+        case iPhone16ProMax
         /// Device is an [iPad 2](https://support.apple.com/kb/SP622)
         ///
         /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP622/SP622_01-ipad2-mul.png)
@@ -606,7 +622,9 @@ public extension Reer where Base: UIDevice {
     
     static var isDynamicIslandScreen: Bool {
         switch modelName {
-        case .iPhone14Pro, .iPhone14ProMax, .iPhone15, .iPhone15Plus, .iPhone15Pro, .iPhone15ProMax:
+        case .iPhone14Pro, .iPhone14ProMax,
+             .iPhone15, .iPhone15Plus, .iPhone15Pro, .iPhone15ProMax,
+             .iPhone16, .iPhone16Plus, .iPhone16Pro, .iPhone16ProMax:
             return true
         default:
             return false
@@ -677,6 +695,10 @@ public extension Reer where Base: UIDevice {
         case "iPhone15,5": return .iPhone15Plus
         case "iPhone16,1": return .iPhone15Pro
         case "iPhone16,2": return .iPhone15ProMax
+        case "iPhone17,3": return .iPhone16
+        case "iPhone17,4": return .iPhone16Plus
+        case "iPhone17,1": return .iPhone16Pro
+        case "iPhone17,2": return .iPhone16ProMax
         case "iPad2,1", "iPad2,2", "iPad2,3", "iPad2,4": return .iPad2
         case "iPad3,1", "iPad3,2", "iPad3,3": return .iPad3
         case "iPad3,4", "iPad3,5", "iPad3,6": return .iPad4
@@ -1101,6 +1123,10 @@ extension UIDevice.Name: CustomStringConvertible {
         case .iPhone15Plus: return "iPhone 15 Plus"
         case .iPhone15Pro: return "iPhone 15 Pro"
         case .iPhone15ProMax: return "iPhone 15 Pro Max"
+        case .iPhone16: return "iPhone 16"
+        case .iPhone16Plus: return "iPhone 16 Plus"
+        case .iPhone16Pro: return "iPhone 16 Pro"
+        case .iPhone16ProMax: return "iPhone 16 Pro Max"
         case .iPad2: return "iPad 2"
         case .iPad3: return "iPad (3rd generation)"
         case .iPad4: return "iPad (4th generation)"

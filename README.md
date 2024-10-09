@@ -1,6 +1,6 @@
 # ReerKit
 ReerKit is a collection of native Swift extensions that provide convenient methods, syntactic sugar, and performance improvements for various native data types, UIKit, and Cocoa classes for iOS, macOS, tvOS, watchOS, and Linux platforms.
-Part of the content in the framework comes from the excellent open-source library [SwifterSwift](https://github.com/SwifterSwift/SwifterSwift), with some code removal, optimization, and bug fixes. Some of the content is gathered from various sources on the internet for utility classes or extension methods. The remaining content is developed by myself. All system type extensions in the framework have the `re` infix added to avoid ambiguity issues when calling the same name extension, such as `"SGVsbG\n8gV29ybGQh".re.base64Decoded`, `"123".re.md5String`.
+Some of the source code is gathered from various sources on the internet for utility classes or extension methods, with some code optimization and bug fixes. The remaining content is developed by myself. All system type extensions in the framework have the `re` infix added to avoid ambiguity issues when calling the same name extension, such as `"SGVsbG\n8gV29ybGQh".re.base64Decoded`, `"123".re.md5String`.
 
 [简体中文](README_CN.md)
 

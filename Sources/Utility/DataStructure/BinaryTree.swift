@@ -19,62 +19,85 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-/// Define a generic binary tree data structure
-public indirect enum BinaryTree<E> {
-    /// Each node contains a left subtree, a value, and a right subtree
-    case node(BinaryTree<E>, E, BinaryTree<E>)
-    /// Represents an empty node (leaf)
-    case empty
+/// Define a generic binary tree data structure as a class with parent pointers
+public class BinaryTree<E> {
+    /// The value stored in the node
+    public var value: E
+    /// The left child of the node
+    public var left: BinaryTree<E>? {
+        didSet {
+            left?.parent = self
+        }
+    }
+    /// The right child of the node
+    public var right: BinaryTree<E>? {
+        didSet {
+            right?.parent = self
+        }
+    }
+    /// The parent node; weak to prevent retain cycles
+    public weak var parent: BinaryTree<E>?
     
     /// Computed property to count the total number of nodes in the tree
     public var count: Int {
-        switch self {
-        case let .node(left, _, right):
-            // Count is the sum of counts from left and right subtrees plus one for the current node
-            return left.count + 1 + right.count
-        case .empty:
-            // Empty node contributes zero to the count
-            return 0
-        }
+        let leftCount = left?.count ?? 0
+        let rightCount = right?.count ?? 0
+        // Count is the sum of counts from left and right subtrees plus one for the current node
+        return 1 + leftCount + rightCount
+    }
+    
+    /// Initialize a node with a value
+    public init(value: E) {
+        self.value = value
+    }
+    
+    /// Set a left child with a value
+    @discardableResult
+    public func setLeft(value: E) -> BinaryTree<E> {
+        let child = BinaryTree(value: value)
+        self.left = child
+        return child
+    }
+    
+    /// Set a right child with a value
+    @discardableResult
+    public func setRight(value: E) -> BinaryTree<E> {
+        let child = BinaryTree(value: value)
+        self.right = child
+        return child
     }
 }
 
 /// Extension to add traversal methods to the binary tree
 extension BinaryTree {
     /// In-order traversal (Left, Root, Right)
-    public func traverseInOrder(process: (E) -> Void) {
-        if case let .node(left, value, right) = self {
-            // Traverse the left subtree
-            left.traverseInOrder(process: process)
-            // Process the current node's value
-            process(value)
-            // Traverse the right subtree
-            right.traverseInOrder(process: process)
-        }
+    public func traverseInorder(process: (E) -> Void) {
+        // Traverse the left subtree
+        left?.traverseInorder(process: process)
+        // Process the current node's value
+        process(value)
+        // Traverse the right subtree
+        right?.traverseInorder(process: process)
     }
     
     /// Pre-order traversal (Root, Left, Right)
-    public func traversePreOrder(process: (E) -> Void) {
-        if case let .node(left, value, right) = self {
-            // Process the current node's value
-            process(value)
-            // Traverse the left subtree
-            left.traversePreOrder(process: process)
-            // Traverse the right subtree
-            right.traversePreOrder(process: process)
-        }
+    public func traversePreorder(process: (E) -> Void) {
+        // Process the current node's value
+        process(value)
+        // Traverse the left subtree
+        left?.traversePreorder(process: process)
+        // Traverse the right subtree
+        right?.traversePreorder(process: process)
     }
     
     /// Post-order traversal (Left, Right, Root)
-    public func traversePostOrder(process: (E) -> Void) {
-        if case let .node(left, value, right) = self {
-            // Traverse the left subtree
-            left.traversePostOrder(process: process)
-            // Traverse the right subtree
-            right.traversePostOrder(process: process)
-            // Process the current node's value
-            process(value)
-        }
+    public func traversePostorder(process: (E) -> Void) {
+        // Traverse the left subtree
+        left?.traversePostorder(process: process)
+        // Traverse the right subtree
+        right?.traversePostorder(process: process)
+        // Process the current node's value
+        process(value)
     }
     
     /// Level-order traversal (Breadth-first traversal)
@@ -87,35 +110,41 @@ extension BinaryTree {
         // Continue until there are no more nodes to visit
         while !queue.isEmpty {
             guard let node = queue.dequeue() else { continue }
+            // Process the current node's value
+            process(node.value)
             
-            if case let .node(left, value, right) = node {
-                // Process the current node's value
-                process(value)
-                
-                // Enqueue the left child if it is a node
-                if case .node(_, _, _) = left {
-                    queue.enqueue(left)
-                }
-                
-                // Enqueue the right child if it is a node
-                if case .node(_, _, _) = right {
-                    queue.enqueue(right)
-                }
+            // Enqueue the left child if it exists
+            if let left = node.left {
+                queue.enqueue(left)
+            }
+            // Enqueue the right child if it exists
+            if let right = node.right {
+                queue.enqueue(right)
             }
         }
     }
 }
 
+/// Extension to add inversion methods to the binary tree
 extension BinaryTree {
-    // Function to invert (mirror) the binary tree
-    func invert() -> BinaryTree {
-        switch self {
-        case let .node(left, value, right):
-            // Swap the left and right subtrees recursively
-            return .node(right.invert(), value, left.invert())
-        case .empty:
-            // If the node is empty, return empty
-            return .empty
-        }
+    /// Function to invert (mirror) the binary tree in place
+    public func invert() {
+        // Recursively invert the left and right subtrees
+        left?.invert()
+        right?.invert()
+        // Swap the left and right children
+        swap(&left, &right)
+        // Parent pointers are updated via didSet
+    }
+    
+    /// Function to get a new inverted (mirrored) binary tree
+    public func inverted() -> BinaryTree<E> {
+        // Create a new node with the current value
+        let newNode = BinaryTree(value: value)
+        // Recursively invert the subtrees and assign them in swapped positions
+        newNode.left = right?.inverted()
+        newNode.right = left?.inverted()
+        // Parent pointers are set via didSet in the BinaryTree class
+        return newNode
     }
 }

@@ -747,6 +747,11 @@
 		D0D84C722C5CCF5D00B24DB7 /* LinearFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D84C6E2C5CCF5300B24DB7 /* LinearFunction.swift */; };
 		D0D84C732C5CCF5E00B24DB7 /* LinearFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D84C6E2C5CCF5300B24DB7 /* LinearFunction.swift */; };
 		D0D84C752C5CD0E800B24DB7 /* MathFunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D84C742C5CD0E800B24DB7 /* MathFunctionsTests.swift */; };
+		D0E0F61B2CB7CBFB0018405A /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0F61A2CB7CBFB0018405A /* BinaryTree.swift */; };
+		D0E0F61C2CB7CBFB0018405A /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0F61A2CB7CBFB0018405A /* BinaryTree.swift */; };
+		D0E0F61D2CB7CBFB0018405A /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0F61A2CB7CBFB0018405A /* BinaryTree.swift */; };
+		D0E0F61E2CB7CBFB0018405A /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0F61A2CB7CBFB0018405A /* BinaryTree.swift */; };
+		D0E0F61F2CB7CBFB0018405A /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0F61A2CB7CBFB0018405A /* BinaryTree.swift */; };
 		D0E1289D29C38A390051D351 /* EdgeInsets+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E1289C29C38A390051D351 /* EdgeInsets+REExtensions.swift */; };
 		D0E129A629C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E129A529C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift */; };
 		D0E354C828BFBBE10000030B /* WeakSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C728BFBBE10000030B /* WeakSet.swift */; };
@@ -1038,6 +1043,7 @@
 		D0D311372AB8522F00E54361 /* Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rounded.swift; sourceTree = "<group>"; };
 		D0D84C6E2C5CCF5300B24DB7 /* LinearFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearFunction.swift; sourceTree = "<group>"; };
 		D0D84C742C5CD0E800B24DB7 /* MathFunctionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathFunctionsTests.swift; sourceTree = "<group>"; };
+		D0E0F61A2CB7CBFB0018405A /* BinaryTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryTree.swift; sourceTree = "<group>"; };
 		D0E1289C29C38A390051D351 /* EdgeInsets+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EdgeInsets+REExtensions.swift"; sourceTree = "<group>"; };
 		D0E129A529C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetsExtensionsTests.swift; sourceTree = "<group>"; };
 		D0E354C728BFBBE10000030B /* WeakSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakSet.swift; sourceTree = "<group>"; };
@@ -1151,6 +1157,7 @@
 				D07562F32BA2EED500640242 /* OrderedDictionary.swift */,
 				D01D002B2BB6E5130067B6FE /* OrderedSet.swift */,
 				D0737E852BC9262D00B6D89E /* BoundedQueue.swift */,
+				D0E0F61A2CB7CBFB0018405A /* BinaryTree.swift */,
 			);
 			path = DataStructure;
 			sourceTree = "<group>";
@@ -2058,6 +2065,7 @@
 				D04B861829F9A59600177357 /* UISlider+REExtensions.swift in Sources */,
 				D04B860829F9A59600177357 /* UITextView+REExtensions.swift in Sources */,
 				D04B862229F9A59600177357 /* UITabBar+REExtensions.swift in Sources */,
+				D0E0F61C2CB7CBFB0018405A /* BinaryTree.swift in Sources */,
 				D04B85BE29F9A3FC00177357 /* SignedNumeric+REExtensions.swift in Sources */,
 				D04B85EC29F9A50E00177357 /* Weak.swift in Sources */,
 				D04B85F029F9A57400177357 /* CATransform3D+REExtensions.swift in Sources */,
@@ -2202,6 +2210,7 @@
 				D04B873829F9A71900177357 /* UITextView+REExtensions.swift in Sources */,
 				D04B86F729F9A71100177357 /* NSAttributedString+REExtensions.swift in Sources */,
 				D04B86C429F9A70000177357 /* Locked.swift in Sources */,
+				D0E0F61D2CB7CBFB0018405A /* BinaryTree.swift in Sources */,
 				D04B86BD29F9A6FC00177357 /* Weak.swift in Sources */,
 				D04B86A029F9A6F100177357 /* Decodable+REExtensions.swift in Sources */,
 				D04B873C29F9A71900177357 /* UITabBar+REExtensions.swift in Sources */,
@@ -2345,6 +2354,7 @@
 				D04B871729F9A71900177357 /* UITextView+REExtensions.swift in Sources */,
 				D04B86E929F9A71000177357 /* NSAttributedString+REExtensions.swift in Sources */,
 				D04B86C929F9A70100177357 /* Locked.swift in Sources */,
+				D0E0F61E2CB7CBFB0018405A /* BinaryTree.swift in Sources */,
 				D04B86C129F9A6FD00177357 /* Weak.swift in Sources */,
 				D04B86B729F9A6F100177357 /* Decodable+REExtensions.swift in Sources */,
 				D04B871B29F9A71900177357 /* UITabBar+REExtensions.swift in Sources */,
@@ -2507,6 +2517,7 @@
 				D0185A1D2C7F4F6400100E3E /* NSObject+REExtensions.swift in Sources */,
 				D0185A1E2C7F4F6400100E3E /* Calendar+REExtensions.swift in Sources */,
 				D0185A262C7F4F6F00100E3E /* EdgeInsets+REExtensions.swift in Sources */,
+				D0E0F61F2CB7CBFB0018405A /* BinaryTree.swift in Sources */,
 				D0185A272C7F4F6F00100E3E /* Font+REExtensions.swift in Sources */,
 				D0185A282C7F4F6F00100E3E /* Color+REExtensions.swift in Sources */,
 				D0185A1F2C7F4F6400100E3E /* Date+REExtensions.swift in Sources */,
@@ -2726,6 +2737,7 @@
 				D076D4AD29F3BED70008ABE0 /* UITabBar+REExtensions.swift in Sources */,
 				D076D48D29F3BA6A0008ABE0 /* UINavigationBar+REExtensions.swift in Sources */,
 				D0122AFF29EEF059008311CF /* UIBarButtonItem+REExtensions.swift in Sources */,
+				D0E0F61B2CB7CBFB0018405A /* BinaryTree.swift in Sources */,
 				D0C3306A29F5A7ED007BE677 /* UIScreen+REExtensions.swift in Sources */,
 				D0D311242AB4458F00E54361 /* CALayer+REExtensions.swift in Sources */,
 				D0B1211E2855156200B5B326 /* TypeNameDescribable.swift in Sources */,

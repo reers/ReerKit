@@ -64,6 +64,49 @@ public class Tree<E> {
     }
 }
 
+/// Extension to add traversal methods to the N-ary tree
+extension Tree {
+    /// Pre-order traversal (Root, Children)
+    public func traversePreorder(process: (E) -> Void) {
+        // Process the current node's value
+        process(value)
+        // Traverse each child subtree
+        for child in children {
+            child.traversePreorder(process: process)
+        }
+    }
+
+    /// Post-order traversal (Children, Root)
+    public func traversePostorder(process: (E) -> Void) {
+        // Traverse each child subtree
+        for child in children {
+            child.traversePostorder(process: process)
+        }
+        // Process the current node's value
+        process(value)
+    }
+
+    /// Level-order traversal with level information
+    public func traverseLevelOrder(process: (E, Int) -> Void) {
+        // Use a queue to keep track of nodes to visit
+        var queue = Queue<(node: Tree<E>, level: Int)>()
+        // Start with the root node
+        queue.enqueue((self, 0))
+
+        // Continue until there are no more nodes to visit
+        while !queue.isEmpty {
+            guard let (node, level) = queue.dequeue() else { continue }
+            // Process the node's value along with its level
+            process(node.value, level)
+
+            // Enqueue the children if they exist
+            for child in node.children {
+                queue.enqueue((child, level + 1))
+            }
+        }
+    }
+}
+
 /// Extension to add inversion methods to the N-ary tree
 extension Tree {
     /// Function to invert (mirror) the N-ary tree in place

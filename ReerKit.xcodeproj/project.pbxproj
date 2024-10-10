@@ -752,6 +752,11 @@
 		D0E0F61D2CB7CBFB0018405A /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0F61A2CB7CBFB0018405A /* BinaryTree.swift */; };
 		D0E0F61E2CB7CBFB0018405A /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0F61A2CB7CBFB0018405A /* BinaryTree.swift */; };
 		D0E0F61F2CB7CBFB0018405A /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0F61A2CB7CBFB0018405A /* BinaryTree.swift */; };
+		D0E0F6222CB7F7FF0018405A /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0F6212CB7F7FF0018405A /* Tree.swift */; };
+		D0E0F6232CB7F7FF0018405A /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0F6212CB7F7FF0018405A /* Tree.swift */; };
+		D0E0F6242CB7F7FF0018405A /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0F6212CB7F7FF0018405A /* Tree.swift */; };
+		D0E0F6252CB7F7FF0018405A /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0F6212CB7F7FF0018405A /* Tree.swift */; };
+		D0E0F6262CB7F7FF0018405A /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E0F6212CB7F7FF0018405A /* Tree.swift */; };
 		D0E1289D29C38A390051D351 /* EdgeInsets+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E1289C29C38A390051D351 /* EdgeInsets+REExtensions.swift */; };
 		D0E129A629C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E129A529C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift */; };
 		D0E354C828BFBBE10000030B /* WeakSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E354C728BFBBE10000030B /* WeakSet.swift */; };
@@ -1044,6 +1049,7 @@
 		D0D84C6E2C5CCF5300B24DB7 /* LinearFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearFunction.swift; sourceTree = "<group>"; };
 		D0D84C742C5CD0E800B24DB7 /* MathFunctionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathFunctionsTests.swift; sourceTree = "<group>"; };
 		D0E0F61A2CB7CBFB0018405A /* BinaryTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryTree.swift; sourceTree = "<group>"; };
+		D0E0F6212CB7F7FF0018405A /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		D0E1289C29C38A390051D351 /* EdgeInsets+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EdgeInsets+REExtensions.swift"; sourceTree = "<group>"; };
 		D0E129A529C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetsExtensionsTests.swift; sourceTree = "<group>"; };
 		D0E354C728BFBBE10000030B /* WeakSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakSet.swift; sourceTree = "<group>"; };
@@ -1158,6 +1164,7 @@
 				D01D002B2BB6E5130067B6FE /* OrderedSet.swift */,
 				D0737E852BC9262D00B6D89E /* BoundedQueue.swift */,
 				D0E0F61A2CB7CBFB0018405A /* BinaryTree.swift */,
+				D0E0F6212CB7F7FF0018405A /* Tree.swift */,
 			);
 			path = DataStructure;
 			sourceTree = "<group>";
@@ -2086,6 +2093,7 @@
 				D0185A022C7F4C0D00100E3E /* Punycode.swift in Sources */,
 				D04B861229F9A59600177357 /* UITextField+REExtensions.swift in Sources */,
 				D0D3112D2AB83D9900E54361 /* Clamped.swift in Sources */,
+				D0E0F6232CB7F7FF0018405A /* Tree.swift in Sources */,
 				D04B85BD29F9A3FC00177357 /* FloatingPoint+REExtensions.swift in Sources */,
 				D04B85F829F9A57D00177357 /* DispatchQueue+REExtensions.swift in Sources */,
 				D04B85E829F9A50B00177357 /* ReadWriteLock.swift in Sources */,
@@ -2231,6 +2239,7 @@
 				D0185A032C7F4C0D00100E3E /* Punycode.swift in Sources */,
 				D04B867829F9A6D400177357 /* CGVector+REExtensions.swift in Sources */,
 				D0D3112E2AB83D9900E54361 /* Clamped.swift in Sources */,
+				D0E0F6242CB7F7FF0018405A /* Tree.swift in Sources */,
 				D04B869429F9A6F100177357 /* Double+REExtensions.swift in Sources */,
 				D04B872E29F9A71900177357 /* UIDevice+REExtensions.swift in Sources */,
 				D04B868929F9A6EA00177357 /* AnyObjectExtensionable.swift in Sources */,
@@ -2375,6 +2384,7 @@
 				D0185A042C7F4C0D00100E3E /* Punycode.swift in Sources */,
 				D04B867129F9A6D300177357 /* CGVector+REExtensions.swift in Sources */,
 				D0D3112F2AB83D9900E54361 /* Clamped.swift in Sources */,
+				D0E0F6252CB7F7FF0018405A /* Tree.swift in Sources */,
 				D04B86AB29F9A6F100177357 /* Double+REExtensions.swift in Sources */,
 				D04B870D29F9A71900177357 /* UIDevice+REExtensions.swift in Sources */,
 				D04B868429F9A6EA00177357 /* AnyObjectExtensionable.swift in Sources */,
@@ -2581,6 +2591,7 @@
 				D0185A3A2C7F4FFC00100E3E /* Float+REExtensions.swift in Sources */,
 				D0185A3B2C7F4FFC00100E3E /* Optional+REExtensions.swift in Sources */,
 				D0185A3C2C7F4FFC00100E3E /* OptionSet+REExtensions.swift in Sources */,
+				D0E0F6262CB7F7FF0018405A /* Tree.swift in Sources */,
 				D0185A3D2C7F4FFC00100E3E /* StringProtocol+REExtensions.swift in Sources */,
 				D0185A3E2C7F4FFC00100E3E /* Character+REExtensions.swift in Sources */,
 				D0185A3F2C7F4FFC00100E3E /* Double+REExtensions.swift in Sources */,
@@ -2726,6 +2737,7 @@
 				D0EBE2392884797B004925E5 /* OnceExecutable.swift in Sources */,
 				D0CD713D28E5CC1D009ADA8E /* Float+REExtensions.swift in Sources */,
 				D0CD713928E5C597009ADA8E /* StdlibProtocolWrappers.swift in Sources */,
+				D0E0F6222CB7F7FF0018405A /* Tree.swift in Sources */,
 				D05897472A84E03E008381BB /* Reachability.swift in Sources */,
 				D0D311332AB8438C00E54361 /* Trimmed.swift in Sources */,
 				D071620B29F3D5B50051C11E /* WKWebView+REExtensions.swift in Sources */,

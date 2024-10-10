@@ -100,26 +100,26 @@ extension BinaryTree {
         process(value)
     }
     
-    /// Level-order traversal (Breadth-first traversal)
-    public func traverseLevelOrder(process: (E) -> Void) {
+    /// Level-order traversal with level information
+    public func traverseLevelOrder(process: (E, Int) -> Void) {
         // Use a queue to keep track of nodes to visit
-        var queue = Queue<BinaryTree<E>>()
+        var queue = Queue<(node: BinaryTree<E>, level: Int)>()
         // Start with the root node
-        queue.enqueue(self)
+        queue.enqueue((self, 0))
         
         // Continue until there are no more nodes to visit
         while !queue.isEmpty {
-            guard let node = queue.dequeue() else { continue }
-            // Process the current node's value
-            process(node.value)
+            guard let (node, level) = queue.dequeue() else { continue }
+            // Process the node's value along with its level
+            process(node.value, level)
             
             // Enqueue the left child if it exists
             if let left = node.left {
-                queue.enqueue(left)
+                queue.enqueue((left, level + 1))
             }
             // Enqueue the right child if it exists
             if let right = node.right {
-                queue.enqueue(right)
+                queue.enqueue((right, level + 1))
             }
         }
     }

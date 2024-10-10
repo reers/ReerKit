@@ -148,3 +148,143 @@ extension BinaryTree {
         return newNode
     }
 }
+
+extension BinaryTree: CustomStringConvertible {
+    public var description: String {
+        return treeString()
+    }
+}
+
+extension BinaryTree {
+    
+    public func printTreeString(showLabel: Bool = false, showEmptyNode: Bool = true) {
+        print(treeString(showLabel: showLabel, showEmptyNode: showEmptyNode))
+    }
+    
+    /// Generates a string representation of the tree structure.
+    ///
+    /// ```swift
+    /// 1
+    /// ├── R: 3
+    /// │   ├── R: 6
+    /// │   │   ├── R: •
+    /// │   │   └── L: 7
+    /// │   └── L: •
+    /// └── L: 2
+    ///     ├── R: 5
+    ///     └── L: 4
+    ///
+    /// 1
+    /// ├── R: 3
+    /// │   └── R: 6
+    /// │       └── L: 7
+    /// └── L: 2
+    ///     ├── R: 5
+    ///     └── L: 4
+    ///
+    /// 1
+    /// ├── 3
+    /// │   ├── 6
+    /// │   │   ├── •
+    /// │   │   └── 7
+    /// │   └── •
+    /// └── 2
+    ///     ├── 5
+    ///     └── 4
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - showLabel: If `true`, includes "L:" and "R:" labels to indicate left and right children.
+    ///   - showEmptyNode: If `true`, includes placeholder `•` for empty child nodes.
+    /// - Returns: A string representing the tree structure.
+    public func treeString(showLabel: Bool = true, showEmptyNode: Bool = true) -> String {
+        return treeString(
+            indent: "",
+            isLast: true,
+            isRightChild: false,
+            isRoot: true,
+            showLabel: showLabel,
+            showEmptyNode: showEmptyNode
+        )
+    }
+
+    private func treeString(
+        indent: String,
+        isLast: Bool,
+        isRightChild: Bool,
+        isRoot: Bool,
+        showLabel: Bool,
+        showEmptyNode: Bool
+    ) -> String {
+        
+        var line = indent
+        
+        if !isRoot {
+            line += isLast ? "└── " : "├── "
+        }
+        
+        if showLabel && !isRoot {
+            line += isRightChild ? "R: " : "L: "
+        }
+        
+        line += "\(value)\n"
+        
+        let isLeafNode = (left == nil && right == nil)
+        
+        if isLeafNode && !showEmptyNode {
+            return line
+        }
+        
+        var newIndent = indent
+        
+        if !isRoot {
+            newIndent += isLast ? "    " : "│   "
+        }
+        
+        var childLines = ""
+        
+        var children: [(child: BinaryTree<E>?, isRightChild: Bool)] = []
+        
+        // Add right child first
+        if right != nil {
+            children.append((right, true))
+        } else if showEmptyNode && !isLeafNode {
+            children.append((nil, true))
+        }
+        
+        // Then add left child
+        if left != nil {
+            children.append((left, false))
+        } else if showEmptyNode && !isLeafNode {
+            children.append((nil, false))
+        }
+        
+        // Filter out nil children if showEmptyNode is false
+        let nonNullChildren = children.filter { $0.child != nil || showEmptyNode }
+        
+        for (index, (child, isRightChild)) in nonNullChildren.enumerated() {
+            let childIsLast = index == nonNullChildren.count - 1
+            
+            if let child = child {
+                childLines += child.treeString(
+                    indent: newIndent,
+                    isLast: childIsLast,
+                    isRightChild: isRightChild,
+                    isRoot: false,
+                    showLabel: showLabel,
+                    showEmptyNode: showEmptyNode
+                )
+            } else if showEmptyNode {
+                // Show placeholder for empty child
+                childLines += newIndent
+                childLines += childIsLast ? "└── " : "├── "
+                if showLabel {
+                    childLines += isRightChild ? "R: " : "L: "
+                }
+                childLines += "•\n"
+            }
+        }
+        
+        return line + childLines
+    }
+}

@@ -20,11 +20,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#if canImport(CoreGraphics)
+#if !os(watchOS) && canImport(CoreGraphics) && canImport(QuartzCore)
 import CoreGraphics
-
-#if canImport(QuartzCore)
-
 import QuartzCore
 
 extension CGAffineTransform: ReerCompatibleValue {}
@@ -33,8 +30,5 @@ public extension Reer where Base == CGAffineTransform {
     @inlinable
     func transform3D() -> CATransform3D { CATransform3DMakeAffineTransform(base) }
 }
-
-#endif
-
 #endif
 

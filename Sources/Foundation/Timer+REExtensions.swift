@@ -19,8 +19,9 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#if canImport(Foundation)
+#if canImport(Foundation) && canImport(ObjectiveC)
 import Foundation
+import ObjectiveC
 
 public extension Reer where Base: Timer {
     

@@ -20,7 +20,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#if canImport(QuartzCore)
+#if canImport(QuartzCore) && !os(watchOS)
 
 import QuartzCore
 
@@ -28,7 +28,7 @@ extension CATransform3D: ReerCompatibleValue {}
 
 // MARK: - Equatable
 
-extension CATransform3D: Equatable {
+extension CATransform3D: @retroactive Equatable {
     /// ReerKit: Returns a Boolean value indicating whether two values are equal.
     ///
     /// Equality is the inverse of inequality. For any values `a` and `b`,

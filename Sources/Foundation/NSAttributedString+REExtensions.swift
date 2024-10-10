@@ -44,6 +44,7 @@ public extension Reer where Base: NSAttributedString {
         return numberOfLines(forWidth: width, ignoreBlankLines: ignoreBlankLines)
     }
     
+    #if !os(Linux)
     /// ReerKit: Calculate lines for a `NSAttributedString` with a width constrained.
     /// - Parameters:
     ///   - width: A constrained of container view width.
@@ -76,6 +77,7 @@ public extension Reer where Base: NSAttributedString {
         
         return numberOfLines
     }
+    #endif
     
     /// ReerKit: Calculate height for a `NSAttributedString` with a constrained width.
     /// - Parameter width: A constrained of container view width.

@@ -50,7 +50,6 @@ public struct Stack<E> {
     }
 }
 
-#if DEBUG
 extension Stack: CustomStringConvertible {
     public var description: String {
         let topLine = "-----Stack Top------\n"
@@ -59,4 +58,3 @@ extension Stack: CustomStringConvertible {
         return topLine + elements + bottomLine
     }
 }
-#endif

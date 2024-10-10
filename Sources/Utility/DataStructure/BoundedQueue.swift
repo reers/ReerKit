@@ -82,7 +82,6 @@ public struct BoundedQueue<E> {
     }
 }
 
-#if DEBUG
 extension BoundedQueue: CustomStringConvertible {
     public var description: String {
         if isEmpty {
@@ -95,4 +94,3 @@ extension BoundedQueue: CustomStringConvertible {
         return "<<< \(elements)"
     }
 }
-#endif

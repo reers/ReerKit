@@ -60,7 +60,6 @@ public struct Queue<E> {
     }
 }
 
-#if DEBUG
 extension Queue: CustomStringConvertible {
     public var description: String {
         if isEmpty {
@@ -73,4 +72,3 @@ extension Queue: CustomStringConvertible {
         return "<<< \(elements)"
     }
 }
-#endif

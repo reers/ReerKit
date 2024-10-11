@@ -14,6 +14,11 @@
 		D004CC49285A41F500C41360 /* Synchronizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D004CC48285A41F500C41360 /* Synchronizing.swift */; };
 		D00615C12976F52D003FA4CF /* CATransform3D+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00615C02976F52D003FA4CF /* CATransform3D+REExtensions.swift */; };
 		D008BD6E28E5DCC500470BEB /* Decodable+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD714628E5D71D009ADA8E /* Decodable+REExtensions.swift */; };
+		D00C2EAB2CA6C04400B74E0C /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00C2EAA2CA6C04400B74E0C /* Keychain.swift */; };
+		D00C2EAC2CA6C04400B74E0C /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00C2EAA2CA6C04400B74E0C /* Keychain.swift */; };
+		D00C2EAD2CA6C04400B74E0C /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00C2EAA2CA6C04400B74E0C /* Keychain.swift */; };
+		D00C2EAE2CA6C04400B74E0C /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00C2EAA2CA6C04400B74E0C /* Keychain.swift */; };
+		D00C2EAF2CA6C04400B74E0C /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00C2EAA2CA6C04400B74E0C /* Keychain.swift */; };
 		D00D638B2A069AB600A9EEF4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00D63882A069AB600A9EEF4 /* LinkedList.swift */; };
 		D00D638C2A069AB600A9EEF4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00D63882A069AB600A9EEF4 /* LinkedList.swift */; };
 		D00D638D2A069AB600A9EEF4 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00D63882A069AB600A9EEF4 /* LinkedList.swift */; };
@@ -827,6 +832,7 @@
 		D0038B822856662B00A890F9 /* RWLocked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RWLocked.swift; sourceTree = "<group>"; };
 		D004CC48285A41F500C41360 /* Synchronizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synchronizing.swift; sourceTree = "<group>"; };
 		D00615C02976F52D003FA4CF /* CATransform3D+REExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CATransform3D+REExtensions.swift"; sourceTree = "<group>"; };
+		D00C2EAA2CA6C04400B74E0C /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		D00D63882A069AB600A9EEF4 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		D00D63892A069AB600A9EEF4 /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		D00D638A2A069AB600A9EEF4 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
@@ -1487,6 +1493,7 @@
 				D05897462A84E03E008381BB /* Reachability.swift */,
 				D036EAF82B26FB4100D451D6 /* Invocation.swift */,
 				D08E03EB2C4948F200C07389 /* MulticastDelegate.swift */,
+				D00C2EAA2CA6C04400B74E0C /* Keychain.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -2171,6 +2178,7 @@
 				D04B85C429F9A3FC00177357 /* Optional+REExtensions.swift in Sources */,
 				D048D7E42ABA0012007B87EB /* NSRange+REExtensions.swift in Sources */,
 				D04B85CD29F9A3FC00177357 /* Sequence+REExtensions.swift in Sources */,
+				D00C2EAC2CA6C04400B74E0C /* Keychain.swift in Sources */,
 				D04B85EA29F9A50B00177357 /* Locked.swift in Sources */,
 				D04B861329F9A59600177357 /* UIStackView+REExtensions.swift in Sources */,
 				D04B85CE29F9A3FC00177357 /* StringProtocol+REExtensions.swift in Sources */,
@@ -2317,6 +2325,7 @@
 				D04B873429F9A71900177357 /* UINavigationItem+REExtensions.swift in Sources */,
 				D048D7E52ABA0012007B87EB /* NSRange+REExtensions.swift in Sources */,
 				D04B872429F9A71900177357 /* UIGestureRecognizer+REExtensions.swift in Sources */,
+				D00C2EAD2CA6C04400B74E0C /* Keychain.swift in Sources */,
 				D04B868229F9A6E000177357 /* DispatchQueue+REExtensions.swift in Sources */,
 				D04B86A229F9A6F100177357 /* Collection+REExtensions.swift in Sources */,
 				D04B86A429F9A6F100177357 /* Character+REExtensions.swift in Sources */,
@@ -2462,6 +2471,7 @@
 				D04B871329F9A71900177357 /* UINavigationItem+REExtensions.swift in Sources */,
 				D048D7E62ABA0012007B87EB /* NSRange+REExtensions.swift in Sources */,
 				D04B870329F9A71900177357 /* UIGestureRecognizer+REExtensions.swift in Sources */,
+				D00C2EAE2CA6C04400B74E0C /* Keychain.swift in Sources */,
 				D04B868329F9A6E100177357 /* DispatchQueue+REExtensions.swift in Sources */,
 				D04B86B929F9A6F100177357 /* Collection+REExtensions.swift in Sources */,
 				D04B86BB29F9A6F100177357 /* Character+REExtensions.swift in Sources */,
@@ -2598,6 +2608,7 @@
 				D0185A402C7F4FFC00100E3E /* SignedNumeric+REExtensions.swift in Sources */,
 				D0185A412C7F4FFC00100E3E /* Bool+REExtensions.swift in Sources */,
 				D0185A422C7F4FFC00100E3E /* Dictionary+REExtensions.swift in Sources */,
+				D00C2EAF2CA6C04400B74E0C /* Keychain.swift in Sources */,
 				D0185A432C7F4FFC00100E3E /* BinaryFloatingPoint+REExtensions.swift in Sources */,
 				D0185A442C7F4FFC00100E3E /* Int+REExtensions.swift in Sources */,
 				D0185A212C7F4F6400100E3E /* NSRange+REExtensions.swift in Sources */,
@@ -2637,6 +2648,7 @@
 				D0E1289D29C38A390051D351 /* EdgeInsets+REExtensions.swift in Sources */,
 				D0E354C828BFBBE10000030B /* WeakSet.swift in Sources */,
 				D0B4ED39293A6E4B0031BDAB /* URL+REExtensions.swift in Sources */,
+				D00C2EAB2CA6C04400B74E0C /* Keychain.swift in Sources */,
 				D06BD5E529157A8D00040407 /* Dictionary+REExtensions.swift in Sources */,
 				D094C84D29F4559D00491CD8 /* OptionSet+REExtensions.swift in Sources */,
 				D0CD712B28E5B474009ADA8E /* BinaryFloatingPoint+REExtensions.swift in Sources */,

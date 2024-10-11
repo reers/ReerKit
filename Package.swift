@@ -5,8 +5,8 @@ import PackageDescription
 let package = Package(
     name: "ReerKit",
     platforms: [
-        .iOS(.v11),
-        .tvOS(.v11),
+        .iOS(.v12),
+        .tvOS(.v12),
         .watchOS(.v4),
         .macOS(.v10_13),
         .visionOS(.v1)

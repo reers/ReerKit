@@ -5,7 +5,7 @@ Some of the source code is gathered from various sources on the internet for uti
 [简体中文](README_CN.md)
 
 ## Requirements
-iOS 11.0+ / tvOS 11.0+ / watchOS 4.0+ / macOS 10.13+ / visionOS 1.0+ / Ubuntu 14.04+
+iOS 12.0+ / tvOS 12.0+ / watchOS 4.0+ / macOS 10.13+ / visionOS 1.0+ / Ubuntu 14.04+
 Swift 5.9+
 XCode 15.2+
 

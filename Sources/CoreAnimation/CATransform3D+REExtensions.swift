@@ -28,6 +28,7 @@ extension CATransform3D: ReerCompatibleValue {}
 
 // MARK: - Equatable
 
+#if swift(>=6.0)
 extension CATransform3D: @retroactive Equatable {
     /// ReerKit: Returns a Boolean value indicating whether two values are equal.
     ///
@@ -42,6 +43,23 @@ extension CATransform3D: @retroactive Equatable {
         return CATransform3DEqualToTransform(lhs, rhs)
     }
 }
+#else
+extension CATransform3D: Equatable {
+    /// ReerKit: Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
+    ///
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
+    @inlinable
+    public static func == (lhs: CATransform3D, rhs: CATransform3D) -> Bool {
+        return CATransform3DEqualToTransform(lhs, rhs)
+    }
+}
+#endif
+
 
 // MARK: - Properties
 

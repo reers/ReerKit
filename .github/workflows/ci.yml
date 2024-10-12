@@ -1,0 +1,34 @@
+# This workflow will build a Swift project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
+
+name: ReerKit
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  CocoaPods:
+    name: CocoaPods
+    runs-on: macos-14
+    strategy:
+      matrix:
+        platform: ['ios', 'macos', 'tvos', 'watchos', 'visionos']
+    env:
+      DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
+    steps:
+    - uses: actions/checkout@v1
+    - name: Bundle Install
+      run: bundle install
+    - name: CocoaPods ${{ matrix.platform }}
+      run: bundle exec pod lib lint --skip-tests --allow-warnings --verbose --platforms=${{ matrix.platform }} 
+      
+  Linux:
+    runs-on: [ubuntu-latest]
+    container: swift:5.10
+    steps:
+      - uses: actions/checkout@v1
+      - name: Linux
+        run: swift build -v

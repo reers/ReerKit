@@ -1,4 +1,16 @@
 version: 1
 builder:
   configs:
-    - documentation_targets: ['ReerKit']
+  - platform: ios
+    scheme: ReerKit
+  - platform: macos
+    scheme: ReerKit
+  - platform: tvos
+    scheme: ReerKit
+  - platform: watchos
+    scheme: ReerKit
+  - platform: visionos
+    scheme: ReerKit
+  - platform: linux
+    scheme: ReerKit
+  - documentation_targets: ['ReerKit']

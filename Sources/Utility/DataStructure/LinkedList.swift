@@ -31,6 +31,7 @@ fileprivate class LinkedListNode<T> {
     }
 }
 
+/// A doubly linked list implementation.
 public final class LinkedList<E> {
     
     fileprivate typealias Node = LinkedListNode<E>

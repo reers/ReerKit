@@ -23,24 +23,42 @@
 import Foundation
 import Dispatch
 
+/// A class that represents a countdown timer with customizable intervals and durations.
 public final class CountdownTimer {
+    /// The time interval between each tick of the timer.
     public let interval: TimeInterval
+    
+    /// The total number of times the timer should tick.
     public let times: Int
+    
+    /// The total duration of the countdown.
     public let totalDuration: TimeInterval
+    
+    /// The action to be performed on each tick of the timer.
     public let action: (CountdownTimer) -> Void
 
+    /// The number of ticks remaining.
     public private(set) var leftTimes: Int
 
+    /// The remaining duration of the countdown.
     public var leftDuration: TimeInterval {
         return interval * Double(leftTimes)
     }
 
+    /// Indicates whether the countdown has finished.
     public var finished: Bool {
         return leftTimes == 0
     }
 
+    /// The underlying timer object.
     private var timer: RETimer?
 
+    /// Initializes a new countdown timer with a specified interval and number of ticks.
+    ///
+    /// - Parameters:
+    ///   - interval: The time interval between each tick.
+    ///   - times: The total number of ticks.
+    ///   - action: The action to be performed on each tick.
     public init(interval: TimeInterval, times: Int, action: @escaping (CountdownTimer) -> Void) {
         self.interval = interval
         self.times = times
@@ -49,6 +67,12 @@ public final class CountdownTimer {
         self.leftTimes = times
     }
 
+    /// Initializes a new countdown timer with a specified number of ticks and total duration.
+    ///
+    /// - Parameters:
+    ///   - times: The total number of ticks.
+    ///   - totalDuration: The total duration of the countdown.
+    ///   - action: The action to be performed on each tick.
     public init(times: Int, totalDuration: TimeInterval, action: @escaping (CountdownTimer) -> Void) {
         self.interval = totalDuration / Double(times)
         self.times = times
@@ -57,6 +81,13 @@ public final class CountdownTimer {
         self.leftTimes = times
     }
 
+    /// Creates and returns a new countdown timer with the specified interval and number of ticks.
+    ///
+    /// - Parameters:
+    ///   - interval: The time interval between each tick.
+    ///   - times: The total number of ticks.
+    ///   - action: The action to be performed on each tick.
+    /// - Returns: A new countdown timer that has already started.
     public static func scheduledTimer(
         withInterval interval: TimeInterval,
         times: Int,
@@ -67,6 +98,13 @@ public final class CountdownTimer {
         return timer
     }
 
+    /// Creates and returns a new countdown timer with the specified number of ticks and total duration.
+    ///
+    /// - Parameters:
+    ///   - times: The total number of ticks.
+    ///   - totalDuration: The total duration of the countdown.
+    ///   - action: The action to be performed on each tick.
+    /// - Returns: A new countdown timer that has already started.
     public static func scheduledTimer(
         withTimes times: Int,
         totalDuration: TimeInterval,
@@ -115,6 +153,7 @@ public final class CountdownTimer {
         return timer
     }
 
+    /// Starts the countdown timer.
     public func fire() {
         timer = RETimer.scheduledTimer(timeInterval: interval, repeats: times > 1) { [weak self] timer in
             guard let self = self else { return }
@@ -126,18 +165,22 @@ public final class CountdownTimer {
         }
     }
     
+    /// Resumes the countdown timer if it was suspended.
     public func resume() {
         timer?.schedule()
     }
 
+    /// Suspends the countdown timer.
     public func suspend() {
         timer?.suspend()
     }
 
+    /// Invalidates the countdown timer, preventing it from ever firing again.
     public func invalidate() {
         timer?.invalidate()
     }
     
+    /// Resets the countdown timer to its initial state.
     public func reset() {
         resume()
         invalidate()

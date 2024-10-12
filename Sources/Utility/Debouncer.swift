@@ -22,35 +22,69 @@
 #if canImport(Foundation)
 import Foundation
 
+/// A class that provides debouncing functionality for executing actions after a specified delay.
 public final class Debouncer {
+    /// The dispatch queue on which the debounced action will be executed.
     private let queue: DispatchQueue
+    
+    /// The current work item representing the debounced action.
     public private(set) var workItem = DispatchWorkItem(block: {})
+    
+    /// The lock used for thread-safe operations.
     #if os(Linux)
     private let lock = MutexLock()
     #else
     private let lock = UnfairLock()
     #endif
 
+    /// Initializes a new Debouncer instance.
+    ///
+    /// - Parameter queue: The dispatch queue to use for executing the debounced action. Defaults to the main queue.
     public init(queue: DispatchQueue = .main) {
         self.queue = queue
     }
 
+    /// Executes the given action after the specified time interval, cancelling any previously scheduled action.
+    ///
+    /// - Parameters:
+    ///   - interval: The time interval to wait before executing the action.
+    ///   - action: The action to be executed.
     public func execute(interval: TimeInterval, action: @escaping () -> Void) {
         execute(time: interval, action: action)
     }
 
+    /// Executes the given action at the specified dispatch time, cancelling any previously scheduled action.
+    ///
+    /// - Parameters:
+    ///   - deadline: The dispatch time at which to execute the action.
+    ///   - action: The action to be executed.
     public func execute(deadline: DispatchTime, action: @escaping () -> Void) {
         execute(time: deadline, action: action)
     }
 
+    /// Executes the given action at the specified wall clock time, cancelling any previously scheduled action.
+    ///
+    /// - Parameters:
+    ///   - wallDeadline: The wall clock time at which to execute the action.
+    ///   - action: The action to be executed.
     public func execute(wallDeadline: DispatchWallTime, action: @escaping () -> Void) {
         execute(time: wallDeadline, action: action)
     }
 
+    /// Private method that handles the execution of the debounced action.
+    ///
+    /// - Parameters:
+    ///   - time: The time at which to execute the action, can be TimeInterval, DispatchTime, or DispatchWallTime.
+    ///   - action: The action to be executed.
     private func execute<Time: Comparable>(time: Time, action: @escaping () -> Void) {
         lock.around {
+            // Cancel any previously scheduled work item
             workItem.cancel()
+            
+            // Create a new work item with the given action
             workItem = DispatchWorkItem(block: action)
+            
+            // Schedule the work item based on the type of time provided
             if let time = time as? TimeInterval {
                 queue.asyncAfter(deadline: .now() + time, execute: workItem)
             } else if let time = time as? DispatchTime {

@@ -36,7 +36,12 @@ public struct OnceToken: Hashable {
 }
 
 fileprivate var tokens = Set<OnceToken>()
+
+#if os(Linux)
+fileprivate let lock = MutexLock()
+#else
 fileprivate let lock = UnfairLock()
+#endif
 
 /// ReerKit: Invoke the passed closure only once during the life time of the process.
 /// It will create an once token by combining #fileID, #function, #line.

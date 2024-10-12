@@ -76,10 +76,12 @@ extension WeakMap where Option == WeakKey, Key: AnyObject & Hashable {
         set {
             let weakKey = Weak(key)
             objectMap[weakKey] = newValue
+            #if canImport(ObjectiveC)
             observeDeinit(for: key) { [weak self] in
                 guard let self = self else { return }
                 self.objectMap.removeValue(forKey: weakKey)
             }
+            #endif
         }
     }
 
@@ -126,10 +128,12 @@ extension WeakMap where Option == WeakValue, Key: Hashable, Value: AnyObject {
             guard let value = newValue else { return }
             let weakValue = Weak(value)
             objectMap[key] = weakValue
+            #if canImport(ObjectiveC)
             observeDeinit(for: value) { [weak self] in
                 guard let self = self else { return }
                 self.objectMap.removeValue(forKey: key)
             }
+            #endif
         }
     }
 
@@ -178,6 +182,7 @@ extension WeakMap where Option == WeakKeyValue, Key: AnyObject & Hashable, Value
             let weakValue = Weak(value)
             objectMap[weakKey] = weakValue
 
+            #if canImport(ObjectiveC)
             observeDeinit(for: key) { [weak self] in
                 guard let self = self else { return }
                 self.objectMap.removeValue(forKey: weakKey)
@@ -187,6 +192,7 @@ extension WeakMap where Option == WeakKeyValue, Key: AnyObject & Hashable, Value
                 guard let self = self else { return }
                 self.objectMap.removeValue(forKey: weakKey)
             }
+            #endif
         }
     }
 

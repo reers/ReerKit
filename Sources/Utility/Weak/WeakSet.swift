@@ -59,10 +59,12 @@ public class WeakSet<T: AnyObject>: ExpressibleByArrayLiteral {
     public func add(_ object: T) {
         let weakBox = Weak(object)
         objectSet.insert(weakBox)
+        #if canImport(ObjectiveC)
         observeDeinit(for: object) { [weak self] in
             guard let self = self else { return }
             self.objectSet.remove(weakBox)
         }
+        #endif
     }
 
     public func addObjects(_ objects: [T]) {
@@ -93,10 +95,12 @@ public class WeakSet<T: AnyObject>: ExpressibleByArrayLiteral {
                 objectSet.remove(box)
                 continue
             }
+            #if canImport(ObjectiveC)
             observeDeinit(for: obj) { [weak self] in
                 guard let self = self else { return }
                 self.objectSet.remove(box)
             }
+            #endif
         }
     }
 }

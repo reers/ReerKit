@@ -20,7 +20,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#if canImport(Dispatch)
+#if canImport(Dispatch) && !os(Linux)
 import Dispatch
 
 public extension Reer where Base: DispatchQueue {

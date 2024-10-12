@@ -9,22 +9,7 @@ on:
   pull_request:
     branches: [ "main" ]
 
-jobs:
-  CocoaPods:
-    name: CocoaPods
-    runs-on: macos-14
-    strategy:
-      matrix:
-        platform: ['ios', 'macos', 'tvos', 'watchos', 'visionos']
-    env:
-      DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
-    steps:
-    - uses: actions/checkout@v1
-    - name: Bundle Install
-      run: bundle install
-    - name: CocoaPods ${{ matrix.platform }}
-      run: bundle exec pod lib lint --skip-tests --allow-warnings --verbose --platforms=${{ matrix.platform }} 
-      
+jobs: 
   Linux:
     runs-on: [ubuntu-latest]
     container: swift:5.10

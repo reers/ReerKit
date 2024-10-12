@@ -42,7 +42,11 @@ public extension Reer where Base: NSRegularExpression {
         in string: String,
         options: NSRegularExpression.MatchingOptions = [],
         range: Range<String.Index>,
-        using block: (_ result: NSTextCheckingResult?, _ flags: NSRegularExpression.MatchingFlags, _ stop: inout Bool) -> Void
+        using block: @escaping (
+            _ result: NSTextCheckingResult?,
+            _ flags: NSRegularExpression.MatchingFlags,
+            _ stop: inout Bool
+        ) -> Void
     ) {
         base.enumerateMatches(
             in: string,

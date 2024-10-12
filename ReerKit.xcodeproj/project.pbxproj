@@ -677,6 +677,11 @@
 		D094C96229F4606600491CD8 /* UIDeviceExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D094C96129F4606600491CD8 /* UIDeviceExtensionsTests.swift */; };
 		D094C96429F4631200491CD8 /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D094C96329F4631200491CD8 /* Memory.swift */; };
 		D094C96629F46A0C00491CD8 /* MemoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D094C96529F46A0C00491CD8 /* MemoryTests.swift */; };
+		D0991CB22CBA56C100C6BE5A /* MutexLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0991CB12CBA56C100C6BE5A /* MutexLock.swift */; };
+		D0991CB32CBA56C100C6BE5A /* MutexLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0991CB12CBA56C100C6BE5A /* MutexLock.swift */; };
+		D0991CB42CBA56C100C6BE5A /* MutexLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0991CB12CBA56C100C6BE5A /* MutexLock.swift */; };
+		D0991CB52CBA56C100C6BE5A /* MutexLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0991CB12CBA56C100C6BE5A /* MutexLock.swift */; };
+		D0991CB62CBA56C100C6BE5A /* MutexLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0991CB12CBA56C100C6BE5A /* MutexLock.swift */; };
 		D09D724029DC94BF00636935 /* big_buck_bunny_720p_1mb.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D09D723F29DC94BF00636935 /* big_buck_bunny_720p_1mb.mp4 */; };
 		D0A0040628620D9900D2FA7C /* TypeNameDescribableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */; };
 		D0A6B3A32924AD11008B7FDA /* UIResponder+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A6B3A22924AD11008B7FDA /* UIResponder+REExtensions.swift */; };
@@ -992,6 +997,7 @@
 		D094C96129F4606600491CD8 /* UIDeviceExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtensionsTests.swift; sourceTree = "<group>"; };
 		D094C96329F4631200491CD8 /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
 		D094C96529F46A0C00491CD8 /* MemoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryTests.swift; sourceTree = "<group>"; };
+		D0991CB12CBA56C100C6BE5A /* MutexLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutexLock.swift; sourceTree = "<group>"; };
 		D09D723F29DC94BF00636935 /* big_buck_bunny_720p_1mb.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = big_buck_bunny_720p_1mb.mp4; sourceTree = "<group>"; };
 		D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeNameDescribableTests.swift; sourceTree = "<group>"; };
 		D0A6B3A22924AD11008B7FDA /* UIResponder+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+REExtensions.swift"; sourceTree = "<group>"; };
@@ -1312,6 +1318,7 @@
 				D0038B7E2856581600A890F9 /* UnfairLock.swift */,
 				D0038B8028565B9400A890F9 /* ReadWriteLock.swift */,
 				D004CC48285A41F500C41360 /* Synchronizing.swift */,
+				D0991CB12CBA56C100C6BE5A /* MutexLock.swift */,
 			);
 			path = Lock;
 			sourceTree = "<group>";
@@ -2160,6 +2167,7 @@
 				D01D6DCE2A06CBE000AEDA3D /* Vibrator.swift in Sources */,
 				D0D311392AB8522F00E54361 /* Rounded.swift in Sources */,
 				D04B85DC29F9A50600177357 /* Throttler.swift in Sources */,
+				D0991CB32CBA56C100C6BE5A /* MutexLock.swift in Sources */,
 				D04B861029F9A59600177357 /* UIViewController+REExtensions.swift in Sources */,
 				D04B85DD29F9A50600177357 /* Debouncer.swift in Sources */,
 				D04B861929F9A59600177357 /* UITableView+REExtensions.swift in Sources */,
@@ -2307,6 +2315,7 @@
 				D01D6DCF2A06CBE000AEDA3D /* Vibrator.swift in Sources */,
 				D0D3113A2AB8522F00E54361 /* Rounded.swift in Sources */,
 				D04B86F929F9A71100177357 /* URLRequest+REExtensions.swift in Sources */,
+				D0991CB42CBA56C100C6BE5A /* MutexLock.swift in Sources */,
 				D04B868029F9A6D900177357 /* Color+REExtensions.swift in Sources */,
 				D04B86BC29F9A6FC00177357 /* WeakProxy.swift in Sources */,
 				D04B872929F9A71900177357 /* UIResponder+REExtensions.swift in Sources */,
@@ -2453,6 +2462,7 @@
 				D01D6DD02A06CBE000AEDA3D /* Vibrator.swift in Sources */,
 				D0D3113B2AB8522F00E54361 /* Rounded.swift in Sources */,
 				D04B86EB29F9A71000177357 /* URLRequest+REExtensions.swift in Sources */,
+				D0991CB52CBA56C100C6BE5A /* MutexLock.swift in Sources */,
 				D04B867D29F9A6D800177357 /* Color+REExtensions.swift in Sources */,
 				D04B86C029F9A6FD00177357 /* WeakProxy.swift in Sources */,
 				D04B870829F9A71900177357 /* UIResponder+REExtensions.swift in Sources */,
@@ -2504,6 +2514,7 @@
 				D0185A7A2C7F501900100E3E /* NanoID.swift in Sources */,
 				D0185A7B2C7F501900100E3E /* Reachability.swift in Sources */,
 				D0185A7C2C7F501900100E3E /* GlobalFunctions.swift in Sources */,
+				D0991CB62CBA56C100C6BE5A /* MutexLock.swift in Sources */,
 				D0185A7D2C7F501900100E3E /* RETimer.swift in Sources */,
 				D0185A7E2C7F501900100E3E /* Invocation.swift in Sources */,
 				D0185A7F2C7F501900100E3E /* CountdownTimer.swift in Sources */,
@@ -2766,6 +2777,7 @@
 				D0D311242AB4458F00E54361 /* CALayer+REExtensions.swift in Sources */,
 				D0B1211E2855156200B5B326 /* TypeNameDescribable.swift in Sources */,
 				D07E53AF2883137000921873 /* WeakProxy.swift in Sources */,
+				D0991CB22CBA56C100C6BE5A /* MutexLock.swift in Sources */,
 				D0122B0B29EEFEB8008311CF /* UICollectionView+REExtensions.swift in Sources */,
 				D004CC49285A41F500C41360 /* Synchronizing.swift in Sources */,
 				D01DABC229B4FAA700ABD25E /* Throttler.swift in Sources */,

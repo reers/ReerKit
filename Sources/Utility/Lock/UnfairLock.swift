@@ -19,7 +19,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#if canImport(os)
+#if canImport(os) && !os(Linux)
 import os.lock
 
 /// ReerKit: A wrapper of `os_unfair_lock`

@@ -21,8 +21,11 @@
 
 /// ReerKit: Combinations of AnyObject extension protocols.
 /// You must conform this protocol by yourself if your class is NOT inheriting from `NSObject`.
+
+#if canImport(ObjectiveC)
 public typealias AnyObjectExtensionable =
     Associatable
     & OnceExecutable
     & Swizzlable
     & DeinitObservable
+#endif

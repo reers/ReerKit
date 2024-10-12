@@ -151,7 +151,7 @@ public extension ReerForEquatable where Base == Data {
             throw JSONError.invalidArray
         }
     }
-    
+    #if !os(Linux)
     /// ReerKit: Generate a random length of Data.
     static func random(ofLength length: Int) -> Data {
         var randomData = Data(count: length)
@@ -164,6 +164,7 @@ public extension ReerForEquatable where Base == Data {
             return Data((0..<length).map { _ in UInt8.random(in: UInt8.min ... UInt8.max) })
         }
     }
+    #endif
 }
 
 #if canImport(CommonCrypto)

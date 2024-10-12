@@ -19,7 +19,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#if canImport(Foundation)
+#if canImport(Foundation) && !os(Linux)
 import Foundation
 
 /// A proxy used to hold a weak object.

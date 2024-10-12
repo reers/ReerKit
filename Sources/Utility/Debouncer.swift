@@ -25,7 +25,11 @@ import Foundation
 public final class Debouncer {
     private let queue: DispatchQueue
     public private(set) var workItem = DispatchWorkItem(block: {})
+    #if os(Linux)
+    private let lock = MutexLock()
+    #else
     private let lock = UnfairLock()
+    #endif
 
     public init(queue: DispatchQueue = .main) {
         self.queue = queue

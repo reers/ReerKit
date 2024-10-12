@@ -32,7 +32,11 @@ public final class Throttler {
     private var isPending = false
     private var hasExecuted = false
     private var latestAction: () -> Void = {}
+    #if os(Linux)
+    private let lock = MutexLock()
+    #else
     private let lock = UnfairLock()
+    #endif
 
     private let queue: DispatchQueue
     private let performMode: PerformMode

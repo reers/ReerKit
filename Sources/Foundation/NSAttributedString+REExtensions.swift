@@ -39,12 +39,12 @@ public extension Reer where Base: NSAttributedString {
         return base.attributes(at: 0, effectiveRange: nil)
     }
     
+    #if !os(Linux)
     @available(*, deprecated, renamed: "numberOfLines(forWidth:ignoreBlankLines:)", message: "Use numberOfLines(forWidth:ignoringBlankLines:) instead.")
     func lines(forWidth width: CGFloat, ignoreBlankLines: Bool = false) -> Int {
         return numberOfLines(forWidth: width, ignoreBlankLines: ignoreBlankLines)
     }
     
-    #if !os(Linux)
     /// ReerKit: Calculate lines for a `NSAttributedString` with a width constrained.
     /// - Parameters:
     ///   - width: A constrained of container view width.
@@ -77,7 +77,6 @@ public extension Reer where Base: NSAttributedString {
         
         return numberOfLines
     }
-    #endif
     
     /// ReerKit: Calculate height for a `NSAttributedString` with a constrained width.
     /// - Parameter width: A constrained of container view width.
@@ -87,13 +86,14 @@ public extension Reer where Base: NSAttributedString {
         let rect = base.boundingRect(with: maxSize, options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
         return rect.height
     }
+    #endif
 
     /// ReerKit: Applies given attributes to the new instance of NSAttributedString initialized with self object.
     ///
     /// - Parameter attributes: Dictionary of attributes.
     /// - Returns: NSAttributedString with applied attributes.
     func with(attributes: [NSAttributedString.Key: Any]) -> NSMutableAttributedString {
-        guard !base.string.isEmpty else { return NSMutableAttributedString() }
+        guard !base.string.isEmpty else { return NSMutableAttributedString(string: "") }
 
         let copy = NSMutableAttributedString(attributedString: base)
         copy.addAttributes(attributes, range: NSRange(0..<base.length))
@@ -112,7 +112,7 @@ public extension Reer where Base: NSAttributedString {
         toRangesMatching pattern: String,
         options: NSRegularExpression.Options = []
     ) -> NSMutableAttributedString {
-        guard let pattern = try? NSRegularExpression(pattern: pattern, options: options) else { return NSMutableAttributedString() }
+        guard let pattern = try? NSRegularExpression(pattern: pattern, options: options) else { return NSMutableAttributedString(string: "") }
 
         let matches = pattern.matches(in: base.string, options: [], range: NSRange(0..<base.length))
         let result = NSMutableAttributedString(attributedString: base)

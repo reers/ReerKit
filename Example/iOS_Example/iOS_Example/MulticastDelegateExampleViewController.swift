@@ -29,6 +29,20 @@ class Counter {
     var multicastDelegate: MulticastDelegate<CounterDelegate> = .init()
 }
 
+extension Counter: MulticastDelegateProtocol {
+    func add(delegate: any CounterDelegate) {
+        multicastDelegate.add(delegate)
+    }
+    
+    func remove(delegate: any CounterDelegate) {
+        multicastDelegate.remove(delegate)
+    }
+    
+    func removeAllDelegates() {
+        multicastDelegate.removeAllDelegates()
+    }
+}
+
 @objc(MulticastDelegateExampleViewController)
 class MulticastDelegateExampleViewController: UIViewController, CounterDelegate {
     
@@ -42,7 +56,9 @@ class MulticastDelegateExampleViewController: UIViewController, CounterDelegate 
         view.addSubview(countLabel)
         countLabel.frame = .init(x: 0, y: 200, width: view.bounds.width, height: 80)
         
-        Counter.shared.multicastDelegate.add(self)
+        Counter.shared.add(delegate: self)
+        // or
+        // Counter.shared.multicastDelegate.add(self)
     }
 
     func counterDidUpdate(_ counter: Counter, to newValue: Int) {

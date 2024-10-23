@@ -80,6 +80,10 @@ public class WeakSet<T: AnyObject>: ExpressibleByArrayLiteral {
     public func removeObjects(_ objects: [T]) {
         objectSet.subtract(objects.map { Weak($0) })
     }
+    
+    public func removeAll() {
+        objectSet.removeAll()
+    }
 
     public func copy() -> WeakSet<T> {
         return WeakSet(objectSet)

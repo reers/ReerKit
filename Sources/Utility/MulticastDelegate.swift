@@ -19,12 +19,20 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+public protocol MulticastDelegateProtocol {
+    associatedtype Delegate
+    func add(delegate: Delegate)
+    func remove(delegate: Delegate)
+    func removeAllDelegates()
+}
+
 /// `MulticastDelegate` lets you easily create a "multicast delegate" for a given protocol or class.
 /// The delegate will be a weak reference in `MulticastDelegate`, and will be removed automatically
 /// from `delegates` after it released.
 public final class MulticastDelegate<T> {
     
     private let delegates: WeakSet<AnyObject>
+    private let lock = UnfairLock()
     
     /// ReerKit: Initialize a new `MulticastDelegate`, and delete references will be weak.
     public init() {
@@ -38,17 +46,30 @@ public final class MulticastDelegate<T> {
     
     /// ReerKit: Add a delegate.
     public func add(_ delegate: T) {
-        delegates.add(delegate as AnyObject)
+        guard let delegate = delegate as AnyObject? else {
+            assert(false, "MulticastDelegate: delegate is not an AnyObject")
+            return
+        }
+        lock.around { delegates.add(delegate) }
     }
     
     /// ReerKit: Remove a previously-added delegate.
     public func remove(_ delegate: T) {
-        delegates.remove(delegate as AnyObject)
+        guard let delegate = delegate as AnyObject? else {
+            assert(false, "MulticastDelegate: delegate is not an AnyObject")
+            return
+        }
+        lock.around { delegates.remove(delegate) }
+    }
+    
+    public func removeAllDelegates() {
+        lock.around { delegates.removeAll() }
     }
     
     /// ReerKit: Invoke a closure on each delegate.
     public func invoke(_ invocation: (T) -> Void) {
-        for delegate in delegates {
+        let delegateCopy = lock.around { delegates }
+        for delegate in delegateCopy {
             if let delegate = delegate as? T {
                 invocation(delegate)
             }
@@ -57,6 +78,10 @@ public final class MulticastDelegate<T> {
     
     /// ReerKit: Checks if the multicast delegate contains the given delegate.
     public func contains(_ delegate: T) -> Bool {
-        return delegates.contains(delegate as AnyObject)
+        guard let delegate = delegate as AnyObject? else {
+            assert(false, "MulticastDelegate: delegate is not an AnyObject")
+            return false
+        }
+        return delegates.contains(delegate)
     }
 }

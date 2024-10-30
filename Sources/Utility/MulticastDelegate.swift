@@ -33,9 +33,9 @@ public final class MulticastDelegate<T> {
     
     private let delegates: WeakSet<AnyObject>
     #if os(Linux)
-    private let lock = UnfairLock()
-    #else
     private let lock = MutexLock()
+    #else
+    private let lock = UnfairLock()
     #endif
     
     

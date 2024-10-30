@@ -16,7 +16,7 @@ class Counter {
     static let shared: Counter = .init()
     var count: Int = 0 {
         didSet {
-            multicastDelegate.invoke { $0.counterDidUpdate(self, to: count) }
+            multicastDelegate.notify { $0.counterDidUpdate(self, to: count) }
         }
     }
     lazy var timer = RETimer(timeInterval: 1, callbackImmediatelyWhenFired: true) { [weak self] _ in

@@ -32,7 +32,12 @@ public protocol MulticastDelegateProtocol {
 public final class MulticastDelegate<T> {
     
     private let delegates: WeakSet<AnyObject>
+    #if os(Linux)
     private let lock = UnfairLock()
+    #else
+    private let lock = MutexLock()
+    #endif
+    
     
     /// ReerKit: Initialize a new `MulticastDelegate`, and delete references will be weak.
     public init() {
@@ -66,12 +71,17 @@ public final class MulticastDelegate<T> {
         lock.around { delegates.removeAll() }
     }
     
-    /// ReerKit: Invoke a closure on each delegate.
+    @available(*, deprecated, renamed: "notify(_:)", message: "Use notify(_:) instead.")
     public func invoke(_ invocation: (T) -> Void) {
+        notify(invocation)
+    }
+    
+    /// ReerKit: Notify a closure on each delegate.
+    public func notify(_ function: (T) -> Void) {
         let delegateCopy = lock.around { delegates }
         for delegate in delegateCopy {
             if let delegate = delegate as? T {
-                invocation(delegate)
+                function(delegate)
             }
         }
     }

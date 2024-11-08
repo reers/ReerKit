@@ -19,6 +19,7 @@ class SquircleCornerViewController: UIViewController {
         let white = UIView()
         white.backgroundColor = .white
         white.frame = .re(-250, 150, 500, 500)
+        // default is squircle rounded corner from iOS 18
         white.layer.cornerRadius = 150
         view.addSubview(white)
         

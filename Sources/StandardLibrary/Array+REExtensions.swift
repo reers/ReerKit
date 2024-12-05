@@ -115,6 +115,17 @@ extension Array: ReerGenericCompatible {}
 // MARK: - Methods (Equatable)
 
 public extension ReerGeneric where Base == Array<T>, T: Equatable {
+    
+    /// ReerKit: Removing all duplicate elements from Array.
+    ///
+    ///        [1, 2, 2, 3, 4, 5].re.removingDuplicates() -> [1, 2, 3, 4, 5]
+    ///        ["h", "e", "l", "l", "o"].re.removingDuplicates() -> ["h", "e", "l", "o"]
+    ///
+    /// - Returns: Return array with all duplicate elements removed.
+    func removingDuplicates() -> [T] {
+        var array = base
+        return array.re.removeDuplicates()
+    }
 
     /// ReerKit: Returns an array with all duplicate elements removed using KeyPath to compare.
     ///

@@ -86,6 +86,14 @@ public extension Reer where Base: NSAttributedString {
         let rect = base.boundingRect(with: maxSize, options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
         return rect.height
     }
+    
+    /// ReerKit: Calculate width for a `NSAttributedString` with an unlimited height in one line.
+    /// - Returns: Width of the attributed string after rendering.
+    func singleLineWidth() -> CGFloat {
+        let maxSize = CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
+        let rect = base.boundingRect(with: maxSize, options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
+        return rect.width
+    }
     #endif
 
     /// ReerKit: Applies given attributes to the new instance of NSAttributedString initialized with self object.

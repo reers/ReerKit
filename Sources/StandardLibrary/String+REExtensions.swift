@@ -410,6 +410,19 @@ public extension Reer where Base == String {
         )
         return rect.height
     }
+    
+    /// ReerKit: Calculate width for a `String` with an unlimited height in one line.
+    /// - Returns: Width of the string with the font after rendering.
+    func singleLineWidth(font: UIFont) -> CGFloat {
+        let maxSize = CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
+        let rect = base.boundingRect(
+            with: maxSize,
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            attributes: [.font: font],
+            context: nil
+        )
+        return rect.width
+    }
     #endif
     
     #if canImport(Foundation)

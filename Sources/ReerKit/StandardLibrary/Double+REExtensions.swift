@@ -78,13 +78,16 @@ public extension Reer where Base == Double {
 
 precedencegroup PowerPrecedence { higherThan: MultiplicationPrecedence }
 infix operator ** : PowerPrecedence
-/// ReerKit: Value of exponentiation.
-///
-/// - Parameters:
-///   - lhs: base double.
-///   - rhs: exponent double.
-/// - Returns: exponentiation result (example: 4.4 ** 0.5 = 2.0976176963).
-public func ** (lhs: Double, rhs: Double) -> Double {
-    // http://nshipster.com/swift-operators/
-    return pow(lhs, rhs)
+
+extension Double {
+    /// ReerKit: Value of exponentiation.
+    ///
+    /// - Parameters:
+    ///   - lhs: base double.
+    ///   - rhs: exponent double.
+    /// - Returns: exponentiation result (example: 4.4 ** 0.5 = 2.0976176963).
+    static public func ** (lhs: Double, rhs: Double) -> Double {
+        // http://nshipster.com/swift-operators/
+        return pow(lhs, rhs)
+    }
 }

@@ -96,8 +96,10 @@ public struct Memory<T> {
     }
     
     /// ReerKit: Get memory data for the variable in string format
-    ///
+    /// 
     /// - Parameter alignment: Represent how many bytes are grouped together
+    /// - Parameter v: The value type value.
+    /// - Returns: Get memory data.
     public static func string(ofVal v: inout T, alignment: MemoryAlign? = nil) -> String {
         let p = pointer(ofVal: &v)
         return string(
@@ -110,6 +112,8 @@ public struct Memory<T> {
     /// ReerKit: Get the memory data pointed to by the reference in string format
     ///
     /// - Parameter alignment: Represent how many bytes are grouped together
+    /// - Parameter v: The reference type value
+    /// - Returns: Get memory data.
     public static func string(ofRef v: T, alignment: MemoryAlign? = nil) -> String {
         let p = pointer(ofRef: v)
         return string(

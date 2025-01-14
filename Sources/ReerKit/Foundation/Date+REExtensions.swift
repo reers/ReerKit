@@ -689,7 +689,7 @@ public extension ReerForEquatable where Base == Date {
     ///     Date().dayName(ofStyle: .threeLetters) -> "Thu"
     ///     Date().dayName(ofStyle: .full) -> "Thursday"
     ///
-    /// - Parameter Style: style of day name (default is NameStyle.full).
+    /// - Parameter style: style of day name (default is NameStyle.full).
     /// - Returns: day name string (example: W, Wed, Wednesday).
     func dayName(ofStyle style: Date.NameStyle = .full) -> String {
         // http://www.codingexplorer.com/swiftly-getting-human-readable-date-nsdateformatter/
@@ -714,7 +714,7 @@ public extension ReerForEquatable where Base == Date {
     ///     Date().monthName(ofStyle: .threeLetters) -> "Jan"
     ///     Date().monthName(ofStyle: .full) -> "January"
     ///
-    /// - Parameter Style: style of month name (default is NameStyle.full).
+    /// - Parameter style: style of month name (default is NameStyle.full).
     /// - Returns: month name string (example: D, Dec, December).
     func monthName(ofStyle style: Date.NameStyle = .full) -> String {
         // http://www.codingexplorer.com/swiftly-getting-human-readable-date-nsdateformatter/

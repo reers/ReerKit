@@ -100,7 +100,7 @@ public extension ReerGeneric where Base == Optional<T> {
     ///            print(unwrappedBar) -> "bar"
     ///        }
     ///
-    /// - Parameter block: a block to run if self is not nil.
+    /// - Parameter action: a block to run if self is not nil.
     func run<U>(_ action: (T) throws -> U?) rethrows -> U? {
         return try base.flatMap(action)
     }

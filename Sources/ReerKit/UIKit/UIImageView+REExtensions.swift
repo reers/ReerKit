@@ -29,7 +29,7 @@ public extension Reer where Base: UIImageView {
     /// - Parameters:
     ///   - url: URL of image.
     ///   - contentMode: imageView content mode (default is .scaleAspectFit).
-    ///   - placeHolder: optional placeholder image
+    ///   - placeholder: optional placeholder image
     ///   - completionHandler: optional completion handler to run when download finishes (default is nil).
     func download(
         from url: URL,

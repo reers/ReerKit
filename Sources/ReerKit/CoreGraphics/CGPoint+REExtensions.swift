@@ -142,7 +142,7 @@ public extension CGPoint {
     /// - Parameters:
     ///   - point: `self`.
     ///   - scalar: scalar value.
-    /// - Returns: result of multiplication of the given CGPoint with the scalar.
+    /// 
     static func *= (point: inout CGPoint, scalar: CGFloat) {
         point.x *= scalar
         point.y *= scalar

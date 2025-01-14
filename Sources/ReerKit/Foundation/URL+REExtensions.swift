@@ -50,7 +50,6 @@ public extension ReerForEquatable where Base == URL {
     ///        let param = ["q": "Hello Swift"]
     ///        url.appendingQueries(params) -> "https://google.com?q=Hello%20Swift"
     ///
-    /// - Parameter parameters: parameters dictionary.
     /// - Returns: URL with appending given query parameters.
     func appendingQueries(_ queries: [String: String]) -> URL {
         var urlComponents = URLComponents(url: base, resolvingAgainstBaseURL: true)!
@@ -64,7 +63,6 @@ public extension ReerForEquatable where Base == URL {
     ///        let url = URL(string: "https://google.com?q=Hello%20Swift")!
     ///        url.removingQueries(["q"]) -> "https://google.com"
     ///
-    /// - Parameter parameters: parameters dictionary.
     /// - Returns: URL with appending given query parameters.
     func removingQueries(_ queries: [String]) -> URL {
         var urlComponents = URLComponents(url: base, resolvingAgainstBaseURL: true)!
@@ -154,7 +152,6 @@ public extension ReerReference where Base == URL {
     ///        url.appendQueryParameters(params)
     ///        print(url) // prints "https://google.com?q=Hello%20Swift"
     ///
-    /// - Parameter parameters: parameters dictionary.
     mutating func appendQueries(_ queries: [String: String]) {
         base.pointee = base.pointee.re.appendingQueries(queries)
     }
@@ -165,8 +162,6 @@ public extension ReerReference where Base == URL {
     ///        url.removeQueries(["q"])
     ///        print(url) // "https://google.com"
     ///
-    /// - Parameter parameters: parameters dictionary.
-    /// - Returns: URL with appending given query parameters.
     mutating func removeQueries(_ queries: [String]) {
         base.pointee = base.pointee.re.removingQueries(queries)
     }

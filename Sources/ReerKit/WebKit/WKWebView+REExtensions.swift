@@ -36,6 +36,7 @@ public extension Reer where Base: WKWebView {
 
     /// ReerKit: Navigate to url using `String`.
     /// - Parameter urlString: The string specifying the URL to navigate to.
+    /// - Parameter timeout: Timeout duration.
     /// - Returns: A new navigation for given `urlString`.
     @discardableResult
     func loadURLString(_ urlString: String, timeout: TimeInterval? = nil) -> WKNavigation? {

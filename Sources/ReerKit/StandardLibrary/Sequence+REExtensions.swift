@@ -104,8 +104,8 @@ public extension Reer where Base: Sequence {
     ///     [1, 2, 3, 4, 5].re.map({ $0.re.string }, where: { $0 % 2 == 0 }) -> ["2", "4"]
     ///
     /// - Parameters:
-    ///   - isIncluded: condition of inclusion to evaluate each element against.
     ///   - transform: transform element function to evaluate every element.
+    ///   - condition: filter condition
     /// - Returns: Return an filtered and mapped array.
     func map<T>(_ transform: (Base.Element) throws -> T, where condition: (Base.Element) throws -> Bool) rethrows -> [T] {
         return try base.lazy.filter(condition).map(transform)

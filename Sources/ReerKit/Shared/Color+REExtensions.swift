@@ -150,7 +150,7 @@ public extension REColor {
     /// ReerKit: Create Color from hexadecimal string in the format RGBA (red-green-blue-alpha).
     ///
     /// - Parameters:
-    ///   - argbHexString: hexadecimal string (examples: 7FEDE7F6, 0x7FEDE7F6, #7FEDE7F6, #f0ff, 0xFF0F, ..).
+    ///   - rgbaHexString: hexadecimal string (examples: 7FEDE7F6, 0x7FEDE7F6, #7FEDE7F6, #f0ff, 0xFF0F, ..).
     static func re(rgbaHexString: String) -> REColor {
         var string = rgbaHexString
             .lowercased()

@@ -29,7 +29,7 @@ public class Invocation {
     /// Get instance method for a Objc class.
     /// - Parameters:
     ///   - selector: Method selector
-    ///   - classOrInstance: Class instance.
+    ///   - instance: A Class or instance.
     /// - Returns: A signature, actually a `NSMethodSignature` instance.
     public static func instanceMethodSignatureForSelector(_ selector: Selector, of instance: any NSObjectProtocol) -> Any? {
         guard instance.responds(to: selector) else {
@@ -45,7 +45,7 @@ public class Invocation {
     /// Get class method for a Objc class.
     /// - Parameters:
     ///   - selector: Method selector
-    ///   - classOrInstance: Class type.
+    ///   - cls: Class type.
     /// - Returns: A signature, actually a `NSMethodSignature` instance.
     public static func classMethodSignatureForSelector(_ selector: Selector, of cls: AnyClass) -> Any? {
         guard cls.responds(to: selector) else {
@@ -61,7 +61,7 @@ public class Invocation {
     private let nsInvocation: NSObject
     
     /// Initializer
-    /// - Parameter signature: Method signature returned from invoking ``methodSignatureForSelector(_:of:)``
+    /// - Parameter signature: Method signature returned from invoking ``Invocation/classMethodSignatureForSelector(_:of:)`` or ``Invocation/instanceMethodSignatureForSelector(_:of:)``
     public init(signature: Any) {
         nsInvocation = Self.nsInvocationInitIMP(
             Self.nsInvocationClass,

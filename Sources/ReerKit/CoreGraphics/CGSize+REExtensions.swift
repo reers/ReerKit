@@ -78,7 +78,6 @@ public extension Reer where Base == CGSize {
     ///
     /// - Parameters:
     ///   - rect: The constrant rect
-    ///   - size: The content size
     ///   - mode: The content mode
     /// - Returns: A rectangle for the given content mode.
     func fit(inRect rect: CGRect, mode: UIView.ContentMode) -> CGRect {

@@ -320,10 +320,14 @@ public extension Reer where Base: UIImage {
         return UIGraphicsGetImageFromCurrentImageContext()!
     }
 
-    /// ReerKit: UIImage with rounded corners.
+    ///  ReerKit: UIImage with rounded corners.
     ///
     /// - Parameters:
     ///   - radius: corner radius (optional), resulting image will be round if unspecified.
+    ///   - corners: corners
+    ///   - borderWidth: borderWidth
+    ///   - borderColor: borderColor
+    ///   - borderLineJoin: borderLineJoin
     /// - Returns: UIImage with all corners rounded.
     func withRoundedCorners(
         radius: CGFloat? = nil,
@@ -440,7 +444,7 @@ public extension Reer where Base: UIImage {
 
     /// ReerKit: Base 64 encoded JPEG data of the image.
     ///
-    /// - Parameter: compressionQuality: The quality of the resulting JPEG image, expressed as a value from 0.0 to 1.0. The value 0.0 represents the maximum compression (or lowest quality) while the value 1.0 represents the least compression (or best quality).
+    /// - Parameter compressionQuality: The quality of the resulting JPEG image, expressed as a value from 0.0 to 1.0. The value 0.0 represents the maximum compression (or lowest quality) while the value 1.0 represents the least compression (or best quality).
     /// - Returns: Base 64 encoded JPEG data of the image as a String.
     func jpegBase64String(compressionQuality: CGFloat) -> String? {
         return base.jpegData(compressionQuality: compressionQuality)?.base64EncodedString()

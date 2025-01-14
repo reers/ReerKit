@@ -399,6 +399,7 @@ public extension Reer where Base == String {
     #if canImport(CoreGraphics) && canImport(UIKit)
     /// ReerKit: Calculate height for a `String` with a constrained width.
     /// - Parameter width: A constrained of container view width.
+    /// - Parameter font: The font for text.
     /// - Returns: Total height of the attributed string after rendering.
     func height(forWidth width: CGFloat, font: UIFont) -> CGFloat {
         let maxSize = CGSize(width: width, height: .greatestFiniteMagnitude)
@@ -730,7 +731,7 @@ public extension Reer where Base == String {
     ///        "hello World".re.starts(with: "H", caseSensitive: false) -> true
     ///
     /// - Parameters:
-    ///   - suffix: substring to search if string starts with.
+    ///   - prefix: substring to search if string starts with.
     ///   - caseSensitive: set true for case sensitive search (default is true).
     /// - Returns: true if string starts with substring.
     func starts(with prefix: String, caseSensitive: Bool = true) -> Bool {
@@ -811,7 +812,7 @@ public extension Reer where Base == String {
     ///        "Short sentence".re.truncated(toLength: 14) -> "Short sentence"
     ///
     /// - Parameters:
-    ///   - toLength: maximum number of characters before cutting.
+    ///   - length: maximum number of characters before cutting.
     ///   - trailing: string to add at the end of truncated string.
     /// - Returns: truncated string (this is an extr...).
     func truncated(toLength length: Int, trailing: String? = "...") -> String {
@@ -845,7 +846,7 @@ public extension Reer where Base == String {
     #if canImport(Foundation)
     /// ReerKit: Returns a new string in which all occurrences of a regex in a specified range of the receiver are replaced by the template.
     /// - Parameters:
-    ///   - regex Regex to replace.
+    ///   - regex: Regex to replace.
     ///   - template: The template to replace the regex.
     ///   - options: The matching options to use
     ///   - searchRange: The range in the receiver in which to search.
@@ -1075,7 +1076,7 @@ public extension ReerReference where Base == String {
     ///        print(str) // prints "This is a very..."
     ///
     /// - Parameters:
-    ///   - toLength: maximum number of characters before cutting.
+    ///   - length: maximum number of characters before cutting.
     ///   - trailing: string to add at the end of truncated string (default is "...").
     @discardableResult
     mutating func truncate(toLength length: Int, trailing: String? = "...") -> String {
@@ -1275,7 +1276,7 @@ public extension Reer where Base == String {
     }
 
     /// ReerKit: Accesses a contiguous subrange of the collection’s elements.
-    /// - Parameter nsRange: A range of the collection’s indices. The bounds of the range must be valid indices of the collection.
+    /// - Parameter bounds: A range of the collection’s indices. The bounds of the range must be valid indices of the collection.
     /// - Returns: A slice of the receiving string.
     subscript(bounds: NSRange) -> Substring {
         guard let range = Range(bounds, in: base) else { fatalError("Failed to find range \(bounds) in \(base)") }
@@ -1386,7 +1387,7 @@ public extension Reer where Base == String {
     }
     
     /// ReerKit: Returns an RSA decrypted data string.
-    /// - Parameter publicKey: RSA private key.
+    /// - Parameter privateKey: RSA private key.
     /// - Returns: A `String` decrypted, or nil if an error occurs.
     func rsaDecrypt(with privateKey: String) -> String? {
         guard let data = base.re.base64DecodedData else { return nil }

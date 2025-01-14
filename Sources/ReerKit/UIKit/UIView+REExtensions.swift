@@ -486,7 +486,7 @@ public extension Reer where Base: UIView {
     
     /// ReerKit: Search all superviews until a view with the condition is found.
     ///
-    /// - Parameter predicate: predicate to evaluate on superviews.
+    /// - Parameter condition: predicate to evaluate on superviews.
     func superview(matching condition: (UIView) -> Bool) -> UIView? {
         guard let superview = base.superview else { return nil }
         if condition(superview) {
@@ -496,8 +496,6 @@ public extension Reer where Base: UIView {
     }
     
     /// ReerKit: Search all superviews until a view with this class is found.
-    ///
-    /// - Parameter name: type of the view to search.
     func superview<T: UIView>(ofType _: T.Type) -> T? {
         guard let superview = base.superview else { return nil }
         if superview is T {
@@ -681,6 +679,7 @@ public extension Reer where Base: UIView {
     ///   - radius: shadow radius (default is 3).
     ///   - offset: shadow offset (default is .zero).
     ///   - opacity: shadow opacity (default is 0.5). It will also be affected by the `alpha` of `backgroundColor`.
+    ///   - path: shadow path
     func addShadow(
         ofColor color: UIColor = UIColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0),
         radius: CGFloat = 3,
@@ -737,7 +736,7 @@ public extension Reer where Base: UIView {
     /// ReerKit: Load view of a certain type from nib
     ///
     /// - Parameters:
-    ///   - withClass: UIView type.
+    ///   - name: UIView type.
     ///   - bundle: bundle of nib (default is nil).
     /// - Returns: UIView
     static func loadFromNib<T: UIView>(withClass name: T.Type, bundle: Bundle? = nil) -> T {
@@ -887,7 +886,7 @@ public extension Reer where Base: UIView {
 
     /// ReerKit: Anchor center Y into current view's superview with a constant margin value.
     ///
-    /// - Parameter withConstant: constant of the anchor constraint (default is 0).
+    /// - Parameter constant: constant of the anchor constraint (default is 0).
     func anchorCenterYToSuperview(constant: CGFloat = 0) {
         base.translatesAutoresizingMaskIntoConstraints = false
         if let anchor = base.superview?.centerYAnchor {
@@ -906,7 +905,7 @@ public extension Reer where Base: UIView {
     /// always added to the common ancestor.
     ///
     /// - Parameter attribute: the attribute to find.
-    /// - Parameter at: the view to find.
+    /// - Parameter view: the view to find.
     /// - Returns: matching constraint.
     func findConstraint(attribute: NSLayoutConstraint.Attribute, for view: UIView) -> NSLayoutConstraint? {
         let constraint = base.constraints.first {

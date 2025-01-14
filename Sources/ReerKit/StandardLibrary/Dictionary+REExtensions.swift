@@ -398,7 +398,7 @@ public extension Dictionary {
     ///
     /// - Parameters:
     ///   - sequence: Sequence being grouped.
-    ///   - keypath: The key path to group by.
+    ///   - keyPath: The key path to group by.
     static func re<S: Sequence>(_ sequence: S, groupBy keyPath: KeyPath<S.Element, Key>) -> [Key: Value] where Value == [S.Element] {
         return Self(grouping: sequence, by: { $0[keyPath: keyPath] })
     }

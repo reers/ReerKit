@@ -516,7 +516,7 @@ public extension ReerForEquatable where Base == Data {
     }
     
     /// ReerKit: Returns an RSA decrypted data.
-    /// - Parameter publicKey: RSA private key.
+    /// - Parameter privateKey: RSA private key.
     /// - Returns: A `Data` decrypted, or nil if an error occurs.
     func rsaDecrypt(with privateKey: String) -> Data? {
         guard let secKey = privateKey.privateSecKey else { return nil }

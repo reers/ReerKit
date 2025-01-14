@@ -40,7 +40,7 @@ public extension Reer where Base: NotificationCenter {
     ///     The block is copied by the notification center and (the copy) held until the observer registration is removed.
     ///
     ///     The block takes one argument:
-    ///   - notification: The notification.
+    ///   
     func observeOnce(
         forName name: NSNotification.Name?,
         object obj: Any? = nil,

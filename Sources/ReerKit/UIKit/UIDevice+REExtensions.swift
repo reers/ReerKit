@@ -183,25 +183,25 @@ public extension UIDevice {
         ///
         /// ![Image](https://km.support.apple.com/resources/sites/APPLE/content/live/IMAGES/1000/IM1095/en_US/TODO)
         case iPhone14ProMax
-        /// Device is an [iPhone 15]()
+        /// Device is an [iPhone 15](https://support.apple.com/en-us/111831)
         ///
         /// ![Image]()
         case iPhone15
-        /// Device is an [iPhone 15 Plus]()
+        /// Device is an [iPhone 15 Plus](https://support.apple.com/en-us/111830)
         ///
         /// ![Image]()
         case iPhone15Plus
-        /// Device is an [iPhone 15 Pro]()
+        /// Device is an [iPhone 15 Pro](https://support.apple.com/en-us/111829)
         ///
         /// ![Image]()
         case iPhone15Pro
-        /// Device is an [iPhone 15 Pro Max]()
+        /// Device is an [iPhone 15 Pro Max](https://support.apple.com/en-us/111828)
         ///
         /// ![Image]()
         case iPhone15ProMax
-        /// Device is an [iPhone 16]()
+        /// Device is an [iPhone 16](https://support.apple.com/en-us/121029)
         ///
-        /// ![Image](https://support.apple.com/en-us/121029)
+        /// ![Image]()
         case iPhone16
         /// Device is an [iPhone 16 Plus](https://support.apple.com/en-us/121030)
         ///

@@ -35,6 +35,7 @@ public extension Reer where Base: CALayer {
     ///   - radius: shadow radius (default is 3).
     ///   - offset: shadow offset (default is .zero).
     ///   - opacity: shadow opacity (default is 0.5). It will also be affected by the `alpha` of `backgroundColor`.
+    ///   - path: shadow path
     func addShadow(
         ofColor color: REColor = REColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0),
         radius: CGFloat = 3,

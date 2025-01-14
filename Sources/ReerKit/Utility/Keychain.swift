@@ -43,6 +43,7 @@ public final class Keychain {
     /// - Parameters:
     ///   - service: The keychain service identifier. Defaults to the app's bundle identifier.
     ///   - accessGroup: The access group for shared keychain items.
+    ///   - synchronizable: synchronize to iCloud or not.
     public init(
         service: String = Bundle.main.bundleIdentifier ?? "com.reers.keychain",
         accessGroup: String? = nil,

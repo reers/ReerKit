@@ -44,6 +44,7 @@ public extension Reer where Base: UINavigationController {
     ///
     /// - Parameters:
     ///   - viewController: viewController to push.
+    ///   - animated: Specify true to animate the transition or false if you do not want the transition to be animated. You might specify false if you are setting up the navigation controller at launch time.
     ///   - completion: optional completion handler (default is nil).
     func pushViewController(_ viewController: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
         base.pushViewController(viewController, animated: animated)

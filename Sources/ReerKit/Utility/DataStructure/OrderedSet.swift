@@ -66,7 +66,7 @@ public struct OrderedSet<Element: Hashable> {
     /// Append a new member to the end of the set, if the set doesn't
     /// already contain it.
     ///
-    /// - Parameter item: The element to add to the set.
+    /// - Parameter newElement: The element to add to the set.
     ///
     /// - Returns: A pair `(inserted, index)`, where `inserted` is a Boolean value
     ///    indicating whether the operation added a new element, and `index` is
@@ -87,8 +87,8 @@ public struct OrderedSet<Element: Hashable> {
     /// Insert a new member to this set at the specified index, if the set doesn't
     /// already contain it.
     ///
-    /// - Parameter item: The element to insert.
-    ///
+    /// - Parameter newElement: The element to insert.
+    /// - Parameter index: The index will insert at.
     /// - Returns: A pair `(inserted, index)`, where `inserted` is a Boolean value
     ///    indicating whether the operation added a new element, and `index` is
     ///    the index of `item` in the resulting set. If `inserted` is false, then

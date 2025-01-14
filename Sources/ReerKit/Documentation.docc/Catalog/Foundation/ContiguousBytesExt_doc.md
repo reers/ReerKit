@@ -1,13 +1,3 @@
-# ContiguousBytes Extensions
-
-Documentation for ContiguousBytes+REExtensions
-
-## Overview
-
-Add overview here.
+# ContiguousBytes+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

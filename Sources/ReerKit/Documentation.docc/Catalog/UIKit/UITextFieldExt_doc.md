@@ -1,13 +1,3 @@
-# UITextField Extensions
-
-Documentation for UITextField+REExtensions
-
-## Overview
-
-Add overview here.
+# UITextField+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

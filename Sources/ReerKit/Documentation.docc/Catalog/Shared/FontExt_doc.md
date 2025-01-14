@@ -1,13 +1,3 @@
-# Font Extensions
-
-Documentation for Font+REExtensions
-
-## Overview
-
-Add overview here.
+# Font+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

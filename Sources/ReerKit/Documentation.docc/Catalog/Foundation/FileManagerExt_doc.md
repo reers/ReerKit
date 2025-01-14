@@ -1,13 +1,3 @@
-# FileManager Extensions
-
-Documentation for FileManager+REExtensions
-
-## Overview
-
-Add overview here.
+# FileManager+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

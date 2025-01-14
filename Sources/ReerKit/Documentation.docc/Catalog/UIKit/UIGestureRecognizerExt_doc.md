@@ -1,13 +1,3 @@
-# UIGestureRecognizer Extensions
-
-Documentation for UIGestureRecognizer+REExtensions
-
-## Overview
-
-Add overview here.
+# UIGestureRecognizer+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

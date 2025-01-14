@@ -1,13 +1,3 @@
-# NSPredicate Extensions
-
-Documentation for NSPredicate+REExtensions
-
-## Overview
-
-Add overview here.
+# NSPredicate+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

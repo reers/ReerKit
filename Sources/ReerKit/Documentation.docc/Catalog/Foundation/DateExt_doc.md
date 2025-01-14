@@ -1,13 +1,3 @@
-# Date Extensions
-
-Documentation for Date+REExtensions
-
-## Overview
-
-Add overview here.
+# Date+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

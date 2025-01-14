@@ -1,13 +1,3 @@
-# NSRegularExpression Extensions
-
-Documentation for NSRegularExpression+REExtensions
-
-## Overview
-
-Add overview here.
+# NSRegularExpression+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

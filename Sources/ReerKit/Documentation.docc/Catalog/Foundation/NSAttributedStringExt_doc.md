@@ -1,13 +1,3 @@
-# NSAttributedString Extensions
-
-Documentation for NSAttributedString+REExtensions
-
-## Overview
-
-Add overview here.
+# NSAttributedString+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

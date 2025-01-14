@@ -1,13 +1,3 @@
-# UINavigationController Extensions
-
-Documentation for UINavigationController+REExtensions
-
-## Overview
-
-Add overview here.
+# UINavigationController+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

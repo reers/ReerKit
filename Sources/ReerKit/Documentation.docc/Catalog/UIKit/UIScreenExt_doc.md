@@ -1,13 +1,3 @@
-# UIScreen Extensions
-
-Documentation for UIScreen+REExtensions
-
-## Overview
-
-Add overview here.
+# UIScreen+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

@@ -1,13 +1,3 @@
-# CGRect Extensions
-
-Documentation for CGRect+REExtensions
-
-## Overview
-
-Add overview here.
+# CGRect+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

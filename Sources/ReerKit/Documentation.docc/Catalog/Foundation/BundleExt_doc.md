@@ -1,13 +1,3 @@
-# Bundle Extensions
-
-Documentation for Bundle+REExtensions
-
-## Overview
-
-Add overview here.
+# Bundle+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

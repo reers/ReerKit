@@ -1,13 +1,3 @@
-# CALayer Extensions
-
-Documentation for CALayer+REExtensions
-
-## Overview
-
-Add overview here.
+# CALayer+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

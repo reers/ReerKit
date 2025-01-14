@@ -1,13 +1,3 @@
-# DispatchQueue Extensions
-
-Documentation for DispatchQueue+REExtensions
-
-## Overview
-
-Add overview here.
+# DispatchQueue+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

@@ -1,13 +1,3 @@
-# UIBezierPath Extensions
-
-Documentation for UIBezierPath+REExtensions
-
-## Overview
-
-Add overview here.
+# UIBezierPath+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

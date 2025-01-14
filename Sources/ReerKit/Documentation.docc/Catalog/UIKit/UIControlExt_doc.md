@@ -1,13 +1,3 @@
-# UIControl Extensions
-
-Documentation for UIControl+REExtensions
-
-## Overview
-
-Add overview here.
+# UIControl+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

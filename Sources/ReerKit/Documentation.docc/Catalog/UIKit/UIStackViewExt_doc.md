@@ -1,13 +1,3 @@
-# UIStackView Extensions
-
-Documentation for UIStackView+REExtensions
-
-## Overview
-
-Add overview here.
+# UIStackView+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

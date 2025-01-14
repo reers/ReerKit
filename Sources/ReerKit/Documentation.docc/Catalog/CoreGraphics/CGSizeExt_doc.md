@@ -1,13 +1,3 @@
-# CGSize Extensions
-
-Documentation for CGSize+REExtensions
-
-## Overview
-
-Add overview here.
+# CGSize+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

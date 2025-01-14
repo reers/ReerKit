@@ -1,13 +1,3 @@
-# CAGradientLayer Extensions
-
-Documentation for CAGradientLayer+REExtensions
-
-## Overview
-
-Add overview here.
+# CAGradientLayer+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

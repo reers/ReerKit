@@ -1,13 +1,3 @@
-# UIImage Extensions
-
-Documentation for UIImage+REExtensions
-
-## Overview
-
-Add overview here.
+# UIImage+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

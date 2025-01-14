@@ -1,13 +1,3 @@
-# UIStoryboard Extensions
-
-Documentation for UIStoryboard+REExtensions
-
-## Overview
-
-Add overview here.
+# UIStoryboard+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

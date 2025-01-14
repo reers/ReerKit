@@ -1,13 +1,3 @@
-# UINavigationBar Extensions
-
-Documentation for UINavigationBar+REExtensions
-
-## Overview
-
-Add overview here.
+# UINavigationBar+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

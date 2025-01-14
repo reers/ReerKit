@@ -1,13 +1,3 @@
-# UITabBar Extensions
-
-Documentation for UITabBar+REExtensions
-
-## Overview
-
-Add overview here.
+# UITabBar+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

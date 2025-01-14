@@ -1,13 +1,3 @@
-# NSRange Extensions
-
-Documentation for NSRange+REExtensions
-
-## Overview
-
-Add overview here.
+# NSRange+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

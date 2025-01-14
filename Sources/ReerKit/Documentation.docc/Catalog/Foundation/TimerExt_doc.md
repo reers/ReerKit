@@ -1,13 +1,3 @@
-# Timer Extensions
-
-Documentation for Timer+REExtensions
-
-## Overview
-
-Add overview here.
+# Timer+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

@@ -1,13 +1,3 @@
-# CGVector Extensions
-
-Documentation for CGVector+REExtensions
-
-## Overview
-
-Add overview here.
+# CGVector+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

@@ -1,13 +1,3 @@
-# UIResponder Extensions
-
-Documentation for UIResponder+REExtensions
-
-## Overview
-
-Add overview here.
+# UIResponder+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

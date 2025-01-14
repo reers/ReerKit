@@ -1,13 +1,3 @@
-# UISearchBar Extensions
-
-Documentation for UISearchBar+REExtensions
-
-## Overview
-
-Add overview here.
+# UISearchBar+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

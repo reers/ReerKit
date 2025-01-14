@@ -1,13 +1,3 @@
-# URLRequest Extensions
-
-Documentation for URLRequest+REExtensions
-
-## Overview
-
-Add overview here.
+# URLRequest+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

@@ -1,13 +1,3 @@
-# Calendar Extensions
-
-Documentation for Calendar+REExtensions
-
-## Overview
-
-Add overview here.
+# Calendar+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

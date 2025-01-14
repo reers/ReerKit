@@ -1,13 +1,3 @@
-# UIViewController Extensions
-
-Documentation for UIViewController+REExtensions
-
-## Overview
-
-Add overview here.
+# UIViewController+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

@@ -1,13 +1,3 @@
-# UIFont Extensions
-
-Documentation for UIFont+REExtensions
-
-## Overview
-
-Add overview here.
+# UIFont+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

@@ -1,13 +1,3 @@
-# UISlider Extensions
-
-Documentation for UISlider+REExtensions
-
-## Overview
-
-Add overview here.
+# UISlider+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

@@ -1,13 +1,3 @@
-# CGColor Extensions
-
-Documentation for CGColor+REExtensions
-
-## Overview
-
-Add overview here.
+# CGColor+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

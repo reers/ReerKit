@@ -1,13 +1,3 @@
-# UIApplication Extensions
-
-Documentation for UIApplication+REExtensions
-
-## Overview
-
-Add overview here.
+# UIApplication+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

@@ -1,13 +1,3 @@
-# CGPoint Extensions
-
-Documentation for CGPoint+REExtensions
-
-## Overview
-
-Add overview here.
+# CGPoint+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

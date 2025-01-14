@@ -1,13 +1,3 @@
-# UIWindow Extensions
-
-Documentation for UIWindow+REExtensions
-
-## Overview
-
-Add overview here.
+# UIWindow+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

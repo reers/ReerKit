@@ -1,13 +1,3 @@
-# URL Extensions
-
-Documentation for URL+REExtensions
-
-## Overview
-
-Add overview here.
+# URL+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

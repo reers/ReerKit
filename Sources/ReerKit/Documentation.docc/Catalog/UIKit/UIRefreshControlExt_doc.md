@@ -1,13 +1,3 @@
-# UIRefreshControl Extensions
-
-Documentation for UIRefreshControl+REExtensions
-
-## Overview
-
-Add overview here.
+# UIRefreshControl+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

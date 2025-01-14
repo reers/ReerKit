@@ -1,13 +1,3 @@
-# Locale Extensions
-
-Documentation for Locale+REExtensions
-
-## Overview
-
-Add overview here.
+# Locale+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

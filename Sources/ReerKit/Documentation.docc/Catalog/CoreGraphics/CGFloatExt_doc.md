@@ -1,13 +1,3 @@
-# CGFloat Extensions
-
-Documentation for CGFloat+REExtensions
-
-## Overview
-
-Add overview here.
+# CGFloat+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

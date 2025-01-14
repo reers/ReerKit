@@ -1,13 +1,3 @@
-# UIScrollView Extensions
-
-Documentation for UIScrollView+REExtensions
-
-## Overview
-
-Add overview here.
+# UIScrollView+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

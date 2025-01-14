@@ -1,13 +1,3 @@
-# UIBarButtonItem Extensions
-
-Documentation for UIBarButtonItem+REExtensions
-
-## Overview
-
-Add overview here.
+# UIBarButtonItem+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

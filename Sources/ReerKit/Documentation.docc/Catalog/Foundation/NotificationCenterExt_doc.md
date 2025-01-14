@@ -1,13 +1,3 @@
-# NotificationCenter Extensions
-
-Documentation for NotificationCenter+REExtensions
-
-## Overview
-
-Add overview here.
+# NotificationCenter+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

@@ -1,13 +1,3 @@
-# UISwitch Extensions
-
-Documentation for UISwitch+REExtensions
-
-## Overview
-
-Add overview here.
+# UISwitch+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

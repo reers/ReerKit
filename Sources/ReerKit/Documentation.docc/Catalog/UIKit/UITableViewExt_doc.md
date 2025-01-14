@@ -1,13 +1,3 @@
-# UITableView Extensions
-
-Documentation for UITableView+REExtensions
-
-## Overview
-
-Add overview here.
+# UITableView+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

@@ -1,13 +1,3 @@
-# Data Extensions
-
-Documentation for Data+REExtensions
-
-## Overview
-
-Add overview here.
+# Data+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

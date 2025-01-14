@@ -1,13 +1,3 @@
-# WKWebView Extensions
-
-Documentation for WKWebView+REExtensions
-
-## Overview
-
-Add overview here.
+# WKWebView+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

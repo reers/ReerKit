@@ -1,13 +1,3 @@
-# EdgeInsets Extensions
-
-Documentation for EdgeInsets+REExtensions
-
-## Overview
-
-Add overview here.
+# EdgeInsets+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

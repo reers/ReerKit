@@ -1,13 +1,3 @@
-# UITextView Extensions
-
-Documentation for UITextView+REExtensions
-
-## Overview
-
-Add overview here.
+# UITextView+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

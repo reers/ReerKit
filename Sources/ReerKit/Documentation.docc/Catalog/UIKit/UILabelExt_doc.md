@@ -1,13 +1,3 @@
-# UILabel Extensions
-
-Documentation for UILabel+REExtensions
-
-## Overview
-
-Add overview here.
+# UILabel+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

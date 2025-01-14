@@ -1,13 +1,3 @@
-# UINavigationItem Extensions
-
-Documentation for UINavigationItem+REExtensions
-
-## Overview
-
-Add overview here.
+# UINavigationItem+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

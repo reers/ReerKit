@@ -1,13 +1,3 @@
-# CATransform3D Extensions
-
-Documentation for CATransform3D+REExtensions
-
-## Overview
-
-Add overview here.
+# CATransform3D+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

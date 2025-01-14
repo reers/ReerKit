@@ -1,13 +1,3 @@
-# NSObject Extensions
-
-Documentation for NSObject+REExtensions
-
-## Overview
-
-Add overview here.
+# NSObject+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

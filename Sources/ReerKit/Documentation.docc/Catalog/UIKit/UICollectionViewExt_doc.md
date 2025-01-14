@@ -1,13 +1,3 @@
-# UICollectionView Extensions
-
-Documentation for UICollectionView+REExtensions
-
-## Overview
-
-Add overview here.
+# UICollectionView+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

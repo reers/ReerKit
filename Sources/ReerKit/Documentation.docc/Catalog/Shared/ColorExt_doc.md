@@ -1,13 +1,3 @@
-# Color Extensions
-
-Documentation for Color+REExtensions
-
-## Overview
-
-Add overview here.
+# Color+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

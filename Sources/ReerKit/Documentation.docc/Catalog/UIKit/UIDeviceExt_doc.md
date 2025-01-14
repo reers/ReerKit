@@ -1,13 +1,3 @@
-# UIDevice Extensions
-
-Documentation for UIDevice+REExtensions
-
-## Overview
-
-Add overview here.
+# UIDevice+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

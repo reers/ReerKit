@@ -1,13 +1,3 @@
-# CGAffineTransform Extensions
-
-Documentation for CGAffineTransform+REExtensions
-
-## Overview
-
-Add overview here.
+# CGAffineTransform+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

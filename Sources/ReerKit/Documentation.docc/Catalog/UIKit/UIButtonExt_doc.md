@@ -1,13 +1,3 @@
-# UIButton Extensions
-
-Documentation for UIButton+REExtensions
-
-## Overview
-
-Add overview here.
+# UIButton+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

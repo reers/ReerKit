@@ -1,13 +1,3 @@
-# UIView Extensions
-
-Documentation for UIView+REExtensions
-
-## Overview
-
-Add overview here.
+# UIView+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

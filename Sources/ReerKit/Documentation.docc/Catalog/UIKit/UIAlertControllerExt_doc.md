@@ -1,13 +1,3 @@
-# UIAlertController Extensions
-
-Documentation for UIAlertController+REExtensions
-
-## Overview
-
-Add overview here.
+# UIAlertController+REExtensions
 
 ## Topics
-
-### Extension Methods
-
-- Add methods here

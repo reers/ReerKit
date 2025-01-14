@@ -2,3 +2,6 @@
 
 ## Topics
 
+- ``Reer/bytes``
+
+- ``Swift/BinaryInteger/re(bytes:)``

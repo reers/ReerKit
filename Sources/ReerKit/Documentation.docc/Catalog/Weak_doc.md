@@ -9,3 +9,13 @@
 - ``WeakProxy``
 
 - ``WeakSet``
+
+- ``WeakSetIterator``
+
+- ``WeakOption``
+
+- ``WeakKey``
+
+- ``WeakValue``
+
+- ``WeakKeyValue``

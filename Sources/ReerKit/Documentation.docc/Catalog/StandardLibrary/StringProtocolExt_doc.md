@@ -2,3 +2,4 @@
 
 ## Topics
 
+- ``ReerForStringProtocol/commonSuffix(with:options:)``

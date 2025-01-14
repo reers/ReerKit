@@ -17,7 +17,6 @@ let package = Package(
     targets: [
         .target(
             name: "ReerKit",
-            path: "Sources",
             resources: [.process("Resources/PrivacyInfo.xcprivacy")]
         ),
         .testTarget(

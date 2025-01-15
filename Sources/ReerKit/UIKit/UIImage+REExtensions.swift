@@ -466,18 +466,18 @@ public extension Reer where Base: UIImage {
 public extension Reer where Base: UIImage {
     /// ReerKit: A new image rotated counterclockwise by a quarter‑turn (90°). ⤺
     /// The width and height will be exchanged.
-    var roatateLeft90: UIImage? {
+    var rotateLeft90: UIImage? {
         return rotated(by: CGFloat(90.0).re.degreesToRadians, fitSize: true)
     }
     
     /// ReerKit: A new image rotated clockwise by a quarter‑turn (90°). ⤼
     /// The width and height will be exchanged.
-    var roatateRight90: UIImage? {
+    var rotateRight90: UIImage? {
         return rotated(by: CGFloat(-90.0).re.degreesToRadians, fitSize: true)
     }
     
     /// ReerKit: A new image rotated 180° . ↻
-    var roatate180: UIImage? {
+    var rotate180: UIImage? {
         return rotated(by: CGFloat(-180.0).re.degreesToRadians, fitSize: true)
     }
     

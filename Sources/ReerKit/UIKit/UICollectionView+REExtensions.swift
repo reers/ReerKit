@@ -146,7 +146,8 @@ public extension Reer where Base: UICollectionView {
     ///   - kind: the kind of supplementary view to retrieve. This value is defined by the layout object.
     ///   - name: UICollectionReusableView type.
     func register<T: UICollectionReusableView>(
-        nib: UINib?, forSupplementaryViewOfKind kind: String,
+        nib: UINib?,
+        forSupplementaryViewOfKind kind: String,
         withClass name: T.Type
     ) {
         base.register(nib, forSupplementaryViewOfKind: kind, withReuseIdentifier: String(describing: name))

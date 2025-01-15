@@ -2,6 +2,8 @@
 
 ## Topics
 
+- ``AnyObjectExtensionable``
+
 - <doc:/Associatable_doc>
 - <doc:/DeinitObservable_doc>
 - <doc:/OnceExecutable_doc>

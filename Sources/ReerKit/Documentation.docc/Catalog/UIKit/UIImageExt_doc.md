@@ -6,7 +6,7 @@
 
 - ``Reer/kilobytesSize``
 
-- ``Reer/origin-1uvt8``
+- ``Reer/original``
 
 - ``Reer/template``
 

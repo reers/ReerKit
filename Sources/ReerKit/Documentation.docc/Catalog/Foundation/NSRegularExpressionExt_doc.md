@@ -14,4 +14,4 @@
 
 - ``Reer/stringByReplacingMatches(in:options:range:withTemplate:)``
 
-- ``Reer/replaceMatches(in:options:range:withTemplate:)e``
+- ``Reer/replaceMatches(in:options:range:withTemplate:)``

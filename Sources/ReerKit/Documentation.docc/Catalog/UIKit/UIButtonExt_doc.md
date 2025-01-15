@@ -53,3 +53,5 @@
 - ``Reer/layoutContent(with:spacing:offsetFromCenter:)``
 
 - ``Reer/setBackgroundColor(color:forState:)``
+
+- ``Reer/setAttributedTitleForAllStates(_:)``

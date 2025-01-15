@@ -6,6 +6,10 @@
 
 - ``ReerReferenceGeneric/swapAt(_:_:)``
 
+- ``ReerReferenceGeneric/appendIfNotExist(_:)``
+
+- ``ReerReferenceGeneric/appendIfNotExist(contentsOf:)``
+
 - ``ReerReferenceGeneric/removeAll(_:)-7p0yh``
 
 - ``ReerReferenceGeneric/removeAll(_:)-3s6gq``

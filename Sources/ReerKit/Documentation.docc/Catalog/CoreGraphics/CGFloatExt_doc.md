@@ -10,9 +10,9 @@
 
 - ``Reer/floor-x5js``
 
-- ``Reer/isPositive-8txl1``
+- ``Reer/isPositive-5vrdl``
 
-- ``Reer/isNegative-4y8o1``
+- ``Reer/isNegative-32evs``
 
 - ``Reer/int-183it``
 

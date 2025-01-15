@@ -10,7 +10,7 @@
 
 - ``Reer/indexPathOfLastItem(inSection:)``
 
-- ``Reer/reloadData(_:)-2orfe``
+- ``Reer/reloadData(_:)-86woi``
 
 - ``Reer/dequeueReusableCell(_:for:)-3l6zi``
 
@@ -23,6 +23,8 @@
 - ``Reer/register(nib:forSupplementaryViewOfKind:withClass:)``
 
 - ``Reer/register(nibWithCellClass:at:)-89pi1``
+
+- ``Reer/register(cell:)-1wl7w``
 
 - ``Reer/scrollToItem(at:at:animated:)``
 

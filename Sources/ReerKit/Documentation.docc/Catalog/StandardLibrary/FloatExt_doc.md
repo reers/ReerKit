@@ -4,9 +4,9 @@
 
 - ``Reer/int-9tuc0``
 
-- ``Reer/double-2yn0m``
+- ``Reer/double-7c25p``
 
-- ``Reer/cgFloat-jg2e``
+- ``Reer/cgFloat-34xon``
 
 ### Operators
 

@@ -6,13 +6,13 @@
 
 - ``Reer/visibleRect``
 
-- ``Reer/scrollToTop()``
+- ``Reer/scrollToTop(animated:)``
 
 - ``Reer/scrollToLeft(animated:)``
 
 - ``Reer/scrollToRight(animated:)``
 
-- ``Reer/scrollToBottom()``
+- ``Reer/scrollToBottom(animated:)``
 
 - ``Reer/scrollUp(animated:)``
 

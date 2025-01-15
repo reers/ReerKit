@@ -20,7 +20,7 @@
 
 - ``Reer/dequeueReusableCell(withClass:)``
 
-- ``Reer/dequeueReusableCell(_:for:)-3l6zi``
+- ``Reer/dequeueReusableCell(_:for:)-706ao``
 
 - ``Reer/dequeueReusableHeaderFooterView(_:)``
 

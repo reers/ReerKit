@@ -4,17 +4,17 @@
 
 - ``Reer/bool-88zhv``
 
-- ``Reer/degreesToRadians-7t2ll``
+- ``Reer/degreesToRadians-3tbkn``
 
-- ``Reer/radiansToDegrees-29mj9``
+- ``Reer/radiansToDegrees-2pk0h``
 
 - ``Reer/uInt``
 
 - ``Reer/double-2yn0m``
 
-- ``Reer/float-59kty``
+- ``Reer/float-5k0sg``
 
-- ``Reer/cgFloat-98e6h``
+- ``Reer/cgFloat-jg2e``
 
 - ``Reer/metricFormatted``
 

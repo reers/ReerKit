@@ -36,6 +36,8 @@
 
 - ``Reer/isValidUrl``
 
+- ``Reer/isValidEmail``
+
 - ``Reer/isValidSchemedUrl``
 
 - ``Reer/isValidHttpsUrl``
@@ -92,9 +94,11 @@
 
 - ``Reer/words()``
 
+- ``Reer/wordCount()``
+
 - ``Reer/toSlug()``
 
-- ``Reer/subscript(index:)``
+- ``Reer/subscript(index:)->Character``
 
 - ``Reer/subscript(range:)``
 
@@ -184,7 +188,9 @@
 
 - ``Reer/subscript(bounds:)``
 
-- ``Reer/with(attributes:)``
+- ``Reer/with(attributes:)-2v5kn``
+
+### Hash
 
 - ``Reer/md2String``
 
@@ -201,3 +207,19 @@
 - ``Reer/sha384String``
 
 - ``Reer/sha512String``
+
+### AES
+
+- ``Reer/aesEncrypt(withKey:iv:)``
+
+- ``Reer/aesDecrypt(withKey:iv:)``
+
+### RSA
+
+- ``Reer/rsaEncrypt(with:)``
+
+- ``Reer/rsaDecrypt(with:)``
+
+- ``Reer/rsaSigned(with:)``
+
+- ``Reer/rsaVerified(with:)``

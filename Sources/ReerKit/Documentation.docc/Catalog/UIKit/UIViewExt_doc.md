@@ -6,7 +6,7 @@
 
 - ``Reer/x-m2em``
 
-- ``Reer/y-gpsg``
+- ``Reer/y-6tgfv``
 
 - ``Reer/width-4yh4f``
 
@@ -67,6 +67,8 @@
 - ``Reer/removeAllSubviews()``
 
 - ``Reer/subviews(ofType:recursive:)``
+
+- ``Reer/subviews(matching:recursive:)``
 
 - ``Reer/firstSubview(ofType:recursive:)``
 

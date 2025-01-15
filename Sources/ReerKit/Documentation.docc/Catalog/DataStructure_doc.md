@@ -10,11 +10,14 @@
 
 - ``BoundedQueue``
 
-- ``LinkedList``
-
 - ``OrderedDictionary``
 
 - ``OrderedSet``
 
 - ``Stack``
 
+### LinkedList
+
+- ``LinkedList``
+
+- ``LinkedListIterator``

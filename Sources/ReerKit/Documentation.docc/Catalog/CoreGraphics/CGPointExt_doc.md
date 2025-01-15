@@ -6,18 +6,20 @@
 
 - ``Reer/distance(from:to:)``
 
+- ``CoreFoundation/CGPoint/re(_:_:)``
+
 ### Operators
 
-- ``CoreGraphics/CGPoint/+(_:_:)``
+- ``CoreFoundation/CGPoint/+(_:_:)``
 
-- ``CoreGraphics/CGPoint/+=(_:_:)``
+- ``CoreFoundation/CGPoint/+=(_:_:)``
 
-- ``CoreGraphics/CGPoint/-(_:_:)``
+- ``CoreFoundation/CGPoint/-(_:_:)``
 
-- ``CoreGraphics/CGPoint/-=(_:_:)``
+- ``CoreFoundation/CGPoint/-=(_:_:)``
 
-- ``CoreGraphics/CGPoint/*(_:_:)``
+- ``CoreFoundation/CGPoint/*(_:_:)``
 
-- ``CoreGraphics/CGPoint/*(_:_:)``
+- ``CoreFoundation/CGPoint/*(_:_:)``
 
-- ``CoreGraphics/CGPoint/*=(_:_:)``
+- ``CoreFoundation/CGPoint/*=(_:_:)``

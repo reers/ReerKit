@@ -70,35 +70,41 @@ public extension Reer where Base: FloatingPoint {
 // MARK: - Operators
 
 infix operator ±
-/// ReerKit: Tuple of plus-minus operation.
-///
-/// - Parameters:
-///   - lhs: number.
-///   - rhs: number.
-/// - Returns: tuple of plus-minus operation ( 2.5 ± 1.5 -> (4, 1)).
-public func ± <T: FloatingPoint>(lhs: T, rhs: T) -> (T, T) {
-    // http://nshipster.com/swift-operators/
-    return (lhs + rhs, lhs - rhs)
+extension FloatingPoint {
+    /// ReerKit: Tuple of plus-minus operation.
+    ///
+    /// - Parameters:
+    ///   - lhs: number.
+    ///   - rhs: number.
+    /// - Returns: tuple of plus-minus operation ( 2.5 ± 1.5 -> (4, 1)).
+    public static func ± (lhs: Self, rhs: Self) -> (Self, Self) {
+        // http://nshipster.com/swift-operators/
+        return (lhs + rhs, lhs - rhs)
+    }
 }
 
 
 prefix operator ±
-/// ReerKit: Tuple of plus-minus operation.
-///
-/// - Parameter int: number.
-/// - Returns: tuple of plus-minus operation (± 2.5 -> (2.5, -2.5)).
-public prefix func ± <T: FloatingPoint>(number: T) -> (T, T) {
-    // http://nshipster.com/swift-operators/
-    return 0 ± number
+extension FloatingPoint {
+    /// ReerKit: Tuple of plus-minus operation.
+    ///
+    /// - Parameter number: number.
+    /// - Returns: tuple of plus-minus operation (± 2.5 -> (2.5, -2.5)).
+    public prefix static func ± (number: Self) -> (Self, Self) {
+        // http://nshipster.com/swift-operators/
+        return 0 ± number
+    }
 }
 
 
 prefix operator √
-/// ReerKit: Square root of float.
-///
-/// - Parameter float: float value to find square root for.
-/// - Returns: square root of given float.
-public prefix func √ <T>(float: T) -> T where T: FloatingPoint {
-    // http://nshipster.com/swift-operators/
-    return sqrt(float)
+extension FloatingPoint {
+    /// ReerKit: Square root of float.
+    ///
+    /// - Parameter float: float value to find square root for.
+    /// - Returns: square root of given float.
+    public prefix static func √ (float: Self) -> Self {
+        // http://nshipster.com/swift-operators/
+        return sqrt(float)
+    }
 }

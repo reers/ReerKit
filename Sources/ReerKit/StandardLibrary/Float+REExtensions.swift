@@ -55,13 +55,16 @@ public extension Reer where Base == Float {
 
 precedencegroup PowerPrecedence { higherThan: MultiplicationPrecedence }
 infix operator ** : PowerPrecedence
-/// ReerKit: Value of exponentiation.
-///
-/// - Parameters:
-///   - lhs: base float.
-///   - rhs: exponent float.
-/// - Returns: exponentiation result (4.4 ** 0.5 = 2.0976176963).
-public func ** (lhs: Float, rhs: Float) -> Float {
-    // http://nshipster.com/swift-operators/
-    return pow(lhs, rhs)
+
+extension Float {
+    /// ReerKit: Value of exponentiation.
+    ///
+    /// - Parameters:
+    ///   - lhs: base float.
+    ///   - rhs: exponent float.
+    /// - Returns: exponentiation result (4.4 ** 0.5 = 2.0976176963).
+    static public func ** (lhs: Float, rhs: Float) -> Float {
+        // http://nshipster.com/swift-operators/
+        return pow(lhs, rhs)
+    }
 }

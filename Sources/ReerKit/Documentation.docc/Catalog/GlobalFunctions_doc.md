@@ -24,6 +24,10 @@
 
 - ``once(fileID:function:line:execute:)``
 
+- ``deonce(_:)``
+
 - ``synchronized(_:execute:)``
 
 - ``observeDeinit(for:onDeinit:)``
+
+- ``moduleName(fileId:)``

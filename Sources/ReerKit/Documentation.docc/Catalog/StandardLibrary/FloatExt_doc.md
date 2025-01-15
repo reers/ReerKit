@@ -7,3 +7,7 @@
 - ``Reer/double-2yn0m``
 
 - ``Reer/cgFloat-jg2e``
+
+### Operators
+
+- ``Swift/Float/**(_:_:)``

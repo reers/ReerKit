@@ -15,3 +15,11 @@
 - ``Reer/floor-28x2p``
 
 - ``Reer/radiansToDegrees-29mj9``
+
+### Operators
+
+- ``Swift/FloatingPoint/±(_:_:)``
+
+- ``Swift/FloatingPoint/±(_:)``
+
+- ``Swift/FloatingPoint/√(_:)``

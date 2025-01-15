@@ -25,3 +25,13 @@
 - ``Reer/isPrime()``
 
 - ``Reer/romanNumeral()``
+
+### Operators
+
+- ``Swift/Int/**(_:_:)``
+
+- ``Swift/Int/√(_:)``
+
+- ``Swift/Int/±(_:)``
+
+- ``Swift/Int/±(_:_:)``

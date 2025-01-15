@@ -29,3 +29,21 @@
 - ``Reer/blend(_:intensity1:with:intensity2:)``
 
 - ``Reer/blend(with:)``
+
+- ``UIKit/UIColor/re(hex:alpha:)``
+
+- ``UIKit/UIColor/re(argbHex:)``
+
+- ``UIKit/UIColor/re(red:green:blue:alpha:)``
+
+- ``UIKit/UIColor/re(hexString:alpha:)``
+
+- ``UIKit/UIColor/re(argbHex:)``
+
+- ``UIKit/UIColor/re(argbHexString:)``
+
+- ``UIKit/UIColor/re(rgbaHex:)``
+
+- ``UIKit/UIColor/re(rgbaHexString:)``
+
+- ``UIKit/UIColor/re(light:dark:)``

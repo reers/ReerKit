@@ -370,12 +370,14 @@ public postfix func ~! <T>(value: T) -> T? {
 
 /// Make `Bool?` to a oppsite value if it is not nil.
 prefix operator !
-public prefix func ! (value: Bool?) -> Bool? {
-    guard let value = value else { return nil }
-    if value {
-        return false
-    } else {
-        return true
+public extension Optional where Wrapped == Bool {
+    static prefix func ! (value: Bool?) -> Bool? {
+        guard let value = value else { return nil }
+        if value {
+            return false
+        } else {
+            return true
+        }
     }
 }
 

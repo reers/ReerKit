@@ -6,6 +6,6 @@
 
 - ``Reer/resizing(to:anchor:)``
 
-- ``CoreGraphics/CGRect/re(center:size:)``
+- ``CoreFoundation/CGRect/re(center:size:)``
 
-- ``CoreGraphics/CGRect/re(_:_:_:_:)``
+- ``CoreFoundation/CGRect/re(_:_:_:_:)``

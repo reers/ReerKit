@@ -15,3 +15,11 @@
 - ``ReerForEquatable/insetBy(bottom:)``
 
 - ``ReerForEquatable/insetBy(bottom:)``
+
+- ``UIKit/UIEdgeInsets/re(inset:)``
+
+### Operators
+
+- ``UIKit/UIEdgeInsets/+(_:_:)``
+
+- ``UIKit/UIEdgeInsets/+=(_:_:)``

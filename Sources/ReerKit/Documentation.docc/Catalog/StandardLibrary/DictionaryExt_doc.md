@@ -2,6 +2,10 @@
 
 ## Topics
 
+- ``DMLDictionary``
+
+- ``DML``
+
 - ``ReerGeneric2/queryString``
 
 - ``ReerGeneric2/stringDictionary``

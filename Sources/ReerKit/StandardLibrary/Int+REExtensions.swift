@@ -166,46 +166,55 @@ public extension Reer where Base == Int {
 
 precedencegroup PowerPrecedence { higherThan: MultiplicationPrecedence }
 infix operator ** : PowerPrecedence
-/// ReerKit: Value of exponentiation.
-///
-/// - Parameters:
-///   - lhs: base integer.
-///   - rhs: exponent integer.
-/// - Returns: exponentiation result (example: 2 ** 3 = 8).
-public func ** (lhs: Int, rhs: Int) -> Double {
-    return pow(Double(lhs), Double(rhs))
+extension Int {
+    /// ReerKit: Value of exponentiation.
+    ///
+    /// - Parameters:
+    ///   - lhs: base integer.
+    ///   - rhs: exponent integer.
+    /// - Returns: exponentiation result (example: 2 ** 3 = 8).
+    static public func ** (lhs: Int, rhs: Int) -> Double {
+        return pow(Double(lhs), Double(rhs))
+    }
 }
 
 prefix operator √
-/// ReerKit: Square root of integer.
-///
-/// - Parameter int: integer value to find square root for
-/// - Returns: square root of given integer.
-public prefix func √ (int: Int) -> Double {
-    return sqrt(Double(int))
+extension Int {
+    /// ReerKit: Square root of integer.
+    ///
+    /// - Parameter int: integer value to find square root for
+    /// - Returns: square root of given integer.
+    public prefix static func √ (int: Int) -> Double {
+        return sqrt(Double(int))
+    }
+
 }
 
 infix operator ±
-/// ReerKit: Tuple of plus-minus operation.
-///
-///     2 ± 3 -> (5, -1)
-/// - Parameters:
-///   - lhs: integer number.
-///   - rhs: integer number.
-/// - Returns: Tuple of plus-minus operation
-public func ± (lhs: Int, rhs: Int) -> (Int, Int) {
-    return (lhs + rhs, lhs - rhs)
+extension Int {
+    /// ReerKit: Tuple of plus-minus operation.
+    ///
+    ///     2 ± 3 -> (5, -1)
+    /// - Parameters:
+    ///   - lhs: integer number.
+    ///   - rhs: integer number.
+    /// - Returns: Tuple of plus-minus operation
+    public static func ± (lhs: Int, rhs: Int) -> (Int, Int) {
+        return (lhs + rhs, lhs - rhs)
+    }
 }
 
 prefix operator ±
-/// ReerKit: Tuple of plus-minus operation.
-///
-/// - Parameter int: integer number
-/// - Returns: Tuple of plus-minus operation (example: ± 2 -> (2, -2)).
-///            The first value must be positive, the second is negative, or both is zero.
-public prefix func ± (int: Int) -> (Int, Int) {
-    let positiveValue = int.re.abs
-    return (positiveValue, -positiveValue)
+extension Int {
+    /// ReerKit: Tuple of plus-minus operation.
+    ///
+    /// - Parameter int: integer number
+    /// - Returns: Tuple of plus-minus operation (example: ± 2 -> (2, -2)).
+    ///            The first value must be positive, the second is negative, or both is zero.
+    public prefix static func ± (int: Int) -> (Int, Int) {
+        let positiveValue = int.re.abs
+        return (positiveValue, -positiveValue)
+    }
 }
 
 

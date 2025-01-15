@@ -67,3 +67,7 @@
 - ``ReerGeneric/anyArrayValue``
 
 - ``ReerGeneric/arrayValue(or:)``
+
+- ``Swift/Optional/!(_:)``
+
+- ``Swift/Optional/?!(_:_:)``

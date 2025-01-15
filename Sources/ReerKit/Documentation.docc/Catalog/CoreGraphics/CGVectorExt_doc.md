@@ -6,12 +6,12 @@
 
 - ``Reer/magnitude``
 
-- ``CoreGraphics/CGVector/re(angle:magnitude:)``
+- ``CoreFoundation/CGVector/re(angle:magnitude:)``
 
-- ``CoreGraphics/CGVector/*(_:_:)``
+- ``CoreFoundation/CGVector/*(_:_:)``
 
-- ``CoreGraphics/CGVector/*(_:_:)``
+- ``CoreFoundation/CGVector/*(_:_:)``
 
-- ``CoreGraphics/CGVector/*(_:_:)``
+- ``CoreFoundation/CGVector/*(_:_:)``
 
-- ``CoreGraphics/CGVector/-(_:_:)``
+- ``CoreFoundation/CGVector/-(_:_:)``

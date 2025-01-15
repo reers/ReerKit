@@ -12,18 +12,45 @@
 
 - ``Invocation``
 
-- ``KeyboardManager``
-
 - ``Keychain``
-
-- ``Memory``
-
-- ``MulticastDelegate``
-
-- ``NanoID``
 
 - ``Reachability``
 
 - ``TypeNameDescribable``
 
 - ``Vibrator``
+
+- ``OnceToken``
+
+### Memory
+
+- ``Memory``
+
+- ``MemoryAlign``
+
+- ``StringMemoryType``
+
+### MulticastDelegate
+
+- ``MulticastDelegate``
+
+- ``MulticastDelegateProtocol``
+
+### NanoID
+
+- ``NanoID``
+
+- ``Randomizer``
+
+- ``IntRandomizer``
+
+- ``SecureRandomizer``
+
+### KeyboardManager
+
+- ``KeyboardManager``
+
+- ``KeyboardObserver``
+
+- ``KeyboardTransition``
+

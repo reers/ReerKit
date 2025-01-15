@@ -14,30 +14,30 @@
 
 - ``Reer/fit(inRect:mode:)``
 
-- ``CoreGraphics/CGSize/+(_:_:)``
+- ``CoreFoundation/CGSize/+(_:_:)``
 
-- ``CoreGraphics/CGSize/+(_:_:)``
+- ``CoreFoundation/CGSize/+(_:_:)``
 
-- ``CoreGraphics/CGSize/+=(_:_:)``
+- ``CoreFoundation/CGSize/+=(_:_:)``
 
-- ``CoreGraphics/CGSize/+=(_:_:)``
+- ``CoreFoundation/CGSize/+=(_:_:)``
 
-- ``CoreGraphics/CGSize/-(_:_:)``
+- ``CoreFoundation/CGSize/-(_:_:)``
 
-- ``CoreGraphics/CGSize/-=(_:_:)``
+- ``CoreFoundation/CGSize/-=(_:_:)``
 
-- ``CoreGraphics/CGSize/-=(_:_:)``
+- ``CoreFoundation/CGSize/-=(_:_:)``
 
-- ``CoreGraphics/CGSize/*(_:_:)``
+- ``CoreFoundation/CGSize/*(_:_:)``
 
-- ``CoreGraphics/CGSize/*(_:_:)``
+- ``CoreFoundation/CGSize/*(_:_:)``
 
-- ``CoreGraphics/CGSize/*(_:_:)``
+- ``CoreFoundation/CGSize/*(_:_:)``
 
-- ``CoreGraphics/CGSize/*=(_:_:)``
+- ``CoreFoundation/CGSize/*=(_:_:)``
 
-- ``CoreGraphics/CGSize/*=(_:_:)``
+- ``CoreFoundation/CGSize/*=(_:_:)``
 
-- ``CoreGraphics/CGSize/re(side:)``
+- ``CoreFoundation/CGSize/re(side:)``
 
-- ``CoreGraphics/CGSize/re(_:_:)``
+- ``CoreFoundation/CGSize/re(_:_:)``

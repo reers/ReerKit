@@ -250,10 +250,10 @@ final class UIImageExtensionsTests: XCTestCase {
         let bundle = Bundle(for: UIImageExtensionsTests.self)
         let image = UIImage(named: "TestImage", in: bundle, compatibleWith: nil)!
         
-        XCTAssertEqual(image.re.roatateRight90?.size.width, image.size.height)
-        XCTAssertEqual(image.re.roatateLeft90?.size.height, image.size.width)
-        XCTAssertEqual(image.re.roatate180?.size.height, image.size.height)
-        XCTAssertEqual(image.re.roatate180?.size.width, image.size.width)
+        XCTAssertEqual(image.re.rotateRight90?.size.width, image.size.height)
+        XCTAssertEqual(image.re.rotateLeft90?.size.height, image.size.width)
+        XCTAssertEqual(image.re.rotate180?.size.height, image.size.height)
+        XCTAssertEqual(image.re.rotate180?.size.width, image.size.width)
     }
 
     func testRotatedByRadians() {

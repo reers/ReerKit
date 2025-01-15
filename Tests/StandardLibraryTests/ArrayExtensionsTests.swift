@@ -72,5 +72,18 @@ final class ArrayExtensionsTests: XCTestCase {
         let dict = data.re.array?[0] as? Dictionary<String, Any>
         XCTAssertEqual(dict?["abc"] as! Int, 123)
     }
+    
+    func testAppendSingleElement() {
+        var numbers = [1, 2, 3]
+        numbers.re.appendIfNotExist(2)
+        numbers.re.appendIfNotExist(4)
+        XCTAssertEqual(numbers, [1, 2, 3, 4])
+    }
+    
+    func testAppendMultipleElements() {
+        var numbers = [1, 2, 3]
+        numbers.re.appendIfNotExist(contentsOf: [2, 3, 4, 5])
+        XCTAssertEqual(numbers, [1, 2, 3, 4, 5])
+    }
 
 }

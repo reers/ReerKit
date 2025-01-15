@@ -198,7 +198,9 @@ public final class RETimer {
         }
     }()
     
-    /// ReerKit: Resumes the timer. Same as `schedule()`.
+    /// ReerKit: Resumes the timer when timer is suspended.
+    ///
+    /// - Important: Do NOT use `resume` to start the timer, it will not work.
     public func resume() {
         guard state == .suspended else { return }
         timer.resume()

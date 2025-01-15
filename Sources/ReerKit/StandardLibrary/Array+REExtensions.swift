@@ -63,6 +63,32 @@ public extension ReerReferenceGeneric where Base == Array<T> {
 // MARK: - Methods (Equatable)
 
 public extension ReerReferenceGeneric where Base == Array<T>, T: Equatable {
+    /// ReerKit: Appends a new element to the array only if it doesn't already exist
+    /// - Parameter newElement: The element to append
+    /// - Complexity: O(n), where n is the length of the array
+    mutating func appendIfNotExist(_ newElement: T) {
+        // Check if the element already exists in the array
+        guard !base.pointee.contains(newElement) else {
+            return
+        }
+        // Append the new element if it's not found
+        base.pointee.append(newElement)
+    }
+    
+    /// ReerKit: Appends multiple elements to the array, excluding any duplicates
+    /// - Parameter newElements: An array of elements to append
+    /// - Complexity: O(n*m), where n is the length of the current array
+    ///   and m is the length of newElements
+    mutating func appendIfNotExist(contentsOf newElements: [T]) {
+        // Iterate through new elements
+        newElements.forEach { element in
+            // Only append elements that don't already exist
+            if !base.pointee.contains(element) {
+                base.pointee.append(element)
+            }
+        }
+    }
+    
     /// ReerKit: Remove all instances of an item from array.
     ///
     ///        [1, 2, 2, 3, 4, 5].re.removeAll(2) -> [1, 3, 4, 5]

@@ -31,3 +31,14 @@
 - ``ReerReferenceGeneric2/subscript(path:)-3d3dk``
 
 - ``Swift/Dictionary/re(_:groupBy:)``
+
+### Operators
+
+- ``Swift/Dictionary/+(_:_:)``
+
+- ``Swift/Dictionary/+=(_:_:)``
+
+- ``Swift/Dictionary/-(_:_:)``
+
+- ``Swift/Dictionary/-=(_:_:)``
+

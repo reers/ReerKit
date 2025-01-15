@@ -1,8 +1,3 @@
-# Shared Documentation
-
-Add documentation content here.
-
-
 # Shared+REExtensions
 
 ## Topics

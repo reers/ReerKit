@@ -9,3 +9,7 @@
 - ``Reer/cgFloat-98e6h``
 
 - ``Reer/normalized(from:to:)``
+
+### Operators
+
+- ``Swift/Double/**(_:_:)``

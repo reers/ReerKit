@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ReerKit"
-  s.version      = "1.1.0"
+  s.version      = "1.1.1"
   s.summary      = "Collections of Swift extensions and utils."
 
   s.description  = <<-DESC
@@ -30,6 +30,6 @@ Pod::Spec.new do |s|
   s.source = { :git => "https://github.com/reers/ReerKit.git", :tag => s.version.to_s }
   s.source_files = "Sources/**/*"
   s.preserve_paths = "Sources/**/*"
-  s.resource_bundles = { "ReerKit" => "Sources/Resources/PrivacyInfo.xcprivacy" }
+  s.resource_bundles = { "ReerKit" => "Sources/ReerKit/Resources/PrivacyInfo.xcprivacy" }
   
 end

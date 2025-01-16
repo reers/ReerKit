@@ -145,20 +145,20 @@ class RETimerViewController: UIViewController {
     
     func startTimer2() {
         timeLabel2.textColor = .blue
-        reTimer2 = RETimer.scheduledTimer(timeInterval: 0.001) { timer in
-            self.timeLabel2.text = Date().re.string(withFormat: "HH:mm:ss.SSS")
+        reTimer2 = RETimer.scheduledTimer(timeInterval: 0.001) { [weak self] timer in
+            self?.timeLabel2.text = Date().re.string(withFormat: "HH:mm:ss.SSS")
         }
     }
     
     func startTimer3() {
         timeLabel3.textColor = .blue
-        reTimer3 = RETimer.scheduledTimer(timeInterval: 0.001) { timer in
+        reTimer3 = RETimer.scheduledTimer(timeInterval: 0.001) { [weak self] timer in
             let minutes = Int(timer.totalElapsedTime / 60.0)
             let seconds = Int(timer.totalElapsedTime - minutes.re.double * 60.0)
             let minutesInMilliseconds = minutes.re.double * 60 * 1000
             let secondsInMilliseconds = seconds.re.double * 1000
             let milliseconds = Int(timer.totalElapsedTime * 1000 - minutesInMilliseconds - secondsInMilliseconds)
-            self.timeLabel3.text = String(format: "%02d:%02d.%03d", minutes, seconds, milliseconds)
+            self?.timeLabel3.text = String(format: "%02d:%02d.%03d", minutes, seconds, milliseconds)
         }
     }
     

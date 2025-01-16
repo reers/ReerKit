@@ -232,6 +232,14 @@ public final class RETimer {
         timer.cancel()
         state = .invalidated
     }
+    
+    deinit {
+        timer.setEventHandler(handler: nil)
+        if state == .suspended {
+            timer.resume()
+        }
+        timer.cancel()
+    }
 }
 
 public extension RETimer {

@@ -52,14 +52,14 @@ public final class Locked<T> {
     
     public func read<U>(_ execute: (T) throws -> U) rethrows -> U {
         os_unfair_lock_lock(lock)
-        defer { os_unfair_lock_unlock(lock)}
+        defer { os_unfair_lock_unlock(lock) }
         return try execute(value)
     }
     
     @discardableResult
     public func write<U>(_ execute: (inout T) throws -> U) rethrows -> U {
         os_unfair_lock_lock(lock)
-        defer { os_unfair_lock_unlock(lock)}
+        defer { os_unfair_lock_unlock(lock) }
         return try execute(&value)
     }
 }

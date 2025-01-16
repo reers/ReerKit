@@ -19,8 +19,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#if canImport(Dispatch)
+
+#if canImport(Dispatch) && canImport(os) && !os(Linux)
 import Dispatch
+import os.lock
 
 #if canImport(Foundation)
 import Foundation
@@ -53,6 +55,7 @@ public final class RETimer {
     private var action: RETimerAction
     private var callbackImmediatelyWhenFired: Bool = false
     private let delay: TimeInterval
+    private let unfairLock: os_unfair_lock_t
     
     /// A record for timer to count seconds when callback occurs every second.
     private var secondsCount = 0
@@ -99,6 +102,9 @@ public final class RETimer {
         self.timeInterval = max(0.0001, timeInterval)
         self.callbackImmediatelyWhenFired = callbackImmediatelyWhenFired
         self.delay = delay
+        
+        unfairLock = .allocate(capacity: 1)
+        unfairLock.initialize(to: os_unfair_lock())
 
         self.timer = DispatchSource.makeTimerSource(queue: queue)
         timer.setEventHandler { [weak self] in
@@ -174,6 +180,8 @@ public final class RETimer {
     /// ReerKit: Schedules a timer.
     @discardableResult
     public func schedule() -> Bool {
+        os_unfair_lock_lock(unfairLock)
+        defer { os_unfair_lock_unlock(unfairLock) }
         guard state == .initial || state == .suspended else { return false }
         _ = scheduleTimerOnce
         timer.resume()
@@ -202,6 +210,8 @@ public final class RETimer {
     ///
     /// - Important: Do NOT use `resume` to start the timer, it will not work.
     public func resume() {
+        os_unfair_lock_lock(unfairLock)
+        defer { os_unfair_lock_unlock(unfairLock) }
         guard state == .suspended else { return }
         timer.resume()
         state = .running
@@ -210,6 +220,8 @@ public final class RETimer {
 
     /// ReerKit: Suspends the timer.
     public func suspend() {
+        os_unfair_lock_lock(unfairLock)
+        defer { os_unfair_lock_unlock(unfairLock) }
         guard state == .running else { return }
         timer.suspend()
         state = .suspended
@@ -221,6 +233,8 @@ public final class RETimer {
     
     /// ReerKit: Stops the timer from ever firing again.
     public func invalidate() {
+        os_unfair_lock_lock(unfairLock)
+        defer { os_unfair_lock_unlock(unfairLock) }
         guard state != .invalidated else { return }
         if state == .suspended {
             timer.resume()
@@ -234,11 +248,16 @@ public final class RETimer {
     }
     
     deinit {
+        os_unfair_lock_lock(unfairLock)
         timer.setEventHandler(handler: nil)
         if state == .suspended {
             timer.resume()
         }
         timer.cancel()
+        os_unfair_lock_unlock(unfairLock)
+        
+        unfairLock.deinitialize(count: 1)
+        unfairLock.deallocate()
     }
 }
 

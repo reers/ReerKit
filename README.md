@@ -1,13 +1,60 @@
-# ReerKit
-ReerKit is a collection of native Swift extensions that provide convenient methods, syntactic sugar, and performance improvements for various native data types, UIKit, and Cocoa classes for iOS, macOS, tvOS, watchOS, and Linux platforms.
-Some of the source code is gathered from various sources on the internet for utility classes or extension methods, with some code optimization and bug fixes. The remaining content is developed by myself. All system type extensions in the framework have the `re` infix added to avoid ambiguity issues when calling the same name extension, such as `"SGVsbG\n8gV29ybGQh".re.base64Decoded`, `"123".re.md5String`.
-
 [简体中文](README_CN.md)
 
+# ReerKit
+ReerKit is a collection of native Swift extensions that provide convenient methods, syntactic sugar, and performance improvements for various native data types, UIKit, and Cocoa classes for iOS, macOS, tvOS, watchOS, and Linux platforms.
+All system type extensions in the framework have the `re` infix added to avoid ambiguity issues when calling the same name extension, such as 
+```swift
+SGVsbG\n8gV29ybGQh".re.base64Decoded
+
+"123".re.md5String
+
+view.re.addSwiftUIView(Color.red)
+```
+
+There are also a of other convenient features available.
+```swift
+// Access dictionary contents using dot notation implemented by dynamic member lookup
+let dict: [String: Any] = ...
+dict.dml.user_name.re.string <=> dict["user_name"] as? String
+
+// Weak reference container, automatically removes elements when they are destroyed.
+WeakSet, WeakMap
+
+// Set grayscale mode for UIView
+view.re.isGrayModeEnabled = true
+
+// Data Structure Encapsulation
+BinaryTree, Tree, LinkedList, Queue, BoundedQueue, Stack, OrderedSet, OrderDictionary
+
+// Lock Encapsulation
+MutexLock, ReadWriteLock, Synchronizing, UnfaireLock
+
+// PropertyWrappers
+Clamped, Locked, Rounded, RWLocked, Trimmed
+
+// Other Utility
+RSA, AES, CountdownTimer, Debouncer, Throttler, DeinitObserver, KeyboardManager, Keychain, Reachability, NanoID, MulticastDelegate
+
+// Additionally, it provides a large number of extension methods and vars for frameworks such as the standard library, UIKit, and Foundation.
+String+REExtensions
+UIView+REExtensions
+Array+REExtensions
+Date+REExtensions
+...
+```
+
 ## Requirements
-iOS 12.0+ / tvOS 12.0+ / watchOS 4.0+ / macOS 10.13+ / visionOS 1.0+ / Ubuntu 14.04+
+iOS 12.0+
+macOS 10.13+
+tvOS 12.0+
+watchOS 4.0+
+visionOS 1.0+
+Ubuntu 14.04+
 Swift 5.9+
-XCode 15.2+
+XCode 15.4+
+
+## Usage
+[Documents build by DocC](https://swiftpackageindex.com/reers/ReerKit/1.1.1/documentation/reerkit)
 
 ## Installation
 
@@ -57,4 +104,3 @@ let package = Package(
 </br>
 <p>Add the <a href="https://github.com/reers/ReerKit/tree/main/Sources">ReerKit</a> folder to your Xcode project to use all extensions or specific extensions.</p>
 </details>
-

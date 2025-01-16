@@ -1,11 +1,58 @@
 # ReerKit
-ReerKit 是许多个原生 Swift 扩展的集合，为 iOS、macOS、tvOS、watchOS 和 Linux 提供了适用于各种原生数据类型、UIKit 和 Cocoa 类的便捷方法、语法糖和性能改进。
-部分源代码是从互联网各处整理到的一些工具类或扩展方法, 并对其进行了一定的优化和 bug 修复. 剩下的内容由本人自己开发完成. 框架中所有的系统类型 extension 都添加了 `re` 中缀, 避免了同名扩展调用时的歧义问题, 如 `"SGVsbG\n8gV29ybGQh".re.base64Decoded`, `"123".re.md5String`.
+ReerKit 是许多个原生 Swift 扩展的集合，为 iOS、macOS、tvOS、watchOS, visionOS 和 Linux 提供了适用于各种原生数据类型、UIKit 和 Cocoa 类的便捷方法、语法糖和性能改进。
+框架中所有的系统类型 extension 都添加了 `re` 中缀, 避免了同名扩展调用时的歧义问题, 如 
+```swift
+SGVsbG\n8gV29ybGQh".re.base64Decoded
+
+"123".re.md5String
+
+view.re.addSwiftUIView(Color.red)
+```
+
+框架中还包含许多其他丰富便捷的功能
+```swift
+// 用 dynamic member lookup 实现通过点语法访问字典内容
+let dict: [String: Any] = ...
+dict.dml.user_name.re.string <=> dict["user_name"] as? String
+
+// 弱引用容器, 元素销毁时自动移出容器
+WeakSet, WeakMap
+
+// 设置 UIView 灰度模式
+view.re.isGrayModeEnabled = true
+
+// 数据结构封装
+BinaryTree, Tree, LinkedList, Queue, BoundedQueue, Stack, OrderedSet, OrderDictionary
+
+// 各种锁的封装
+MutexLock, ReadWriteLock, Synchronizing, UnfaireLock
+
+// 属性包装器 PropertyWrappers 
+Clamped, Locked, Rounded, RWLocked, Trimmed
+
+// 其他工具类
+RSA, AES, CountdownTimer, Debouncer, Throttler, DeinitObserver, KeyboardManager, Keychain, Reachability, NanoID, MulticastDelegate
+
+// 还有为标准库, UIKit, Foudation 等框架提供了大量扩展方法和属性
+String+REExtensions
+UIView+REExtensions
+Array+REExtensions
+Date+REExtensions
+....
+```
 
 ## 要求
-iOS 12.0+ / tvOS 12.0+ / watchOS 4.0+ / macOS 10.13+ / visionOS 1.0+ / Ubuntu 14.04+
+iOS 12.0+
+macOS 10.13+
+tvOS 12.0+
+watchOS 4.0+
+visionOS 1.0+
+Ubuntu 14.04+
 Swift 5.9+
-XCode 15.2+
+XCode 15.4+
+
+## 使用文档
+[DocC 生成的文档](https://swiftpackageindex.com/reers/ReerKit/1.1.1/documentation/reerkit)
 
 ## 安装
 

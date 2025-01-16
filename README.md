@@ -44,7 +44,9 @@ Date+REExtensions
 ```
 
 ## Usage
-[Documents build by DocC](https://swiftpackageindex.com/reers/ReerKit/1.1.1/documentation/reerkit)
+[Link of Documents build by DocC](https://swiftpackageindex.com/reers/ReerKit/1.1.1/documentation/reerkit)
+
+[Or click here to download the doccarchive file](https://gitee.com/phoenix19/cdn/raw/master/ReerKit.doccarchive.zip)
 
 ## Requirements
 iOS 12.0+

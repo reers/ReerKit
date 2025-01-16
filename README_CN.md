@@ -42,7 +42,9 @@ Date+REExtensions
 ```
 
 ## 使用文档
-[DocC 生成的文档](https://swiftpackageindex.com/reers/ReerKit/1.1.1/documentation/reerkit)
+[DocC 生成的文档链接](https://swiftpackageindex.com/reers/ReerKit/1.1.1/documentation/reerkit)
+
+[或者点击这里下载 doccarchive 文件](https://gitee.com/phoenix19/cdn/raw/master/ReerKit.doccarchive.zip)
 
 ## 要求
 iOS 12.0+

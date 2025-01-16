@@ -19,7 +19,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#if canImport(Foundation) && canImport(Dispatch)
+#if canImport(Foundation) && canImport(Dispatch) && canImport(os) && !os(Linux)
 import Foundation
 import Dispatch
 

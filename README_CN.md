@@ -41,18 +41,25 @@ Date+REExtensions
 ....
 ```
 
-## 要求
-iOS 12.0+
-macOS 10.13+
-tvOS 12.0+
-watchOS 4.0+
-visionOS 1.0+
-Ubuntu 14.04+
-Swift 5.9+
-XCode 15.4+
-
 ## 使用文档
 [DocC 生成的文档](https://swiftpackageindex.com/reers/ReerKit/1.1.1/documentation/reerkit)
+
+## 要求
+iOS 12.0+
+
+macOS 10.13+
+
+tvOS 12.0+
+
+watchOS 4.0+
+
+visionOS 1.0+
+
+Ubuntu 14.04+
+
+Swift 5.9+
+
+XCode 15.4+
 
 ## 安装
 

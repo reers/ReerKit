@@ -22,6 +22,7 @@
 - <doc:/RangeExt_doc>
 - <doc:/RangeReplaceableCollectionExt_doc>
 - <doc:/SequenceExt_doc>
+- <doc:/SetExt_doc>
 - <doc:/SignedIntegerExt_doc>
 - <doc:/SignedNumericExt_doc>
 - <doc:/StringExt_doc>

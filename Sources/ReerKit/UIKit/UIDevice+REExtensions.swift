@@ -215,6 +215,10 @@ public extension UIDevice {
         ///
         /// ![Image]()
         case iPhone16ProMax
+        /// Device is an [iPhone 16e](https://support.apple.com/en-us/122208)
+        ///
+        /// ![Image](https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/122208-iphone-16e.png)
+        case iPhone16e
         /// Device is an [iPad 2](https://support.apple.com/kb/SP622)
         ///
         /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP622/SP622_01-ipad2-mul.png)
@@ -613,7 +617,7 @@ public extension Reer where Base: UIDevice {
              .iPhoneXR, .iPhone11, .iPhone11Pro, .iPhone11ProMax,
              .iPhone12, .iPhone12Mini, .iPhone12Pro, .iPhone12ProMax,
              .iPhone13, .iPhone13Mini, .iPhone13Pro, .iPhone13ProMax,
-             .iPhone14, .iPhone14Plus:
+             .iPhone14, .iPhone14Plus, .iPhone16e:
             return true
         default:
             return false
@@ -697,6 +701,7 @@ public extension Reer where Base: UIDevice {
         case "iPhone16,2": return .iPhone15ProMax
         case "iPhone17,3": return .iPhone16
         case "iPhone17,4": return .iPhone16Plus
+        case "iPhone17,5": return .iPhone16e
         case "iPhone17,1": return .iPhone16Pro
         case "iPhone17,2": return .iPhone16ProMax
         case "iPad2,1", "iPad2,2", "iPad2,3", "iPad2,4": return .iPad2
@@ -1127,6 +1132,7 @@ extension UIDevice.Name: CustomStringConvertible {
         case .iPhone16Plus: return "iPhone 16 Plus"
         case .iPhone16Pro: return "iPhone 16 Pro"
         case .iPhone16ProMax: return "iPhone 16 Pro Max"
+        case .iPhone16e: return "iPhone 16e"
         case .iPad2: return "iPad 2"
         case .iPad3: return "iPad (3rd generation)"
         case .iPad4: return "iPad (4th generation)"

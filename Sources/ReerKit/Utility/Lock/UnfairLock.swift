@@ -24,30 +24,25 @@ import os.lock
 
 /// ReerKit: A wrapper of `os_unfair_lock`
 public final class UnfairLock {
-    private let unfairLock: os_unfair_lock_t
+    private var unfairLock = os_unfair_lock()
 
-    public init() {
-        unfairLock = .allocate(capacity: 1)
-        unfairLock.initialize(to: os_unfair_lock())
-    }
+    public init() {}
     
-    deinit {
-        unfairLock.deinitialize(count: 1)
-        unfairLock.deallocate()
-    }
-    
+    @inline(__always)
     public func lock() {
-        os_unfair_lock_lock(unfairLock)
+        os_unfair_lock_lock(&unfairLock)
     }
     
     /// ReerKit: Returns true if the lock was succesfully locked and false if the lock was already locked.
+    @inline(__always)
     @discardableResult
     public func tryLock() -> Bool {
-        return os_unfair_lock_trylock(unfairLock)
+        return os_unfair_lock_trylock(&unfairLock)
     }
     
+    @inline(__always)
     public func unlock() {
-        os_unfair_lock_unlock(unfairLock)
+        os_unfair_lock_unlock(&unfairLock)
     }
 
     /// ReerKit: Executes a closure returning a value while acquiring the lock.

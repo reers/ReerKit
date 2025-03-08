@@ -267,6 +267,10 @@ public extension UIDevice {
         ///
         /// ![Image](https://km.support.apple.com/resources/sites/APPLE/content/live/IMAGES/1000/IM1096/en_US/TODO.png)
         case iPad10
+        /// Device is an [iPad (11th generation)]()
+        ///
+        /// ![Image]()
+        case iPad11
         /// Device is an [iPad Air (4th generation)](https://support.apple.com/kb/SP828)
         ///
         /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP828/sp828ipad-air-ipados14-960_2x.png)
@@ -275,6 +279,22 @@ public extension UIDevice {
         ///
         /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/TODO)
         case iPadAir5
+        /// Device is an [iPad Air 11-inch (M2)](https://support.apple.com/en-us/119894)
+        ///
+        /// ![Image](https://cdsassets.apple.com/content/services/pub/image?productid=301027&size=240x240)
+        case iPadAir11InchM2
+        /// Device is an [iPad Air 13-inch (M2)](https://support.apple.com/en-us/119893)
+        ///
+        /// ![Image](https://cdsassets.apple.com/content/services/pub/image?productid=301029&size=240x240)
+        case iPadAir13InchM2
+        /// Device is an [iPad Air 11-inch (M3)]()
+        ///
+        /// ![Image]()
+        case iPadAir11InchM3
+        /// Device is an [iPad Air 13-inch (M3)]()
+        ///
+        /// ![Image]()
+        case iPadAir13InchM3
         /// Device is an [iPad Mini](https://support.apple.com/kb/SP661)
         ///
         /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP661/sp661_ipad_mini_color.jpg)
@@ -299,6 +319,10 @@ public extension UIDevice {
         ///
         /// ![Image](https://km.support.apple.com/resources/sites/APPLE/content/live/IMAGES/1000/IM1097/en_US/ipad-mini-6gen-240.png)
         case iPadMini6
+        /// Device is an [iPad Mini (7th generation)]()
+        ///
+        /// ![Image]()
+        case iPadMini7
         /// Device is an [iPad Pro 9.7-inch](https://support.apple.com/kb/SP739)
         ///
         /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP739/SP739.png)
@@ -350,11 +374,11 @@ public extension UIDevice {
         /// Device is an [iPad Pro 11-inch (M4)](https://support.apple.com/en-us/119892)
         ///
         /// ![Image](https://cdsassets.apple.com/content/services/pub/image?productid=301031&size=240x240)
-        case iPadPro11M4
+        case iPadPro11InchM4
         /// Device is an [iPad Pro 13-inch (M4)](https://support.apple.com/en-us/119891)
         ///
         /// ![Image](https://cdsassets.apple.com/content/services/pub/image?productid=301033&size=240x240)
-        case iPadPro13M4
+        case iPadPro13InchM4
         /// Device is a [HomePod](https://support.apple.com/kb/SP773)
         ///
         /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP773/homepod_space_gray_large_2x.jpg)
@@ -716,14 +740,20 @@ public extension Reer where Base: UIDevice {
         case "iPad11,6", "iPad11,7": return .iPad8
         case "iPad12,1", "iPad12,2": return .iPad9
         case "iPad13,18", "iPad13,19": return .iPad10
+        case "iPad15,7", "iPad15,8": return .iPad11
         case "iPad13,1", "iPad13,2": return .iPadAir4
         case "iPad13,16", "iPad13,17": return .iPadAir5
+        case "iPad14,8", "iPad14,9": return .iPadAir11InchM2
+        case "iPad14,10", "iPad14,11": return .iPadAir13InchM2
+        case "iPad15,3", "iPad15,4": return .iPadAir11InchM3
+        case "iPad15,5", "iPad15,6": return .iPadAir13InchM3
         case "iPad2,5", "iPad2,6", "iPad2,7": return .iPadMini
         case "iPad4,4", "iPad4,5", "iPad4,6": return .iPadMini2
         case "iPad4,7", "iPad4,8", "iPad4,9": return .iPadMini3
         case "iPad5,1", "iPad5,2": return .iPadMini4
         case "iPad11,1", "iPad11,2": return .iPadMini5
         case "iPad14,1", "iPad14,2": return .iPadMini6
+        case "iPad16,1", "iPad16,2": return .iPadMini7
         case "iPad6,3", "iPad6,4": return .iPadPro9Inch
         case "iPad6,7", "iPad6,8": return .iPadPro12Inch
         case "iPad7,1", "iPad7,2": return .iPadPro12Inch2
@@ -736,8 +766,8 @@ public extension Reer where Base: UIDevice {
         case "iPad13,8", "iPad13,9", "iPad13,10", "iPad13,11": return .iPadPro12Inch5
         case "iPad14,3", "iPad14,4": return .iPadPro11Inch4
         case "iPad14,5", "iPad14,6": return .iPadPro12Inch6
-        case "iPad16,3", "iPad16,4": return .iPadPro11M4
-        case "iPad16,5", "iPad16,6": return .iPadPro13M4
+        case "iPad16,3", "iPad16,4": return .iPadPro11InchM4
+        case "iPad16,5", "iPad16,6": return .iPadPro13InchM4
         case "AudioAccessory1,1": return .homePod
         case "i386", "x86_64", "arm64": return .simulator(getName(ofMachineModel: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "iOS"))
         default: return .unknown(machineModelIdentifier)
@@ -1145,14 +1175,20 @@ extension UIDevice.Name: CustomStringConvertible {
         case .iPad8: return "iPad (8th generation)"
         case .iPad9: return "iPad (9th generation)"
         case .iPad10: return "iPad (10th generation)"
+        case .iPad11: return "iPad (11th generation)"
         case .iPadAir4: return "iPad Air (4th generation)"
         case .iPadAir5: return "iPad Air (5th generation)"
+        case .iPadAir11InchM2: return "iPad Air (11-inch) (M2)"
+        case .iPadAir13InchM2: return "iPad Air (13-inch) (M2)"
+        case .iPadAir11InchM3: return "iPad Air (11-inch) (M3)"
+        case .iPadAir13InchM3: return "iPad Air (13-inch) (M3)"
         case .iPadMini: return "iPad Mini"
         case .iPadMini2: return "iPad Mini 2"
         case .iPadMini3: return "iPad Mini 3"
         case .iPadMini4: return "iPad Mini 4"
         case .iPadMini5: return "iPad Mini (5th generation)"
         case .iPadMini6: return "iPad Mini (6th generation)"
+        case .iPadMini7: return "iPad Mini (7th generation)"
         case .iPadPro9Inch: return "iPad Pro (9.7-inch)"
         case .iPadPro12Inch: return "iPad Pro (12.9-inch)"
         case .iPadPro12Inch2: return "iPad Pro (12.9-inch) (2nd generation)"
@@ -1165,8 +1201,8 @@ extension UIDevice.Name: CustomStringConvertible {
         case .iPadPro12Inch5: return "iPad Pro (12.9-inch) (5th generation)"
         case .iPadPro11Inch4: return "iPad Pro (11-inch) (4th generation)"
         case .iPadPro12Inch6: return "iPad Pro (12.9-inch) (6th generation)"
-        case .iPadPro11M4: return "iPad Pro (11-inch) (M4)"
-        case .iPadPro13M4: return "iPad Pro (13-inch) (M4)"
+        case .iPadPro11InchM4: return "iPad Pro (11-inch) (M4)"
+        case .iPadPro13InchM4: return "iPad Pro (13-inch) (M4)"
         case .homePod: return "HomePod"
         case .simulator(let model): return "Simulator (\(model.description))"
         case .unknown(let identifier): return identifier

@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ReerKit"
-  s.version      = "1.1.2"
+  s.version      = "1.1.3"
   s.summary      = "Collections of Swift extensions and utils."
 
   s.description  = <<-DESC

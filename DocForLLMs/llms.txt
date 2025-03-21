@@ -1,0 +1,1199 @@
+<SYSTEM>Document for ReerKit</SYSTEM>
+
+# Overview
+
+ReerKit is a collection of native Swift extensions that provide convenient methods, syntactic sugar, and performance improvements for various native data types, UIKit, and Cocoa classes for iOS, macOS, tvOS, watchOS, and Linux platforms. All system type extensions in the framework have the re infix added to avoid ambiguity issues when calling the same name extension, such as
+
+```
+SGVsbG\n8gV29ybGQh".re.base64Decoded
+
+"123".re.md5String
+
+view.re.addSwiftUIView(Color.red)
+```
+
+# API List
+
+## GlobalFunctions
+
+```
+import Dispatch
+/// ReerKit: Get current queue label.
+/// - Returns: Queue label string.
+public func currentQueueLabel() -> String
+
+/// ReerKit: Execute a closure on main queue asynchronously.
+public func asyncOnMainQueue(_ action: @escaping () -> Void)
+
+/// ReerKit: Execute a closure on main queue synchronously.
+public func syncOnMainQueue(_ action: @escaping () -> Void)
+
+/// ReerKit: Execute a closure on global queue asynchronously.
+public func asyncOnGlobalQueue(qos: DispatchQoS.QoSClass = .default, action: @escaping () -> Void)
+
+/// ReerKit: Execute a closure on global queue synchronously.
+public func syncOnGlobalQueue(qos: DispatchQoS.QoSClass = .default, action: @escaping () -> Void)
+
+/// ReerKit: Delay to execute a closure on the queue.
+public func delay(_ interval: Double, onQueue queue: DispatchQueue = .main, action: @escaping () -> Void)
+
+import Darwin
+/// ReerKit: Get info by name via `sysctl`
+/// e.g.
+/// hw.model
+/// kern.osversion
+/// kern.hostname
+public func sysctl(by name: String) -> String
+
+/// ReerKit: Return a `Bool` value, the probability of it being `true` is the input value.
+public func trueWithProbability(_ percent: Double) -> Bool
+
+/// ReerKit: Return a `Bool` value, the probability of it being `false` is the input value.
+public func falseWithProbability(_ percent: Double) -> Bool
+```
+
+```
+/// ReerKit: An once token type that wrapped an internal string.
+public struct OnceToken : Hashable {
+
+    /// Create a token with an internal pointer.
+    public init()
+
+    public init(_ value: String)
+}
+
+/// ReerKit: Invoke the passed closure only once during the life time of the process.
+/// It will create an once token by combining #fileID, #function, #line.
+///
+///     once {
+///         print("do something")
+///     }
+///
+/// - Parameters:
+///   - fileID: No need to pass it, just use the default.
+///   - function: No need to pass it, just use the default.
+///   - line: No need to pass it, just use the default.
+///   - execute: The closure need to be executed.
+public func once(fileID: String = #fileID, function: String = #function, line: Int = #line, execute: () -> Void)
+
+/// ReerKit: Invoke the passed closure only once during the life time of the process.
+/// It need an once token parameter, seealso `OnceToken`.
+///
+///     let token = OnceToken()
+///     once(token) {
+///         print("do something")
+///     }
+///
+/// - Parameters:
+///   - token: An unique once token.
+///   - execute: The closure need to be executed.
+public func once(_ token: OnceToken, execute: () -> Void)
+
+/// ReerKit: Cancel the once token mark, that means you can execute the action again with the same token.
+/// - Parameter token: The token that need to cancel marking.
+public func deonce(_ token: OnceToken)
+```
+
+```
+import ObjectiveC
+/// ReerKit: Use just like objective-c `@synchronized`.
+///
+///     let obj = NSObject()
+///     synchronized(obj) {
+///         // do something
+///     }
+/// - Parameters:
+///   - token: A reference type object.
+///   - execute: An action need to be executed synchronizely.
+public func synchronized<Result>(_ token: AnyObject, execute: () throws -> Result) rethrows -> Result
+```
+
+```
+import ObjectiveC
+
+/// ReerKit: Global function to observe deinit for the object.
+public func observeDeinit<Object>(for object: Object?, onDeinit: @escaping () -> Void) where Object : AnyObject
+```
+
+```
+/// Get module name from a swift file ID.
+/// - Parameter fileId: No need to pass it, just use the default.
+/// - Returns: Module name, return `""` if failed.
+public func moduleName(fileId: String = #fileID) -> String
+```
+
+## DataStructure
+
+### Tree
+
+```
+/// Define a generic N-ary tree data structure as a class with parent pointers
+public class Tree<E> {
+
+    /// The value stored in the node
+    public var value: E
+
+    /// The children of the node
+    public var children: [Tree<E>] { get set }
+
+    /// The parent node; weak to prevent retain cycles
+    public weak var parent: Tree<E>?
+
+    /// Computed property to count the total number of nodes in the tree
+    public var count: Int { get }
+
+    /// Initialize a node with a value
+    public init(value: E)
+
+    /// Add a child node with a value
+    @discardableResult
+    public func addChild(value: E) -> Tree<E>
+
+    /// Add an existing tree as a child
+    @discardableResult
+    public func addChild(_ child: Tree<E>) -> Tree<E>
+}
+
+/// Extension to add traversal methods to the N-ary tree
+extension Tree {
+
+    /// Pre-order traversal (Root, Children)
+    public func traversePreorder(process: (E) -> Void)
+
+    /// Post-order traversal (Children, Root)
+    public func traversePostorder(process: (E) -> Void)
+
+    /// Level-order traversal with level information
+    public func traverseLevelOrder(process: (E, Int) -> Void)
+}
+
+/// Extension to add inversion methods to the N-ary tree
+extension Tree {
+
+    /// Function to invert (mirror) the N-ary tree in place
+    public func invert()
+
+    /// Function to get a new inverted (mirrored) N-ary tree
+    public func inverted() -> Tree<E>
+}
+
+extension Tree : CustomStringConvertible {
+
+    /// A textual representation of this instance.
+    ///
+    /// Calling this property directly is discouraged. Instead, convert an
+    /// instance of any type to a string by using the `String(describing:)`
+    /// initializer. This initializer works with any type, and uses the custom
+    /// `description` property for types that conform to
+    /// `CustomStringConvertible`:
+    ///
+    ///     struct Point: CustomStringConvertible {
+    ///         let x: Int, y: Int
+    ///
+    ///         var description: String {
+    ///             return "(\(x), \(y))"
+    ///         }
+    ///     }
+    ///
+    ///     let p = Point(x: 21, y: 30)
+    ///     let s = String(describing: p)
+    ///     print(s)
+    ///     // Prints "(21, 30)"
+    ///
+    /// The conversion of `p` to a string in the assignment to `s` uses the
+    /// `Point` type's `description` property.
+    public var description: String { get }
+}
+
+extension Tree {
+
+    /// Prints the tree structure as a string.
+    public func printTreeString()
+
+    /// Generates a string representation of the tree structure.
+    ///
+    /// ```swift
+    /// Root
+    /// ├── Child2
+    /// ├── Child1
+    /// │   └── Grandchild2
+    /// │       └── GreatGrandchild0
+    /// └── Child0
+    ///     ├── Grandchild1
+    ///     └── Grandchild0
+    /// ```
+    ///
+    /// - Returns: A string representing the tree structure.
+    public func treeString() -> String
+}
+```
+
+### BinaryTree
+
+```
+/// Define a generic binary tree data structure as a class with parent pointers
+public class BinaryTree<E> {
+
+    /// The value stored in the node
+    public var value: E
+
+    /// The left child of the node
+    public var left: BinaryTree<E>? { get set }
+
+    /// The right child of the node
+    public var right: BinaryTree<E>? { get set }
+
+    /// The parent node; weak to prevent retain cycles
+    public weak var parent: BinaryTree<E>?
+
+    /// Computed property to count the total number of nodes in the tree
+    public var count: Int { get }
+
+    /// Initialize a node with a value
+    public init(value: E)
+
+    /// Set a left child with a value
+    @discardableResult
+    public func setLeft(value: E) -> BinaryTree<E>
+
+    /// Set a right child with a value
+    @discardableResult
+    public func setRight(value: E) -> BinaryTree<E>
+}
+
+/// Extension to add traversal methods to the binary tree
+extension BinaryTree {
+
+    /// In-order traversal (Left, Root, Right)
+    public func traverseInorder(process: (E) -> Void)
+
+    /// Pre-order traversal (Root, Left, Right)
+    public func traversePreorder(process: (E) -> Void)
+
+    /// Post-order traversal (Left, Right, Root)
+    public func traversePostorder(process: (E) -> Void)
+
+    /// Level-order traversal with level information
+    public func traverseLevelOrder(process: (E, Int) -> Void)
+}
+
+/// Extension to add inversion methods to the binary tree
+extension BinaryTree {
+
+    /// Function to invert (mirror) the binary tree in place
+    public func invert()
+
+    /// Function to get a new inverted (mirrored) binary tree
+    public func inverted() -> BinaryTree<E>
+}
+
+extension BinaryTree : CustomStringConvertible {
+
+    /// A textual representation of this instance.
+    ///
+    /// Calling this property directly is discouraged. Instead, convert an
+    /// instance of any type to a string by using the `String(describing:)`
+    /// initializer. This initializer works with any type, and uses the custom
+    /// `description` property for types that conform to
+    /// `CustomStringConvertible`:
+    ///
+    ///     struct Point: CustomStringConvertible {
+    ///         let x: Int, y: Int
+    ///
+    ///         var description: String {
+    ///             return "(\(x), \(y))"
+    ///         }
+    ///     }
+    ///
+    ///     let p = Point(x: 21, y: 30)
+    ///     let s = String(describing: p)
+    ///     print(s)
+    ///     // Prints "(21, 30)"
+    ///
+    /// The conversion of `p` to a string in the assignment to `s` uses the
+    /// `Point` type's `description` property.
+    public var description: String { get }
+}
+
+extension BinaryTree {
+
+    public func printTreeString(showLabel: Bool = false, showEmptyNode: Bool = true)
+
+    /// Generates a string representation of the tree structure.
+    ///
+    /// ```swift
+    /// 1
+    /// ├── R: 3
+    /// │   ├── R: 6
+    /// │   │   ├── R: •
+    /// │   │   └── L: 7
+    /// │   └── L: •
+    /// └── L: 2
+    ///     ├── R: 5
+    ///     └── L: 4
+    ///
+    /// 1
+    /// ├── R: 3
+    /// │   └── R: 6
+    /// │       └── L: 7
+    /// └── L: 2
+    ///     ├── R: 5
+    ///     └── L: 4
+    ///
+    /// 1
+    /// ├── 3
+    /// │   ├── 6
+    /// │   │   ├── •
+    /// │   │   └── 7
+    /// │   └── •
+    /// └── 2
+    ///     ├── 5
+    ///     └── 4
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - showLabel: If `true`, includes "L:" and "R:" labels to indicate left and right children.
+    ///   - showEmptyNode: If `true`, includes placeholder `•` for empty child nodes.
+    /// - Returns: A string representing the tree structure.
+    public func treeString(showLabel: Bool = true, showEmptyNode: Bool = true) -> String
+}
+```
+
+### Queue
+
+```
+public struct Queue<E> {
+
+    public init()
+
+    public var count: Int { get }
+
+    public var isEmpty: Bool { get }
+
+    public mutating func enqueue(_ element: E)
+
+    @discardableResult
+    public mutating func dequeue() -> E?
+
+    public var front: E? { get }
+}
+
+extension Queue : CustomStringConvertible {
+
+    /// A textual representation of this instance.
+    ///
+    /// Calling this property directly is discouraged. Instead, convert an
+    /// instance of any type to a string by using the `String(describing:)`
+    /// initializer. This initializer works with any type, and uses the custom
+    /// `description` property for types that conform to
+    /// `CustomStringConvertible`:
+    ///
+    ///     struct Point: CustomStringConvertible {
+    ///         let x: Int, y: Int
+    ///
+    ///         var description: String {
+    ///             return "(\(x), \(y))"
+    ///         }
+    ///     }
+    ///
+    ///     let p = Point(x: 21, y: 30)
+    ///     let s = String(describing: p)
+    ///     print(s)
+    ///     // Prints "(21, 30)"
+    ///
+    /// The conversion of `p` to a string in the assignment to `s` uses the
+    /// `Point` type's `description` property.
+    public var description: String { get }
+}
+```
+
+### BoundedQueue
+
+```
+/// ReerKit: A first-in-first-out queue with a fixed capacity.
+public struct BoundedQueue<E> {
+
+    public enum OverflowBehavior {
+
+        case rejectNew
+
+        case dequeueOldest
+    }
+
+    public init(maxSize: Int, overflowBehavior: OverflowBehavior)
+
+    public var count: Int { get }
+
+    public var isEmpty: Bool { get }
+
+    @discardableResult
+    public mutating func enqueue(_ element: E) -> Bool
+
+    @discardableResult
+    public mutating func dequeue() -> E?
+
+    public var front: E? { get }
+}
+
+extension BoundedQueue : CustomStringConvertible {
+
+    /// A textual representation of this instance.
+    ///
+    /// Calling this property directly is discouraged. Instead, convert an
+    /// instance of any type to a string by using the `String(describing:)`
+    /// initializer. This initializer works with any type, and uses the custom
+    /// `description` property for types that conform to
+    /// `CustomStringConvertible`:
+    ///
+    ///     struct Point: CustomStringConvertible {
+    ///         let x: Int, y: Int
+    ///
+    ///         var description: String {
+    ///             return "(\(x), \(y))"
+    ///         }
+    ///     }
+    ///
+    ///     let p = Point(x: 21, y: 30)
+    ///     let s = String(describing: p)
+    ///     print(s)
+    ///     // Prints "(21, 30)"
+    ///
+    /// The conversion of `p` to a string in the assignment to `s` uses the
+    /// `Point` type's `description` property.
+    public var description: String { get }
+}
+```
+
+### OrderedDictionary
+
+```
+/// ReerKit: A dictionary with guaranteed keys ordering.
+///
+///     var dict = OrderedDictionary<String, Int>()
+///     dict.append(1, forKey: "foo")
+///     dict.append(2, forKey: "bar")
+///
+///     dict["foo"] // 1
+///     dict["bar"] // 2
+///     dict["qux"] // nil
+///     dict.map { $0.key } // ["foo", "bar"], in this order.
+public struct OrderedDictionary<Key, Value> where Key : Hashable {
+
+    public private(set) var keys: [Key] { get }
+
+    public private(set) var dictionary: [Key : Value] { get }
+
+    public var values: [Value] { get }
+
+    /// Creates an empty ordered dictionary.
+    public init()
+
+    /// Creates an empty ordered dictionary.
+    public init(minimumCapacity: Int)
+
+    /// Returns the value associated with key, or nil.
+    public subscript(key: Key) -> Value? { get set }
+
+    /// Returns the value associated with key, or the default value.
+    public subscript(key: Key, default defaultValue: Value) -> Value { get set }
+
+    /// Appends the given value for the given key.
+    ///
+    /// - precondition: There is no value associated with key yet.
+    public mutating func appendValue(_ value: Value, forKey key: Key)
+
+    /// Updates the value stored in the dictionary for the given key, or
+    /// appends a new key-value pair if the key does not exist.
+    ///
+    /// Use this method instead of key-based subscripting when you need to know
+    /// whether the new value supplants the value of an existing key. If the
+    /// value of an existing key is updated, updateValue(_:forKey:) returns the
+    /// original value. If the given key is not present in the dictionary, this
+    /// method appends the key-value pair and returns nil.
+    @discardableResult
+    public mutating func updateValue(_ value: Value, forKey key: Key) -> Value?
+
+    /// Removes the value associated with key.
+    @discardableResult
+    public mutating func removeValue(forKey key: Key) -> Value?
+
+    /// Returns a new ordered dictionary containing the keys of this dictionary
+    /// with the values transformed by the given closure.
+    public func mapValues<T>(_ transform: (Value) throws -> T) rethrows -> OrderedDictionary<Key, T>
+
+    /// Returns a new ordered dictionary containing only the key-value pairs
+    /// that have non-nil values as the result of transformation by the
+    /// given closure.
+    public func compactMapValues<T>(_ transform: (Value) throws -> T?) rethrows -> OrderedDictionary<Key, T>
+
+    public func filter(_ isIncluded: ((key: Key, value: Value)) throws -> Bool) rethrows -> OrderedDictionary<Key, Value>
+
+    public mutating func merge<S>(_ other: S, uniquingKeysWith combine: (Value, Value) throws -> Value) rethrows where S : Sequence, S.Element == (Key, Value)
+
+    public mutating func merge<S>(_ other: S, uniquingKeysWith combine: (Value, Value) throws -> Value) rethrows where S : Sequence, S.Element == (key: Key, value: Value)
+
+    public func merging<S>(_ other: S, uniquingKeysWith combine: (Value, Value) throws -> Value) rethrows -> OrderedDictionary<Key, Value> where S : Sequence, S.Element == (Key, Value)
+
+    public func merging<S>(_ other: S, uniquingKeysWith combine: (Value, Value) throws -> Value) rethrows -> OrderedDictionary<Key, Value> where S : Sequence, S.Element == (key: Key, value: Value)
+}
+
+extension OrderedDictionary : Collection {
+
+    /// A type that represents a position in the collection.
+    ///
+    /// Valid indices consist of the position of every element and a
+    /// "past the end" position that's not valid for use as a subscript
+    /// argument.
+    public typealias Index = Int
+
+    /// The position of the first element in a nonempty collection.
+    ///
+    /// If the collection is empty, `startIndex` is equal to `endIndex`.
+    public var startIndex: Int { get }
+
+    /// The collection's "past the end" position---that is, the position one
+    /// greater than the last valid subscript argument.
+    ///
+    /// When you need a range that includes the last element of a collection, use
+    /// the half-open range operator (`..<`) with `endIndex`. The `..<` operator
+    /// creates a range that doesn't include the upper bound, so it's always
+    /// safe to use with `endIndex`. For example:
+    ///
+    ///     let numbers = [10, 20, 30, 40, 50]
+    ///     if let index = numbers.firstIndex(of: 30) {
+    ///         print(numbers[index ..< numbers.endIndex])
+    ///     }
+    ///     // Prints "[30, 40, 50]"
+    ///
+    /// If the collection is empty, `endIndex` is equal to `startIndex`.
+    public var endIndex: Int { get }
+
+    /// Returns the position immediately after the given index.
+    ///
+    /// The successor of an index must be well defined. For an index `i` into a
+    /// collection `c`, calling `c.index(after: i)` returns the same index every
+    /// time.
+    ///
+    /// - Parameter i: A valid index of the collection. `i` must be less than
+    ///   `endIndex`.
+    /// - Returns: The index value immediately after `i`.
+    public func index(after i: Int) -> Int
+
+    /// Accesses the element at the specified position.
+    ///
+    /// The following example accesses an element of an array through its
+    /// subscript to print its value:
+    ///
+    ///     var streets = ["Adams", "Bryant", "Channing", "Douglas", "Evarts"]
+    ///     print(streets[1])
+    ///     // Prints "Bryant"
+    ///
+    /// You can subscript a collection with any valid index other than the
+    /// collection's end index. The end index refers to the position one past
+    /// the last element of a collection, so it doesn't correspond with an
+    /// element.
+    ///
+    /// - Parameter position: The position of the element to access. `position`
+    ///   must be a valid index of the collection that is not equal to the
+    ///   `endIndex` property.
+    ///
+    /// - Complexity: O(1)
+    public subscript(position: Int) -> (key: Key, value: Value) { get }
+}
+
+extension OrderedDictionary : ExpressibleByDictionaryLiteral {
+
+    /// Creates an instance initialized with the given key-value pairs.
+    public init(dictionaryLiteral elements: (Key, Value)...)
+}
+
+extension OrderedDictionary : Equatable where Value : Equatable {
+
+    /// Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
+    ///
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
+    public static func == (lhs: OrderedDictionary, rhs: OrderedDictionary) -> Bool
+}
+
+extension OrderedDictionary : CustomStringConvertible {
+
+    /// A textual representation of this instance.
+    ///
+    /// Calling this property directly is discouraged. Instead, convert an
+    /// instance of any type to a string by using the `String(describing:)`
+    /// initializer. This initializer works with any type, and uses the custom
+    /// `description` property for types that conform to
+    /// `CustomStringConvertible`:
+    ///
+    ///     struct Point: CustomStringConvertible {
+    ///         let x: Int, y: Int
+    ///
+    ///         var description: String {
+    ///             return "(\(x), \(y))"
+    ///         }
+    ///     }
+    ///
+    ///     let p = Point(x: 21, y: 30)
+    ///     let s = String(describing: p)
+    ///     print(s)
+    ///     // Prints "(21, 30)"
+    ///
+    /// The conversion of `p` to a string in the assignment to `s` uses the
+    /// `Point` type's `description` property.
+    public var description: String { get }
+}
+
+extension Dictionary {
+
+    public init(_ orderedDictionary: OrderedDictionary<Key, Value>)
+}
+```
+
+### OrderedSet
+
+```
+/// ReerKit: An ordered set is an ordered collection of instances of `Element` in which
+/// uniqueness of the objects is guaranteed.
+///
+///     var set = OrderedSet<String>()
+///     set.append("a")
+///     set.insert("b", at: 1)
+///     set.append("c")
+///     set.map { Int($0)! } // [1, 2, 3], in this order.
+public struct OrderedSet<Element> where Element : Hashable {
+
+    /// Creates an empty ordered set.
+    public init()
+
+    /// Creates an empty ordered set.
+    public init(_ array: [Element])
+
+    /// The number of elements in the collection.
+    ///
+    /// To check whether a collection is empty, use its `isEmpty` property
+    /// instead of comparing `count` to zero. Unless the collection guarantees
+    /// random-access performance, calculating `count` can be an O(*n*)
+    /// operation.
+    ///
+    /// - Complexity: O(1) if the collection conforms to
+    ///   `RandomAccessCollection`; otherwise, O(*n*), where *n* is the length
+    ///   of the collection.
+    public var count: Int { get }
+
+    /// A Boolean value indicating whether the collection is empty.
+    ///
+    /// When you need to check whether your collection is empty, use the
+    /// `isEmpty` property instead of checking that the `count` property is
+    /// equal to zero. For collections that don't conform to
+    /// `RandomAccessCollection`, accessing the `count` property iterates
+    /// through the elements of the collection.
+    ///
+    ///     let horseName = "Silver"
+    ///     if horseName.isEmpty {
+    ///         print("My horse has no name.")
+    ///     } else {
+    ///         print("Hi ho, \(horseName)!")
+    ///     }
+    ///     // Prints "Hi ho, Silver!"
+    ///
+    /// - Complexity: O(1)
+    public var isEmpty: Bool { get }
+
+    /// Array value of the ordered set.
+    public var elements: [Element] { get }
+
+    public func contains(_ member: Element) -> Bool
+
+    /// Append a new member to the end of the set, if the set doesn't
+    /// already contain it.
+    ///
+    /// - Parameter newElement: The element to add to the set.
+    ///
+    /// - Returns: A pair `(inserted, index)`, where `inserted` is a Boolean value
+    ///    indicating whether the operation added a new element, and `index` is
+    ///    the index of `item` in the resulting set.
+    ///
+    /// - Complexity: The operation is expected to perform O(1) copy, hash, and
+    ///    compare operations on the `Element` type, if it implements high-quality
+    ///    hashing.
+    @discardableResult
+    public mutating func append(_ newElement: Element) -> (inserted: Bool, index: Int)
+
+    /// Insert a new member to this set at the specified index, if the set doesn't
+    /// already contain it.
+    ///
+    /// - Parameter newElement: The element to insert.
+    /// - Parameter index: The index will insert at.
+    /// - Returns: A pair `(inserted, index)`, where `inserted` is a Boolean value
+    ///    indicating whether the operation added a new element, and `index` is
+    ///    the index of `item` in the resulting set. If `inserted` is false, then
+    ///    the returned `index` may be different from the index requested.
+    ///
+    /// - Complexity: The operation is expected to perform amortized
+    ///    O(`self.count`) copy, hash, and compare operations on the `Element`
+    ///    type, if it implements high-quality hashing. (Insertions need to make
+    ///    room in the storage array to add the inserted element.)
+    @discardableResult
+    public mutating func insert(_ newElement: Element, at index: Int) -> (inserted: Bool, index: Int)
+
+    /// Remove and return the element at the beginning of the ordered set.
+    @discardableResult
+    public mutating func removeFirst() -> Element
+
+    /// Remove and return the element at the end of the ordered set.
+    @discardableResult
+    public mutating func removeLast() -> Element
+
+    @discardableResult
+    public mutating func remove(_ member: Element) -> Element?
+
+    /// Remove all elements.
+    public mutating func removeAll(keepingCapacity keepCapacity: Bool = false)
+}
+
+extension OrderedSet : Collection {
+
+    /// A type that represents a position in the collection.
+    ///
+    /// Valid indices consist of the position of every element and a
+    /// "past the end" position that's not valid for use as a subscript
+    /// argument.
+    public typealias Index = Int
+
+    /// The position of the first element in a nonempty collection.
+    ///
+    /// If the collection is empty, `startIndex` is equal to `endIndex`.
+    public var startIndex: Int { get }
+
+    /// The collection's "past the end" position---that is, the position one
+    /// greater than the last valid subscript argument.
+    ///
+    /// When you need a range that includes the last element of a collection, use
+    /// the half-open range operator (`..<`) with `endIndex`. The `..<` operator
+    /// creates a range that doesn't include the upper bound, so it's always
+    /// safe to use with `endIndex`. For example:
+    ///
+    ///     let numbers = [10, 20, 30, 40, 50]
+    ///     if let index = numbers.firstIndex(of: 30) {
+    ///         print(numbers[index ..< numbers.endIndex])
+    ///     }
+    ///     // Prints "[30, 40, 50]"
+    ///
+    /// If the collection is empty, `endIndex` is equal to `startIndex`.
+    public var endIndex: Int { get }
+
+    /// Returns the position immediately after the given index.
+    ///
+    /// The successor of an index must be well defined. For an index `i` into a
+    /// collection `c`, calling `c.index(after: i)` returns the same index every
+    /// time.
+    ///
+    /// - Parameter i: A valid index of the collection. `i` must be less than
+    ///   `endIndex`.
+    /// - Returns: The index value immediately after `i`.
+    public func index(after i: Int) -> Int
+
+    /// Accesses the element at the specified position.
+    ///
+    /// The following example accesses an element of an array through its
+    /// subscript to print its value:
+    ///
+    ///     var streets = ["Adams", "Bryant", "Channing", "Douglas", "Evarts"]
+    ///     print(streets[1])
+    ///     // Prints "Bryant"
+    ///
+    /// You can subscript a collection with any valid index other than the
+    /// collection's end index. The end index refers to the position one past
+    /// the last element of a collection, so it doesn't correspond with an
+    /// element.
+    ///
+    /// - Parameter position: The position of the element to access. `position`
+    ///   must be a valid index of the collection that is not equal to the
+    ///   `endIndex` property.
+    ///
+    /// - Complexity: O(1)
+    public subscript(position: Int) -> Element { get }
+}
+
+extension OrderedSet : ExpressibleByArrayLiteral {
+
+    /// Creates an instance initialized with the given elements.
+    public init(arrayLiteral elements: Element...)
+}
+
+extension OrderedSet : CustomStringConvertible {
+
+    /// A textual representation of this instance.
+    ///
+    /// Calling this property directly is discouraged. Instead, convert an
+    /// instance of any type to a string by using the `String(describing:)`
+    /// initializer. This initializer works with any type, and uses the custom
+    /// `description` property for types that conform to
+    /// `CustomStringConvertible`:
+    ///
+    ///     struct Point: CustomStringConvertible {
+    ///         let x: Int, y: Int
+    ///
+    ///         var description: String {
+    ///             return "(\(x), \(y))"
+    ///         }
+    ///     }
+    ///
+    ///     let p = Point(x: 21, y: 30)
+    ///     let s = String(describing: p)
+    ///     print(s)
+    ///     // Prints "(21, 30)"
+    ///
+    /// The conversion of `p` to a string in the assignment to `s` uses the
+    /// `Point` type's `description` property.
+    public var description: String { get }
+}
+
+extension OrderedSet : Equatable {
+
+    /// Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
+    ///
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
+    public static func == (lhs: OrderedSet, rhs: OrderedSet) -> Bool
+}
+```
+
+### Stack
+
+```
+public struct Stack<E> {
+
+    public init()
+
+    public var count: Int { get }
+
+    public var isEmpty: Bool { get }
+
+    public mutating func push(_ element: E)
+
+    @discardableResult
+    public mutating func pop() -> E?
+
+    public var top: E? { get }
+
+    public mutating func removeAll()
+}
+
+extension Stack : CustomStringConvertible {
+
+    /// A textual representation of this instance.
+    ///
+    /// Calling this property directly is discouraged. Instead, convert an
+    /// instance of any type to a string by using the `String(describing:)`
+    /// initializer. This initializer works with any type, and uses the custom
+    /// `description` property for types that conform to
+    /// `CustomStringConvertible`:
+    ///
+    ///     struct Point: CustomStringConvertible {
+    ///         let x: Int, y: Int
+    ///
+    ///         var description: String {
+    ///             return "(\(x), \(y))"
+    ///         }
+    ///     }
+    ///
+    ///     let p = Point(x: 21, y: 30)
+    ///     let s = String(describing: p)
+    ///     print(s)
+    ///     // Prints "(21, 30)"
+    ///
+    /// The conversion of `p` to a string in the assignment to `s` uses the
+    /// `Point` type's `description` property.
+    public var description: String { get }
+}
+```
+
+### LinkedList
+
+```
+/// A doubly linked list implementation.
+public final class LinkedList<E> {
+
+    public private(set) var count: Int { get }
+
+    public var isEmpty: Bool { get }
+
+    public init()
+
+    public func insert(_ element: E, at index: Int)
+
+    public func append(_ element: E)
+
+    @discardableResult
+    public func remove(at index: Int) -> E
+
+    public func removeFirst()
+
+    public func removeLast()
+
+    public func removeAll()
+
+    public func set(_ element: E, at index: Int)
+
+    public subscript(index: Int) -> E { get }
+}
+
+extension LinkedList where E : Equatable {
+
+    public func firstIndex(of element: E) -> Int?
+
+    public func lastIndex(of element: E) -> Int?
+
+    public func contains(element: E) -> Bool
+
+    public func removeAll(_ element: E)
+
+    public func removeAll(_ elements: [E])
+
+    public func removeAll(where shouldBeRemoved: (E) throws -> Bool) rethrows
+}
+
+extension LinkedList : ExpressibleByArrayLiteral {
+
+    /// Creates an instance initialized with the given elements.
+    public convenience init(arrayLiteral elements: E...)
+}
+
+extension LinkedList {
+
+    public var array: [E] { get }
+
+    public func reverse()
+}
+
+extension LinkedList : CustomStringConvertible {
+
+    /// A textual representation of this instance.
+    ///
+    /// Calling this property directly is discouraged. Instead, convert an
+    /// instance of any type to a string by using the `String(describing:)`
+    /// initializer. This initializer works with any type, and uses the custom
+    /// `description` property for types that conform to
+    /// `CustomStringConvertible`:
+    ///
+    ///     struct Point: CustomStringConvertible {
+    ///         let x: Int, y: Int
+    ///
+    ///         var description: String {
+    ///             return "(\(x), \(y))"
+    ///         }
+    ///     }
+    ///
+    ///     let p = Point(x: 21, y: 30)
+    ///     let s = String(describing: p)
+    ///     print(s)
+    ///     // Prints "(21, 30)"
+    ///
+    /// The conversion of `p` to a string in the assignment to `s` uses the
+    /// `Point` type's `description` property.
+    public var description: String { get }
+}
+
+extension LinkedList {
+
+    public func map<T>(transform: (E) -> T) -> LinkedList<T>
+
+    public func filter(predicate: (E) -> Bool) -> LinkedList<E>
+}
+
+extension LinkedList : Sequence {
+
+    /// Returns an iterator over the elements of this sequence.
+    public func makeIterator() -> LinkedListIterator<E>
+}
+
+public struct LinkedListIterator<E> : IteratorProtocol {
+
+    internal let linkedList: LinkedList<E>
+
+    internal init(linkedList: LinkedList<E>)
+
+    /// Advances to the next element and returns it, or `nil` if no next element
+    /// exists.
+    ///
+    /// Repeatedly calling this method returns, in order, all the elements of the
+    /// underlying sequence. As soon as the sequence has run out of elements, all
+    /// subsequent calls return `nil`.
+    ///
+    /// You must not call this method if any other copy of this iterator has been
+    /// advanced with a call to its `next()` method.
+    ///
+    /// The following example shows how an iterator can be used explicitly to
+    /// emulate a `for`-`in` loop. First, retrieve a sequence's iterator, and
+    /// then call the iterator's `next()` method until it returns `nil`.
+    ///
+    ///     let numbers = [2, 3, 5, 7]
+    ///     var numbersIterator = numbers.makeIterator()
+    ///
+    ///     while let num = numbersIterator.next() {
+    ///         print(num)
+    ///     }
+    ///     // Prints "2"
+    ///     // Prints "3"
+    ///     // Prints "5"
+    ///     // Prints "7"
+    ///
+    /// - Returns: The next element in the underlying sequence, if a next element
+    ///   exists; otherwise, `nil`.
+    public mutating func next() -> E?
+}
+```
+
+## Lock
+
+### MutexLock
+
+```
+import Darwin
+
+/// ReerKit: A wrapper class for pthread mutex, providing a simple interface for thread synchronization.
+public final class MutexLock {
+
+    public init()
+
+    /// Acquires the lock, blocking the current thread until the lock can be obtained.
+    public func lock()
+
+    /// ReerKit: Attempts to acquire the lock without blocking.
+    /// Returns true if the lock was successfully locked and false if the lock was already locked.
+    @discardableResult
+    public func tryLock() -> Bool
+
+    /// Releases the lock.
+    public func unlock()
+
+    /// ReerKit: Executes a closure returning a value while acquiring the lock.
+    ///
+    /// - Parameter execute: The closure to run while holding the lock.
+    ///
+    /// - Returns: The value the closure generated.
+    ///
+    /// - Throws: Rethrows any error that the closure might throw.
+    public func around<Result>(_ execute: () throws -> Result) rethrows -> Result
+}
+```
+
+### ReadWriteLock
+
+```
+import Darwin
+
+/// ReerKit: Represents a reader-writer lock. Note that this implementation is not recursive.
+public final class ReadWriteLock {
+
+    public init()
+
+    public func readLock()
+
+    /// ReerKit: Returns true if the lock was succesfully locked and false if the lock was already locked.
+    @discardableResult
+    public func tryReadLock() -> Bool
+
+    public func readUnlock()
+
+    public func writeLock()
+
+    /// ReerKit: Returns true if the lock was succesfully locked and false if the lock was already locked.
+    @discardableResult
+    public func tryWriteLock() -> Bool
+
+    public func writeUnlock()
+
+    public func readAround<Result>(_ execute: () throws -> Result) rethrows -> Result
+
+    public func writeAround<Result>(_ execute: () throws -> Result) rethrows -> Result
+}
+```
+
+### UnfairLock
+
+```
+import os.lock
+
+/// ReerKit: A wrapper of `os_unfair_lock`
+public final class UnfairLock {
+
+    public init()
+
+    public func lock()
+
+    /// ReerKit: Returns true if the lock was succesfully locked and false if the lock was already locked.
+    @discardableResult
+    public func tryLock() -> Bool
+
+    public func unlock()
+
+    /// ReerKit: Executes a closure returning a value while acquiring the lock.
+    ///
+    /// - Parameter execute: The closure to run.
+    ///
+    /// - Returns: The value the closure generated.
+    public func around<Result>(_ execute: () throws -> Result) rethrows -> Result
+}
+```
+
+## Math
+
+### LinearFunction
+
+```
+import CoreGraphics
+
+/// ReerKit: Represents a linear function of the form y = mx + b
+public struct LinearFunction : CustomStringConvertible {
+
+    /// The slope (m) of the linear function
+    public let slope: Double
+
+    /// The y-intercept (b) of the linear function
+    public let intercept: Double
+
+    /// Initializes a LinearFunction with a given slope and y-intercept
+    /// - Parameters:
+    ///   - slope: The slope of the line
+    ///   - intercept: The y-intercept of the line
+    public init(slope: Double, intercept: Double)
+
+    /// Initializes a LinearFunction from two points on the line
+    /// - Parameters:
+    ///   - point1: The first point on the line
+    ///   - point2: The second point on the line
+    public init(point1: CGPoint, point2: CGPoint)
+
+    /// Calculates the y value for a given x value
+    ///
+    ///     let linear = LinearFunction(slope: 2, intercept: 5)
+    ///     let y = linear(x: 3)
+    ///
+    /// - Parameter x: The x value
+    /// - Returns: The corresponding y value
+    public func callAsFunction(x: Double) -> Double
+
+    /// Calculates the x value for a given y value
+    ///
+    ///     let linear = LinearFunction(slope: 2, intercept: 5)
+    ///     let x = linear(y: 11)
+    ///
+    /// - Parameter y: The y value
+    /// - Returns: The corresponding x value
+    public func callAsFunction(y: Double) -> Double
+
+    /// A string representation of the linear function
+    public var description: String { get }
+}
+```

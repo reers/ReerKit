@@ -1301,11 +1301,6 @@ extension LinkedList : Sequence {
 }
 
 public struct LinkedListIterator<E> : IteratorProtocol {
-
-    internal let linkedList: LinkedList<E>
-
-    internal init(linkedList: LinkedList<E>)
-
     /// Advances to the next element and returns it, or `nil` if no next element
     /// exists.
     ///
@@ -1768,10 +1763,6 @@ extension WeakSet : Sequence {
 
 public struct WeakSetIterator<T> : IteratorProtocol where T : AnyObject {
 
-    internal let weakSet: WeakSet<T>
-
-    internal init(_ weakSet: WeakSet<T>)
-
     /// Advances to the next element and returns it, or `nil` if no next element
     /// exists.
     ///
@@ -2142,12 +2133,6 @@ import Foundation
 
 /// A helper class to interact with the Keychain for storing, retrieving, and deleting key-value pairs securely.
 public final class Keychain {
-
-    /// The keychain service identifier.
-    internal let service: String
-
-    /// The access group for shared keychain items.
-    internal var accessGroup: String?
 
     /// Indicates whether the keychain item should be synchronized to other devices through iCloud.
     public var synchronizable: Bool
@@ -3215,19 +3200,6 @@ open class Reachability {
     /// The current network reachability status.
     open var status: Status { get }
 
-    /// Mutable state storage.
-    internal struct MutableState {
-
-        /// A closure executed when the network reachability status changes.
-        internal var callback: OnChangedCallback?
-
-        /// `DispatchQueue` on which listeners will be called.
-        internal var callbackQueue: DispatchQueue?
-
-        /// Previously calculated status.
-        internal var previousStatus: Status?
-    }
-
     /// Creates an instance with the specified host.
     ///
     /// - Note: The `host` value must *not* contain a scheme, just the hostname.
@@ -3266,24 +3238,6 @@ open class Reachability {
 }
 
 extension Reachability.Status : Equatable {
-}
-
-extension SCNetworkReachabilityFlags {
-
-    internal var isReachable: Bool { get }
-
-    internal var isConnectionRequired: Bool { get }
-
-    internal var canConnectAutomatically: Bool { get }
-
-    internal var canConnectWithoutUserInteraction: Bool { get }
-
-    internal var isActuallyReachable: Bool { get }
-
-    internal var isCellular: Bool { get }
-
-    /// Human readable `String` for all states, to help with debugging.
-    internal var readableDescription: String { get }
 }
 ```
 
@@ -3360,10 +3314,6 @@ public struct Vibrator {
         case warning
 
         case error
-
-        internal var impactStyle: UIImpactFeedbackGenerator.FeedbackStyle { get }
-
-        internal var notificationType: UINotificationFeedbackGenerator.FeedbackType { get }
     }
 
     public static func occur(_ style: FeedbackStyle, intensity: CGFloat = 1.0)
@@ -3429,7 +3379,7 @@ public struct Memory<T> {
     public static func size(ofRef v: T) -> Int
 }
 
-public extension <<error type>> {
+public extension ReerReference where Base == String {
 
     public mutating func memoryType() -> StringMemoryType
 }
@@ -3500,8 +3450,6 @@ public struct NanoID {
 extension NanoID {
 
     public struct Alphabet {
-
-        internal let characters: [Character]
 
         public var size: Int { get }
 
@@ -3653,8 +3601,6 @@ public enum AssociationPolicy {
 
 public struct AssociationKey {
 
-    internal let address: UnsafeRawPointer
-
     /// ReerKit: Create an ObjC association key.
     ///
     /// - warning: The key must be uniqued.
@@ -3680,7 +3626,7 @@ public struct AssociationKey {
     public init(_ key: Selector)
 }
 
-public extension <<error type>> {
+public extension Reer where Base: AnyObject {
 
     /// ReerKit: Sets an associated value for self using a given key and association policy.
     ///
@@ -4344,7 +4290,7 @@ public extension ReerReferenceGeneric2 where Base == Dictionary<U1, U2> {
     ///        dict.re.keys.contains("key2") -> false
     ///
     /// - Parameter keys: keys to be removed.
-    public mutating func removeAll<S>(keys: S) where S : Sequence, S.Element == <<error type>>
+    public mutating func removeAll<S>(keys: S) where S : Sequence, S.Element == U1
 
     /// ReerKit: Remove a value for a random key from the dictionary.
     @discardableResult
@@ -5039,7 +4985,7 @@ public extension ReerForRangeReplaceableCollection where Base: RangeReplaceableC
     /// - Returns: self after applying provided condition.
     /// - Throws: provided condition exception.
     @discardableResult
-    public mutating func keep(while condition: (Base.Element) throws -> Bool) rethrows -> <<error type>>
+    public mutating func keep(while condition: (Base.Element) throws -> Bool) rethrows -> ReerForRangeReplaceableCollection<Base>
 
     /// ReerKit: Remove all duplicate elements using KeyPath to compare.
     ///
@@ -5178,7 +5124,7 @@ public extension ReerForRangeReplaceableCollection where Base: RangeReplaceableC
     /// ReerKit: Adds the elements of a sequence to the end of the array, mutates the array in place
     ///
     /// - Parameter newElements: The optional sequence to append to the array
-    public mutating func appendIfNonNil<S>(contentsOf newElements: S?) where S : Sequence, S.Element == <<error type>>
+    public mutating func appendIfNonNil<S>(contentsOf newElements: S?) where S : Sequence, Base.Element == S.Element
 }
 
 public extension RangeReplaceableCollection {
@@ -6270,5 +6216,4308 @@ public extension ReerForStringProtocol where Base: StringProtocol {
     ///     - Parameter options: Options for the comparison.
     /// - Returns: The longest common suffix of the receiver and the given String.
     public func commonSuffix<T>(with aString: T, options: String.CompareOptions = []) -> String where T : StringProtocol
+}
+```
+
+## Foundation+REExtensions
+
+### Bundle
+
+```
+import Foundation
+
+public extension Reer where Base: Bundle {
+
+    /// ReerKit: Check file exist in the bundle.
+    ///
+    ///     Bundle.main.re.fileExists(withName: "abc.json")
+    ///
+    public func fileExists(withName name: String) -> Bool
+}
+```
+
+### Calendar
+
+```
+import Foundation
+
+extension Calendar: ReerCompatibleValue {}
+public extension Reer where Base == Calendar {
+
+    /// ReerKit: Return the number of days in the month for a specified 'Date'.
+    ///
+    ///        let date = Date() // "Jan 12, 2017, 7:07 PM"
+    ///        Calendar.current.re.numberOfDaysInMonth(for: date) -> 31
+    ///
+    /// - Parameter date: the date form which the number of days in month is calculated.
+    /// - Returns: The number of days in the month of 'Date'.
+    public func numberOfDaysInMonth(for date: Date) -> Int
+}
+```
+
+### ContiguousBytes
+
+```
+import Foundation
+
+public struct ReerForContiguousBytes<Base> {
+
+    public let base: Base
+
+    public init(_ base: Base)
+}
+
+public extension ContiguousBytes {
+
+    /// Gets a namespace holder for ReerKit compatible types.
+    public var re: ReerForContiguousBytes<Self> { get set }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    public static var re: ReerForContiguousBytes<Self>.Type { get set }
+}
+
+public extension ReerForContiguousBytes where Base : ContiguousBytes {
+
+    /// ReerKit: Transform `ContiguousBytes` to `Data`
+    public var data: Data { get }
+}
+```
+
+### Data
+
+```
+import Foundation
+import CommonCrypto
+import zlib
+
+public extension Data {
+
+    /// ReerKit: Convert hex string to Data.
+    public static func re(hexString: String) -> Data?
+
+    /// ReerKit: Create a data from a file in bundle.
+    public static func re(fileName: String, inBundle bundle: Bundle = .main) -> Data?
+}
+
+public enum JSONError : Error {
+
+    case invalidDict
+
+    case invalidArray
+}
+
+public extension ReerForEquatable where Base == Data {
+
+    /// ReerKit: Return data as an array of bytes.
+    public var bytes: [UInt8] { get }
+
+    /// ReerKit: Returns string decoded in UTF8.
+    public var utf8String: String? { get }
+
+    /// ReerKit: String by encoding Data using the given encoding (if applicable).
+    ///
+    /// - Parameter encoding: encoding.
+    /// - Returns: String by encoding Data using the given encoding (if applicable).
+    public func string(encoding: String.Encoding = .utf8) -> String?
+
+    /// ReerKit: Returns a lowercase String in hex.
+    public var hexString: String? { get }
+
+    /// ReerKit: Returns an Dictionary or Array for decoded self.
+    /// Returns nil if an error occurs.
+    /// - Returns: an Dictionary or Array for decoded self.
+    public var jsonValue: Any? { get }
+
+    /// ReerKit: Returns a Foundation object from given JSON data.
+    ///
+    /// - Parameter options: Options for reading the JSON data and creating the Foundation object.
+    ///
+    ///   For possible values, see `JSONSerialization.ReadingOptions`.
+    /// - Throws: An `NSError` if the receiver does not represent a valid JSON object.
+    /// - Returns: A Foundation object from the JSON data in the receiver, or `nil` if an error occurs.
+    public func jsonValue(options: JSONSerialization.ReadingOptions = []) throws -> Any
+
+    /// ReerKit: Returns an Dictionary for decoded self.
+    /// Returns nil if an error occurs.
+    public var dictionary: [AnyHashable : Any]? { get }
+
+    /// ReerKit: Returns [String: Any] for decoded self.
+    /// Returns nil if an error occurs.
+    public var stringAnyDictionary: [String : Any]? { get }
+
+    /// ReerKit: Returns [String: String] for decoded self.
+    /// Returns nil if an error occurs.
+    public var stringDictionary: [String : String]? { get }
+
+    /// ReerKit: Returns an Dictionary for decoded self.
+    public func toDictionary() throws -> [AnyHashable : Any]
+
+    /// ReerKit: Returns an Array for decoded self.
+    /// Returns nil if an error occurs.
+    public var array: [Any]? { get }
+
+    /// ReerKit: Returns an Array for decoded self.
+    public func toArray() throws -> [Any]
+
+    /// ReerKit: Generate a random length of Data.
+    public static func random(ofLength length: Int) -> Data
+}
+
+public extension ReerForEquatable where Base == Data {
+
+    /// ReerKit: Returns an Data for md2 hash.
+    public var md2Data: Data? { get }
+
+    /// ReerKit: Returns a lowercase String for md2 hash.
+    public var md2String: String? { get }
+
+    /// ReerKit: Returns an Data for md4 hash.
+    public var md4Data: Data? { get }
+
+    /// ReerKit: Returns a lowercase String for md4 hash.
+    public var md4String: String? { get }
+
+    /// ReerKit: Returns an Data for md5 hash.
+    public var md5Data: Data? { get }
+
+    /// ReerKit: Returns a lowercase String for md5 hash.
+    public var md5String: String? { get }
+
+    /// ReerKit: Returns an Data for sha1 hash.
+    public var sha1Data: Data? { get }
+
+    /// ReerKit: Returns a lowercase String for sha1 hash.
+    public var sha1String: String? { get }
+
+    /// ReerKit: Returns an Data for sha224 hash.
+    public var sha224Data: Data? { get }
+
+    /// ReerKit: Returns a lowercase String for sha224 hash.
+    public var sha224String: String? { get }
+
+    /// ReerKit: Returns an Data for sha256 hash.
+    public var sha256Data: Data? { get }
+
+    /// ReerKit: Returns a lowercase String for sha256 hash.
+    public var sha256String: String? { get }
+
+    /// ReerKit: Returns an Data for sha384 hash.
+    public var sha384Data: Data? { get }
+
+    /// ReerKit: Returns a lowercase String for sha384 hash.
+    public var sha384String: String? { get }
+
+    /// ReerKit: Returns an Data for sha512 hash.
+    public var sha512Data: Data? { get }
+
+    /// ReerKit: Returns a lowercase String for sha512 hash.
+    public var sha512String: String? { get }
+}
+
+public enum HMACAlgorithm {
+
+    case md5, sha1, sha224, sha256, sha384, sha512
+}
+
+public extension ReerForEquatable where Base == Data {
+
+    /// ReerKit: Returns a lowercase String for hmac using the algorithm with key.
+    /// - Parameters:
+    ///   - alg: HMAC algorithm.
+    ///   - key: The hmac key.
+    /// - Returns: HMAC handled hex string.
+    public func hmacString(using alg: HMACAlgorithm, key: String) -> String?
+
+    /// ReerKit: Returns a Data for hmac using the algorithm with key.
+    /// - Parameters:
+    ///   - alg: HMAC algorithm.
+    ///   - key: The hmac key.
+    /// - Returns: HMAC handled data.
+    public func hmacData(using alg: HMACAlgorithm, key: String) -> Data?
+
+    /// ReerKit: Returns a lowercase String for hmac using the algorithm with key data.
+    /// - Parameters:
+    ///   - alg: HMAC algorithm.
+    ///   - key: The hmac key.
+    /// - Returns: HMAC handled hex string.
+    public func hmacString(using alg: HMACAlgorithm, key: Data) -> String?
+
+    /// ReerKit: Returns a Data for hmac using the algorithm with key data.
+    /// - Parameters:
+    ///   - alg: HMAC algorithm.
+    ///   - key: The hmac key.
+    /// - Returns: HMAC handled data.
+    public func hmacData(using alg: HMACAlgorithm, key: Data) -> Data?
+}
+
+public extension ReerForEquatable where Base == Data {
+
+    /// ReerKit: Returns an encrypted Data using AES.
+    ///
+    /// - Parameters:
+    ///   - key: A key length of 16(AES128), 24(AES192) or 32(AES256)
+    ///   - iv: An initialization vector length of 16(CBC), or use the default data that length of 0(ECB)
+    /// - Returns: A `Data` encrypted, or nil if an error occurs.
+    public func aesEncrypt(withKey key: Data, iv: Data = .init()) -> Data?
+
+    /// ReerKit: Returns an decrypted Data using AES.
+    ///
+    /// - Parameters:
+    ///   - key: A key length of 16(AES128), 24(AES192) or 32(AES256)
+    ///   - iv: An initialization vector length of 16(CBC), or use the default data that length of 0(ECB)
+    /// - Returns: An `Data` decrypted, or nil if an error occurs.
+    public func aesDecrypt(withKey key: Data, iv: Data = .init()) -> Data?
+
+    /// ReerKit: Returns an RSA encrypted data.
+    /// - Parameter publicKey: RSA public key.
+    /// - Returns: A `Data` encrypted, or nil if an error occurs.
+    public func rsaEncrypt(with publicKey: String) -> Data?
+
+    /// ReerKit: Returns an RSA decrypted data.
+    /// - Parameter privateKey: RSA private key.
+    /// - Returns: A `Data` decrypted, or nil if an error occurs.
+    public func rsaDecrypt(with privateKey: String) -> Data?
+
+    /// ReerKit: Returns an RSA signed data.
+    /// - Parameter privateKey: RSA private key.
+    /// - Returns: A signature, or nil if an error occurs.
+    public func rsaSigned(with privateKey: String) -> Data?
+
+    /// ReerKit: Returns an RSA verified data.
+    /// - Parameter publicKey: RSA public key.
+    /// - Returns: A verified `Data`, or nil if an error occurs.
+    public func rsaVerified(with publicKey: String) -> Data?
+}
+
+/// ReerKit: Compression level whose rawValue is based on the zlib's constants.
+public struct CompressionLevel : RawRepresentable {
+
+    /// Compression level in the range of `0` (no compression) to `9` (maximum compression).
+    public let rawValue: Int32
+
+    /// Creates a new instance with the specified raw value.
+    ///
+    /// If there is no value of the type that corresponds with the specified raw
+    /// value, this initializer returns `nil`. For example:
+    ///
+    ///     enum PaperSize: String {
+    ///         case A4, A5, Letter, Legal
+    ///     }
+    ///
+    ///     print(PaperSize(rawValue: "Legal"))
+    ///     // Prints "Optional("PaperSize.Legal")"
+    ///
+    ///     print(PaperSize(rawValue: "Tabloid"))
+    ///     // Prints "nil"
+    ///
+    /// - Parameter rawValue: The raw value to use for the new instance.
+    public init(rawValue: Int32)
+
+    public static let noCompression: main.CompressionLevel
+
+    public static let bestSpeed: main.CompressionLevel
+
+    public static let bestCompression: main.CompressionLevel
+
+    public static let defaultCompression: main.CompressionLevel
+}
+
+public extension ReerForEquatable where Base == Data {
+
+    /// ReerKit: Whether the receiver is compressed in gzip format.
+    public var isGzipped: Bool { get }
+
+    /// ReerKit: Whether the receiver is compressed in zlib format.
+    public var isZlibbed: Bool { get }
+
+    /// ReerKit: Comperss data to zlib-compressed in default compresssion level.
+    ///
+    /// - Returns: Compressed data.
+    public func zlibCompressed(level: CompressionLevel = .defaultCompression) -> Data?
+
+    /// ReerKit: Decompress data from zlib-compressed data.
+    ///
+    /// - Returns: Decompressed data.
+    public func zlibDecompressed() -> Data?
+
+    /// ReerKit: Compress data to gzip in default compresssion level.
+    ///
+    /// - Returns: Compressed data.
+    public func gzipCompressed(level: CompressionLevel = .defaultCompression) -> Data?
+
+    /// ReerKit: Decompress data from gzip data.
+    ///
+    /// - Returns: Decompressed data.
+    public func gzipDecompressed() -> Data?
+}
+```
+
+### Date
+
+```
+import Foundation
+import Darwin
+
+public extension Date {
+
+    /// ReerKit: Day name format.
+    ///
+    /// - threeLetters: 3 letter day abbreviation of day name.
+    /// - oneLetter: 1 letter day abbreviation of day name.
+    /// - full: Full day name.
+    public enum NameStyle {
+
+        /// ReerKit: 3 letter day abbreviation of day name.
+        case threeLetters
+
+        /// ReerKit: 1 letter day abbreviation of day name.
+        case oneLetter
+
+        /// ReerKit: Full day name.
+        case full
+    }
+}
+
+public extension ReerForEquatable where Base == Date {
+
+    /// ReerKit: User’s current calendar.
+    public var calendar: Calendar { get }
+
+    /// ReerKit: Era.
+    ///
+    ///        Date().re.era -> 1
+    ///
+    public var era: Int { get }
+
+    /// ReerKit: Quarter.
+    ///
+    ///        Date().quarter -> 3 // date in third quarter of the year.
+    ///
+    public var quarter: Int { get }
+
+    /// ReerKit: Week of year.
+    ///
+    ///        Date().weekOfYear -> 2 // second week in the year.
+    ///
+    public var weekOfYear: Int { get }
+
+    /// ReerKit: Week of month.
+    ///
+    ///        Date().weekOfMonth -> 3 // date is in third week of the month.
+    ///
+    public var weekOfMonth: Int { get }
+
+    /// ReerKit: Weekday.
+    ///
+    ///     Date().weekday -> 5 // fifth day in the current week.
+    ///
+    public var weekday: Int { get }
+
+    /// ReerKit: Year.
+    ///
+    ///        Date().year -> 2017
+    ///
+    public var year: Int { get }
+
+    /// ReerKit: Month.
+    ///
+    ///     Date().month -> 1
+    ///
+    public var month: Int { get }
+
+    /// ReerKit: Day.
+    ///
+    ///     Date().day -> 12
+    ///
+    public var day: Int { get }
+
+    /// ReerKit: Hour.
+    ///
+    ///     Date().hour -> 17 // 5 pm
+    ///
+    ///     var someDate = Date()
+    ///     someDate.hour = 13 // sets someDate's hour to 1 pm.
+    ///
+    public var hour: Int { get }
+
+    /// ReerKit: Minutes.
+    ///
+    ///     Date().minute -> 39
+    ///
+    ///     var someDate = Date()
+    ///     someDate.minute = 10 // sets someDate's minutes to 10.
+    ///
+    public var minute: Int { get }
+
+    /// ReerKit: Seconds.
+    ///
+    ///     Date().second -> 55
+    ///
+    ///     var someDate = Date()
+    ///     someDate.second = 15 // sets someDate's seconds to 15.
+    ///
+    public var second: Int { get }
+
+    /// ReerKit: Nanoseconds.
+    ///
+    ///     Date().nanosecond -> 981379985
+    ///
+    ///     var someDate = Date()
+    ///     someDate.nanosecond = 981379985 // sets someDate's seconds to 981379985.
+    ///
+    public var nanosecond: Int { get }
+
+    /// ReerKit: Milliseconds.
+    ///
+    ///     Date().millisecond -> 68
+    ///
+    ///     var someDate = Date()
+    ///     someDate.millisecond = 68 // sets someDate's nanosecond to 68000000.
+    ///
+    public var millisecond: Int { get }
+
+    /// ReerKit: Check if date is in leap year
+    public var isLeapYear: Bool { get }
+
+    /// ReerKit: Check if date is within today.
+    ///
+    ///     Date().isToday -> true
+    ///
+    public var isToday: Bool { get }
+
+    /// ReerKit: Check if date is within yesterday.
+    ///
+    ///     Date().isYesterday -> false
+    ///
+    public var isYesterday: Bool { get }
+
+    /// ReerKit: Check if date is in future.
+    ///
+    ///     Date(timeInterval: 100, since: Date()).isFuture -> true
+    ///
+    public var isFuture: Bool { get }
+
+    /// ReerKit: Check if date is in past.
+    ///
+    ///     Date(timeInterval: -100, since: Date()).isPast -> true
+    ///
+    public var isPast: Bool { get }
+
+    /// ReerKit: Check if date is within tomorrow.
+    ///
+    ///     Date().isTomorrow -> false
+    ///
+    public var isTomorrow: Bool { get }
+
+    /// ReerKit: Check if date is within a weekend period.
+    public var isWeekend: Bool { get }
+
+    /// ReerKit: Check if date is within a weekday period.
+    public var isWorkday: Bool { get }
+
+    /// ReerKit: Check if date is within the current week.
+    public var isThisWeek: Bool { get }
+
+    /// ReerKit: Check if date is within the current month.
+    public var isThisMonth: Bool { get }
+
+    /// ReerKit: Check if date is within the current year.
+    public var isThisYear: Bool { get }
+
+    /// ReerKit: ISO8601 string of format (yyyy-MM-dd'T'HH:mm:ss.SSS) from date.
+    ///
+    ///     Date().iso8601String -> "2017-01-12T14:51:29.574Z"
+    ///
+    public var iso8601String: String { get }
+
+    /// ReerKit: Nearest five minutes to date.
+    ///
+    ///     var date = Date() // "5:54 PM"
+    ///     date.minute = 32 // "5:32 PM"
+    ///     date.nearestFiveMinutes // "5:30 PM"
+    ///
+    ///     date.minute = 44 // "5:44 PM"
+    ///     date.nearestFiveMinutes // "5:45 PM"
+    ///
+    public var nearestFiveMinutes: Date { get }
+
+    /// ReerKit: Nearest ten minutes to date.
+    ///
+    ///     var date = Date() // "5:57 PM"
+    ///     date.minute = 34 // "5:34 PM"
+    ///     date.nearestTenMinutes // "5:30 PM"
+    ///
+    ///     date.minute = 48 // "5:48 PM"
+    ///     date.nearestTenMinutes // "5:50 PM"
+    ///
+    public var nearestTenMinutes: Date { get }
+
+    /// ReerKit: Nearest quarter hour to date.
+    ///
+    ///     var date = Date() // "5:57 PM"
+    ///     date.minute = 34 // "5:34 PM"
+    ///     date.nearestQuarterHour // "5:30 PM"
+    ///
+    ///     date.minute = 40 // "5:40 PM"
+    ///     date.nearestQuarterHour // "5:45 PM"
+    ///
+    public var nearestQuarterHour: Date { get }
+
+    /// ReerKit: Nearest half hour to date.
+    ///
+    ///     var date = Date() // "6:07 PM"
+    ///     date.minute = 41 // "6:41 PM"
+    ///     date.nearestHalfHour // "6:30 PM"
+    ///
+    ///     date.minute = 51 // "6:51 PM"
+    ///     date.nearestHalfHour // "7:00 PM"
+    ///
+    public var nearestHalfHour: Date { get }
+
+    /// ReerKit: Nearest hour to date.
+    ///
+    ///     var date = Date() // "6:17 PM"
+    ///     date.nearestHour // "6:00 PM"
+    ///
+    ///     date.minute = 36 // "6:36 PM"
+    ///     date.nearestHour // "7:00 PM"
+    ///
+    public var nearestHour: Date { get }
+
+    /// ReerKit: Yesterday date.
+    ///
+    ///     let date = Date() // "Oct 3, 2018, 10:57:11"
+    ///     let yesterday = date.yesterday // "Oct 2, 2018, 10:57:11"
+    ///
+    public var yesterday: Date { get }
+
+    /// ReerKit: Tomorrow's date.
+    ///
+    ///     let date = Date() // "Oct 3, 2018, 10:57:11"
+    ///     let tomorrow = date.tomorrow // "Oct 4, 2018, 10:57:11"
+    ///
+    public var tomorrow: Date { get }
+
+    /// ReerKit: UNIX timestamp from date.
+    ///
+    ///        Date().unixTimestamp -> 1484233862.826291
+    ///
+    public var unixTimestamp: Double { get }
+
+    /// ReerKit: Return Int milliseconds timestamp.
+    public var millisecondsSince1970: Int { get }
+
+    /// ReerKit: Calculates the number of milliseconds from this date to now
+    ///
+    /// - Returns: An integer representing the number of milliseconds from this date to now.
+    ///            If this date is in the future, the returned value will be negative.
+    ///
+    /// - Note: This method uses `timeIntervalSince` to calculate the time difference,
+    ///         then multiplies the result by 1000 to convert it to milliseconds.
+    ///         The result is rounded to the nearest integer.
+    public var millisecondsToNow: Int { get }
+
+    /// ReerKit: Date by adding multiples of calendar component.
+    ///
+    ///     let date = Date() // "Jan 12, 2017, 7:07 PM"
+    ///     let date2 = date.adding(.minute, value: -10) // "Jan 12, 2017, 6:57 PM"
+    ///     let date3 = date.adding(.day, value: 4) // "Jan 16, 2017, 7:07 PM"
+    ///     let date4 = date.adding(.month, value: 2) // "Mar 12, 2017, 7:07 PM"
+    ///     let date5 = date.adding(.year, value: 13) // "Jan 12, 2030, 7:07 PM"
+    ///
+    /// - Parameters:
+    ///   - component: component type.
+    ///   - value: multiples of components to add.
+    /// - Returns: original date + multiples of component added.
+    public func adding(_ component: Calendar.Component, value: Int) -> Date
+
+    /// ReerKit: Date by changing value of calendar component.
+    ///
+    ///     let date = Date() // "Jan 12, 2017, 7:07 PM"
+    ///     let date2 = date.changing(.minute, value: 10) // "Jan 12, 2017, 7:10 PM"
+    ///     let date3 = date.changing(.day, value: 4) // "Jan 4, 2017, 7:07 PM"
+    ///     let date4 = date.changing(.month, value: 2) // "Feb 12, 2017, 7:07 PM"
+    ///     let date5 = date.changing(.year, value: 2000) // "Jan 12, 2000, 7:07 PM"
+    ///
+    /// - Parameters:
+    ///   - component: component type.
+    ///   - value: new value of component to change.
+    /// - Returns: original date after changing given component to given value.
+    public func changing(_ component: Calendar.Component, value: Int) -> Date?
+
+    /// ReerKit: Date at the beginning of calendar component.
+    ///
+    ///     let date = Date() // "Jan 12, 2017, 7:14 PM"
+    ///     let date2 = date.beginning(of: .hour) // "Jan 12, 2017, 7:00 PM"
+    ///     let date3 = date.beginning(of: .month) // "Jan 1, 2017, 12:00 AM"
+    ///     let date4 = date.beginning(of: .year) // "Jan 1, 2017, 12:00 AM"
+    ///
+    /// - Parameter component: calendar component to get date at the beginning of.
+    /// - Returns: date at the beginning of calendar component (if applicable).
+    public func beginning(of component: Calendar.Component) -> Date?
+
+    /// ReerKit: Date at the end of calendar component.
+    ///
+    ///     let date = Date() // "Jan 12, 2017, 7:27 PM"
+    ///     let date2 = date.end(of: .day) // "Jan 12, 2017, 11:59 PM"
+    ///     let date3 = date.end(of: .month) // "Jan 31, 2017, 11:59 PM"
+    ///     let date4 = date.end(of: .year) // "Dec 31, 2017, 11:59 PM"
+    ///
+    /// - Parameter component: calendar component to get date at the end of.
+    /// - Returns: date at the end of calendar component (if applicable).
+    public func end(of component: Calendar.Component) -> Date?
+
+    /// ReerKit: Check if date is in current given calendar component.
+    ///
+    ///     Date().isInCurrent(.day) -> true
+    ///     Date().isInCurrent(.year) -> true
+    ///
+    /// - Parameter component: calendar component to check.
+    /// - Returns: true if date is in current given calendar component.
+    public func isInCurrent(_ component: Calendar.Component) -> Bool
+
+    /// ReerKit: Date string from date.
+    ///
+    ///     Date().string(withFormat: "dd/MM/yyyy") -> "1/12/17"
+    ///     Date().string(withFormat: "HH:mm") -> "23:50"
+    ///     Date().string(withFormat: "dd/MM/yyyy HH:mm") -> "1/12/17 23:50"
+    ///
+    /// - Parameter format: Date format (default is "dd/MM/yyyy").
+    /// - Returns: date string.
+    public func string(withFormat format: String = "dd/MM/yyyy HH:mm") -> String
+
+    /// ReerKit: Date string from date.
+    ///
+    ///     Date().dateString(ofStyle: .short) -> "1/12/17"
+    ///     Date().dateString(ofStyle: .medium) -> "Jan 12, 2017"
+    ///     Date().dateString(ofStyle: .long) -> "January 12, 2017"
+    ///     Date().dateString(ofStyle: .full) -> "Thursday, January 12, 2017"
+    ///
+    /// - Parameter style: DateFormatter style (default is .medium).
+    /// - Returns: date string.
+    public func dateString(ofStyle style: DateFormatter.Style = .medium) -> String
+
+    /// ReerKit: Date and time string from date.
+    ///
+    ///     Date().dateTimeString(ofStyle: .short) -> "1/12/17, 7:32 PM"
+    ///     Date().dateTimeString(ofStyle: .medium) -> "Jan 12, 2017, 7:32:00 PM"
+    ///     Date().dateTimeString(ofStyle: .long) -> "January 12, 2017 at 7:32:00 PM GMT+3"
+    ///     Date().dateTimeString(ofStyle: .full) -> "Thursday, January 12, 2017 at 7:32:00 PM GMT+03:00"
+    ///
+    /// - Parameter style: DateFormatter style (default is .medium).
+    /// - Returns: date and time string.
+    public func dateTimeString(ofStyle style: DateFormatter.Style = .medium) -> String
+
+    /// ReerKit: Time string from date.
+    ///
+    ///     Date().timeString(ofStyle: .short) -> "7:37 PM"
+    ///     Date().timeString(ofStyle: .medium) -> "7:37:02 PM"
+    ///     Date().timeString(ofStyle: .long) -> "7:37:02 PM GMT+3"
+    ///     Date().timeString(ofStyle: .full) -> "7:37:02 PM GMT+03:00"
+    ///
+    /// - Parameter style: DateFormatter style (default is .medium).
+    /// - Returns: time string.
+    public func timeString(ofStyle style: DateFormatter.Style = .medium) -> String
+
+    /// ReerKit: Day name from date.
+    ///
+    ///     Date().dayName(ofStyle: .oneLetter) -> "T"
+    ///     Date().dayName(ofStyle: .threeLetters) -> "Thu"
+    ///     Date().dayName(ofStyle: .full) -> "Thursday"
+    ///
+    /// - Parameter style: style of day name (default is NameStyle.full).
+    /// - Returns: day name string (example: W, Wed, Wednesday).
+    public func dayName(ofStyle style: Date.NameStyle = .full) -> String
+
+    /// ReerKit: Month name from date.
+    ///
+    ///     Date().monthName(ofStyle: .oneLetter) -> "J"
+    ///     Date().monthName(ofStyle: .threeLetters) -> "Jan"
+    ///     Date().monthName(ofStyle: .full) -> "January"
+    ///
+    /// - Parameter style: style of month name (default is NameStyle.full).
+    /// - Returns: month name string (example: D, Dec, December).
+    public func monthName(ofStyle style: Date.NameStyle = .full) -> String
+
+    /// ReerKit: get number of milliseconds between two date
+    ///
+    /// - Parameter date: date to compare self to.
+    /// - Returns: number of milliseconds between self and given date.
+    public func millisecondsSince(_ date: Date) -> Double
+
+    /// ReerKit: get number of seconds between two date
+    ///
+    /// - Parameter date: date to compare self to.
+    /// - Returns: number of seconds between self and given date.
+    public func secondsSince(_ date: Date) -> Double
+
+    /// ReerKit: get number of minutes between two date
+    ///
+    /// - Parameter date: date to compare self to.
+    /// - Returns: number of minutes between self and given date.
+    public func minutesSince(_ date: Date) -> Double
+
+    /// ReerKit: get number of hours between two date
+    ///
+    /// - Parameter date: date to compare self to.
+    /// - Returns: number of hours between self and given date.
+    public func hoursSince(_ date: Date) -> Double
+
+    /// ReerKit: get number of days between two date
+    ///
+    /// - Parameter date: date to compare self to.
+    /// - Returns: number of days between self and given date.
+    public func daysSince(_ date: Date) -> Double
+
+    /// ReerKit: check if a date is between two other dates.
+    ///
+    /// - Parameters:
+    ///   - startDate: start date to compare self to.
+    ///   - endDate: endDate date to compare self to.
+    ///   - includeBounds: true if the start and end date should be included (default is false).
+    /// - Returns: true if the date is between the two given dates.
+    public func isBetween(_ startDate: Date, _ endDate: Date, includeBounds: Bool = false) -> Bool
+
+    /// ReerKit: check if a date is a number of date components of another date.
+    ///
+    /// - Parameters:
+    ///   - value: number of times component is used in creating range.
+    ///   - component: Calendar.Component to use.
+    ///   - date: Date to compare self to.
+    /// - Returns: true if the date is within a number of components of another date.
+    public func isWithin(_ value: UInt, _ component: Calendar.Component, of date: Date) -> Bool
+
+    /// ReerKit: Returns a random date within the specified range.
+    ///
+    /// - Parameter range: The range in which to create a random date. `range` must not be empty.
+    /// - Returns: A random date within the bounds of `range`.
+    public static func random(in range: Range<Date>) -> Date
+
+    /// ReerKit: Returns a random date within the specified range.
+    ///
+    /// - Parameter range: The range in which to create a random date.
+    /// - Returns: A random date within the bounds of `range`.
+    public static func random(in range: ClosedRange<Date>) -> Date
+
+    /// ReerKit: Returns a random date within the specified range, using the given generator as a source for randomness.
+    ///
+    /// - Parameters:
+    ///   - range: The range in which to create a random date. `range` must not be empty.
+    ///   - generator: The random number generator to use when creating the new random date.
+    /// - Returns: A random date within the bounds of `range`.
+    public static func random<T>(in range: Range<Date>, using generator: inout T) -> Date where T : RandomNumberGenerator
+
+    /// ReerKit: Returns a random date within the specified range, using the given generator as a source for randomness.
+    ///
+    /// - Parameters:
+    ///   - range: The range in which to create a random date.
+    ///   - generator: The random number generator to use when creating the new random date.
+    /// - Returns: A random date within the bounds of `range`.
+    public static func random<T>(in range: ClosedRange<Date>, using generator: inout T) -> Date where T : RandomNumberGenerator
+}
+
+extension Date: ReerReferenceCompatible {}
+public extension ReerReference where Base == Date {
+
+    /// ReerKit: Add calendar component to date.
+    ///
+    ///     var date = Date() // "Jan 12, 2017, 7:07 PM"
+    ///     date.add(.minute, value: -10) // "Jan 12, 2017, 6:57 PM"
+    ///     date.add(.day, value: 4) // "Jan 16, 2017, 7:07 PM"
+    ///     date.add(.month, value: 2) // "Mar 12, 2017, 7:07 PM"
+    ///     date.add(.year, value: 13) // "Jan 12, 2030, 7:07 PM"
+    ///
+    /// - Parameters:
+    ///   - component: component type.
+    ///   - value: multiples of component to add.
+    public mutating func add(_ component: Calendar.Component, value: Int)
+
+    /// ReerKit: Setup year of date.
+    ///
+    ///        var someDate = Date()
+    ///        someDate.re.setYear(2000)  // sets someDate's year to 2000
+    ///
+    public mutating func setYear(_ year: Int)
+
+    /// ReerKit: Setup month of date.
+    ///
+    ///        var someDate = Date()
+    ///        someDate.re.setMonth(10)  // sets someDate's month to 10.
+    ///
+    public mutating func setMonth(_ month: Int)
+
+    /// ReerKit: Setup day of date.
+    ///
+    ///        var someDate = Date()
+    ///        someDate.re.setDay(1)  // sets someDate's day of month to 1.
+    ///
+    public mutating func setDay(_ day: Int)
+
+    /// ReerKit: Setup hour of date.
+    ///
+    ///        var someDate = Date()
+    ///        someDate.re.setHour(13)  // sets someDate's hour to 1 pm.
+    ///
+    public mutating func setHour(_ hour: Int)
+
+    /// ReerKit: Setup minute of date.
+    ///
+    ///        var someDate = Date()
+    ///        someDate.re.setMinute(10)  // sets someDate's minutes to 10.
+    ///
+    public mutating func setMinute(_ minute: Int)
+
+    /// ReerKit: Setup second of date.
+    ///
+    ///        var someDate = Date()
+    ///        someDate.re.setSecond(15)  // sets someDate's seconds to 15.
+    ///
+    public mutating func setSecond(_ second: Int)
+
+    /// ReerKit: Setup nanosecond of date.
+    ///
+    ///        var someDate = Date()
+    ///        someDate.re.setNanosecond(981379985)  // sets someDate's nanoseconds to 981379985.
+    ///
+    public mutating func setNanosecond(_ nanosecond: Int)
+
+    /// ReerKit: Setup millisecond of date.
+    ///
+    ///        var someDate = Date()
+    ///        someDate.re.setMillisecond(68)  // sets someDate's nanosecond to 68000000.
+    ///
+    public mutating func setMillisecond(_ millisecond: Int)
+}
+
+public extension Date {
+
+    /// ReerKit: Create a new date form calendar components.
+    ///
+    ///     let date = Date(year: 2010, month: 1, day: 12) // "Jan 12, 2010, 7:45 PM"
+    ///
+    /// - Parameters:
+    ///   - calendar: Calendar (default is current).
+    ///   - timeZone: TimeZone (default is current).
+    ///   - era: Era (default is current era).
+    ///   - year: Year (default is current year).
+    ///   - month: Month (default is current month).
+    ///   - day: Day (default is today).
+    ///   - hour: Hour (default is current hour).
+    ///   - minute: Minute (default is current minute).
+    ///   - second: Second (default is current second).
+    ///   - nanosecond: Nanosecond (default is current nanosecond).
+    public static func re(calendar: Calendar? = Calendar.current, timeZone: TimeZone? = NSTimeZone.default, era: Int? = Date().re.era, year: Int? = Date().re.year, month: Int? = Date().re.month, day: Int? = Date().re.day, hour: Int? = Date().re.hour, minute: Int? = Date().re.minute, second: Int? = Date().re.second, nanosecond: Int? = Date().re.nanosecond) -> Date?
+
+    /// ReerKit: Create date object from ISO8601 string.
+    ///
+    ///     let date = Date(iso8601String: "2017-01-12T16:48:00.959Z") // "Jan 12, 2017, 7:48 PM"
+    ///
+    /// - Parameter iso8601String: ISO8601 string of format (yyyy-MM-dd'T'HH:mm:ss.SSSZ).
+    public static func re(iso8601String: String) -> Date?
+
+    /// ReerKit: Create new date object from UNIX timestamp.
+    ///
+    ///     let date = Date(unixTimestamp: 1484239783.922743) // "Jan 12, 2017, 7:49 PM"
+    ///
+    /// - Parameter unixTimestamp: UNIX timestamp.
+    public static func re(unixTimestamp: Double) -> Date
+}
+```
+
+### FileManager
+
+```
+import Foundation
+
+public extension Reer where Base: FileManager {
+
+    /// ReerKit: Read from a JSON file at a given path.
+    ///
+    /// - Parameters:
+    ///   - path: JSON file path.
+    ///   - readingOptions: JSONSerialization reading options.
+    /// - Throws: Throws any errors thrown by Data creation or JSON serialization.
+    /// - Returns: Optional dictionary.
+    public func jsonFromFile(atPath path: String, readingOptions: JSONSerialization.ReadingOptions = .allowFragments) throws -> [String : Any]?
+
+    /// ReerKit: Read from a JSON file with a given filename.
+    ///
+    /// - Parameters:
+    ///   - filename: File to read.
+    ///   - bundleClass: Bundle where the file is associated.
+    ///   - readingOptions: JSONSerialization reading options.
+    /// - Throws: Throws any errors thrown by Data creation or JSON serialization.
+    /// - Returns: Optional dictionary.
+    public func jsonFromFile(withFilename filename: String, at bundleClass: AnyClass? = nil, readingOptions: JSONSerialization.ReadingOptions = .allowFragments) throws -> [String : Any]?
+
+    /// ReerKit: Creates a unique directory for saving temporary files. The directory can be used to create multiple temporary files used for a common purpose.
+    ///
+    ///     let tempDirectory = try fileManager.createTemporaryDirectory()
+    ///     let tempFile1URL = tempDirectory.appendingPathComponent(ProcessInfo().globallyUniqueString)
+    ///     let tempFile2URL = tempDirectory.appendingPathComponent(ProcessInfo().globallyUniqueString)
+    ///
+    /// - Throws: An error if a temporary directory cannot be found or created.
+    /// - Returns: A URL to a new directory for saving temporary files.
+    public func createTemporaryDirectory() throws -> URL
+}
+```
+
+### Locale
+
+```
+import Foundation
+
+public extension ReerForEquatable where Base == Locale {
+
+    /// ReerKit: UNIX representation of locale usually used for normalizing.
+    public static var posix: Locale { get }
+
+    /// ReerKit: Returns bool value indicating if locale has 12h format.
+    public var is12HourTimeFormat: Bool { get }
+
+    /// ReerKit: Get the flag emoji for a given country region code.
+    /// - Parameter isoRegionCode: The IOS region code.
+    ///
+    /// Adapted from https://stackoverflow.com/a/30403199/1627511
+    /// - Returns: A flag emoji string for the given region code (optional).
+    public static func flagEmoji(forRegionCode isoRegionCode: String) -> String?
+}
+```
+
+### NSAttributedString
+
+```
+import Foundation
+import UIKit
+
+public extension Reer where Base: NSAttributedString {
+
+    /// ReerKit: Dictionary of the attributes applied across the whole string.
+    public var attributes: [NSAttributedString.Key : Any] { get }
+
+    @available(*, deprecated, renamed: "numberOfLines(forWidth:ignoreBlankLines:)", message: "Use numberOfLines(forWidth:ignoringBlankLines:) instead.")
+    public func lines(forWidth width: CGFloat, ignoreBlankLines: Bool = false) -> Int
+
+    /// ReerKit: Calculate lines for a `NSAttributedString` with a width constrained.
+    /// - Parameters:
+    ///   - width: A constrained of container view width.
+    ///   - ignoreBlankLines: Whether should ignore blank lines.
+    /// - Returns: Total lines of the attributed string after rendering.
+    public func numberOfLines(forWidth width: CGFloat, ignoreBlankLines: Bool = false) -> Int
+
+    /// ReerKit: Calculate height for a `NSAttributedString` with a constrained width.
+    /// - Parameter width: A constrained of container view width.
+    /// - Returns: Total height of the attributed string after rendering.
+    public func height(forWidth width: CGFloat) -> CGFloat
+
+    /// ReerKit: Calculate width for a `NSAttributedString` with an unlimited height in one line.
+    /// - Returns: Width of the attributed string after rendering.
+    public func singleLineWidth() -> CGFloat
+
+    /// ReerKit: Applies given attributes to the new instance of NSAttributedString initialized with self object.
+    ///
+    /// - Parameter attributes: Dictionary of attributes.
+    /// - Returns: NSAttributedString with applied attributes.
+    public func with(attributes: [NSAttributedString.Key : Any]) -> NSMutableAttributedString
+
+    /// ReerKit: Apply attributes to substrings matching a regular expression.
+    ///
+    /// - Parameters:
+    ///   - attributes: Dictionary of attributes.
+    ///   - pattern: a regular expression to target.
+    ///   - options: The regular expression options that are applied to the expression during matching. See NSRegularExpression.Options for possible values.
+    /// - Returns: An NSAttributedString with attributes applied to substrings matching the pattern.
+    public func with(attributes: [NSAttributedString.Key : Any], toRangesMatching pattern: String, options: NSRegularExpression.Options = []) -> NSMutableAttributedString
+
+    /// ReerKit: Apply attributes to occurrences of a given string.
+    ///
+    /// - Parameters:
+    ///   - attributes: Dictionary of attributes.
+    ///   - target: a subsequence string for the attributes to be applied to.
+    /// - Returns: An NSAttributedString with attributes applied on the target string.
+    public func with<T>(attributes: [NSAttributedString.Key : Any], toOccurrencesOf target: T) -> NSMutableAttributedString where T : StringProtocol
+}
+
+public extension NSAttributedString {
+
+    /// ReerKit: Add a NSAttributedString to another NSAttributedString.
+    ///
+    /// - Parameters:
+    ///   - lhs: NSAttributedString to add to.
+    ///   - rhs: NSAttributedString to add.
+    public static func += (lhs: inout NSAttributedString, rhs: NSAttributedString)
+
+    /// ReerKit: Add a NSAttributedString to another NSAttributedString and return a new NSAttributedString instance.
+    ///
+    /// - Parameters:
+    ///   - lhs: NSAttributedString to add.
+    ///   - rhs: NSAttributedString to add.
+    /// - Returns: New instance with added NSAttributedString.
+    public static func + (lhs: NSAttributedString, rhs: NSAttributedString) -> NSMutableAttributedString
+
+    /// ReerKit: Add a NSAttributedString to another NSAttributedString.
+    ///
+    /// - Parameters:
+    ///   - lhs: NSAttributedString to add to.
+    ///   - rhs: String to add.
+    public static func += (lhs: inout NSAttributedString, rhs: String)
+
+    /// ReerKit: Add a NSAttributedString to another NSAttributedString and return a new NSAttributedString instance.
+    ///
+    /// - Parameters:
+    ///   - lhs: NSAttributedString to add.
+    ///   - rhs: String to add.
+    /// - Returns: New instance with added NSAttributedString.
+    public static func + (lhs: NSAttributedString, rhs: String) -> NSMutableAttributedString
+}
+
+public extension ReerGeneric where Base == Array<T>, T: NSAttributedString {
+
+    /// ReerKit: Returns a new `NSAttributedString` by concatenating the elements of the sequence, adding the given separator between each element.
+    ///
+    /// - Parameter separator: An `NSAttributedString` to add between the elements of the sequence.
+    /// - Returns: NSAttributedString with applied attributes.
+    public func joined(separator: NSAttributedString) -> NSMutableAttributedString
+
+    public func joined(separator: String) -> NSMutableAttributedString
+}
+```
+
+### NSObject
+
+```
+import ObjectiveC
+import Foundation
+
+extension NSObject: ReerCompatible {}
+
+
+// MARK: - TypeName
+
+extension NSObject: TypeNameDescribable {}
+
+
+// MARK: - Association & Once & Swizzle & Observe Deinit
+
+extension NSObject: AnyObjectExtensionable {}
+
+public extension Reer where Base: NSObject {
+
+    /// ReerKit: Get all instance variables implemented by the class.
+    ///
+    /// - Returns: An array of instance variables.
+    public static var ivars: [String] { get }
+
+    /// ReerKit: Get all selectors implemented by the class.
+    ///
+    /// - Returns: An array of selectors.
+    public static var ocSelectors: [Selector] { get }
+
+    /// ReerKit: Get all protocols implemented by the class.
+    ///
+    /// - Returns: An array of protocol names.
+    public static var ocProtocols: [String] { get }
+
+    /// ReerKit: Get all properties implemented by the class.
+    ///
+    /// - Returns: An array of property names.
+    public static var ocProperties: [String] { get }
+
+    /// ReerKit: Add a selector that is implemented on another object to the current class.
+    ///
+    /// - Parameters:
+    ///   - selector: Selector.
+    ///   - originalClass: Object implementing the selector.
+    public static func addSelector(_ selector: Selector, from originalClass: AnyClass)
+
+    /// ReerKit: Add a custom method to the current class.
+    ///
+    /// - Parameters:
+    ///   - identifier: Selector name.
+    ///   - implementation: Implementation as a closure.
+    public static func addMethod(_ identifier: String, implementation: @convention(block) @escaping () -> Void)
+
+    /// ReerKit: A convenience method to perform selectors by identifier strings.
+    ///
+    /// - Parameter identifier: Selector name.
+    public func performMethod(_ identifier: String)
+}
+```
+
+### NSPredicate
+
+```
+import Foundation
+
+public extension Reer where Base: NSPredicate {
+
+    /// ReerKit Returns a new predicate formed by NOT-ing the predicate.
+    public var not: NSCompoundPredicate { get }
+
+    /// ReerKit Returns a new predicate formed by AND-ing the argument to the predicate.
+    ///
+    /// - Parameter predicate: NSPredicate.
+    /// - Returns: NSCompoundPredicate.
+    public func and(_ predicate: NSPredicate) -> NSCompoundPredicate
+
+    /// ReerKit Returns a new predicate formed by OR-ing the argument to the predicate.
+    ///
+    /// - Parameter predicate: NSPredicate.
+    /// - Returns: NSCompoundPredicate.
+    public func or(_ predicate: NSPredicate) -> NSCompoundPredicate
+}
+
+public extension NSPredicate {
+
+    /// ReerKit Returns a new predicate formed by NOT-ing the predicate.
+    /// - Parameters: rhs: NSPredicate to convert.
+    /// - Returns: NSCompoundPredicate
+    prefix public static func ! (rhs: NSPredicate) -> NSCompoundPredicate
+
+    /// ReerKit Returns a new predicate formed by AND-ing the argument to the predicate.
+    ///
+    /// - Parameters:
+    ///   - lhs: NSPredicate.
+    ///   - rhs: NSPredicate.
+    /// - Returns: NSCompoundPredicate
+    public static func + (lhs: NSPredicate, rhs: NSPredicate) -> NSCompoundPredicate
+
+    /// ReerKit Returns a new predicate formed by OR-ing the argument to the predicate.
+    ///
+    /// - Parameters:
+    ///   - lhs: NSPredicate.
+    ///   - rhs: NSPredicate.
+    /// - Returns: NSCompoundPredicate
+    public static func | (lhs: NSPredicate, rhs: NSPredicate) -> NSCompoundPredicate
+
+    /// ReerKit Returns a new predicate formed by remove the argument to the predicate.
+    ///
+    /// - Parameters:
+    ///   - lhs: NSPredicate.
+    ///   - rhs: NSPredicate.
+    /// - Returns: NSCompoundPredicate
+    public static func - (lhs: NSPredicate, rhs: NSPredicate) -> NSCompoundPredicate
+}
+```
+
+### NSRange
+
+```
+import Foundation
+
+public extension Reer where Base == NSRange {
+
+    /// ReerKit: Get Range<Int> from NSRange
+    public var range: Range<Int> { get }
+}
+```
+
+### NSRegularExpression
+
+```
+import Foundation
+
+public extension Reer where Base: NSRegularExpression {
+
+    /// ReerKit: Enumerates the string allowing the Block to handle each regular expression match.
+    ///
+    /// - Parameters:
+    ///   - string: The string.
+    ///   - options: The matching options to report. See `NSRegularExpression.MatchingOptions` for the supported values.
+    ///   - range: The range of the string to test.
+    ///   - block: The Block enumerates the matches of the regular expression in the string.
+    ///     The block takes three arguments and returns `Void`:
+    ///     - result:
+    ///         An `NSTextCheckingResult` specifying the match. This result gives the overall matched range via its `range` property, and the range of each individual capture group via its `range(at:)` method. The range {NSNotFound, 0} is returned if one of the capture groups did not participate in this particular match.
+    ///     - flags:
+    ///         The current state of the matching progress. See `NSRegularExpression.MatchingFlags` for the possible values.
+    ///     - stop:
+    ///         A reference to a Boolean value. The Block can set the value to true to stop further processing of the array. The stop argument is an out-only argument. You should only ever set this Boolean to true within the Block.
+    public func enumerateMatches(in string: String, options: NSRegularExpression.MatchingOptions = [], range: Range<String.Index>, using block: @escaping (_ result: NSTextCheckingResult?, _ flags: NSRegularExpression.MatchingFlags, _ stop: inout Bool) -> Void)
+
+    /// ReerKit: Returns an array containing all the matches of the regular expression in the string.
+    ///
+    /// - Parameters:
+    ///   - string: The string to search.
+    ///   - options: The matching options to use. See NSRegularExpression.MatchingOptions for possible values.
+    ///   - range: The range of the string to search.
+    /// - Returns: An array of `NSTextCheckingResult` objects. Each result gives the overall matched range via its `range` property, and the range of each individual capture group via its `range(at:)` method. The range {NSNotFound, 0} is returned if one of the capture groups did not participate in this particular match.
+    public func matches(in string: String, options: NSRegularExpression.MatchingOptions = [], range: Range<String.Index>) -> [NSTextCheckingResult]
+
+    /// ReerKit: Returns the number of matches of the regular expression within the specified range of the string.
+    ///
+    /// - Parameters:
+    ///   - string: The string to search.
+    ///   - options: The matching options to use. See NSRegularExpression.MatchingOptions for possible values.
+    ///   - range: The range of the string to search.
+    /// - Returns: The number of matches of the regular expression.
+    public func numberOfMatches(in string: String, options: NSRegularExpression.MatchingOptions = [], range: Range<String.Index>) -> Int
+
+    /// ReerKit: Returns the first match of the regular expression within the specified range of the string.
+    ///
+    /// - Parameters:
+    ///   - string: The string to search.
+    ///   - options: The matching options to use. See `NSRegularExpression.MatchingOptions` for possible values.
+    ///   - range: The range of the string to search.
+    /// - Returns: An `NSTextCheckingResult` object. This result gives the overall matched range via its `range` property, and the range of each individual capture group via its `range(at:)` method. The range {NSNotFound, 0} is returned if one of the capture groups did not participate in this particular match.
+    public func firstMatch(in string: String, options: NSRegularExpression.MatchingOptions = [], range: Range<String.Index>) -> NSTextCheckingResult?
+
+    /// ReerKit: Returns the range of the first match of the regular expression within the specified range of the string.
+    ///
+    /// - Parameters:
+    ///   - string: The string to search.
+    ///   - options: The matching options to use. See `NSRegularExpression.MatchingOptions` for possible values.
+    ///   - range: The range of the string to search.
+    /// - Returns: The range of the first match. Returns `nil` if no match is found.
+    public func rangeOfFirstMatch(in string: String, options: NSRegularExpression.MatchingOptions = [], range: Range<String.Index>) -> Range<String.Index>?
+
+    /// ReerKit: Returns a new string containing matching regular expressions replaced with the template string.
+    ///
+    /// - Parameters:
+    ///   - string: The string to search for values within.
+    ///   - options: The matching options to use. See `NSRegularExpression.MatchingOptions` for possible values.
+    ///   - range: The range of the string to search.
+    ///   - templ: The substitution template used when replacing matching instances.
+    /// - Returns: A string with matching regular expressions replaced by the template string.
+    public func stringByReplacingMatches(in string: String, options: NSRegularExpression.MatchingOptions = [], range: Range<String.Index>, withTemplate templ: String) -> String
+
+    /// ReerKit: Replaces regular expression matches within the mutable string using the template string.
+    ///
+    /// - Parameters:
+    ///   - string: The mutable string to search and replace values within.
+    ///   - options: The matching options to use. See `NSRegularExpression.MatchingOptions` for possible values.
+    ///   - range: The range of the string to search.
+    ///   - templ: The substitution template used when replacing matching instances.
+    /// - Returns: The number of matches.
+    @discardableResult
+    public func replaceMatches(in string: inout String, options: NSRegularExpression.MatchingOptions = [], range: Range<String.Index>, withTemplate templ: String) -> Int
+}
+```
+
+### NotificationCenter
+
+```
+import Foundation
+
+public extension Reer where Base: NotificationCenter {
+
+    /// ReerKit: Adds a one-time entry to the notification center's dispatch table that includes a notification queue and a block to add to the queue, and an optional notification name and sender.
+    /// - Parameters:
+    ///   - name: The name of the notification for which to register the observer; that is, only notifications with this name are used to add the block to the operation queue.
+    ///
+    ///     If you pass `nil`, the notification center doesn’t use a notification’s name to decide whether to add the block to the operation queue.
+    ///   - obj: The object whose notifications the observer wants to receive; that is, only notifications sent by this sender are delivered to the observer.
+    ///
+    ///     If you pass `nil`, the notification center doesn’t use a notification’s sender to decide whether to deliver it to the observer.
+    ///   - queue: The operation queue to which block should be added.
+    ///
+    ///     If you pass `nil`, the block is run synchronously on the posting thread.
+    ///   - block: The block to be executed when the notification is received.
+    ///
+    ///     The block is copied by the notification center and (the copy) held until the observer registration is removed.
+    ///
+    ///     The block takes one argument:
+    ///   
+    public func observeOnce(forName name: NSNotification.Name?, object obj: Any? = nil, queue: OperationQueue? = nil, using block: @escaping (_ notification: Notification) -> Void)
+}
+```
+
+### Timer
+
+```
+import Foundation
+import ObjectiveC
+
+public extension Reer where Base: Timer {
+
+    /// ReerKit: Creates a timer and schedules it on the current run loop in the default mode.
+    /// The target will be wrapped with a WeakProxy.
+    public static func scheduledTimer(timeInterval: TimeInterval, weakTarget: NSObject, selector: Selector, userInfo: Any?, repeats: Bool) -> Timer
+
+    /// ReerKit: Initializes a timer object with the specified object and selector.
+    /// The target will be wrapped with a WeakProxy.
+    public static func timer(timeInterval: TimeInterval, weakTarget: NSObject, selector: Selector, userInfo: Any?, repeats: Bool) -> Timer
+
+    /// ReerKit: Resumes the timer.
+    public func resume()
+
+    /// ReerKit: Suspends the timer.
+    public func suspend()
+}
+```
+
+### URL
+
+```
+import Foundation
+import AVFoundation
+import UIKit
+
+public extension ReerForEquatable where Base == URL {
+
+    /// ReerKit: Dictionary of the URL's query parameters.
+    public var queryParameters: [String : String]? { get }
+
+    /// ReerKit: URL with appending query parameters.
+    ///
+    ///        let url = URL(string: "https://google.com")!
+    ///        let param = ["q": "Hello Swift"]
+    ///        url.appendingQueries(params) -> "https://google.com?q=Hello%20Swift"
+    ///
+    /// - Returns: URL with appending given query parameters.
+    public func appendingQueries(_ queries: [String : String]) -> URL
+
+    /// ReerKit: URL with removing query parameters.
+    ///
+    ///        let url = URL(string: "https://google.com?q=Hello%20Swift")!
+    ///        url.removingQueries(["q"]) -> "https://google.com"
+    ///
+    /// - Returns: URL with appending given query parameters.
+    public func removingQueries(_ queries: [String]) -> URL
+
+    /// ReerKit: Get value of a query key.
+    ///
+    ///    var url = URL(string: "https://google.com?code=12345")!
+    ///    queryValue(for: "code") -> "12345"
+    ///
+    /// - Parameter key: The key of a query value.
+    public func queryValue(for key: String) -> String?
+
+    /// ReerKit: Returns a new URL by removing all the path components.
+    ///
+    ///     let url = URL(string: "https://domain.com/path/other")!
+    ///     print(url.deletingAllPathComponents()) // prints "https://domain.com/"
+    ///
+    /// - Returns: URL with all path components removed.
+    public func deletingAllPathComponents() -> URL
+
+    /// ReerKit: Generates new URL that does not have scheme.
+    ///
+    ///        let url = URL(string: "https://domain.com")!
+    ///        print(url.droppedScheme()) // prints "domain.com"
+    public func droppedScheme() -> URL?
+
+    /// ReerKit: Generate a thumbnail image from given url. Returns nil if no thumbnail could be created. This function may take some time to complete. It's recommended to dispatch the call if the thumbnail is not generated from a local resource.
+    ///
+    ///     var url = URL(string: "https://video.golem.de/files/1/1/20637/wrkw0718-sd.mp4")!
+    ///     var thumbnail = url.thumbnail()
+    ///     thumbnail = url.thumbnail(fromTime: 5)
+    ///
+    ///     DisptachQueue.main.async {
+    ///         someImageView.image = url.thumbnail()
+    ///     }
+    ///
+    /// - Parameter time: Seconds into the video where the image should be generated.
+    /// - Returns: The UIImage result of the AVAssetImageGenerator
+    public func thumbnail(fromTime time: Float64 = 0) -> UIImage?
+}
+
+extension URL: ReerReferenceCompatible {}
+public extension ReerReference where Base == URL {
+
+    /// ReerKit: Append query parameters to URL.
+    ///
+    ///        var url = URL(string: "https://google.com")!
+    ///        let param = ["q": "Hello Swift"]
+    ///        url.appendQueryParameters(params)
+    ///        print(url) // prints "https://google.com?q=Hello%20Swift"
+    ///
+    public mutating func appendQueries(_ queries: [String : String])
+
+    /// ReerKit: Remove query parameters to URL.
+    ///
+    ///        let url = URL(string: "https://google.com?q=Hello%20Swift")!
+    ///        url.removeQueries(["q"])
+    ///        print(url) // "https://google.com"
+    ///
+    public mutating func removeQueries(_ queries: [String])
+
+    /// ReerKit: Remove all the path components from the URL.
+    ///
+    ///        var url = URL(string: "https://domain.com/path/other")!
+    ///        url.deleteAllPathComponents()
+    ///        print(url) // prints "https://domain.com/"
+    public mutating func deleteAllPathComponents()
+}
+
+public extension URL {
+
+    public static func re(string: String?, relativeTo url: URL? = nil) -> URL?
+}
+```
+
+### URLRequest
+
+```
+import Foundation
+
+public extension URLRequest {
+
+    /// ReerKit: Create URLRequest from URL string.
+    ///
+    /// - Parameter urlString: URL string to initialize URL request from
+    public static func re(urlString: String) -> URLRequest?
+}
+
+public extension ReerForEquatable where Base == URLRequest {
+
+    /// ReerKit: cURL command representation of this URL request.
+    public var curlString: String { get }
+}
+```
+
+## Shared+REExtensions
+
+### Color
+
+```
+#if canImport(UIKit)
+import UIKit
+/// ReerKit: Color
+public typealias REColor = UIColor
+#endif
+
+#if canImport(AppKit) && !targetEnvironment(macCatalyst)
+import AppKit
+/// ReerKit: Color
+public typealias REColor = NSColor
+#endif
+
+public extension REColor {
+
+    /// ReerKit: Create Color from RGB values with optional transparency.
+    ///
+    /// - Parameters:
+    ///   - red: red component.
+    ///   - green: green component.
+    ///   - blue: blue component.
+    ///   - alpha: optional transparency value (default is 1).
+    public static func re(red: Int, green: Int, blue: Int, alpha: CGFloat = 1) -> REColor
+
+    /// ReerKit: Create Color from hexadecimal value with optional transparency.
+    ///
+    /// - Parameters:
+    ///   - hex: hex Int with 6 digits (example: 0xDECEB5).
+    ///   - alpha: optional transparency value (default is 1).
+    public static func re(hex: Int, alpha: CGFloat = 1) -> REColor
+
+    /// ReerKit: Create Color from hexadecimal string with optional transparency (if applicable).
+    ///
+    /// - Parameters:
+    ///   - hexString: hexadecimal string (examples: EDE7F6, 0xEDE7F6, #EDE7F6, #0ff, 0xF0F, ..).
+    ///   - alpha: optional transparency value (default is 1).
+    public static func re(hexString: String, alpha: CGFloat = 1) -> REColor
+
+    /// ReerKit: Create Color from hexadecimal value in the format ARGB (alpha-red-green-blue).
+    ///
+    /// - Parameters:
+    ///   - argbHex: hexadecimal value with 8 digits (examples: 0x7FEDE7F6).
+    public static func re(argbHex: Int) -> REColor
+
+    /// ReerKit: Create Color from hexadecimal string in the format ARGB (alpha-red-green-blue).
+    ///
+    /// - Parameters:
+    ///   - argbHexString: hexadecimal string (examples: 7FEDE7F6, 0x7FEDE7F6, #7FEDE7F6, #f0ff, 0xFF0F, ..).
+    public static func re(argbHexString: String) -> REColor
+
+    /// ReerKit: Create Color from hexadecimal value in the format RGBA (red-green-blue-alpha).
+    ///
+    /// - Parameters:
+    ///   - rgbaHex: hexadecimal value with 8 digits  (examples: 0x7FEDE7F6).
+    public static func re(rgbaHex: Int) -> REColor
+
+    /// ReerKit: Create Color from hexadecimal string in the format RGBA (red-green-blue-alpha).
+    ///
+    /// - Parameters:
+    ///   - rgbaHexString: hexadecimal string (examples: 7FEDE7F6, 0x7FEDE7F6, #7FEDE7F6, #f0ff, 0xFF0F, ..).
+    public static func re(rgbaHexString: String) -> REColor
+
+    /// ReerKit: Create a dynamic color with light and dark color.
+    public static func re(light: REColor, dark: REColor) -> REColor
+}
+
+public extension Reer where Base: REColor {
+
+    /// ReerKit: Random color.
+    public static var random: REColor { get }
+
+    /// ReerKit: Get brightness of color.
+    public var brightness: CGFloat { get }
+
+    /// ReerKit: Alpha of Color (read-only).
+    public var alpha: CGFloat { get }
+
+    /// ReerKit: Get components of hue, saturation, and brightness, and alpha (read-only).
+    public var hsba: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) { get }
+
+    /// ReerKit: RGBA components for a Color (RGB between 0 and 255).
+    ///
+    ///     UIColor.red.re.rgba.red -> 255
+    ///     NSColor.green.re.rgba.green -> 255
+    ///     UIColor.blue.re.rgba.blue -> 255
+    ///
+    public var rgba: (red: Int, green: Int, blue: Int, alpha: CGFloat) { get }
+
+    /// ReerKit: RGBA components of percentage for a Color (RGB between 0 and 1.0).
+    ///
+    ///     UIColor.red.re.rgba.red -> 255
+    ///     NSColor.green.re.rgba.green -> 255
+    ///     UIColor.blue.re.rgba.blue -> 255
+    ///
+    public var rgbaPercent: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) { get }
+
+    /// ReerKit: Hexadecimal value string (read-only).
+    public var hexString: String { get }
+
+    /// ReerKit: Hexadecimal value string in RGBA mode (read-only).
+    public var rgbaHexString: String { get }
+
+    /// ReerKit: Hexadecimal value string in ARGB mode (read-only).
+    public var argbHexString: String { get }
+
+    /// ReerKit: Lighten a color
+    ///
+    ///     let color = UIColor(red: r, green: g, blue: b, alpha: a)
+    ///     let lighterColor: UIColor = color.lighten(by: 0.2)
+    ///
+    /// - Parameter percentage: Percentage by which to lighten the color
+    /// - Returns: A lightened color
+    public func lighten(by percentage: CGFloat = 0.2) -> REColor
+
+    /// ReerKit: Darken a color
+    ///
+    ///     let color = UIColor(red: r, green: g, blue: b, alpha: a)
+    ///     let darkerColor: UIColor = color.darken(by: 0.2)
+    ///
+    /// - Parameter percentage: Percentage by which to darken the color
+    /// - Returns: A darkened color
+    public func darken(by percentage: CGFloat = 0.2) -> REColor
+
+    /// ReerKit: Blend two Colors.
+    ///
+    /// - Parameters:
+    ///   - color1: first color to blend
+    ///   - intensity1: intensity of first color (default is 0.5)
+    ///   - color2: second color to blend
+    ///   - intensity2: intensity of second color (default is 0.5)
+    /// - Returns: Color created by blending first and second colors.
+    public static func blend(_ color1: REColor, intensity1: CGFloat = 0.5, with color2: REColor, intensity2: CGFloat = 0.5) -> REColor
+
+    /// ReerKit: Blend the color with a color
+    ///
+    /// - Parameter color: second color to blend
+    /// - Returns: Color created by blending self and seond colors.
+    public func blend(with color: REColor) -> REColor
+}
+```
+
+### EdgeInsets
+
+```
+import UIKit
+/// ReerKit: EdgeInsets
+public typealias REEdgeInsets = UIEdgeInsets
+
+public extension REEdgeInsets {
+
+    /// ReerKit: Creates an `EdgeInsets` with the inset value applied to all (top, bottom, right, left).
+    ///
+    /// - Parameter inset: Inset to be applied in all the edges.
+    public static func re(inset: CGFloat) -> REEdgeInsets
+}
+
+public extension ReerForEquatable where Base == REEdgeInsets {
+
+    /// ReerKit: Return the vertical insets. The vertical insets is composed by top + bottom.
+    public var vertical: CGFloat { get }
+
+    /// ReerKit: Return the horizontal insets. The horizontal insets is composed by  left + right.
+    public var horizontal: CGFloat { get }
+
+    /// ReerKit: Creates an `EdgeInsets` based on current value and top offset.
+    ///
+    /// - Parameters:
+    ///   - top: Offset to be applied in to the top edge.
+    /// - Returns: EdgeInsets offset with given offset.
+    public func insetBy(top: CGFloat) -> REEdgeInsets
+
+    /// ReerKit: Creates an `EdgeInsets` based on current value and left offset.
+    ///
+    /// - Parameters:
+    ///   - left: Offset to be applied in to the left edge.
+    /// - Returns: EdgeInsets offset with given offset.
+    public func insetBy(left: CGFloat) -> REEdgeInsets
+
+    /// ReerKit: Creates an `EdgeInsets` based on current value and bottom offset.
+    ///
+    /// - Parameters:
+    ///   - bottom: Offset to be applied in to the bottom edge.
+    /// - Returns: EdgeInsets offset with given offset.
+    public func insetBy(bottom: CGFloat) -> REEdgeInsets
+
+    /// ReerKit: Creates an `EdgeInsets` based on current value and right offset.
+    ///
+    /// - Parameters:
+    ///   - right: Offset to be applied in to the right edge.
+    /// - Returns: EdgeInsets offset with given offset.
+    public func insetBy(right: CGFloat) -> REEdgeInsets
+}
+
+public extension REEdgeInsets {
+
+    /// ReerKit: Add all the properties of two `EdgeInsets` to create their addition.
+    ///
+    /// - Parameters:
+    ///   - lhs: The left-hand expression
+    ///   - rhs: The right-hand expression
+    /// - Returns: A new `EdgeInsets` instance where the values of `lhs` and `rhs` are added together.
+    public static func + (lhs: REEdgeInsets, rhs: REEdgeInsets) -> REEdgeInsets
+
+    /// ReerKit: Add all the properties of two `EdgeInsets` to the left-hand instance.
+    ///
+    /// - Parameters:
+    ///   - lhs: The left-hand expression to be mutated
+    ///   - rhs: The right-hand expression
+    public static func += (lhs: inout REEdgeInsets, rhs: REEdgeInsets)
+}
+```
+
+## UIKit+REExtensions
+
+### UIAlertController
+
+```
+import UIKit
+import AudioToolbox
+
+public extension Reer where Base: UIAlertController {
+
+    /// ReerKit: Present alert view controller in the current view controller.
+    ///
+    /// - Parameters:
+    ///   - animated: set true to animate presentation of alert controller (default is true).
+    ///   - vibrate: set true to vibrate the device while presenting the alert (default is false).
+    ///   - completion: an optional completion handler to be called after presenting alert controller (default is nil).
+    @available(iOSApplicationExtension, unavailable)
+    @available(visionOS, unavailable)
+    public func show(animated: Bool = true, vibrate: Bool = false, completion: (() -> Void)? = nil)
+
+    /// ReerKit: Add an action to Alert.
+    ///
+    /// - Parameters:
+    ///   - title: action title.
+    ///   - style: action style (default is UIAlertActionStyle.default).
+    ///   - isEnabled: isEnabled status for action (default is true).
+    ///   - handler: optional action handler to be called when button is tapped (default is nil).
+    /// - Returns: action created by this method.
+    @discardableResult
+    public func addAction(title: String, style: UIAlertAction.Style = .default, isEnabled: Bool = true, handler: ((UIAlertAction) -> Void)? = nil) -> UIAlertAction
+
+    /// ReerKit: Add a text field to Alert.
+    ///
+    /// - Parameters:
+    ///   - text: text field text (default is nil).
+    ///   - placeholder: text field placeholder text (default is nil).
+    ///   - editingChangedTarget: an optional target for text field's editingChanged.
+    ///   - editingChangedSelector: an optional selector for text field's editingChanged.
+    public func addTextField(text: String? = nil, placeholder: String? = nil, editingChangedTarget: Any?, editingChangedSelector: Selector?)
+}
+
+public extension UIAlertController {
+
+    /// ReerKit: Create a alert view controller with actions.
+    /// - Parameters:
+    ///   - title: alert controller's title.
+    ///   - message: alert controller's message (default is nil).
+    ///   - preferredStyle: alert controller's display style.
+    ///   - tintColor: alert controller's tint color (default is nil).
+    ///   - actions: button clicked actions.
+    @MainActor public static func re(title: String? = nil, message: String? = nil, preferredStyle: UIAlertController.Style = .alert, tintColor: UIColor? = nil, actions: [UIAlertAction]) -> UIAlertController
+
+    /// ReerKit: Create new alert view controller with default OK action.
+    ///
+    /// - Parameters:
+    ///   - title: alert controller's title.
+    ///   - message: alert controller's message (default is nil).
+    ///   - defaultActionButtonTitle: default action button title (default is "OK").
+    ///   - tintColor: alert controller's tint color (default is nil).
+    @MainActor public static func re(title: String? = nil, message: String? = nil, defaultActionButtonTitle: String = "OK", tintColor: UIColor? = nil) -> UIAlertController
+
+    /// ReerKit: Create new error alert view controller from Error with default OK action.
+    ///
+    /// - Parameters:
+    ///   - title: alert controller's title (default is "Error").
+    ///   - error: error to set alert controller's message to it's localizedDescription.
+    ///   - defaultActionButtonTitle: default action button title (default is "OK").
+    ///   - preferredStyle: type of alert to display (default is .alert).
+    ///   - tintColor: alert controller's tint color (default is nil).
+    @MainActor public static func re(title: String = "Error", error: Error, defaultActionButtonTitle: String = "OK", preferredStyle: UIAlertController.Style = .alert, tintColor: UIColor? = nil) -> UIAlertController
+}
+```
+
+### UIApplication
+
+```
+import UIKit
+
+public extension UIApplication {
+
+    /// ReerKit: Application running environment.
+    ///
+    /// - debug: Application is running in debug mode.
+    /// - testFlight: Application is installed from Test Flight.
+    /// - appStore: Application is installed from the App Store.
+    public enum Environment {
+
+        /// ReerKit: Application is running in debug mode.
+        case debug
+
+        /// ReerKit: Application is installed from Test Flight.
+        case testFlight
+
+        /// ReerKit: Application is installed from the App Store.
+        case appStore
+    }
+}
+
+public extension Reer where Base: UIApplication {
+
+    /// ReerKit: Current inferred app environment.
+    public static var inferredEnvironment: UIApplication.Environment { get }
+
+    /// ReerKit: Return the main bundle's `CFBundleDisplayName` or `CFBundleName`.
+    public static var name: String { get }
+
+    /// ReerKit: Return the main bundle's bundle identifier.
+    public static var bundleID: String { get }
+
+    /// ReerKit: App current build number.
+    public static var buildNumber: String { get }
+
+    /// ReerKit: App's current version number.
+    public static var version: String { get }
+
+    /// ReerKit: App's scheme list.
+    public static var schemes: [String] { get }
+}
+
+public extension Reer where Base: UIApplication {
+
+    /// ReerKit: App's key window.
+    /// https://github.com/SwiftKickMobile/SwiftMessages/blob/master/SwiftMessages/UIWindow%2BExtensions.swift
+    public static var keyWindow: UIWindow? { get }
+
+    /// ReerKit: The app's visible and hidden windows.
+    public static var windows: [UIWindow] { get }
+
+    /// ReerKit: The app's main screen.
+    public static var mainScreen: UIScreen? { get }
+
+    /// ReerKit: App's top most view controller.
+    public static var topViewController: UIViewController? { get }
+
+    /// ReerKit: App's top most navigation controller.
+    public static var topNavigationController: UINavigationController? { get }
+
+    /// ReerKit: A view controller's top most view controller.
+    public static func topViewController(of viewController: UIViewController?) -> UIViewController?
+}
+
+public extension Reer where Base: UIApplication {
+
+    /// ReerKit: "Documents" URL in this app's sandbox.
+    public static var documentsURL: URL { get }
+
+    /// ReerKit: "Documents" path in this app's sandbox.
+    public static var documentsPath: String { get }
+
+    /// ReerKit: "Caches" URL in this app's sandbox.
+    public static var cachesURL: URL { get }
+
+    /// ReerKit: "Caches" path in this app's sandbox.
+    public static var cachesPath: String { get }
+
+    /// ReerKit: "Library" URL in this app's sandbox.
+    public static var libraryURL: URL { get }
+
+    /// ReerKit: "Library" path in this app's sandbox.
+    public static var libraryPath: String { get }
+}
+```
+
+### UIBarButtonItem
+
+```
+import UIKit
+
+public extension Reer where Base: UIBarButtonItem {
+
+    /// ReerKit: Creates a flexible space UIBarButtonItem.
+    public static var flexibleSpace: UIBarButtonItem { get }
+
+    /// ReerKit: Add Target to UIBarButtonItem.
+    ///
+    /// - Parameters:
+    ///   - target: target.
+    ///   - action: selector to run when button is tapped.
+    public func addTargetForAction(_ target: AnyObject, action: Selector)
+
+    /// ReerKit: Creates a fixed space UIBarButtonItem with a specific width.
+    ///
+    /// - Parameter width: Width of the UIBarButtonItem.
+    public static func fixedSpace(width: CGFloat) -> UIBarButtonItem
+}
+```
+
+### UIBezierPath
+
+```
+import UIKit
+
+public extension UIBezierPath {
+
+    /// ReerKit: Initializes a UIBezierPath with a line from a CGPoint to another CGPoint.
+    ///
+    /// - Parameters:
+    ///   - from: The point from which to path should start.
+    ///   - otherPoint: The point where the path should end.
+    public static func re(from: CGPoint, to otherPoint: CGPoint) -> UIBezierPath
+
+    /// ReerKit: Initializes a UIBezierPath connecting the given CGPoints with straight lines.
+    ///
+    /// - Parameter points: The points of which the path should consist.
+    public static func re(points: [CGPoint]) -> UIBezierPath
+
+    /// ReerKit: Initializes a polygonal UIBezierPath with the given CGPoints. At least 3 points must be given.
+    ///
+    /// - Parameter points: The points of the polygon which the path should form.
+    public static func re(polygonWithPoints points: [CGPoint]) -> UIBezierPath?
+
+    /// ReerKit: Initializes a UIBezierPath with an oval path of given size.
+    ///
+    /// - Parameters:
+    ///   - size: The width and height of the oval.
+    ///   - centered: Whether the oval should be centered in its coordinate space.
+    public static func re(ovalOf size: CGSize, centered: Bool) -> UIBezierPath
+
+    /// ReerKit: Initializes a UIBezierPath with a  rectangular path of given size.
+    ///
+    /// - Parameters:
+    ///   - size: The width and height of the rect.
+    ///   - centered: Whether the oval should be centered in its coordinate space.
+    public static func re(rectOf size: CGSize, centered: Bool) -> UIBezierPath
+}
+```
+
+### UIButton
+
+```
+import UIKit
+
+public extension Reer where Base: UIButton {
+
+    /// ReerKit: Image of disabled state for button; also inspectable from Storyboard.
+    public var imageForDisabled: UIImage? { get set }
+
+    /// ReerKit: Image of highlighted state for button; also inspectable from Storyboard.
+    public var imageForHighlighted: UIImage? { get set }
+
+    /// ReerKit: Image of normal state for button; also inspectable from Storyboard.
+    public var imageForNormal: UIImage? { get set }
+
+    /// ReerKit: Image of selected state for button; also inspectable from Storyboard.
+    public var imageForSelected: UIImage? { get set }
+
+    /// ReerKit: Image of focused state for button; also inspectable from Storyboard.
+    public var imageForFocused: UIImage? { get set }
+
+    /// ReerKit: Title color of disabled state for button; also inspectable from Storyboard.
+    public var titleColorForDisabled: UIColor? { get set }
+
+    /// ReerKit: Title color of highlighted state for button; also inspectable from Storyboard.
+    public var titleColorForHighlighted: UIColor? { get set }
+
+    /// ReerKit: Title color of normal state for button; also inspectable from Storyboard.
+    public var titleColorForNormal: UIColor? { get set }
+
+    /// ReerKit: Title color of selected state for button; also inspectable from Storyboard.
+    public var titleColorForSelected: UIColor? { get set }
+
+    /// ReerKit: Title color of focused state for button; also inspectable from Storyboard.
+    public var titleColorForFocused: UIColor? { get set }
+
+    /// ReerKit: Title of disabled state for button; also inspectable from Storyboard.
+    public var titleForDisabled: String? { get set }
+
+    /// ReerKit: Title of highlighted state for button; also inspectable from Storyboard.
+    public var titleForHighlighted: String? { get set }
+
+    /// ReerKit: Title of normal state for button; also inspectable from Storyboard.
+    public var titleForNormal: String? { get set }
+
+    /// ReerKit: Title of selected state for button; also inspectable from Storyboard.
+    public var titleForSelected: String? { get set }
+
+    /// ReerKit: Title of focused state for button; also inspectable from Storyboard.
+    public var titleForFocused: String? { get set }
+
+    /// ReerKit: Attributed title of disabled state for button.
+    public var attributedTitleForDisabled: NSAttributedString? { get set }
+
+    /// ReerKit: Attributed title of highlighted state for button.
+    public var attributedTitleForHighlighted: NSAttributedString? { get set }
+
+    /// ReerKit: Attributed title of normal state for button.
+    public var attributedTitleForNormal: NSAttributedString? { get set }
+
+    /// ReerKit: Attributed title of selected state for button.
+    public var attributedTitleForSelected: NSAttributedString? { get set }
+
+    /// ReerKit: Attributed title of focused state for button.
+    public var attributedTitleForFocused: NSAttributedString? { get set }
+
+    /// ReerKit: Set image for all states.
+    ///
+    /// - Parameter image: UIImage.
+    public func setImageForAllStates(_ image: UIImage?)
+
+    /// ReerKit: Set title color for all states.
+    ///
+    /// - Parameter color: UIColor.
+    public func setTitleColorForAllStates(_ color: UIColor?)
+
+    /// ReerKit: Set title for all states.
+    ///
+    /// - Parameter title: title string.
+    public func setTitleForAllStates(_ title: String?)
+
+    /// ReerKit: Set attributed title for all states.
+    ///
+    /// - Parameter title: title string.
+    public func setAttributedTitleForAllStates(_ title: NSAttributedString?)
+
+    public enum ContentLayoutType {
+
+        case leftImageRightText
+
+        case leftTextRightImage
+
+        case topImageBottomText
+
+        case topTextBottomImage
+    }
+
+    /// ReerKit: Layout button's image and text. Setup title, font, image before invoking this method.
+    /// - Parameters:
+    ///   - type: layout type.
+    ///   - spacing: spacing between title text and image.
+    ///   - offsetFromCenter: offset from center of button.
+    public func layoutContent(with type: ContentLayoutType, spacing: CGFloat = 0, offsetFromCenter: CGVector = .init(dx: 0, dy: 0))
+
+    /// ReerKit: Set background color for specified state.
+    /// - Parameters:
+    ///   - color: The color of the image that will be set as background for the button in the given state.
+    ///   - forState: set the UIControl.State for the desired color.
+    public func setBackgroundColor(color: UIColor?, forState: UIControl.State)
+}
+```
+
+### UICollectionView
+
+```
+import UIKit
+
+public extension Reer where Base: UICollectionView {
+
+    /// ReerKit: Index path of last item in collectionView.
+    public var indexPathOfLastItem: IndexPath? { get }
+
+    /// ReerKit: Index of last section in collectionView.
+    public var lastSection: Int { get }
+
+    /// ReerKit: Number of all items in all sections of collectionView.
+    ///
+    /// - Returns: The count of all rows in the collectionView.
+    public func numberOfItems() -> Int
+
+    /// ReerKit: IndexPath for last item in section.
+    ///
+    /// - Parameter section: section to get last item in.
+    /// - Returns: optional last indexPath for last item in section (if applicable).
+    public func indexPathOfLastItem(inSection section: Int) -> IndexPath?
+
+    /// ReerKit: Reload data with a completion handler.
+    ///
+    /// - Parameter completion: completion handler to run after reloadData finishes.
+    public func reloadData(_ completion: @escaping () -> Void)
+
+    /// ReerKit: Dequeue reusable UICollectionViewCell using class name.
+    ///
+    /// - Parameters:
+    ///   - name: UICollectionViewCell type.
+    ///   - indexPath: location of cell in collectionView.
+    /// - Returns: UICollectionViewCell object with associated class name.
+    public func dequeueReusableCell<T>(_ name: T.Type, for indexPath: IndexPath) -> T where T : UICollectionViewCell
+
+    /// ReerKit: Dequeue reusable UICollectionReusableView using class name.
+    ///
+    /// - Parameters:
+    ///   - kind: the kind of supplementary view to retrieve. This value is defined by the layout object.
+    ///   - name: UICollectionReusableView type.
+    ///   - indexPath: location of cell in collectionView.
+    /// - Returns: UICollectionReusableView object with associated class name.
+    public func dequeueReusableSupplementaryView<T>(ofKind kind: String, withClass name: T.Type, for indexPath: IndexPath) -> T where T : UICollectionReusableView
+
+    /// ReerKit: Register UICollectionReusableView using class name.
+    ///
+    /// - Parameters:
+    ///   - kind: the kind of supplementary view to retrieve. This value is defined by the layout object.
+    ///   - name: UICollectionReusableView type.
+    public func register<T>(supplementaryViewOfKind kind: String, withClass name: T.Type) where T : UICollectionReusableView
+
+    /// ReerKit: Register UICollectionViewCell using class name.
+    ///
+    /// - Parameters:
+    ///   - nib: Nib file used to create the collectionView cell.
+    ///   - name: UICollectionViewCell type.
+    public func register<T>(nib: UINib?, forCellWithClass name: T.Type) where T : UICollectionViewCell
+
+    /// ReerKit: Register UICollectionViewCell using class name.
+    ///
+    /// - Parameter name: UICollectionViewCell type.
+    public func register<T>(cell name: T.Type) where T : UICollectionViewCell
+
+    /// ReerKit: Register UICollectionReusableView using class name.
+    ///
+    /// - Parameters:
+    ///   - nib: Nib file used to create the reusable view.
+    ///   - kind: the kind of supplementary view to retrieve. This value is defined by the layout object.
+    ///   - name: UICollectionReusableView type.
+    public func register<T>(nib: UINib?, forSupplementaryViewOfKind kind: String, withClass name: T.Type) where T : UICollectionReusableView
+
+    /// ReerKit: Register UICollectionViewCell with .xib file using only its corresponding class.
+    ///               Assumes that the .xib filename and cell class has the same name.
+    ///
+    /// - Parameters:
+    ///   - name: UICollectionViewCell type.
+    ///   - bundleClass: Class in which the Bundle instance will be based on.
+    public func register<T>(nibWithCellClass name: T.Type, at bundleClass: AnyClass? = nil) where T : UICollectionViewCell
+
+    /// ReerKit: Safely scroll to possibly invalid IndexPath.
+    ///
+    /// - Parameters:
+    ///   - indexPath: Target IndexPath to scroll to.
+    ///   - scrollPosition: Scroll position.
+    ///   - animated: Whether to animate or not.
+    public func scrollToItem(at indexPath: IndexPath, at scrollPosition: UICollectionView.ScrollPosition, animated: Bool)
+
+    /// ReerKit: Check whether IndexPath is valid within the CollectionView.
+    ///
+    /// - Parameter indexPath: An IndexPath to check.
+    /// - Returns: Boolean value for valid or invalid IndexPath.
+    public func isValidIndexPath(_ indexPath: IndexPath) -> Bool
+}
+```
+
+### UIControl
+
+```
+import UIKit
+import ObjectiveC
+
+public extension Reer where Base: UIControl {
+
+    /// ReerKit: Removes all targets and actions for a particular event (or events)
+    /// from an internal dispatch table.
+    public func removeAllTargets()
+
+    /// ReerKit: Adds a action for a particular event (or events) to an internal dispatch table.
+    /// It will cause a strong reference to @a action.
+    ///
+    /// - Parameters:
+    ///   - events: The action which is invoked then the action message is
+    ///             sent  (cannot be nil). The action is retained.
+    ///   - action: A bitmask specifying the control events for which the
+    ///            action message is sent.
+    public func addAction(forControlEvents events: UIControl.Event, action: @escaping (UIControl) -> Void)
+
+    /// ReerKit: Adds or replaces a action for a particular event (or events) to an internal
+    /// dispatch table. It will cause a strong reference to @a action.
+    ///
+    /// - Parameters:
+    ///   - events: A bitmask specifying the control events for which the
+    ///             action message is sent.
+    ///   - action: The action which is invoked then the action message is
+    ///            sent (cannot be nil). The action is retained.
+    public func setAction(forControlEvents events: UIControl.Event, action: @escaping (UIControl) -> Void)
+
+    /// ReerKit: Removes all actions for a particular event (or events) from an internal
+    /// dispatch table.
+    ///
+    /// - Parameter events: A bitmask specifying the control events for which the
+    ///                     action message is sent.
+    public func removeAllActions(forControlEvents events: UIControl.Event)
+
+    /// ReerKit: Adds or replaces a target and action for a particular event (or events)
+    /// to an internal dispatch table.
+    ///
+    /// - Parameters:
+    ///   - target: The target object—that is, the object to which the
+    ///             action message is sent. If this is nil, the responder
+    ///             chain is searched for an object willing to respond to the
+    ///             action message.
+    ///   - action: A selector identifying an action message.
+    ///   - events: A bitmask specifying the control events for which the
+    ///             action message is sent.
+    public func setTarget(_ target: Any?, action: Selector, forControlEvents events: UIControl.Event)
+}
+```
+
+### UIDevice
+
+```
+import UIKit
+import Darwin
+
+public extension UIDevice {
+
+    public enum Name {
+
+        /// Device is an [iPod touch (5th generation)](https://support.apple.com/kb/SP657)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP657/sp657_ipod-touch_size.jpg)
+        case iPodTouch5
+
+        /// Device is an [iPod touch (6th generation)](https://support.apple.com/kb/SP720)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP720/SP720-ipod-touch-specs-color-sg-2015.jpg)
+        case iPodTouch6
+
+        /// Device is an [iPod touch (7th generation)](https://support.apple.com/kb/SP796)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP796/ipod-touch-7th-gen_2x.png)
+        case iPodTouch7
+
+        /// Device is an [iPhone 4](https://support.apple.com/kb/SP587)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP643/sp643_iphone4s_color_black.jpg)
+        case iPhone4
+
+        /// Device is an [iPhone 4s](https://support.apple.com/kb/SP643)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP643/sp643_iphone4s_color_black.jpg)
+        case iPhone4s
+
+        /// Device is an [iPhone 5](https://support.apple.com/kb/SP655)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP655/sp655_iphone5_color.jpg)
+        case iPhone5
+
+        /// Device is an [iPhone 5c](https://support.apple.com/kb/SP684)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP684/SP684-color_yellow.jpg)
+        case iPhone5c
+
+        /// Device is an [iPhone 5s](https://support.apple.com/kb/SP685)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP685/SP685-color_black.jpg)
+        case iPhone5s
+
+        /// Device is an [iPhone 6](https://support.apple.com/kb/SP705)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP705/SP705-iphone_6-mul.png)
+        case iPhone6
+
+        /// Device is an [iPhone 6 Plus](https://support.apple.com/kb/SP706)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP706/SP706-iphone_6_plus-mul.png)
+        case iPhone6Plus
+
+        /// Device is an [iPhone 6s](https://support.apple.com/kb/SP726)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP726/SP726-iphone6s-gray-select-2015.png)
+        case iPhone6s
+
+        /// Device is an [iPhone 6s Plus](https://support.apple.com/kb/SP727)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP727/SP727-iphone6s-plus-gray-select-2015.png)
+        case iPhone6sPlus
+
+        /// Device is an [iPhone 7](https://support.apple.com/kb/SP743)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP743/iphone7-black.png)
+        case iPhone7
+
+        /// Device is an [iPhone 7 Plus](https://support.apple.com/kb/SP744)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP744/iphone7-plus-black.png)
+        case iPhone7Plus
+
+        /// Device is an [iPhone SE](https://support.apple.com/kb/SP738)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP738/SP738.png)
+        case iPhoneSE
+
+        /// Device is an [iPhone 8](https://support.apple.com/kb/SP767)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP767/iphone8.png)
+        case iPhone8
+
+        /// Device is an [iPhone 8 Plus](https://support.apple.com/kb/SP768)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP768/iphone8plus.png)
+        case iPhone8Plus
+
+        /// Device is an [iPhone X](https://support.apple.com/kb/SP770)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP770/iphonex.png)
+        case iPhoneX
+
+        /// Device is an [iPhone Xs](https://support.apple.com/kb/SP779)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP779/SP779-iphone-xs.jpg)
+        case iPhoneXS
+
+        /// Device is an [iPhone Xs Max](https://support.apple.com/kb/SP780)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP780/SP780-iPhone-Xs-Max.jpg)
+        case iPhoneXSMax
+
+        /// Device is an [iPhone Xʀ](https://support.apple.com/kb/SP781)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP781/SP781-iPhone-xr.jpg)
+        case iPhoneXR
+
+        /// Device is an [iPhone 11](https://support.apple.com/kb/SP804)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP804/sp804-iphone11_2x.png)
+        case iPhone11
+
+        /// Device is an [iPhone 11 Pro](https://support.apple.com/kb/SP805)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP805/sp805-iphone11pro_2x.png)
+        case iPhone11Pro
+
+        /// Device is an [iPhone 11 Pro Max](https://support.apple.com/kb/SP806)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP806/sp806-iphone11pro-max_2x.png)
+        case iPhone11ProMax
+
+        /// Device is an [iPhone SE (2nd generation)](https://support.apple.com/kb/SP820)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP820/iphone-se-2nd-gen_2x.png)
+        case iPhoneSE2
+
+        /// Device is an [iPhone 12](https://support.apple.com/kb/SP830)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP830/sp830-iphone12-ios14_2x.png)
+        case iPhone12
+
+        /// Device is an [iPhone 12 mini](https://support.apple.com/kb/SP829)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP829/sp829-iphone12mini-ios14_2x.png)
+        case iPhone12Mini
+
+        /// Device is an [iPhone 12 Pro](https://support.apple.com/kb/SP831)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP831/iphone12pro-ios14_2x.png)
+        case iPhone12Pro
+
+        /// Device is an [iPhone 12 Pro Max](https://support.apple.com/kb/SP832)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP832/iphone12promax-ios14_2x.png)
+        case iPhone12ProMax
+
+        /// Device is an [iPhone 13](https://support.apple.com/kb/SP851)
+        ///
+        /// ![Image](https://km.support.apple.com/resources/sites/APPLE/content/live/IMAGES/1000/IM1092/en_US/iphone-13-240.png)
+        case iPhone13
+
+        /// Device is an [iPhone 13 mini](https://support.apple.com/kb/SP847)
+        ///
+        /// ![Image](https://km.support.apple.com/resources/sites/APPLE/content/live/IMAGES/1000/IM1091/en_US/iphone-13mini-240.png)
+        case iPhone13Mini
+
+        /// Device is an [iPhone 13 Pro](https://support.apple.com/kb/SP852)
+        ///
+        /// ![Image](https://km.support.apple.com/resources/sites/APPLE/content/live/IMAGES/1000/IM1093/en_US/iphone-13pro-240.png)
+        case iPhone13Pro
+
+        /// Device is an [iPhone 13 Pro Max](https://support.apple.com/kb/SP848)
+        ///
+        /// ![Image](https://km.support.apple.com/resources/sites/APPLE/content/live/IMAGES/1000/IM1095/en_US/iphone-13promax-240.png)
+        case iPhone13ProMax
+
+        /// Device is an [iPhone SE (3rd generation)](https://support.apple.com/kb/SP867)
+        ///
+        /// ![Image](https://km.support.apple.com/resources/sites/APPLE/content/live/IMAGES/1000/IM1136/en_US/iphone-se-3rd-gen-colors-240.png)
+        case iPhoneSE3
+
+        /// Device is an [iPhone 14](https://support.apple.com/kb/SP873)
+        ///
+        /// ![Image](https://km.support.apple.com/resources/sites/APPLE/content/live/IMAGES/1000/IM1092/en_US/TODO)
+        case iPhone14
+
+        /// Device is an [iPhone 14 Plus](https://support.apple.com/kb/SP874)
+        ///
+        /// ![Image](https://km.support.apple.com/resources/sites/APPLE/content/live/IMAGES/1000/IM1091/en_US/TODO)
+        case iPhone14Plus
+
+        /// Device is an [iPhone 14 Pro](https://support.apple.com/kb/SP875)
+        ///
+        /// ![Image](https://km.support.apple.com/resources/sites/APPLE/content/live/IMAGES/1000/IM1093/en_US/TODO)
+        case iPhone14Pro
+
+        /// Device is an [iPhone 14 Pro Max](https://support.apple.com/kb/SP876)
+        ///
+        /// ![Image](https://km.support.apple.com/resources/sites/APPLE/content/live/IMAGES/1000/IM1095/en_US/TODO)
+        case iPhone14ProMax
+
+        /// Device is an [iPhone 15](https://support.apple.com/en-us/111831)
+        ///
+        /// ![Image]()
+        case iPhone15
+
+        /// Device is an [iPhone 15 Plus](https://support.apple.com/en-us/111830)
+        ///
+        /// ![Image]()
+        case iPhone15Plus
+
+        /// Device is an [iPhone 15 Pro](https://support.apple.com/en-us/111829)
+        ///
+        /// ![Image]()
+        case iPhone15Pro
+
+        /// Device is an [iPhone 15 Pro Max](https://support.apple.com/en-us/111828)
+        ///
+        /// ![Image]()
+        case iPhone15ProMax
+
+        /// Device is an [iPhone 16](https://support.apple.com/en-us/121029)
+        ///
+        /// ![Image]()
+        case iPhone16
+
+        /// Device is an [iPhone 16 Plus](https://support.apple.com/en-us/121030)
+        ///
+        /// ![Image]()
+        case iPhone16Plus
+
+        /// Device is an [iPhone 16 Pro](https://support.apple.com/en-us/121031)
+        ///
+        /// ![Image]()
+        case iPhone16Pro
+
+        /// Device is an [iPhone 16 Pro Max](https://support.apple.com/en-us/121032)
+        ///
+        /// ![Image]()
+        case iPhone16ProMax
+
+        /// Device is an [iPhone 16e](https://support.apple.com/en-us/122208)
+        ///
+        /// ![Image](https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/122208-iphone-16e.png)
+        case iPhone16e
+
+        /// Device is an [iPad 2](https://support.apple.com/kb/SP622)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP622/SP622_01-ipad2-mul.png)
+        case iPad2
+
+        /// Device is an [iPad (3rd generation)](https://support.apple.com/kb/SP647)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP662/sp662_ipad-4th-gen_color.jpg)
+        case iPad3
+
+        /// Device is an [iPad (4th generation)](https://support.apple.com/kb/SP662)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP662/sp662_ipad-4th-gen_color.jpg)
+        case iPad4
+
+        /// Device is an [iPad Air](https://support.apple.com/kb/SP692)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP692/SP692-specs_color-mul.png)
+        case iPadAir
+
+        /// Device is an [iPad Air 2](https://support.apple.com/kb/SP708)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP708/SP708-space_gray.jpeg)
+        case iPadAir2
+
+        /// Device is an [iPad (5th generation)](https://support.apple.com/kb/SP751)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP751/ipad_5th_generation.png)
+        case iPad5
+
+        /// Device is an [iPad (6th generation)](https://support.apple.com/kb/SP774)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP774/sp774-ipad-6-gen_2x.png)
+        case iPad6
+
+        /// Device is an [iPad Air (3rd generation)](https://support.apple.com/kb/SP787)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP787/ipad-air-2019.jpg)
+        case iPadAir3
+
+        /// Device is an [iPad (7th generation)](https://support.apple.com/kb/SP807)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP807/sp807-ipad-7th-gen_2x.png)
+        case iPad7
+
+        /// Device is an [iPad (8th generation)](https://support.apple.com/kb/SP822)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP822/sp822-ipad-8gen_2x.png)
+        case iPad8
+
+        /// Device is an [iPad (9th generation)](https://support.apple.com/kb/SP849)
+        ///
+        /// ![Image](https://km.support.apple.com/resources/sites/APPLE/content/live/IMAGES/1000/IM1096/en_US/ipad-9gen-240.png)
+        case iPad9
+
+        /// Device is an [iPad (10th generation)](https://support.apple.com/kb/SP884)
+        ///
+        /// ![Image](https://km.support.apple.com/resources/sites/APPLE/content/live/IMAGES/1000/IM1096/en_US/TODO.png)
+        case iPad10
+
+        /// Device is an [iPad (11th generation)]()
+        ///
+        /// ![Image]()
+        case iPad11
+
+        /// Device is an [iPad Air (4th generation)](https://support.apple.com/kb/SP828)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP828/sp828ipad-air-ipados14-960_2x.png)
+        case iPadAir4
+
+        /// Device is an [iPad Air (5th generation)](https://support.apple.com/kb/TODO)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/TODO)
+        case iPadAir5
+
+        /// Device is an [iPad Air 11-inch (M2)](https://support.apple.com/en-us/119894)
+        ///
+        /// ![Image](https://cdsassets.apple.com/content/services/pub/image?productid=301027&size=240x240)
+        case iPadAir11InchM2
+
+        /// Device is an [iPad Air 13-inch (M2)](https://support.apple.com/en-us/119893)
+        ///
+        /// ![Image](https://cdsassets.apple.com/content/services/pub/image?productid=301029&size=240x240)
+        case iPadAir13InchM2
+
+        /// Device is an [iPad Air 11-inch (M3)]()
+        ///
+        /// ![Image]()
+        case iPadAir11InchM3
+
+        /// Device is an [iPad Air 13-inch (M3)]()
+        ///
+        /// ![Image]()
+        case iPadAir13InchM3
+
+        /// Device is an [iPad Mini](https://support.apple.com/kb/SP661)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP661/sp661_ipad_mini_color.jpg)
+        case iPadMini
+
+        /// Device is an [iPad Mini 2](https://support.apple.com/kb/SP693)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP693/SP693-specs_color-mul.png)
+        case iPadMini2
+
+        /// Device is an [iPad Mini 3](https://support.apple.com/kb/SP709)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP709/SP709-space_gray.jpeg)
+        case iPadMini3
+
+        /// Device is an [iPad Mini 4](https://support.apple.com/kb/SP725)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP725/SP725ipad-mini-4.png)
+        case iPadMini4
+
+        /// Device is an [iPad Mini (5th generation)](https://support.apple.com/kb/SP788)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP788/ipad-mini-2019.jpg)
+        case iPadMini5
+
+        /// Device is an [iPad Mini (6th generation)](https://support.apple.com/kb/SP850)
+        ///
+        /// ![Image](https://km.support.apple.com/resources/sites/APPLE/content/live/IMAGES/1000/IM1097/en_US/ipad-mini-6gen-240.png)
+        case iPadMini6
+
+        /// Device is an [iPad Mini (7th generation)]()
+        ///
+        /// ![Image]()
+        case iPadMini7
+
+        /// Device is an [iPad Pro 9.7-inch](https://support.apple.com/kb/SP739)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP739/SP739.png)
+        case iPadPro9Inch
+
+        /// Device is an [iPad Pro 12-inch](https://support.apple.com/kb/SP723)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP723/SP723-iPad_Pro_2x.png)
+        case iPadPro12Inch
+
+        /// Device is an [iPad Pro 12-inch (2nd generation)](https://support.apple.com/kb/SP761)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP761/ipad-pro-12in-hero-201706.png)
+        case iPadPro12Inch2
+
+        /// Device is an [iPad Pro 10.5-inch](https://support.apple.com/kb/SP762)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP761/ipad-pro-10in-hero-201706.png)
+        case iPadPro10Inch
+
+        /// Device is an [iPad Pro 11-inch](https://support.apple.com/kb/SP784)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP784/ipad-pro-11-2018_2x.png)
+        case iPadPro11Inch
+
+        /// Device is an [iPad Pro 12.9-inch (3rd generation)](https://support.apple.com/kb/SP785)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP785/ipad-pro-12-2018_2x.png)
+        case iPadPro12Inch3
+
+        /// Device is an [iPad Pro 11-inch (2nd generation)](https://support.apple.com/kb/SP814)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP814/ipad-pro-11-2020.jpeg)
+        case iPadPro11Inch2
+
+        /// Device is an [iPad Pro 12.9-inch (4th generation)](https://support.apple.com/kb/SP815)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP815/ipad-pro-12-2020.jpeg)
+        case iPadPro12Inch4
+
+        /// Device is an [iPad Pro 11-inch (3rd generation)](https://support.apple.com/kb/SP843)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP843/ipad-pro-11_2x.png)
+        case iPadPro11Inch3
+
+        /// Device is an [iPad Pro 12.9-inch (5th generation)](https://support.apple.com/kb/SP844)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP844/ipad-pro-12-9_2x.png)
+        case iPadPro12Inch5
+
+        /// Device is an [iPad Pro 11-inch (4th generation)](https://support.apple.com/kb/SP882)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP843/TODO.png)
+        case iPadPro11Inch4
+
+        /// Device is an [iPad Pro 12.9-inch (6th generation)](https://support.apple.com/kb/SP883)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP844/TODO.png)
+        case iPadPro12Inch6
+
+        /// Device is an [iPad Pro 11-inch (M4)](https://support.apple.com/en-us/119892)
+        ///
+        /// ![Image](https://cdsassets.apple.com/content/services/pub/image?productid=301031&size=240x240)
+        case iPadPro11InchM4
+
+        /// Device is an [iPad Pro 13-inch (M4)](https://support.apple.com/en-us/119891)
+        ///
+        /// ![Image](https://cdsassets.apple.com/content/services/pub/image?productid=301033&size=240x240)
+        case iPadPro13InchM4
+
+        /// Device is a [HomePod](https://support.apple.com/kb/SP773)
+        ///
+        /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP773/homepod_space_gray_large_2x.jpg)
+        case homePod
+
+        /// Device is [Simulator](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/iOS_Simulator_Guide/Introduction/Introduction.html)
+        ///
+        /// ![Image](https://developer.apple.com/assets/elements/icons/256x256/xcode-6.png)
+        indirect case simulator(Name)
+
+        /// Device is not yet known (implemented)
+        /// You can still use this enum as before but the description equals the identifier (you can get multiple identifiers for the same product class
+        /// (e.g. "iPhone6,1" or "iPhone 6,2" do both mean "iPhone 5s"))
+        case unknown(String)
+    }
+}
+
+public extension Reer where Base: UIDevice {
+
+    /// ReerKit: Get current device's os version.
+    public static var osVersion: String { get }
+
+    /// ReerKit: Get current device's os version number.
+    public static var osVersionNumber: Float { get }
+
+    /// ReerKit: Get current device's current language.
+    public static var currentLanguage: String { get }
+
+    /// ReerKit: Whether the device is iPhone or iPod touch.
+    public static var isPhone: Bool { get }
+
+    /// ReerKit: Whether the device is iPad/iPad mini.
+    public static var isPad: Bool { get }
+
+    /// ReerKit: Whether the device is Mac.
+    public static var isMac: Bool { get }
+
+    /// ReerKit: Whether the device is Apple TV.
+    public static var isTV: Bool { get }
+
+    /// ReerKit: Whether the device is Vision Pro.
+    public static var isVision: Bool { get }
+
+    /// ReerKit: Whether the device is a simulator.
+    public static var isSimulator: Bool { get }
+
+    /// ReerKit: Whether the device is jailbroken.
+    public static var isJailbroken: Bool { get }
+
+    /// ReerKit: Wherher the device can make phone calls.
+    public static var canMakePhoneCalls: Bool { get }
+
+    /// ReerKit: WIFI IP address of this device (can be nil). e.g. @"192.168.1.111"
+    public static var ipAddressWIFI: String? { get }
+
+    /// ReerKit: Cell IP address of this device (can be nil). e.g. @"10.2.2.222"
+    public static var ipAddressCell: String? { get }
+
+    public static var isRectangularScreen: Bool { get }
+
+    public static var isNotchScreen: Bool { get }
+
+    public static var isDynamicIslandScreen: Bool { get }
+
+    /// ReerKit: The device's hardware machine id.  e.g. "iPhone6,1" "iPad4,6"
+    ///
+    /// [reference](http://theiphonewiki.com/wiki/Models)
+    public static var machineModelIdentifier: String { get }
+
+    /// ReerKit: The device's machine model internal name.  e.g. "D83AP" "D16AP"
+    public static var machineModelName: String { get }
+
+    /// ReerKit: Get product model name of the device. e.g `.iPhone13ProMax`
+    /// or get string version `UIDevice.current.re.modelName.description` -> "iPhone13 Pro Max"
+    public static var modelName: UIDevice.Name { get }
+
+    /// ReerKit: Mount id
+    public static var mntID: String { get }
+
+    /// ReerKit: Total disk space in byte. (-1 when error occurs)
+    public static var diskSpace: Int64 { get }
+
+    /// ReerKit: Free disk space in byte. (-1 when error occurs)
+    public static var diskSpaceFree: Int64 { get }
+
+    /// ReerKit: Used disk space in byte. (-1 when error occurs)
+    public static var diskSpaceUsed: Int64 { get }
+
+    /// ReerKit: Total physical memory in byte. (-1 when error occurs)
+    public static var memoryTotal: Int64 { get }
+
+    /// ReerKit: Used app memory and total memory
+    ///
+    /// [Reference](https://github.com/zixun/SystemEye/blob/master/SystemEye/Classes/Memory.swift)
+    public static var appMemoryUsage: (used: Int64, total: Int64) { get }
+
+    /// ReerKit: System memory usage
+    public static var systemMemoryUsage: (free: Int64, active: Int64, inactive: Int64, wired: Int64, compressed: Int64, purgable: Int64, total: Int64) { get }
+
+    /// ReerKit: App CPU usage
+    public static var appCPUUsage: Double { get }
+
+    /// ReerKit: System CPU usage
+    public static var systemCPUUsage: (system: Double, user: Double, idle: Double, nice: Double) { get }
+}
+
+
+
+extension UIDevice.Name : CustomStringConvertible {
+
+    /// A textual representation of the device.
+    public var description: String { get }
+}
+```
+
+### UIFont
+
+```
+import UIKit
+
+public extension Reer where Base: UIFont {
+
+    /// ReerKit: Font as bold font.
+    public var bold: UIFont { get }
+
+    /// ReerKit: Font as italic font.
+    public var italic: UIFont { get }
+
+    /// ReerKit: Font as monospaced font.
+    ///
+    ///     UIFont.re.preferredFont(forTextStyle: .body).monospaced
+    ///
+    public var monospaced: UIFont { get }
+}
+```
+
+### UIGestureRecognizer
+
+```
+import UIKit
+
+public extension Reer where Base: UIGestureRecognizer {
+
+    /// ReerKit: Remove Gesture Recognizer from its view.
+    public func removeFromView()
+}
+```
+
+### UIImage
+
+```
+import UIKit
+import Accelerate
+import Darwin
+
+public extension Reer where Base: UIImage {
+
+    /// ReerKit: Size in bytes of UIImage.
+    public var bytesSize: Int { get }
+
+    /// ReerKit: Size in kilo bytes of UIImage.
+    public var kilobytesSize: Int { get }
+
+    /// ReerKit: UIImage with .alwaysOriginal rendering mode.
+    public var original: UIImage { get }
+
+    /// ReerKit: UIImage with .alwaysTemplate rendering mode.
+    public var template: UIImage { get }
+
+    /// ReerKit: Whether this image has alpha channel.
+    public var hasAlphaChannel: Bool { get }
+
+    /// ReerKit: Average color for this image.
+    public func averageColor() -> UIColor?
+
+    /// ReerKit: Pick the color at a point of the image.
+    /// It will return nil if the point is out of bounds.
+    public func color(at point: CGPoint) -> UIColor?
+
+    /// ReerKit: Compressed UIImage from original UIImage.
+    ///
+    /// - Parameter quality: The quality of the resulting JPEG image, expressed as a value from 0.0 to 1.0. The value 0.0 represents the maximum compression (or lowest quality) while the value 1.0 represents the least compression (or best quality), (default is 0.5).
+    /// - Returns: optional UIImage (if applicable).
+    public func compressed(quality: CGFloat = 0.5) -> UIImage?
+
+    /// ReerKit: Compressed UIImage data from original UIImage.
+    ///
+    /// - Parameter quality: The quality of the resulting JPEG image, expressed as a value from 0.0 to 1.0. The value 0.0 represents the maximum compression (or lowest quality) while the value 1.0 represents the least compression (or best quality), (default is 0.5).
+    /// - Returns: optional Data (if applicable).
+    public func compressedData(quality: CGFloat = 0.5) -> Data?
+
+    /// ReerKit: UIImage filled with color
+    ///
+    /// - Parameter color: color to fill image with.
+    /// - Returns: UIImage filled with given color.
+    public func filled(withColor color: UIColor) -> UIImage
+
+    /// ReerKit: UIImage blended with color.
+    ///
+    /// - Parameters:
+    ///   - color: color to blend image with.
+    ///   - mode: how to blend the tint.
+    ///   - alpha: alpha value used to draw.
+    /// - Returns: UIImage tinted with given color.
+    public func blend(_ color: UIColor, mode: CGBlendMode, alpha: CGFloat = 1.0) -> UIImage
+
+    /// ReerKit: UImage with background color.
+    ///
+    /// - Parameters:
+    ///   - backgroundColor: Color to use as background color.
+    /// - Returns: UIImage with a background color that is visible where alpha < 1.
+    public func withBackgroundColor(_ backgroundColor: UIColor) -> UIImage
+
+    ///  ReerKit: UIImage with rounded corners.
+    ///
+    /// - Parameters:
+    ///   - radius: corner radius (optional), resulting image will be round if unspecified.
+    ///   - corners: corners
+    ///   - borderWidth: borderWidth
+    ///   - borderColor: borderColor
+    ///   - borderLineJoin: borderLineJoin
+    /// - Returns: UIImage with all corners rounded.
+    public func withRoundedCorners(radius: CGFloat? = nil, corners: UIRectCorner = .allCorners, borderWidth: CGFloat = 0, borderColor: UIColor? = nil, borderLineJoin: CGLineJoin = .miter) -> UIImage
+
+    /// ReerKit: Returns a new image which is edge inset from this image.
+    ///
+    /// - Parameters:
+    ///   - insets: Inset (positive) for each of the edges, values can be negative to 'outset'.
+    ///   - color: Extend edge's fill color, nil means clear color.
+    /// - Returns: The new image
+    public func withEdge(byInsets insets: UIEdgeInsets, color: UIColor?) -> UIImage?
+
+    /// ReerKit: Base 64 encoded PNG data of the image.
+    ///
+    /// - Returns: Base 64 encoded PNG data of the image as a String.
+    public func pngBase64String() -> String?
+
+    /// ReerKit: Base 64 encoded JPEG data of the image.
+    ///
+    /// - Parameter compressionQuality: The quality of the resulting JPEG image, expressed as a value from 0.0 to 1.0. The value 0.0 represents the maximum compression (or lowest quality) while the value 1.0 represents the least compression (or best quality).
+    /// - Returns: Base 64 encoded JPEG data of the image as a String.
+    public func jpegBase64String(compressionQuality: CGFloat) -> String?
+
+    /// ReerKit: UIImage with color uses .alwaysOriginal rendering mode.
+    ///
+    /// - Parameters:
+    ///   - color: Color of image.
+    /// - Returns: UIImage with color.
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    public func withAlwaysOriginalTintColor(_ color: UIColor) -> UIImage
+}
+
+public extension Reer where Base: UIImage {
+
+    /// ReerKit: A new image rotated counterclockwise by a quarter‑turn (90°). ⤺
+    /// The width and height will be exchanged.
+    public var rotateLeft90: UIImage? { get }
+
+    /// ReerKit: A new image rotated clockwise by a quarter‑turn (90°). ⤼
+    /// The width and height will be exchanged.
+    public var rotateRight90: UIImage? { get }
+
+    /// ReerKit: A new image rotated 180° . ↻
+    public var rotate180: UIImage? { get }
+
+    /// ReerKit: Returns a new rotated image (relative to the center).
+    ///
+    /// - Parameters:
+    ///   - radians: Rotated radians in counterclockwise.⟲
+    ///   - fitSize: true: new image's size is extend to fit all content.
+    ///              false: image's size will not change, content may be clipped.
+    /// - Returns: The new image
+    public func rotated(by radians: CGFloat, fitSize: Bool = true) -> UIImage?
+
+    /// ReerKit: Creates a copy of the receiver rotated by the given angle.
+    ///
+    ///     // Rotate the image by 180°
+    ///     image.rotated(by: Measurement(value: 180, unit: .degrees))
+    ///
+    /// - Parameter angle: The angle measurement by which to rotate the image.
+    /// - Returns: A new image rotated by the given angle.
+    @available(tvOS 10.0, watchOS 3.0, *)
+    public func rotated(by angle: Measurement<UnitAngle>) -> UIImage?
+
+    /// ReerKit: UIImage Cropped to CGRect.
+    ///
+    /// - Parameter rect: CGRect to crop UIImage to.
+    /// - Returns: cropped UIImage
+    public func cropped(to rect: CGRect) -> UIImage
+
+    /// ReerKit: UIImage scaled to height with respect to aspect ratio.
+    ///
+    /// - Parameters:
+    ///   - toHeight: new height.
+    ///   - opaque: flag indicating whether the bitmap is opaque.
+    /// - Returns: optional scaled UIImage (if applicable).
+    public func resize(toHeight: CGFloat, opaque: Bool = false) -> UIImage?
+
+    /// ReerKit: UIImage scaled to width with respect to aspect ratio.
+    ///
+    /// - Parameters:
+    ///   - toWidth: new width.
+    ///   - opaque: flag indicating whether the bitmap is opaque.
+    /// - Returns: optional scaled UIImage (if applicable).
+    public func resize(toWidth: CGFloat, opaque: Bool = false) -> UIImage?
+
+    /// ReerKit: Returns a new image which is scaled from this image.
+    /// The image content will be changed with the contentMode.
+    ///
+    /// - Parameters:
+    ///   - size: The new size to be scaled, values should be positive.
+    ///   - contentMode: The content mode for image content.
+    ///   - opaque: flag indicating whether the bitmap is opaque.
+    /// - Returns: The new image with the given size.
+    public func resize(to size: CGSize, contentMode: UIView.ContentMode = .scaleToFill, opaque: Bool = false) -> UIImage?
+
+    /// ReerKit: Draws the entire image in the specified rectangle, content changed with
+    /// the contentMode.
+    ///
+    /// - Note: This method draws the entire image in the current graphics context,
+    /// respecting the image's orientation setting. In the default coordinate system,
+    /// images are situated down and to the right of the origin of the specified
+    /// rectangle. This method respects any transforms applied to the current graphics
+    /// context, however.
+    ///
+    /// - Parameters:
+    ///   - rect: The rectangle in which to draw the image.
+    ///   - contentMode: Draw content mode
+    ///   - clipsToBounds: A Boolean value that determines whether content are confined to the rect.
+    public func draw(inRect rect: CGRect, contentMode: UIView.ContentMode, clipsToBounds: Bool)
+
+    /// ReerKit: A vertically flipped image. ⥯
+    public var flipVertical: UIImage? { get }
+
+    /// ReerKit: A horizontally flipped image. ⇋
+    public var flipHorizontal: UIImage? { get }
+}
+
+public extension Reer where Base: UIImage {
+
+    /// ReerKit: Applies a blur effect to this image. Suitable for blur any content.
+    public var blurSoft: UIImage? { get }
+
+    /// ReerKit: Applies a blur effect to this image. Suitable for blur any content except pure white.
+    /// (same as iOS Control Panel)
+    public var blurLight: UIImage? { get }
+
+    /// ReerKit: Applies a blur effect to this image. Suitable for displaying black text.
+    /// (same as iOS Navigation Bar White)
+    public var blurExtraLight: UIImage? { get }
+
+    /// ReerKit: Applies a blur effect to this image. Suitable for displaying white text.
+    /// (same as iOS Notification Center)
+    public var blurDark: UIImage? { get }
+
+    /// ReerKit: Applies a blur and tint color to this image.
+    ///
+    /// - Parameter tintColor: The tint color.
+    /// - Returns: The new image
+    public func blurWithTintColor(_ tintColor: UIColor) -> UIImage?
+
+    /// ReerKit: Applies a blur, tint color, and saturation adjustment to this image,
+    /// optionally within the area specified by @a maskImage.
+    ///
+    /// - Parameters:
+    ///   - radius: The radius of the blur in points, 0 means no blur effect.
+    ///   - tintColor: An optional UIColor object that is uniformly blended with
+    ///                the result of the blur and saturation operations. The
+    ///                alpha channel of this color determines how strong the
+    ///                tint is. nil means no tint.
+    ///   - tintBlendMode: The @a tintColor blend mode.
+    ///                    Default is CGBlendMode.normal.
+    ///   - saturation: A value of 1.0 produces no change in the resulting image.
+    ///                 Values less than 1.0 will desaturation the resulting image
+    ///                 while values greater than 1.0 will have the opposite effect.
+    ///                 0 means gray scale.
+    ///   - maskImage: If specified, @a inputImage is only modified in the area(s)
+    ///                defined by this mask.  This must be an image mask or it
+    ///                must meet the requirements of the mask parameter of
+    ///                CGContextClipToMask.
+    /// - Returns: The blured new Image
+    public func blur(radius: CGFloat, tintColor: UIColor? = nil, tintBlendMode: CGBlendMode, saturation: CGFloat, maskImage: UIImage? = nil) -> UIImage?
+}
+
+public struct ImageFilterName : ExpressibleByStringLiteral, Hashable, RawRepresentable {
+
+    public static let chrome: `Self`
+
+    public static let fade: `Self`
+
+    public static let instant: `Self`
+
+    public static let mono: `Self`
+
+    public static let noir: `Self`
+
+    public static let process: `Self`
+
+    public static let tonal: `Self`
+
+    public static let transfer: `Self`
+
+    /// A type that represents a string literal.
+    ///
+    /// Valid types for `StringLiteralType` are `String` and `StaticString`.
+    public typealias StringLiteralType = String
+
+    /// The corresponding value of the raw type.
+    ///
+    /// A new instance initialized with `rawValue` will be equivalent to this
+    /// instance. For example:
+    ///
+    ///     enum PaperSize: String {
+    ///         case A4, A5, Letter, Legal
+    ///     }
+    ///
+    ///     let selectedSize = PaperSize.Letter
+    ///     print(selectedSize.rawValue)
+    ///     // Prints "Letter"
+    ///
+    ///     print(selectedSize == PaperSize(rawValue: selectedSize.rawValue)!)
+    ///     // Prints "true"
+    public private(set) var rawValue: String { get }
+
+    /// Creates an instance initialized to the given string value.
+    ///
+    /// - Parameter value: The value of the new instance.
+    public init(stringLiteral value: String)
+
+    /// Creates a new instance with the specified raw value.
+    ///
+    /// If there is no value of the type that corresponds with the specified raw
+    /// value, this initializer returns `nil`. For example:
+    ///
+    ///     enum PaperSize: String {
+    ///         case A4, A5, Letter, Legal
+    ///     }
+    ///
+    ///     print(PaperSize(rawValue: "Legal"))
+    ///     // Prints "Optional("PaperSize.Legal")"
+    ///
+    ///     print(PaperSize(rawValue: "Tabloid"))
+    ///     // Prints "nil"
+    ///
+    /// - Parameter rawValue: The raw value to use for the new instance.
+    public init?(rawValue: String)
+
+    /// Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
+    ///
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
+    public static func == (lhs: `Self`, rhs: `Self`) -> Bool
+
+    /// Hashes the essential components of this value by feeding them into the
+    /// given hasher.
+    ///
+    /// Implement this method to conform to the `Hashable` protocol. The
+    /// components used for hashing must be the same as the components compared
+    /// in your type's `==` operator implementation. Call `hasher.combine(_:)`
+    /// with each of these components.
+    ///
+    /// - Important: In your implementation of `hash(into:)`,
+    ///   don't call `finalize()` on the `hasher` instance provided,
+    ///   or replace it with a different instance.
+    ///   Doing so may become a compile-time error in the future.
+    ///
+    /// - Parameter hasher: The hasher to use when combining the components
+    ///   of this instance.
+    public func hash(into hasher: inout Hasher)
+}
+
+public extension Reer where Base: UIImage {
+
+    /// ReerKit: A grayscaled image.
+    public var grayscale: UIImage? { get }
+
+    /// ReerKit:
+    /// - Parameter filterName: Name of the filter.
+    /// - Returns: A filtered image.
+    public func with(filter filterName: ImageFilterName) -> UIImage?
+}
+
+public extension UIImage {
+
+    /// ReerKit: Create UIImage from color and size.
+    ///
+    /// - Parameters:
+    ///   - color: image fill color.
+    ///   - size: image size.
+    public static func re(color: UIColor, size: CGSize = .init(width: 1, height: 1)) -> UIImage
+
+    /// ReerKit: Create a new image from a base 64 string.
+    ///
+    /// - Parameters:
+    ///   - base64String: a base-64 `String`, representing the image
+    ///   - scale: The scale factor to assume when interpreting the image data created from the base-64 string. Applying a scale factor of 1.0 results in an image whose size matches the pixel-based dimensions of the image. Applying a different scale factor changes the size of the image as reported by the `size` property.
+    public static func re(base64String: String, scale: CGFloat = 1.0) -> UIImage?
+
+    /// ReerKit: Create a new image from a URL
+    ///
+    /// - Important:
+    ///   Use this method to convert data:// URLs to UIImage objects.
+    ///   Don't use this synchronous initializer to request network-based URLs. For network-based URLs, this method can block the current thread for tens of seconds on a slow network, resulting in a poor user experience, and in iOS, may cause your app to be terminated.
+    ///   Instead, for non-file URLs, consider using this in an asynchronous way, using `dataTask(with:completionHandler:)` method of the URLSession class or a library such as `AlamofireImage`, `Kingfisher`, `SDWebImage`, or others to perform asynchronous network image loading.
+    /// - Parameters:
+    ///   - url: a `URL`, representing the image location
+    ///   - scale: The scale factor to assume when interpreting the image data created from the URL. Applying a scale factor of 1.0 results in an image whose size matches the pixel-based dimensions of the image. Applying a different scale factor changes the size of the image as reported by the `size` property.
+    public static func re(url: URL, scale: CGFloat = 1.0) throws -> UIImage?
+
+    /// ReerKit: Create an image from a PDF file data or path.
+    ///
+    /// - Parameter dataOrPath: PDF data in `Data`, or PDF file path in `String`.
+    /// - Returns: A new image create from PDF, or nil when an error occurs.
+    public static func re(pdf dataOrPath: Any) -> UIImage?
+
+    /// ReerKit: Create an image from a PDF file data or path.
+    ///
+    /// - Parameters:
+    ///   - dataOrPath: PDF data in `Data`, or PDF file path in `String`.
+    ///   - size: The new image's size, PDF's content will be stretched as needed.
+    /// - Returns: A new image create from PDF, or nil when an error occurs.
+    public static func re(pdf dataOrPath: Any, size: CGSize) -> UIImage?
+
+    /// ReerKit: Create a square image from apple emoji.
+    ///
+    /// - Parameters:
+    ///   - emoji: single emoji, such as "😄".
+    ///   - size: image's size.
+    /// - Returns: Image from emoji, or nil when an error occurs.
+    public static func re(emoji: String, size: CGFloat) -> UIImage?
+}
+```
+
+### UIImageView
+
+```
+import UIKit
+
+public extension Reer where Base: UIImageView {
+
+    /// ReerKit: Set image from a URL.
+    ///
+    /// - Parameters:
+    ///   - url: URL of image.
+    ///   - contentMode: imageView content mode (default is .scaleAspectFit).
+    ///   - placeholder: optional placeholder image
+    ///   - completionHandler: optional completion handler to run when download finishes (default is nil).
+    public func download(from url: URL, contentMode: UIView.ContentMode = .scaleAspectFit, placeholder: UIImage? = nil, completionHandler: ((UIImage?) -> Void)? = nil)
+
+    /// ReerKit: Make image view blurry.
+    ///
+    /// - Parameter style: UIBlurEffectStyle (default is .light).
+    public func blur(withStyle style: UIBlurEffect.Style = .light)
+
+    /// ReerKit: Blurred version of an image view.
+    ///
+    /// - Parameter style: UIBlurEffectStyle (default is .light).
+    /// - Returns: blurred version of self.
+    public func blurred(withStyle style: UIBlurEffect.Style = .light) -> UIImageView
+}
+```
+
+### UILabel
+
+```
+import UIKit
+
+public extension Reer where Base: UILabel {
+
+    /// ReerKit: Required height for a label.
+    public var requiredHeight: CGFloat { get }
+}
+```
+
+### UINavigationBar
+
+```
+import UIKit
+
+public extension Reer where Base: UINavigationBar {
+
+    /// ReerKit: Set Navigation Bar title, title color and font.
+    ///
+    /// - Parameters:
+    ///   - font: title font.
+    ///   - color: title text color (default is .black).
+    public func setTitleFont(_ font: UIFont, color: UIColor = .black)
+
+    /// ReerKit: Make navigation bar transparent.
+    ///
+    /// - Parameter tint: tint color (default is .white).
+    public func makeTransparent(withTint tint: UIColor = .white)
+
+    /// ReerKit: Set navigationBar background and text colors.
+    ///
+    /// - Parameters:
+    ///   - background: background color.
+    ///   - text: text color.
+    public func setColors(background: UIColor, text: UIColor)
+}
+```
+
+### UINavigationController
+
+```
+import UIKit
+
+public extension Reer where Base: UINavigationController {
+
+    /// ReerKit: Pop ViewController with completion handler.
+    ///
+    /// - Parameters:
+    ///   - animated: Set this value to true to animate the transition (default is true).
+    ///   - completion: optional completion handler (default is nil).
+    public func popViewController(animated: Bool = true, _ completion: (() -> Void)? = nil)
+
+    /// ReerKit: Push ViewController with completion handler.
+    ///
+    /// - Parameters:
+    ///   - viewController: viewController to push.
+    ///   - animated: Specify true to animate the transition or false if you do not want the transition to be animated. You might specify false if you are setting up the navigation controller at launch time.
+    ///   - completion: optional completion handler (default is nil).
+    public func pushViewController(_ viewController: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil)
+
+    /// ReerKit: Make navigation controller's navigation bar transparent.
+    ///
+    /// - Parameter tint: tint color (default is .white).
+    public func makeTransparent(withTint tint: UIColor = .white)
+}
+```
+
+### UINavigationItem
+
+```
+import UIKit
+
+public extension Reer where Base: UINavigationItem {
+
+    /// ReerKit: Replace title label with an image in navigation item.
+    ///
+    /// - Parameter image: UIImage to replace title with.
+    public func replaceTitle(with image: UIImage)
+}
+```
+
+### UIRefreshControl
+
+```
+import UIKit
+
+public extension Reer where Base: UIRefreshControl {
+
+    /// ReerKit: Programmatically begin refresh control inside of UITableView.
+    ///
+    /// - Parameters:
+    ///   - tableView: UITableView instance, inside which the refresh control is contained.
+    ///   - animated: Boolean, indicates that is the content offset changing should be animated or not.
+    ///   - sendAction: Boolean, indicates that should it fire sendActions method for valueChanged UIControlEvents.
+    public func beginRefreshing(in tableView: UITableView, animated: Bool, sendAction: Bool = false)
+
+    /// ReerKit: Programmatically begin refresh control inside of UIScrollView.
+    ///
+    /// - Parameters:
+    ///   - animated: Boolean, indicates that is the content offset changing should be animated or not.
+    ///   - sendAction: Boolean, indicates that should it fire sendActions method for valueChanged UIControlEvents.
+    public func beginRefreshing(animated: Bool, sendAction: Bool = false)
+}
+```
+
+### UIResponder
+
+```
+import UIKit
+public typealias ResponderEventAction = (_ userInfo: [AnyHashable : Any]?, _ toNext: inout Bool) -> Void
+
+/// ReerKit: Event name.
+///
+///     extension ResponderEventName {
+///         static let testButtonClicked: ResponderEventName = "XXTestButtonClicked"
+///     }
+public struct ResponderEventName : ExpressibleByStringLiteral, Hashable, RawRepresentable {
+
+    /// A type that represents a string literal.
+    ///
+    /// Valid types for `StringLiteralType` are `String` and `StaticString`.
+    public typealias StringLiteralType = String
+
+    /// The corresponding value of the raw type.
+    ///
+    /// A new instance initialized with `rawValue` will be equivalent to this
+    /// instance. For example:
+    ///
+    ///     enum PaperSize: String {
+    ///         case A4, A5, Letter, Legal
+    ///     }
+    ///
+    ///     let selectedSize = PaperSize.Letter
+    ///     print(selectedSize.rawValue)
+    ///     // Prints "Letter"
+    ///
+    ///     print(selectedSize == PaperSize(rawValue: selectedSize.rawValue)!)
+    ///     // Prints "true"
+    public private(set) var rawValue: String { get }
+
+    /// Creates an instance initialized to the given string value.
+    ///
+    /// - Parameter value: The value of the new instance.
+    public init(stringLiteral value: String)
+
+    /// Creates a new instance with the specified raw value.
+    ///
+    /// If there is no value of the type that corresponds with the specified raw
+    /// value, this initializer returns `nil`. For example:
+    ///
+    ///     enum PaperSize: String {
+    ///         case A4, A5, Letter, Legal
+    ///     }
+    ///
+    ///     print(PaperSize(rawValue: "Legal"))
+    ///     // Prints "Optional("PaperSize.Legal")"
+    ///
+    ///     print(PaperSize(rawValue: "Tabloid"))
+    ///     // Prints "nil"
+    ///
+    /// - Parameter rawValue: The raw value to use for the new instance.
+    public init?(rawValue: String)
+
+    /// Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
+    ///
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
+    public static func == (lhs: ResponderEventName, rhs: ResponderEventName) -> Bool
+
+    /// Hashes the essential components of this value by feeding them into the
+    /// given hasher.
+    ///
+    /// Implement this method to conform to the `Hashable` protocol. The
+    /// components used for hashing must be the same as the components compared
+    /// in your type's `==` operator implementation. Call `hasher.combine(_:)`
+    /// with each of these components.
+    ///
+    /// - Important: In your implementation of `hash(into:)`,
+    ///   don't call `finalize()` on the `hasher` instance provided,
+    ///   or replace it with a different instance.
+    ///   Doing so may become a compile-time error in the future.
+    ///
+    /// - Parameter hasher: The hasher to use when combining the components
+    ///   of this instance.
+    public func hash(into hasher: inout Hasher)
+}
+
+public extension Reer where Base: UIResponder {
+
+    /// ReerKit: Throw a responder event in a responder.
+    /// - Parameters:
+    ///   - eventName: A customize event name.
+    ///   - userInfo: The user info for the event.
+    public func post(_ eventName: ResponderEventName, userInfo: [AnyHashable : Any]? = nil)
+
+    /// ReerKit: Obeserve a responder event in some next responder.
+    /// - Parameters:
+    ///   - eventName: A customize event name.
+    ///   - action: Action will be execute when receive the event.
+    public mutating func observeResponderEvent(_ eventName: ResponderEventName, action: @escaping ResponderEventAction)
+
+    /// ReerKit: Unobserve a responder event.
+    /// - Parameter eventName: The customize event name.
+    public mutating func unobserveResponderEvent(_ eventName: ResponderEventName)
+}
+```
+
+### UIScreen
+
+```
+import UIKit
+
+public extension Reer where Base: UIScreen {
+
+    /// ReerKit: Main screen size.
+    public static var size: CGSize { get }
+
+    /// ReerKit: Main screen width.
+    public static var width: CGFloat { get }
+
+    /// ReerKit: Main screen height.
+    public static var height: CGFloat { get }
+
+    /// ReerKit: Point value of one physical pixel for different screen.
+    public static var onePixel: CGFloat { get }
+
+    /// ReerKit: Half point value for aligning physical pixel.
+    public static var halfPoint: CGFloat { get }
+}
+```
+
+### UIScrollView
+
+```
+import UIKit
+
+public extension Reer where Base: UIScrollView {
+
+    /// ReerKit: Takes a snapshot of an entire ScrollView.
+    ///
+    ///    AnySubclassOfUIScrollView().snapshot
+    ///    UITableView().snapshot
+    ///
+    /// - Returns: Snapshot as UIImage for rendered ScrollView.
+    public var snapshot: UIImage? { get }
+
+    /// ReerKit: The currently visible region of the scroll view.
+    public var visibleRect: CGRect { get }
+
+    /// ReerKit: Scroll to the top-most content offset.
+    /// - Parameter animated: `true` to animate the transition at a constant velocity to the new offset, `false` to make the transition immediate.
+    public func scrollToTop(animated: Bool = true)
+
+    /// ReerKit: Scroll to the left-most content offset.
+    /// - Parameter animated: `true` to animate the transition at a constant velocity to the new offset, `false` to make the transition immediate.
+    public func scrollToLeft(animated: Bool = true)
+
+    /// ReerKit: Scroll to the bottom-most content offset.
+    /// - Parameter animated: `true` to animate the transition at a constant velocity to the new offset, `false` to make the transition immediate.
+    public func scrollToBottom(animated: Bool = true)
+
+    /// ReerKit: Scroll to the right-most content offset.
+    /// - Parameter animated: `true` to animate the transition at a constant velocity to the new offset, `false` to make the transition immediate.
+    public func scrollToRight(animated: Bool = true)
+
+    /// ReerKit: Scroll up one page of the scroll view.
+    /// If `isPagingEnabled` is `true`, the previous page location is used.
+    /// - Parameter animated: `true` to animate the transition at a constant velocity to the new offset, `false` to make the transition immediate.
+    public func scrollUp(animated: Bool = true)
+
+    /// ReerKit: Scroll left one page of the scroll view.
+    /// If `isPagingEnabled` is `true`, the previous page location is used.
+    /// - Parameter animated: `true` to animate the transition at a constant velocity to the new offset, `false` to make the transition immediate.
+    public func scrollLeft(animated: Bool = true)
+
+    /// ReerKit: Scroll down one page of the scroll view.
+    /// If `isPagingEnabled` is `true`, the next page location is used.
+    /// - Parameter animated: `true` to animate the transition at a constant velocity to the new offset, `false` to make the transition immediate.
+    public func scrollDown(animated: Bool = true)
+
+    /// ReerKit: Scroll right one page of the scroll view.
+    /// If `isPagingEnabled` is `true`, the next page location is used.
+    /// - Parameter animated: `true` to animate the transition at a constant velocity to the new offset, `false` to make the transition immediate.
+    public func scrollRight(animated: Bool = true)
+}
+```
+
+### UISearchBar
+
+```
+import UIKit
+
+public extension Reer where Base: UISearchBar {
+
+    /// ReerKit: Text field inside search bar (if applicable).
+    public var textField: UITextField? { get }
+
+    /// ReerKit: Text with no spaces or new lines in beginning and end (if applicable).
+    public var trimmedText: String? { get }
+
+    /// ReerKit: Clear text.
+    public func clear()
+}
+```
+
+### UISegmentedControl
+
+```
+import UIKit
+
+public extension Reer where Base: UISegmentedControl {
+
+    /// ReerKit: Segments titles.
+    public var segmentTitles: [String] { get set }
+
+    /// ReerKit: Segments images.
+    public var segmentImages: [UIImage] { get set }
+}
+```
+
+### UISlider
+
+```
+import UIKit
+
+public extension Reer where Base: UISlider {
+
+    /// ReerKit: Set slide bar value with completion handler.
+    ///
+    /// - Parameters:
+    ///   - value: slider value.
+    ///   - animated: set true to animate value change (default is true).
+    ///   - duration: animation duration in seconds (default is 1 second).
+    ///   - completion: an optional completion handler to run after value is changed (default is nil).
+    public func setValue(_ value: Float, animated: Bool = true, duration: TimeInterval = 1, completion: (() -> Void)? = nil)
+}
+```
+
+### UIStackView
+
+```
+import UIKit
+
+public extension UIStackView {
+
+    /// ReerKit: Initialize an UIStackView with an array of UIView and common parameters.
+    ///
+    ///     let stackView = UIStackView(arrangedSubviews: [UIView(), UIView()], axis: .vertical)
+    ///
+    /// - Parameters:
+    ///   - arrangedSubviews: The UIViews to add to the stack.
+    ///   - axis: The axis along which the arranged views are laid out.
+    ///   - spacing: The distance in points between the adjacent edges of the stack view’s arranged views (default: 0.0).
+    ///   - alignment: The alignment of the arranged subviews perpendicular to the stack view’s axis (default: .fill).
+    ///   - distribution: The distribution of the arranged views along the stack view’s axis (default: .fill).
+    @MainActor public static func re(arrangedSubviews: [UIView], axis: NSLayoutConstraint.Axis, spacing: CGFloat = 0.0, alignment: UIStackView.Alignment = .fill, distribution: UIStackView.Distribution = .fill) -> UIStackView
+}
+
+public extension Reer where Base: UIStackView {
+
+    /// ReerKit: Adds array of views to the end of the arrangedSubviews array.
+    ///
+    /// - Parameter views: views array.
+    public func addArrangedSubviews(_ views: [UIView])
+
+    /// ReerKit: Removes all views in stack’s array of arranged subviews.
+    public func removeArrangedSubviews()
+
+    /// ReerKit: Exchanges two views of the arranged subviews.
+    /// - Parameters:
+    ///   - view1: first view to swap.
+    ///   - view2: second view to swap.
+    ///   - animated: set true to animate swap (default is true).
+    ///   - duration: animation duration in seconds (default is 1 second).
+    ///   - delay: animation delay in seconds (default is 1 second).
+    ///   - options: animation options (default is AnimationOptions.curveLinear).
+    ///   - completion: optional completion handler to run with animation finishes (default is nil).
+    public func swap(_ view1: UIView, _ view2: UIView, animated: Bool = false, duration: TimeInterval = 0.25, delay: TimeInterval = 0, options: UIView.AnimationOptions = .curveLinear, completion: ((Bool) -> Void)? = nil)
+}
+```
+
+### UIStoryboard
+
+```
+import UIKit
+
+public extension Reer where Base: UIStoryboard {
+
+    /// ReerKit: Get main storyboard for application.
+    public static var main: UIStoryboard? { get }
+
+    /// ReerKit: Instantiate a UIViewController using its class name.
+    ///
+    /// - Parameter name: UIViewController type.
+    /// - Returns: The view controller corresponding to specified class name.
+    public func instantiateViewController<T>(withClass name: T.Type) -> T? where T : UIViewController
+}
+```
+
+### UISwitch
+
+```
+import UIKit
+
+public extension Reer where Base: UISwitch {
+
+    /// ReerKit: Toggle a UISwitch.
+    ///
+    /// - Parameter animated: set true to animate the change (default is true).
+    public func toggle(animated: Bool = true)
+}
+```
+
+### UITabBar
+
+```
+import UIKit
+
+public extension Reer where Base: UITabBar {
+
+    /// ReerKit: Set tabBar colors.
+    ///
+    /// - Parameters:
+    ///   - background: background color.
+    ///   - selectedBackground: background color for selected tab.
+    ///   - item: icon tint color for items.
+    ///   - selectedItem: icon tint color for item.
+    public func setColors(background: UIColor? = nil, selectedBackground: UIColor? = nil, item: UIColor? = nil, selectedItem: UIColor? = nil)
+}
+```
+
+### UITableView
+
+```
+import UIKit
+
+public extension Reer where Base: UITableView {
+
+    /// ReerKit: Index path of last row in tableView.
+    public var indexPathForLastRow: IndexPath? { get }
+
+    /// ReerKit: Index of last section in tableView.
+    public var lastSection: Int? { get }
+
+    /// ReerKit: Number of all rows in all sections of tableView.
+    ///
+    /// - Returns: The count of all rows in the tableView.
+    public func numberOfRows() -> Int
+
+    /// ReerKit: IndexPath for last row in section.
+    ///
+    /// - Parameter section: section to get last row in.
+    /// - Returns: optional last indexPath for last row in section (if applicable).
+    public func indexPathForLastRow(inSection section: Int) -> IndexPath?
+
+    /// ReerKit: Reload data with a completion handler.
+    ///
+    /// - Parameter completion: completion handler to run after reloadData finishes.
+    public func reloadData(_ completion: @escaping () -> Void)
+
+    /// ReerKit: Reload tableView height only animatablly. It will not trigger `cellForRow` to reload data.
+    public func reloadHeight()
+
+    /// ReerKit: Remove TableFooterView.
+    public func removeTableFooterView()
+
+    /// ReerKit: Remove TableHeaderView.
+    public func removeTableHeaderView()
+
+    /// ReerKit: Dequeue reusable UITableViewCell using class name.
+    ///
+    /// - Parameter name: UITableViewCell type.
+    /// - Returns: UITableViewCell object with associated class name.
+    public func dequeueReusableCell<T>(withClass name: T.Type) -> T where T : UITableViewCell
+
+    /// ReerKit: Dequeue reusable UITableViewCell using class name for indexPath.
+    ///
+    /// - Parameters:
+    ///   - name: UITableViewCell type.
+    ///   - indexPath: location of cell in tableView.
+    /// - Returns: UITableViewCell object with associated class name.
+    public func dequeueReusableCell<T>(_ name: T.Type, for indexPath: IndexPath) -> T where T : UITableViewCell
+
+    /// ReerKit: Dequeue reusable UITableViewHeaderFooterView using class name.
+    ///
+    /// - Parameter name: UITableViewHeaderFooterView type.
+    /// - Returns: UITableViewHeaderFooterView object with associated class name.
+    public func dequeueReusableHeaderFooterView<T>(_ name: T.Type) -> T where T : UITableViewHeaderFooterView
+
+    /// ReerKit: Register UITableViewHeaderFooterView using class name.
+    ///
+    /// - Parameters:
+    ///   - nib: Nib file used to create the header or footer view.
+    ///   - name: UITableViewHeaderFooterView type.
+    public func register<T>(nib: UINib?, withHeaderFooterViewClass name: T.Type) where T : UITableViewHeaderFooterView
+
+    /// ReerKit: Register UITableViewHeaderFooterView using class name.
+    ///
+    /// - Parameter name: UITableViewHeaderFooterView type.
+    public func register<T>(headerFooterView name: T.Type) where T : UITableViewHeaderFooterView
+
+    /// ReerKit: Register UITableViewCell using class name.
+    ///
+    /// - Parameter name: UITableViewCell type.
+    public func register<T>(cell name: T.Type) where T : UITableViewCell
+
+    /// ReerKit: Register UITableViewCell using class name.
+    ///
+    /// - Parameters:
+    ///   - nib: Nib file used to create the tableView cell.
+    ///   - name: UITableViewCell type.
+    public func register<T>(nib: UINib?, withCellClass name: T.Type) where T : UITableViewCell
+
+    /// ReerKit: Register UITableViewCell with .xib file using only its corresponding class.
+    ///               Assumes that the .xib filename and cell class has the same name.
+    ///
+    /// - Parameters:
+    ///   - name: UITableViewCell type.
+    ///   - bundleClass: Class in which the Bundle instance will be based on.
+    public func register<T>(nibWithCellClass name: T.Type, at bundleClass: AnyClass? = nil) where T : UITableViewCell
+
+    /// ReerKit: Check whether IndexPath is valid within the tableView.
+    ///
+    /// - Parameter indexPath: An IndexPath to check.
+    /// - Returns: Boolean value for valid or invalid IndexPath.
+    public func isValidIndexPath(_ indexPath: IndexPath) -> Bool
+
+    /// ReerKit: Safely scroll to possibly invalid IndexPath.
+    ///
+    /// - Parameters:
+    ///   - indexPath: Target IndexPath to scroll to.
+    ///   - scrollPosition: Scroll position.
+    ///   - animated: Whether to animate or not.
+    public func scrollToRow(at indexPath: IndexPath, at scrollPosition: UITableView.ScrollPosition, animated: Bool)
+}
+```
+
+### UITextField
+
+```
+import UIKit
+
+public extension UITextField {
+
+    /// ReerKit: UITextField text type.
+    ///
+    /// - emailAddress: UITextField is used to enter email addresses.
+    /// - password: UITextField is used to enter passwords.
+    /// - generic: UITextField is used to enter generic text.
+    public enum TextType {
+
+        /// ReerKit: UITextField is used to enter email addresses.
+        case emailAddress
+
+        /// ReerKit: UITextField is used to enter passwords.
+        case password
+
+        /// ReerKit: UITextField is used to enter generic text.
+        case generic
+    }
+}
+
+public extension Reer where Base: UITextField {
+
+    /// ReerKit: Set textField for common text types.
+    public var textType: UITextField.TextType { get set }
+
+    /// ReerKit: Check if text field is empty.
+    public var isEmpty: Bool { get }
+
+    /// ReerKit: Return text with no spaces or new lines in beginning and end.
+    public var trimmedText: String? { get }
+
+    /// ReerKit: Check if textFields text is a valid email format.
+    ///
+    ///        textField.text = "john@doe.com"
+    ///        textField.hasValidEmail -> true
+    ///
+    ///        textField.text = "swifterswift"
+    ///        textField.hasValidEmail -> false
+    ///
+    public var hasValidEmail: Bool { get }
+
+    /// ReerKit: Left view tint color.
+    public var leftViewTintColor: UIColor? { get set }
+
+    /// ReerKit: Right view tint color.
+    public var rightViewTintColor: UIColor? { get set }
+
+    /// ReerKit: Clear text.
+    public func clear()
+
+    /// ReerKit: Set placeholder text color.
+    ///
+    /// - Parameter color: placeholder text color.
+    public func setPlaceHolderTextColor(_ color: UIColor?)
+
+    /// ReerKit: Add padding to the left of the textfield rect.
+    ///
+    /// - Parameter padding: amount of padding to apply to the left of the textfield rect.
+    public func addPaddingLeft(_ padding: CGFloat)
+
+    /// ReerKit: Add padding to the right of the textfield rect.
+    ///
+    /// - Parameter padding: amount of padding to apply to the right of the textfield rect.
+    public func addPaddingRight(_ padding: CGFloat)
+
+    /// ReerKit: Add padding to the left of the textfield rect.
+    ///
+    /// - Parameters:
+    ///   - image: left image.
+    ///   - padding: amount of padding between icon and the left of textfield.
+    public func addPaddingLeftIcon(_ image: UIImage, padding: CGFloat)
+
+    /// ReerKit: Add padding to the right of the textfield rect.
+    ///
+    /// - Parameters:
+    ///   - image: right image.
+    ///   - padding: amount of padding between icon and the right of textfield.
+    public func addPaddingRightIcon(_ image: UIImage, padding: CGFloat)
+
+    @discardableResult
+    public func addToolbar(items: [UIBarButtonItem]?, height: CGFloat = 44) -> UIToolbar
+}
+```
+
+### UITextView
+
+```
+import UIKit
+
+public extension Reer where Base: UITextView {
+
+    /// ReerKit: Clear text.
+    public func clear()
+
+    /// ReerKit: Scroll to the bottom of text view.
+    public func scrollToBottom()
+
+    /// ReerKit: Scroll to the top of text view.
+    public func scrollToTop()
+
+    /// ReerKit: Wrap to the content (Text / Attributed Text).
+    public func wrapToContent()
+}
+```
+
+### UIViewController
+
+```
+import UIKit
+
+public extension Reer where Base: UIViewController {
+
+    /// ReerKit: Check if ViewController is onscreen and not hidden.
+    public var isVisible: Bool { get }
+
+    /// ReerKit: Instantiate UIViewController from storyboard.
+    ///
+    /// - Parameters:
+    ///   - storyboard: Name of the storyboard where the UIViewController is located.
+    ///   - bundle: Bundle in which storyboard is located.
+    ///   - identifier: UIViewController's storyboard identifier.
+    /// - Returns: Custom UIViewController instantiated from storyboard.
+    public static func instantiate(from storyboard: String = "Main", bundle: Bundle? = nil, identifier: String? = nil) -> Base
+
+    /// ReerKit: Assign as listener to notification.
+    ///
+    /// - Parameters:
+    ///   - name: notification name.
+    ///   - selector: selector to run with notified.
+    public func addNotificationObserver(name: Notification.Name, selector: Selector)
+
+    /// ReerKit: Unassign as listener to notification.
+    ///
+    /// - Parameter name: notification name.
+    public func removeNotificationObserver(name: Notification.Name)
+
+    /// ReerKit: Unassign as listener from all notifications.
+    public func removeNotificationsObserver()
+
+    /// ReerKit: Helper method to display an alert on any UIViewController subclass. Uses UIAlertController to show an alert.
+    ///
+    /// - Parameters:
+    ///   - title: title of the alert.
+    ///   - message: message/body of the alert.
+    ///   - buttonTitles: (Optional)list of button titles for the alert. Default button i.e "OK" will be shown if this parameter is nil.
+    ///   - highlightedButtonIndex: (Optional) index of the button from buttonTitles that should be highlighted. If this parameter is nil no button will be highlighted.
+    ///   - completion: (Optional) completion block to be invoked when any one of the buttons is tapped. It passes the index of the tapped button as an argument.
+    /// - Returns: UIAlertController object (discardable).
+    @discardableResult
+    public func showAlert(title: String?, message: String?, buttonTitles: [String]? = nil, highlightedButtonIndex: Int? = nil, completion: ((Int) -> Void)? = nil) -> UIAlertController
+
+    /// ReerKit: Helper method to add a UIViewController as a childViewController.
+    ///
+    /// - Parameters:
+    ///   - child: the view controller to add as a child.
+    ///   - containerView: the containerView for the child viewController's root view.
+    public func addChildViewController(_ child: UIViewController, toContainerView containerView: UIView)
+
+    /// ReerKit: Helper method to remove a UIViewController from its parent.
+    public func removeViewAndControllerFromParentViewController()
+
+    /// ReerKit: Helper method for a UIViewController to close itself.
+    public func closeSelf(animated: Bool = true, completion: (() -> Void)? = nil)
+
+    /// ReerKit: Helper method to present a UIViewController as a popover.
+    ///
+    /// - Parameters:
+    ///   - popoverContent: the view controller to add as a popover.
+    ///   - sourcePoint: the point in which to anchor the popover.
+    ///   - size: the size of the popover. Default uses the popover preferredContentSize.
+    ///   - delegate: the popover's presentationController delegate. Default is nil.
+    ///   - animated: Pass true to animate the presentation; otherwise, pass false.
+    ///   - completion: The block to execute after the presentation finishes. Default is nil.
+    public func presentPopover(_ popoverContent: UIViewController, sourcePoint: CGPoint, size: CGSize? = nil, delegate: UIPopoverPresentationControllerDelegate? = nil, animated: Bool = true, completion: (() -> Void)? = nil)
+}
+```
+
+### UIView
+
+```
+import UIKit
+import SwiftUI
+import CoreImage
+
+public extension Reer where Base: UIView {
+
+    /// ReerKit: Shortcut for frame.origin.x
+    public var x: CGFloat { get set }
+
+    /// ReerKit: Shortcut for frame.origin.y
+    public var y: CGFloat { get set }
+
+    /// ReerKit: Shortcut for frame.size.width
+    public var width: CGFloat { get set }
+
+    /// ReerKit: Shortcut for frame.size.height
+    public var height: CGFloat { get set }
+
+    /// ReerKit: Shortcut for frame.origin.x
+    public var left: CGFloat { get set }
+
+    /// ReerKit: Shortcut for frame.origin.x + frame.size.width
+    public var right: CGFloat { get set }
+
+    /// ReerKit: Shortcut for frame.origin.y
+    public var top: CGFloat { get set }
+
+    /// ReerKit: Shortcut for frame.origin.y + frame.size.height
+    public var bottom: CGFloat { get set }
+
+    /// ReerKit: Shortcut for center.x
+    public var centerX: CGFloat { get set }
+
+    /// ReerKit: Shortcut for center.y
+    public var centerY: CGFloat { get set }
+
+    /// ReerKit: Shortcut for frame.origin
+    public var origin: CGPoint { get set }
+
+    /// ReerKit: Shortcut for frame.size
+    public var size: CGSize { get set }
+}
+
+public extension Reer where Base: UIView {
+
+    /// ReerKit: Border color of view.
+    public var borderColor: UIColor? { get set }
+
+    /// ReerKit: Border width of view.
+    public var borderWidth: CGFloat { get set }
+
+    /// ReerKit: Corner radius of view.
+    public var cornerRadius: CGFloat { get set }
+
+    /// ReerKit: Shadow color of view.
+    public var shadowColor: UIColor? { get set }
+
+    /// ReerKit: Shadow offset of view.
+    public var shadowOffset: CGSize { get set }
+
+    /// ReerKit: Shadow opacity of view.
+    public var shadowOpacity: Float { get set }
+
+    /// ReerKit: Shadow radius of view.
+    public var shadowRadius: CGFloat { get set }
+
+    /// ReerKit: Shadow path of view.
+    public var shadowPath: UIBezierPath? { get set }
+}
+
+public extension Reer where Base: UIView {
+
+    /// ReerKit: Create a snapshot image of the complete view hierarchy.
+    public var snapshotImage: UIImage? { get }
+
+    /// ReerKit: Find the first responder in its subviews recursively.
+    public var firstResponder: UIView? { get }
+
+    /// ReerKit: Get view's ViewController that belongs to.
+    public var viewController: UIViewController? { get }
+
+    public var isGrayModeEnabled: Bool { get set }
+}
+
+public extension Reer where Base: UIView {
+
+    /// ReerKit: Create a snapshot image of the complete view hierarchy.
+    /// It's faster than `snapshotImage`, but may cause screen updates.
+    ///
+    /// - Parameter afterUpdates: A Boolean value that indicates whether the snapshot should be rendered after recent changes have been incorporated. Specify the value false if you want to render a snapshot in the view hierarchy’s current state, which might not include recent changes.
+    /// - Returns: a snapshot image of view
+    public func snapshot(afterScreenUpdates afterUpdates: Bool = false) -> UIImage?
+
+    /// ReerKit: Pick the color at a point of the view.
+    /// It will return nil if the point is out of bounds.
+    public func color(at point: CGPoint) -> UIColor?
+
+    /// ReerKit: Add array of views to the view.
+    ///
+    /// - Parameter subviews: array of subviews to add to view.
+    public func addSubviews(_ subviews: [UIView])
+
+    /// ReerKit: Remove all subviews
+    public func removeAllSubviews()
+
+    /// ReerKit: Returns all the subviews of a given type.
+    ///
+    /// - Parameters:
+    ///   - ofType: Class of the view to search.
+    ///   - recursive: Whether to find recursively in the view hierarchy.
+    /// - Returns: All subviews with a specified type.
+    public func subviews<T>(ofType _: T.Type, recursive: Bool = false) -> [T]
+
+    /// ReerKit: Returns the first subview of a given type.
+    ///
+    /// - Parameters:
+    ///   - ofType: Class of the view to search.
+    ///   - recursive: Whether to find it recursively in the view hierarchy.
+    /// - Returns: All subviews with a specified type.
+    public func firstSubview<T>(ofType _: T.Type, recursive: Bool = false) -> T?
+
+    /// ReerKit: Return all the subviews matching the condition.
+    /// - Parameters:
+    ///   - condition: condition to evaluate each subview against.
+    ///   - recursive: Whether to find it recursively in the view hierarchy.
+    /// - Returns: All subviews that matching the condition.
+    public func subviews(matching condition: (UIView) -> Bool, recursive: Bool = false) -> [UIView]
+
+    /// ReerKit: Return the first subview matching the condition.
+    /// - Parameters:
+    ///   - condition: condition to evaluate each subview against.
+    ///   - recursive: Whether to find it recursively in the view hierarchy.
+    /// - Returns: The first subview that matching the condition.
+    public func firstSubview(matching condition: (UIView) -> Bool, recursive: Bool = false) -> UIView?
+
+    /// ReerKit: Return the string of subviews tree.
+    ///
+    /// ```
+    /// UIView (0x0000000107c102f0) - frame: (0.0, 0.0, 430.0, 932.0)
+    /// ├── UILabel (0x0000000107f08900) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// ├── UIButton (0x0000000107c18550) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// │   ├── UIImageView (0x0000000107c19660) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// │   └── UIImageView (0x0000000107c19bf0) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// └── UILabel (0x0000000107c19df0) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// ```
+    ///
+    /// - Parameter maxDepth: The maximum depth you want to find in the view hierarchy
+    /// - Returns: The string of subviews tree.
+    public func subviewTree(maxDepth: Int = Int.max) -> String
+
+    /// ReerKit: Print the subviews tree.
+    ///
+    /// ```
+    /// UIView (0x0000000107c102f0) - frame: (0.0, 0.0, 430.0, 932.0)
+    /// ├── UILabel (0x0000000107f08900) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// ├── UIButton (0x0000000107c18550) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// │   ├── UIImageView (0x0000000107c19660) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// │   └── UIImageView (0x0000000107c19bf0) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// └── UILabel (0x0000000107c19df0) - frame: (0.0, 0.0, 0.0, 0.0)
+    /// ```
+    ///
+    /// - Parameter maxDepth: The maximum depth you want to find in the view hierarchy
+    public func printSubviewTree(maxDepth: Int = Int.max)
+
+    /// ReerKit: Search all superviews until a view with the condition is found.
+    ///
+    /// - Parameter condition: predicate to evaluate on superviews.
+    public func superview(matching condition: (UIView) -> Bool) -> UIView?
+
+    /// ReerKit: Search all superviews until a view with this class is found.
+    public func superview<T>(ofType _: T.Type) -> T? where T : UIView
+
+    /// ReerKit: Returns all superviews of the current view
+    /// - Parameter maxLevel: The maximum number of levels to traverse upwards. Defaults to Int.max.
+    /// - Returns: An array of superviews, ordered from the immediate superview to the highest level ancestor.
+    public func superviews(maxLevel: Int = Int.max) -> [UIView]
+
+    /// ReerKit: Converts a point from the receiver's coordinate system to that of the specified view or window.
+    ///
+    /// - Parameters:
+    ///   - point: A point specified in the local coordinate system (bounds) of the receiver.
+    ///   - view: The view or window into whose coordinate system point is to be converted.
+    ///           If view is nil, this method instead converts to window base coordinates.
+    /// - Returns: The point converted to the coordinate system of view.
+    public func convert(point: CGPoint, toViewOrWindow view: UIView?) -> CGPoint
+
+    /// ReerKit: Converts a point from the coordinate system of a given view or window to that of the receiver.
+    ///
+    /// - Parameters:
+    ///   - point: A point specified in the local coordinate system (bounds) of view.
+    ///   - view: The view or window with point in its coordinate system.
+    ///           If view is nil, this method instead converts from window base coordinates.
+    /// - Returns: The point converted to the local coordinate system (bounds) of the receiver.
+    public func convert(point: CGPoint, fromViewOrWindow view: UIView?) -> CGPoint
+
+    /// ReerKit: Converts a rectangle from the receiver's coordinate system to that of another view or window.
+    ///
+    /// - Parameters:
+    ///   - rect: A rectangle specified in the local coordinate system (bounds) of the receiver.
+    ///   - view: The view or window that is the target of the conversion operation.
+    ///           If view is nil, this method instead converts to window base coordinates.
+    /// - Returns: The converted rectangle.
+    public func convert(rect: CGRect, toViewOrWindow view: UIView?) -> CGRect
+
+    /// ReerKit: Converts a rectangle from the coordinate system of another view or window to that of the receiver.
+    ///
+    /// - Parameters:
+    ///   - rect: A rectangle specified in the local coordinate system (bounds) of view.
+    ///   - view: The view or window with rect in its coordinate system.
+    ///           If view is nil, this method instead converts from window base coordinates.
+    /// - Returns: The converted rectangle.
+    public func convert(rect: CGRect, fromViewOrWindow view: UIView?) -> CGRect
+
+    /// ReerKit: Set some or all corners radiuses of view.
+    ///
+    /// - Parameters:
+    ///   - corners: array of corners to change (example: [.bottomLeft, .topRight]).
+    ///   - radius: radius for selected corners.
+    public func roundCorners(_ corners: UIRectCorner = .allCorners, radius: CGFloat)
+
+    /// ReerKit: Set some or all corners radiuses of view with a continuous curve.
+    /// It will make the rectangle to squircle, just like the iPhone/iPad...and all of Apple products's rounded corner.
+    /// https://medium.com/minimal-notes/rounded-corners-in-the-apple-ecosystem-1b3f45e18fcc
+    ///
+    /// - Parameters:
+    ///   - corners: array of corners to change (example: [.bottomLeft, .topRight]).
+    ///   - radius: radius for selected corners.
+    @available(iOS 13.0, tvOS 13.0, *)
+    public func squircleRoundCorners(_ corners: UIRectCorner = .allCorners, radius: CGFloat)
+
+    /// ReerKit: Add shadow to view.
+    ///
+    /// - Note: This method only works with non-clear background color, or if the view has a `shadowPath` set.
+    /// See parameter `opacity` for detail.
+    ///
+    /// - Parameters:
+    ///   - color: shadow color (default is #137992).
+    ///   - radius: shadow radius (default is 3).
+    ///   - offset: shadow offset (default is .zero).
+    ///   - opacity: shadow opacity (default is 0.5). It will also be affected by the `alpha` of `backgroundColor`.
+    ///   - path: shadow path
+    public func addShadow(ofColor color: UIColor = UIColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0), radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.5, path: CGPath? = nil)
+
+    /// ReerKit: Fade in view.
+    ///
+    /// - Parameters:
+    ///   - duration: animation duration in seconds (default is 1 second).
+    ///   - completion: optional completion handler to run with animation finishes (default is nil).
+    public func fadeIn(duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil)
+
+    /// ReerKit: Fade out view.
+    ///
+    /// - Parameters:
+    ///   - duration: animation duration in seconds (default is 1 second).
+    ///   - completion: optional completion handler to run with animation finishes (default is nil).
+    public func fadeOut(duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil)
+
+    /// ReerKit: Load view from nib.
+    ///
+    /// - Parameters:
+    ///   - name: nib name.
+    ///   - bundle: bundle of nib (default is nil).
+    /// - Returns: optional UIView (if applicable).
+    public static func loadFromNib(named name: String, bundle: Bundle? = nil) -> UIView?
+
+    /// ReerKit: Load view of a certain type from nib
+    ///
+    /// - Parameters:
+    ///   - name: UIView type.
+    ///   - bundle: bundle of nib (default is nil).
+    /// - Returns: UIView
+    public static func loadFromNib<T>(withClass name: T.Type, bundle: Bundle? = nil) -> T where T : UIView
+
+    /// ReerKit: Remove all gesture recognizers from view.
+    public func removeGestureRecognizers()
+
+    /// ReerKit: Attaches gesture recognizers to the view. Attaching gesture recognizers to a view defines the scope of the represented gesture, causing it to receive touches hit-tested to that view and all of its subviews. The view establishes a strong reference to the gesture recognizers.
+    ///
+    /// - Parameter gestureRecognizers: The array of gesture recognizers to be added to the view.
+    public func addGestureRecognizers(_ gestureRecognizers: [UIGestureRecognizer])
+
+    /// ReerKit: Detaches gesture recognizers from the receiving view. This method releases gestureRecognizers in addition to detaching them from the view.
+    ///
+    /// - Parameter gestureRecognizers: The array of gesture recognizers to be removed from the view.
+    public func removeGestureRecognizers(_ gestureRecognizers: [UIGestureRecognizer])
+}
+
+public extension Reer where Base: UIView {
+
+    /// ReerKit: Check if view is in RTL format.
+    public var isRightToLeft: Bool { get }
+
+    /// ReerKit: Add Visual Format constraints.
+    ///
+    /// - Parameters:
+    ///   - withFormat: visual Format language.
+    ///   - views: array of views which will be accessed starting with index 0 (example: [v0], [v1], [v2]..).
+    public func addConstraints(withFormat: String, views: UIView...)
+
+    /// ReerKit: Anchor all sides of the view into it's superview.
+    public func fillToSuperview()
+
+    /// ReerKit: Add anchors from any side of the current view into the specified anchors and returns the newly added constraints.
+    ///
+    /// - Parameters:
+    ///   - top: current view's top anchor will be anchored into the specified anchor.
+    ///   - left: current view's left anchor will be anchored into the specified anchor.
+    ///   - bottom: current view's bottom anchor will be anchored into the specified anchor.
+    ///   - right: current view's right anchor will be anchored into the specified anchor.
+    ///   - topConstant: current view's top anchor margin.
+    ///   - leftConstant: current view's left anchor margin.
+    ///   - bottomConstant: current view's bottom anchor margin.
+    ///   - rightConstant: current view's right anchor margin.
+    ///   - widthConstant: current view's width.
+    ///   - heightConstant: current view's height.
+    /// - Returns: array of newly added constraints (if applicable).
+    @discardableResult
+    public func anchor(top: NSLayoutYAxisAnchor? = nil, left: NSLayoutXAxisAnchor? = nil, bottom: NSLayoutYAxisAnchor? = nil, right: NSLayoutXAxisAnchor? = nil, topConstant: CGFloat = 0, leftConstant: CGFloat = 0, bottomConstant: CGFloat = 0, rightConstant: CGFloat = 0, widthConstant: CGFloat = 0, heightConstant: CGFloat = 0) -> [NSLayoutConstraint]
+
+    /// ReerKit: Anchor center X into current view's superview with a constant margin value.
+    ///
+    /// - Parameter constant: constant of the anchor constraint (default is 0).
+    public func anchorCenterXToSuperview(constant: CGFloat = 0)
+
+    /// ReerKit: Anchor center Y into current view's superview with a constant margin value.
+    ///
+    /// - Parameter constant: constant of the anchor constraint (default is 0).
+    public func anchorCenterYToSuperview(constant: CGFloat = 0)
+
+    /// ReerKit: Anchor center X and Y into current view's superview.
+    public func anchorCenterSuperview()
+
+    /// ReerKit: Search constraints until we find one for the given view
+    /// and attribute. This will enumerate ancestors since constraints are
+    /// always added to the common ancestor.
+    ///
+    /// - Parameter attribute: the attribute to find.
+    /// - Parameter view: the view to find.
+    /// - Returns: matching constraint.
+    public func findConstraint(attribute: NSLayoutConstraint.Attribute, for view: UIView) -> NSLayoutConstraint?
+
+    /// ReerKit: First width constraint for this view.
+    public var widthConstraint: NSLayoutConstraint? { get }
+
+    /// ReerKit: First height constraint for this view.
+    public var heightConstraint: NSLayoutConstraint? { get }
+
+    /// ReerKit: First leading constraint for this view.
+    public var leadingConstraint: NSLayoutConstraint? { get }
+
+    /// ReerKit: First trailing constraint for this view.
+    public var trailingConstraint: NSLayoutConstraint? { get }
+
+    /// ReerKit: First top constraint for this view.
+    public var topConstraint: NSLayoutConstraint? { get }
+
+    /// ReerKit: First bottom constraint for this view.
+    public var bottomConstraint: NSLayoutConstraint? { get }
+}
+
+@available(iOS 13.0, tvOS 13.0, *)
+public extension Reer where Base: UIView {
+
+    /// ReerKit: Adds a SwiftUI view to the end of the receiver’s list of subviews.
+    /// - Parameter view: The SwiftUI view to be added. After being added, this view appears on top of any other subviews.
+    /// - Returns: A UIKit view that represent a SwiftUI view hierarchy.
+    public func addSwiftUIView(_ view: some View) -> UIView
+
+    /// ReerKit: Inserts a SwiftUI at the specified index.
+    /// - Parameters:
+    ///   - view: The SwiftUI view to insert.
+    ///   - index: The index in the array of the subviews property at which to insert the view. Subview indices start at 0 and cannot be greater than the number of subviews.
+    /// - Returns: A UIKit view that represent a SwiftUI view hierarchy.
+    public func insertSwiftUIView(_ view: some View, at index: Int) -> UIView
+
+    /// ReerKit: Inserts a SwiftUI view below another view in the view hierarchy.
+    /// - Parameters:
+    ///   - view: The SwiftUI view to insert below another view. It’s removed from its superview if it’s not a sibling of siblingSubview.
+    ///   - siblingSubview: The sibling view that will be above the inserted view.
+    /// - Returns: A UIKit view that represent a SwiftUI view hierarchy.
+    public func insertSwiftUIView(_ view: some View, belowSubview siblingSubview: UIView) -> UIView
+
+    /// ReerKit: Inserts a view above another view in the view hierarchy.
+    /// - Parameters:
+    ///   - view: The SwiftUI view to insert. It’s removed from its superview if it’s not a sibling of siblingSubview.
+    ///   - siblingSubview: The sibling view that will be behind the inserted view.
+    /// - Returns: A UIKit view that represent a SwiftUI view hierarchy.
+    public func insertSwiftUIView(_ view: some View, aboveSubview siblingSubview: UIView) -> UIView
+}
+```
+
+### UIWindow
+
+```
+import UIKit
+
+public extension Reer where Base: UIWindow {
+
+    /// ReerKit: Switch current root view controller with a new view controller.
+    ///
+    /// - Parameters:
+    ///   - viewController: new view controller.
+    ///   - animated: set to true to animate view controller change (default is true).
+    ///   - duration: animation duration in seconds (default is 0.5).
+    ///   - options: animation options (default is .transitionFlipFromRight).
+    ///   - completion: optional completion handler called after view controller is changed.
+    public func switchRootViewController(to viewController: UIViewController, animated: Bool = true, duration: TimeInterval = 0.5, options: UIView.AnimationOptions = .transitionFlipFromRight, _ completion: (() -> Void)? = nil)
 }
 ```

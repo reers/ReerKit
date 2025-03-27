@@ -10521,3 +10521,830 @@ public extension Reer where Base: UIWindow {
     public func switchRootViewController(to viewController: UIViewController, animated: Bool = true, duration: TimeInterval = 0.5, options: UIView.AnimationOptions = .transitionFlipFromRight, _ completion: (() -> Void)? = nil)
 }
 ```
+
+## CoreAnimation+REExtensions
+
+### CAGradientLayer
+
+```
+import QuartzCore
+
+public extension CAGradientLayer {
+
+    /// ReerKit: Creates a CAGradientLayer with the specified colors, location, startPoint, endPoint, and type.
+    ///
+    /// - Parameters:
+    ///   - colors: An array of colors defining the color of each gradient stop.
+    ///   - locations: An array of NSNumber defining the location of each
+    ///                gradient stop as a value in the range [0, 1]. The values must be
+    ///                monotonically increasing. If a nil array is given, the stops are
+    ///                assumed to spread uniformly across the [0, 1] range. When rendered,
+    ///                the colors are mapped to the output colorspace before being
+    ///                interpolated (default is nil).
+    ///   - startPoint: start point corresponds to the first gradient stop (I.e. [0,0] is the bottom-corner of the layer, [1,1] is the top-right corner).
+    ///   - endPoint: end point corresponds to the last gradient stop
+    ///   - type: The kind of gradient that will be drawn. Currently, the only allowed values are `axial' (the default value), `radial', and `conic'.
+    public static func re(colors: [REColor], locations: [CGFloat]? = nil, startPoint: CGPoint = CGPoint(x: 0.5, y: 0), endPoint: CGPoint = CGPoint(x: 0.5, y: 1), type: CAGradientLayerType = .axial) -> CAGradientLayer
+}
+```
+
+### CALayer
+
+```
+import QuartzCore
+import UIKit
+
+public extension Reer where Base: CALayer {
+
+    /// ReerKit: Add shadow to layer.
+    ///
+    /// - Note: This method only works with non-clear background color, or if the view has a `shadowPath` set.
+    /// See parameter `opacity` for detail.
+    ///
+    /// - Parameters:
+    ///   - color: shadow color (default is #137992).
+    ///   - radius: shadow radius (default is 3).
+    ///   - offset: shadow offset (default is .zero).
+    ///   - opacity: shadow opacity (default is 0.5). It will also be affected by the `alpha` of `backgroundColor`.
+    ///   - path: shadow path
+    public func addShadow(ofColor color: REColor = REColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0), radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.5, path: CGPath? = nil)
+}
+
+public extension Reer where Base: CALayer {
+
+    /// ReerKit: Shortcut for frame.origin.x
+    public var x: CGFloat { get set }
+
+    /// ReerKit: Shortcut for frame.origin.y
+    public var y: CGFloat { get set }
+
+    /// ReerKit: Shortcut for frame.size.width
+    public var width: CGFloat { get set }
+
+    /// ReerKit: Shortcut for frame.size.height
+    public var height: CGFloat { get set }
+
+    /// ReerKit: Shortcut for frame.origin.x
+    public var left: CGFloat { get set }
+
+    /// ReerKit: Shortcut for frame.origin.x + frame.size.width
+    public var right: CGFloat { get set }
+
+    /// ReerKit: Shortcut for frame.origin.y
+    public var top: CGFloat { get set }
+
+    /// ReerKit: Shortcut for frame.origin.y + frame.size.height
+    public var bottom: CGFloat { get set }
+
+    /// ReerKit: Shortcut for position.x
+    public var centerX: CGFloat { get set }
+
+    /// ReerKit: Shortcut for position.y
+    public var centerY: CGFloat { get set }
+
+    /// ReerKit: Shortcut for frame.origin
+    public var origin: CGPoint { get set }
+
+    /// ReerKit: Shortcut for frame.size
+    public var size: CGSize { get set }
+}
+
+```
+
+### CATransform3D
+
+```
+import QuartzCore
+
+extension CATransform3D: ReerCompatibleValue {}
+
+extension CATransform3D : Equatable {
+
+    /// ReerKit: Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
+    ///
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
+    @inlinable public static func == (lhs: CATransform3D, rhs: CATransform3D) -> Bool
+}
+
+public extension Reer where Base == CATransform3D {
+
+    /// ReerKit: The identity transform: [1 0 0 0; 0 1 0 0; 0 0 1 0; 0 0 0 1].
+    @inlinable public static var identity: CATransform3D { get }
+
+    /// ReerKit: Returns `true` if the receiver is the identity transform.
+    @inlinable public var isIdentity: Bool { get }
+}
+
+public extension CATransform3D {
+
+    /// ReerKit: Returns a transform that translates by `(tx, ty, tz)`.
+    /// - Parameters:
+    ///   - tx: x-axis translation
+    ///   - ty: y-axis translation
+    ///   - tz: z-axis translation
+    @inlinable public static func re(translationX tx: CGFloat, y ty: CGFloat, z tz: CGFloat) -> CATransform3D
+
+    /// ReerKit: Returns a transform that scales by `(sx, sy, sz)`.
+    /// - Parameters:
+    ///   - sx: x-axis scale
+    ///   - sy: y-axis scale
+    ///   - sz: z-axis scale
+    @inlinable public static func re(scaleX sx: CGFloat, y sy: CGFloat, z sz: CGFloat) -> CATransform3D
+
+    /// ReerKit: Returns a transform that rotates by `angle` radians about the vector `(x, y, z)`.
+    ///
+    /// If the vector has zero length the behavior is undefined.
+    /// - Parameters:
+    ///   - angle: The angle of rotation
+    ///   - x: x position of the vector
+    ///   - y: y position of the vector
+    ///   - z: z position of the vector
+    @inlinable public static func re(rotationAngle angle: CGFloat, x: CGFloat, y: CGFloat, z: CGFloat) -> CATransform3D
+}
+
+public extension Reer where Base == CATransform3D {
+
+    /// ReerKit: Translate the receiver by `(tx, ty, tz)`.
+    /// - Parameters:
+    ///   - tx: x-axis translation
+    ///   - ty: y-axis translation
+    ///   - tz: z-axis translation
+    /// - Returns: The translated matrix.
+    @inlinable public func translatedBy(x tx: CGFloat, y ty: CGFloat, z tz: CGFloat) -> CATransform3D
+
+    /// ReerKit: Scale the receiver by `(sx, sy, sz)`.
+    /// - Parameters:
+    ///   - sx: x-axis scale
+    ///   - sy: y-axis scale
+    ///   - sz: z-axis scale
+    /// - Returns: The scaled matrix.
+    @inlinable public func scaledBy(x sx: CGFloat, y sy: CGFloat, z sz: CGFloat) -> CATransform3D
+
+    /// ReerKit: Rotate the receiver by `angle` radians about the vector `(x, y, z)`.
+    ///
+    /// If the vector has zero length the behavior is undefined.
+    /// - Parameters:
+    ///   - angle: The angle of rotation
+    ///   - x: x position of the vector
+    ///   - y: y position of the vector
+    ///   - z: z position of the vector
+    /// - Returns: The rotated matrix.
+    @inlinable public func rotated(by angle: CGFloat, x: CGFloat, y: CGFloat, z: CGFloat) -> CATransform3D
+
+    /// ReerKit: Invert the receiver.
+    ///
+    /// Returns the original matrix if the receiver has no inverse.
+    /// - Returns: The inverted matrix of the receiver.
+    @inlinable public func inverted() -> CATransform3D
+
+    /// ReerKit: Concatenate `transform` to the receiver.
+    /// - Parameter t2: The transform to concatenate on to the receiver
+    /// - Returns: The concatenated matrix.
+    @inlinable public func concatenating(_ t2: CATransform3D) -> CATransform3D
+}
+
+extension CATransform3D: ReerReferenceCompatible {}
+public extension ReerReference where Base == CATransform3D {
+
+    /// ReerKit: Translate the receiver by `(tx, ty, tz)`.
+    /// - Parameters:
+    ///   - tx: x-axis translation
+    ///   - ty: y-axis translation
+    ///   - tz: z-axis translation
+    @inlinable public mutating func translateBy(x tx: CGFloat, y ty: CGFloat, z tz: CGFloat)
+
+    /// ReerKit: Scale the receiver by `(sx, sy, sz)`.
+    /// - Parameters:
+    ///   - sx: x-axis scale
+    ///   - sy: y-axis scale
+    ///   - sz: z-axis scale
+    @inlinable public mutating func scaleBy(x sx: CGFloat, y sy: CGFloat, z sz: CGFloat)
+
+    /// ReerKit: Rotate the receiver by `angle` radians about the vector `(x, y, z)`.
+    ///
+    /// If the vector has zero length the behavior is undefined.
+    /// - Parameters:
+    ///   - angle: The angle of rotation
+    ///   - x: x position of the vector
+    ///   - y: y position of the vector
+    ///   - z: z position of the vector
+    @inlinable public mutating func rotate(by angle: CGFloat, x: CGFloat, y: CGFloat, z: CGFloat)
+
+    /// ReerKit: Invert the receiver.
+    ///
+    /// Returns the original matrix if the receiver has no inverse.
+    @inlinable public mutating func invert()
+
+    /// ReerKit: Concatenate `transform` to the receiver.
+    /// - Parameter t2: The transform to concatenate on to the receiver
+    @inlinable public mutating func concatenate(_ t2: CATransform3D)
+}
+import CoreGraphics
+
+public extension <<error type>> {
+
+    /// ReerKit: Returns true if the receiver can be represented exactly by an affine transform.
+    @inlinable public var isAffine: Bool { get }
+
+    /// ReerKit: Returns the affine transform represented by the receiver.
+    ///
+    /// If the receiver can not be represented exactly by an affine transform the returned value is undefined.
+    @inlinable public func affineTransform() -> CGAffineTransform
+}
+```
+
+## CoreGraphics+REExtensions
+
+### CGAffineTransform
+
+```
+import CoreGraphics
+import QuartzCore
+
+extension CGAffineTransform: ReerCompatibleValue {}
+public extension Reer where Base == CGAffineTransform {
+
+    /// ReerKit: Returns a transform with the same effect as the receiver.
+    @inlinable public func transform3D() -> CATransform3D
+}
+```
+
+### CGColor
+
+```
+import CoreGraphics
+import UIKit
+
+extension CGColor: ReerCompatible {}
+public extension Reer where Base: CGColor {
+
+    /// ReerKit: UIColor.
+    public var uiColor: UIColor? { get }
+}
+```
+
+### CGFloat
+
+```
+import CoreGraphics
+import Foundation
+
+public extension Reer where Base == CGFloat {
+
+    /// ReerKit: Absolute of CGFloat value.
+    public var abs: CGFloat { get }
+
+    /// ReerKit: Ceil of CGFloat value.
+    public var ceil: CGFloat { get }
+
+    /// ReerKit: Radian value of degree input.
+    public var degreesToRadians: CGFloat { get }
+
+    /// ReerKit: Floor of CGFloat value.
+    public var floor: CGFloat { get }
+
+    /// ReerKit: Check if CGFloat is positive.
+    public var isPositive: Bool { get }
+
+    /// ReerKit: Check if CGFloat is negative.
+    public var isNegative: Bool { get }
+
+    /// ReerKit: Int.
+    public var int: Int { get }
+
+    /// ReerKit: Float.
+    public var float: Float { get }
+
+    /// ReerKit: Double.
+    public var double: Double { get }
+
+    /// ReerKit: Degree value of radian input.
+    public var radiansToDegrees: CGFloat { get }
+}
+```
+
+### CGPoint
+
+```
+import CoreGraphics
+
+extension CGPoint: ReerCompatibleValue {}
+public extension Reer where Base == CGPoint {
+
+    /// ReerKit: Distance from another CGPoint.
+    ///
+    ///     let point1 = CGPoint(x: 10, y: 10)
+    ///     let point2 = CGPoint(x: 30, y: 30)
+    ///     let distance = point1.re.distance(from: point2)
+    ///     // distance = 28.28
+    ///
+    /// - Parameter point: CGPoint to get distance from.
+    /// - Returns: Distance between self and given CGPoint.
+    public func distance(from point: CGPoint) -> CGFloat
+
+    /// ReerKit: Distance between two CGPoints.
+    ///
+    ///     let point1 = CGPoint(x: 10, y: 10)
+    ///     let point2 = CGPoint(x: 30, y: 30)
+    ///     let distance = CGPoint.re.distance(from: point2, to: point1)
+    ///     // distance = 28.28
+    ///
+    /// - Parameters:
+    ///   - point1: first CGPoint.
+    ///   - point2: second CGPoint.
+    /// - Returns: distance between the two given CGPoints.
+    public static func distance(from point1: CGPoint, to point2: CGPoint) -> CGFloat
+}
+
+public extension CGPoint {
+
+    /// ReerKit: Add two CGPoints.
+    ///
+    ///     let point1 = CGPoint(x: 10, y: 10)
+    ///     let point2 = CGPoint(x: 30, y: 30)
+    ///     let point = point1 + point2
+    ///     // point = CGPoint(x: 40, y: 40)
+    ///
+    /// - Parameters:
+    ///   - lhs: CGPoint to add to.
+    ///   - rhs: CGPoint to add.
+    /// - Returns: result of addition of the two given CGPoints.
+    public static func + (lhs: CGPoint, rhs: CGPoint) -> CGPoint
+
+    /// ReerKit: Add a CGPoints to self.
+    ///
+    ///     let point1 = CGPoint(x: 10, y: 10)
+    ///     let point2 = CGPoint(x: 30, y: 30)
+    ///     point1 += point2
+    ///     // point1 = CGPoint(x: 40, y: 40)
+    ///
+    /// - Parameters:
+    ///   - lhs: `self`.
+    ///   - rhs: CGPoint to add.
+    public static func += (lhs: inout CGPoint, rhs: CGPoint)
+
+    /// ReerKit: Subtract two CGPoints.
+    ///
+    ///     let point1 = CGPoint(x: 10, y: 10)
+    ///     let point2 = CGPoint(x: 30, y: 30)
+    ///     let point = point1 - point2
+    ///     // point = CGPoint(x: -20, y: -20)
+    ///
+    /// - Parameters:
+    ///   - lhs: CGPoint to subtract from.
+    ///   - rhs: CGPoint to subtract.
+    /// - Returns: result of subtract of the two given CGPoints.
+    public static func - (lhs: CGPoint, rhs: CGPoint) -> CGPoint
+
+    /// ReerKit: Subtract a CGPoints from self.
+    ///
+    ///     let point1 = CGPoint(x: 10, y: 10)
+    ///     let point2 = CGPoint(x: 30, y: 30)
+    ///     point1 -= point2
+    ///     // point1 = CGPoint(x: -20, y: -20)
+    ///
+    /// - Parameters:
+    ///   - lhs: `self`.
+    ///   - rhs: CGPoint to subtract.
+    public static func -= (lhs: inout CGPoint, rhs: CGPoint)
+
+    /// ReerKit: Multiply a CGPoint with a scalar.
+    ///
+    ///     let point1 = CGPoint(x: 10, y: 10)
+    ///     let scalar = point1 * 5
+    ///     // scalar = CGPoint(x: 50, y: 50)
+    ///
+    /// - Parameters:
+    ///   - point: CGPoint to multiply.
+    ///   - scalar: scalar value.
+    /// - Returns: result of multiplication of the given CGPoint with the scalar.
+    public static func * (point: CGPoint, scalar: CGFloat) -> CGPoint
+
+    /// ReerKit: Multiply self with a scalar.
+    ///
+    ///     let point1 = CGPoint(x: 10, y: 10)
+    ///     point *= 5
+    ///     // point1 = CGPoint(x: 50, y: 50)
+    ///
+    /// - Parameters:
+    ///   - point: `self`.
+    ///   - scalar: scalar value.
+    /// 
+    public static func *= (point: inout CGPoint, scalar: CGFloat)
+
+    /// ReerKit: Multiply a CGPoint with a scalar.
+    ///
+    ///     let point1 = CGPoint(x: 10, y: 10)
+    ///     let scalar = 5 * point1
+    ///     // scalar = CGPoint(x: 50, y: 50)
+    ///
+    /// - Parameters:
+    ///   - scalar: scalar value.
+    ///   - point: CGPoint to multiply.
+    /// - Returns: result of multiplication of the given CGPoint with the scalar.
+    public static func * (scalar: CGFloat, point: CGPoint) -> CGPoint
+}
+
+public extension CGPoint {
+
+    /// ReerKit: Create a `CGPoint` instance with x, y, but without argument label.
+    public static func re(_ x: CGFloat, _ y: CGFloat) -> CGPoint
+}
+```
+
+### CGRect
+
+```
+import CoreGraphics
+
+extension CGRect: ReerCompatibleValue {}
+public extension Reer where Base == CGRect {
+
+    /// ReerKit: Return center of rect.
+    public var center: CGPoint { get }
+
+    /// ReerKit: Create a new `CGRect` by resizing with specified anchor.
+    /// - Parameters:
+    ///   - size: new size to be applied.
+    ///   - anchor: specified anchor, a point in normalized coordinates -
+    ///     '(0, 0)' is the top left corner of rect，'(1, 1)' is the bottom right corner of rect,
+    ///     defaults to '(0.5, 0.5)'. Example:
+    ///
+    ///          anchor = CGPoint(x: 0.0, y: 1.0):
+    ///
+    ///                       A2------B2
+    ///          A----B       |        |
+    ///          |    |  -->  |        |
+    ///          C----D       C-------D2
+    ///
+    public func resizing(to size: CGSize, anchor: CGPoint = CGPoint(x: 0.5, y: 0.5)) -> CGRect
+}
+
+public extension CGRect {
+
+    /// ReerKit: Create a `CGRect` instance with center and size.
+    /// - Parameters:
+    ///   - center: center of the new rect.
+    ///   - size: size of the new rect.
+    public static func re(center: CGPoint, size: CGSize) -> CGRect
+
+    /// ReerKit: Create a `CGRect` instance with x, y, width, height, but without argument label.
+    public static func re(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect
+}
+```
+
+### CGSize
+
+```
+import CoreGraphics
+import UIKit
+
+extension CGSize: ReerCompatibleValue {}
+public extension Reer where Base == CGSize {
+
+    /// ReerKit: Returns the aspect ratio.
+    public var aspectRatio: CGFloat { get }
+
+    /// ReerKit: Returns width or height, whichever is the bigger value.
+    public var maxDimension: CGFloat { get }
+
+    /// ReerKit: Returns width or height, whichever is the smaller value.
+    public var minDimension: CGFloat { get }
+
+    /// ReerKit: Aspect fit CGSize.
+    ///
+    ///     let rect = CGSize(width: 120, height: 80)
+    ///     let parentRect  = CGSize(width: 100, height: 50)
+    ///     let newRect = rect.re.aspectFit(to: parentRect)
+    ///     //newRect.width = 75 , newRect.height = 50
+    ///
+    /// - Parameter boundingSize: bounding size to fit self to.
+    /// - Returns: self fitted into given bounding size
+    public func aspectFit(to boundingSize: CGSize) -> CGSize
+
+    /// ReerKit: Aspect fill CGSize.
+    ///
+    ///     let rect = CGSize(width: 20, height: 120)
+    ///     let parentRect  = CGSize(width: 100, height: 60)
+    ///     let newRect = rect.re.aspectFill(to: parentRect)
+    ///     //newRect.width = 100 , newRect.height = 600
+    ///
+    /// - Parameter boundingSize: bounding size to fill self to.
+    /// - Returns: self filled into given bounding size
+    public func aspectFill(to boundingSize: CGSize) -> CGSize
+
+    /// ReerKit: Returns a rectangle to fit the @param rect with specified content mode.
+    ///
+    /// - Parameters:
+    ///   - rect: The constrant rect
+    ///   - mode: The content mode
+    /// - Returns: A rectangle for the given content mode.
+    public func fit(inRect rect: CGRect, mode: UIView.ContentMode) -> CGRect
+}
+
+public extension CGSize {
+
+    /// ReerKit: Add two CGSize.
+    ///
+    ///     let sizeA = CGSize(width: 5, height: 10)
+    ///     let sizeB = CGSize(width: 3, height: 4)
+    ///     let result = sizeA + sizeB
+    ///     // result = CGSize(width: 8, height: 14)
+    ///
+    /// - Parameters:
+    ///   - lhs: CGSize to add to.
+    ///   - rhs: CGSize to add.
+    /// - Returns: The result comes from the addition of the two given CGSize struct.
+    public static func + (lhs: CGSize, rhs: CGSize) -> CGSize
+
+    /// ReerKit: Add a tuple to CGSize.
+    ///
+    ///     let sizeA = CGSize(width: 5, height: 10)
+    ///     let result = sizeA + (5, 4)
+    ///     // result = CGSize(width: 10, height: 14)
+    ///
+    /// - Parameters:
+    ///   - lhs: CGSize to add to.
+    ///   - tuple: tuple value.
+    /// - Returns: The result comes from the addition of the given CGSize and tuple.
+    public static func + (lhs: CGSize, tuple: (width: CGFloat, height: CGFloat)) -> CGSize
+
+    /// ReerKit: Add a CGSize to self.
+    ///
+    ///     var sizeA = CGSize(width: 5, height: 10)
+    ///     let sizeB = CGSize(width: 3, height: 4)
+    ///     sizeA += sizeB
+    ///     // sizeA = CGPoint(width: 8, height: 14)
+    ///
+    /// - Parameters:
+    ///   - lhs: `self`.
+    ///   - rhs: CGSize to add.
+    public static func += (lhs: inout CGSize, rhs: CGSize)
+
+    /// ReerKit: Add a tuple to self.
+    ///
+    ///     var sizeA = CGSize(width: 5, height: 10)
+    ///     sizeA += (3, 4)
+    ///     // result = CGSize(width: 8, height: 14)
+    ///
+    /// - Parameters:
+    ///   - lhs: `self`.
+    ///   - tuple: tuple value.
+    public static func += (lhs: inout CGSize, tuple: (width: CGFloat, height: CGFloat))
+
+    /// ReerKit: Subtract two CGSize.
+    ///
+    ///     let sizeA = CGSize(width: 5, height: 10)
+    ///     let sizeB = CGSize(width: 3, height: 4)
+    ///     let result = sizeA - sizeB
+    ///     // result = CGSize(width: 2, height: 6)
+    ///
+    /// - Parameters:
+    ///   - lhs: CGSize to subtract from.
+    ///   - rhs: CGSize to subtract.
+    /// - Returns: The result comes from the subtract of the two given CGSize struct.
+    public static func - (lhs: CGSize, rhs: CGSize) -> CGSize
+
+    /// ReerKit: Subtract a tuple from CGSize.
+    ///
+    ///     let sizeA = CGSize(width: 5, height: 10)
+    ///     let result = sizeA - (3, 2)
+    ///     // result = CGSize(width: 2, height: 8)
+    ///
+    /// - Parameters:
+    ///   - lhs: CGSize to subtract from.
+    ///   - tuple: tuple value.
+    /// - Returns: The result comes from the subtract of the given CGSize and tuple.
+    public static func - (lhs: CGSize, tuple: (width: CGFloat, heoght: CGFloat)) -> CGSize
+
+    /// ReerKit: Subtract a CGSize from self.
+    ///
+    ///     var sizeA = CGSize(width: 5, height: 10)
+    ///     let sizeB = CGSize(width: 3, height: 4)
+    ///     sizeA -= sizeB
+    ///     // sizeA = CGPoint(width: 2, height: 6)
+    ///
+    /// - Parameters:
+    ///   - lhs: `self`.
+    ///   - rhs: CGSize to subtract.
+    public static func -= (lhs: inout CGSize, rhs: CGSize)
+
+    /// ReerKit: Subtract a tuple from self.
+    ///
+    ///     var sizeA = CGSize(width: 5, height: 10)
+    ///     sizeA -= (2, 4)
+    ///     // result = CGSize(width: 3, height: 6)
+    ///
+    /// - Parameters:
+    ///   - lhs: `self`.
+    ///   - tuple: tuple value.
+    public static func -= (lhs: inout CGSize, tuple: (width: CGFloat, height: CGFloat))
+
+    /// ReerKit: Multiply two CGSize.
+    ///
+    ///     let sizeA = CGSize(width: 5, height: 10)
+    ///     let sizeB = CGSize(width: 3, height: 4)
+    ///     let result = sizeA * sizeB
+    ///     // result = CGSize(width: 15, height: 40)
+    ///
+    /// - Parameters:
+    ///   - lhs: CGSize to multiply.
+    ///   - rhs: CGSize to multiply with.
+    /// - Returns: The result comes from the multiplication of the two given CGSize structs.
+    public static func * (lhs: CGSize, rhs: CGSize) -> CGSize
+
+    /// ReerKit: Multiply a CGSize with a scalar.
+    ///
+    ///     let sizeA = CGSize(width: 5, height: 10)
+    ///     let result = sizeA * 5
+    ///     // result = CGSize(width: 25, height: 50)
+    ///
+    /// - Parameters:
+    ///   - lhs: CGSize to multiply.
+    ///   - scalar: scalar value.
+    /// - Returns: The result comes from the multiplication of the given CGSize and scalar.
+    public static func * (lhs: CGSize, scalar: CGFloat) -> CGSize
+
+    /// ReerKit: Multiply a CGSize with a scalar.
+    ///
+    ///     let sizeA = CGSize(width: 5, height: 10)
+    ///     let result = 5 * sizeA
+    ///     // result = CGSize(width: 25, height: 50)
+    ///
+    /// - Parameters:
+    ///   - scalar: scalar value.
+    ///   - rhs: CGSize to multiply.
+    /// - Returns: The result comes from the multiplication of the given scalar and CGSize.
+    public static func * (scalar: CGFloat, rhs: CGSize) -> CGSize
+
+    /// ReerKit: Multiply self with a CGSize.
+    ///
+    ///     var sizeA = CGSize(width: 5, height: 10)
+    ///     let sizeB = CGSize(width: 3, height: 4)
+    ///     sizeA *= sizeB
+    ///     // result = CGSize(width: 15, height: 40)
+    ///
+    /// - Parameters:
+    ///   - lhs: `self`.
+    ///   - rhs: CGSize to multiply.
+    public static func *= (lhs: inout CGSize, rhs: CGSize)
+
+    /// ReerKit: Multiply self with a scalar.
+    ///
+    ///     var sizeA = CGSize(width: 5, height: 10)
+    ///     sizeA *= 3
+    ///     // result = CGSize(width: 15, height: 30)
+    ///
+    /// - Parameters:
+    ///   - lhs: `self`.
+    ///   - scalar: scalar value.
+    public static func *= (lhs: inout CGSize, scalar: CGFloat)
+}
+
+public extension CGSize {
+
+    /// ReerKit: Create a `CGSize` instance with side length (same width and height).
+    ///
+    /// - Parameters:
+    ///   - side: side length.
+    public static func re(side: CGFloat) -> CGSize
+
+    /// ReerKit: Create a `CGSize` instance with width, height, but without argument label.
+    public static func re(_ width: CGFloat, _ height: CGFloat) -> CGSize
+}
+```
+
+### CGVector
+
+```
+import CoreGraphics
+
+extension CGVector: ReerCompatibleValue {}
+public extension Reer where Base == CGVector {
+
+    /// ReerKit: The angle of rotation (in radians) of the vector. The range of the angle is -π to π; an angle of 0 points to the right.
+    ///
+    public var angle: CGFloat { get }
+
+    /// ReerKit: The magnitude (or length) of the vector.
+    ///
+    public var magnitude: CGFloat { get }
+}
+
+public extension CGVector {
+
+    /// ReerKit: Creates a vector with the given magnitude and angle.
+    ///
+    ///     let vector = CGVector.re(angle: .pi, magnitude: 1)
+    ///
+    /// - Parameters:
+    ///     - angle: The angle of rotation (in radians) counterclockwise from the positive x-axis.
+    ///     - magnitude: The length of the vector.
+    ///
+    public static func re(angle: CGFloat, magnitude: CGFloat) -> CGVector
+}
+
+public extension CGVector {
+
+    /// ReerKit: Multiplies a scalar and a vector (commutative).
+    ///
+    ///     let vector = CGVector(dx: 1, dy: 1)
+    ///     let largerVector = vector * 2
+    ///
+    /// - Parameters:
+    ///   - vector: The vector to be multiplied.
+    ///   - scalar: The scale by which the vector will be multiplied.
+    /// - Returns: The vector with its magnitude scaled.
+    public static func * (vector: CGVector, scalar: CGFloat) -> CGVector
+
+    /// ReerKit: Multiplies a scalar and a vector (commutative).
+    ///
+    ///     let vector = CGVector(dx: 1, dy: 1)
+    ///     let largerVector = 2 * vector
+    ///
+    /// - Parameters:
+    ///   - scalar: The scalar by which the vector will be multiplied.
+    ///   - vector: The vector to be multiplied.
+    /// - Returns: The vector with its magnitude scaled.
+    public static func * (scalar: CGFloat, vector: CGVector) -> CGVector
+
+    /// ReerKit: Compound assignment operator for vector-scalar multiplication.
+    ///
+    ///     var vector = CGVector(dx: 1, dy: 1)
+    ///     vector *= 2
+    ///
+    /// - Parameters:
+    ///   - vector: The vector to be multiplied.
+    ///   - scalar: The scale by which the vector will be multiplied.
+    public static func *= (vector: inout CGVector, scalar: CGFloat)
+
+    /// ReerKit: Negates the vector. The direction is reversed, but magnitude remains the same.
+    ///
+    ///     let vector = CGVector(dx: 1, dy: 1)
+    ///     let reversedVector = -vector
+    ///
+    /// - Parameter vector: The vector to be negated.
+    /// - Returns: The negated vector.
+    prefix public static func - (vector: CGVector) -> CGVector
+}
+```
+
+## Dispatch+REExtensions
+
+### DispatchQueue
+
+```
+import Dispatch
+
+public extension Reer where Base: DispatchQueue {
+
+    /// ReerKit: A Boolean value indicating whether the current dispatch queue is the main queue.
+    public static var isOnMainQueue: Bool { get }
+
+    /// ReerKit: Returns a Boolean value indicating whether the current dispatch queue is the specified queue.
+    ///
+    /// - Returns: `true` if the current queue is the specified queue, otherwise `false`.
+    public var isExecuting: Bool { get }
+}
+public typealias DelayTimeInSecond = Double
+public extension Reer where Base: DispatchQueue {
+
+    /// ReerKit: Runs passed closure asynchronous after certain time interval.
+    ///
+    /// - Parameters:
+    ///   - delay: The time interval(second) after which the closure will run.
+    ///   - qos: Quality of service at which the work item should be executed.
+    ///   - flags: Flags that control the execution environment of the work item.
+    ///   - work: The closure to run after certain time interval.
+    public func asyncAfter(delay: DelayTimeInSecond, qos: DispatchQoS = .unspecified, flags: DispatchWorkItemFlags = [], execute work: @escaping () -> Void)
+}
+```
+
+## WKWebView+REExtensions
+
+### WKWebView
+
+```
+import WebKit
+
+public extension Reer where Base: WKWebView {
+
+    /// ReerKit: Navigate to `url`.
+    /// - Parameter url: URL to navigate.
+    /// - Returns: A new navigation for given `url`.
+    @discardableResult
+    public func loadURL(_ url: URL) -> WKNavigation?
+
+    /// ReerKit: Navigate to url using `String`.
+    /// - Parameter urlString: The string specifying the URL to navigate to.
+    /// - Parameter timeout: Timeout duration.
+    /// - Returns: A new navigation for given `urlString`.
+    @discardableResult
+    public func loadURLString(_ urlString: String, timeout: TimeInterval? = nil) -> WKNavigation?
+}
+```

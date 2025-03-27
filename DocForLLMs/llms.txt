@@ -12,6 +12,289 @@ SGVsbG\n8gV29ybGQh".re.base64Decoded
 view.re.addSwiftUIView(Color.red)
 ```
 
+# ReerInfix
+Using the bridge below allows all system extension properties and methods to have an infix, such as `"aString".re.md5`
+
+```
+/// Wrapper for ReerKit compatible types. This type provides an extension point for
+/// convenience methods in ReerKit.
+public struct Reer<Base> {
+
+    public let base: Base
+
+    public init(_ base: Base)
+}
+
+/// Represents an object type that is compatible with ReerKit. You can use `re` property to get a
+/// value in the namespace of ReerKit.
+public protocol ReerCompatible : AnyObject {
+}
+
+/// Represents a value type that is compatible with ReerKit. You can use `re` property to get a
+/// value in the namespace of ReerKit.
+public protocol ReerCompatibleValue {
+}
+
+extension ReerCompatible {
+
+    /// Gets a namespace holder for ReerKit compatible types.
+    public var re: Reer<Self> { get set }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    public static var re: Reer<Self>.Type { get set }
+}
+
+extension ReerCompatibleValue {
+
+    /// Gets a namespace holder for ReerKit compatible types.
+    public var re: Reer<Self> { get set }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    public static var re: Reer<Self>.Type { get set }
+}
+
+/// Wrapper for ReerKit compatible types with a generic parameter. This type provides an extension point for
+/// convenience methods in ReerKit.
+public struct ReerGeneric<Base, T> {
+
+    public internal(set) var base: Base { get }
+
+    public init(_ base: Base)
+}
+
+/// Represents a type with a generic parameter that is compatible with ReerKit. You can use `re` property to get a
+/// value in the namespace of ReerKit.
+public protocol ReerGenericCompatible {
+
+    associatedtype T
+}
+
+public extension ReerGenericCompatible {
+
+    /// Gets a namespace holder for ReerKit compatible types.
+    public var re: ReerGeneric<Self, T> { get set }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    public static var re: ReerGeneric<Self, T>.Type { get set }
+}
+
+/// Wrapper for ReerKit compatible types with 2 generic parameters. This type provides an extension point for
+/// convenience methods in ReerKit.
+public struct ReerGeneric2<Base, T1, T2> {
+
+    public internal(set) var base: Base { get }
+
+    public init(_ base: Base)
+}
+
+/// Represents a type with 2 generic parameters that is compatible with ReerKit. You can use `re` property to get a
+/// value in the namespace of ReerKit.
+public protocol ReerGeneric2Compatible {
+
+    associatedtype T1
+
+    associatedtype T2
+}
+
+public extension ReerGeneric2Compatible {
+
+    /// Gets a namespace holder for ReerKit compatible types.
+    public var re: ReerGeneric2<Self, T1, T2> { get set }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    public static var re: ReerGeneric2<Self, T1, T2>.Type { get set }
+}
+
+/// Wrapper for ReerKit compatible types in a reference way. This type provides an extension point for
+/// convenience methods in ReerKit.
+public struct ReerReference<Base> {
+
+    public internal(set) var base: UnsafeMutablePointer<Base> { get }
+
+    public init(_ base: inout Base)
+}
+
+/// Represents a type that is compatible with ReerKit. You can use `re` property to get a
+/// value in the namespace of ReerKit.
+public protocol ReerReferenceCompatible {
+}
+
+public extension ReerReferenceCompatible {
+
+    /// Gets a namespace holder for ReerKit compatible types.
+    public var re: ReerReference<Self> { mutating get set }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    public static var re: ReerReference<Self>.Type { get set }
+}
+
+/// Wrapper for ReerKit compatible types with a generic parameter in a reference way. This type provides an extension point for
+/// convenience methods in ReerKit.
+public struct ReerReferenceGeneric<Base, T> {
+
+    public let base: UnsafeMutablePointer<Base>
+
+    public init(_ base: inout Base)
+}
+
+/// Represents a type with a generic parameter that is compatible with ReerKit. You can use `re` property to get a
+/// value in the namespace of ReerKit.
+public protocol ReerReferenceGenericCompatible {
+
+    associatedtype T
+}
+
+public extension ReerReferenceGenericCompatible {
+
+    /// Gets a namespace holder for ReerKit compatible types.
+    public var re: ReerReferenceGeneric<Self, T> { mutating get set }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    public static var re: ReerReferenceGeneric<Self, T>.Type { get set }
+}
+
+/// Wrapper for ReerKit compatible types with a generic parameter in a reference way. This type provides an extension point for
+/// convenience methods in ReerKit.
+public struct ReerReferenceGeneric2<Base, U1, U2> {
+
+    public let base: UnsafeMutablePointer<Base>
+
+    public init(_ base: inout Base)
+}
+
+/// Represents a type with a generic parameter that is compatible with ReerKit. You can use `re` property to get a
+/// value in the namespace of ReerKit.
+public protocol ReerReferenceGeneric2Compatible {
+
+    associatedtype U1
+
+    associatedtype U2
+}
+
+public extension ReerReferenceGeneric2Compatible {
+
+    /// Gets a namespace holder for ReerKit compatible types.
+    public var re: ReerReferenceGeneric2<Self, U1, U2> { mutating get set }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    public static var re: ReerReferenceGeneric2<Self, U1, U2>.Type { get set }
+}
+
+public extension Numeric {
+
+    /// Gets a namespace holder for ReerKit compatible types.
+    public var re: Reer<`Self`> { get set }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    public static var re: Reer<`Self`>.Type { get set }
+}
+
+public extension Sequence {
+
+    /// Gets a namespace holder for ReerKit compatible types.
+    public var re: Reer<`Self`> { get set }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    public static var re: Reer<`Self`>.Type { get set }
+}
+
+public struct ReerForEquatable<Base> {
+
+    public internal(set) var base: Base { get }
+
+    public init(_ base: Base)
+}
+
+public extension Equatable {
+
+    /// Gets a namespace holder for ReerKit compatible types.
+    public var re: ReerForEquatable<Self> { get set }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    public static var re: ReerForEquatable<Self>.Type { get set }
+}
+
+public struct ReerForMutableCollection<Base> {
+
+    public let base: UnsafeMutablePointer<Base>
+
+    public init(_ base: inout Base)
+}
+
+public extension MutableCollection {
+
+    /// Gets a namespace holder for ReerKit compatible types.
+    public var re: ReerForMutableCollection<Self> { mutating get set }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    public static var re: ReerForMutableCollection<Self>.Type { get set }
+}
+
+public struct ReerForStringProtocol<Base> {
+
+    public let base: Base
+
+    public init(_ base: Base)
+}
+
+public extension StringProtocol {
+
+    /// Gets a namespace holder for ReerKit compatible types.
+    public var re: ReerForStringProtocol<Self> { get set }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    public static var re: ReerForStringProtocol<Self>.Type { get set }
+}
+
+public struct ReerForRangeReplaceableCollection<Base> {
+
+    public let base: UnsafeMutablePointer<Base>
+
+    public init(_ base: inout Base)
+}
+
+public extension RangeReplaceableCollection {
+
+    /// Gets a namespace holder for ReerKit compatible types.
+    public var re: ReerForRangeReplaceableCollection<Self> { mutating get set }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    public static var re: ReerForRangeReplaceableCollection<Self>.Type { get set }
+}
+
+public struct ReerForOptionSet<Base> {
+
+    public let base: Base
+
+    public init(_ base: Base)
+}
+
+public extension OptionSet {
+
+    /// Gets a namespace holder for ReerKit compatible types.
+    public var re: ReerForOptionSet<Self> { get set }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    public static var re: ReerForOptionSet<Self>.Type { get set }
+}
+
+public struct ReerForContiguousBytes<Base> {
+
+    public let base: Base
+
+    public init(_ base: Base)
+}
+
+public extension ContiguousBytes {
+
+    /// Gets a namespace holder for ReerKit compatible types.
+    public var re: ReerForContiguousBytes<Self> { get set }
+
+    /// Gets a namespace holder for ReerKit compatible meta types.
+    public static var re: ReerForContiguousBytes<Self>.Type { get set }
+}
+```
+
 # API List
 
 ## GlobalFunctions
@@ -1195,5 +1478,2341 @@ public struct LinearFunction : CustomStringConvertible {
 
     /// A string representation of the linear function
     public var description: String { get }
+}
+```
+
+## PropertyWrapper
+
+### Clamped
+
+```
+@propertyWrapper 
+public struct Clamped<Value> where Value : Comparable {
+
+    public init(wrappedValue: Value, _ range: ClosedRange<Value>)
+
+    public var wrappedValue: Value { get set }
+}
+```
+
+### Locked
+
+```
+import os.lock
+
+/// ReerKit: A lock protects the property with an `os_unfair_lock`
+@propertyWrapper 
+public final class Locked<T> {
+
+    public init(wrappedValue: T)
+
+    public var wrappedValue: T { get set }
+
+    public var projectedValue: Locked<T> { get }
+
+    public func read<U>(_ execute: (T) throws -> U) rethrows -> U
+
+    @discardableResult
+    public func write<U>(_ execute: (inout T) throws -> U) rethrows -> U
+}
+```
+
+### Rounded
+
+```
+@propertyWrapper 
+public struct Rounded<Value> where Value : FloatingPoint {
+
+    public let rule: FloatingPointRoundingRule
+
+    public init(wrappedValue: Value, rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero)
+
+    public var wrappedValue: Value { get set }
+}
+```
+
+### RWLocked
+
+```
+import Darwin
+
+/// ReerKit: A read write lock wrapper grants multiple readers and single-writer guarantees on a value.
+@propertyWrapper 
+public final class RWLocked<T> {
+
+    public init(wrappedValue: T)
+
+    public var wrappedValue: T { get set }
+
+    public var projectedValue: RWLocked<T> { get }
+
+    public func read<U>(_ execute: (T) throws -> U) rethrows -> U
+
+    @discardableResult
+    public func write<U>(_ execute: (inout T) throws -> U) rethrows -> U
+}
+```
+
+### Trimmed
+
+```
+@propertyWrapper
+public struct Trimmed {
+
+    public init(wrappedValue: String)
+
+    public var wrappedValue: String { get set }
+}
+```
+
+## Weak
+
+### weak
+
+```
+/// Weak wrapper for AnyObject.
+public final class Weak<T> where T : AnyObject {
+
+    public private(set) weak var object: T? { get }
+
+    public init(_ object: T)
+}
+
+extension Weak : Equatable, Hashable {
+
+    /// Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
+    ///
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
+    public static func == (lhs: Weak<T>, rhs: Weak<T>) -> Bool
+
+    /// Hashes the essential components of this value by feeding them into the
+    /// given hasher.
+    ///
+    /// Implement this method to conform to the `Hashable` protocol. The
+    /// components used for hashing must be the same as the components compared
+    /// in your type's `==` operator implementation. Call `hasher.combine(_:)`
+    /// with each of these components.
+    ///
+    /// - Important: In your implementation of `hash(into:)`,
+    ///   don't call `finalize()` on the `hasher` instance provided,
+    ///   or replace it with a different instance.
+    ///   Doing so may become a compile-time error in the future.
+    ///
+    /// - Parameter hasher: The hasher to use when combining the components
+    ///   of this instance.
+    public func hash(into hasher: inout Hasher)
+}
+```
+
+### WeakProxy
+
+```
+import Foundation
+
+/// A proxy used to hold a weak object.
+/// It can be used to avoid retain cycles, such as the target in Timer or CADisplayLink.
+public class WeakProxy : NSObject {
+
+    /// The proxy target.
+    public weak var target: NSObject?
+
+    /// Creates a new weak proxy for target.
+    public init(target: NSObject)
+
+    public override func forwardingTarget(for aSelector: Selector!) -> Any?
+
+    public override func responds(to aSelector: Selector!) -> Bool
+
+    public override func isEqual(_ object: Any?) -> Bool
+
+    public override var hash: Int { get }
+
+    public override var superclass: AnyClass? { get }
+
+    public override func isProxy() -> Bool
+
+    public override func isKind(of aClass: AnyClass) -> Bool
+
+    public override func isMember(of aClass: AnyClass) -> Bool
+
+    public override func conforms(to aProtocol: Protocol) -> Bool
+
+    public override var description: String { get }
+
+    public override var debugDescription: String { get }
+}
+```
+
+### WeakMap
+
+```
+public protocol WeakOption {}
+
+/// Use phantom types to express weak option.
+public enum WeakKey : WeakOption {}
+public enum WeakValue : WeakOption {}
+public enum WeakKeyValue : WeakOption {}
+
+/// A map class that weak refering every AnyObject element.
+/// If the object element's key or value released, its weak wrapper `Weak<T>` will remove from the internal map automatically.
+/// This class is not thread-safe and should not be accessed concurrently from multiple threads.
+/// 
+///     var aa: NSObject? = NSObject()
+///     let bb: NSObject? = NSObject()
+///     let map: WeakMap<WeakValue, String, NSObject> = .init(["aa": aa!, "bb": bb!])
+///
+public class WeakMap<Option, Key, Value> where Option : WeakMap.WeakOption, Key : Hashable {
+
+    public var count: Int { get }
+
+    public var keys: [Key] { get }
+
+    public var values: [Value] { get }
+}
+
+extension WeakMap where Option == WeakMap.WeakKey, Key : AnyObject {
+
+    public convenience init(_ weakKeyMap: [Key : Value] = [:])
+
+    public subscript(key: Key) -> Value? { get set }
+
+    @discardableResult
+    public func removeValue(forKey key: Key) -> Value?
+
+    @discardableResult
+    public func updateValue(_ value: Value, forKey key: Key) -> Value?
+
+    public func forEach(_ body: ((key: Key, value: Value)) throws -> Void) rethrows
+}
+
+extension WeakMap where Option == WeakMap.WeakValue, Value : AnyObject {
+
+    public convenience init(_ weakValueMap: [Key : Value] = [:])
+
+    public subscript(key: Key) -> Value? { get set }
+
+    @discardableResult
+    public func removeValue(forKey key: Key) -> Value?
+
+    @discardableResult
+    public func updateValue(_ value: Value, forKey key: Key) -> Value?
+
+    public func forEach(_ body: ((key: Key, value: Value)) throws -> Void) rethrows
+}
+
+extension WeakMap where Option == WeakMap.WeakKeyValue, Key : AnyObject, Value : AnyObject {
+
+    public convenience init(_ weakKeyValueMap: [Key : Value] = [:])
+
+    public subscript(key: Key) -> Value? { get set }
+
+    @discardableResult
+    public func removeValue(forKey key: Key) -> Value?
+
+    @discardableResult
+    public func updateValue(_ value: Value, forKey key: Key) -> Value?
+
+    public func forEach(_ body: ((key: Key, value: Value)) throws -> Void) rethrows
+}
+```
+
+### WeakSet
+
+```
+/// A set class that weak refering every AnyObject element.
+/// If the object element released, its weak wrapper `Weak<T>` will remove from the internal set automatically.
+/// This class is not thread-safe and should not be accessed concurrently from multiple threads.
+///
+///     var aa: NSObject? = NSObject()
+///     let bb: NSObject? = NSObject()
+///     let set = WeakSet([aa!, bb!])
+///
+public class WeakSet<T> : ExpressibleByArrayLiteral where T : AnyObject {
+
+    public init()
+
+    public init(_ objects: [T])
+
+    /// Creates an instance initialized with the given elements.
+    public required convenience init(arrayLiteral elements: T...)
+
+    public var allObjects: [T] { get }
+
+    public var count: Int { get }
+
+    public func contains(_ object: T) -> Bool
+
+    public func add(_ object: T)
+
+    public func addObjects(_ objects: [T])
+
+    public func remove(_ object: T)
+
+    public func removeObjects(_ objects: [T])
+
+    public func removeAll()
+
+    public func copy() -> WeakSet<T>
+}
+
+extension WeakSet : Sequence {
+
+    /// Returns an iterator over the elements of this sequence.
+    public func makeIterator() -> WeakSetIterator<T>
+}
+
+public struct WeakSetIterator<T> : IteratorProtocol where T : AnyObject {
+
+    internal let weakSet: WeakSet<T>
+
+    internal init(_ weakSet: WeakSet<T>)
+
+    /// Advances to the next element and returns it, or `nil` if no next element
+    /// exists.
+    ///
+    /// Repeatedly calling this method returns, in order, all the elements of the
+    /// underlying sequence. As soon as the sequence has run out of elements, all
+    /// subsequent calls return `nil`.
+    ///
+    /// You must not call this method if any other copy of this iterator has been
+    /// advanced with a call to its `next()` method.
+    ///
+    /// The following example shows how an iterator can be used explicitly to
+    /// emulate a `for`-`in` loop. First, retrieve a sequence's iterator, and
+    /// then call the iterator's `next()` method until it returns `nil`.
+    ///
+    ///     let numbers = [2, 3, 5, 7]
+    ///     var numbersIterator = numbers.makeIterator()
+    ///
+    ///     while let num = numbersIterator.next() {
+    ///         print(num)
+    ///     }
+    ///     // Prints "2"
+    ///     // Prints "3"
+    ///     // Prints "5"
+    ///     // Prints "7"
+    ///
+    /// - Returns: The next element in the underlying sequence, if a next element
+    ///   exists; otherwise, `nil`.
+    public mutating func next() -> T?
+}
+```
+
+## Utility
+
+### RETimer
+
+```
+import Dispatch
+import os.lock
+import Foundation
+
+/// ReerKit: A timer based on `DispatchSource`.
+///
+///                           fireDate
+///     schedule()   callbackImmediatelyWhenFired  default first callback
+///         |                     |                      |
+///         |--------delay--------|-------interval-------|-------interval-------|
+public final class RETimer {
+
+    public enum State {
+
+        case initial
+
+        case running
+
+        case suspended
+
+        case invalidated
+    }
+
+    /// A number of seconds.
+    public typealias TimeInterval = Double
+
+    public private(set) var repeats: Bool { get }
+
+    public private(set) var timeInterval: TimeInterval { get }
+
+    public private(set) var state: State { get }
+
+    public typealias RETimerAction = (_ timer: RETimer) -> Void
+
+    /// Total elapsed time since the timer started, excluding paused durations.
+    public var totalElapsedTime: TimeInterval { get }
+
+    /// ReerKit: Initializes a timer object with the specified time interval and block.
+    /// You must call `schedule()` yourself after creating the timer.
+    ///
+    /// - Parameters:
+    ///   - delay: The delay interval after `schedule` method is invoked.
+    ///   - timeInterval: The number of seconds between firings of the timer. If timeInterval is less than or equal to 0.0, this method chooses the nonnegative value of 0.0001 seconds instead.
+    ///   - repeats: If true, the timer will repeatedly reschedule itself until invalidated. If false, the timer will be invalidated after it fires.
+    ///   - queue: The dispatch queue to which to execute the installed handlers.
+    ///   - callbackImmediatelyWhenFired: When should callback when time is fired, default is `false`, and its behavior is the same as `Foundation.Timer`
+    ///   - action: A closure to be executed when the timer fires. The closure takes a single Timer parameter and has no return value.
+    public init(delay: TimeInterval = 0, timeInterval: TimeInterval, repeats: Bool = true, queue: DispatchQueue = .main, callbackImmediatelyWhenFired: Bool = false, action: @escaping RETimerAction)
+
+    /// ReerKit: Creates a timer and schedules it with a delay interval.
+    /// - Parameters:
+    ///   - delay: The delay interval after `schedule` method is invoked.
+    ///   - timeInterval: The number of seconds between firings of the timer. If timeInterval is less than or equal to 0.0, this method chooses the nonnegative value of 0.0001 seconds instead.
+    ///   - repeats: If true, the timer will repeatedly reschedule itself until invalidated. If false, the timer will be invalidated after it fires.
+    ///   - queue: The dispatch queue to which to execute the installed handlers.
+    ///   - callbackImmediatelyWhenFired: When should callback when time is fired, default is `false`, and its behavior is the same as `Foundation.Timer`
+    ///   - action: A closure to be executed when the timer fires. The closure takes a single Timer parameter and has no return value.
+    /// - Returns: A timer instance.
+    public class func scheduledTimer(delay: TimeInterval = 0, timeInterval: TimeInterval, repeats: Bool = true, queue: DispatchQueue = .main, callbackImmediatelyWhenFired: Bool = false, action: @escaping RETimerAction) -> RETimer
+
+    /// ReerKit: Creates a timer and schedules it on a fire date.
+    /// - Parameters:
+    ///   - fireDate: The fire date of the timer.
+    ///   - timeInterval: The number of seconds between firings of the timer. If timeInterval is less than or equal to 0.0, this method chooses the nonnegative value of 0.0001 seconds instead.
+    ///   - repeats: If true, the timer will repeatedly reschedule itself until invalidated. If false, the timer will be invalidated after it fires.
+    ///   - queue: The dispatch queue to which to execute the installed handlers.
+    ///   - callbackImmediatelyWhenFired: When should callback when time is fired, default is `false`, and its behavior is the same as `Foundation.Timer`
+    ///   - action: A closure to be executed when the timer fires. The closure takes a single Timer parameter and has no return value.
+    /// - Returns: A timer instance.
+    public static func scheduledTimer(fireDate: Date, timeInterval: TimeInterval, repeats: Bool = true, queue: DispatchQueue = .main, callbackImmediatelyWhenFired: Bool = false, action: @escaping RETimerAction) -> RETimer
+
+    /// ReerKit: Schedules a timer.
+    @discardableResult
+    public func schedule() -> Bool
+
+    /// ReerKit: Resumes the timer when timer is suspended.
+    ///
+    /// - Important: Do NOT use `resume` to start the timer, it will not work.
+    public func resume()
+
+    /// ReerKit: Suspends the timer.
+    public func suspend()
+
+    /// ReerKit: Stops the timer from ever firing again.
+    public func invalidate()
+}
+
+public extension RETimer {
+
+    /// ReerKit: Execute the closure after the delay interval.
+    /// - Parameters:
+    ///   - delay: The delay interval.
+    ///   - queue: The dispatch queue to which to execute the installed handlers.
+    ///   - action: A closure to be executed after the delay.
+    public static func after(_ delay: TimeInterval, queue: DispatchQueue = .main, action: @escaping () -> Void)
+
+    /// ReerKit: Creates a timer that fires every second, providing the timer instance, display seconds, and passed duration.
+    ///
+    /// This method creates a timer that fires every second, calling the `action` closure with the timer, the number of seconds that have passed, and the total elapsed time excluding any paused durations. Internally, it uses a more frequent interval for increased accuracy, especially when resuming from a suspended state.
+    ///
+    /// **Usage example:**
+    /// ```swift
+    /// let timer = RETimer.scheduledTimerEverySecond { timer, displaySeconds, passedDuration in
+    ///     print("Timer fired! Display Seconds: \(displaySeconds), Passed Duration: \(passedDuration)")
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - queue: The dispatch queue on which to execute the timer. Defaults to the main queue.
+    ///   - action: A closure to be executed every second. The closure takes three parameters:
+    ///     - `timer`: The `RETimer` instance.
+    ///     - `displaySeconds`: An `Int` representing the number of seconds that have passed since the timer started.
+    ///     - `passedDuration`: A `TimeInterval` representing the total elapsed time excluding any paused durations.
+    /// - Returns: An instance of `RETimer` configured to fire every second.
+    public static func scheduledTimerEverySecond(queue: DispatchQueue = .main, action: @escaping (_ timer: RETimer, _ displaySeconds: Int, _ passedDuration: TimeInterval) -> Void) -> RETimer
+}
+```
+
+### CountdownTimer
+
+```
+import Foundation
+import Dispatch
+
+/// A class that represents a countdown timer with customizable intervals and durations.
+public final class CountdownTimer {
+
+    /// The time interval between each tick of the timer.
+    public let interval: TimeInterval
+
+    /// The total number of times the timer should tick.
+    public let times: Int
+
+    /// The total duration of the countdown.
+    public let totalDuration: TimeInterval
+
+    /// The action to be performed on each tick of the timer.
+    public let action: (CountdownTimer) -> Void
+
+    /// The number of ticks remaining.
+    public private(set) var leftTimes: Int { get }
+
+    /// The remaining duration of the countdown.
+    public var leftDuration: TimeInterval { get }
+
+    /// Indicates whether the countdown has finished.
+    public var finished: Bool { get }
+
+    /// Initializes a new countdown timer with a specified interval and number of ticks.
+    ///
+    /// - Parameters:
+    ///   - interval: The time interval between each tick.
+    ///   - times: The total number of ticks.
+    ///   - action: The action to be performed on each tick.
+    public init(interval: TimeInterval, times: Int, action: @escaping (CountdownTimer) -> Void)
+
+    /// Initializes a new countdown timer with a specified number of ticks and total duration.
+    ///
+    /// - Parameters:
+    ///   - times: The total number of ticks.
+    ///   - totalDuration: The total duration of the countdown.
+    ///   - action: The action to be performed on each tick.
+    public init(times: Int, totalDuration: TimeInterval, action: @escaping (CountdownTimer) -> Void)
+
+    /// Creates and returns a new countdown timer with the specified interval and number of ticks.
+    ///
+    /// - Parameters:
+    ///   - interval: The time interval between each tick.
+    ///   - times: The total number of ticks.
+    ///   - action: The action to be performed on each tick.
+    /// - Returns: A new countdown timer that has already started.
+    public static func scheduledTimer(withInterval interval: TimeInterval, times: Int, action: @escaping (CountdownTimer) -> Void) -> CountdownTimer
+
+    /// Creates and returns a new countdown timer with the specified number of ticks and total duration.
+    ///
+    /// - Parameters:
+    ///   - times: The total number of ticks.
+    ///   - totalDuration: The total duration of the countdown.
+    ///   - action: The action to be performed on each tick.
+    /// - Returns: A new countdown timer that has already started.
+    public static func scheduledTimer(withTimes times: Int, totalDuration: TimeInterval, action: @escaping (CountdownTimer) -> Void) -> CountdownTimer
+
+    /// ReerKit: Countdown timer with a total seconds be set, and call back every second.
+    ///
+    /// ```
+    /// var countdownTimer = CountdownTimer.scheduledTimer(withTotalSeconds: 60) {
+    ///     [weak self] displaySeconds, leftDuration, passedDuration in
+    ///
+    ///     let minutes = Int(Double(displaySeconds) / 60.0)
+    ///     let seconds = Int(Double(displaySeconds) - minutes.re.double * 60.0)
+    ///     self?.timeLabel.text = String(format: "%02d:%02d", minutes, seconds)
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - totalSeconds: Total seconds with `Int`
+    ///   - action: Called back every second, carrying the displayed number of seconds, remaining time, and elapsed time.
+    /// - Returns: A countdown timer.
+    public static func scheduledTimer(withTotalSeconds totalSeconds: Int, action: @escaping (_ displaySeconds: Int, _ leftDuration: TimeInterval, _ passedDuration: TimeInterval) -> Void) -> CountdownTimer
+
+    /// Starts the countdown timer.
+    public func fire()
+
+    /// Resumes the countdown timer if it was suspended.
+    public func resume()
+
+    /// Suspends the countdown timer.
+    public func suspend()
+
+    /// Invalidates the countdown timer, preventing it from ever firing again.
+    public func invalidate()
+
+    /// Resets the countdown timer to its initial state.
+    public func reset()
+}
+```
+
+### Throttler
+
+```
+import Foundation
+
+public final class Throttler {
+
+    public enum PerformMode {
+
+        case first
+
+        case last
+    }
+
+    public init(queue: DispatchQueue = .main, performMode: PerformMode = .first)
+
+    public func execute(interval: TimeInterval, action: @escaping () -> Void)
+
+    public func execute(deadline: DispatchTime, action: @escaping () -> Void)
+
+    public func execute(wallDeadline: DispatchWallTime, action: @escaping () -> Void)
+}
+```
+
+### Debouncer
+
+```
+import Foundation
+
+/// A class that provides debouncing functionality for executing actions after a specified delay.
+public final class Debouncer {
+
+    /// The current work item representing the debounced action.
+    public private(set) var workItem: DispatchWorkItem { get }
+
+    /// Initializes a new Debouncer instance.
+    ///
+    /// - Parameter queue: The dispatch queue to use for executing the debounced action. Defaults to the main queue.
+    public init(queue: DispatchQueue = .main)
+
+    /// Executes the given action after the specified time interval, cancelling any previously scheduled action.
+    ///
+    /// - Parameters:
+    ///   - interval: The time interval to wait before executing the action.
+    ///   - action: The action to be executed.
+    public func execute(interval: TimeInterval, action: @escaping () -> Void)
+
+    /// Executes the given action at the specified dispatch time, cancelling any previously scheduled action.
+    ///
+    /// - Parameters:
+    ///   - deadline: The dispatch time at which to execute the action.
+    ///   - action: The action to be executed.
+    public func execute(deadline: DispatchTime, action: @escaping () -> Void)
+
+    /// Executes the given action at the specified wall clock time, cancelling any previously scheduled action.
+    ///
+    /// - Parameters:
+    ///   - wallDeadline: The wall clock time at which to execute the action.
+    ///   - action: The action to be executed.
+    public func execute(wallDeadline: DispatchWallTime, action: @escaping () -> Void)
+}
+```
+
+### Invocation
+
+```
+import ObjectiveC
+import Foundation
+
+/// A wrapper for Objective-C `NSInvocation`
+public class Invocation {
+
+    /// Get instance method for a Objc class.
+    /// - Parameters:
+    ///   - selector: Method selector
+    ///   - instance: A Class or instance.
+    /// - Returns: A signature, actually a `NSMethodSignature` instance.
+    public static func instanceMethodSignatureForSelector(_ selector: Selector, of instance: any NSObjectProtocol) -> Any?
+
+    /// Get class method for a Objc class.
+    /// - Parameters:
+    ///   - selector: Method selector
+    ///   - cls: Class type.
+    /// - Returns: A signature, actually a `NSMethodSignature` instance.
+    public static func classMethodSignatureForSelector(_ selector: Selector, of cls: AnyClass) -> Any?
+
+    /// Initializer
+    /// - Parameter signature: Method signature returned from invoking ``Invocation/classMethodSignatureForSelector(_:of:)`` or ``Invocation/instanceMethodSignatureForSelector(_:of:)``
+    public init(signature: Any)
+
+    /// Set selector will be invoking.
+    public func setSelector(_ selector: Selector)
+
+    /// Set argument for the method.
+    /// - Parameters:
+    ///   - arg: argument using a inout var as `NSObject`
+    ///   - index: usually from 2, 0 is `self`, 1 is `_cmd`
+    public func setArgument(_ arg: inout any NSObjectProtocol, atIndex index: Int)
+
+    public func retainArguments()
+
+    public func invoke(withTarget target: Any)
+
+    /// Get return value after invoking.
+    /// - Parameter ret: return value using a inout var as `NSObject`
+    public func getReturnValue(_ ret: inout Any)
+}
+```
+
+### Keychain
+
+```
+import Security
+import Foundation
+
+/// A helper class to interact with the Keychain for storing, retrieving, and deleting key-value pairs securely.
+public final class Keychain {
+
+    /// The keychain service identifier.
+    internal let service: String
+
+    /// The access group for shared keychain items.
+    internal var accessGroup: String?
+
+    /// Indicates whether the keychain item should be synchronized to other devices through iCloud.
+    public var synchronizable: Bool
+
+    /// Initializes a new instance of Keychain with the specified service and access group.
+    /// - Parameters:
+    ///   - service: The keychain service identifier. Defaults to the app's bundle identifier.
+    ///   - accessGroup: The access group for shared keychain items.
+    ///   - synchronizable: synchronize to iCloud or not.
+    public init(service: String = Bundle.main.bundleIdentifier ?? "com.reers.keychain", accessGroup: String? = nil, synchronizable: Bool = false)
+
+    /// Stores the provided data in the keychain under the specified key.
+    /// - Parameters:
+    ///   - value: The data to store in the keychain.
+    ///   - key: The key under which to store the data.
+    ///   - access: The accessibility level of the keychain item.
+    /// - Returns: A status indicating the result of the keychain operation.
+    @discardableResult
+    public func setData(_ value: Data, forKey key: String, withAccess access: Keychain.Accessibility = .whenUnlocked) -> Keychain.Status
+
+    /// Stores the provided string in the keychain under the specified key.
+    /// - Parameters:
+    ///   - value: The string to store in the keychain.
+    ///   - key: The key under which to store the string.
+    ///   - access: The accessibility level of the keychain item.
+    /// - Returns: A status indicating the result of the keychain operation.
+    @discardableResult
+    public func setString(_ value: String, forKey key: String, withAccess access: Keychain.Accessibility = .whenUnlocked) -> Keychain.Status
+
+    /// Retrieves the data stored in the keychain for the specified key.
+    /// - Parameter key: The key for which to retrieve the data.
+    /// - Returns: A tuple containing the data if found and a status indicating the result of the keychain operation.
+    public func getData(_ key: String) -> (data: Data?, status: Keychain.Status)
+
+    /// Retrieves the string stored in the keychain for the specified key.
+    /// - Parameter key: The key for which to retrieve the string.
+    /// - Returns: A tuple containing the string if found and a status indicating the result of the keychain operation.
+    public func getString(_ key: String) -> (string: String?, status: Keychain.Status)
+
+    /// Deletes the keychain item for the specified key.
+    /// - Parameter key: The key for which to delete the keychain item.
+    /// - Returns: A status indicating the result of the keychain operation.
+    @discardableResult
+    public func remove(forKey key: String) -> Keychain.Status
+
+    /// Updates the keychain item with the provided data for the specified key.
+    /// - Parameters:
+    ///   - value: The new data to store in the keychain.
+    ///   - key: The key for which to update the keychain item.
+    ///   - access: The accessibility level of the keychain item.
+    /// - Returns: A status indicating the result of the keychain operation.
+    @discardableResult
+    public func update(_ value: Data, forKey key: String, withAccess access: Keychain.Accessibility = .whenUnlocked) -> Keychain.Status
+
+    /// Retrieves all keys stored in the keychain for the current service.
+    /// - Returns: A tuple containing an array of keys and a status indicating the result of the keychain operation.
+    public func allKeys() -> (keys: [String], status: Keychain.Status)
+
+    /// Deletes all keychain items for the current service.
+    /// - Returns: A status indicating the result of the keychain operation.
+    @discardableResult
+    public func removeAll() -> Keychain.Status
+}
+
+extension Keychain {
+
+    /// Enum representing the accessibility levels for keychain items.
+    public enum Accessibility : RawRepresentable {
+
+        /// Item data can only be accessed while the device is unlocked.
+        /// This is recommended for items that only need to be accessible while the application is in the foreground.
+        /// Items with this attribute will migrate to a new device when using encrypted backups.
+        case whenUnlocked
+
+        /// Item data can only be accessed once the device has been unlocked after a restart.
+        /// This is recommended for items that need to be accessible by background applications.
+        /// Items with this attribute will migrate to a new device when using encrypted backups.
+        case afterFirstUnlock
+
+        /// Item data can only be accessed while the device is unlocked.
+        /// This class is only available if a passcode is set on the device.
+        /// This is recommended for items that only need to be accessible while the application is in the foreground.
+        /// Items with this attribute will never migrate to a new device, so after a backup is restored to a new device, these items will be missing.
+        /// No items can be stored in this class on devices without a passcode.
+        /// Disabling the device passcode will cause all items in this class to be deleted.
+        case whenPasscodeSetThisDeviceOnly
+
+        /// Item data can only be accessed while the device is unlocked.
+        /// This is recommended for items that only need to be accessible while the application is in the foreground.
+        /// Items with this attribute will never migrate to a new device, so after a backup is restored to a new device, these items will be missing.
+        case whenUnlockedThisDeviceOnly
+
+        /// Item data can only be accessed once the device has been unlocked after a restart.
+        /// This is recommended for items that need to be accessible by background applications.
+        /// Items with this attribute will never migrate to a new device, so after a backup is restored to a new device these items will be missing.
+        case afterFirstUnlockThisDeviceOnly
+
+        /// Creates a new instance with the specified raw value.
+        ///
+        /// If there is no value of the type that corresponds with the specified raw
+        /// value, this initializer returns `nil`. For example:
+        ///
+        ///     enum PaperSize: String {
+        ///         case A4, A5, Letter, Legal
+        ///     }
+        ///
+        ///     print(PaperSize(rawValue: "Legal"))
+        ///     // Prints "Optional("PaperSize.Legal")"
+        ///
+        ///     print(PaperSize(rawValue: "Tabloid"))
+        ///     // Prints "nil"
+        ///
+        /// - Parameter rawValue: The raw value to use for the new instance.
+        public init?(rawValue: String)
+
+        /// The corresponding value of the raw type.
+        ///
+        /// A new instance initialized with `rawValue` will be equivalent to this
+        /// instance. For example:
+        ///
+        ///     enum PaperSize: String {
+        ///         case A4, A5, Letter, Legal
+        ///     }
+        ///
+        ///     let selectedSize = PaperSize.Letter
+        ///     print(selectedSize.rawValue)
+        ///     // Prints "Letter"
+        ///
+        ///     print(selectedSize == PaperSize(rawValue: selectedSize.rawValue)!)
+        ///     // Prints "true"
+        public var rawValue: String { get }
+    }
+}
+
+extension Keychain {
+
+    /// A collection of constants representing keychain attribute keys.
+    public struct Attribute {
+
+        /// The service associated with the keychain item.
+        public static var service: String { get }
+
+        /// The access group for the keychain item.
+        public static var accessGroup: String { get }
+
+        /// The accessibility of the keychain item.
+        public static var accessible: String { get }
+
+        /// The account associated with the keychain item.
+        public static var account: String { get }
+
+        /// Indicates whether the keychain item is synchronized to other devices through iCloud.
+        public static var synchronizable: String { get }
+
+        /// The class of the keychain item.
+        public static var `class`: String { get }
+
+        /// A value that indicates the maximum number of results returned.
+        public static var matchLimit: String { get }
+
+        /// A Boolean value that indicates whether to return the data from a keychain item.
+        public static var returnData: String { get }
+
+        /// The data value of the keychain item.
+        public static var valueData: String { get }
+
+        /// A persistent reference to a keychain item.
+        public static var returnReference: String { get }
+
+        /// A Boolean value that indicates whether to return a dictionary of attributes for the keychain item.
+        public static var returnAttributes: String { get }
+
+        /// A value that specifies that all matching items should be returned.
+        public static var matchLimitAll: String { get }
+    }
+}
+
+extension Keychain {
+
+    /// Enum representing possible status codes returned by keychain APIs.
+    public enum Status : OSStatus {
+
+        case success
+
+        case unimplemented
+
+        case diskFull
+
+        case io
+
+        case opWr
+
+        case param
+
+        case wrPerm
+
+        case allocate
+
+        case userCanceled
+
+        case badReq
+
+        case internalComponent
+
+        case notAvailable
+
+        case readOnly
+
+        case authFailed
+
+        case noSuchKeychain
+
+        case invalidKeychain
+
+        case duplicateKeychain
+
+        case duplicateCallback
+
+        case invalidCallback
+
+        case duplicateItem
+
+        case itemNotFound
+
+        case bufferTooSmall
+
+        case dataTooLarge
+
+        case noSuchAttr
+
+        case invalidItemRef
+
+        case invalidSearchRef
+
+        case noSuchClass
+
+        case noDefaultKeychain
+
+        case interactionNotAllowed
+
+        case readOnlyAttr
+
+        case wrongSecVersion
+
+        case keySizeNotAllowed
+
+        case noStorageModule
+
+        case noCertificateModule
+
+        case noPolicyModule
+
+        case interactionRequired
+
+        case dataNotAvailable
+
+        case dataNotModifiable
+
+        case createChainFailed
+
+        case invalidPrefsDomain
+
+        case inDarkWake
+
+        case aclNotSimple
+
+        case policyNotFound
+
+        case invalidTrustSetting
+
+        case noAccessForItem
+
+        case invalidOwnerEdit
+
+        case trustNotAvailable
+
+        case unsupportedFormat
+
+        case unknownFormat
+
+        case keyIsSensitive
+
+        case multiplePrivKeys
+
+        case passphraseRequired
+
+        case invalidPasswordRef
+
+        case invalidTrustSettings
+
+        case noTrustSettings
+
+        case pkcs12VerifyFailure
+
+        case invalidCertificate
+
+        case notSigner
+
+        case policyDenied
+
+        case invalidKey
+
+        case decode
+
+        case `internal`
+
+        case unsupportedAlgorithm
+
+        case unsupportedOperation
+
+        case unsupportedPadding
+
+        case itemInvalidKey
+
+        case itemInvalidKeyType
+
+        case itemInvalidValue
+
+        case itemClassMissing
+
+        case itemMatchUnsupported
+
+        case useItemListUnsupported
+
+        case useKeychainUnsupported
+
+        case useKeychainListUnsupported
+
+        case returnDataUnsupported
+
+        case returnAttributesUnsupported
+
+        case returnRefUnsupported
+
+        case returnPersitentRefUnsupported
+
+        case valueRefUnsupported
+
+        case valuePersistentRefUnsupported
+
+        case returnMissingPointer
+
+        case matchLimitUnsupported
+
+        case itemIllegalQuery
+
+        case waitForCallback
+
+        case missingEntitlement
+
+        case upgradePending
+
+        case mpSignatureInvalid
+
+        case otrTooOld
+
+        case otrIDTooNew
+
+        case serviceNotAvailable
+
+        case insufficientClientID
+
+        case deviceReset
+
+        case deviceFailed
+
+        case appleAddAppACLSubject
+
+        case applePublicKeyIncomplete
+
+        case appleSignatureMismatch
+
+        case appleInvalidKeyStartDate
+
+        case appleInvalidKeyEndDate
+
+        case conversionError
+
+        case appleSSLv2Rollback
+
+        case quotaExceeded
+
+        case fileTooBig
+
+        case invalidDatabaseBlob
+
+        case invalidKeyBlob
+
+        case incompatibleDatabaseBlob
+
+        case incompatibleKeyBlob
+
+        case hostNameMismatch
+
+        case unknownCriticalExtensionFlag
+
+        case noBasicConstraints
+
+        case noBasicConstraintsCA
+
+        case invalidAuthorityKeyID
+
+        case invalidSubjectKeyID
+
+        case invalidKeyUsageForPolicy
+
+        case invalidExtendedKeyUsage
+
+        case invalidIDLinkage
+
+        case pathLengthConstraintExceeded
+
+        case invalidRoot
+
+        case crlExpired
+
+        case crlNotValidYet
+
+        case crlNotFound
+
+        case crlServerDown
+
+        case crlBadURI
+
+        case unknownCertExtension
+
+        case unknownCRLExtension
+
+        case crlNotTrusted
+
+        case crlPolicyFailed
+
+        case idpFailure
+
+        case smimeEmailAddressesNotFound
+
+        case smimeBadExtendedKeyUsage
+
+        case smimeBadKeyUsage
+
+        case smimeKeyUsageNotCritical
+
+        case smimeNoEmailAddress
+
+        case smimeSubjAltNameNotCritical
+
+        case sslBadExtendedKeyUsage
+
+        case ocspBadResponse
+
+        case ocspBadRequest
+
+        case ocspUnavailable
+
+        case ocspStatusUnrecognized
+
+        case endOfData
+
+        case incompleteCertRevocationCheck
+
+        case networkFailure
+
+        case ocspNotTrustedToAnchor
+
+        case recordModified
+
+        case ocspSignatureError
+
+        case ocspNoSigner
+
+        case ocspResponderMalformedReq
+
+        case ocspResponderInternalError
+
+        case ocspResponderTryLater
+
+        case ocspResponderSignatureRequired
+
+        case ocspResponderUnauthorized
+
+        case ocspResponseNonceMismatch
+
+        case codeSigningBadCertChainLength
+
+        case codeSigningNoBasicConstraints
+
+        case codeSigningBadPathLengthConstraint
+
+        case codeSigningNoExtendedKeyUsage
+
+        case codeSigningDevelopment
+
+        case resourceSignBadCertChainLength
+
+        case resourceSignBadExtKeyUsage
+
+        case trustSettingDeny
+
+        case invalidSubjectName
+
+        case unknownQualifiedCertStatement
+
+        case mobileMeRequestQueued
+
+        case mobileMeRequestRedirected
+
+        case mobileMeServerError
+
+        case mobileMeServerNotAvailable
+
+        case mobileMeServerAlreadyExists
+
+        case mobileMeServerServiceErr
+
+        case mobileMeRequestAlreadyPending
+
+        case mobileMeNoRequestPending
+
+        case mobileMeCSRVerifyFailure
+
+        case mobileMeFailedConsistencyCheck
+
+        case notInitialized
+
+        case invalidHandleUsage
+
+        case pvcReferentNotFound
+
+        case functionIntegrityFail
+
+        case internalError
+
+        case memoryError
+
+        case invalidData
+
+        case mdsError
+
+        case invalidPointer
+
+        case selfCheckFailed
+
+        case functionFailed
+
+        case moduleManifestVerifyFailed
+
+        case invalidGUID
+
+        case invalidHandle
+
+        case invalidDBList
+
+        case invalidPassthroughID
+
+        case invalidNetworkAddress
+
+        case crlAlreadySigned
+
+        case invalidNumberOfFields
+
+        case verificationFailure
+
+        case unknownTag
+
+        case invalidSignature
+
+        case invalidName
+
+        case invalidCertificateRef
+
+        case invalidCertificateGroup
+
+        case tagNotFound
+
+        case invalidQuery
+
+        case invalidValue
+
+        case callbackFailed
+
+        case aclDeleteFailed
+
+        case aclReplaceFailed
+
+        case aclAddFailed
+
+        case aclChangeFailed
+
+        case invalidAccessCredentials
+
+        case invalidRecord
+
+        case invalidACL
+
+        case invalidSampleValue
+
+        case incompatibleVersion
+
+        case privilegeNotGranted
+
+        case invalidScope
+
+        case pvcAlreadyConfigured
+
+        case invalidPVC
+
+        case emmLoadFailed
+
+        case emmUnloadFailed
+
+        case addinLoadFailed
+
+        case invalidKeyRef
+
+        case invalidKeyHierarchy
+
+        case addinUnloadFailed
+
+        case libraryReferenceNotFound
+
+        case invalidAddinFunctionTable
+
+        case invalidServiceMask
+
+        case moduleNotLoaded
+
+        case invalidSubServiceID
+
+        case attributeNotInContext
+
+        case moduleManagerInitializeFailed
+
+        case moduleManagerNotFound
+
+        case eventNotificationCallbackNotFound
+
+        case inputLengthError
+
+        case outputLengthError
+
+        case privilegeNotSupported
+
+        case deviceError
+
+        case attachHandleBusy
+
+        case notLoggedIn
+
+        case algorithmMismatch
+
+        case keyUsageIncorrect
+
+        case keyBlobTypeIncorrect
+
+        case keyHeaderInconsistent
+
+        case unsupportedKeyFormat
+
+        case unsupportedKeySize
+
+        case invalidKeyUsageMask
+
+        case unsupportedKeyUsageMask
+
+        case invalidKeyAttributeMask
+
+        case unsupportedKeyAttributeMask
+
+        case invalidKeyLabel
+
+        case unsupportedKeyLabel
+
+        case invalidKeyFormat
+
+        case unsupportedVectorOfBuffers
+
+        case invalidInputVector
+
+        case invalidOutputVector
+
+        case invalidContext
+
+        case invalidAlgorithm
+
+        case invalidAttributeKey
+
+        case missingAttributeKey
+
+        case invalidAttributeInitVector
+
+        case missingAttributeInitVector
+
+        case invalidAttributeSalt
+
+        case missingAttributeSalt
+
+        case invalidAttributePadding
+
+        case missingAttributePadding
+
+        case invalidAttributeRandom
+
+        case missingAttributeRandom
+
+        case invalidAttributeSeed
+
+        case missingAttributeSeed
+
+        case invalidAttributePassphrase
+
+        case missingAttributePassphrase
+
+        case invalidAttributeKeyLength
+
+        case missingAttributeKeyLength
+
+        case invalidAttributeBlockSize
+
+        case missingAttributeBlockSize
+
+        case invalidAttributeOutputSize
+
+        case missingAttributeOutputSize
+
+        case invalidAttributeRounds
+
+        case missingAttributeRounds
+
+        case invalidAlgorithmParms
+
+        case missingAlgorithmParms
+
+        case invalidAttributeLabel
+
+        case missingAttributeLabel
+
+        case invalidAttributeKeyType
+
+        case missingAttributeKeyType
+
+        case invalidAttributeMode
+
+        case missingAttributeMode
+
+        case invalidAttributeEffectiveBits
+
+        case missingAttributeEffectiveBits
+
+        case invalidAttributeStartDate
+
+        case missingAttributeStartDate
+
+        case invalidAttributeEndDate
+
+        case missingAttributeEndDate
+
+        case invalidAttributeVersion
+
+        case missingAttributeVersion
+
+        case invalidAttributePrime
+
+        case missingAttributePrime
+
+        case invalidAttributeBase
+
+        case missingAttributeBase
+
+        case invalidAttributeSubprime
+
+        case missingAttributeSubprime
+
+        case invalidAttributeIterationCount
+
+        case missingAttributeIterationCount
+
+        case invalidAttributeDLDBHandle
+
+        case missingAttributeDLDBHandle
+
+        case invalidAttributeAccessCredentials
+
+        case missingAttributeAccessCredentials
+
+        case invalidAttributePublicKeyFormat
+
+        case missingAttributePublicKeyFormat
+
+        case invalidAttributePrivateKeyFormat
+
+        case missingAttributePrivateKeyFormat
+
+        case invalidAttributeSymmetricKeyFormat
+
+        case missingAttributeSymmetricKeyFormat
+
+        case invalidAttributeWrappedKeyFormat
+
+        case missingAttributeWrappedKeyFormat
+
+        case stagedOperationInProgress
+
+        case stagedOperationNotStarted
+
+        case verifyFailed
+
+        case querySizeUnknown
+
+        case blockSizeMismatch
+
+        case publicKeyInconsistent
+
+        case deviceVerifyFailed
+
+        case invalidLoginName
+
+        case alreadyLoggedIn
+
+        case invalidDigestAlgorithm
+
+        case invalidCRLGroup
+
+        case certificateCannotOperate
+
+        case certificateExpired
+
+        case certificateNotValidYet
+
+        case certificateRevoked
+
+        case certificateSuspended
+
+        case insufficientCredentials
+
+        case invalidAction
+
+        case invalidAuthority
+
+        case verifyActionFailed
+
+        case invalidCertAuthority
+
+        case invalidCRLAuthority
+
+        case invalidCRLEncoding
+
+        case invalidCRLType
+
+        case invalidCRL
+
+        case invalidFormType
+
+        case invalidID
+
+        case invalidIdentifier
+
+        case invalidIndex
+
+        case invalidPolicyIdentifiers
+
+        case invalidTimeString
+
+        case invalidReason
+
+        case invalidRequestInputs
+
+        case invalidResponseVector
+
+        case invalidStopOnPolicy
+
+        case invalidTuple
+
+        case multipleValuesUnsupported
+
+        case notTrusted
+
+        case noDefaultAuthority
+
+        case rejectedForm
+
+        case requestLost
+
+        case requestRejected
+
+        case unsupportedAddressType
+
+        case unsupportedService
+
+        case invalidTupleGroup
+
+        case invalidBaseACLs
+
+        case invalidTupleCredendtials
+
+        case invalidEncoding
+
+        case invalidValidityPeriod
+
+        case invalidRequestor
+
+        case requestDescriptor
+
+        case invalidBundleInfo
+
+        case invalidCRLIndex
+
+        case noFieldValues
+
+        case unsupportedFieldFormat
+
+        case unsupportedIndexInfo
+
+        case unsupportedLocality
+
+        case unsupportedNumAttributes
+
+        case unsupportedNumIndexes
+
+        case unsupportedNumRecordTypes
+
+        case fieldSpecifiedMultiple
+
+        case incompatibleFieldFormat
+
+        case invalidParsingModule
+
+        case databaseLocked
+
+        case datastoreIsOpen
+
+        case missingValue
+
+        case unsupportedQueryLimits
+
+        case unsupportedNumSelectionPreds
+
+        case unsupportedOperator
+
+        case invalidDBLocation
+
+        case invalidAccessRequest
+
+        case invalidIndexInfo
+
+        case invalidNewOwner
+
+        case invalidModifyMode
+
+        case missingRequiredExtension
+
+        case extendedKeyUsageNotCritical
+
+        case timestampMissing
+
+        case timestampInvalid
+
+        case timestampNotTrusted
+
+        case timestampServiceNotAvailable
+
+        case timestampBadAlg
+
+        case timestampBadRequest
+
+        case timestampBadDataFormat
+
+        case timestampTimeNotAvailable
+
+        case timestampUnacceptedPolicy
+
+        case timestampUnacceptedExtension
+
+        case timestampAddInfoNotAvailable
+
+        case timestampSystemFailure
+
+        case signingTimeMissing
+
+        case timestampRejection
+
+        case timestampWaiting
+
+        case timestampRevocationWarning
+
+        case timestampRevocationNotification
+
+        case unexpectedError
+    }
+}
+
+extension Keychain.Status : RawRepresentable {
+
+    /// Initializes a Keychain.Status from an OSStatus code.
+    /// - Parameter status: The OSStatus code.
+    public init(status: OSStatus)
+}
+```
+
+### Reachability
+
+```
+import Foundation
+import SystemConfiguration
+import Dispatch
+
+/// The ``Reachability`` class listens for reachability changes of hosts and addresses for both cellular and
+/// WiFi network interfaces.
+///
+/// Reachability can be used to determine background information about why a network operation failed, or to retry
+/// network requests when a connection is established. It should not be used to prevent a user from initiating a network
+/// request, as it's possible that an initial request may be required to establish reachability.
+open class Reachability {
+
+    /// Defines the various states of network reachability.
+    public enum Status {
+
+        /// It is unknown whether the network is reachable.
+        case unknown
+
+        /// The network is not reachable.
+        case none
+
+        /// The network is reachable on the associated `ConnectionType`.
+        case reachable(ConnectionType)
+
+        internal init(_ flags: SCNetworkReachabilityFlags)
+    }
+
+    /// Defines the various connection types detected by reachability flags.
+    public enum ConnectionType {
+
+        /// The connection type is either over Ethernet or WiFi.
+        case ethernetOrWiFi
+
+        /// The connection type is a cellular connection.
+        case cellular
+    }
+
+    /// A closure executed when the network reachability status changes. The closure takes a single argument: the
+    /// network reachability status.
+    public typealias OnChangedCallback = (Status) -> Void
+
+    /// Default ``Reachability`` for the zero address and a `callbackQueue` of `.main`.
+    public static let `default`: Reachability.Reachability?
+
+    /// Whether the network is currently reachable.
+    open var isReachable: Bool { get }
+
+    /// Whether the network is currently reachable over the cellular interface.
+    ///
+    /// - Note: Using this property to decide whether to make a high or low bandwidth request is not recommended.
+    ///         Instead, set the `allowsCellularAccess` on any `URLRequest`s being issued.
+    ///
+    open var isReachableOnCellular: Bool { get }
+
+    /// Whether the network is currently reachable over Ethernet or WiFi interface.
+    open var isReachableOnEthernetOrWiFi: Bool { get }
+
+    /// `DispatchQueue` on which reachability will update.
+    public let reachabilityQueue: DispatchQueue
+
+    /// Flags of the current reachability type, if any.
+    open var flags: SCNetworkReachabilityFlags? { get }
+
+    /// The current network reachability status.
+    open var status: Status { get }
+
+    /// Mutable state storage.
+    internal struct MutableState {
+
+        /// A closure executed when the network reachability status changes.
+        internal var callback: OnChangedCallback?
+
+        /// `DispatchQueue` on which listeners will be called.
+        internal var callbackQueue: DispatchQueue?
+
+        /// Previously calculated status.
+        internal var previousStatus: Status?
+    }
+
+    /// Creates an instance with the specified host.
+    ///
+    /// - Note: The `host` value must *not* contain a scheme, just the hostname.
+    ///
+    /// - Parameters:
+    ///   - host:          Host used to evaluate network reachability. Must *not* include the scheme (e.g. `https`).
+    public convenience init?(host: String)
+
+    /// Creates an instance that monitors the address 0.0.0.0.
+    ///
+    /// Reachability treats the 0.0.0.0 address as a special token that causes it to monitor the general routing
+    /// status of the device, both IPv4 and IPv6.
+    public convenience init?()
+
+    /// Starts listening for changes in network reachability status.
+    ///
+    /// - Note: Stops and removes any existing listener.
+    ///
+    /// - Parameters:
+    ///   - queue:    `DispatchQueue` on which to call the `callback` closure. `.main` by default.
+    ///   - callback: `OnChangedCallback` closure called when reachability changes.
+    ///
+    /// - Returns: `true` if listening was started successfully, `false` otherwise.
+    @discardableResult
+    open func startListening(onQueue queue: DispatchQueue = .main, onChanged callback: @escaping OnChangedCallback) -> Bool
+
+    /// Stops listening for changes in network reachability status.
+    open func stopListening()
+
+    /// Calls the `callback` closure of the `callbackQueue` if the computed status hasn't changed.
+    ///
+    /// - Note: Should only be called from the `reachabilityQueue`.
+    ///
+    /// - Parameter flags: `SCNetworkReachabilityFlags` to use to calculate the status.
+    internal func notifyWhenChanged(_ flags: SCNetworkReachabilityFlags)
+}
+
+extension Reachability.Status : Equatable {
+}
+
+extension SCNetworkReachabilityFlags {
+
+    internal var isReachable: Bool { get }
+
+    internal var isConnectionRequired: Bool { get }
+
+    internal var canConnectAutomatically: Bool { get }
+
+    internal var canConnectWithoutUserInteraction: Bool { get }
+
+    internal var isActuallyReachable: Bool { get }
+
+    internal var isCellular: Bool { get }
+
+    /// Human readable `String` for all states, to help with debugging.
+    internal var readableDescription: String { get }
+}
+```
+
+### TypeNameDescribable
+
+```
+import Foundation
+
+/// Return type name of an instance or a type, using by conforming this protocol.
+public protocol TypeNameDescribable {
+
+    var typeName: String { get }
+
+    static var typeName: String { get }
+
+    var fullTypeName: String { get }
+
+    static var fullTypeName: String { get }
+}
+
+extension TypeNameDescribable {
+
+    /// Return type name of an instance without module name prefix.
+    ///
+    ///     ModuleA.Foo().typeName -> "Foo"
+    public var typeName: String { get }
+
+    /// Return type name of a type without module name prefix.
+    ///
+    ///     ModuleA.Foo.typeName -> "Foo"
+    public static var typeName: String { get }
+
+    /// Return full type name of a type with module name prefix.
+    /// But if the instance is an objective-c class object, it still return a name without module name prefix.
+    ///
+    ///     ModuleA.Foo().typeName -> "ModuleA.Foo"
+    public var fullTypeName: String { get }
+
+    /// Return full type name of a type with module name prefix.
+    /// But if the type is an objective-c class, it still return a name without module name prefix.
+    ///
+    ///     ModuleA.Foo().typeName -> "ModuleA.Foo"
+    public static var fullTypeName: String { get }
+}
+/// Get module name from a swift file ID.
+/// - Parameter fileId: No need to pass it, just use the default.
+/// - Returns: Module name, return `""` if failed.
+public func moduleName(fileId: String = #fileID) -> String
+```
+
+### Vibrator
+
+```
+import UIKit
+
+public struct Vibrator {
+
+    public enum FeedbackStyle : Int {
+
+        case light
+
+        case medium
+
+        case heavy
+
+        case soft
+
+        case rigid
+
+        case selectionChanged
+
+        case success
+
+        case warning
+
+        case error
+
+        internal var impactStyle: UIImpactFeedbackGenerator.FeedbackStyle { get }
+
+        internal var notificationType: UINotificationFeedbackGenerator.FeedbackType { get }
+    }
+
+    public static func occur(_ style: FeedbackStyle, intensity: CGFloat = 1.0)
+}
+```
+
+### Memory
+
+```
+import Darwin
+
+public enum MemoryAlign : Int {
+
+    case one, two, four, eight
+}
+
+public enum StringMemoryType : UInt8 {
+
+    case text
+
+    case taggedPointer
+
+    case heap
+
+    case unknow
+}
+
+
+
+/// ReerKit: Utilities for checking memory structure.
+public struct Memory<T> {
+
+    /// ReerKit: Get memory data for the variable in byte array format
+    public static func bytes(ofVal v: inout T) -> [UInt8]
+
+    /// ReerKit: Get the memory data pointed to by the reference in byte array format.
+    public static func bytes(ofRef v: T) -> [UInt8]
+
+    /// ReerKit: Get memory data for the variable in string format
+    /// 
+    /// - Parameter alignment: Represent how many bytes are grouped together
+    /// - Parameter v: The value type value.
+    /// - Returns: Get memory data.
+    public static func string(ofVal v: inout T, alignment: MemoryAlign? = nil) -> String
+
+    /// ReerKit: Get the memory data pointed to by the reference in string format
+    ///
+    /// - Parameter alignment: Represent how many bytes are grouped together
+    /// - Parameter v: The reference type value
+    /// - Returns: Get memory data.
+    public static func string(ofRef v: T, alignment: MemoryAlign? = nil) -> String
+
+    /// ReerKit: Get the memory address of the variable
+    public static func pointer(ofVal v: inout T) -> UnsafeRawPointer
+
+    /// ReerKit: Get the address of the memory pointed to by the reference
+    public static func pointer(ofRef v: T) -> UnsafeRawPointer
+
+    /// ReerKit: Get the memory size occupied by the variable
+    public static func size(ofVal v: inout T) -> Int
+
+    /// ReerKit: Get the size of the memory pointed to by the reference
+    public static func size(ofRef v: T) -> Int
+}
+
+public extension <<error type>> {
+
+    public mutating func memoryType() -> StringMemoryType
+}
+```
+
+### MulticastDelegate
+
+```
+public protocol MulticastDelegateProtocol {
+
+    associatedtype Delegate
+
+    func add(delegate: Delegate)
+
+    func remove(delegate: Delegate)
+
+    func removeAllDelegates()
+}
+
+/// `MulticastDelegate` lets you easily create a "multicast delegate" for a given protocol or class.
+/// The delegate will be a weak reference in `MulticastDelegate`, and will be removed automatically
+/// from `delegates` after it released.
+public final class MulticastDelegate<T> {
+
+    /// ReerKit: Initialize a new `MulticastDelegate`, and delete references will be weak.
+    public init()
+
+    /// ReerKit: Use the property to check if no delegates are contained there.
+    public var isEmpty: Bool { get }
+
+    /// ReerKit: Add a delegate.
+    public func add(_ delegate: T)
+
+    /// ReerKit: Remove a previously-added delegate.
+    public func remove(_ delegate: T)
+
+    public func removeAllDelegates()
+
+    @available(*, deprecated, renamed: "notify(_:)", message: "Use notify(_:) instead.")
+    public func invoke(_ invocation: (T) -> Void)
+
+    /// ReerKit: Notify a closure on each delegate.
+    public func notify(_ function: (T) -> Void)
+
+    /// ReerKit: Checks if the multicast delegate contains the given delegate.
+    public func contains(_ delegate: T) -> Bool
+}
+```
+
+### NanoID
+
+```
+import Security
+
+public struct NanoID {
+
+    /// Generate a new identifier
+    ///
+    /// - Parameters:
+    ///   - alphabet: alphabet to use, exclude to use instance default
+    ///   - size: size to use, exclude to use instance default
+    ///   - randomizer: randomizer to use, exclude to use instance default
+    public static func generate(alphabet: Alphabet = .default, size: UInt = 21, randomizer: Randomizer = defaultRandomizer) -> String
+
+    public static var defaultRandomizer: Randomizer
+}
+
+extension NanoID {
+
+    public struct Alphabet {
+
+        internal let characters: [Character]
+
+        public var size: Int { get }
+
+        /// ReerKit: Initializes an alphabet given one or more strings
+        /// - Parameter alphabet: Strings to build the alphabet from
+        public init(_ alphabet: String...)
+
+        /// Returns a single character from the alphabet
+        ///
+        /// - Parameter index: The position of the character to return
+        public func character(at index: Int) -> Character
+
+        /// Returns a single character from the alphabet given a byte
+        ///
+        /// - Parameter byte: The byte used to determine the character's position
+        public func character(from byte: UInt8) -> Character
+
+        public static let numbers: NanoID.NanoID.Alphabet
+
+        public static let lowercaseLetters: NanoID.NanoID.Alphabet
+
+        public static let uppercaseLetters: NanoID.NanoID.Alphabet
+
+        public static let letters: NanoID.NanoID.Alphabet
+
+        public static let `default`: NanoID.NanoID.Alphabet
+    }
+}
+
+public protocol Randomizer {
+
+    func getCharacters(count: UInt, from alphabet: NanoID.Alphabet) -> [Character]
+}
+
+public struct SecureRandomizer : Randomizer {
+
+    public func getCharacters(count: UInt, from alphabet: NanoID.Alphabet) -> [Character]
+}
+
+public struct IntRandomizer : Randomizer {
+
+    public func getCharacters(count: UInt, from alphabet: NanoID.Alphabet) -> [Character]
+}
+```
+
+### KeyboardManager
+
+```
+import UIKit
+import ObjectiveC
+import CoreFoundation
+
+/// The protocol defines the method you can use
+/// to receive system keyboard change information.
+public protocol KeyboardObserver : AnyObject {
+
+    func keyboardChanged(with transition: KeyboardTransition)
+}
+
+/// System keyboard transition information.
+/// Use `convert(rect:toView:)` to convert frame to specified view.
+public struct KeyboardTransition {
+
+    public var toHidden: Bool
+
+    public var toVisible: Bool
+
+    public var fromFrame: CGRect
+
+    public var toFrame: CGRect
+
+    public var animationDuration: TimeInterval
+
+    public var animationCurve: UIView.AnimationCurve
+
+    public var animationOption: UIView.AnimationOptions
+}
+
+/// A KeyboardManager object lets you get the system keyboard information,
+/// and track the keyboard visible/frame/transition.
+///
+/// You should access this class in main thread and add observer before keyboard will show.
+public final class KeyboardManager : NSObject {
+
+    public static let shared: KeyboardManager.KeyboardManager
+
+    /// Get the keyboard window. nil if there's no keyboard window.
+    public var keyboardWindow: UIWindow? { get }
+
+    /// Get the keyboard view. nil if there's no keyboard view.
+    public var keyboardView: UIView? { get }
+
+    /// Whether the keyboard is visible.
+    public var isKeyboardVisible: Bool { get }
+
+    /// Get the keyboard frame. CGRect.null if there's no keyboard view.
+    /// Use convert(rect:toView:) to convert frame to specified view.
+    public var keyboardFrame: CGRect { get }
+
+    /// Add an observer to manager to get keyboard change information.
+    /// This method makes a weak reference to the observer.
+    public func addObserver(_ observer: KeyboardObserver)
+
+    /// Remove an observer from manager.
+    /// No need to remove observer in `deinit` method, ``KeyboardManager`` will remove observer automatically.
+    public func removeObserver(_ observer: KeyboardObserver)
+
+    public func convertRect(_ rect: CGRect, toView view: UIView?) -> CGRect
+}
+```
+
+## StandardLibrary+REExtensions
+
+### AnyObjectExtensionable
+
+#### Associatable
+
+```
+import ObjectiveC
+
+/// The ability to use the convenient association functions.
+/// You must conform this protocol by yourself if your class is NOT inheriting from `NSObject`.
+public protocol Associatable {
+}
+
+/// ReerKit: Policies related to associative references.
+public enum AssociationPolicy {
+
+    /// Specifies a weak reference to the associated object.
+    case assign
+
+    /// Specifies a strong reference to the associated object.
+    /// The association is not made atomically.
+    case retain
+
+    /// Specifies that the associated object is copied.
+    /// The association is not made atomically.
+    case copy
+
+    /// Specifies a strong reference to the associated object.
+    /// The association is made atomically.
+    case retainAtomic
+
+    /// Specifies that the associated object is copied.
+    /// The association is made atomically.
+    case copyAtomic
+}
+
+
+public struct AssociationKey {
+
+    internal let address: UnsafeRawPointer
+
+    /// ReerKit: Create an ObjC association key.
+    ///
+    /// - warning: The key must be uniqued.
+    public init()
+
+    /// ReerKit: Create an ObjC association key from a `StaticString`.
+    ///
+    ///     let key1 = AssociationKey("SomeString" as StaticString)
+    ///     let key2 = AssociationKey(#function as StaticString)
+    ///
+    /// - precondition: `key` has a pointer representation.
+    public init(_ key: StaticString)
+
+    /// ReerKit: Create an ObjC association key from a `Selector`.
+    ///
+    ///     @objc var foo: String {
+    ///         get {
+    ///             re.associatedValue(forKey: AssociationKey(#selector(getter: self.foo)), default: "23")
+    ///         }
+    ///     }
+    ///
+    /// - Parameter key: An @objc function or computed property selector.
+    public init(_ key: Selector)
+}
+
+public extension <<error type>> {
+
+    /// ReerKit: Sets an associated value for self using a given key and association policy.
+    ///
+    ///     let obj = NSObject()
+    ///     let key = AssociationKey("bar" as StaticString)
+    ///     obj.re.setAssociatedValue(123, forKey: key)
+    ///
+    /// - Parameters:
+    ///   - value: The source value for the association.
+    ///   - key: The key for the association.
+    ///   - policy: The policy for the association. For possible values, see `AssociationPolicy`
+    public func setAssociatedValue(_ value: Any?, forKey key: AssociationKey, withPolicy policy: AssociationPolicy = .retain)
+
+    /// ReerKit: Returns the value associated on self for a given key.
+    ///
+    ///     let value: Int? = obj.re.associatedValue(forKey: key)
+    ///
+    /// - Parameter key: The key for the association.
+    /// - Returns: The value associated with the key.
+    public func associatedValue<Value>(forKey key: AssociationKey) -> Value?
+
+    /// ReerKit: Returns the value associated on self for a given key.
+    ///
+    ///     let value = obj.re.associatedValue(forKey: key, default: 123)
+    ///
+    /// - Parameters:
+    ///   - key: The key for the association.
+    ///   - default: Default value for the result.
+    /// - Returns: The value associated with the key.
+    public func associatedValue<Value>(forKey key: AssociationKey, default: Value) -> Value
+
+    /// ReerKit: Sets an associated weak object for self using a given key.
+    ///
+    ///     let obj = NSObject()
+    ///     let key = AssociationKey("bar" as StaticString)
+    ///     obj.re.setAssociatedWeakObject(NSObject(), forKey: key)
+    ///     let value: Int? = obj.re.associatedValue(forKey: key)
+    ///
+    /// - Parameters:
+    ///   - object: The source object for the association.
+    ///   - key: The key for the association.
+    public func setAssociatedWeakObject<Object>(_ object: Object, forKey key: AssociationKey) where Object : AnyObject
+
+    /// ReerKit: Returns the weak object associated on self for a given key.
+    ///
+    ///     let obj = obj.re.associatedWeakObject(forKey: key) as NSObject?
+    ///
+    /// - Parameters:
+    ///   - key: The key for the association.
+    /// - Returns: The object associated with the key.
+    public func associatedWeakObject<Object>(forKey key: AssociationKey) -> Object? where Object : AnyObject
+}
+```
+
+#### DeinitObservable
+
+```
+/// The ability to observe AnyObject deinit.
+/// You must conform this protocol by yourself if your class is NOT inheriting from `NSObject`.
+public protocol DeinitObservable: ReerCompatible {}
+public extension Reer where Base: AnyObject {
+    func onDeinit(perform action: @escaping () -> Void)
+}
+```
+
+#### OnceExecutable
+
+```
+/// The ability to execute a closure once.
+/// You must conform this protocol by yourself if your class is NOT inheriting from `NSObject`.
+public protocol OnceExecutable: ReerCompatible {}
+
+public typealias OnceKey = AssociationKey
+
+public extension Reer where Base: AnyObject {
+
+    /// ReerKit: Execute the passed closure once by a key during the object life time.
+    ///
+    ///     let obj = NSObject()
+    ///     func test() {
+    ///         obj.re.executeOnce(byKey: key) { print("once") }
+    ///     }
+    ///     test()
+    ///     test()
+    ///     obj.re.executeOnce(byKey: key) { print("once") }
+    ///     // output: once
+    @discardableResult
+    public func executeOnce<Result>(byKey key: OnceKey, _ execute: @escaping () throws -> Result) rethrows -> Result
+
+    /// ReerKit: Execute the passed closure once by a auto generated key during the object life time.
+    ///
+    ///     let obj = NSObject()
+    ///     func test() {
+    ///         obj.re.executeOnce { print("once") }
+    ///     }
+    ///     test()
+    ///     test()
+    ///     // output: once
+    @discardableResult
+    public func executeOnce<Result>(fileID: String = #fileID, function: String = #function, line: Int = #line, _ execute: @escaping () throws -> Result) rethrows -> Result
+}
+```
+
+#### Swizzlable
+
+```
+import ObjectiveC
+
+/// The ability to swizzle method conveniently.
+/// You must conform this protocol by yourself if your class is NOT inheriting from `NSObject`.
+public protocol Swizzlable: ReerCompatible {}
+
+public extension Reer where Base: AnyObject {
+
+    /// ReerKit: Swizzle instance method of the class.
+    /// Also you can use ability from Swift, see `@_dynamicReplacement(for: )`
+    ///
+    /// - Parameters:
+    ///   - originalSelector: The selector must be a `@objc dynamic` method.
+    ///   - swizzledSelector: The selector must be a `@objc` method.
+    /// - Returns: Successful or not.
+    @discardableResult
+    public static func swizzleInstanceMethod(_ originalSelector: Selector, with swizzledSelector: Selector) -> Bool
+
+    /// ReerKit: Swizzle class method of the class.
+    /// Also you can use ability from Swift, see `@_dynamicReplacement(for: )`
+    ///
+    /// - Parameters:
+    ///   - originalSelector: The selector must be a `@objc dynamic` method.
+    ///   - swizzledSelector: The selector must be a `@objc` method.
+    /// - Returns: Successful or not.
+    @discardableResult
+    public static func swizzleClassMethod(_ originalSelector: Selector, with swizzledSelector: Selector) -> Bool
 }
 ```

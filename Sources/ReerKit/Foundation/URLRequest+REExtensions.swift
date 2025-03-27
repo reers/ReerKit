@@ -34,7 +34,7 @@ public extension URLRequest {
     ///
     /// - Parameter urlString: URL string to initialize URL request from
     static func re(urlString: String) -> URLRequest? {
-        guard let url = URL(string: urlString) else { return nil }
+        guard let url = URL.re(string: urlString) else { return nil }
         return .init(url: url)
     }
 }

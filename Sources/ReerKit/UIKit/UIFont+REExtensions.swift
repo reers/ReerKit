@@ -26,12 +26,14 @@ import UIKit
 public extension Reer where Base: UIFont {
     /// ReerKit: Font as bold font.
     var bold: UIFont {
-        return UIFont(descriptor: base.fontDescriptor.withSymbolicTraits(.traitBold)!, size: 0)
+        guard let descriptor = base.fontDescriptor.withSymbolicTraits(.traitBold) else { return base }
+        return UIFont(descriptor: descriptor, size: 0)
     }
 
     /// ReerKit: Font as italic font.
     var italic: UIFont {
-        return UIFont(descriptor: base.fontDescriptor.withSymbolicTraits(.traitItalic)!, size: 0)
+        guard let descriptor = base.fontDescriptor.withSymbolicTraits(.traitItalic) else { return base }
+        return UIFont(descriptor: descriptor, size: 0)
     }
 
     /// ReerKit: Font as monospaced font.

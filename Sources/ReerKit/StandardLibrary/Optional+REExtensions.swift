@@ -347,9 +347,15 @@ public extension ReerGeneric where Base == Optional<T> {
     }
 }
 
-// MARK: - Check Optional<Collection> is nil or empty.
+// MARK: - Check Optional<Collection> is empty or not.
 
 public extension ReerGeneric where Base == Optional<T>, T: Collection {
+    /// ReerKit: Check if optional is not nil and not empty collection.
+    var isNotEmpty: Bool {
+        if let collection = base, !collection.isEmpty { return true }
+        else { return false }
+    }
+    
     /// ReerKit: Check if optional is nil or empty collection.
     ///
     ///     let foo: String? = ""

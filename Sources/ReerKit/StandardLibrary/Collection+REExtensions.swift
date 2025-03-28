@@ -26,6 +26,9 @@ import Dispatch
 
 // MARK: - Properties
 public extension Reer where Base: Collection {
+    /// ReerKit: A Boolean value indicating whether the collection is not empty.
+    var isNotEmpty: Bool { !base.isEmpty }
+    
     /// ReerKit: The full range of the collection.
     var fullRange: Range<Base.Index> { base.startIndex..<base.endIndex }
 }

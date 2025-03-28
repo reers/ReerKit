@@ -64,20 +64,6 @@ public extension Reer where Base: Sequence {
     func reject(where condition: (Base.Element) throws -> Bool) rethrows -> [Base.Element] {
         return try base.filter { return try !condition($0) }
     }
-
-    /// ReerKit: Get element count based on condition.
-    ///
-    ///     [2, 2, 4, 7].re.count(where: { $0 % 2 == 0 }) -> 3
-    ///
-    /// - Parameter condition: condition to evaluate each element against.
-    /// - Returns: number of times the condition evaluated to true.
-    func count(where condition: (Base.Element) throws -> Bool) rethrows -> Int {
-        var count = 0
-        for element in base where try condition(element) {
-            count += 1
-        }
-        return count
-    }
     
     /// ReerKit: Iterate over a collection in reverse order. (right to left)
     ///

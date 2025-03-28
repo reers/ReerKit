@@ -10,8 +10,6 @@
 
 - ``Reer/reject(where:)``
 
-- ``Reer/count(where:)``
-
 - ``Reer/reversedForEach(_:)``
 
 - ``Reer/forEach(_:where:)``

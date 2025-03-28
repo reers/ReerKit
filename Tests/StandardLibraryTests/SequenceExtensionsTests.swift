@@ -41,13 +41,7 @@ class SequenceExtensionsTests: XCTestCase {
         let output = input.re.reject { $0 % 2 == 0 }
         XCTAssertEqual(output, [1, 3, 5])
     }
-
-    func testCountWhere() {
-        let array = [1, 1, 1, 1, 4, 4, 1, 1, 1]
-        let count = array.re.count { $0 % 2 == 0 }
-        XCTAssertEqual(count, 2)
-    }
-
+    
     func testForReversedForEach() {
         let input = [1, 2, 3, 4, 5]
         var output: [Int] = []

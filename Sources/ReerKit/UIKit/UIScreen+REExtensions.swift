@@ -42,7 +42,7 @@ public extension Reer where Base: UIScreen {
     /// ReerKit: Point value of one physical pixel for different screen.
     static var onePixel: CGFloat {
         let scale = UIScreen.main.scale
-        if scale == 2 { return 0.333}
+        if scale == 3 { return 0.333}
         else if scale == 2 { return 0.5 }
         else { return 1.0 }
     }

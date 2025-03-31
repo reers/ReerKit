@@ -39,6 +39,24 @@ class SubClass: NSObject, TestProtocol {
     }
 }
 
+class ExampleClass: NSObject {
+    @objc func testMethod() -> String {
+        return "Hello"
+    }
+    
+    @objc func oneArg(_ a: NSNumber) -> String {
+        return "oneArg-\(a)"
+    }
+    
+    @objc func add(_ a: NSNumber, and b: NSNumber) -> NSNumber {
+        return NSNumber(value: a.intValue + b.intValue)
+    }
+    
+    @objc func printSomething() {
+        print("something")
+    }
+}
+
 class NSObjectExtensionsTests: XCTestCase {
     
     func testRuntime() {
@@ -71,8 +89,31 @@ class NSObjectExtensionsTests: XCTestCase {
             methodExpectation.fulfill()
         })
         let view = UIView()
-        view.re.performMethod(methodName)
+        view.re.perform(methodName)
         waitForExpectations(timeout: 0.1, handler:nil)
+    }
+    
+    func testPerform() {
+        let example = ExampleClass()
+
+        do {
+            let result: String = try example.re.perform("testMethod")
+            XCTAssertEqual(result, "Hello")
+            
+            let sum: NSNumber = try example.re.perform(
+                "add:and:",
+                argument1: NSNumber(value: 1),
+                argument2: NSNumber(value: 2)
+            )
+            XCTAssertEqual(sum, 3)
+            
+            let trans: String = try example.re.perform("oneArg:", argument1: NSNumber(value: 33))
+            XCTAssertEqual(trans, "oneArg-33")
+            
+            example.re.perform("printSomething")
+        } catch {
+            print("Error: \(error)")
+        }
     }
 
     func testOCClassName() {

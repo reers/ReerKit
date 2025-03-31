@@ -132,16 +132,59 @@ public extension Reer where Base: NSObject {
         class_addMethod(Base.self, selector, implementation, encoding)
     }
     #endif
+}
+
+public enum PerformError: Error {
+    case invalidSelector
+    case selectorNotResponded
+    case invalidReturnType
+    case executionFailed
+}
+
+public extension Reer where Base: NSObject {
     
-    /// ReerKit: A convenience method to perform selectors by identifier strings.
-    ///
-    /// - Parameter identifier: Selector name.
-    func performMethod(_ identifier: String) {
+    func perform(_ identifier: String) {
         let selector = NSSelectorFromString(identifier)
         if base.responds(to: selector) {
             base.perform(selector)
         }
     }
+    
+    /// ReerKit: A convenience method to perform selectors by identifier strings.
+    /// - Parameters:
+    ///   - selectorName: Name of the selector to perform
+    ///   - argument1: First argument (optional)
+    ///   - argument2: Second argument (optional)
+    /// - Returns: Result of defined type
+    /// - Throws: PerformError
+    @discardableResult
+    func perform<T>(
+        _ selectorName: String,
+        argument1: AnyObject? = nil,
+        argument2: AnyObject? = nil
+    ) throws -> T {
+        let selector = NSSelectorFromString(selectorName)
+        guard base.responds(to: selector) else {
+            throw PerformError.selectorNotResponded
+        }
+        let result: Unmanaged<AnyObject>
+        if let argument1, let argument2 {
+            result = base.perform(selector, with: argument1, with: argument2)
+        } else if let argument1 {
+            result = base.perform(selector, with: argument1)
+        } else if let argument2 {
+            result = base.perform(selector, with: argument2)
+        } else {
+            result = base.perform(selector)
+        }
+        
+        guard let typedResult = result.takeUnretainedValue() as? T else {
+            throw PerformError.invalidReturnType
+        }
+        
+        return typedResult
+    }
 }
+
 
 #endif

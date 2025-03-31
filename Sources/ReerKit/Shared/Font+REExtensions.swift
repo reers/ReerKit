@@ -20,6 +20,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+#if !os(Linux)
+
 #if canImport(UIKit)
 import UIKit
 /// ReerKit: Font
@@ -91,3 +93,5 @@ public extension REFont {
         return REFont.systemFont(ofSize: fontSize, weight: .black)
     }
 }
+
+#endif

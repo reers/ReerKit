@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C2B4AAC62DC0BE2D0056BBCA /* CAAnimation+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B4AAC52DC0BE1B0056BBCA /* CAAnimation+REExtensions.swift */; };
+		C2B4AAC72DC0BE2D0056BBCA /* CAAnimation+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B4AAC52DC0BE1B0056BBCA /* CAAnimation+REExtensions.swift */; };
+		C2B4AAC82DC0BE2D0056BBCA /* CAAnimation+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B4AAC52DC0BE1B0056BBCA /* CAAnimation+REExtensions.swift */; };
+		C2B4AAC92DC0BE2D0056BBCA /* CAAnimation+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B4AAC52DC0BE1B0056BBCA /* CAAnimation+REExtensions.swift */; };
+		C2B4AACA2DC0BE2D0056BBCA /* CAAnimation+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B4AAC52DC0BE1B0056BBCA /* CAAnimation+REExtensions.swift */; };
+		C2B4AACC2DC0C4B10056BBCA /* CAAnimationExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B4AACB2DC0C4A20056BBCA /* CAAnimationExtensionsTests.swift */; };
 		D00D63982A069B4500A9EEF4 /* DataStructuresTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00D63972A069B4500A9EEF4 /* DataStructuresTest.swift */; };
 		D0122B0129EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B0029EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift */; };
 		D0122B0529EEF528008311CF /* UIBezierPathExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B0429EEF528008311CF /* UIBezierPathExtensionsTests.swift */; };
@@ -850,6 +856,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C2B4AAC52DC0BE1B0056BBCA /* CAAnimation+REExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAAnimation+REExtensions.swift"; sourceTree = "<group>"; };
+		C2B4AACB2DC0C4A20056BBCA /* CAAnimationExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAAnimationExtensionsTests.swift; sourceTree = "<group>"; };
 		D00D63972A069B4500A9EEF4 /* DataStructuresTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructuresTest.swift; sourceTree = "<group>"; };
 		D0122B0029EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemExtensionsTests.swift; sourceTree = "<group>"; };
 		D0122B0429EEF528008311CF /* UIBezierPathExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPathExtensionsTests.swift; sourceTree = "<group>"; };
@@ -1227,6 +1235,7 @@
 			children = (
 				D0350FCD2D362F4C00F4B5F2 /* CAGradientLayer+REExtensions.swift */,
 				D0350FCE2D362F4C00F4B5F2 /* CALayer+REExtensions.swift */,
+				C2B4AAC52DC0BE1B0056BBCA /* CAAnimation+REExtensions.swift */,
 				D0350FCF2D362F4C00F4B5F2 /* CATransform3D+REExtensions.swift */,
 			);
 			path = CoreAnimation;
@@ -1545,6 +1554,7 @@
 			children = (
 				D05C8673294B4F610077E744 /* CAGradientLayerExtensionsTests.swift */,
 				D05C8677294B535D0077E744 /* CATransform3DExtensionsTests.swift */,
+				C2B4AACB2DC0C4A20056BBCA /* CAAnimationExtensionsTests.swift */,
 			);
 			path = CoreAnimationTests;
 			sourceTree = "<group>";
@@ -2233,6 +2243,7 @@
 				D03511F02D362F4C00F4B5F2 /* ReerKit.swift in Sources */,
 				D02B86052D3F6EEF007FDAE1 /* Set+REExtensions.swift in Sources */,
 				D03511F12D362F4C00F4B5F2 /* Timer+REExtensions.swift in Sources */,
+				C2B4AAC72DC0BE2D0056BBCA /* CAAnimation+REExtensions.swift in Sources */,
 				D03511F22D362F4C00F4B5F2 /* Collection+REExtensions.swift in Sources */,
 				D03511F32D362F4C00F4B5F2 /* Reachability.swift in Sources */,
 				D03511F42D362F4C00F4B5F2 /* MutableCollection+REExtensions.swift in Sources */,
@@ -2384,6 +2395,7 @@
 				D03512782D362F4C00F4B5F2 /* ReerKit.swift in Sources */,
 				D02B86042D3F6EEF007FDAE1 /* Set+REExtensions.swift in Sources */,
 				D03512792D362F4C00F4B5F2 /* Timer+REExtensions.swift in Sources */,
+				C2B4AAC62DC0BE2D0056BBCA /* CAAnimation+REExtensions.swift in Sources */,
 				D035127A2D362F4C00F4B5F2 /* Collection+REExtensions.swift in Sources */,
 				D035127B2D362F4C00F4B5F2 /* Reachability.swift in Sources */,
 				D035127C2D362F4C00F4B5F2 /* MutableCollection+REExtensions.swift in Sources */,
@@ -2534,6 +2546,7 @@
 				D03511672D362F4C00F4B5F2 /* ReerKit.swift in Sources */,
 				D02B86062D3F6EEF007FDAE1 /* Set+REExtensions.swift in Sources */,
 				D03511682D362F4C00F4B5F2 /* Timer+REExtensions.swift in Sources */,
+				C2B4AAC92DC0BE2D0056BBCA /* CAAnimation+REExtensions.swift in Sources */,
 				D03511692D362F4C00F4B5F2 /* Collection+REExtensions.swift in Sources */,
 				D035116A2D362F4C00F4B5F2 /* Reachability.swift in Sources */,
 				D035116B2D362F4C00F4B5F2 /* MutableCollection+REExtensions.swift in Sources */,
@@ -2684,6 +2697,7 @@
 				D03510DF2D362F4C00F4B5F2 /* ReerKit.swift in Sources */,
 				D02B86072D3F6EEF007FDAE1 /* Set+REExtensions.swift in Sources */,
 				D03510E02D362F4C00F4B5F2 /* Timer+REExtensions.swift in Sources */,
+				C2B4AAC82DC0BE2D0056BBCA /* CAAnimation+REExtensions.swift in Sources */,
 				D03510E12D362F4C00F4B5F2 /* Collection+REExtensions.swift in Sources */,
 				D03510E22D362F4C00F4B5F2 /* Reachability.swift in Sources */,
 				D03510E32D362F4C00F4B5F2 /* MutableCollection+REExtensions.swift in Sources */,
@@ -2818,6 +2832,7 @@
 				D03512ED2D362F4C00F4B5F2 /* CGRect+REExtensions.swift in Sources */,
 				D03512EE2D362F4C00F4B5F2 /* RWLocked.swift in Sources */,
 				D03512EF2D362F4C00F4B5F2 /* UICollectionView+REExtensions.swift in Sources */,
+				C2B4AACA2DC0BE2D0056BBCA /* CAAnimation+REExtensions.swift in Sources */,
 				D03512F02D362F4C00F4B5F2 /* UIStoryboard+REExtensions.swift in Sources */,
 				D03512F12D362F4C00F4B5F2 /* Date+REExtensions.swift in Sources */,
 				D03512F22D362F4C00F4B5F2 /* Optional+REExtensions.swift in Sources */,
@@ -2867,6 +2882,7 @@
 				D090D97029DC68CA00245538 /* NSAttributedStringExtensionsTests.swift in Sources */,
 				D090D96C29DC629700245538 /* NotificationCenterExtensionsTests.swift in Sources */,
 				D0CD714328E5CDCD009ADA8E /* DoubleExtensionsTests.swift in Sources */,
+				C2B4AACC2DC0C4B10056BBCA /* CAAnimationExtensionsTests.swift in Sources */,
 				D0122B0D29EF0049008311CF /* UICollectionViewExtensionsTests.swift in Sources */,
 				D076D4C329F3C3F70008ABE0 /* TestViewController.swift in Sources */,
 				D05C8678294B535D0077E744 /* CATransform3DExtensionsTests.swift in Sources */,

@@ -62,6 +62,23 @@ public extension Reer where Base: Collection {
     subscript(index: Base.Index) -> Base.Element? {
         return (index >= base.startIndex && index < base.endIndex) ? base[index] : nil
     }
+    
+    /// ReerKit: Safe protects the array from out of bounds by use of optional.
+    ///
+    ///        let arr = [1, 2, 3, 4, 5]
+    ///        arr.re[1] -> 2
+    ///        arr.re[10] -> nil
+    ///        arr.re[10, default: -999] -> -999
+    ///
+    /// - Parameters:
+    ///   - index: index of element to access element.
+    ///   - defaultValue: The default value to use if `index` doesn't exist in the `indices`
+    subscript(index: Base.Index, default defaultValue: @autoclosure () -> Base.Element) -> Base.Element {
+        guard index >= base.startIndex, index < base.endIndex else {
+            return defaultValue()
+        }
+        return base[index]
+    }
 
     /// ReerKit: Returns an array of slices of length "size" from the array. If array can't be split evenly, the final slice will be the remaining elements.
     ///

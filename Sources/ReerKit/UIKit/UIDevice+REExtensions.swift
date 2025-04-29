@@ -1011,7 +1011,7 @@ extension Reer where Base: UIDevice {
     #if canImport(Darwin)
     // https://stackoverflow.com/questions/30748480/swift-get-devices-ip-address/30748582
     private static func ipAddress(withIfaName ifaName: String) -> String? {
-        if ifaName.count == 0 { return nil }
+        guard !ifaName.isEmpty else { return nil }
         var address: String?
         
         var ifaddr: UnsafeMutablePointer<ifaddrs>?

@@ -680,7 +680,7 @@ public extension Reer where Base == String {
     /// ReerKit: Check if string contains only unique characters.
     ///
     func hasUniqueCharacters() -> Bool {
-        guard base.count > 0 else { return false }
+        guard !base.isEmpty else { return false }
         var uniqueChars = Set<String>()
         for char in base {
             if uniqueChars.contains(String(char)) { return false }

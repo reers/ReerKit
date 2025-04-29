@@ -238,6 +238,39 @@ class UIViewExtensionsTests: XCTestCase {
         view.re.addSubviews([UIView(), UIView()])
         XCTAssertEqual(view.subviews.count, 2)
     }
+    
+    func testAddComponents() {
+        let frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        let view = UIView(frame: frame)
+        XCTAssertEqual(view.subviews.count, 0)
+        
+        let x = 1, y = 2
+        var fakeView: UIView?
+        // void warning
+        fakeView = nil
+        
+        view.re.addComponents {
+            UILayoutGuide()
+            CALayer()
+            UIView()
+            
+            fakeView
+            
+            if x > y {
+                UILabel()
+            } else {
+                UIButton(type: .custom)
+            }
+            
+            for _ in (0...1) {
+                UITextField()
+            }
+        }
+        
+        XCTAssertEqual(view.subviews.count, 4)
+        XCTAssertEqual(view.layoutGuides.count, 1)
+        XCTAssertEqual(view.layer.sublayers!.count, 5)
+    }
 
     func testFadeIn() {
         let view1 = UIView()

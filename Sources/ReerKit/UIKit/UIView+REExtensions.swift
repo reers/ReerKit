@@ -289,6 +289,13 @@ public extension Reer where Base: UIView {
     #endif
 }
 
+// MARK: - REComponentProtocol
+
+public protocol REComponentProtocol: AnyObject {}
+extension UIView: REComponentProtocol {}
+extension CALayer: REComponentProtocol {}
+extension UILayoutGuide: REComponentProtocol {}
+
 // MARK: - Method
 
 public extension Reer where Base: UIView {
@@ -337,6 +344,50 @@ public extension Reer where Base: UIView {
     /// - Parameter subviews: array of subviews to add to view.
     func addSubviews(_ subviews: [UIView]) {
         subviews.forEach { base.addSubview($0) }
+    }
+    
+    /// ReerKit: Add components to the view.
+    ///
+    /// - Parameter components: A block for components, e.g UIView、CALayer、UILayoutGuide
+    /// - Returns: self
+    ///
+    /// @code
+    /// ```swift
+    /// var fakeView: UIView?
+    ///
+    /// view.re.addComponents {
+    ///     UILayoutGuide()
+    ///     CALayer()
+    ///     UIView()
+    ///
+    ///     fakeView
+    ///
+    ///     if x > y {
+    ///         UILabel()
+    ///     } else {
+    ///         UIButton(type: .custom)
+    ///     }
+    ///
+    ///     for _ in (0...1) {
+    ///         UITextField()
+    ///     }
+    /// }
+    /// ```
+    /// @endcode
+    @discardableResult
+    func addComponents(@REViewBuilder<any REComponentProtocol> _ components: () -> [any REComponentProtocol]) -> Base {
+        for item in components() {
+            if let view = item as? UIView {
+                base.addSubview(view)
+            } else if let guide = item as? UILayoutGuide {
+                base.addLayoutGuide(guide)
+            } else if let layer = item as? CALayer {
+                base.layer.addSublayer(layer)
+            } else {
+                assertionFailure("Not supported => \(String(describing: item))")
+            }
+        }
+        return base
     }
     
     /// ReerKit: Remove all subviews

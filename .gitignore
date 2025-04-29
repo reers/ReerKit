@@ -70,3 +70,4 @@ fastlane/test_output
 iOSInjectionProject/
 /.DS_Store
 /Sources/.DS_Store
+Sources/ReerKit/.DS_Store

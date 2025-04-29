@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C2B4B19A2DC0CD130056BBCA /* REViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B4B1992DC0CD0A0056BBCA /* REViewBuilder.swift */; };
+		C2B4B19B2DC0CD130056BBCA /* REViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B4B1992DC0CD0A0056BBCA /* REViewBuilder.swift */; };
+		C2B4B19C2DC0CD130056BBCA /* REViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B4B1992DC0CD0A0056BBCA /* REViewBuilder.swift */; };
+		C2B4B19D2DC0CD130056BBCA /* REViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B4B1992DC0CD0A0056BBCA /* REViewBuilder.swift */; };
+		C2B4B19E2DC0CD130056BBCA /* REViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B4B1992DC0CD0A0056BBCA /* REViewBuilder.swift */; };
 		D00D63982A069B4500A9EEF4 /* DataStructuresTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00D63972A069B4500A9EEF4 /* DataStructuresTest.swift */; };
 		D0122B0129EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B0029EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift */; };
 		D0122B0529EEF528008311CF /* UIBezierPathExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B0429EEF528008311CF /* UIBezierPathExtensionsTests.swift */; };
@@ -850,6 +855,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C2B4B1992DC0CD0A0056BBCA /* REViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REViewBuilder.swift; sourceTree = "<group>"; };
 		D00D63972A069B4500A9EEF4 /* DataStructuresTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructuresTest.swift; sourceTree = "<group>"; };
 		D0122B0029EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemExtensionsTests.swift; sourceTree = "<group>"; };
 		D0122B0429EEF528008311CF /* UIBezierPathExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPathExtensionsTests.swift; sourceTree = "<group>"; };
@@ -1391,6 +1397,7 @@
 				D03510322D362F4C00F4B5F2 /* UITextField+REExtensions.swift */,
 				D03510332D362F4C00F4B5F2 /* UITextView+REExtensions.swift */,
 				D03510342D362F4C00F4B5F2 /* UIView+REExtensions.swift */,
+				C2B4B1992DC0CD0A0056BBCA /* REViewBuilder.swift */,
 				D03510352D362F4C00F4B5F2 /* UIViewController+REExtensions.swift */,
 				D03510362D362F4C00F4B5F2 /* UIWindow+REExtensions.swift */,
 			);
@@ -2208,6 +2215,7 @@
 				D03511D72D362F4C00F4B5F2 /* StdlibProtocolWrappers.swift in Sources */,
 				D03511D82D362F4C00F4B5F2 /* Float+REExtensions.swift in Sources */,
 				D03511D92D362F4C00F4B5F2 /* UITextField+REExtensions.swift in Sources */,
+				C2B4B19E2DC0CD130056BBCA /* REViewBuilder.swift in Sources */,
 				D03511DA2D362F4C00F4B5F2 /* Comparable+REExtensions.swift in Sources */,
 				D03511DB2D362F4C00F4B5F2 /* UIImageView+REExtensions.swift in Sources */,
 				D03511DC2D362F4C00F4B5F2 /* Data+REExtensions.swift in Sources */,
@@ -2359,6 +2367,7 @@
 				D035125F2D362F4C00F4B5F2 /* StdlibProtocolWrappers.swift in Sources */,
 				D03512602D362F4C00F4B5F2 /* Float+REExtensions.swift in Sources */,
 				D03512612D362F4C00F4B5F2 /* UITextField+REExtensions.swift in Sources */,
+				C2B4B19D2DC0CD130056BBCA /* REViewBuilder.swift in Sources */,
 				D03512622D362F4C00F4B5F2 /* Comparable+REExtensions.swift in Sources */,
 				D03512632D362F4C00F4B5F2 /* UIImageView+REExtensions.swift in Sources */,
 				D03512642D362F4C00F4B5F2 /* Data+REExtensions.swift in Sources */,
@@ -2509,6 +2518,7 @@
 				D035114E2D362F4C00F4B5F2 /* StdlibProtocolWrappers.swift in Sources */,
 				D035114F2D362F4C00F4B5F2 /* Float+REExtensions.swift in Sources */,
 				D03511502D362F4C00F4B5F2 /* UITextField+REExtensions.swift in Sources */,
+				C2B4B19A2DC0CD130056BBCA /* REViewBuilder.swift in Sources */,
 				D03511512D362F4C00F4B5F2 /* Comparable+REExtensions.swift in Sources */,
 				D03511522D362F4C00F4B5F2 /* UIImageView+REExtensions.swift in Sources */,
 				D03511532D362F4C00F4B5F2 /* Data+REExtensions.swift in Sources */,
@@ -2659,6 +2669,7 @@
 				D03510C62D362F4C00F4B5F2 /* StdlibProtocolWrappers.swift in Sources */,
 				D03510C72D362F4C00F4B5F2 /* Float+REExtensions.swift in Sources */,
 				D03510C82D362F4C00F4B5F2 /* UITextField+REExtensions.swift in Sources */,
+				C2B4B19B2DC0CD130056BBCA /* REViewBuilder.swift in Sources */,
 				D03510C92D362F4C00F4B5F2 /* Comparable+REExtensions.swift in Sources */,
 				D03510CA2D362F4C00F4B5F2 /* UIImageView+REExtensions.swift in Sources */,
 				D03510CB2D362F4C00F4B5F2 /* Data+REExtensions.swift in Sources */,
@@ -2718,6 +2729,7 @@
 				D035128A2D362F4C00F4B5F2 /* Queue.swift in Sources */,
 				D035128B2D362F4C00F4B5F2 /* UINavigationController+REExtensions.swift in Sources */,
 				D035128C2D362F4C00F4B5F2 /* URLRequest+REExtensions.swift in Sources */,
+				C2B4B19C2DC0CD130056BBCA /* REViewBuilder.swift in Sources */,
 				D035128D2D362F4C00F4B5F2 /* AnyObjectExtensionable.swift in Sources */,
 				D035128E2D362F4C00F4B5F2 /* Memory.swift in Sources */,
 				D035128F2D362F4C00F4B5F2 /* UIBarButtonItem+REExtensions.swift in Sources */,

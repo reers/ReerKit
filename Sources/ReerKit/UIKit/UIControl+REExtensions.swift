@@ -41,10 +41,10 @@ public extension Reer where Base: UIControl {
     /// It will cause a strong reference to @a action.
     ///
     /// - Parameters:
-    ///   - events: The action which is invoked then the action message is
-    ///             sent  (cannot be nil). The action is retained.
-    ///   - action: A bitmask specifying the control events for which the
+    ///   - events: A bitmask specifying the control events for which the
     ///            action message is sent.
+    ///   - action: The action which is invoked then the action message is
+    ///             sent  (cannot be nil). The action is retained.
     func addAction(forControlEvents events: UIControl.Event, action: @escaping (UIControl) -> Void) {
         let target = UIControlActionTarget(action: action, events: events)
         base.addTarget(target, action: #selector(target.invoke(with:)), for: events)

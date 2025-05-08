@@ -1,4 +1,3 @@
-[DeepWiki](https://deepwiki.com/reers/ReerKit)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/reers/ReerKit)
 
 # ReerKit

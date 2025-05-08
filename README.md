@@ -1,6 +1,5 @@
 [简体中文](README_CN.md)
 
-[DeepWiki](https://deepwiki.com/reers/ReerKit)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/reers/ReerKit)
 
 # ReerKit

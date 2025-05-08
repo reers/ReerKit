@@ -22,52 +22,55 @@
 #if !os(watchOS) && !os(Linux) && canImport(QuartzCore)
 import QuartzCore
 
-public typealias RECADidStartBlock = (CAAnimation) -> Void
-public typealias RECADidStopBlock = (CAAnimation, Bool) -> Void
-
-/// CAAnimation delegate mediator
-private final class CAAnimationDelegateMediator: NSObject, CAAnimationDelegate {
-    fileprivate var startBlock: RECADidStartBlock?
-    fileprivate var stopBlock: RECADidStopBlock?
+/// CAAnimation delegate proxy
+private final class CAAnimationDelegateProxy: NSObject, CAAnimationDelegate {
+    fileprivate var onStartActions = [(CAAnimation) -> Void]()
+    fileprivate var onStopActions = [(CAAnimation, Bool) -> Void]()
     
     // MARK: - CAAnimationDelegate
     
     func animationDidStart(_ anim: CAAnimation) {
-        startBlock?(anim)
+        onStartActions.forEach { $0(anim) }
     }
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        stopBlock?(anim, flag)
+        onStopActions.forEach { $0(anim, flag) }
     }
 }
 
 public extension Reer where Base: CAAnimation {
-    /// ReerKit: CAAnimation wrapper to avoid circular references.
+    /// ReerKit: Create delegate proxy if it doesn't exist
     ///
-    /// - Parameters:
-    ///   - block: call back when animation start.
-    func animationDidStart(_ block: @escaping RECADidStartBlock) {
-        guard let delegate = base.delegate as? CAAnimationDelegateMediator else {
-            let delegateMediator = CAAnimationDelegateMediator()
-            delegateMediator.startBlock = block
-            base.delegate = delegateMediator // retain
-            return
+    /// - Returns: CAAnimationDelegateProxy
+    private var delegateProxy: CAAnimationDelegateProxy {
+        guard let delegate = base.delegate as? CAAnimationDelegateProxy else {
+            let proxy = CAAnimationDelegateProxy()
+            base.delegate = proxy  // retained
+            return proxy
         }
-        delegate.startBlock = block
+        return delegate
     }
     
     /// ReerKit: CAAnimation wrapper to avoid circular references.
     ///
     /// - Parameters:
-    ///   - block: call back when animation stop.
-    func animationDidStop(_ block: @escaping RECADidStopBlock) {
-        guard let delegate = base.delegate as? CAAnimationDelegateMediator else {
-            let delegateMediator = CAAnimationDelegateMediator()
-            delegateMediator.stopBlock = block
-            base.delegate = delegateMediator // retain
-            return
-        }
-        delegate.stopBlock = block
+    ///   - action: A closure that call back with you created `animation` instance when animation start.
+    /// - Returns: Reer
+    @discardableResult
+    func onStart(_ action: @escaping (CAAnimation) -> Void) -> Self {
+        delegateProxy.onStartActions.append(action)
+        return self
+    }
+    
+    /// ReerKit: CAAnimation wrapper to avoid circular references.
+    ///
+    /// - Parameters:
+    ///   - action: A closure that call back with you created `animation` instance and `finished` flag when animation stop.
+    /// - Returns: Reer
+    @discardableResult
+    func onStop(_ action: @escaping (CAAnimation, Bool) -> Void) -> Self {
+        delegateProxy.onStopActions.append(action)
+        return self
     }
 }
 

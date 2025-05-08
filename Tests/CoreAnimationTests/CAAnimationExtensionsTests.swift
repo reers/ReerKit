@@ -27,16 +27,35 @@ final class CAAnimationExtensionsTests: XCTestCase {
         let exp = expectation(description: "doAnimation")
         
         var count = 0
-        scaleAnimation.re.animationDidStart { animation in
-            count += 1
-            debugPrint("animation start")
-        }
-        scaleAnimation.re.animationDidStop { _, _ in
-            count += 1
-            debugPrint("animation stop")
-            XCTAssertEqual(count, 2)
-            exp.fulfill()
-        }
+        
+        scaleAnimation
+            .re
+            .onStart { animation in
+                count += 1
+                XCTAssertEqual(count, 1)
+            }
+            .onStop { _, _ in
+                count -= 1
+                XCTAssertEqual(count, 1)
+            }
+        
+        scaleAnimation
+            .re
+            .onStart { animation in
+                count += 1
+                XCTAssertEqual(count, 2)
+            }
+            .onStop { _, _ in
+                count -= 1
+                XCTAssertEqual(count, 0)
+            }
+            .onStop { _, _ in
+                count -= 1
+                XCTAssertEqual(count, -1)
+                
+                exp.fulfill()
+            }
+        
         view.layer.add(scaleAnimation, forKey: "scale")
         
         waitForExpectations(timeout: 5)

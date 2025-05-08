@@ -41,11 +41,13 @@ private final class CAAnimationDelegateProxy: NSObject, CAAnimationDelegate {
 public extension Reer where Base: CAAnimation {
     /// ReerKit: Create delegate proxy if it doesn't exist
     ///
+    /// The delegate object is retained by the receiver
+    ///
     /// - Returns: CAAnimationDelegateProxy
     private var delegateProxy: CAAnimationDelegateProxy {
         guard let delegate = base.delegate as? CAAnimationDelegateProxy else {
             let proxy = CAAnimationDelegateProxy()
-            base.delegate = proxy  // retained
+            base.delegate = proxy
             return proxy
         }
         return delegate

@@ -28,7 +28,7 @@ extension CATransform3D: ReerCompatibleValue {}
 
 // MARK: - Equatable
 
-#if swift(>=6.0)
+#if compiler(>=6.0)
 extension CATransform3D: @retroactive Equatable {
     /// ReerKit: Returns a Boolean value indicating whether two values are equal.
     ///

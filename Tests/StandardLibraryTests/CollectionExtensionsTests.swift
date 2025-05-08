@@ -40,6 +40,7 @@ final class CollectionExtensionsTests: XCTestCase {
         XCTAssertNotNil(collection.re[2])
         XCTAssertEqual(collection.re[2], 3)
         XCTAssertNil(collection.re[10])
+        XCTAssertEqual(collection.re[10, default: -999], -999)
     }
 
     func testIndicesWhere() {

@@ -63,7 +63,7 @@ public extension Reer where Base: Collection {
         return (index >= base.startIndex && index < base.endIndex) ? base[index] : nil
     }
     
-    /// ReerKit: Safe protects the array from out of bounds by use of optional.
+    /// ReerKit: Safe protects the array from out of bounds by use of default.
     ///
     ///        let arr = [1, 2, 3, 4, 5]
     ///        arr.re[1] -> 2

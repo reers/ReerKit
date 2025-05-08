@@ -13,6 +13,7 @@
 		C2B4AAC92DC0BE2D0056BBCA /* CAAnimation+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B4AAC52DC0BE1B0056BBCA /* CAAnimation+REExtensions.swift */; };
 		C2B4AACA2DC0BE2D0056BBCA /* CAAnimation+REExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B4AAC52DC0BE1B0056BBCA /* CAAnimation+REExtensions.swift */; };
 		C2B4AACC2DC0C4B10056BBCA /* CAAnimationExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B4AACB2DC0C4A20056BBCA /* CAAnimationExtensionsTests.swift */; };
+		C2CA7F6D2DCC8B06000BF730 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F39A83287DF21300A754B2 /* TestHelpers.swift */; };
 		D00D63982A069B4500A9EEF4 /* DataStructuresTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00D63972A069B4500A9EEF4 /* DataStructuresTest.swift */; };
 		D0122B0129EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B0029EEF0E0008311CF /* UIBarButtonItemExtensionsTests.swift */; };
 		D0122B0529EEF528008311CF /* UIBezierPathExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0122B0429EEF528008311CF /* UIBezierPathExtensionsTests.swift */; };
@@ -2883,6 +2884,7 @@
 				D090D96C29DC629700245538 /* NotificationCenterExtensionsTests.swift in Sources */,
 				D0CD714328E5CDCD009ADA8E /* DoubleExtensionsTests.swift in Sources */,
 				C2B4AACC2DC0C4B10056BBCA /* CAAnimationExtensionsTests.swift in Sources */,
+				C2CA7F6D2DCC8B06000BF730 /* TestHelpers.swift in Sources */,
 				D0122B0D29EF0049008311CF /* UICollectionViewExtensionsTests.swift in Sources */,
 				D076D4C329F3C3F70008ABE0 /* TestViewController.swift in Sources */,
 				D05C8678294B535D0077E744 /* CATransform3DExtensionsTests.swift in Sources */,

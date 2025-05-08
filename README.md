@@ -1,5 +1,8 @@
 [简体中文](README_CN.md)
 
+[DeepWiki](https://deepwiki.com/reers/ReerKit)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/reers/ReerKit)
+
 # ReerKit
 ReerKit is a collection of native Swift extensions that provide convenient methods, syntactic sugar, and performance improvements for various native data types, UIKit, and Cocoa classes for iOS, macOS, tvOS, watchOS, and Linux platforms.
 All system type extensions in the framework have the `re` infix added to avoid ambiguity issues when calling the same name extension, such as 

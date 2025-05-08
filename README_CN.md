@@ -1,3 +1,6 @@
+[DeepWiki](https://deepwiki.com/reers/ReerKit)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/reers/ReerKit)
+
 # ReerKit
 ReerKit 是许多个原生 Swift 扩展的集合，为 iOS、macOS、tvOS、watchOS, visionOS 和 Linux 提供了适用于各种原生数据类型、UIKit 和 Cocoa 类的便捷方法、语法糖和性能改进。
 框架中所有的系统类型 extension 都添加了 `re` 中缀, 避免了同名扩展调用时的歧义问题, 如 

@@ -28,8 +28,7 @@ final class CAAnimationExtensionsTests: XCTestCase {
         
         var count = 0
         
-        scaleAnimation
-            .re
+        scaleAnimation.re
             .onStart { animation in
                 count += 1
                 XCTAssertEqual(count, 1)
@@ -39,8 +38,7 @@ final class CAAnimationExtensionsTests: XCTestCase {
                 XCTAssertEqual(count, 1)
             }
         
-        scaleAnimation
-            .re
+        scaleAnimation.re
             .onStart { animation in
                 count += 1
                 XCTAssertEqual(count, 2)

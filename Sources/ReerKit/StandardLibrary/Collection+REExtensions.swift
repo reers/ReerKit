@@ -128,10 +128,80 @@ public extension Reer where Base: Collection {
         }
     }
     
-    func forEach(_ body: (Base.Element, Int) throws  -> Void) rethrows {
-        for (index, item) in base.enumerated() {
-            try body(item, index)
+    /// ReerKit: Performs the specified closure on each element of the sequence with position information.
+    /// - Parameters:
+    ///   - body: A closure that takes four parameters:
+    ///     - index: The current index in the sequence
+    ///     - element: The element at the current position
+    ///     - isFirst: Whether this is the first element
+    ///     - isLast: Whether this is the last element
+    func forEach(
+        _ body: (_ index: Int, _ element: Base.Element, _ isFirst: Bool, _ isLast: Bool) throws -> Void
+    ) rethrows {
+        for (offset, element) in base.enumerated() {
+            let currentIndex = base.index(base.startIndex, offsetBy: offset)
+            try body(
+                offset,
+                element,
+                currentIndex == base.startIndex,
+                base.index(after: currentIndex) == base.endIndex
+            )
         }
+    }
+    
+    /// ReerKit: Returns an array containing the results of mapping the given closure over the sequence's elements with position information.
+    /// - Parameters:
+    ///   - transform: A closure that takes four parameters:
+    ///     - index: The current index in the sequence
+    ///     - element: The element at the current position
+    ///     - isFirst: Whether this is the first element
+    ///     - isLast: Whether this is the last element
+    /// - Returns: An array containing the transformed elements
+    func map<T>(
+        _ transform: (_ index: Int, _ element: Base.Element, _ isFirst: Bool, _ isLast: Bool) throws -> T
+    ) rethrows -> [T] {
+        var result: [T] = []
+        result.reserveCapacity(base.underestimatedCount)
+        
+        for (offset, element) in base.enumerated() {
+            let currentIndex = base.index(base.startIndex, offsetBy: offset)
+            try result.append(transform(
+                offset,
+                element,
+                currentIndex == base.startIndex,
+                base.index(after: currentIndex) == base.endIndex
+            ))
+        }
+        
+        return result
+    }
+    
+    /// ReerKit: Returns an array containing the non-nil results of mapping the given closure over the sequence's elements with position information.
+    /// - Parameters:
+    ///   - transform: A closure that takes four parameters:
+    ///     - index: The current index in the sequence
+    ///     - element: The element at the current position
+    ///     - isFirst: Whether this is the first element
+    ///     - isLast: Whether this is the last element
+    /// - Returns: An array containing the non-nil transformed elements
+    func compactMap<T>(
+        _ transform: (_ index: Int, _ element: Base.Element, _ isFirst: Bool, _ isLast: Bool) throws -> T?
+    ) rethrows -> [T] {
+        var result: [T] = []
+        
+        for (offset, element) in base.enumerated() {
+            let currentIndex = base.index(base.startIndex, offsetBy: offset)
+            if let transformed = try transform(
+                offset,
+                element,
+                currentIndex == base.startIndex,
+                base.index(after: currentIndex) == base.endIndex
+            ) {
+                result.append(transformed)
+            }
+        }
+        
+        return result
     }
 }
 

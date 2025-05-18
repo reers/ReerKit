@@ -149,21 +149,112 @@ final class CollectionExtensionsTests: XCTestCase {
         XCTAssertEqual([Int]().re.average(), 0)
     }
     
-    func testForEachWithIndex() {
-        var ret: [Int] = []
-        ["a", "b", "c"].re.forEach { item, index in
-            ret.append(index)
-        }
-        XCTAssertEqual(ret, [0, 1, 2])
+    func testForEachWithPositionInfo() {
+        let numbers = [1, 2, 3]
+        var result: [(index: Int, element: Int, isFirst: Bool, isLast: Bool)] = []
         
-        ret.removeAll()
-        var retString = ""
-        ["a", "b", "c"].re.forEach {
-            retString += $0
-            ret.append($1)
+        numbers.re.forEach { index, element, isFirst, isLast in
+            result.append((index, element, isFirst, isLast))
         }
-        XCTAssertEqual(retString, "abc")
-        XCTAssertEqual(ret, [0, 1, 2])
+        
+        // Test array length
+        XCTAssertEqual(result.count, 3)
+        
+        // Test first element
+        XCTAssertEqual(result[0].index, 0)
+        XCTAssertEqual(result[0].element, 1)
+        XCTAssertTrue(result[0].isFirst)
+        XCTAssertFalse(result[0].isLast)
+        
+        // Test middle element
+        XCTAssertEqual(result[1].index, 1)
+        XCTAssertEqual(result[1].element, 2)
+        XCTAssertFalse(result[1].isFirst)
+        XCTAssertFalse(result[1].isLast)
+        
+        // Test last element
+        XCTAssertEqual(result[2].index, 2)
+        XCTAssertEqual(result[2].element, 3)
+        XCTAssertFalse(result[2].isFirst)
+        XCTAssertTrue(result[2].isLast)
+        
+        // Test empty array
+        let emptyArray: [Int] = []
+        var emptyResult = 0
+        emptyArray.re.forEach { _, _, _, _ in
+            emptyResult += 1
+        }
+        XCTAssertEqual(emptyResult, 0)
+    }
+
+    func testMapWithPositionInfo() {
+        let numbers = [1, 2, 3]
+        
+        // Test normal mapping
+        let result = numbers.re.map { index, element, isFirst, isLast -> String in
+            switch (isFirst, isLast) {
+            case (true, _):
+                return "First:\(element)"
+            case (_, true):
+                return "Last:\(element)"
+            default:
+                return "Middle:\(element)"
+            }
+        }
+        
+        XCTAssertEqual(result.count, 3)
+        XCTAssertEqual(result[0], "First:1")
+        XCTAssertEqual(result[1], "Middle:2")
+        XCTAssertEqual(result[2], "Last:3")
+        
+        // Test single element array
+        let singleNumber = [1]
+        let singleResult = singleNumber.re.map { _, element, isFirst, isLast -> String in
+            XCTAssertTrue(isFirst)
+            XCTAssertTrue(isLast)
+            return "\(element)"
+        }
+        XCTAssertEqual(singleResult, ["1"])
+        
+        // Test empty array
+        let emptyArray: [Int] = []
+        let emptyResult = emptyArray.re.map { _, _, _, _ in return "unreachable" }
+        XCTAssertTrue(emptyResult.isEmpty)
+    }
+
+    func testCompactMapWithPositionInfo() {
+        let numbers = [1, 2, 3, 4]
+        
+        // Test filtering and mapping
+        let result = numbers.re.compactMap { index, element, isFirst, isLast -> String? in
+            if element % 2 == 0 {
+                return "\(index):\(element)"
+            }
+            return nil
+        }
+        
+        XCTAssertEqual(result.count, 2)
+        XCTAssertEqual(result[0], "1:2")
+        XCTAssertEqual(result[1], "3:4")
+        
+        // Test all nil results
+        let allNilResult = numbers.re.compactMap { _, _, _, _ -> String? in
+            return nil
+        }
+        XCTAssertTrue(allNilResult.isEmpty)
+        
+        // Test all non-nil results
+        let allNonNilResult = numbers.re.compactMap { index, element, isFirst, isLast -> Int? in
+            return element
+        }
+        XCTAssertEqual(allNonNilResult, numbers)
+        
+        // Test empty array
+        let emptyArray: [Int] = []
+        let emptyResult = emptyArray.re.compactMap { _, _, _, _ -> Int? in
+            return 1
+        }
+        XCTAssertTrue(emptyResult.isEmpty)
     }
 }
 

@@ -24,6 +24,7 @@
 		D0D311222AB4351700E54361 /* SwiftUITestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311212AB4351700E54361 /* SwiftUITestViewController.swift */; };
 		D0D311292AB4798700E54361 /* BlurImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311282AB4798700E54361 /* BlurImageViewController.swift */; };
 		D0E099962C9D93BF0096B9C9 /* RETimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E099952C9D93BF0096B9C9 /* RETimerViewController.swift */; };
+		D0ED29612DEAB2FB0012996F /* ExampleNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ED29602DEAB2F40012996F /* ExampleNavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		D0D311212AB4351700E54361 /* SwiftUITestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUITestViewController.swift; sourceTree = "<group>"; };
 		D0D311282AB4798700E54361 /* BlurImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurImageViewController.swift; sourceTree = "<group>"; };
 		D0E099952C9D93BF0096B9C9 /* RETimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RETimerViewController.swift; sourceTree = "<group>"; };
+		D0ED29602DEAB2F40012996F /* ExampleNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleNavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 		D08416D22A30E2C80078919B /* iOS_Example */ = {
 			isa = PBXGroup;
 			children = (
+				D0ED29602DEAB2F40012996F /* ExampleNavigationController.swift */,
 				D08416D32A30E2C80078919B /* AppDelegate.swift */,
 				D08416D52A30E2C80078919B /* SceneDelegate.swift */,
 				D08416EF2A30E6A60078919B /* ExampleListViewController.swift */,
@@ -224,6 +227,7 @@
 				D0A08C342B236D9B00B89DA9 /* GrayModeViewController.swift in Sources */,
 				D08E03F32C4A290600C07389 /* MulticastDelegateExampleViewController.swift in Sources */,
 				D08416F72A30EBAF0078919B /* KeyboardManagerDemoViewController.swift in Sources */,
+				D0ED29612DEAB2FB0012996F /* ExampleNavigationController.swift in Sources */,
 				D05100092B3F0C6F001F576D /* CountdownTimerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

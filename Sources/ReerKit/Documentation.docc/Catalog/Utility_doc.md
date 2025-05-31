@@ -22,6 +22,8 @@
 
 - ``OnceToken``
 
+- ``FPSLabel``
+
 ### Memory
 
 - ``Memory``

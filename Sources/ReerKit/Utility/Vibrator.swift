@@ -71,19 +71,57 @@ public struct Vibrator {
     public static func occur(_ style: FeedbackStyle, intensity: CGFloat = 1.0) {
         switch style {
         case .light, .medium, .heavy, .soft, .rigid:
-            let generator = UIImpactFeedbackGenerator(style: style.impactStyle)
+            if impactFeedbackGenerator == nil {
+                impactFeedbackGenerator = UIImpactFeedbackGenerator(style: style.impactStyle)
+            }
             if #available(iOS 13.0, *) {
-                generator.impactOccurred(intensity: intensity)
+                impactFeedbackGenerator?.impactOccurred(intensity: intensity)
             } else {
-                generator.impactOccurred()
+                impactFeedbackGenerator?.impactOccurred()
             }
         case .selectionChanged:
-            let generator = UISelectionFeedbackGenerator()
-            generator.selectionChanged()
+            selectionFeedbackGenerator?.selectionChanged()
         case .success, .warning, .error:
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(style.notificationType)
+            notificationFeedbackGenerator?.notificationOccurred(style.notificationType)
+        }
+        delayReleaseGenerator()
+    }
+    
+    public static func prepare(_ style: FeedbackStyle) {
+        switch style {
+        case .light, .medium, .heavy, .soft, .rigid:
+            if impactFeedbackGenerator == nil {
+                impactFeedbackGenerator = UIImpactFeedbackGenerator(style: style.impactStyle)
+            }
+            impactFeedbackGenerator?.prepare()
+        case .selectionChanged:
+            selectionFeedbackGenerator?.prepare()
+        case .success, .warning, .error:
+            notificationFeedbackGenerator?.prepare()
+        }
+        delayReleaseGenerator()
+    }
+    
+    public static func end() {
+        impactFeedbackGenerator = nil
+        selectionFeedbackGenerator = nil
+        notificationFeedbackGenerator = nil
+    }
+    
+    private static func delayReleaseGenerator() {
+        debouncer.execute(interval: 2) {
+            asyncOnMainQueue(end)
         }
     }
+    
+    private static var impactFeedbackGenerator: UIImpactFeedbackGenerator?
+    
+    @LazyResettable(UISelectionFeedbackGenerator())
+    private static var selectionFeedbackGenerator: UISelectionFeedbackGenerator?
+    
+    @LazyResettable(UINotificationFeedbackGenerator())
+    private static var notificationFeedbackGenerator: UINotificationFeedbackGenerator?
+    
+    private static var debouncer = Debouncer(queue: .global(qos: .background))
 }
 #endif

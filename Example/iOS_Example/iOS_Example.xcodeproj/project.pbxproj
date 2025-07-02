@@ -18,6 +18,7 @@
 		D08416F52A30EB2F0078919B /* ReerKit in Frameworks */ = {isa = PBXBuildFile; productRef = D08416F42A30EB2F0078919B /* ReerKit */; };
 		D08416F72A30EBAF0078919B /* KeyboardManagerDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08416F62A30EBAF0078919B /* KeyboardManagerDemoViewController.swift */; };
 		D08E03F32C4A290600C07389 /* MulticastDelegateExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08E03F22C4A290600C07389 /* MulticastDelegateExampleViewController.swift */; };
+		D09AC9F32E154DB3006933F3 /* VibratorExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09AC9F22E154DAF006933F3 /* VibratorExampleViewController.swift */; };
 		D0A08C342B236D9B00B89DA9 /* GrayModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A08C332B236D9B00B89DA9 /* GrayModeViewController.swift */; };
 		D0C9C0F62A3239EE007C2C36 /* ResponderChainEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0F52A3239EE007C2C36 /* ResponderChainEventViewController.swift */; };
 		D0D311202AB2D76F00E54361 /* ButtonExtensionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3111F2AB2D76F00E54361 /* ButtonExtensionsViewController.swift */; };
@@ -41,6 +42,7 @@
 		D08416EF2A30E6A60078919B /* ExampleListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleListViewController.swift; sourceTree = "<group>"; };
 		D08416F62A30EBAF0078919B /* KeyboardManagerDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManagerDemoViewController.swift; sourceTree = "<group>"; };
 		D08E03F22C4A290600C07389 /* MulticastDelegateExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegateExampleViewController.swift; sourceTree = "<group>"; };
+		D09AC9F22E154DAF006933F3 /* VibratorExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibratorExampleViewController.swift; sourceTree = "<group>"; };
 		D0A08C332B236D9B00B89DA9 /* GrayModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayModeViewController.swift; sourceTree = "<group>"; };
 		D0C9C0F52A3239EE007C2C36 /* ResponderChainEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponderChainEventViewController.swift; sourceTree = "<group>"; };
 		D0D3111F2AB2D76F00E54361 /* ButtonExtensionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtensionsViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 		D08416D22A30E2C80078919B /* iOS_Example */ = {
 			isa = PBXGroup;
 			children = (
+				D09AC9F22E154DAF006933F3 /* VibratorExampleViewController.swift */,
 				D0ED29602DEAB2F40012996F /* ExampleNavigationController.swift */,
 				D08416D32A30E2C80078919B /* AppDelegate.swift */,
 				D08416D52A30E2C80078919B /* SceneDelegate.swift */,
@@ -216,6 +219,7 @@
 			files = (
 				D0D311292AB4798700E54361 /* BlurImageViewController.swift in Sources */,
 				D0E099962C9D93BF0096B9C9 /* RETimerViewController.swift in Sources */,
+				D09AC9F32E154DB3006933F3 /* VibratorExampleViewController.swift in Sources */,
 				D08416F02A30E6A60078919B /* ExampleListViewController.swift in Sources */,
 				D08416D42A30E2C80078919B /* AppDelegate.swift in Sources */,
 				D0D311202AB2D76F00E54361 /* ButtonExtensionsViewController.swift in Sources */,

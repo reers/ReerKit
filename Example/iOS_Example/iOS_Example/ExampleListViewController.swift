@@ -28,7 +28,8 @@ class ExampleListViewController: UIViewController {
         Example(title: "RETimer", vcName: "RETimerViewController"),
         Example(title: "CountdownTimer", vcName: "CountdownTimerViewController"),
         Example(title: "Squircle Rounded Corner", vcName: "SquircleCornerViewController"),
-        Example(title: "Multicast Delegate Test", vcName: "MulticastDelegateExampleViewController")
+        Example(title: "Multicast Delegate Test", vcName: "MulticastDelegateExampleViewController"),
+        Example(title: "Feedback generator", vcName: "VibratorExampleViewController")
     ]
     
     

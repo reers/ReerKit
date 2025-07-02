@@ -759,13 +759,21 @@ public extension Reer where Base == String {
 
     /// ReerKit: Random string of given length.
     ///
-    ///        String.re.random(ofLength: 18) -> "u7MMZYvGo9obcOcPj8"
+    ///     String.re.random(ofLength: 18) -> "u7MMZYvGo9obcOcPj8"
+    ///     String.re.random(ofLength: 3, from: "1234567890") -> "623"
     ///
     /// - Parameter length: number of characters in string.
+    /// -
     /// - Returns: random string of given length.
-    static func random(ofLength length: Int) -> String {
+    
+    /// ReerKit: Random string of given length.
+    /// - Parameters:
+    ///   - length: number of characters in string.
+    ///   - characterSet: custom character set.
+    /// - Returns: random string of given length.
+    static func random(ofLength length: Int, from characterSet: String = "") -> String {
         guard length > 0 else { return "" }
-        let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let base = characterSet.isEmpty ? "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" : characterSet
         var randomString = ""
         for _ in 1...length {
             randomString.append(base.randomElement()!)

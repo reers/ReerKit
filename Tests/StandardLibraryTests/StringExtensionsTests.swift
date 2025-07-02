@@ -441,6 +441,9 @@ final class StringExtensionsTests: XCTestCase {
         XCTAssertNotEqual(str1, str2)
 
         XCTAssertEqual(String.re.random(ofLength: 0), "")
+        let str3 = String.re.random(ofLength: 3, from: "1234567890")
+        XCTAssertEqual(str3.count, 3)
+        XCTAssertTrue(str3.re.hasDigitsOnly)
     }
 
     func testReverse() {

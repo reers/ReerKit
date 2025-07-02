@@ -50,5 +50,33 @@ final class PropertyWrappersTests: XCTestCase {
         weight = 0
         XCTAssertEqual(weight, 0)
     }
+    
+    @LazyResettable("Marshall")
+    var bluetoothSpeaker: String?
+    
+    @LazyResettable({
+        if true {
+            return "iPhone"
+        } else {
+            return "xxx"
+        }
+    })
+    var phone: String
+    
+    func testLazyResettable() {
+        XCTAssertEqual(bluetoothSpeaker, "Marshall")
+        bluetoothSpeaker = nil
+        XCTAssertFalse($bluetoothSpeaker.isInitialized)
+        bluetoothSpeaker = "Sony"
+        XCTAssertEqual(bluetoothSpeaker, "Sony")
+        XCTAssertTrue($bluetoothSpeaker.isInitialized)
+        
+        XCTAssertEqual(phone, "iPhone")
+        XCTAssertTrue($phone.isInitialized)
+        $phone.reset()
+        XCTAssertFalse($phone.isInitialized)
+        phone = "oppo"
+        XCTAssertEqual(phone, "oppo")
+    }
 
 }

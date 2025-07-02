@@ -779,6 +779,11 @@
 		D094C84F29F456A400491CD8 /* OptionSetExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D094C84E29F456A400491CD8 /* OptionSetExtensionsTests.swift */; };
 		D094C96229F4606600491CD8 /* UIDeviceExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D094C96129F4606600491CD8 /* UIDeviceExtensionsTests.swift */; };
 		D094C96629F46A0C00491CD8 /* MemoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D094C96529F46A0C00491CD8 /* MemoryTests.swift */; };
+		D09AC9ED2E151C09006933F3 /* LazyResettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09AC9EC2E151C09006933F3 /* LazyResettable.swift */; };
+		D09AC9EE2E151C09006933F3 /* LazyResettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09AC9EC2E151C09006933F3 /* LazyResettable.swift */; };
+		D09AC9EF2E151C09006933F3 /* LazyResettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09AC9EC2E151C09006933F3 /* LazyResettable.swift */; };
+		D09AC9F02E151C09006933F3 /* LazyResettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09AC9EC2E151C09006933F3 /* LazyResettable.swift */; };
+		D09AC9F12E151C09006933F3 /* LazyResettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09AC9EC2E151C09006933F3 /* LazyResettable.swift */; };
 		D09D724029DC94BF00636935 /* big_buck_bunny_720p_1mb.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D09D723F29DC94BF00636935 /* big_buck_bunny_720p_1mb.mp4 */; };
 		D0A0040628620D9900D2FA7C /* TypeNameDescribableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */; };
 		D0B120FD285505AA00B5B326 /* ReerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B120F4285505AA00B5B326 /* ReerKit.framework */; };
@@ -1084,6 +1089,7 @@
 		D094C84E29F456A400491CD8 /* OptionSetExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSetExtensionsTests.swift; sourceTree = "<group>"; };
 		D094C96129F4606600491CD8 /* UIDeviceExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtensionsTests.swift; sourceTree = "<group>"; };
 		D094C96529F46A0C00491CD8 /* MemoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryTests.swift; sourceTree = "<group>"; };
+		D09AC9EC2E151C09006933F3 /* LazyResettable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyResettable.swift; sourceTree = "<group>"; };
 		D09D723F29DC94BF00636935 /* big_buck_bunny_720p_1mb.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = big_buck_bunny_720p_1mb.mp4; sourceTree = "<group>"; };
 		D0A0040528620D9900D2FA7C /* TypeNameDescribableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeNameDescribableTests.swift; sourceTree = "<group>"; };
 		D0B120F4285505AA00B5B326 /* ReerKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1450,6 +1456,7 @@
 		D035104D2D362F4C00F4B5F2 /* PropertyWrapper */ = {
 			isa = PBXGroup;
 			children = (
+				D09AC9EC2E151C09006933F3 /* LazyResettable.swift */,
 				D03510482D362F4C00F4B5F2 /* Clamped.swift */,
 				D03510492D362F4C00F4B5F2 /* Locked.swift */,
 				D035104A2D362F4C00F4B5F2 /* Rounded.swift */,
@@ -2236,6 +2243,7 @@
 				D03511D92D362F4C00F4B5F2 /* UITextField+REExtensions.swift in Sources */,
 				D03511DA2D362F4C00F4B5F2 /* Comparable+REExtensions.swift in Sources */,
 				D03511DB2D362F4C00F4B5F2 /* UIImageView+REExtensions.swift in Sources */,
+				D09AC9EF2E151C09006933F3 /* LazyResettable.swift in Sources */,
 				D03511DC2D362F4C00F4B5F2 /* Data+REExtensions.swift in Sources */,
 				D03511DD2D362F4C00F4B5F2 /* WeakMap.swift in Sources */,
 				D03511DE2D362F4C00F4B5F2 /* CGRect+REExtensions.swift in Sources */,
@@ -2389,6 +2397,7 @@
 				D03512612D362F4C00F4B5F2 /* UITextField+REExtensions.swift in Sources */,
 				D03512622D362F4C00F4B5F2 /* Comparable+REExtensions.swift in Sources */,
 				D03512632D362F4C00F4B5F2 /* UIImageView+REExtensions.swift in Sources */,
+				D09AC9ED2E151C09006933F3 /* LazyResettable.swift in Sources */,
 				D03512642D362F4C00F4B5F2 /* Data+REExtensions.swift in Sources */,
 				D03512652D362F4C00F4B5F2 /* WeakMap.swift in Sources */,
 				D03512662D362F4C00F4B5F2 /* CGRect+REExtensions.swift in Sources */,
@@ -2541,6 +2550,7 @@
 				D03511502D362F4C00F4B5F2 /* UITextField+REExtensions.swift in Sources */,
 				D03511512D362F4C00F4B5F2 /* Comparable+REExtensions.swift in Sources */,
 				D03511522D362F4C00F4B5F2 /* UIImageView+REExtensions.swift in Sources */,
+				D09AC9F02E151C09006933F3 /* LazyResettable.swift in Sources */,
 				D03511532D362F4C00F4B5F2 /* Data+REExtensions.swift in Sources */,
 				D03511542D362F4C00F4B5F2 /* WeakMap.swift in Sources */,
 				D03511552D362F4C00F4B5F2 /* CGRect+REExtensions.swift in Sources */,
@@ -2693,6 +2703,7 @@
 				D03510C82D362F4C00F4B5F2 /* UITextField+REExtensions.swift in Sources */,
 				D03510C92D362F4C00F4B5F2 /* Comparable+REExtensions.swift in Sources */,
 				D03510CA2D362F4C00F4B5F2 /* UIImageView+REExtensions.swift in Sources */,
+				D09AC9F12E151C09006933F3 /* LazyResettable.swift in Sources */,
 				D03510CB2D362F4C00F4B5F2 /* Data+REExtensions.swift in Sources */,
 				D03510CC2D362F4C00F4B5F2 /* WeakMap.swift in Sources */,
 				D03510CD2D362F4C00F4B5F2 /* CGRect+REExtensions.swift in Sources */,
@@ -2785,6 +2796,7 @@
 				D03512AB2D362F4C00F4B5F2 /* NSRegularExpression+REExtensions.swift in Sources */,
 				D03512AC2D362F4C00F4B5F2 /* NotificationCenter+REExtensions.swift in Sources */,
 				D03512AD2D362F4C00F4B5F2 /* Invocation.swift in Sources */,
+				D09AC9EE2E151C09006933F3 /* LazyResettable.swift in Sources */,
 				D03512AE2D362F4C00F4B5F2 /* Punycode.swift in Sources */,
 				D03512AF2D362F4C00F4B5F2 /* Character+REExtensions.swift in Sources */,
 				D03512B02D362F4C00F4B5F2 /* RETimer.swift in Sources */,

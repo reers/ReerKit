@@ -19,6 +19,45 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+/// A property wrapper that automatically trims whitespace and newlines from string values
+///
+/// This wrapper ensures that any string assigned to the wrapped property
+/// has leading and trailing whitespace characters and newlines automatically removed.
+/// The trimming is performed using `CharacterSet.whitespacesAndNewlines`, which includes
+/// spaces, tabs, newlines, and other Unicode whitespace characters.
+///
+/// **Trimmed Characters:**
+/// - Spaces (` `)
+/// - Tabs (`\t`)
+/// - Newlines (`\n`, `\r`, `\r\n`)
+/// - Other Unicode whitespace characters
+///
+/// **Use Cases:**
+/// - User input validation and sanitization
+/// - Configuration values from files or network
+/// - Form field processing
+/// - Data parsing and cleaning
+/// - API request/response processing
+///
+/// Example usage:
+/// ```swift
+/// struct UserProfile {
+///     @Trimmed
+///     var username: String = ""
+///
+///     @Trimmed
+///     var email: String = ""
+///
+///     @Trimmed
+///     var displayName: String = ""
+///
+///     func updateProfile() {
+///         username = "  john_doe  "        // Stored as "john_doe"
+///         email = "\t user@example.com \n" // Stored as "user@example.com"
+///         displayName = "   John Doe   "   // Stored as "John Doe"
+///     }
+/// }
+/// ```
 @propertyWrapper
 public struct Trimmed {
     private var value: String

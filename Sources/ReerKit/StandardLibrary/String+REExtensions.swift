@@ -1308,6 +1308,135 @@ public extension Reer where Base == String {
         return NSMutableAttributedString(string: base, attributes: attributes)
     }
     #endif
+    
+    // MARK: - Chainable Methods
+    
+    #if canImport(UIKit)
+    /// ReerKit: Create an attributed string with font.
+    /// - Parameter font: The font to apply.
+    /// - Returns: A mutable attributed string with font applied.
+    func font(_ font: UIFont) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: base, attributes: [.font: font])
+    }
+    
+    /// ReerKit: Create an attributed string with foreground color.
+    /// - Parameter color: The color to apply.
+    /// - Returns: A mutable attributed string with color applied.
+    func color(_ color: UIColor) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: base, attributes: [.foregroundColor: color])
+    }
+    
+    /// ReerKit: Create an attributed string with background color.
+    /// - Parameter color: The background color to apply.
+    /// - Returns: A mutable attributed string with background color applied.
+    func backgroundColor(_ color: UIColor) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: base, attributes: [.backgroundColor: color])
+    }
+    #endif
+    
+    #if canImport(AppKit) && !targetEnvironment(macCatalyst)
+    /// ReerKit: Create an attributed string with font.
+    /// - Parameter font: The font to apply.
+    /// - Returns: A mutable attributed string with font applied.
+    func font(_ font: NSFont) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: base, attributes: [.font: font])
+    }
+    
+    /// ReerKit: Create an attributed string with foreground color.
+    /// - Parameter color: The color to apply.
+    /// - Returns: A mutable attributed string with color applied.
+    func color(_ color: NSColor) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: base, attributes: [.foregroundColor: color])
+    }
+    
+    /// ReerKit: Create an attributed string with background color.
+    /// - Parameter color: The background color to apply.
+    /// - Returns: A mutable attributed string with background color applied.
+    func backgroundColor(_ color: NSColor) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: base, attributes: [.backgroundColor: color])
+    }
+    #endif
+    
+    /// ReerKit: Create an attributed string with font size using system font.
+    /// - Parameter size: The font size to apply.
+    /// - Returns: A mutable attributed string with font applied.
+    func fontSize(_ size: CGFloat) -> NSMutableAttributedString {
+        return font(.systemFont(ofSize: size))
+    }
+    
+    /// ReerKit: Create an attributed string with paragraph style.
+    /// - Parameter paragraphStyle: The paragraph style to apply.
+    /// - Returns: A mutable attributed string with paragraph style applied.
+    func paragraphStyle(_ paragraphStyle: NSParagraphStyle) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: base, attributes: [.paragraphStyle: paragraphStyle])
+    }
+    
+    /// ReerKit: Create an attributed string with paragraph style using a builder closure.
+    /// - Parameter builder: A closure that creates and configures the paragraph style.
+    /// - Returns: A mutable attributed string with paragraph style applied.
+    func paragraphStyle(_ builder: () -> NSParagraphStyle) -> NSMutableAttributedString {
+        return paragraphStyle(builder())
+    }
+    
+    /// ReerKit: Create an attributed string with underline style.
+    /// - Parameter style: The underline style to apply.
+    /// - Returns: A mutable attributed string with underline applied.
+    func underline(_ style: NSUnderlineStyle) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: base, attributes: [.underlineStyle: style.rawValue])
+    }
+    
+    /// ReerKit: Create an attributed string with strikethrough style.
+    /// - Parameter style: The strikethrough style to apply.
+    /// - Returns: A mutable attributed string with strikethrough applied.
+    func strikethrough(_ style: NSUnderlineStyle) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: base, attributes: [.strikethroughStyle: style.rawValue])
+    }
+    
+    /// ReerKit: Create an attributed string with kern (character spacing).
+    /// - Parameter kern: The kern value to apply.
+    /// - Returns: A mutable attributed string with kern applied.
+    func kern(_ kern: CGFloat) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: base, attributes: [.kern: kern])
+    }
+    
+    /// ReerKit: Create an attributed string with baseline offset.
+    /// - Parameter offset: The baseline offset to apply.
+    /// - Returns: A mutable attributed string with baseline offset applied.
+    func baselineOffset(_ offset: CGFloat) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: base, attributes: [.baselineOffset: offset])
+    }
+    
+    /// ReerKit: Create an attributed string with shadow.
+    /// - Parameter shadow: The shadow to apply.
+    /// - Returns: A mutable attributed string with shadow applied.
+    func shadow(_ shadow: NSShadow) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: base, attributes: [.shadow: shadow])
+    }
+    
+    /// ReerKit: Create an attributed string with stroke width.
+    /// - Parameter width: The stroke width to apply.
+    /// - Returns: A mutable attributed string with stroke width applied.
+    func strokeWidth(_ width: CGFloat) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: base, attributes: [.strokeWidth: width])
+    }
+    
+    #if canImport(UIKit)
+    /// ReerKit: Create an attributed string with stroke color.
+    /// - Parameter color: The stroke color to apply.
+    /// - Returns: A mutable attributed string with stroke color applied.
+    func strokeColor(_ color: UIColor) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: base, attributes: [.strokeColor: color])
+    }
+    #endif
+    
+    #if canImport(AppKit) && !targetEnvironment(macCatalyst)
+    /// ReerKit: Create an attributed string with stroke color.
+    /// - Parameter color: The stroke color to apply.
+    /// - Returns: A mutable attributed string with stroke color applied.
+    func strokeColor(_ color: NSColor) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: base, attributes: [.strokeColor: color])
+    }
+    #endif
 }
 #endif
 

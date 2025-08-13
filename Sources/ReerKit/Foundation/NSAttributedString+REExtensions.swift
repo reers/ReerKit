@@ -147,6 +147,140 @@ public extension Reer where Base: NSAttributedString {
     }
 }
 
+// MARK: - Chainable Methods
+
+public extension Reer where Base: NSAttributedString {
+    
+    #if canImport(UIKit)
+    /// ReerKit: Set font for the attributed string.
+    /// - Parameter font: The font to apply.
+    /// - Returns: A mutable attributed string with font applied.
+    func font(_ font: UIFont) -> NSMutableAttributedString {
+        return with(attributes: [.font: font])
+    }
+    
+    /// ReerKit: Set foreground color for the attributed string.
+    /// - Parameter color: The color to apply.
+    /// - Returns: A mutable attributed string with color applied.
+    func color(_ color: UIColor) -> NSMutableAttributedString {
+        return with(attributes: [.foregroundColor: color])
+    }
+    
+    /// ReerKit: Set background color for the attributed string.
+    /// - Parameter color: The background color to apply.
+    /// - Returns: A mutable attributed string with background color applied.
+    func backgroundColor(_ color: UIColor) -> NSMutableAttributedString {
+        return with(attributes: [.backgroundColor: color])
+    }
+    #endif
+    
+    #if canImport(AppKit) && !targetEnvironment(macCatalyst)
+    /// ReerKit: Set font for the attributed string.
+    /// - Parameter font: The font to apply.
+    /// - Returns: A mutable attributed string with font applied.
+    func font(_ font: NSFont) -> NSMutableAttributedString {
+        return with(attributes: [.font: font])
+    }
+    
+    /// ReerKit: Set foreground color for the attributed string.
+    /// - Parameter color: The color to apply.
+    /// - Returns: A mutable attributed string with color applied.
+    func color(_ color: NSColor) -> NSMutableAttributedString {
+        return with(attributes: [.foregroundColor: color])
+    }
+    
+    /// ReerKit: Set background color for the attributed string.
+    /// - Parameter color: The background color to apply.
+    /// - Returns: A mutable attributed string with background color applied.
+    func backgroundColor(_ color: NSColor) -> NSMutableAttributedString {
+        return with(attributes: [.backgroundColor: color])
+    }
+    #endif
+    
+    
+    /// ReerKit: Set font size for the attributed string using system font.
+    /// - Parameter size: The font size to apply.
+    /// - Returns: A mutable attributed string with font applied.
+    func fontSize(_ size: CGFloat) -> NSMutableAttributedString {
+        return font(.systemFont(ofSize: size))
+    }
+    
+    /// ReerKit: Set paragraph style for the attributed string.
+    /// - Parameter paragraphStyle: The paragraph style to apply.
+    /// - Returns: A mutable attributed string with paragraph style applied.
+    func paragraphStyle(_ paragraphStyle: NSParagraphStyle) -> NSMutableAttributedString {
+        return with(attributes: [.paragraphStyle: paragraphStyle])
+    }
+    
+    /// ReerKit: Set paragraph style for the attributed string using a builder closure.
+    /// - Parameter builder: A closure that creates and configures the paragraph style.
+    /// - Returns: A mutable attributed string with paragraph style applied.
+    func paragraphStyle(_ builder: () -> NSParagraphStyle) -> NSMutableAttributedString {
+        return paragraphStyle(builder())
+    }
+    
+    /// ReerKit: Set underline style for the attributed string.
+    /// - Parameter style: The underline style to apply.
+    /// - Returns: A mutable attributed string with underline applied.
+    func underline(_ style: NSUnderlineStyle) -> NSMutableAttributedString {
+        return with(attributes: [.underlineStyle: style.rawValue])
+    }
+    
+    /// ReerKit: Set strikethrough style for the attributed string.
+    /// - Parameter style: The strikethrough style to apply.
+    /// - Returns: A mutable attributed string with strikethrough applied.
+    func strikethrough(_ style: NSUnderlineStyle) -> NSMutableAttributedString {
+        return with(attributes: [.strikethroughStyle: style.rawValue])
+    }
+    
+    /// ReerKit: Set kern (character spacing) for the attributed string.
+    /// - Parameter kern: The kern value to apply.
+    /// - Returns: A mutable attributed string with kern applied.
+    func kern(_ kern: CGFloat) -> NSMutableAttributedString {
+        return with(attributes: [.kern: kern])
+    }
+    
+    /// ReerKit: Set baseline offset for the attributed string.
+    /// - Parameter offset: The baseline offset to apply.
+    /// - Returns: A mutable attributed string with baseline offset applied.
+    func baselineOffset(_ offset: CGFloat) -> NSMutableAttributedString {
+        return with(attributes: [.baselineOffset: offset])
+    }
+    
+    /// ReerKit: Set shadow for the attributed string.
+    /// - Parameter shadow: The shadow to apply.
+    /// - Returns: A mutable attributed string with shadow applied.
+    func shadow(_ shadow: NSShadow) -> NSMutableAttributedString {
+        return with(attributes: [.shadow: shadow])
+    }
+    
+    /// ReerKit: Set stroke width for the attributed string.
+    /// - Parameter width: The stroke width to apply.
+    /// - Returns: A mutable attributed string with stroke width applied.
+    func strokeWidth(_ width: CGFloat) -> NSMutableAttributedString {
+        return with(attributes: [.strokeWidth: width])
+    }
+    
+    #if canImport(UIKit)
+    /// ReerKit: Set stroke color for the attributed string.
+    /// - Parameter color: The stroke color to apply.
+    /// - Returns: A mutable attributed string with stroke color applied.
+    func strokeColor(_ color: UIColor) -> NSMutableAttributedString {
+        return with(attributes: [.strokeColor: color])
+    }
+    #endif
+    
+    #if canImport(AppKit) && !targetEnvironment(macCatalyst)
+    /// ReerKit: Set stroke color for the attributed string.
+    /// - Parameter color: The stroke color to apply.
+    /// - Returns: A mutable attributed string with stroke color applied.
+    func strokeColor(_ color: NSColor) -> NSMutableAttributedString {
+        return with(attributes: [.strokeColor: color])
+    }
+    #endif
+}
+
+
 // MARK: - Operators
 
 public extension NSAttributedString {

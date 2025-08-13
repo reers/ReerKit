@@ -1090,4 +1090,170 @@ final class StringExtensionsTests: XCTestCase {
         XCTAssertEqual("寿司".re.punycodeEncoded, "sprr0q")
         XCTAssertEqual("寿司".re.idnaEncoded, "xn--sprr0q")
     }
+    
+    func testStringChainableMethods() {
+        #if !os(Linux) && canImport(UIKit)
+        let testString = "Hello World!"
+        
+        // Test font method
+        let withFont = testString.re.font(.systemFont(ofSize: 16))
+        XCTAssertEqual(withFont.string, testString)
+        var attributes = withFont.attributes(at: 0, effectiveRange: nil)
+        XCTAssertNotNil(attributes[.font])
+        XCTAssertEqual(attributes[.font] as! UIFont, UIFont.systemFont(ofSize: 16))
+        
+        // Test fontSize method
+        let withFontSize = testString.re.fontSize(18)
+        XCTAssertEqual(withFontSize.string, testString)
+        attributes = withFontSize.attributes(at: 0, effectiveRange: nil)
+        XCTAssertNotNil(attributes[.font])
+        XCTAssertEqual(attributes[.font] as! UIFont, UIFont.systemFont(ofSize: 18))
+        
+        // Test color method
+        let withColor = testString.re.color(.red)
+        XCTAssertEqual(withColor.string, testString)
+        attributes = withColor.attributes(at: 0, effectiveRange: nil)
+        XCTAssertNotNil(attributes[.foregroundColor])
+        XCTAssertEqual(attributes[.foregroundColor] as! UIColor, .red)
+        
+        // Test backgroundColor method
+        let withBackgroundColor = testString.re.backgroundColor(.blue)
+        XCTAssertEqual(withBackgroundColor.string, testString)
+        attributes = withBackgroundColor.attributes(at: 0, effectiveRange: nil)
+        XCTAssertNotNil(attributes[.backgroundColor])
+        XCTAssertEqual(attributes[.backgroundColor] as! UIColor, .blue)
+        
+        // Test paragraphStyle method
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        let withParagraphStyle = testString.re.paragraphStyle(paragraphStyle)
+        XCTAssertEqual(withParagraphStyle.string, testString)
+        attributes = withParagraphStyle.attributes(at: 0, effectiveRange: nil)
+        XCTAssertNotNil(attributes[.paragraphStyle])
+        XCTAssertEqual((attributes[.paragraphStyle] as! NSParagraphStyle).alignment, .center)
+        
+        // Test paragraphStyle with builder method
+        let withParagraphStyleBuilder = testString.re.paragraphStyle {
+            let style = NSMutableParagraphStyle()
+            style.alignment = .right
+            return style
+        }
+        XCTAssertEqual(withParagraphStyleBuilder.string, testString)
+        attributes = withParagraphStyleBuilder.attributes(at: 0, effectiveRange: nil)
+        XCTAssertNotNil(attributes[.paragraphStyle])
+        XCTAssertEqual((attributes[.paragraphStyle] as! NSParagraphStyle).alignment, .right)
+        
+        // Test underline method
+        let withUnderline = testString.re.underline(.single)
+        XCTAssertEqual(withUnderline.string, testString)
+        attributes = withUnderline.attributes(at: 0, effectiveRange: nil)
+        XCTAssertNotNil(attributes[.underlineStyle])
+        XCTAssertEqual(attributes[.underlineStyle] as! Int, NSUnderlineStyle.single.rawValue)
+        
+        // Test strikethrough method
+        let withStrikethrough = testString.re.strikethrough(.single)
+        XCTAssertEqual(withStrikethrough.string, testString)
+        attributes = withStrikethrough.attributes(at: 0, effectiveRange: nil)
+        XCTAssertNotNil(attributes[.strikethroughStyle])
+        XCTAssertEqual(attributes[.strikethroughStyle] as! Int, NSUnderlineStyle.single.rawValue)
+        
+        // Test kern method
+        let withKern = testString.re.kern(2.0)
+        XCTAssertEqual(withKern.string, testString)
+        attributes = withKern.attributes(at: 0, effectiveRange: nil)
+        XCTAssertNotNil(attributes[.kern])
+        XCTAssertEqual(attributes[.kern] as! CGFloat, 2.0, accuracy: 0.01)
+        
+        // Test baselineOffset method
+        let withBaselineOffset = testString.re.baselineOffset(3.0)
+        XCTAssertEqual(withBaselineOffset.string, testString)
+        attributes = withBaselineOffset.attributes(at: 0, effectiveRange: nil)
+        XCTAssertNotNil(attributes[.baselineOffset])
+        XCTAssertEqual(attributes[.baselineOffset] as! CGFloat, 3.0, accuracy: 0.01)
+        
+        // Test shadow method
+        let shadow = NSShadow()
+        shadow.shadowBlurRadius = 2.0
+        shadow.shadowOffset = CGSize(width: 1, height: 1)
+        let withShadow = testString.re.shadow(shadow)
+        XCTAssertEqual(withShadow.string, testString)
+        attributes = withShadow.attributes(at: 0, effectiveRange: nil)
+        XCTAssertNotNil(attributes[.shadow])
+        let retrievedShadow = attributes[.shadow] as! NSShadow
+        XCTAssertEqual(retrievedShadow.shadowBlurRadius, 2.0, accuracy: 0.01)
+        XCTAssertEqual(retrievedShadow.shadowOffset, CGSize(width: 1, height: 1))
+        
+        // Test strokeWidth method
+        let withStrokeWidth = testString.re.strokeWidth(1.5)
+        XCTAssertEqual(withStrokeWidth.string, testString)
+        attributes = withStrokeWidth.attributes(at: 0, effectiveRange: nil)
+        XCTAssertNotNil(attributes[.strokeWidth])
+        XCTAssertEqual(attributes[.strokeWidth] as! CGFloat, 1.5, accuracy: 0.01)
+        
+        // Test strokeColor method
+        let withStrokeColor = testString.re.strokeColor(.green)
+        XCTAssertEqual(withStrokeColor.string, testString)
+        attributes = withStrokeColor.attributes(at: 0, effectiveRange: nil)
+        XCTAssertNotNil(attributes[.strokeColor])
+        XCTAssertEqual(attributes[.strokeColor] as! UIColor, .green)
+        #endif
+    }
+    
+    func testStringChainableMethodsCombined() {
+        #if !os(Linux) && canImport(UIKit)
+        let testString = "Chained Methods Test"
+        
+        // Test chaining multiple methods
+        let chained = testString.re
+            .fontSize(20)
+            .re.color(.red)
+            .re.backgroundColor(.yellow)
+            .re.kern(1.0)
+            .re.underline(.single)
+        
+        XCTAssertEqual(chained.string, testString)
+        let attributes = chained.attributes(at: 0, effectiveRange: nil)
+        
+        // Verify all attributes are applied
+        XCTAssertNotNil(attributes[.font])
+        XCTAssertEqual(attributes[.font] as! UIFont, UIFont.systemFont(ofSize: 20))
+        XCTAssertEqual(attributes[.foregroundColor] as! UIColor, .red)
+        XCTAssertEqual(attributes[.backgroundColor] as! UIColor, .yellow)
+        XCTAssertEqual(attributes[.kern] as! CGFloat, 1.0, accuracy: 0.01)
+        XCTAssertEqual(attributes[.underlineStyle] as! Int, NSUnderlineStyle.single.rawValue)
+        #endif
+    }
+    
+    func testStringChainableMethodsEmptyString() {
+        #if !os(Linux) && canImport(UIKit)
+        let emptyString = ""
+        
+        // Test that chainable methods work with empty strings
+        let withFont = emptyString.re.font(.systemFont(ofSize: 12))
+        XCTAssertEqual(withFont.string, "")
+        let attributes = withFont.attributes(at: 0, effectiveRange: nil)
+        XCTAssertEqual(attributes.count, 0) // Empty string should have no attributes
+        #endif
+    }
+    
+    func testStringWithAttributesCompatibility() {
+        #if !os(Linux) && canImport(UIKit)
+        let testString = "Compatibility Test"
+        
+        // Test that new chainable methods work with existing with(attributes:) method
+        let withAttributes = testString.re.with(attributes: [
+            .font: UIFont.systemFont(ofSize: 14),
+            .foregroundColor: UIColor.blue
+        ])
+        
+        // Apply additional attributes using chainable methods
+        let extended = withAttributes.re.backgroundColor(.yellow).re.kern(2.0)
+        
+        let attributes = extended.attributes(at: 0, effectiveRange: nil)
+        XCTAssertEqual(attributes[.font] as! UIFont, UIFont.systemFont(ofSize: 14))
+        XCTAssertEqual(attributes[.foregroundColor] as! UIColor, .blue)
+        XCTAssertEqual(attributes[.backgroundColor] as! UIColor, .yellow)
+        XCTAssertEqual(attributes[.kern] as! CGFloat, 2.0, accuracy: 0.01)
+        #endif
+    }
 }

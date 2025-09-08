@@ -73,17 +73,17 @@ public extension Reer where Base: UIScrollView {
     /// ReerKit: Scroll to the bottom-most content offset.
     /// - Parameter animated: `true` to animate the transition at a constant velocity to the new offset, `false` to make the transition immediate.
     func scrollToBottom(animated: Bool = true) {
-        base.setContentOffset(
-            CGPoint(x: base.contentOffset.x, y: max(0, base.contentSize.height - base.bounds.height) + base.contentInset.bottom),
-            animated: animated)
+        let targetOffsetY = base.contentSize.height + base.contentInset.bottom - base.bounds.height
+        guard targetOffsetY > 0 else { return }
+        base.setContentOffset(.init(x: base.contentOffset.x, y: targetOffsetY), animated: animated)
     }
 
     /// ReerKit: Scroll to the right-most content offset.
     /// - Parameter animated: `true` to animate the transition at a constant velocity to the new offset, `false` to make the transition immediate.
     func scrollToRight(animated: Bool = true) {
-        base.setContentOffset(
-            CGPoint(x: max(0, base.contentSize.width - base.bounds.width) + base.contentInset.right, y: base.contentOffset.y),
-            animated: animated)
+        let targetOffsetX = base.contentSize.width + base.contentInset.right - base.bounds.width
+        guard targetOffsetX > 0 else { return }
+        base.setContentOffset(.init(x: targetOffsetX, y: base.contentOffset.y), animated: animated)
     }
 
     /// ReerKit: Scroll up one page of the scroll view.

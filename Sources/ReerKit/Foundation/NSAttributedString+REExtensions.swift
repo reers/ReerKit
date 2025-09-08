@@ -147,6 +147,7 @@ public extension Reer where Base: NSAttributedString {
     }
 }
 
+#if !os(Linux)
 // MARK: - Chainable Methods
 
 public extension Reer where Base: NSAttributedString {
@@ -279,7 +280,7 @@ public extension Reer where Base: NSAttributedString {
     }
     #endif
 }
-
+#endif
 
 // MARK: - Operators
 

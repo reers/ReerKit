@@ -44,6 +44,23 @@ public extension Reer where Base == CGSize {
     var minDimension: CGFloat {
         return min(base.width, base.height)
     }
+    
+    /// ReerKit: Returns the maximum centered square rect within the size.
+    ///
+    /// The square's side length equals the shorter dimension of the size,
+    /// and the square is centered within the size.
+    ///
+    ///     let size = CGSize(width: 200, height: 100)
+    ///     let squareRect = size.re.centerSquareRect
+    ///     // squareRect = CGRect(x: 50, y: 0, width: 100, height: 100)
+    ///
+    /// - Returns: A CGRect representing the centered square.
+    var centerSquareRect: CGRect {
+        let side = min(base.width, base.height)
+        let x = (base.width - side) / 2
+        let y = (base.height - side) / 2
+        return CGRect(x: x, y: y, width: side, height: side)
+    }
 
     /// ReerKit: Aspect fit CGSize.
     ///

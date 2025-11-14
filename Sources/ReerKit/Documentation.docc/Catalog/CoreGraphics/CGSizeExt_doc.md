@@ -8,6 +8,8 @@
 
 - ``Reer/minDimension``
 
+- ``Reer/centerSquareRect``
+
 - ``Reer/aspectFit(to:)``
 
 - ``Reer/aspectFill(to:)``

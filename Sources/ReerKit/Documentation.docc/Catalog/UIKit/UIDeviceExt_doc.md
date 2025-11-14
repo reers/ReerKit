@@ -26,6 +26,8 @@
 
 - ``Reer/canMakePhoneCalls``
 
+- ``Reer/systemInitTime``
+
 - ``Reer/ipAddressWIFI``
 
 - ``Reer/ipAddressCell``

@@ -660,6 +660,24 @@ public extension Reer where Base: UIDevice {
     static var canMakePhoneCalls: Bool {
         return UIApplication.shared.canOpenURL(URL(string: "tel://")!)
     }
+    
+    /// ReerKit: System initialization time by getting the creation time of /var/mobile directory.
+    ///
+    /// - Note: This method gets the system initialization time by checking the creation time of the /var/mobile directory.
+    ///         The /var/mobile directory is created when the device is first activated/set up.
+    ///         **Important**: Factory reset will NOT change this time - it reflects the original device activation time.
+    ///         Only initial system installation or system reinstallation will update this timestamp.
+    ///         It's important to note that if the user has modified the system time, the returned time may be inaccurate.
+    ///         This provides device-level initialization time, which is earlier than app installation time.
+    /// - Returns: System initialization time as a formatted string "seconds.nanoseconds", or empty string if error occurs.
+    static var systemInitTime: String {
+        var info = stat()
+        let result = stat("/var/mobile", &info)
+        guard result == 0 else { return "" }
+        
+        let time = info.st_birthtimespec
+        return String(format: "%ld.%09ld", time.tv_sec, time.tv_nsec)
+    }
 
     #if canImport(Darwin)
     /// ReerKit: WIFI IP address of this device (can be nil). e.g. @"192.168.1.111"

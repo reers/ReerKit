@@ -48,6 +48,8 @@
 
 - ``Reer/cropped(to:)``
 
+- ``Reer/orientationFixed()``
+
 - ``Reer/resize(toHeight:opaque:)``
 
 - ``Reer/resize(toWidth:opaque:)``

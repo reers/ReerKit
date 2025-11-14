@@ -555,17 +555,47 @@ public extension Reer where Base: UIImage {
         UIGraphicsEndImageContext()
         return newImage
     }
-
     
     /// ReerKit: UIImage Cropped to CGRect.
     ///
     /// - Parameter rect: CGRect to crop UIImage to.
     /// - Returns: cropped UIImage
     func cropped(to rect: CGRect) -> UIImage {
-        guard rect.size.width <= base.size.width, rect.size.height <= base.size.height else { return base }
-        let scaledRect = rect.applying(CGAffineTransform(scaleX: base.scale, y: base.scale))
-        guard let image = base.cgImage?.cropping(to: scaledRect) else { return base }
-        return UIImage(cgImage: image, scale: base.scale, orientation: base.imageOrientation)
+        guard rect.size.width <= base.size.width,
+              rect.size.height <= base.size.height else {
+            return base
+        }
+        
+        @inline(__always)
+        func crop(_ image: UIImage, with rect: CGRect) -> UIImage {
+            let scaledRect = rect.applying(CGAffineTransform(scaleX: image.scale, y: image.scale))
+            guard let cgImage = image.cgImage,
+                  let cropped = cgImage.cropping(to: scaledRect) else {
+                return image
+            }
+            return UIImage(cgImage: cropped, scale: image.scale, orientation: .up)
+        }
+        
+        if base.imageOrientation == .up {
+            return crop(base, with: rect)
+        } else {
+            let fixedImage = base.re.orientationFixed()
+            return crop(fixedImage, with: rect)
+        }
+    }
+    
+    /// ReerKit: Returns a new image with orientation fixed to .up.
+    ///
+    /// This method redraws the image to remove the EXIF orientation information,
+    /// resulting in an image with orientation .up and the pixels rotated/flipped accordingly.
+    ///
+    /// - Returns: A new image with orientation .up, or the original image if already .up.
+    func orientationFixed() -> UIImage {
+        guard base.imageOrientation != .up else { return base }
+        UIGraphicsBeginImageContextWithOptions(base.size, false, base.scale)
+        defer { UIGraphicsEndImageContext() }
+        base.draw(in: CGRect(origin: .zero, size: base.size))
+        return UIGraphicsGetImageFromCurrentImageContext() ?? base
     }
 
     /// ReerKit: UIImage scaled to height with respect to aspect ratio.

@@ -108,6 +108,21 @@ public extension Reer where Base: UIApplication {
         else { return [] }
         return urlSchemes
     }
+    
+    /// ReerKit: App installation time, inferred by getting the creation time of the Documents directory.
+    ///
+    /// - Note: This method infers the app installation time by getting the creation time of the Documents directory in the app sandbox.
+    ///         It's important to note that if the user has modified the system time, the installation time obtained may be inaccurate.
+    ///         Additionally, if the app recreates the Documents directory under certain circumstances, the returned time may not be the actual installation time.
+    static var installationTime: Date? {
+        guard let documentsURL = FileManager.default.urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        ).first else { return nil }
+        
+        let attributes = try? FileManager.default.attributesOfItem(atPath: documentsURL.path)
+        return attributes?[.creationDate] as? Date
+    }
 }
 
 // MARK: - UI

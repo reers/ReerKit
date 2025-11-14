@@ -678,6 +678,31 @@ public extension Reer where Base: UIDevice {
         let time = info.st_birthtimespec
         return String(format: "%ld.%09ld", time.tv_sec, time.tv_nsec)
     }
+    
+    /// ReerKit: System boot time (the time when device was last restarted).
+    ///
+    /// - Note: This method gets the system boot time by querying kern.boottime via sysctl.
+    ///         The boot time updates every time the device is restarted/rebooted.
+    ///         Unlike systemInitTime which reflects device activation, this reflects the most recent boot.
+    ///         It's important to note that if the user has modified the system time, the returned time may be inaccurate.
+    /// - Returns: System boot time as Date, or nil if error occurs.
+    static var systemBootTime: Date? {
+        var tv = timeval()
+        var size = MemoryLayout<timeval>.stride
+        let result = sysctlbyname("kern.boottime", &tv, &size, nil, 0)
+        guard result == 0 else { return nil }
+        
+        return Date(timeIntervalSince1970: Double(tv.tv_sec) + Double(tv.tv_usec) / 1_000_000.0)
+    }
+    
+    /// ReerKit: System uptime (how long the device has been running since last boot).
+    ///
+    /// - Note: This returns the time interval since the device was last booted.
+    ///         The value increases continuously while the device is running and resets to zero after reboot.
+    /// - Returns: Time interval in seconds since last boot.
+    static var systemUptime: TimeInterval {
+        return ProcessInfo.processInfo.systemUptime
+    }
 
     #if canImport(Darwin)
     /// ReerKit: WIFI IP address of this device (can be nil). e.g. @"192.168.1.111"

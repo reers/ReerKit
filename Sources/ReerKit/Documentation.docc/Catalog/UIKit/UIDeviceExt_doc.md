@@ -28,6 +28,10 @@
 
 - ``Reer/systemInitTime``
 
+- ``Reer/systemBootTime``
+
+- ``Reer/systemUptime``
+
 - ``Reer/ipAddressWIFI``
 
 - ``Reer/ipAddressCell``

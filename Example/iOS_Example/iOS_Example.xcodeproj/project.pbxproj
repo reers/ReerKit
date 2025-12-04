@@ -19,6 +19,7 @@
 		D08416F72A30EBAF0078919B /* KeyboardManagerDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08416F62A30EBAF0078919B /* KeyboardManagerDemoViewController.swift */; };
 		D08E03F32C4A290600C07389 /* MulticastDelegateExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08E03F22C4A290600C07389 /* MulticastDelegateExampleViewController.swift */; };
 		D09AC9F32E154DB3006933F3 /* VibratorExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09AC9F22E154DAF006933F3 /* VibratorExampleViewController.swift */; };
+		D09F1D512EE1DB3E003C858C /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = D09F1D502EE1DB3E003C858C /* AppIcon.icon */; };
 		D0A08C342B236D9B00B89DA9 /* GrayModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A08C332B236D9B00B89DA9 /* GrayModeViewController.swift */; };
 		D0C9C0F62A3239EE007C2C36 /* ResponderChainEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C9C0F52A3239EE007C2C36 /* ResponderChainEventViewController.swift */; };
 		D0D311202AB2D76F00E54361 /* ButtonExtensionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3111F2AB2D76F00E54361 /* ButtonExtensionsViewController.swift */; };
@@ -43,6 +44,7 @@
 		D08416F62A30EBAF0078919B /* KeyboardManagerDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManagerDemoViewController.swift; sourceTree = "<group>"; };
 		D08E03F22C4A290600C07389 /* MulticastDelegateExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegateExampleViewController.swift; sourceTree = "<group>"; };
 		D09AC9F22E154DAF006933F3 /* VibratorExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibratorExampleViewController.swift; sourceTree = "<group>"; };
+		D09F1D502EE1DB3E003C858C /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		D0A08C332B236D9B00B89DA9 /* GrayModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayModeViewController.swift; sourceTree = "<group>"; };
 		D0C9C0F52A3239EE007C2C36 /* ResponderChainEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponderChainEventViewController.swift; sourceTree = "<group>"; };
 		D0D3111F2AB2D76F00E54361 /* ButtonExtensionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtensionsViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				D0E099952C9D93BF0096B9C9 /* RETimerViewController.swift */,
 				D063357D2B613B6C00AD3ED0 /* SquircleCornerViewController.swift */,
 				D08E03F22C4A290600C07389 /* MulticastDelegateExampleViewController.swift */,
+				D09F1D502EE1DB3E003C858C /* AppIcon.icon */,
 				D08416DC2A30E2CA0078919B /* Assets.xcassets */,
 				D08416DE2A30E2CA0078919B /* LaunchScreen.storyboard */,
 				D08416E12A30E2CA0078919B /* Info.plist */,
@@ -187,6 +190,7 @@
 			files = (
 				D08416E02A30E2CA0078919B /* LaunchScreen.storyboard in Resources */,
 				D08416DD2A30E2CA0078919B /* Assets.xcassets in Resources */,
+				D09F1D512EE1DB3E003C858C /* AppIcon.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

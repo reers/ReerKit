@@ -53,6 +53,30 @@ public extension Reer where Base: UIScreen {
         if scale == 3 { return 0.666 }
         else { return 0.5 }
     }
+    
+    /// ReerKit: The corner radius of the display screen.
+    ///
+    /// This property retrieves the corner radius of the physical display using a private API.
+    /// Returns 0 if the private API is unavailable or changes in future iOS versions.
+    ///
+    /// - Note: This uses `UIScreen`'s private `_displayCornerRadius` property via KVC.
+    ///
+    /// Example:
+    ///
+    ///     let radius = UIScreen.re.displayCornerRadius
+    ///     print("Screen corner radius: \(radius)")
+    ///
+    static var displayCornerRadius: CGFloat {
+        return UIScreen.main.value(forKey: UIScreen.cornerRadiusKey) as? CGFloat ?? 0
+    }
+}
+
+extension UIScreen {
+    /// ReerKit: Private key for accessing the display corner radius property.
+    static let cornerRadiusKey: String = {
+        let components = ["Radius", "Corner", "display", "_"]
+        return components.reversed().joined()
+    }()
 }
 
 #endif

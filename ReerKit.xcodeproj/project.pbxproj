@@ -811,6 +811,7 @@
 		D0CD714528E5CDCD009ADA8E /* FloatExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD714228E5CDCD009ADA8E /* FloatExtensionsTests.swift */; };
 		D0CDBDCC299FB47500BD682D /* DebouncerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDBDCB299FB47500BD682D /* DebouncerTests.swift */; };
 		D0D311312AB83E1D00E54361 /* PropertyWrappersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D311302AB83E1D00E54361 /* PropertyWrappersTests.swift */; };
+		D0D5F3C02EE29DF800DBB15C /* SwiftUIColorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D5F3BF2EE29DF800DBB15C /* SwiftUIColorExtensionsTests.swift */; };
 		D0D84C752C5CD0E800B24DB7 /* MathFunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D84C742C5CD0E800B24DB7 /* MathFunctionsTests.swift */; };
 		D0E129A629C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E129A529C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift */; };
 		D0EBE23D28847EC4004925E5 /* AnyObjectExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBE23C28847EC4004925E5 /* AnyObjectExtensionsTests.swift */; };
@@ -1118,6 +1119,7 @@
 		D0CD714228E5CDCD009ADA8E /* FloatExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatExtensionsTests.swift; sourceTree = "<group>"; };
 		D0CDBDCB299FB47500BD682D /* DebouncerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebouncerTests.swift; sourceTree = "<group>"; };
 		D0D311302AB83E1D00E54361 /* PropertyWrappersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyWrappersTests.swift; sourceTree = "<group>"; };
+		D0D5F3BF2EE29DF800DBB15C /* SwiftUIColorExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIColorExtensionsTests.swift; sourceTree = "<group>"; };
 		D0D84C742C5CD0E800B24DB7 /* MathFunctionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathFunctionsTests.swift; sourceTree = "<group>"; };
 		D0E129A529C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetsExtensionsTests.swift; sourceTree = "<group>"; };
 		D0EBE23C28847EC4004925E5 /* AnyObjectExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyObjectExtensionsTests.swift; sourceTree = "<group>"; };
@@ -1744,6 +1746,7 @@
 			isa = PBXGroup;
 			children = (
 				D0E129A529C38ECC0051D351 /* EdgeInsetsExtensionsTests.swift */,
+				D0D5F3BF2EE29DF800DBB15C /* SwiftUIColorExtensionsTests.swift */,
 				D08B843929D66C4200D7EC17 /* ColorExtensionsTests.swift */,
 			);
 			path = SharedTests;
@@ -2925,6 +2928,7 @@
 				D0BDA4B329DC4CA6001EA4A0 /* DateExtensionsTests.swift in Sources */,
 				D05A881C291C106800C53492 /* StringExtensionsTests.swift in Sources */,
 				D0B4ED3F293A7E660031BDAB /* CountdownTimerTests.swift in Sources */,
+				D0D5F3C02EE29DF800DBB15C /* SwiftUIColorExtensionsTests.swift in Sources */,
 				D076D49B29F3BC740008ABE0 /* UISearchBarExtensionsTests.swift in Sources */,
 				D05C868C294B61420077E744 /* CGRectExtensionsTests.swift in Sources */,
 				D01DABC429B4FE1300ABD25E /* ThrottlerTests.swift in Sources */,

@@ -438,4 +438,257 @@ fileprivate extension String {
     }
 }
 
+// MARK: - SwiftUI Color Support
+
+#if canImport(SwiftUI)
+import SwiftUI
+
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+public extension Color {
+    /// ReerKit: Create SwiftUI Color from RGB values with optional opacity.
+    ///
+    /// - Parameters:
+    ///   - red: red component (0-255).
+    ///   - green: green component (0-255).
+    ///   - blue: blue component (0-255).
+    ///   - opacity: optional opacity value (default is 1).
+    ///   - colorSpace: color space (default is sRGB).
+    static func re(red: Int, green: Int, blue: Int, opacity: Double = 1, colorSpace: ColorSpace = .sRGB) -> Color {
+        let red = max(0, min(255, red))
+        let green = max(0, min(255, green))
+        let blue = max(0, min(255, blue))
+        let opacity = max(0, min(1, opacity))
+        
+        let r = Double(red) / 255.0
+        let g = Double(green) / 255.0
+        let b = Double(blue) / 255.0
+        
+        switch colorSpace {
+        case .sRGB:
+            return Color(.sRGB, red: r, green: g, blue: b, opacity: opacity)
+        case .displayP3:
+            return Color(.displayP3, red: r, green: g, blue: b, opacity: opacity)
+        }
+    }
+    
+    /// ReerKit: Create SwiftUI Color from hexadecimal value with optional opacity.
+    ///
+    /// - Parameters:
+    ///   - hex: hex Int with 6 digits (example: 0xDECEB5).
+    ///   - opacity: optional opacity value (default is 1).
+    ///   - colorSpace: color space (default is sRGB).
+    static func re(hex: Int, opacity: Double = 1, colorSpace: ColorSpace = .sRGB) -> Color {
+        let red = (hex >> 16) & 0xFF
+        let green = (hex >> 8) & 0xFF
+        let blue = hex & 0xFF
+        return Color.re(red: red, green: green, blue: blue, opacity: opacity, colorSpace: colorSpace)
+    }
+    
+    /// ReerKit: Create SwiftUI Color from hexadecimal value with optional opacity.
+    ///
+    /// - Parameters:
+    ///   - hex: hex Int with 6 digits (example: 0xDECEB5).
+    ///   - opacity: optional opacity value (default is 1).
+    ///   - colorSpace: color space (default is sRGB).
+    static func re(_ hex: Int, opacity: Double = 1, colorSpace: ColorSpace = .sRGB) -> Color {
+        return re(hex: hex, opacity: opacity, colorSpace: colorSpace)
+    }
+    
+    /// ReerKit: Create SwiftUI Color from hexadecimal string with optional opacity (if applicable).
+    ///
+    /// - Parameters:
+    ///   - hexString: hexadecimal string (examples: EDE7F6, 0xEDE7F6, #EDE7F6, #0ff, 0xF0F, ..).
+    ///   - opacity: optional opacity value (default is 1).
+    ///   - colorSpace: color space (default is sRGB).
+    static func re(hexString: String, opacity: Double = 1, colorSpace: ColorSpace = .sRGB) -> Color {
+        var string = hexString
+            .lowercased()
+            .re.removingPrefix("0x")
+            .re.removingPrefix("#")
+        
+        if string.count == 3 {
+            string = string.longFormatHex
+        }
+        guard string.count == 6 else {
+            assertionFailure("Color string \(hexString) should be 3 or 6 characters.")
+            return .clear
+        }
+        
+        guard let hexValue = Int(string, radix: 16) else {
+            assertionFailure("Invalid color string \(hexString)")
+            return .clear
+        }
+        
+        return Color.re(hex: hexValue, opacity: opacity, colorSpace: colorSpace)
+    }
+    
+    /// ReerKit: Create SwiftUI Color from hexadecimal string with optional opacity (if applicable).
+    ///
+    /// - Parameters:
+    ///   - hexString: hexadecimal string (examples: EDE7F6, 0xEDE7F6, #EDE7F6, #0ff, 0xF0F, ..).
+    ///   - opacity: optional opacity value (default is 1).
+    ///   - colorSpace: color space (default is sRGB).
+    static func re(_ hexString: String, opacity: Double = 1, colorSpace: ColorSpace = .sRGB) -> Color {
+        return re(hexString: hexString, opacity: opacity, colorSpace: colorSpace)
+    }
+    
+    /// ReerKit: Create SwiftUI Color from hexadecimal value in the format ARGB (alpha-red-green-blue).
+    ///
+    /// - Parameters:
+    ///   - argbHex: hexadecimal value with 8 digits (examples: 0x7FEDE7F6).
+    ///   - colorSpace: color space (default is sRGB).
+    static func re(argbHex: Int, colorSpace: ColorSpace = .sRGB) -> Color {
+        let alpha = (argbHex >> 24) & 0xFF
+        let red = (argbHex >> 16) & 0xFF
+        let green = (argbHex >> 8) & 0xFF
+        let blue = argbHex & 0xFF
+        return Color.re(red: red, green: green, blue: blue, opacity: Double(alpha) / 255, colorSpace: colorSpace)
+    }
+    
+    /// ReerKit: Create SwiftUI Color from hexadecimal string in the format ARGB (alpha-red-green-blue).
+    ///
+    /// - Parameters:
+    ///   - argbHexString: hexadecimal string (examples: 7FEDE7F6, 0x7FEDE7F6, #7FEDE7F6, #f0ff, 0xFF0F, ..).
+    ///   - colorSpace: color space (default is sRGB).
+    static func re(argbHexString: String, colorSpace: ColorSpace = .sRGB) -> Color {
+        var string = argbHexString
+            .lowercased()
+            .re.removingPrefix("0x")
+            .re.removingPrefix("#")
+        
+        if string.count <= 4 {
+            string = string.longFormatHex
+        }
+        
+        guard let hexValue = Int(string, radix: 16) else {
+            assertionFailure("Invalid color string \(argbHexString)")
+            return .clear
+        }
+        
+        let hasAlpha = string.count == 8
+        
+        let alpha = hasAlpha ? (hexValue >> 24) & 0xFF : 0xFF
+        let red = (hexValue >> 16) & 0xFF
+        let green = (hexValue >> 8) & 0xFF
+        let blue = hexValue & 0xFF
+        
+        return Color.re(red: red, green: green, blue: blue, opacity: Double(alpha) / 255, colorSpace: colorSpace)
+    }
+    
+    /// ReerKit: Create SwiftUI Color from hexadecimal value in the format RGBA (red-green-blue-alpha).
+    ///
+    /// - Parameters:
+    ///   - rgbaHex: hexadecimal value with 8 digits  (examples: 0x7FEDE7F6).
+    ///   - colorSpace: color space (default is sRGB).
+    static func re(rgbaHex: Int, colorSpace: ColorSpace = .sRGB) -> Color {
+        let red = (rgbaHex >> 24) & 0xFF
+        let green = (rgbaHex >> 16) & 0xFF
+        let blue = (rgbaHex >> 8) & 0xFF
+        let alpha = rgbaHex & 0xFF
+        return Color.re(red: red, green: green, blue: blue, opacity: Double(alpha) / 255, colorSpace: colorSpace)
+    }
+    
+    /// ReerKit: Create SwiftUI Color from hexadecimal string in the format RGBA (red-green-blue-alpha).
+    ///
+    /// - Parameters:
+    ///   - rgbaHexString: hexadecimal string (examples: 7FEDE7F6, 0x7FEDE7F6, #7FEDE7F6, #f0ff, 0xFF0F, ..).
+    ///   - colorSpace: color space (default is sRGB).
+    static func re(rgbaHexString: String, colorSpace: ColorSpace = .sRGB) -> Color {
+        var string = rgbaHexString
+            .lowercased()
+            .re.removingPrefix("0x")
+            .re.removingPrefix("#")
+        
+        if string.count <= 4 {
+            string = string.longFormatHex
+        }
+        
+        guard let hexValue = Int(string, radix: 16) else {
+            assertionFailure("Invalid color string \(rgbaHexString)")
+            return .clear
+        }
+        
+        let hasAlpha = string.count == 8
+        
+        let red = (hexValue >> 24) & 0xFF
+        let green = (hexValue >> 16) & 0xFF
+        let blue = (hexValue >> 8) & 0xFF
+        let alpha = hasAlpha ? hexValue & 0xFF : 0xFF
+        
+        return Color.re(red: red, green: green, blue: blue, opacity: Double(alpha) / 255, colorSpace: colorSpace)
+    }
+}
+
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+public extension ReerForEquatable where Base == Color {
+    /// ReerKit: Random SwiftUI Color.
+    static var random: Color {
+        let red = Int.random(in: 0...255)
+        let green = Int.random(in: 0...255)
+        let blue = Int.random(in: 0...255)
+        return Color.re(red: red, green: green, blue: blue)
+    }
+    
+    /// ReerKit: Random SwiftUI Color with specified color space.
+    ///
+    /// - Parameter colorSpace: color space (default is sRGB).
+    /// - Returns: A random color in the specified color space.
+    static func random(colorSpace: ColorSpace = .sRGB) -> Color {
+        let red = Int.random(in: 0...255)
+        let green = Int.random(in: 0...255)
+        let blue = Int.random(in: 0...255)
+        return Color.re(red: red, green: green, blue: blue, colorSpace: colorSpace)
+    }
+    
+    #if canImport(UIKit)
+    /// ReerKit: Convert SwiftUI Color to UIColor.
+    ///
+    /// - Returns: UIColor representation of the SwiftUI Color.
+    @available(macOS 14.0, *)
+    var uiColor: UIColor {
+        if #available(iOS 14.0, *) {
+            return UIColor(base)
+        } else {
+            return .clear
+        }
+    }
+    #endif
+    
+    #if canImport(AppKit) && !targetEnvironment(macCatalyst)
+    /// ReerKit: Convert SwiftUI Color to NSColor.
+    ///
+    /// - Returns: NSColor representation of the SwiftUI Color.
+    @available(macOS 11.0, *)
+    var nsColor: NSColor {
+        return NSColor(base)
+    }
+    #endif
+}
+
+#if canImport(UIKit)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+public extension Reer where Base: UIColor {
+    /// ReerKit: Convert UIColor to SwiftUI Color.
+    ///
+    /// - Returns: SwiftUI Color representation of the UIColor.
+    var color: Color {
+        return Color(base)
+    }
+}
+#endif
+
+#if canImport(AppKit) && !targetEnvironment(macCatalyst)
+@available(macOS 10.15, *)
+public extension Reer where Base: NSColor {
+    /// ReerKit: Convert NSColor to SwiftUI Color.
+    ///
+    /// - Returns: SwiftUI Color representation of the NSColor.
+    var color: Color {
+        return Color(base)
+    }
+}
+#endif
+
+#endif
+
 #endif

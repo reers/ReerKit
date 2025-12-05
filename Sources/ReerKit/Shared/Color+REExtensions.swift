@@ -34,6 +34,14 @@ import AppKit
 public typealias REColor = NSColor
 #endif
 
+// MARK: - ColorSpace
+
+/// ReerKit: Color space for REColor
+public enum ColorSpace {
+    case sRGB
+    case displayP3
+}
+
 // MARK: - Initializer
 
 public extension REColor {
@@ -44,12 +52,23 @@ public extension REColor {
     ///   - green: green component.
     ///   - blue: blue component.
     ///   - alpha: optional transparency value (default is 1).
-    static func re(red: Int, green: Int, blue: Int, alpha: CGFloat = 1) -> REColor {
+    ///   - colorSpace: color space (default is sRGB).
+    static func re(red: Int, green: Int, blue: Int, alpha: CGFloat = 1, colorSpace: ColorSpace = .sRGB) -> REColor {
         let red = max(0, min(255, red))
         let green = max(0, min(255, green))
         let blue = max(0, min(255, blue))
         let alpha = max(0, min(1, alpha))
-        return REColor(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: alpha)
+        
+        let r = CGFloat(red) / 255.0
+        let g = CGFloat(green) / 255.0
+        let b = CGFloat(blue) / 255.0
+        
+        switch colorSpace {
+        case .sRGB:
+            return REColor(red: r, green: g, blue: b, alpha: alpha)
+        case .displayP3:
+            return REColor(displayP3Red: r, green: g, blue: b, alpha: alpha)
+        }
     }
 
     /// ReerKit: Create Color from hexadecimal value with optional transparency.
@@ -57,12 +76,13 @@ public extension REColor {
     /// - Parameters:
     ///   - hex: hex Int with 6 digits (example: 0xDECEB5).
     ///   - alpha: optional transparency value (default is 1).
-    static func re(hex: Int, alpha: CGFloat = 1) -> REColor {
+    ///   - colorSpace: color space (default is sRGB).
+    static func re(hex: Int, alpha: CGFloat = 1, colorSpace: ColorSpace = .sRGB) -> REColor {
         let red = (hex >> 16) & 0xFF
         let green = (hex >> 8) & 0xFF
         let blue = hex & 0xFF
         let alpha = max(0, min(1, alpha))
-        return REColor.re(red: red, green: green, blue: blue, alpha: alpha)
+        return REColor.re(red: red, green: green, blue: blue, alpha: alpha, colorSpace: colorSpace)
     }
     
     /// ReerKit: Create Color from hexadecimal value with optional transparency.
@@ -70,8 +90,9 @@ public extension REColor {
     /// - Parameters:
     ///   - hex: hex Int with 6 digits (example: 0xDECEB5).
     ///   - alpha: optional transparency value (default is 1).
-    static func re(_ hex: Int, alpha: CGFloat = 1) -> REColor {
-        return re(hex: hex, alpha: alpha)
+    ///   - colorSpace: color space (default is sRGB).
+    static func re(_ hex: Int, alpha: CGFloat = 1, colorSpace: ColorSpace = .sRGB) -> REColor {
+        return re(hex: hex, alpha: alpha, colorSpace: colorSpace)
     }
 
     /// ReerKit: Create Color from hexadecimal string with optional transparency (if applicable).
@@ -79,7 +100,8 @@ public extension REColor {
     /// - Parameters:
     ///   - hexString: hexadecimal string (examples: EDE7F6, 0xEDE7F6, #EDE7F6, #0ff, 0xF0F, ..).
     ///   - alpha: optional transparency value (default is 1).
-    static func re(hexString: String, alpha: CGFloat = 1) -> REColor {
+    ///   - colorSpace: color space (default is sRGB).
+    static func re(hexString: String, alpha: CGFloat = 1, colorSpace: ColorSpace = .sRGB) -> REColor {
         var string = hexString
             .lowercased()
             .re.removingPrefix("0x")
@@ -100,7 +122,7 @@ public extension REColor {
 
         let alpha = max(0, min(1, alpha))
 
-        return REColor.re(hex: hexValue, alpha: alpha)
+        return REColor.re(hex: hexValue, alpha: alpha, colorSpace: colorSpace)
     }
     
     /// ReerKit: Create Color from hexadecimal string with optional transparency (if applicable).
@@ -108,27 +130,30 @@ public extension REColor {
     /// - Parameters:
     ///   - hexString: hexadecimal string (examples: EDE7F6, 0xEDE7F6, #EDE7F6, #0ff, 0xF0F, ..).
     ///   - alpha: optional transparency value (default is 1).
-    static func re(_ hexString: String, alpha: CGFloat = 1) -> REColor {
-        return re(hexString: hexString, alpha: alpha)
+    ///   - colorSpace: color space (default is sRGB).
+    static func re(_ hexString: String, alpha: CGFloat = 1, colorSpace: ColorSpace = .sRGB) -> REColor {
+        return re(hexString: hexString, alpha: alpha, colorSpace: colorSpace)
     }
 
     /// ReerKit: Create Color from hexadecimal value in the format ARGB (alpha-red-green-blue).
     ///
     /// - Parameters:
     ///   - argbHex: hexadecimal value with 8 digits (examples: 0x7FEDE7F6).
-    static func re(argbHex: Int) -> REColor {
+    ///   - colorSpace: color space (default is sRGB).
+    static func re(argbHex: Int, colorSpace: ColorSpace = .sRGB) -> REColor {
         let alpha = (argbHex >> 24) & 0xFF
         let red = (argbHex >> 16) & 0xFF
         let green = (argbHex >> 8) & 0xFF
         let blue = argbHex & 0xFF
-        return REColor.re(red: red, green: green, blue: blue, alpha: CGFloat(alpha) / 255)
+        return REColor.re(red: red, green: green, blue: blue, alpha: CGFloat(alpha) / 255, colorSpace: colorSpace)
     }
 
     /// ReerKit: Create Color from hexadecimal string in the format ARGB (alpha-red-green-blue).
     ///
     /// - Parameters:
     ///   - argbHexString: hexadecimal string (examples: 7FEDE7F6, 0x7FEDE7F6, #7FEDE7F6, #f0ff, 0xFF0F, ..).
-    static func re(argbHexString: String) -> REColor {
+    ///   - colorSpace: color space (default is sRGB).
+    static func re(argbHexString: String, colorSpace: ColorSpace = .sRGB) -> REColor {
         var string = argbHexString
             .lowercased()
             .re.removingPrefix("0x")
@@ -150,26 +175,28 @@ public extension REColor {
         let green = (hexValue >> 8) & 0xFF
         let blue = hexValue & 0xFF
 
-        return REColor.re(red: red, green: green, blue: blue, alpha: CGFloat(alpha) / 255)
+        return REColor.re(red: red, green: green, blue: blue, alpha: CGFloat(alpha) / 255, colorSpace: colorSpace)
     }
 
     /// ReerKit: Create Color from hexadecimal value in the format RGBA (red-green-blue-alpha).
     ///
     /// - Parameters:
     ///   - rgbaHex: hexadecimal value with 8 digits  (examples: 0x7FEDE7F6).
-    static func re(rgbaHex: Int) -> REColor {
+    ///   - colorSpace: color space (default is sRGB).
+    static func re(rgbaHex: Int, colorSpace: ColorSpace = .sRGB) -> REColor {
         let red = (rgbaHex >> 24) & 0xFF
         let green = (rgbaHex >> 16) & 0xFF
         let blue = (rgbaHex >> 8) & 0xFF
         let alpha = rgbaHex & 0xFF
-        return REColor.re(red: red, green: green, blue: blue, alpha: CGFloat(alpha) / 255)
+        return REColor.re(red: red, green: green, blue: blue, alpha: CGFloat(alpha) / 255, colorSpace: colorSpace)
     }
 
     /// ReerKit: Create Color from hexadecimal string in the format RGBA (red-green-blue-alpha).
     ///
     /// - Parameters:
     ///   - rgbaHexString: hexadecimal string (examples: 7FEDE7F6, 0x7FEDE7F6, #7FEDE7F6, #f0ff, 0xFF0F, ..).
-    static func re(rgbaHexString: String) -> REColor {
+    ///   - colorSpace: color space (default is sRGB).
+    static func re(rgbaHexString: String, colorSpace: ColorSpace = .sRGB) -> REColor {
         var string = rgbaHexString
             .lowercased()
             .re.removingPrefix("0x")
@@ -191,7 +218,7 @@ public extension REColor {
         let blue = (hexValue >> 8) & 0xFF
         let alpha = hasAlpha ? hexValue & 0xFF : 0xFF
 
-        return REColor.re(red: red, green: green, blue: blue, alpha: CGFloat(alpha) / 255)
+        return REColor.re(red: red, green: green, blue: blue, alpha: CGFloat(alpha) / 255, colorSpace: colorSpace)
     }
 
     #if !os(watchOS)
@@ -223,6 +250,17 @@ public extension Reer where Base: REColor {
         let green = Int.random(in: 0...255)
         let blue = Int.random(in: 0...255)
         return REColor.re(red: red, green: green, blue: blue)
+    }
+    
+    /// ReerKit: Random color with specified color space.
+    ///
+    /// - Parameter colorSpace: color space (default is sRGB).
+    /// - Returns: A random color in the specified color space.
+    static func random(colorSpace: ColorSpace = .sRGB) -> REColor {
+        let red = Int.random(in: 0...255)
+        let green = Int.random(in: 0...255)
+        let blue = Int.random(in: 0...255)
+        return REColor.re(red: red, green: green, blue: blue, colorSpace: colorSpace)
     }
     
     /// ReerKit: Get brightness of color.

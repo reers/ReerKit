@@ -140,17 +140,162 @@ final class SwiftUIColorExtensionsTests: XCTestCase {
         XCTAssertNotNil(swiftUIColor)
     }
     
-    @available(macOS 11.0, *)
-    func testREColorConversion() {
-        let swiftUIColor = Color.re(hex: 0xFF8040)
-        let reColor = swiftUIColor.re.reColor
-        XCTAssertNotNil(reColor)
-        
-        // Test round-trip conversion
-        let convertedColor = reColor.re.color
-        XCTAssertNotNil(convertedColor)
-    }
     #endif
+    
+    // MARK: - Color Properties Tests (iOS 14.0+)
+    
+    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+    func testColorRGBA() {
+        let color = Color.re(red: 255, green: 128, blue: 64)
+        let rgba = color.re.rgba
+        
+        XCTAssertEqual(rgba.red, 255)
+        XCTAssertEqual(rgba.green, 128)
+        XCTAssertEqual(rgba.blue, 64)
+        XCTAssertEqual(rgba.alpha, 1.0, accuracy: 0.01)
+    }
+    
+    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+    func testColorRGBAPercent() {
+        let color = Color.re(red: 255, green: 128, blue: 0)
+        let rgbaPercent = color.re.rgbaPercent
+        
+        XCTAssertEqual(rgbaPercent.red, 1.0, accuracy: 0.01)
+        XCTAssertEqual(rgbaPercent.green, 0.5, accuracy: 0.01)
+        XCTAssertEqual(rgbaPercent.blue, 0.0, accuracy: 0.01)
+        XCTAssertEqual(rgbaPercent.alpha, 1.0, accuracy: 0.01)
+    }
+    
+    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+    func testColorAlpha() {
+        let opaqueColor = Color.re(hex: 0xFF8040)
+        XCTAssertEqual(opaqueColor.re.alpha, 1.0, accuracy: 0.01)
+        
+        let semiTransparentColor = Color.re(hex: 0xFF8040, opacity: 0.5)
+        XCTAssertEqual(semiTransparentColor.re.alpha, 0.5, accuracy: 0.01)
+    }
+    
+    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+    func testColorBrightness() {
+        let white = Color.re(red: 255, green: 255, blue: 255)
+        XCTAssertEqual(white.re.brightness, 1.0, accuracy: 0.01)
+        
+        let black = Color.re(red: 0, green: 0, blue: 0)
+        XCTAssertEqual(black.re.brightness, 0.0, accuracy: 0.01)
+        
+        let gray = Color.re(red: 128, green: 128, blue: 128)
+        XCTAssertGreaterThan(gray.re.brightness, 0.4)
+        XCTAssertLessThan(gray.re.brightness, 0.6)
+    }
+    
+    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+    func testColorHSBA() {
+        let red = Color.re(red: 255, green: 0, blue: 0)
+        let hsba = red.re.hsba
+        
+        XCTAssertEqual(hsba.hue, 0.0, accuracy: 0.01)
+        XCTAssertEqual(hsba.saturation, 1.0, accuracy: 0.01)
+        XCTAssertEqual(hsba.brightness, 1.0, accuracy: 0.01)
+        XCTAssertEqual(hsba.alpha, 1.0, accuracy: 0.01)
+    }
+    
+    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+    func testColorHexString() {
+        let color = Color.re(red: 255, green: 128, blue: 64)
+        XCTAssertEqual(color.re.hexString, "#ff8040")
+    }
+    
+    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+    func testColorRGBAHexString() {
+        let color = Color.re(red: 255, green: 128, blue: 64, opacity: 0.5)
+        // Alpha is approximately 127/128
+        let hexString = color.re.rgbaHexString
+        XCTAssert(hexString.hasPrefix("#ff8040"))
+    }
+    
+    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+    func testColorARGBHexString() {
+        let color = Color.re(red: 255, green: 128, blue: 64, opacity: 1.0)
+        XCTAssertEqual(color.re.argbHexString, "#ffff8040")
+    }
+    
+    // MARK: - Color Manipulation Tests
+    
+    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+    func testColorLighten() {
+        let color = Color.re(red: 128, green: 64, blue: 32)
+        let lighterColor = color.re.lighten(by: 0.2)
+        
+        XCTAssertNotNil(lighterColor)
+        
+        // Verify the lightened color has higher RGB values
+        let originalRGBA = color.re.rgba
+        let lightenedRGBA = lighterColor.re.rgba
+        
+        XCTAssertGreaterThan(lightenedRGBA.red, originalRGBA.red)
+        XCTAssertGreaterThan(lightenedRGBA.green, originalRGBA.green)
+        XCTAssertGreaterThan(lightenedRGBA.blue, originalRGBA.blue)
+    }
+    
+    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+    func testColorDarken() {
+        let color = Color.re(red: 200, green: 150, blue: 100)
+        let darkerColor = color.re.darken(by: 0.3)
+        
+        XCTAssertNotNil(darkerColor)
+        
+        // Verify the darkened color has lower RGB values
+        let originalRGBA = color.re.rgba
+        let darkenedRGBA = darkerColor.re.rgba
+        
+        XCTAssertLessThan(darkenedRGBA.red, originalRGBA.red)
+        XCTAssertLessThan(darkenedRGBA.green, originalRGBA.green)
+        XCTAssertLessThan(darkenedRGBA.blue, originalRGBA.blue)
+    }
+    
+    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+    func testColorBlendStatic() {
+        let red = Color.re(red: 255, green: 0, blue: 0)
+        let blue = Color.re(red: 0, green: 0, blue: 255)
+        
+        let blended = Color.re.blend(red, intensity1: 0.5, with: blue, intensity2: 0.5)
+        XCTAssertNotNil(blended)
+        
+        let blendedRGBA = blended.re.rgba
+        // Should be somewhere between red and blue
+        XCTAssertGreaterThan(blendedRGBA.red, 0)
+        XCTAssertGreaterThan(blendedRGBA.blue, 0)
+    }
+    
+    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+    func testColorBlendInstance() {
+        let red = Color.re(red: 255, green: 0, blue: 0)
+        let blue = Color.re(red: 0, green: 0, blue: 255)
+        
+        let blended = red.re.blend(with: blue)
+        XCTAssertNotNil(blended)
+        
+        let blendedRGBA = blended.re.rgba
+        // Should be equal blend (purple-ish)
+        XCTAssertGreaterThan(blendedRGBA.red, 50)
+        XCTAssertGreaterThan(blendedRGBA.blue, 50)
+    }
+    
+    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+    func testColorBlendIntensity() {
+        let red = Color.re(red: 255, green: 0, blue: 0)
+        let blue = Color.re(red: 0, green: 0, blue: 255)
+        
+        // Blend with more red
+        let redDominant = Color.re.blend(red, intensity1: 0.8, with: blue, intensity2: 0.2)
+        let redDominantRGBA = redDominant.re.rgba
+        XCTAssertGreaterThan(redDominantRGBA.red, redDominantRGBA.blue)
+        
+        // Blend with more blue
+        let blueDominant = Color.re.blend(red, intensity1: 0.2, with: blue, intensity2: 0.8)
+        let blueDominantRGBA = blueDominant.re.rgba
+        XCTAssertGreaterThan(blueDominantRGBA.blue, blueDominantRGBA.red)
+    }
 }
 
 #endif

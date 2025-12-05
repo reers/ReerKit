@@ -64,6 +64,15 @@ public extension REColor {
         let alpha = max(0, min(1, alpha))
         return REColor.re(red: red, green: green, blue: blue, alpha: alpha)
     }
+    
+    /// ReerKit: Create Color from hexadecimal value with optional transparency.
+    ///
+    /// - Parameters:
+    ///   - hex: hex Int with 6 digits (example: 0xDECEB5).
+    ///   - alpha: optional transparency value (default is 1).
+    static func re(_ hex: Int, alpha: CGFloat = 1) -> REColor {
+        return re(hex: hex, alpha: alpha)
+    }
 
     /// ReerKit: Create Color from hexadecimal string with optional transparency (if applicable).
     ///
@@ -92,6 +101,15 @@ public extension REColor {
         let alpha = max(0, min(1, alpha))
 
         return REColor.re(hex: hexValue, alpha: alpha)
+    }
+    
+    /// ReerKit: Create Color from hexadecimal string with optional transparency (if applicable).
+    ///
+    /// - Parameters:
+    ///   - hexString: hexadecimal string (examples: EDE7F6, 0xEDE7F6, #EDE7F6, #0ff, 0xF0F, ..).
+    ///   - alpha: optional transparency value (default is 1).
+    static func re(_ hexString: String, alpha: CGFloat = 1) -> REColor {
+        return re(hexString: hexString, alpha: alpha)
     }
 
     /// ReerKit: Create Color from hexadecimal value in the format ARGB (alpha-red-green-blue).

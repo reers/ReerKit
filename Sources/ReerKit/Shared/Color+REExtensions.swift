@@ -346,17 +346,23 @@ public extension Reer where Base: REColor {
     ///     let color = UIColor(red: r, green: g, blue: b, alpha: a)
     ///     let lighterColor: UIColor = color.lighten(by: 0.2)
     ///
-    /// - Parameter percentage: Percentage by which to lighten the color
+    /// - Parameters:
+    ///   - percentage: Percentage by which to lighten the color
+    ///   - colorSpace: color space (default is sRGB)
     /// - Returns: A lightened color
-    func lighten(by percentage: CGFloat = 0.2) -> REColor {
+    func lighten(by percentage: CGFloat = 0.2, colorSpace: ColorSpace = .sRGB) -> REColor {
         var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
         base.getRed(&r, green: &g, blue: &b, alpha: &a)
-        return REColor(
-            red: r + (1 - r) * percentage,
-            green: g + (1 - g) * percentage,
-            blue: b + (1 - b) * percentage,
-            alpha: a
-        )
+        let newR = r + (1 - r) * percentage
+        let newG = g + (1 - g) * percentage
+        let newB = b + (1 - b) * percentage
+        
+        switch colorSpace {
+        case .sRGB:
+            return REColor(red: newR, green: newG, blue: newB, alpha: a)
+        case .displayP3:
+            return REColor(displayP3Red: newR, green: newG, blue: newB, alpha: a)
+        }
     }
 
     /// ReerKit: Darken a color
@@ -364,17 +370,23 @@ public extension Reer where Base: REColor {
     ///     let color = UIColor(red: r, green: g, blue: b, alpha: a)
     ///     let darkerColor: UIColor = color.darken(by: 0.2)
     ///
-    /// - Parameter percentage: Percentage by which to darken the color
+    /// - Parameters:
+    ///   - percentage: Percentage by which to darken the color
+    ///   - colorSpace: color space (default is sRGB)
     /// - Returns: A darkened color
-    func darken(by percentage: CGFloat = 0.2) -> REColor {
+    func darken(by percentage: CGFloat = 0.2, colorSpace: ColorSpace = .sRGB) -> REColor {
         var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
         base.getRed(&r, green: &g, blue: &b, alpha: &a)
-        return REColor(
-            red: r - r * percentage,
-            green: g - g * percentage,
-            blue: b - b * percentage,
-            alpha: a
-        )
+        let newR = r - r * percentage
+        let newG = g - g * percentage
+        let newB = b - b * percentage
+        
+        switch colorSpace {
+        case .sRGB:
+            return REColor(red: newR, green: newG, blue: newB, alpha: a)
+        case .displayP3:
+            return REColor(displayP3Red: newR, green: newG, blue: newB, alpha: a)
+        }
     }
 
     /// ReerKit: Blend two Colors.
@@ -384,12 +396,14 @@ public extension Reer where Base: REColor {
     ///   - intensity1: intensity of first color (default is 0.5)
     ///   - color2: second color to blend
     ///   - intensity2: intensity of second color (default is 0.5)
+    ///   - colorSpace: color space (default is sRGB)
     /// - Returns: Color created by blending first and second colors.
     static func blend(
         _ color1: REColor,
         intensity1: CGFloat = 0.5,
         with color2: REColor,
-        intensity2: CGFloat = 0.5
+        intensity2: CGFloat = 0.5,
+        colorSpace: ColorSpace = .sRGB
     ) -> REColor {
         let total = intensity1 + intensity2
         let level1 = intensity1 / total
@@ -418,15 +432,22 @@ public extension Reer where Base: REColor {
         let blue = level1 * blue1 + level2 * blue2
         let alpha = level1 * alpha1 + level2 * alpha2
 
-        return REColor(red: red, green: green, blue: blue, alpha: alpha)
+        switch colorSpace {
+        case .sRGB:
+            return REColor(red: red, green: green, blue: blue, alpha: alpha)
+        case .displayP3:
+            return REColor(displayP3Red: red, green: green, blue: blue, alpha: alpha)
+        }
     }
 
     /// ReerKit: Blend the color with a color
     ///
-    /// - Parameter color: second color to blend
+    /// - Parameters:
+    ///   - color: second color to blend
+    ///   - colorSpace: color space (default is sRGB)
     /// - Returns: Color created by blending self and seond colors.
-    func blend(with color: REColor) -> REColor {
-        return REColor.re.blend(base, intensity1: 0.5, with: color, intensity2: 0.5)
+    func blend(with color: REColor, colorSpace: ColorSpace = .sRGB) -> REColor {
+        return REColor.re.blend(base, intensity1: 0.5, with: color, intensity2: 0.5, colorSpace: colorSpace)
     }
 }
 
@@ -769,22 +790,27 @@ public extension ReerForEquatable where Base == Color {
     ///     let color = Color.re(hex: 0xFF8040)
     ///     let lighterColor = color.re.lighten(by: 0.2)
     ///
-    /// - Parameter percentage: Percentage by which to lighten the color
+    /// - Parameters:
+    ///   - percentage: Percentage by which to lighten the color
+    ///   - colorSpace: color space (default is sRGB)
     /// - Returns: A lightened SwiftUI Color
-    func lighten(by percentage: CGFloat = 0.2) -> Color {
+    func lighten(by percentage: CGFloat = 0.2, colorSpace: ColorSpace = .sRGB) -> Color {
         let comps = rgbaPercent
         let r = comps.red
         let g = comps.green
         let b = comps.blue
         let a = comps.alpha
         
-        return Color(
-            .sRGB,
-            red: r + (1 - r) * percentage,
-            green: g + (1 - g) * percentage,
-            blue: b + (1 - b) * percentage,
-            opacity: Double(a)
-        )
+        let newR = r + (1 - r) * percentage
+        let newG = g + (1 - g) * percentage
+        let newB = b + (1 - b) * percentage
+        
+        switch colorSpace {
+        case .sRGB:
+            return Color(.sRGB, red: newR, green: newG, blue: newB, opacity: Double(a))
+        case .displayP3:
+            return Color(.displayP3, red: newR, green: newG, blue: newB, opacity: Double(a))
+        }
     }
     
     /// ReerKit: Darken a color
@@ -792,22 +818,27 @@ public extension ReerForEquatable where Base == Color {
     ///     let color = Color.re(hex: 0xFF8040)
     ///     let darkerColor = color.re.darken(by: 0.2)
     ///
-    /// - Parameter percentage: Percentage by which to darken the color
+    /// - Parameters:
+    ///   - percentage: Percentage by which to darken the color
+    ///   - colorSpace: color space (default is sRGB)
     /// - Returns: A darkened SwiftUI Color
-    func darken(by percentage: CGFloat = 0.2) -> Color {
+    func darken(by percentage: CGFloat = 0.2, colorSpace: ColorSpace = .sRGB) -> Color {
         let comps = rgbaPercent
         let r = comps.red
         let g = comps.green
         let b = comps.blue
         let a = comps.alpha
         
-        return Color(
-            .sRGB,
-            red: r - r * percentage,
-            green: g - g * percentage,
-            blue: b - b * percentage,
-            opacity: Double(a)
-        )
+        let newR = r - r * percentage
+        let newG = g - g * percentage
+        let newB = b - b * percentage
+        
+        switch colorSpace {
+        case .sRGB:
+            return Color(.sRGB, red: newR, green: newG, blue: newB, opacity: Double(a))
+        case .displayP3:
+            return Color(.displayP3, red: newR, green: newG, blue: newB, opacity: Double(a))
+        }
     }
     
     /// ReerKit: Blend two SwiftUI Colors.
@@ -817,12 +848,14 @@ public extension ReerForEquatable where Base == Color {
     ///   - intensity1: intensity of first color (default is 0.5)
     ///   - color2: second color to blend
     ///   - intensity2: intensity of second color (default is 0.5)
+    ///   - colorSpace: color space (default is sRGB)
     /// - Returns: Color created by blending first and second colors.
     static func blend(
         _ color1: Color,
         intensity1: CGFloat = 0.5,
         with color2: Color,
-        intensity2: CGFloat = 0.5
+        intensity2: CGFloat = 0.5,
+        colorSpace: ColorSpace = .sRGB
     ) -> Color {
         let total = intensity1 + intensity2
         let level1 = intensity1 / total
@@ -851,15 +884,22 @@ public extension ReerForEquatable where Base == Color {
         let blue = level1 * blue1 + level2 * blue2
         let alpha = level1 * alpha1 + level2 * alpha2
         
-        return Color(.sRGB, red: Double(red), green: Double(green), blue: Double(blue), opacity: Double(alpha))
+        switch colorSpace {
+        case .sRGB:
+            return Color(.sRGB, red: Double(red), green: Double(green), blue: Double(blue), opacity: Double(alpha))
+        case .displayP3:
+            return Color(.displayP3, red: Double(red), green: Double(green), blue: Double(blue), opacity: Double(alpha))
+        }
     }
     
     /// ReerKit: Blend the color with another SwiftUI color
     ///
-    /// - Parameter color: second color to blend
+    /// - Parameters:
+    ///   - color: second color to blend
+    ///   - colorSpace: color space (default is sRGB)
     /// - Returns: Color created by blending self and second colors.
-    func blend(with color: Color) -> Color {
-        return Color.re.blend(base, intensity1: 0.5, with: color, intensity2: 0.5)
+    func blend(with color: Color, colorSpace: ColorSpace = .sRGB) -> Color {
+        return Color.re.blend(base, intensity1: 0.5, with: color, intensity2: 0.5, colorSpace: colorSpace)
     }
     
     private var rgbaComponents: [CGFloat] {

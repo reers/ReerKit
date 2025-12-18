@@ -216,8 +216,18 @@ public extension Reer where Base: NSAttributedString {
     /// ReerKit: Set paragraph style for the attributed string using a builder closure.
     /// - Parameter builder: A closure that creates and configures the paragraph style.
     /// - Returns: A mutable attributed string with paragraph style applied.
+    @available(*, deprecated, message: "Use paragraphStyle(_: (NSMutableParagraphStyle) -> Void) instead.")
     func paragraphStyle(_ builder: () -> NSParagraphStyle) -> NSMutableAttributedString {
         return paragraphStyle(builder())
+    }
+    
+    /// ReerKit: Set paragraph style for the attributed string using a configuration closure.
+    /// - Parameter configure: A closure that configures the provided mutable paragraph style.
+    /// - Returns: A mutable attributed string with paragraph style applied.
+    func paragraphStyle(_ configure: (NSMutableParagraphStyle) -> Void) -> NSMutableAttributedString {
+        let style = NSMutableParagraphStyle()
+        configure(style)
+        return paragraphStyle(style)
     }
     
     /// ReerKit: Set underline style for the attributed string.

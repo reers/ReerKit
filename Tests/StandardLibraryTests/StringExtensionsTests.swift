@@ -1092,7 +1092,7 @@ final class StringExtensionsTests: XCTestCase {
     }
     
     func testStringChainableMethods() {
-        #if !os(Linux) && canImport(UIKit)
+#if !os(Linux) && canImport(UIKit)
         let testString = "Hello World!"
         
         // Test font method
@@ -1132,14 +1132,12 @@ final class StringExtensionsTests: XCTestCase {
         XCTAssertNotNil(attributes[.paragraphStyle])
         XCTAssertEqual((attributes[.paragraphStyle] as! NSParagraphStyle).alignment, .center)
         
-        // Test paragraphStyle with builder method
-        let withParagraphStyleBuilder = testString.re.paragraphStyle {
-            let style = NSMutableParagraphStyle()
+        // Test paragraphStyle with configure method
+        let withParagraphStyleConfigure = testString.re.paragraphStyle { style in
             style.alignment = .right
-            return style
         }
-        XCTAssertEqual(withParagraphStyleBuilder.string, testString)
-        attributes = withParagraphStyleBuilder.attributes(at: 0, effectiveRange: nil)
+        XCTAssertEqual(withParagraphStyleConfigure.string, testString)
+        attributes = withParagraphStyleConfigure.attributes(at: 0, effectiveRange: nil)
         XCTAssertNotNil(attributes[.paragraphStyle])
         XCTAssertEqual((attributes[.paragraphStyle] as! NSParagraphStyle).alignment, .right)
         

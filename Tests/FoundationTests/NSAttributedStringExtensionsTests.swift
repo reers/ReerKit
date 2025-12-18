@@ -242,13 +242,11 @@ final class NSAttributedStringExtensionsTests: XCTestCase {
         XCTAssertNotNil(attributes[.paragraphStyle])
         XCTAssertEqual((attributes[.paragraphStyle] as! NSParagraphStyle).alignment, .center)
         
-        // Test paragraphStyle with builder method
-        let withParagraphStyleBuilder = attributedString.re.paragraphStyle {
-            let style = NSMutableParagraphStyle()
+        // Test paragraphStyle with configure method
+        let withParagraphStyleConfigure = attributedString.re.paragraphStyle { style in
             style.alignment = .right
-            return style
         }
-        attributes = withParagraphStyleBuilder.attributes(at: 0, effectiveRange: nil)
+        attributes = withParagraphStyleConfigure.attributes(at: 0, effectiveRange: nil)
         XCTAssertNotNil(attributes[.paragraphStyle])
         XCTAssertEqual((attributes[.paragraphStyle] as! NSParagraphStyle).alignment, .right)
         

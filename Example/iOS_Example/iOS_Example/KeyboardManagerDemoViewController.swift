@@ -13,6 +13,7 @@ class KeyboardManagerDemoViewController: UIViewController {
     
     deinit {
         print(#function)
+        KeyboardManager.shared.removeObserver(self)
     }
     
     var defaultFrame: CGRect = .zero

@@ -23,8 +23,16 @@
 public final class Weak<T: AnyObject> {
     public private(set) weak var object: T?
     private let hashKey: Int
+    
     public init(_ object: T) {
         self.object = object
+        self.hashKey = ObjectIdentifier(object).hashValue
+    }
+    
+    /// Creates a lookup-only instance that can be used for set operations
+    /// without storing a weak reference. Useful when the object may be deallocating.
+    public init(hashKeyOnly object: T) {
+        self.object = nil
         self.hashKey = ObjectIdentifier(object).hashValue
     }
 }

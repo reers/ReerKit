@@ -53,7 +53,7 @@ public class WeakSet<T: AnyObject>: ExpressibleByArrayLiteral {
     }
 
     public func contains(_ object: T) -> Bool {
-        return objectSet.contains(Weak(object))
+        return objectSet.contains(Weak(hashKeyOnly: object))
     }
 
     public func add(_ object: T) {
@@ -74,11 +74,11 @@ public class WeakSet<T: AnyObject>: ExpressibleByArrayLiteral {
     }
 
     public func remove(_ object: T) {
-        objectSet.remove(Weak(object))
+        objectSet.remove(Weak(hashKeyOnly: object))
     }
 
     public func removeObjects(_ objects: [T]) {
-        objectSet.subtract(objects.map { Weak($0) })
+        objectSet.subtract(objects.map { Weak(hashKeyOnly: $0) })
     }
     
     public func removeAll() {

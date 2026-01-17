@@ -667,7 +667,7 @@ public extension ReerForEquatable where Base == Color {
     /// - Returns: UIColor representation of the SwiftUI Color.
     @available(macOS 14.0, *)
     var uiColor: UIColor {
-        if #available(iOS 14.0, *) {
+        if #available(iOS 14.0, tvOS 14.0, watchOS 7.0, *) {
             return UIColor(base)
         } else {
             return .clear

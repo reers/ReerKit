@@ -370,16 +370,31 @@ public final class KeyboardManager: NSObject {
         // UIInputSetContainerView
         for view in window.subviews {
             let viewName = String(describing: type(of: view))
-            if viewName.count != 23 { continue }
-            if !viewName.hasPrefix("UI") { continue }
-            if !viewName.hasSuffix("InputSetContainerView") { continue }
-            // UIInputSetHostView
-            for subView in view.subviews {
-                let subViewName = String(describing: type(of: subView))
-                if subViewName.count != 18 { continue }
-                if !subViewName.hasPrefix("UI") { continue }
-                if !subViewName.hasSuffix("InputSetHostView") { continue }
-                return subView
+            switch viewName.count {
+            case 23:
+                if !viewName.hasPrefix("UI") { continue }
+                if !viewName.hasSuffix("InputSetContainerView") { continue }
+                // UIInputSetHostView
+                for subView in view.subviews {
+                    let subViewName = String(describing: type(of: subView))
+                    if subViewName.count != 18 { continue }
+                    if !subViewName.hasPrefix("UI") { continue }
+                    if !subViewName.hasSuffix("InputSetHostView") { continue }
+                    return subView
+                }
+            case 20:
+                // iOS 26.0+
+                if !viewName.hasPrefix("UI") { continue }
+                if !viewName.hasSuffix("TrackingWindowView") { continue }
+                // UIKeyboardItemContainerView
+                for subView in view.subviews {
+                    let subViewName = String(describing: type(of: subView))
+                    if subViewName.count != 27 { continue }
+                    if !subViewName.hasPrefix("UI") { continue }
+                    if !subViewName.hasSuffix("KeyboardItemContainerView") { continue }
+                    return subView
+                }
+            default: continue
             }
         }
         return nil

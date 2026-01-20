@@ -45,6 +45,16 @@ class KeyboardManagerDemoViewController: UIViewController {
         textField.becomeFirstResponder()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("Keyboard is visible \(KeyboardManager.shared.isKeyboardVisible)")
+        
+        let red = UIView()
+        red.backgroundColor = .red
+        red.frame = .init(x: 0, y: 0, width: 200, height: 50)
+        KeyboardManager.shared.keyboardView?.addSubview(red)
+    }
+    
     @objc
     func toggle() {
         if textField.isFirstResponder {

@@ -718,34 +718,52 @@ public extension Reer where Base: UIDevice {
     
     #if os(iOS)
     static var isRectangularScreen: Bool {
-        switch modelName {
+        return isRectangularScreenModel(modelName)
+    }
+    
+    static var isNotchScreen: Bool {
+        return isNotchScreenModel(modelName)
+    }
+    
+    static var isDynamicIslandScreen: Bool {
+        return isDynamicIslandScreenModel(modelName)
+    }
+    
+    private static func isRectangularScreenModel(_ model: UIDevice.Name) -> Bool {
+        switch model {
         case .iPodTouch5, .iPodTouch6, .iPodTouch7, .iPhone4, .iPhone4s, .iPhone5, .iPhone5c, .iPhone5s, .iPhone6, .iPhone6Plus, .iPhone6s, .iPhone6sPlus, .iPhone7, .iPhone7Plus, .iPhoneSE, .iPhone8, .iPhone8Plus, .iPhoneSE2, .iPhoneSE3:
             return true
+        case .simulator(let innerModel):
+            return isRectangularScreenModel(innerModel)
         default:
             return false
         }
     }
     
-    static var isNotchScreen: Bool {
-        switch modelName {
+    private static func isNotchScreenModel(_ model: UIDevice.Name) -> Bool {
+        switch model {
         case .iPhoneX, .iPhoneXS, .iPhoneXSMax,
              .iPhoneXR, .iPhone11, .iPhone11Pro, .iPhone11ProMax,
              .iPhone12, .iPhone12Mini, .iPhone12Pro, .iPhone12ProMax,
              .iPhone13, .iPhone13Mini, .iPhone13Pro, .iPhone13ProMax,
              .iPhone14, .iPhone14Plus, .iPhone16e:
             return true
+        case .simulator(let innerModel):
+            return isNotchScreenModel(innerModel)
         default:
             return false
         }
     }
     
-    static var isDynamicIslandScreen: Bool {
-        switch modelName {
+    private static func isDynamicIslandScreenModel(_ model: UIDevice.Name) -> Bool {
+        switch model {
         case .iPhone14Pro, .iPhone14ProMax,
              .iPhone15, .iPhone15Plus, .iPhone15Pro, .iPhone15ProMax,
              .iPhone16, .iPhone16Plus, .iPhone16Pro, .iPhone16ProMax,
              .iPhone17, .iPhone17Pro, .iPhone17ProMax, .iPhoneAir:
             return true
+        case .simulator(let innerModel):
+            return isDynamicIslandScreenModel(innerModel)
         default:
             return false
         }

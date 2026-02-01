@@ -23,26 +23,38 @@
 import os.lock
 
 /// ReerKit: A wrapper of `os_unfair_lock`
+///
+/// - Important: The lock is heap-allocated to prevent issues with Swift's
+///   potential bitwise copying of struct properties. `os_unfair_lock` relies
+///   on its memory address for correctness, so copying it would cause undefined behavior.
 public final class UnfairLock {
-    private var unfairLock = os_unfair_lock()
+    private let unfairLock: os_unfair_lock_t
 
-    public init() {}
+    public init() {
+        unfairLock = .allocate(capacity: 1)
+        unfairLock.initialize(to: os_unfair_lock())
+    }
+    
+    deinit {
+        unfairLock.deinitialize(count: 1)
+        unfairLock.deallocate()
+    }
     
     @inline(__always)
     public func lock() {
-        os_unfair_lock_lock(&unfairLock)
+        os_unfair_lock_lock(unfairLock)
     }
     
     /// ReerKit: Returns true if the lock was succesfully locked and false if the lock was already locked.
     @inline(__always)
     @discardableResult
     public func tryLock() -> Bool {
-        return os_unfair_lock_trylock(&unfairLock)
+        return os_unfair_lock_trylock(unfairLock)
     }
     
     @inline(__always)
     public func unlock() {
-        os_unfair_lock_unlock(&unfairLock)
+        os_unfair_lock_unlock(unfairLock)
     }
 
     /// ReerKit: Executes a closure returning a value while acquiring the lock.

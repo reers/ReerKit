@@ -18,6 +18,8 @@
 
 - ``Reer/installationTime``
 
+- ``Reer/icon``
+
 - ``Reer/keyWindow``
 
 - ``Reer/windows``

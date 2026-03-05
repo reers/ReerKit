@@ -123,6 +123,16 @@ public extension Reer where Base: UIApplication {
         let attributes = try? FileManager.default.attributesOfItem(atPath: documentsURL.path)
         return attributes?[.creationDate] as? Date
     }
+
+    /// ReerKit: App icon from the main bundle's `CFBundleIcons`.
+    static var icon: UIImage? {
+        guard let icons = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: Any],
+              let primaryIcon = icons["CFBundlePrimaryIcon"] as? [String: Any],
+              let iconFiles = primaryIcon["CFBundleIconFiles"] as? [String],
+              let lastIcon = iconFiles.last
+        else { return nil }
+        return UIImage(named: lastIcon)
+    }
 }
 
 // MARK: - UI

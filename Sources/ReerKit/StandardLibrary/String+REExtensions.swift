@@ -1160,31 +1160,6 @@ public extension ReerReference where Base == String {
 // MARK: - Operators
 
 public extension String {
-    #if canImport(Foundation)
-    /// ReerKit: Overload Swift's 'contains' operator for matching regex pattern.
-    ///
-    /// - Parameters:
-    ///   - lhs: String to check on regex pattern.
-    ///   - rhs: Regex pattern to match against.
-    /// - Returns: true if string matches the pattern.
-    static func ~= (lhs: String, rhs: String) -> Bool {
-        return lhs.range(of: rhs, options: .regularExpression) != nil
-    }
-    #endif
-
-    #if canImport(Foundation)
-    /// ReerKit: Overload Swift's 'contains' operator for matching regex.
-    ///
-    /// - Parameters:
-    ///   - lhs: String to check on regex.
-    ///   - rhs: Regex to match against.
-    /// - Returns: `true` if there is at least one match for the regex in the string.
-    static func ~= (lhs: String, rhs: NSRegularExpression) -> Bool {
-        let range = NSRange(lhs.startIndex..<lhs.endIndex, in: lhs)
-        return rhs.firstMatch(in: lhs, range: range) != nil
-    }
-    #endif
-
     /// ReerKit: Repeat string multiple times.
     ///
     ///        'bar' * 3 -> "barbarbar"

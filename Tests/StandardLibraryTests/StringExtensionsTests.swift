@@ -564,25 +564,6 @@ final class StringExtensionsTests: XCTestCase {
         XCTAssertTrue("email@mail.com".re.matches(regex: try NSRegularExpression(pattern: emailPattern)))
     }
 
-    #if canImport(Foundation)
-    func testPatternMatchOperator() {
-        XCTAssert("123" ~= "\\d{3}")
-        XCTAssertFalse("dasda" ~= "\\d{3}")
-        XCTAssertFalse("notanemail.com" ~= emailPattern)
-        XCTAssert("email@mail.com" ~= emailPattern)
-        XCTAssert("hat" ~= "[a-z]at")
-        XCTAssertFalse("" ~= "[a-z]at")
-        XCTAssert("" ~= "[a-z]*")
-        XCTAssertFalse("" ~= "[0-9]+")
-    }
-    #endif
-
-    func testRegexMatchOperator() throws {
-        let regex = try NSRegularExpression(pattern: "\\d{3}")
-        XCTAssert("123" ~= regex)
-        XCTAssertFalse("abc" ~= regex)
-    }
-
     func testPadStart() {
         var str: String = "str"
         str.re.padStart(10)

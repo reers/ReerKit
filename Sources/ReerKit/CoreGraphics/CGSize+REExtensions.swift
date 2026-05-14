@@ -73,7 +73,8 @@ public extension Reer where Base == CGSize {
     /// - Returns: self fitted into given bounding size
     func aspectFit(to boundingSize: CGSize) -> CGSize {
         let minRatio = min(boundingSize.width / base.width, boundingSize.height / base.height)
-        return CGSize(width: base.width * minRatio, height: base.height * minRatio)
+        let fittedSize = CGSize(width: base.width * minRatio, height: base.height * minRatio)
+        return CGSize(width: min(fittedSize.width, boundingSize.width), height: min(fittedSize.height, boundingSize.height))
     }
 
     /// ReerKit: Aspect fill CGSize.

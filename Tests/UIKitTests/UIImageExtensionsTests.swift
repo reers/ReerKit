@@ -151,6 +151,20 @@ final class UIImageExtensionsTests: XCTestCase {
         XCTAssertEqual(12, cropped.size.height * cropped.scale)
     }
 
+    func testCroppedAllowsFloatingPointRoundingAtImageBounds() {
+        let image = UIImage.re(color: .black, size: CGSize(width: 354, height: 772))
+        let rect = CGRect(
+            origin: .zero,
+            size: CGSize(width: 354.00000000000006, height: 106.61403508771932)
+        )
+
+        let cropped = image.re.cropped(to: rect)
+
+        XCTAssertNotEqual(cropped.size, image.size)
+        XCTAssertEqual(cropped.size.width, image.size.width)
+        XCTAssertEqual(cropped.size.height, 107)
+    }
+
     func testScaledToHeight() {
         let bundle = Bundle(for: UIImageExtensionsTests.self)
         let image = UIImage(named: "TestImage", in: bundle, compatibleWith: nil)!

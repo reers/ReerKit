@@ -21,6 +21,15 @@ final class CGSizeExtensionsTests: XCTestCase {
         XCTAssertEqual(newRect.height, 50)
     }
 
+    func testAspectFitDoesNotExceedBoundingSizeWhenLimitedByWidth() {
+        let size = CGSize(width: 342, height: 103)
+        let boundingSize = CGSize(width: 354, height: 772)
+        let fittedSize = size.re.aspectFit(to: boundingSize)
+
+        XCTAssertLessThanOrEqual(fittedSize.width, boundingSize.width)
+        XCTAssertLessThanOrEqual(fittedSize.height, boundingSize.height)
+    }
+
     func testAspectFill() {
         let rect = CGSize(width: 20, height: 120)
         let parentRect = CGSize(width: 100, height: 60)

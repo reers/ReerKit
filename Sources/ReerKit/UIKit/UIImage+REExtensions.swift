@@ -561,8 +561,9 @@ public extension Reer where Base: UIImage {
     /// - Parameter rect: CGRect to crop UIImage to.
     /// - Returns: cropped UIImage
     func cropped(to rect: CGRect) -> UIImage {
-        guard rect.size.width <= base.size.width,
-              rect.size.height <= base.size.height else {
+        let imageBounds = CGRect(origin: .zero, size: base.size)
+        let cropRect = rect.intersection(imageBounds)
+        guard !cropRect.isEmpty, cropRect.size != base.size else {
             return base
         }
         
@@ -577,10 +578,10 @@ public extension Reer where Base: UIImage {
         }
         
         if base.imageOrientation == .up {
-            return crop(base, with: rect)
+            return crop(base, with: cropRect)
         } else {
             let fixedImage = base.re.orientationFixed()
-            return crop(fixedImage, with: rect)
+            return crop(fixedImage, with: cropRect)
         }
     }
     

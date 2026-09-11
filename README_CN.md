@@ -53,11 +53,11 @@ Date+REExtensions
 [或者点击这里下载 doccarchive 文件](https://gitee.com/phoenix19/cdn/raw/master/ReerKit.doccarchive.zip)
 
 ## 要求
-iOS 12.0+
+iOS 13.0+
 
 macOS 10.15+
 
-tvOS 12.0+
+tvOS 13.0+
 
 watchOS 4.0+
 

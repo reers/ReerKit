@@ -132,6 +132,30 @@ final class DefaultsMacroTests: XCTestCase {
         )
     }
 
+    func testDefaultsMacroExpandsStaticProperty() {
+        assertMacroExpansion(
+            """
+            final class Example {
+                @Defaults("count", 0)
+                static var count: Int
+            }
+            """,
+            expandedSource: """
+            final class Example {
+                static var count: Int {
+                    get {
+                        ReerDefaults.value(forKey: "count", default: 0)
+                    }
+                    set {
+                        ReerDefaults.set(newValue, forKey: "count")
+                    }
+                }
+            }
+            """,
+            macros: testMacros
+        )
+    }
+
     func testDefaultsMacroDiagnosesUnsupportedNonOptionalPropertyWithoutDefault() {
         assertMacroExpansion(
             """

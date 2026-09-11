@@ -44,7 +44,7 @@ public enum AssociationPolicy {
     case copyAtomic
 }
 
-fileprivate extension AssociationPolicy {
+extension AssociationPolicy {
     var objcPolicy: objc_AssociationPolicy {
         switch self {
         case .assign: return .OBJC_ASSOCIATION_ASSIGN

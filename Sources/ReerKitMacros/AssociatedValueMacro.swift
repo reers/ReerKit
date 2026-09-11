@@ -30,21 +30,42 @@ public struct AssociatedValueMacro: AccessorMacro {
             return []
         }
 
-        guard variableDecl.isInstanceProperty else {
-            context.diagnose(Diagnostic(node: Syntax(node), message: AssociatedValueDiagnostic.requiresInstanceVar))
-            return []
-        }
-
         let arguments = AssociatedValueArguments(attribute: node)
         let key = "AssociationKey(#function as StaticString)"
         let initializerDefault = binding.initializer?.value.description.trimmingCharacters(in: .whitespacesAndNewlines)
         let knownTypeDefault = KnownDefaultValues.defaultValue(for: binding.typeAnnotation?.type)
         let defaultValue = arguments.defaultValue ?? initializerDefault ?? knownTypeDefault
+
+        if variableDecl.isInstanceProperty {
+            let getterExpression: String
+            if let defaultValue {
+                getterExpression = "re.associatedValue(forKey: \(key), default: \(defaultValue))"
+            } else {
+                getterExpression = "re.associatedValue(forKey: \(key))"
+            }
+
+            return [
+                """
+                get {
+                    \(raw: getterExpression)
+                }
+                """,
+                """
+                set {
+                    re.setAssociatedValue(newValue, forKey: \(raw: key), withPolicy: \(raw: arguments.policy))
+                }
+                """
+            ]
+        }
+
+        // Type (static/class) properties have no instance to attach to, so the
+        // association is hosted on the metatype object (`Self.self`), which
+        // matches the "one value per type" semantics of type properties.
         let getterExpression: String
         if let defaultValue {
-            getterExpression = "re.associatedValue(forKey: \(key), default: \(defaultValue))"
+            getterExpression = "ReerAssociation.value(for: Self.self, key: \(key), default: \(defaultValue))"
         } else {
-            getterExpression = "re.associatedValue(forKey: \(key))"
+            getterExpression = "ReerAssociation.value(for: Self.self, key: \(key))"
         }
 
         return [
@@ -55,7 +76,7 @@ public struct AssociatedValueMacro: AccessorMacro {
             """,
             """
             set {
-                re.setAssociatedValue(newValue, forKey: \(raw: key), withPolicy: \(raw: arguments.policy))
+                ReerAssociation.set(newValue, for: Self.self, key: \(raw: key), policy: \(raw: arguments.policy))
             }
             """
         ]
@@ -95,14 +116,11 @@ private struct AssociatedValueArguments {
 
 private enum AssociatedValueDiagnostic: DiagnosticMessage {
     case requiresStoredVar
-    case requiresInstanceVar
 
     var message: String {
         switch self {
         case .requiresStoredVar:
             return "@AssociatedValue can only be attached to a single stored var property"
-        case .requiresInstanceVar:
-            return "@AssociatedValue can only be attached to an instance var property"
         }
     }
 
@@ -110,8 +128,6 @@ private enum AssociatedValueDiagnostic: DiagnosticMessage {
         switch self {
         case .requiresStoredVar:
             return MessageID(domain: "ReerKitMacros", id: "requiresStoredVar")
-        case .requiresInstanceVar:
-            return MessageID(domain: "ReerKitMacros", id: "requiresInstanceVar")
         }
     }
 

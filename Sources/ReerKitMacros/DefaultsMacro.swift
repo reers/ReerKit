@@ -21,11 +21,6 @@ public struct DefaultsMacro: AccessorMacro {
             return []
         }
 
-        guard variableDecl.isInstanceProperty else {
-            context.diagnose(Diagnostic(node: Syntax(node), message: DefaultsDiagnostic.requiresInstanceVar))
-            return []
-        }
-
         let arguments = DefaultsArguments(attribute: node)
         guard let key = arguments.key else {
             context.diagnose(Diagnostic(node: Syntax(node), message: DefaultsDiagnostic.requiresKey))
@@ -102,7 +97,6 @@ private struct DefaultsArguments {
 
 private enum DefaultsDiagnostic: DiagnosticMessage {
     case requiresStoredVar
-    case requiresInstanceVar
     case requiresKey
     case requiresDefaultValue
 
@@ -110,8 +104,6 @@ private enum DefaultsDiagnostic: DiagnosticMessage {
         switch self {
         case .requiresStoredVar:
             return "@Defaults can only be attached to a single stored var property"
-        case .requiresInstanceVar:
-            return "@Defaults can only be attached to an instance var property"
         case .requiresKey:
             return "@Defaults requires a UserDefaults key"
         case .requiresDefaultValue:
@@ -123,8 +115,6 @@ private enum DefaultsDiagnostic: DiagnosticMessage {
         switch self {
         case .requiresStoredVar:
             return MessageID(domain: "ReerKitMacros", id: "defaultsRequiresStoredVar")
-        case .requiresInstanceVar:
-            return MessageID(domain: "ReerKitMacros", id: "defaultsRequiresInstanceVar")
         case .requiresKey:
             return MessageID(domain: "ReerKitMacros", id: "defaultsRequiresKey")
         case .requiresDefaultValue:

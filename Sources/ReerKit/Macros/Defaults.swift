@@ -24,6 +24,9 @@ import Foundation
 
 /// ReerKit: Generates `UserDefaults` accessors for a property.
 ///
+/// Works on both instance properties and type (`static`/`class`) properties,
+/// since the generated accessors only reference the key and container.
+///
 /// Example:
 /// ```swift
 /// @Defaults("isAppeared")

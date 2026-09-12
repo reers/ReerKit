@@ -36,10 +36,15 @@ public struct AssociatedValueMacro: AccessorMacro {
         }
 
         let arguments = AssociatedValueArguments(attribute: node)
+        guard !arguments.hasDefaultValueArgument else {
+            context.diagnose(Diagnostic(node: Syntax(node), message: AssociatedValueDiagnostic.usesDefaultValueArgument))
+            return []
+        }
+
         let key = "AssociationKey(#function as StaticString)"
         let initializerDefault = binding.initializer?.value.description.trimmingCharacters(in: .whitespacesAndNewlines)
         let knownTypeDefault = KnownDefaultValues.defaultValue(for: binding.typeAnnotation?.type)
-        let defaultValue = arguments.defaultValue ?? initializerDefault ?? knownTypeDefault
+        let defaultValue = initializerDefault ?? knownTypeDefault
         let getterExpression: String
         if let defaultValue {
             getterExpression = "re.associatedValue(forKey: \(key), default: \(defaultValue))"
@@ -71,8 +76,8 @@ extension VariableDeclSyntax {
 }
 
 private struct AssociatedValueArguments {
-    var defaultValue: String?
     var policy = ".retain"
+    var hasDefaultValueArgument = false
 
     init(attribute: AttributeSyntax) {
         guard case let .argumentList(arguments) = attribute.arguments else {
@@ -82,10 +87,12 @@ private struct AssociatedValueArguments {
         for argument in arguments {
             let expression = argument.expression.description.trimmingCharacters(in: .whitespacesAndNewlines)
             switch argument.label?.text {
-            case "default":
-                defaultValue = expression
             case "policy":
                 policy = expression
+            case "default", "defaultValue":
+                hasDefaultValueArgument = true
+            case nil:
+                hasDefaultValueArgument = true
             default:
                 continue
             }
@@ -96,6 +103,7 @@ private struct AssociatedValueArguments {
 private enum AssociatedValueDiagnostic: DiagnosticMessage {
     case requiresStoredVar
     case requiresInstanceVar
+    case usesDefaultValueArgument
 
     var message: String {
         switch self {
@@ -103,6 +111,8 @@ private enum AssociatedValueDiagnostic: DiagnosticMessage {
             return "@AssociatedValue can only be attached to a single stored var property"
         case .requiresInstanceVar:
             return "@AssociatedValue can only be attached to an instance var property"
+        case .usesDefaultValueArgument:
+            return "@AssociatedValue default value should be provided with the property initializer"
         }
     }
 
@@ -112,6 +122,8 @@ private enum AssociatedValueDiagnostic: DiagnosticMessage {
             return MessageID(domain: "ReerKitMacros", id: "requiresStoredVar")
         case .requiresInstanceVar:
             return MessageID(domain: "ReerKitMacros", id: "requiresInstanceVar")
+        case .usesDefaultValueArgument:
+            return MessageID(domain: "ReerKitMacros", id: "usesDefaultValueArgument")
         }
     }
 

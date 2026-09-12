@@ -22,6 +22,11 @@ public struct DefaultsMacro: AccessorMacro {
         }
 
         let arguments = DefaultsArguments(attribute: node)
+        guard !arguments.hasDefaultValueArgument else {
+            context.diagnose(Diagnostic(node: Syntax(node), message: DefaultsDiagnostic.usesDefaultValueArgument))
+            return []
+        }
+
         guard let key = arguments.key else {
             context.diagnose(Diagnostic(node: Syntax(node), message: DefaultsDiagnostic.requiresKey))
             return []
@@ -29,7 +34,7 @@ public struct DefaultsMacro: AccessorMacro {
 
         let initializerDefault = binding.initializer?.value.description.trimmingCharacters(in: .whitespacesAndNewlines)
         let knownTypeDefault = KnownDefaultValues.defaultValue(for: binding.typeAnnotation?.type)
-        let defaultValue = arguments.defaultValue ?? initializerDefault ?? knownTypeDefault
+        let defaultValue = initializerDefault ?? knownTypeDefault
         let isOptional = binding.typeAnnotation?.type.isOptional == true
 
         guard defaultValue != nil || isOptional else {
@@ -62,8 +67,8 @@ public struct DefaultsMacro: AccessorMacro {
 
 private struct DefaultsArguments {
     var key: String?
-    var defaultValue: String?
     var container: String?
+    var hasDefaultValueArgument = false
 
     init(attribute: AttributeSyntax) {
         guard case let .argumentList(arguments) = attribute.arguments else {
@@ -78,6 +83,11 @@ private struct DefaultsArguments {
                 continue
             }
 
+            if argument.label?.text == "default" || argument.label?.text == "defaultValue" {
+                hasDefaultValueArgument = true
+                continue
+            }
+
             guard argument.label == nil else {
                 continue
             }
@@ -85,10 +95,8 @@ private struct DefaultsArguments {
             switch positionalIndex {
             case 0:
                 key = expression
-            case 1:
-                defaultValue = expression
             default:
-                break
+                hasDefaultValueArgument = true
             }
             positionalIndex += 1
         }
@@ -99,6 +107,7 @@ private enum DefaultsDiagnostic: DiagnosticMessage {
     case requiresStoredVar
     case requiresKey
     case requiresDefaultValue
+    case usesDefaultValueArgument
 
     var message: String {
         switch self {
@@ -108,6 +117,8 @@ private enum DefaultsDiagnostic: DiagnosticMessage {
             return "@Defaults requires a UserDefaults key"
         case .requiresDefaultValue:
             return "@Defaults requires a default value for non-optional properties unless the property type has a known default"
+        case .usesDefaultValueArgument:
+            return "@Defaults default value should be provided with the property initializer"
         }
     }
 
@@ -119,6 +130,8 @@ private enum DefaultsDiagnostic: DiagnosticMessage {
             return MessageID(domain: "ReerKitMacros", id: "defaultsRequiresKey")
         case .requiresDefaultValue:
             return MessageID(domain: "ReerKitMacros", id: "defaultsRequiresDefaultValue")
+        case .usesDefaultValueArgument:
+            return MessageID(domain: "ReerKitMacros", id: "defaultsUsesDefaultValueArgument")
         }
     }
 

@@ -29,13 +29,12 @@ import Foundation
 ///
 /// Example:
 /// ```swift
-/// @Defaults("isAppeared")
-/// var isAppeared: Bool
+/// @Defaults("name", container: .standard)
+/// var name: String? = "bbbb"
 /// ```
 @attached(accessor)
 public macro Defaults(
     _ key: String,
-    _ defaultValue: Any? = nil,
     container: UserDefaults = .standard
 ) = #externalMacro(module: "ReerKitMacros", type: "DefaultsMacro")
 

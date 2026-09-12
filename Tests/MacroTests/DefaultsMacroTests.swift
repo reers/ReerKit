@@ -12,12 +12,12 @@ final class DefaultsMacroTests: XCTestCase {
         "Defaults": DefaultsMacro.self
     ]
 
-    func testDefaultsMacroExpandsExplicitDefaultValue() {
+    func testDefaultsMacroUsesPropertyInitializerAsDefaultValue() {
         assertMacroExpansion(
             """
             final class Example {
-                @Defaults("key111", false)
-                var isAppeared: Bool
+                @Defaults("key111")
+                var isAppeared: Bool = false
             }
             """,
             expandedSource: """
@@ -64,8 +64,8 @@ final class DefaultsMacroTests: XCTestCase {
         assertMacroExpansion(
             """
             final class Example {
-                @Defaults("key111", false, container: .standard)
-                var isAppeared: Bool
+                @Defaults("key111", container: .standard)
+                var isAppeared: Bool = false
             }
             """,
             expandedSource: """
@@ -108,7 +108,7 @@ final class DefaultsMacroTests: XCTestCase {
         )
     }
 
-    func testDefaultsMacroUsesPropertyInitializerAsDefaultValue() {
+    func testDefaultsMacroUsesIntegerPropertyInitializerAsDefaultValue() {
         assertMacroExpansion(
             """
             final class Example {
@@ -136,8 +136,8 @@ final class DefaultsMacroTests: XCTestCase {
         assertMacroExpansion(
             """
             final class Example {
-                @Defaults("count", 0)
-                static var count: Int
+                @Defaults("count")
+                static var count: Int = 0
             }
             """,
             expandedSource: """
@@ -152,6 +152,30 @@ final class DefaultsMacroTests: XCTestCase {
                 }
             }
             """,
+            macros: testMacros
+        )
+    }
+
+    func testDefaultsMacroDiagnosesDefaultValueArgument() {
+        assertMacroExpansion(
+            """
+            final class Example {
+                @Defaults("key111", false)
+                var isAppeared: Bool
+            }
+            """,
+            expandedSource: """
+            final class Example {
+                var isAppeared: Bool
+            }
+            """,
+            diagnostics: [
+                DiagnosticSpec(
+                    message: "@Defaults default value should be provided with the property initializer",
+                    line: 2,
+                    column: 5
+                )
+            ],
             macros: testMacros
         )
     }

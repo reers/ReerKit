@@ -33,7 +33,7 @@ MutexLock, ReadWriteLock, Synchronizing, UnfaireLock
 Clamped, Locked, Rounded, RWLocked, Trimmed
 
 // 属性宏, 自动生成关联对象或 UserDefaults get/set 访问器
-@AssociatedValue(default: false) var isAppeared: Bool
+@AssociatedValue var isAppeared: Bool = false
 @Defaults("isAppeared") var isAppeared: Bool
 
 // 其他工具类
@@ -104,12 +104,12 @@ let package = Package(
 <pre><code class="swift language-swift">@Defaults("isAppeared")
 var isAppeared: Bool
 
-@Defaults("launchCount", 0, container: .standard)
-var launchCount: Int
+@Defaults("launchCount", container: .standard)
+var launchCount: Int = 0
 
 @AssociatedValue
-var isAppeared: Bool</code></pre>
-<p>省略默认值时，支持的基础类型会使用内置默认值，例如 <code>false</code>、<code>0</code>、<code>""</code>、<code>Date()</code>、<code>Data()</code>、<code>URL(string: "/")!</code>、<code>UUID()</code> 和 <code>Decimal(0)</code>。</p>
+var isAppeared: Bool = false</code></pre>
+<p>自定义默认值使用属性赋值语法。省略默认值时，支持的基础类型会使用内置默认值，例如 <code>false</code>、<code>0</code>、<code>""</code>、<code>Date()</code>、<code>Data()</code>、<code>URL(string: "/")!</code>、<code>UUID()</code> 和 <code>Decimal(0)</code>。</p>
 <p><code>@Defaults</code> 也支持类型（<code>static</code>/<code>class</code>）属性。</p>
 </details>
 

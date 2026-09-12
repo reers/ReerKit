@@ -30,12 +30,11 @@
 /// ```swift
 /// extension UIViewController {
 ///     @AssociatedValue
-///     var isAppeared: Bool
+///     var isAppeared: Bool = false
 /// }
 /// ```
 @attached(accessor)
 public macro AssociatedValue(
-    default defaultValue: Any? = nil,
     policy: AssociationPolicy = .retain
 ) = #externalMacro(module: "ReerKitMacros", type: "AssociatedValueMacro")
 

@@ -39,8 +39,8 @@ final class AssociatedValueMacroTests: XCTestCase {
         assertMacroExpansion(
             """
             final class Example {
-                @AssociatedValue(default: 0, policy: .assign)
-                var count: Int
+                @AssociatedValue(policy: .assign)
+                var count: Int = 0
             }
             """,
             expandedSource: """
@@ -63,8 +63,8 @@ final class AssociatedValueMacroTests: XCTestCase {
         assertMacroExpansion(
             """
             extension UIViewController {
-                @AssociatedValue(default: false)
-                var isAppeared: Bool
+                @AssociatedValue
+                var isAppeared: Bool = false
             }
             """,
             expandedSource: """
@@ -79,6 +79,30 @@ final class AssociatedValueMacroTests: XCTestCase {
                 }
             }
             """,
+            macros: testMacros
+        )
+    }
+
+    func testAssociatedValueMacroDiagnosesDefaultValueArgument() {
+        assertMacroExpansion(
+            """
+            final class Example {
+                @AssociatedValue(default: 0)
+                var count: Int
+            }
+            """,
+            expandedSource: """
+            final class Example {
+                var count: Int
+            }
+            """,
+            diagnostics: [
+                DiagnosticSpec(
+                    message: "@AssociatedValue default value should be provided with the property initializer",
+                    line: 2,
+                    column: 5
+                )
+            ],
             macros: testMacros
         )
     }

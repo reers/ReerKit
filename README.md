@@ -35,7 +35,7 @@ MutexLock, ReadWriteLock, Synchronizing, UnfaireLock
 Clamped, Locked, Rounded, RWLocked, Trimmed
 
 // Property macros, automatically generate associated-object or UserDefaults get/set accessors
-@AssociatedValue(default: false) var isAppeared: Bool
+@AssociatedValue var isAppeared: Bool = false
 @Defaults("isAppeared") var isAppeared: Bool
 
 // Other Utility
@@ -106,12 +106,12 @@ let package = Package(
 <pre><code class="swift language-swift">@Defaults("isAppeared")
 var isAppeared: Bool
 
-@Defaults("launchCount", 0, container: .standard)
-var launchCount: Int
+@Defaults("launchCount", container: .standard)
+var launchCount: Int = 0
 
 @AssociatedValue
-var isAppeared: Bool</code></pre>
-<p>When a default value is omitted, supported basic types use built-in defaults such as `false`, `0`, `""`, `Date()`, `Data()`, `URL(string: "/")!`, `UUID()`, and `Decimal(0)`.</p>
+var isAppeared: Bool = false</code></pre>
+<p>Use property initializers for custom default values. When a default value is omitted, supported basic types use built-in defaults such as `false`, `0`, `""`, `Date()`, `Data()`, `URL(string: "/")!`, `UUID()`, and `Decimal(0)`.</p>
 <p>`@Defaults` also works on type (`static`/`class`) properties.</p>
 </details>
 

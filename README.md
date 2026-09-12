@@ -34,6 +34,10 @@ MutexLock, ReadWriteLock, Synchronizing, UnfaireLock
 // PropertyWrappers
 Clamped, Locked, Rounded, RWLocked, Trimmed
 
+// Property macros, automatically generate associated-object or UserDefaults get/set accessors
+@AssociatedValue var isAppeared: Bool = false
+@Defaults("isAppeared") var isAppeared: Bool
+
 // Other Utility
 RSA, AES, CountdownTimer, Debouncer, Throttler, DeinitObserver, KeyboardManager, Keychain, Reachability, NanoID, MulticastDelegate
 
@@ -51,11 +55,11 @@ Date+REExtensions
 [Or click here to download the doccarchive file](https://gitee.com/phoenix19/cdn/raw/master/ReerKit.doccarchive.zip)
 
 ## Requirements
-iOS 12.0+
+iOS 13.0+
 
-macOS 10.13+
+macOS 10.15+
 
-tvOS 12.0+
+tvOS 13.0+
 
 watchOS 4.0+
 
@@ -68,15 +72,6 @@ Swift 5.9+
 XCode 15.4+
 
 ## Installation
-
-<details>
-<summary>CocoaPods</summary>
-</br>
-<p>To integrate ReerKit into your Xcode project using <a href="http://cocoapods.org">CocoaPods</a>, specify it in your `Podfile`:</p>
-<h4>- Integrate all extensions (recommended):</h4>
-<pre><code class="ruby language-ruby">pod 'ReerKit'</code></pre>
-</code></pre>
-</details>
 
 <details>
 <summary>Carthage</summary>
@@ -107,7 +102,17 @@ let package = Package(
     ]
 ),</code></pre>
 <p>Then run `swift package update`.</p>
-<p>Please note that <a href="https://swift.org/package-manager">Swift Package Manager</a> does not support building for iOS/tvOS/macOS/watchOS applications.</p>
+<p>Property macros are available through Swift Package Manager builds. The legacy Xcode project does not load the `ReerKitMacros` plugin.</p>
+<pre><code class="swift language-swift">@Defaults("isAppeared")
+var isAppeared: Bool
+
+@Defaults("launchCount", container: .standard)
+var launchCount: Int = 0
+
+@AssociatedValue
+var isAppeared: Bool = false</code></pre>
+<p>Use property initializers for custom default values. When a default value is omitted, supported basic types use built-in defaults such as `false`, `0`, `""`, `Date()`, `Data()`, `URL(string: "/")!`, `UUID()`, and `Decimal(0)`.</p>
+<p>`@Defaults` also works on type (`static`/`class`) properties.</p>
 </details>
 
 <details>

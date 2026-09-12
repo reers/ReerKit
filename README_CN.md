@@ -32,6 +32,10 @@ MutexLock, ReadWriteLock, Synchronizing, UnfaireLock
 // 属性包装器 PropertyWrappers 
 Clamped, Locked, Rounded, RWLocked, Trimmed
 
+// 属性宏, 自动生成关联对象或 UserDefaults get/set 访问器
+@AssociatedValue var isAppeared: Bool = false
+@Defaults("isAppeared") var isAppeared: Bool
+
 // 其他工具类
 RSA, AES, CountdownTimer, Debouncer, Throttler, DeinitObserver, KeyboardManager, Keychain, Reachability, NanoID, MulticastDelegate
 
@@ -49,11 +53,11 @@ Date+REExtensions
 [或者点击这里下载 doccarchive 文件](https://gitee.com/phoenix19/cdn/raw/master/ReerKit.doccarchive.zip)
 
 ## 要求
-iOS 12.0+
+iOS 13.0+
 
-macOS 10.13+
+macOS 10.15+
 
-tvOS 12.0+
+tvOS 13.0+
 
 watchOS 4.0+
 
@@ -66,15 +70,6 @@ Swift 5.9+
 XCode 15.4+
 
 ## 安装
-
-<details>
-<summary>CocoaPods</summary>
-</br>
-<p>要使用 <a href="http://cocoapods.org">CocoaPods</a> 将 ReerKit 集成到您的 Xcode 项目，请在您的 <code>Podfile</code> 中设置:</p>
-<h4>- 集成所有扩展（推荐）:</h4>
-<pre><code class="ruby language-ruby">pod 'ReerKit'</code></pre>
-</code></pre>
-</details>
 
 <details>
 <summary>Carthage</summary>
@@ -105,7 +100,17 @@ let package = Package(
     ]
 ),</code></pre>
 <p>然后运行 <code>swift package update</code>。</p>
-<p>请注意，<a href="https://swift.org/package-manager">Swift Package Manager</a> 不支持为 iOS/tvOS/macOS/watchOS 应用程序编译 
+<p>属性宏需要通过 Swift Package Manager 构建使用。旧的 Xcode project 不会加载 <code>ReerKitMacros</code> 插件。</p>
+<pre><code class="swift language-swift">@Defaults("isAppeared")
+var isAppeared: Bool
+
+@Defaults("launchCount", container: .standard)
+var launchCount: Int = 0
+
+@AssociatedValue
+var isAppeared: Bool = false</code></pre>
+<p>自定义默认值使用属性赋值语法。省略默认值时，支持的基础类型会使用内置默认值，例如 <code>false</code>、<code>0</code>、<code>""</code>、<code>Date()</code>、<code>Data()</code>、<code>URL(string: "/")!</code>、<code>UUID()</code> 和 <code>Decimal(0)</code>。</p>
+<p><code>@Defaults</code> 也支持类型（<code>static</code>/<code>class</code>）属性。</p>
 </details>
 
 <details>

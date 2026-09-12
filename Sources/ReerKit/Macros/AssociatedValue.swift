@@ -23,19 +23,14 @@
 
 /// ReerKit: Generates Objective-C associated-object accessors for a property.
 ///
-/// Use this macro on properties of `AnyObject` compatible types on platforms
-/// with the Objective-C runtime. Instance properties attach the value to the
-/// instance itself; `static`/`class` properties attach the value to the
-/// metatype object (`Self.self`) via `ReerAssociation`.
+/// Use this macro on instance properties of `AnyObject` compatible types on
+/// platforms with the Objective-C runtime.
 ///
 /// Example:
 /// ```swift
 /// extension UIViewController {
 ///     @AssociatedValue
 ///     var isAppeared: Bool
-///
-///     @AssociatedValue(default: 0)
-///     static var appearCount: Int
 /// }
 /// ```
 @attached(accessor)

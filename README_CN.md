@@ -110,7 +110,7 @@ var launchCount: Int
 @AssociatedValue
 var isAppeared: Bool</code></pre>
 <p>省略默认值时，支持的基础类型会使用内置默认值，例如 <code>false</code>、<code>0</code>、<code>""</code>、<code>Date()</code>、<code>Data()</code>、<code>URL(string: "/")!</code>、<code>UUID()</code> 和 <code>Decimal(0)</code>。</p>
-<p>两个宏也支持类型（<code>static</code>/<code>class</code>）属性。<code>@AssociatedValue</code> 会把类型属性的值通过 <code>ReerAssociation</code> 挂载到元类型对象上。</p>
+<p><code>@Defaults</code> 也支持类型（<code>static</code>/<code>class</code>）属性。</p>
 </details>
 
 <details>

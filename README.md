@@ -112,7 +112,7 @@ var launchCount: Int
 @AssociatedValue
 var isAppeared: Bool</code></pre>
 <p>When a default value is omitted, supported basic types use built-in defaults such as `false`, `0`, `""`, `Date()`, `Data()`, `URL(string: "/")!`, `UUID()`, and `Decimal(0)`.</p>
-<p>Both macros also work on type (`static`/`class`) properties. `@AssociatedValue` hosts the value of a type property on the metatype object via `ReerAssociation`.</p>
+<p>`@Defaults` also works on type (`static`/`class`) properties.</p>
 </details>
 
 <details>

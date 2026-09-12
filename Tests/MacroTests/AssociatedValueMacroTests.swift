@@ -131,7 +131,7 @@ final class AssociatedValueMacroTests: XCTestCase {
         )
     }
 
-    func testAssociatedValueMacroExpandsStaticPropertyAccessors() {
+    func testAssociatedValueMacroDiagnosesStaticProperty() {
         assertMacroExpansion(
             """
             final class Example {
@@ -141,21 +141,21 @@ final class AssociatedValueMacroTests: XCTestCase {
             """,
             expandedSource: """
             final class Example {
-                static var count: Int {
-                    get {
-                        ReerAssociation.value(for: Self.self, key: AssociationKey(#function as StaticString), default: 0)
-                    }
-                    set {
-                        ReerAssociation.set(newValue, for: Self.self, key: AssociationKey(#function as StaticString), policy: .retain)
-                    }
-                }
+                static var count: Int
             }
             """,
+            diagnostics: [
+                DiagnosticSpec(
+                    message: "@AssociatedValue can only be attached to an instance var property",
+                    line: 2,
+                    column: 5
+                )
+            ],
             macros: testMacros
         )
     }
 
-    func testAssociatedValueMacroExpandsClassPropertyAccessors() {
+    func testAssociatedValueMacroDiagnosesClassProperty() {
         assertMacroExpansion(
             """
             class Example {
@@ -165,16 +165,16 @@ final class AssociatedValueMacroTests: XCTestCase {
             """,
             expandedSource: """
             class Example {
-                class var title: String? {
-                    get {
-                        ReerAssociation.value(for: Self.self, key: AssociationKey(#function as StaticString))
-                    }
-                    set {
-                        ReerAssociation.set(newValue, for: Self.self, key: AssociationKey(#function as StaticString), policy: .retain)
-                    }
-                }
+                class var title: String?
             }
             """,
+            diagnostics: [
+                DiagnosticSpec(
+                    message: "@AssociatedValue can only be attached to an instance var property",
+                    line: 2,
+                    column: 5
+                )
+            ],
             macros: testMacros
         )
     }

@@ -235,6 +235,22 @@ public extension UIDevice {
         ///
         /// ![Image]()
         case iPhoneAir
+        /// Device is an [iPhone 17e]()
+        ///
+        /// ![Image]()
+        case iPhone17e
+        /// Device is an [iPhone 18 Pro]()
+        ///
+        /// ![Image]()
+        case iPhone18Pro
+        /// Device is an [iPhone 18 Pro Max]()
+        ///
+        /// ![Image]()
+        case iPhone18ProMax
+        /// Device is an [iPhone Duo]()
+        ///
+        /// ![Image]()
+        case iPhoneDuo
         /// Device is an [iPad 2](https://support.apple.com/kb/SP622)
         ///
         /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP622/SP622_01-ipad2-mul.png)
@@ -311,6 +327,14 @@ public extension UIDevice {
         ///
         /// ![Image]()
         case iPadAir13InchM3
+        /// Device is an [iPad Air 11-inch (M4)]()
+        ///
+        /// ![Image]()
+        case iPadAir11InchM4
+        /// Device is an [iPad Air 13-inch (M4)]()
+        ///
+        /// ![Image]()
+        case iPadAir13InchM4
         /// Device is an [iPad Mini](https://support.apple.com/kb/SP661)
         ///
         /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP661/sp661_ipad_mini_color.jpg)
@@ -395,6 +419,14 @@ public extension UIDevice {
         ///
         /// ![Image](https://cdsassets.apple.com/content/services/pub/image?productid=301033&size=240x240)
         case iPadPro13InchM4
+        /// Device is an [iPad Pro 11-inch (M5)]()
+        ///
+        /// ![Image]()
+        case iPadPro11InchM5
+        /// Device is an [iPad Pro 13-inch (M5)]()
+        ///
+        /// ![Image]()
+        case iPadPro13InchM5
         /// Device is a [HomePod](https://support.apple.com/kb/SP773)
         ///
         /// ![Image](https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP773/homepod_space_gray_large_2x.jpg)
@@ -541,6 +573,26 @@ public extension UIDevice {
         ///
         /// ![Image]()
         case appleWatchSeries11_46mm
+        /// Device is an [Apple Watch SE (3rd generation)]()
+        ///
+        /// ![Image]()
+        case appleWatchSE3_40mm
+        /// Device is an [Apple Watch SE (3rd generation)]()
+        ///
+        /// ![Image]()
+        case appleWatchSE3_44mm
+        /// Device is an [Apple Watch Series 12]()
+        ///
+        /// ![Image]()
+        case appleWatchSeries12_42mm
+        /// Device is an [Apple Watch Series 12]()
+        ///
+        /// ![Image]()
+        case appleWatchSeries12_46mm
+        /// Device is an [Apple Watch Ultra 4]()
+        ///
+        /// ![Image]()
+        case appleWatchUltra4
         #elseif os(visionOS)
         case appleVisionPro
         #endif
@@ -746,7 +798,7 @@ public extension Reer where Base: UIDevice {
              .iPhoneXR, .iPhone11, .iPhone11Pro, .iPhone11ProMax,
              .iPhone12, .iPhone12Mini, .iPhone12Pro, .iPhone12ProMax,
              .iPhone13, .iPhone13Mini, .iPhone13Pro, .iPhone13ProMax,
-             .iPhone14, .iPhone14Plus, .iPhone16e:
+             .iPhone14, .iPhone14Plus, .iPhone16e, .iPhone17e:
             return true
         case .simulator(let innerModel):
             return isNotchScreenModel(innerModel)
@@ -760,7 +812,8 @@ public extension Reer where Base: UIDevice {
         case .iPhone14Pro, .iPhone14ProMax,
              .iPhone15, .iPhone15Plus, .iPhone15Pro, .iPhone15ProMax,
              .iPhone16, .iPhone16Plus, .iPhone16Pro, .iPhone16ProMax,
-             .iPhone17, .iPhone17Pro, .iPhone17ProMax, .iPhoneAir:
+             .iPhone17, .iPhone17Pro, .iPhone17ProMax, .iPhoneAir,
+             .iPhone18Pro, .iPhone18ProMax:
             return true
         case .simulator(let innerModel):
             return isDynamicIslandScreenModel(innerModel)
@@ -842,6 +895,10 @@ public extension Reer where Base: UIDevice {
         case "iPhone18,1": return .iPhone17Pro
         case "iPhone18,2": return .iPhone17ProMax
         case "iPhone18,4": return .iPhoneAir
+        case "iPhone18,5": return .iPhone17e
+        case "iPhone19,2": return .iPhone18Pro
+        case "iPhone19,3", "iPhone19,7": return .iPhone18ProMax
+        case "iPhone19,4": return .iPhoneDuo
         case "iPad2,1", "iPad2,2", "iPad2,3", "iPad2,4": return .iPad2
         case "iPad3,1", "iPad3,2", "iPad3,3": return .iPad3
         case "iPad3,4", "iPad3,5", "iPad3,6": return .iPad4
@@ -861,6 +918,8 @@ public extension Reer where Base: UIDevice {
         case "iPad14,10", "iPad14,11": return .iPadAir13InchM2
         case "iPad15,3", "iPad15,4": return .iPadAir11InchM3
         case "iPad15,5", "iPad15,6": return .iPadAir13InchM3
+        case "iPad16,8", "iPad16,9": return .iPadAir11InchM4
+        case "iPad16,10", "iPad16,11": return .iPadAir13InchM4
         case "iPad2,5", "iPad2,6", "iPad2,7": return .iPadMini
         case "iPad4,4", "iPad4,5", "iPad4,6": return .iPadMini2
         case "iPad4,7", "iPad4,8", "iPad4,9": return .iPadMini3
@@ -882,6 +941,8 @@ public extension Reer where Base: UIDevice {
         case "iPad14,5", "iPad14,6": return .iPadPro12Inch6
         case "iPad16,3", "iPad16,4": return .iPadPro11InchM4
         case "iPad16,5", "iPad16,6": return .iPadPro13InchM4
+        case "iPad17,1", "iPad17,2": return .iPadPro11InchM5
+        case "iPad17,3", "iPad17,4": return .iPadPro13InchM5
         case "AudioAccessory1,1": return .homePod
         case "i386", "x86_64", "arm64": return .simulator(getName(ofMachineModel: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "iOS"))
         default: return .unknown(machineModelIdentifier)
@@ -928,6 +989,11 @@ public extension Reer where Base: UIDevice {
         case "Watch7,12": return .appleWatchUltra3
         case "Watch7,17", "Watch7,19": return .appleWatchSeries11_42mm
         case "Watch7,18", "Watch7,20": return .appleWatchSeries11_46mm
+        case "Watch7,13", "Watch7,14": return .appleWatchSE3_40mm
+        case "Watch7,15", "Watch7,16": return .appleWatchSE3_44mm
+        case "Watch8,2", "Watch8,4": return .appleWatchSeries12_42mm
+        case "Watch8,3", "Watch8,5": return .appleWatchSeries12_46mm
+        case "Watch8,1": return .appleWatchUltra4
         case "i386", "x86_64", "arm64": return .simulator(mapToDevice(identifier: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "watchOS"))
         default: return .unknown(identifier)
         }
@@ -1289,6 +1355,10 @@ extension UIDevice.Name: CustomStringConvertible {
         case .iPhone17Pro: return "iPhone 17 Pro"
         case .iPhone17ProMax: return "iPhone 17 Pro Max"
         case .iPhoneAir: return "iPhone Air"
+        case .iPhone17e: return "iPhone 17e"
+        case .iPhone18Pro: return "iPhone 18 Pro"
+        case .iPhone18ProMax: return "iPhone 18 Pro Max"
+        case .iPhoneDuo: return "iPhone Duo"
         case .iPad2: return "iPad 2"
         case .iPad3: return "iPad (3rd generation)"
         case .iPad4: return "iPad (4th generation)"
@@ -1308,6 +1378,8 @@ extension UIDevice.Name: CustomStringConvertible {
         case .iPadAir13InchM2: return "iPad Air (13-inch) (M2)"
         case .iPadAir11InchM3: return "iPad Air (11-inch) (M3)"
         case .iPadAir13InchM3: return "iPad Air (13-inch) (M3)"
+        case .iPadAir11InchM4: return "iPad Air (11-inch) (M4)"
+        case .iPadAir13InchM4: return "iPad Air (13-inch) (M4)"
         case .iPadMini: return "iPad Mini"
         case .iPadMini2: return "iPad Mini 2"
         case .iPadMini3: return "iPad Mini 3"
@@ -1329,6 +1401,8 @@ extension UIDevice.Name: CustomStringConvertible {
         case .iPadPro12Inch6: return "iPad Pro (12.9-inch) (6th generation)"
         case .iPadPro11InchM4: return "iPad Pro (11-inch) (M4)"
         case .iPadPro13InchM4: return "iPad Pro (13-inch) (M4)"
+        case .iPadPro11InchM5: return "iPad Pro (11-inch) (M5)"
+        case .iPadPro13InchM5: return "iPad Pro (13-inch) (M5)"
         case .homePod: return "HomePod"
         case .simulator(let model): return "Simulator (\(model.description))"
         case .unknown(let identifier): return identifier
@@ -1366,6 +1440,11 @@ extension UIDevice.Name: CustomStringConvertible {
         case .appleWatchUltra3: return "Apple Watch Ultra 3"
         case .appleWatchSeries11_42mm: return "Apple Watch Series 11 42mm"
         case .appleWatchSeries11_46mm: return "Apple Watch Series 11 46mm"
+        case .appleWatchSE3_40mm: return "Apple Watch SE (3rd generation) 40mm"
+        case .appleWatchSE3_44mm: return "Apple Watch SE (3rd generation) 44mm"
+        case .appleWatchSeries12_42mm: return "Apple Watch Series 12 42mm"
+        case .appleWatchSeries12_46mm: return "Apple Watch Series 12 46mm"
+        case .appleWatchUltra4: return "Apple Watch Ultra 4"
         case .simulator(let model): return "Simulator (\(model.description))"
         case .unknown(let identifier): return identifier
         }

@@ -50,7 +50,7 @@ Date+REExtensions
 ```
 
 ## Usage
-[Link of Documents build by DocC](https://swiftpackageindex.com/reers/ReerKit/1.2.7/documentation/reerkit)
+[Link of Documents build by DocC](https://swiftpackageindex.com/reers/ReerKit/1.2.9/documentation/reerkit)
 
 [Or click here to download the doccarchive file](https://gitee.com/phoenix19/cdn/raw/master/ReerKit.doccarchive.zip)
 
@@ -77,7 +77,7 @@ XCode 15.4+
 <summary>Carthage</summary>
 </br>
 <p>To integrate ReerKit into your Xcode project using <a href="https://github.com/Carthage/Carthage">Carthage</a>, specify it in your `Cartfile`:</p>
-<pre><code class="ogdl language-ogdl">github "ReerKit/ReerKit" ~> 1.2.7
+<pre><code class="ogdl language-ogdl">github "ReerKit/ReerKit" ~> 1.2.9
 </code></pre>
 </details>
 
@@ -90,7 +90,7 @@ let package = Package(
     name: "YOUR_PROJECT_NAME",
     targets: [],
     dependencies: [
-        .package(url: "https://github.com/reers/ReerKit.git", from: "1.2.7")
+        .package(url: "https://github.com/reers/ReerKit.git", from: "1.2.9")
     ]
 )
 </code></pre>

@@ -77,17 +77,23 @@ public extension Equatable {
 // MARK: - MutableCollection
 
 public struct ReerForMutableCollection<Base> {
-    public let base: UnsafeMutablePointer<Base>
-    public init(_ base: inout Base) {
-        self.base = withUnsafeMutablePointer(to: &base) { $0 }
+    public var base: Base
+    public init(_ base: Base) {
+        self.base = base
     }
 }
 
 public extension MutableCollection {
     /// Gets a namespace holder for ReerKit compatible types.
     var re: ReerForMutableCollection<Self> {
-        mutating get { return ReerForMutableCollection(&self) }
-        set {}
+        mutating get { return ReerForMutableCollection(self) }
+        set { self = newValue.base }
+        _modify {
+            // `consume` moves the value into the wrapper so in-place mutations don't trigger a CoW copy.
+            var wrapper = ReerForMutableCollection(consume self)
+            defer { self = wrapper.base }
+            yield &wrapper
+        }
     }
 
     /// Gets a namespace holder for ReerKit compatible meta types.
@@ -123,17 +129,23 @@ public extension StringProtocol {
 // MARK: - RangeReplaceableCollection
 
 public struct ReerForRangeReplaceableCollection<Base> {
-    public let base: UnsafeMutablePointer<Base>
-    public init(_ base: inout Base) {
-        self.base = withUnsafeMutablePointer(to: &base) { $0 }
+    public var base: Base
+    public init(_ base: Base) {
+        self.base = base
     }
 }
 
 public extension RangeReplaceableCollection {
     /// Gets a namespace holder for ReerKit compatible types.
     var re: ReerForRangeReplaceableCollection<Self> {
-        mutating get { return ReerForRangeReplaceableCollection(&self) }
-        set {}
+        mutating get { return ReerForRangeReplaceableCollection(self) }
+        set { self = newValue.base }
+        _modify {
+            // `consume` moves the value into the wrapper so in-place mutations don't trigger a CoW copy.
+            var wrapper = ReerForRangeReplaceableCollection(consume self)
+            defer { self = wrapper.base }
+            yield &wrapper
+        }
     }
 
     /// Gets a namespace holder for ReerKit compatible meta types.

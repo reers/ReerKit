@@ -223,14 +223,14 @@ public extension ReerReferenceGeneric2 where Base == Dictionary<U1, U2> {
     ///
     /// - Parameter keys: keys to be removed.
     mutating func removeAll<S: Sequence>(keys: S) where S.Element == U1 {
-        keys.forEach { base.pointee.removeValue(forKey: $0) }
+        keys.forEach { base.removeValue(forKey: $0) }
     }
 
     /// ReerKit: Remove a value for a random key from the dictionary.
     @discardableResult
     mutating func removeValueForRandomKey() -> U2? {
-        guard let randomKey = base.pointee.keys.randomElement() else { return nil }
-        return base.pointee.removeValue(forKey: randomKey)
+        guard let randomKey = base.keys.randomElement() else { return nil }
+        return base.removeValue(forKey: randomKey)
     }
 }
 
@@ -242,9 +242,9 @@ public extension ReerReferenceGeneric2 where Base == Dictionary<U1, U2>, U1: Str
     ///        print(dict) // prints "["testkey": "value"]"
     ///
     mutating func lowercaseAllKeys() {
-        for key in base.pointee.keys {
+        for key in base.keys {
             if let lowercaseKey = String(describing: key).lowercased() as? U1 {
-                base.pointee[lowercaseKey] = base.pointee.removeValue(forKey: key)
+                base[lowercaseKey] = base.removeValue(forKey: key)
             }
         }
     }
@@ -269,7 +269,7 @@ public extension ReerReferenceGeneric2 where Base == Dictionary<U1, U2> {
     subscript(path path: [U1]) -> Any? {
         get {
             guard !path.isEmpty else { return nil }
-            var result: Any? = base.pointee
+            var result: Any? = base
             for key in path {
                 if let element = (result as? [U1: Any])?[key] {
                     result = element
@@ -282,11 +282,11 @@ public extension ReerReferenceGeneric2 where Base == Dictionary<U1, U2> {
         set {
             if let first = path.first {
                 if path.count == 1, let new = newValue as? U2 {
-                    return base.pointee[first] = new
+                    return base[first] = new
                 }
-                if var nested = base.pointee[first] as? [U1: Any] {
+                if var nested = base[first] as? [U1: Any] {
                     nested.re[path: Array(path.dropFirst())] = newValue
-                    return base.pointee[first] = nested as? U2
+                    return base[first] = nested as? U2
                 }
             }
         }
@@ -310,11 +310,12 @@ public extension ReerReferenceGeneric2 where Base == Dictionary<U1, U2>, U1 == S
     subscript(path path: U1) -> Any? {
         get {
             let keys = path.components(separatedBy: ".")
-            return base.pointee.re[path: keys]
+            var dict = base
+            return dict.re[path: keys]
         }
         set {
             let keys = path.components(separatedBy: ".")
-            base.pointee.re[path: keys] = newValue
+            base.re[path: keys] = newValue
         }
     }
 }

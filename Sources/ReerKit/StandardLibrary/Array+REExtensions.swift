@@ -40,7 +40,7 @@ public extension ReerReferenceGeneric where Base == Array<T> {
     ///
     /// - Parameter newElement: element to insert.
     mutating func prepend(_ newElement: T) {
-        base.pointee.insert(newElement, at: 0)
+        base.insert(newElement, at: 0)
     }
 
     /// ReerKit: Safely swap values at given index positions.
@@ -54,9 +54,9 @@ public extension ReerReferenceGeneric where Base == Array<T> {
     ///   - otherIndex: index of other element.
     mutating func swapAt(_ index: Base.Index, _ otherIndex: Base.Index) {
         guard index != otherIndex else { return }
-        guard base.pointee.startIndex..<base.pointee.endIndex ~= index else { return }
-        guard base.pointee.startIndex..<base.pointee.endIndex ~= otherIndex else { return }
-        base.pointee.swapAt(index, otherIndex)
+        guard base.startIndex..<base.endIndex ~= index else { return }
+        guard base.startIndex..<base.endIndex ~= otherIndex else { return }
+        base.swapAt(index, otherIndex)
     }
 }
 
@@ -68,11 +68,11 @@ public extension ReerReferenceGeneric where Base == Array<T>, T: Equatable {
     /// - Complexity: O(n), where n is the length of the array
     mutating func appendIfNotExist(_ newElement: T) {
         // Check if the element already exists in the array
-        guard !base.pointee.contains(newElement) else {
+        guard !base.contains(newElement) else {
             return
         }
         // Append the new element if it's not found
-        base.pointee.append(newElement)
+        base.append(newElement)
     }
     
     /// ReerKit: Appends multiple elements to the array, excluding any duplicates
@@ -83,8 +83,8 @@ public extension ReerReferenceGeneric where Base == Array<T>, T: Equatable {
         // Iterate through new elements
         newElements.forEach { element in
             // Only append elements that don't already exist
-            if !base.pointee.contains(element) {
-                base.pointee.append(element)
+            if !base.contains(element) {
+                base.append(element)
             }
         }
     }
@@ -98,8 +98,8 @@ public extension ReerReferenceGeneric where Base == Array<T>, T: Equatable {
     /// - Returns: self after removing all instances of item.
     @discardableResult
     mutating func removeAll(_ item: T) -> [T] {
-        base.pointee.removeAll { $0 == item }
-        return base.pointee
+        base.removeAll { $0 == item }
+        return base
     }
 
     /// ReerKit: Remove all instances contained in items parameter from array.
@@ -111,9 +111,9 @@ public extension ReerReferenceGeneric where Base == Array<T>, T: Equatable {
     /// - Returns: self after removing all instances of all items in given array.
     @discardableResult
     mutating func removeAll(_ items: [T]) -> [T] {
-        guard !items.isEmpty else { return base.pointee }
-        base.pointee.removeAll { items.contains($0) }
-        return base.pointee
+        guard !items.isEmpty else { return base }
+        base.removeAll { items.contains($0) }
+        return base
     }
 
     /// ReerKit: Remove all duplicate elements from Array.
@@ -124,12 +124,12 @@ public extension ReerReferenceGeneric where Base == Array<T>, T: Equatable {
     /// - Returns: Return array with all duplicate elements removed.
     @discardableResult
     mutating func removeDuplicates() -> [T] {
-        base.pointee = base.pointee.reduce(into: [T]()) {
+        base = base.reduce(into: [T]()) {
             if !$0.contains($1) {
                 $0.append($1)
             }
         }
-        return base.pointee
+        return base
     }
 }
 
@@ -144,8 +144,8 @@ public extension ReerReferenceGeneric where Base == Array<T>, T: Hashable {
     @discardableResult
     mutating func removeDuplicates() -> [T] {
         var set = Set<T>()
-        base.pointee.removeAll { !set.insert($0).inserted }
-        return base.pointee
+        base.removeAll { !set.insert($0).inserted }
+        return base
     }
 }
 

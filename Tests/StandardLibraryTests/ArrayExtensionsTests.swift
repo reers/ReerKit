@@ -32,6 +32,54 @@ final class ArrayExtensionsTests: XCTestCase {
         XCTAssertEqual(array, [1, 2, 3, 4, 5])
     }
 
+    private struct Sticker: Hashable {
+        var id: Int?
+        var resource: String?
+    }
+
+    @inline(never)
+    private static func merge(_ a: [Sticker], _ b: [Sticker], _ c: [Sticker]) -> [Sticker] {
+        var result = a + b + c
+        result.re.removeDuplicates()
+        return result
+    }
+
+    @inline(never)
+    private static func prependAndSwap(_ values: [Int]) -> [Int] {
+        var result = values
+        result.re.prepend(-1)
+        result.re.swapAt(0, result.count - 1)
+        return result
+    }
+
+    // Must also pass under the Release configuration, where optimizations used to expose a dangling pointer.
+    func testMutatingNamespaceOnLocalVariable() {
+        let stickers = (0..<50).map { Sticker(id: $0, resource: "res_\($0)") }
+        for _ in 0..<2000 {
+            XCTAssertEqual(Self.merge(stickers, stickers, stickers), stickers)
+        }
+        for _ in 0..<2000 {
+            XCTAssertEqual(Self.prependAndSwap([1, 2, 3]), [3, 1, 2, -1])
+        }
+    }
+
+    func testMutatingNamespaceOnBackgroundQueue() {
+        let stickers = (0..<50).map { Sticker(id: $0, resource: "res_\($0)") }
+        DispatchQueue.concurrentPerform(iterations: 2000) { _ in
+            XCTAssertEqual(Self.merge(stickers, stickers, stickers), stickers)
+        }
+    }
+
+    func testMutatingNamespaceDoesNotCopyBuffer() {
+        var array = Array(0..<1000)
+        let before = array.withUnsafeBufferPointer { $0.baseAddress }
+        array.re.swapAt(0, 999)
+        let after = array.withUnsafeBufferPointer { $0.baseAddress }
+        XCTAssertEqual(before, after)
+        XCTAssertEqual(array.first, 999)
+        XCTAssertEqual(array.last, 0)
+    }
+
     func testWithoutDuplicatesUsingKeyPath() {
         let array = [
             Person(name: "Wade", age: 20, location: Location(city: "London")),

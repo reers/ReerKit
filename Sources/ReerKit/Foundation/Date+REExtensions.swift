@@ -868,8 +868,8 @@ public extension ReerReference where Base == Date {
     ///   - component: component type.
     ///   - value: multiples of component to add.
     mutating func add(_ component: Calendar.Component, value: Int) {
-        if let date = base.pointee.re.calendar.date(byAdding: component, value: value, to: base.pointee) {
-            base.pointee = date
+        if let date = base.re.calendar.date(byAdding: component, value: value, to: base) {
+            base = date
         }
     }
 
@@ -880,11 +880,11 @@ public extension ReerReference where Base == Date {
     ///
     mutating func setYear(_ year: Int) {
         guard year > 0 else { return }
-        let calendar = base.pointee.re.calendar
-        let currentYear = calendar.component(.year, from: base.pointee)
+        let calendar = base.re.calendar
+        let currentYear = calendar.component(.year, from: base)
         let yearsToAdd = year - currentYear
-        if let date = calendar.date(byAdding: .year, value: yearsToAdd, to: base.pointee) {
-            base.pointee = date
+        if let date = calendar.date(byAdding: .year, value: yearsToAdd, to: base) {
+            base = date
         }
     }
 
@@ -894,14 +894,14 @@ public extension ReerReference where Base == Date {
     ///        someDate.re.setMonth(10)  // sets someDate's month to 10.
     ///
     mutating func setMonth(_ month: Int) {
-        let calendar = base.pointee.re.calendar
-        let allowedRange = calendar.range(of: .month, in: .year, for: base.pointee)!
+        let calendar = base.re.calendar
+        let allowedRange = calendar.range(of: .month, in: .year, for: base)!
         guard allowedRange.contains(month) else { return }
 
-        let currentMonth = calendar.component(.month, from: base.pointee)
+        let currentMonth = calendar.component(.month, from: base)
         let monthsToAdd = month - currentMonth
-        if let date = calendar.date(byAdding: .month, value: monthsToAdd, to: base.pointee) {
-            base.pointee = date
+        if let date = calendar.date(byAdding: .month, value: monthsToAdd, to: base) {
+            base = date
         }
     }
 
@@ -911,14 +911,14 @@ public extension ReerReference where Base == Date {
     ///        someDate.re.setDay(1)  // sets someDate's day of month to 1.
     ///
     mutating func setDay(_ day: Int) {
-        let calendar = base.pointee.re.calendar
-        let allowedRange = calendar.range(of: .day, in: .month, for: base.pointee)!
+        let calendar = base.re.calendar
+        let allowedRange = calendar.range(of: .day, in: .month, for: base)!
         guard allowedRange.contains(day) else { return }
 
-        let currentDay = calendar.component(.day, from: base.pointee)
+        let currentDay = calendar.component(.day, from: base)
         let daysToAdd = day - currentDay
-        if let date = calendar.date(byAdding: .day, value: daysToAdd, to: base.pointee) {
-            base.pointee = date
+        if let date = calendar.date(byAdding: .day, value: daysToAdd, to: base) {
+            base = date
         }
     }
 
@@ -928,14 +928,14 @@ public extension ReerReference where Base == Date {
     ///        someDate.re.setHour(13)  // sets someDate's hour to 1 pm.
     ///
     mutating func setHour(_ hour: Int) {
-        let calendar = base.pointee.re.calendar
-        let allowedRange = calendar.range(of: .hour, in: .day, for: base.pointee)!
+        let calendar = base.re.calendar
+        let allowedRange = calendar.range(of: .hour, in: .day, for: base)!
         guard allowedRange.contains(hour) else { return }
 
-        let currentHour = calendar.component(.hour, from: base.pointee)
+        let currentHour = calendar.component(.hour, from: base)
         let hoursToAdd = hour - currentHour
-        if let date = calendar.date(byAdding: .hour, value: hoursToAdd, to: base.pointee) {
-            base.pointee = date
+        if let date = calendar.date(byAdding: .hour, value: hoursToAdd, to: base) {
+            base = date
         }
     }
 
@@ -945,14 +945,14 @@ public extension ReerReference where Base == Date {
     ///        someDate.re.setMinute(10)  // sets someDate's minutes to 10.
     ///
     mutating func setMinute(_ minute: Int) {
-        let calendar = base.pointee.re.calendar
-        let allowedRange = calendar.range(of: .minute, in: .hour, for: base.pointee)!
+        let calendar = base.re.calendar
+        let allowedRange = calendar.range(of: .minute, in: .hour, for: base)!
         guard allowedRange.contains(minute) else { return }
 
-        let currentMinutes = calendar.component(.minute, from: base.pointee)
+        let currentMinutes = calendar.component(.minute, from: base)
         let minutesToAdd = minute - currentMinutes
-        if let date = calendar.date(byAdding: .minute, value: minutesToAdd, to: base.pointee) {
-            base.pointee = date
+        if let date = calendar.date(byAdding: .minute, value: minutesToAdd, to: base) {
+            base = date
         }
     }
 
@@ -962,14 +962,14 @@ public extension ReerReference where Base == Date {
     ///        someDate.re.setSecond(15)  // sets someDate's seconds to 15.
     ///
     mutating func setSecond(_ second: Int) {
-        let calendar = base.pointee.re.calendar
-        let allowedRange = calendar.range(of: .second, in: .minute, for: base.pointee)!
+        let calendar = base.re.calendar
+        let allowedRange = calendar.range(of: .second, in: .minute, for: base)!
         guard allowedRange.contains(second) else { return }
 
-        let currentSeconds = calendar.component(.second, from: base.pointee)
+        let currentSeconds = calendar.component(.second, from: base)
         let secondsToAdd = second - currentSeconds
-        if let date = calendar.date(byAdding: .second, value: secondsToAdd, to: base.pointee) {
-            base.pointee = date
+        if let date = calendar.date(byAdding: .second, value: secondsToAdd, to: base) {
+            base = date
         }
     }
 
@@ -979,20 +979,20 @@ public extension ReerReference where Base == Date {
     ///        someDate.re.setNanosecond(981379985)  // sets someDate's nanoseconds to 981379985.
     ///
     mutating func setNanosecond(_ nanosecond: Int) {
-        let calendar = base.pointee.re.calendar
+        let calendar = base.re.calendar
 #if targetEnvironment(macCatalyst)
         // The `Calendar` implementation in `macCatalyst` does not know that a nanosecond is 1/1,000,000,000th of a second
         let allowedRange = 0..<1_000_000_000
 #else
-        let allowedRange = calendar.range(of: .nanosecond, in: .second, for: base.pointee)!
+        let allowedRange = calendar.range(of: .nanosecond, in: .second, for: base)!
 #endif
         guard allowedRange.contains(nanosecond) else { return }
 
-        let currentNanoseconds = calendar.component(.nanosecond, from: base.pointee)
+        let currentNanoseconds = calendar.component(.nanosecond, from: base)
         let nanosecondsToAdd = nanosecond - currentNanoseconds
 
-        if let date = calendar.date(byAdding: .nanosecond, value: nanosecondsToAdd, to: base.pointee) {
-            base.pointee = date
+        if let date = calendar.date(byAdding: .nanosecond, value: nanosecondsToAdd, to: base) {
+            base = date
         }
     }
 
@@ -1002,18 +1002,18 @@ public extension ReerReference where Base == Date {
     ///        someDate.re.setMillisecond(68)  // sets someDate's nanosecond to 68000000.
     ///
     mutating func setMillisecond(_ millisecond: Int) {
-        let calendar = base.pointee.re.calendar
+        let calendar = base.re.calendar
         let nanoSeconds = millisecond * 1_000_000
 #if targetEnvironment(macCatalyst)
         // The `Calendar` implementation in `macCatalyst` does not know that a nanosecond is 1/1,000,000,000th of a second
         let allowedRange = 0..<1_000_000_000
 #else
-        let allowedRange = calendar.range(of: .nanosecond, in: .second, for: base.pointee)!
+        let allowedRange = calendar.range(of: .nanosecond, in: .second, for: base)!
 #endif
         guard allowedRange.contains(nanoSeconds) else { return }
 
-        if let date = calendar.date(bySetting: .nanosecond, value: nanoSeconds, of: base.pointee) {
-            base.pointee = date
+        if let date = calendar.date(bySetting: .nanosecond, value: nanoSeconds, of: base) {
+            base = date
         }
     }
 }

@@ -177,7 +177,7 @@ public extension ReerReference where Base == CATransform3D {
     ///   - tz: z-axis translation
     @inlinable
     mutating func translateBy(x tx: CGFloat, y ty: CGFloat, z tz: CGFloat) {
-        base.pointee = CATransform3DTranslate(base.pointee, tx, ty, tz)
+        base = CATransform3DTranslate(base, tx, ty, tz)
     }
 
     /// ReerKit: Scale the receiver by `(sx, sy, sz)`.
@@ -187,7 +187,7 @@ public extension ReerReference where Base == CATransform3D {
     ///   - sz: z-axis scale
     @inlinable
     mutating func scaleBy(x sx: CGFloat, y sy: CGFloat, z sz: CGFloat) {
-        base.pointee = CATransform3DScale(base.pointee, sx, sy, sz)
+        base = CATransform3DScale(base, sx, sy, sz)
     }
 
     /// ReerKit: Rotate the receiver by `angle` radians about the vector `(x, y, z)`.
@@ -200,7 +200,7 @@ public extension ReerReference where Base == CATransform3D {
     ///   - z: z position of the vector
     @inlinable
     mutating func rotate(by angle: CGFloat, x: CGFloat, y: CGFloat, z: CGFloat) {
-        base.pointee = CATransform3DRotate(base.pointee, angle, x, y, z)
+        base = CATransform3DRotate(base, angle, x, y, z)
     }
 
     /// ReerKit: Invert the receiver.
@@ -208,14 +208,14 @@ public extension ReerReference where Base == CATransform3D {
     /// Returns the original matrix if the receiver has no inverse.
     @inlinable
     mutating func invert() {
-        base.pointee = CATransform3DInvert(base.pointee)
+        base = CATransform3DInvert(base)
     }
 
     /// ReerKit: Concatenate `transform` to the receiver.
     /// - Parameter t2: The transform to concatenate on to the receiver
     @inlinable
     mutating func concatenate(_ t2: CATransform3D) {
-        base.pointee = CATransform3DConcat(base.pointee, t2)
+        base = CATransform3DConcat(base, t2)
     }
 }
 

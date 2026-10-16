@@ -427,8 +427,9 @@ public extension Reer where Base == String {
     #endif
     
     #if canImport(Foundation)
-    private static var dateFormatter: DateFormatter = {
-        let formatter = Date.dateFormatter
+    private static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.timeZone = TimeZone.current
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
@@ -445,8 +446,9 @@ public extension Reer where Base == String {
     #endif
 
     #if canImport(Foundation)
-    private static var dateTimeFormatter: DateFormatter = {
-        let formatter = Date.dateFormatter
+    private static let dateTimeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.timeZone = TimeZone.current
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return formatter
@@ -1474,7 +1476,7 @@ public extension Reer where Base == String {
     ///
     /// - Parameters:
     ///   - key: A key with a length of 16(AES128), 24(AES192) or 32(AES256) after conversion to data
-    ///   - iv: An initialization vector with a length of 16(CBC) after conversion to data, or use the default data that length of 0(EBC)
+    ///   - iv: An initialization vector with a length of 16 (CBC) after conversion to data, or the default empty string to use an all-zero IV
     /// - Returns: A base64 encoded string of the encrypted Data encrypted, or nil if an error occurs.
     func aesEncrypt(withKey key: String, iv: String = "") -> String? {
         guard let data = base.re.utf8Data,
@@ -1489,7 +1491,7 @@ public extension Reer where Base == String {
     ///
     /// - Parameters:
     ///   - key: A key with a length of 16(AES128), 24(AES192) or 32(AES256) after conversion to data
-    ///   - iv: An initialization vector with a length of 16(CBC) after conversion to data, or use the default data that length of 0(EBC)
+    ///   - iv: An initialization vector with a length of 16 (CBC) after conversion to data, or the default empty string to use an all-zero IV
     /// - Returns: A decrypted string, or nil if an error occurs.
     func aesDecrypt(withKey key: String, iv: String = "") -> String? {
         guard let data = Data(base64Encoded: base, options: .ignoreUnknownCharacters),

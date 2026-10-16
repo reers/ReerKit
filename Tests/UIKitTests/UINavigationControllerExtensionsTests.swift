@@ -14,15 +14,14 @@ import UIKit
 
 final class UINavigationControllerExtensionsTests: XCTestCase {
     func testPushViewController() {
-        let navigationController = UINavigationController()
+        let rootVC = UIViewController()
+        let navigationController = UINavigationController(rootViewController: rootVC)
         let vcToPush = UIViewController()
-
-        navigationController.pushViewController(vcToPush, animated: false)
 
         let exp = expectation(description: "pushCallback")
 
         navigationController.re.pushViewController(vcToPush) {
-            XCTAssertEqual(navigationController.viewControllers.count, 1)
+            XCTAssertEqual(navigationController.viewControllers.count, 2)
             XCTAssertEqual(navigationController.topViewController, vcToPush)
             exp.fulfill()
         }

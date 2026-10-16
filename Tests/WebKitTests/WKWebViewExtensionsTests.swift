@@ -44,7 +44,8 @@ final class WKWebViewExtensionsTests: XCTestCase {
     }
 
     func testLoadInvalidURLString() {
-        let invalidURLString = "invalid url"
+        // Since iOS 17 `URL(string:)` percent-encodes "invalid url", a space in the host stays invalid.
+        let invalidURLString = "http://exa mple.com"
         let navigation = webView.re.loadURLString(invalidURLString)
 
         XCTAssertNil(navigation)

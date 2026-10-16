@@ -21,7 +21,7 @@ class SignedNumericExtensionsTests: XCTestCase {
 
     func testAsLocaleCurrency() {
         let number1: Double = 3.2
-        XCTAssertEqual(number1.re.localeCurrency(), "$3.20")
+        XCTAssertEqual(number1.re.localeCurrency(Locale(identifier: "en_US")), "$3.20")
 
         let number2 = Double(10.23)
         if let symbol = Locale.current.currencySymbol {
@@ -41,7 +41,7 @@ class SignedNumericExtensionsTests: XCTestCase {
     }
     
     func testSpelledOutString() {
-        XCTAssertEqual((12.32).re.spelledOutString(), "twelve point three two")
+        XCTAssertEqual((12.32).re.spelledOutString(locale: Locale(identifier: "en_US")), "twelve point three two")
     }
 
 }

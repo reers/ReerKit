@@ -421,7 +421,7 @@ public extension ReerForEquatable where Base == Data {
     ///
     /// - Parameters:
     ///   - key: A key length of 16(AES128), 24(AES192) or 32(AES256)
-    ///   - iv: An initialization vector length of 16(CBC), or use the default data that length of 0(ECB)
+    ///   - iv: An initialization vector length of 16 (CBC), or the default empty data to use an all-zero IV (equivalent to ECB for input shorter than one block)
     /// - Returns: A `Data` encrypted, or nil if an error occurs.
     func aesEncrypt(withKey key: Data, iv: Data = .init()) -> Data? {
         guard key.count == 16 || key.count == 24 || key.count == 32 else {
@@ -443,7 +443,8 @@ public extension ReerForEquatable where Base == Data {
                             CCAlgorithm(kCCAlgorithmAES),
                             CCOptions(kCCOptionPKCS7Padding),
                             keyBytes.baseAddress, key.count,
-                            ivBytes.baseAddress,
+                            // An empty Data still has a non-nil (stack) baseAddress, and CCCrypt would read 16 garbage bytes from it as the IV.
+                            iv.isEmpty ? nil : ivBytes.baseAddress,
                             dataBytes.baseAddress, base.count,
                             resultBytes.baseAddress,
                             resultBytes.count,
@@ -467,7 +468,7 @@ public extension ReerForEquatable where Base == Data {
     ///
     /// - Parameters:
     ///   - key: A key length of 16(AES128), 24(AES192) or 32(AES256)
-    ///   - iv: An initialization vector length of 16(CBC), or use the default data that length of 0(ECB)
+    ///   - iv: An initialization vector length of 16 (CBC), or the default empty data to use an all-zero IV (equivalent to ECB for input shorter than one block)
     /// - Returns: An `Data` decrypted, or nil if an error occurs.
     func aesDecrypt(withKey key: Data, iv: Data = .init()) -> Data? {
         guard key.count == 16 || key.count == 24 || key.count == 32 else {
@@ -489,7 +490,8 @@ public extension ReerForEquatable where Base == Data {
                             CCAlgorithm(kCCAlgorithmAES),
                             CCOptions(kCCOptionPKCS7Padding),
                             keyBytes.baseAddress, key.count,
-                            ivBytes.baseAddress,
+                            // An empty Data still has a non-nil (stack) baseAddress, and CCCrypt would read 16 garbage bytes from it as the IV.
+                            iv.isEmpty ? nil : ivBytes.baseAddress,
                             dataBytes.baseAddress, base.count,
                             resultBytes.baseAddress,
                             resultBytes.count,

@@ -77,7 +77,12 @@ final class DateExtensionsTests: XCTestCase {
         #endif
     }
 
-    func testWeekOfYear() {
+    func testWeekOfYear() throws {
+        // `weekOfYear`/`weekOfMonth` use `Calendar.current`, whose week rules come from the region (e.g. zh_CN needs 5 days in week 1).
+        try XCTSkipUnless(
+            Calendar.current.firstWeekday == 1 && Calendar.current.minimumDaysInFirstWeek == 1,
+            "Expectations assume US week rules; the test scheme pins region to US."
+        )
         let date = Date(timeIntervalSince1970: 0)
         XCTAssertEqual(date.re.weekOfYear, 1)
 
@@ -88,7 +93,12 @@ final class DateExtensionsTests: XCTestCase {
         XCTAssertEqual(originalDate?.re.weekOfYear, 1)
     }
 
-    func testWeekOfMonth() {
+    func testWeekOfMonth() throws {
+        // `weekOfYear`/`weekOfMonth` use `Calendar.current`, whose week rules come from the region (e.g. zh_CN needs 5 days in week 1).
+        try XCTSkipUnless(
+            Calendar.current.firstWeekday == 1 && Calendar.current.minimumDaysInFirstWeek == 1,
+            "Expectations assume US week rules; the test scheme pins region to US."
+        )
         let date = Date(timeIntervalSince1970: 0)
         XCTAssertEqual(date.re.weekOfMonth, 1)
 
@@ -799,14 +809,22 @@ final class DateExtensionsTests: XCTestCase {
         XCTAssertEqual(date.re.timeString(ofStyle: .full), formatter.string(from: date))
     }
 
-    func testDayName() {
+    func testDayName() throws {
+        try XCTSkipUnless(
+            Locale.current.identifier.hasPrefix("en"),
+            "Expectations are English names; the test scheme pins language to en."
+        )
         let date = Date(timeIntervalSince1970: 1_486_121_165)
         XCTAssertEqual(date.re.dayName(ofStyle: .full), "Friday")
         XCTAssertEqual(date.re.dayName(ofStyle: .threeLetters), "Fri")
         XCTAssertEqual(date.re.dayName(ofStyle: .oneLetter), "F")
     }
 
-    func testMonthName() {
+    func testMonthName() throws {
+        try XCTSkipUnless(
+            Locale.current.identifier.hasPrefix("en"),
+            "Expectations are English names; the test scheme pins language to en."
+        )
         let date = Date(timeIntervalSince1970: 1_486_121_165)
         XCTAssertEqual(date.re.monthName(ofStyle: .full), "February")
         XCTAssertEqual(date.re.monthName(ofStyle: .threeLetters), "Feb")

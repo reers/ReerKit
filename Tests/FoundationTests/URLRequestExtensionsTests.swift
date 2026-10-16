@@ -24,7 +24,8 @@ final class URLRequestExtensionsTests: XCTestCase {
         XCTAssertNotNil(request2)
         XCTAssertEqual(request1.url, request2!.url)
 
-        let invalidURLString = "invalid url"
+        // Since iOS 17 `URL(string:)` percent-encodes "invalid url", a space in the host stays invalid.
+        let invalidURLString = "http://exa mple.com"
         XCTAssertNil(URLRequest.re(urlString: invalidURLString))
     }
 

@@ -208,7 +208,10 @@ final class StringExtensionsTests: XCTestCase {
     }
 
     func testUrl() {
-        XCTAssertNil("hello world".re.url)
+        XCTAssertNil("http://exa mple.com".re.url)
+        XCTAssertNil("".re.url)
+        // The lenient fallback encodes the path before iOS 17, and `URL(string:)` does it itself afterwards.
+        XCTAssertEqual("https://example.com/a b".re.url?.absoluteString, "https://example.com/a%20b")
 
         let google = "https://www.google.com"
         XCTAssertEqual(google.re.url, URL(string: google))
@@ -634,8 +637,13 @@ final class StringExtensionsTests: XCTestCase {
         XCTAssertEqual("str".re.paddingEnd(2), "str")
     }
 
-    func testIsSpelledCorrectly() {
+    func testIsSpelledCorrectly() throws {
         #if os(iOS) || os(tvOS)
+        // `isSpelledCorrectly` checks against `Locale.preferredLanguages.first`, and UITextChecker has no dictionary for e.g. Chinese.
+        try XCTSkipUnless(
+            Locale.preferredLanguages.first?.hasPrefix("en") == true,
+            "Expectations are English words; the test scheme pins language to en."
+        )
         let strCorrect = "Hello, World!"
 
         XCTAssert(strCorrect.re.isSpelledCorrectly)
@@ -788,7 +796,7 @@ final class StringExtensionsTests: XCTestCase {
     func testIntOrdinal() {
         let num = 12
         XCTAssertNotNil(num.re.ordinalString())
-        XCTAssertEqual(num.re.ordinalString(), "12th")
+        XCTAssertEqual(num.re.ordinalString(locale: Locale(identifier: "en_US")), "12th")
     }
 
     func testReplacingOccurrencesRegex() throws {
@@ -846,6 +854,14 @@ final class StringExtensionsTests: XCTestCase {
         
         /// AES 256 with iv
         XCTAssertEqual("123".re.aesEncrypt(withKey: "abcdefghijklmnopabcdefghijklmnop", iv: "0123456789abcdef")!.re.aesDecrypt(withKey: "abcdefghijklmnopabcdefghijklmnop", iv: "0123456789abcdef"), "123")
+
+        /// Empty iv means an all-zero IV; expected values come from `openssl enc -aes-128-cbc -iv 0...0`.
+        /// A round trip alone can't catch a garbage IV, since it only breaks when encrypt and decrypt read different bytes.
+        XCTAssertEqual("123".re.aesEncrypt(withKey: "abcdefghijklmnop"), "+cN0a4ry/2CwnZnyC6w/DA==")
+        let multiBlock = "The quick brown fox jumps over the lazy dog"
+        let multiBlockCipher = "uqfITz6vHvTDaxRSlZ7BS5NiPm9AZ1T5QblUdlrBhtuaH7s1fJPX5Q0rVg4z0tp0"
+        XCTAssertEqual(multiBlock.re.aesEncrypt(withKey: "abcdefghijklmnop"), multiBlockCipher)
+        XCTAssertEqual(multiBlockCipher.re.aesDecrypt(withKey: "abcdefghijklmnop"), multiBlock)
     }
     
     func testRSA() {
@@ -1210,8 +1226,8 @@ final class StringExtensionsTests: XCTestCase {
         // Test that chainable methods work with empty strings
         let withFont = emptyString.re.font(.systemFont(ofSize: 12))
         XCTAssertEqual(withFont.string, "")
-        let attributes = withFont.attributes(at: 0, effectiveRange: nil)
-        XCTAssertEqual(attributes.count, 0) // Empty string should have no attributes
+        // `attributes(at:)` requires index < length, so an empty string has no position to query.
+        XCTAssertEqual(withFont.length, 0)
         #endif
     }
     

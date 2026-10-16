@@ -58,6 +58,7 @@ public extension Reer where Base: UITabBar {
         if let selectedbg = selectedBackground {
             let rect = CGSize(width: base.frame.width / CGFloat(barItems.count), height: base.frame.height)
             base.selectionIndicatorImage = { (color: UIColor, size: CGSize) -> UIImage in
+                guard size.width > 0, size.height > 0 else { return UIImage() }
                 UIGraphicsBeginImageContextWithOptions(size, false, 1)
                 color.setFill()
                 UIRectFill(CGRect(x: 0, y: 0, width: size.width, height: size.height))
@@ -74,6 +75,7 @@ public extension Reer where Base: UITabBar {
                 guard let image = barItem.image else { continue }
 
                 barItem.image = { (image: UIImage, color: UIColor) -> UIImage in
+                    guard image.size.width > 0, image.size.height > 0 else { return image }
                     UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
                     color.setFill()
                     guard let context = UIGraphicsGetCurrentContext() else {

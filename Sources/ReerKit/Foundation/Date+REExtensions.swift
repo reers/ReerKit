@@ -1091,7 +1091,13 @@ extension Date {
     static let sharedDateFormatter = DateFormatter()
     
     static var dateFormatter: DateFormatter {
-        return Thread.isMainThread ? sharedDateFormatter: DateFormatter()
+        guard Thread.isMainThread else { return DateFormatter() }
+        // Callers such as `iso8601String` customize locale/timeZone on the shared instance,
+        // so restore the defaults (all three are null_resettable) before handing it out.
+        sharedDateFormatter.locale = nil
+        sharedDateFormatter.timeZone = nil
+        sharedDateFormatter.calendar = nil
+        return sharedDateFormatter
     }
 }
 

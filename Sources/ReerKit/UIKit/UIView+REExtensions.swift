@@ -219,6 +219,7 @@ public extension Reer where Base: UIView {
     
     /// ReerKit: Create a snapshot image of the complete view hierarchy.
     var snapshotImage: UIImage? {
+        guard base.bounds.width > 0, base.bounds.height > 0 else { return nil }
         UIGraphicsBeginImageContextWithOptions(base.bounds.size, base.isOpaque, 0)
         defer { UIGraphicsEndImageContext() }
         guard let context = UIGraphicsGetCurrentContext() else { return nil }
@@ -299,6 +300,7 @@ public extension Reer where Base: UIView {
     /// - Parameter afterUpdates: A Boolean value that indicates whether the snapshot should be rendered after recent changes have been incorporated. Specify the value false if you want to render a snapshot in the view hierarchy’s current state, which might not include recent changes.
     /// - Returns: a snapshot image of view
     func snapshot(afterScreenUpdates afterUpdates: Bool = false) -> UIImage? {
+        guard base.bounds.width > 0, base.bounds.height > 0 else { return nil }
         UIGraphicsBeginImageContextWithOptions(base.bounds.size, base.isOpaque, 0)
         defer { UIGraphicsEndImageContext() }
         base.drawHierarchy(in: base.bounds, afterScreenUpdates: afterUpdates)

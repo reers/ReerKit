@@ -133,6 +133,22 @@ public extension ReerReferenceGeneric where Base == Array<T>, T: Equatable {
     }
 }
 
+public extension ReerReferenceGeneric where Base == Array<T>, T: Hashable {
+    /// ReerKit: Remove all duplicate elements from Array, keeping the first occurrence order.
+    ///
+    ///        [1, 2, 2, 3, 4, 5].re.removeDuplicates() -> [1, 2, 3, 4, 5]
+    ///        ["h", "e", "l", "l", "o"].re.removeDuplicates() -> ["h", "e", "l", "o"]
+    ///
+    /// - Returns: Return array with all duplicate elements removed.
+    /// - Complexity: O(*n*), where *n* is the length of the array.
+    @discardableResult
+    mutating func removeDuplicates() -> [T] {
+        var set = Set<T>()
+        base.pointee.removeAll { !set.insert($0).inserted }
+        return base.pointee
+    }
+}
+
 
 // MARK: --------- Nonmutating ---------
 
@@ -172,6 +188,20 @@ public extension ReerGeneric where Base == Array<T>, T: Equatable {
     func removingDuplicates<U: Hashable>(byKeyPath path: KeyPath<T, U>) -> [T] {
         var set = Set<U>()
         return base.filter { set.insert($0[keyPath: path]).inserted }
+    }
+}
+
+public extension ReerGeneric where Base == Array<T>, T: Hashable {
+    /// ReerKit: Removing all duplicate elements from Array, keeping the first occurrence order.
+    ///
+    ///        [1, 2, 2, 3, 4, 5].re.removingDuplicates() -> [1, 2, 3, 4, 5]
+    ///        ["h", "e", "l", "l", "o"].re.removingDuplicates() -> ["h", "e", "l", "o"]
+    ///
+    /// - Returns: Return array with all duplicate elements removed.
+    /// - Complexity: O(*n*), where *n* is the length of the array.
+    func removingDuplicates() -> [T] {
+        var set = Set<T>()
+        return base.filter { set.insert($0).inserted }
     }
 }
 

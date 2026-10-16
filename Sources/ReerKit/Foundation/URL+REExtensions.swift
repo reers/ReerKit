@@ -153,7 +153,7 @@ public extension ReerReference where Base == URL {
     ///        print(url) // prints "https://google.com?q=Hello%20Swift"
     ///
     mutating func appendQueries(_ queries: [String: String]) {
-        base.pointee = base.pointee.re.appendingQueries(queries)
+        base = base.re.appendingQueries(queries)
     }
     
     /// ReerKit: Remove query parameters to URL.
@@ -163,7 +163,7 @@ public extension ReerReference where Base == URL {
     ///        print(url) // "https://google.com"
     ///
     mutating func removeQueries(_ queries: [String]) {
-        base.pointee = base.pointee.re.removingQueries(queries)
+        base = base.re.removingQueries(queries)
     }
 
     /// ReerKit: Remove all the path components from the URL.
@@ -172,10 +172,10 @@ public extension ReerReference where Base == URL {
     ///        url.deleteAllPathComponents()
     ///        print(url) // prints "https://domain.com/"
     mutating func deleteAllPathComponents() {
-        guard !base.pointee.pathComponents.isEmpty else { return }
+        guard !base.pathComponents.isEmpty else { return }
 
-        for _ in 0..<base.pointee.pathComponents.count - 1 {
-            base.pointee.deleteLastPathComponent()
+        for _ in 0..<base.pathComponents.count - 1 {
+            base.deleteLastPathComponent()
         }
     }
 }

@@ -31,15 +31,15 @@ public extension ReerForRangeReplaceableCollection where Base: RangeReplaceableC
     /// - Returns: The first element for which predicate returns true, after removing it. If no elements in the collection satisfy the given predicate, returns `nil`.
     @discardableResult
     mutating func removeFirst(where predicate: (Base.Element) throws -> Bool) rethrows -> Base.Element? {
-        guard let index = try base.pointee.firstIndex(where: predicate) else { return nil }
-        return base.pointee.remove(at: index)
+        guard let index = try base.firstIndex(where: predicate) else { return nil }
+        return base.remove(at: index)
     }
 
     /// ReerKit: Remove a random value from the collection.
     @discardableResult
     mutating func removeRandomElement() -> Base.Element? {
-        guard let randomIndex = base.pointee.indices.randomElement() else { return nil }
-        return base.pointee.remove(at: randomIndex)
+        guard let randomIndex = base.indices.randomElement() else { return nil }
+        return base.remove(at: randomIndex)
     }
 
     /// ReerKit: Keep elements of Array while condition is true.
@@ -51,8 +51,8 @@ public extension ReerForRangeReplaceableCollection where Base: RangeReplaceableC
     /// - Throws: provided condition exception.
     @discardableResult
     mutating func keep(while condition: (Base.Element) throws -> Bool) rethrows -> Self {
-        if let idx = try base.pointee.firstIndex(where: { try !condition($0) }) {
-            base.pointee.removeSubrange(idx...)
+        if let idx = try base.firstIndex(where: { try !condition($0) }) {
+            base.removeSubrange(idx...)
         }
         return self
     }
@@ -62,7 +62,7 @@ public extension ReerForRangeReplaceableCollection where Base: RangeReplaceableC
     /// - Parameter path: Key path to compare, the value must be Equatable.
     mutating func removeDuplicates<E: Equatable>(keyPath path: KeyPath<Base.Element, E>) {
         var items = [Base.Element]()
-        base.pointee.removeAll { element -> Bool in
+        base.removeAll { element -> Bool in
             guard items.contains(where: { $0[keyPath: path] == element[keyPath: path] }) else {
                 items.append(element)
                 return false
@@ -76,7 +76,7 @@ public extension ReerForRangeReplaceableCollection where Base: RangeReplaceableC
     /// - Parameter path: Key path to compare, the value must be Hashable.
     mutating func removeDuplicates<E: Hashable>(keyPath path: KeyPath<Base.Element, E>) {
         var set = Set<E>()
-        base.pointee.removeAll { !set.insert($0[keyPath: path]).inserted }
+        base.removeAll { !set.insert($0[keyPath: path]).inserted }
     }
 
     /// ReerKit: Safely accesses the element at the specified position.
@@ -124,15 +124,15 @@ public extension ReerForRangeReplaceableCollection where Base: RangeReplaceableC
     /// - Parameter offset: The offset position of the element to access.
     subscript(offset: Int) -> Base.Element? {
         get {
-            let collection = base.pointee
+            let collection = base
             guard offset >= 0, offset < collection.count else { return nil }
             return collection[collection.index(collection.startIndex, offsetBy: offset)]
         }
         set {
-            guard offset >= 0, offset < base.pointee.count else { return }
-            let offsetIndex = base.pointee.index(base.pointee.startIndex, offsetBy: offset)
+            guard offset >= 0, offset < base.count else { return }
+            let offsetIndex = base.index(base.startIndex, offsetBy: offset)
             let newCollection = newValue.map { [$0] } ?? []
-            base.pointee.replaceSubrange(offsetIndex..<base.pointee.index(after: offsetIndex), with: newCollection)
+            base.replaceSubrange(offsetIndex..<base.index(after: offsetIndex), with: newCollection)
         }
     }
 
@@ -210,7 +210,7 @@ public extension ReerForRangeReplaceableCollection where Base: RangeReplaceableC
     /// - Parameter range: A range of the collection’s indices offsets.
     subscript<R>(range: R) -> Base? where R: RangeExpression, R.Bound == Int {
         get {
-            let collection = base.pointee
+            let collection = base
             let indexRange = range.relative(to: Int.min..<Int.max)
             if indexRange.upperBound < 0 || indexRange.lowerBound >= collection.count { return nil }
             let lowerBound = Swift.max(0, indexRange.lowerBound)
@@ -219,12 +219,12 @@ public extension ReerForRangeReplaceableCollection where Base: RangeReplaceableC
         }
         set {
             let indexRange = range.relative(to: Int.min..<Int.max)
-            if indexRange.upperBound < 0 || indexRange.lowerBound >= base.pointee.count { return }
+            if indexRange.upperBound < 0 || indexRange.lowerBound >= base.count { return }
             let lowerBound = Swift.max(0, indexRange.lowerBound)
-            let upperBound = Swift.min(indexRange.upperBound, base.pointee.count)
+            let upperBound = Swift.min(indexRange.upperBound, base.count)
             let newCollection = newValue ?? Base()
-            base.pointee.replaceSubrange(
-                base.pointee.index(base.pointee.startIndex, offsetBy: lowerBound)..<base.pointee.index(base.pointee.startIndex, offsetBy: upperBound),
+            base.replaceSubrange(
+                base.index(base.startIndex, offsetBy: lowerBound)..<base.index(base.startIndex, offsetBy: upperBound),
                 with: newCollection
             )
         }
@@ -235,7 +235,7 @@ public extension ReerForRangeReplaceableCollection where Base: RangeReplaceableC
     /// - Parameter newElement: The optional element to append to the array
     mutating func appendIfNonNil(_ newElement: Base.Element?) {
         guard let newElement = newElement else { return }
-        base.pointee.append(newElement)
+        base.append(newElement)
     }
 
     /// ReerKit: Adds the elements of a sequence to the end of the array, mutates the array in place
@@ -243,7 +243,7 @@ public extension ReerForRangeReplaceableCollection where Base: RangeReplaceableC
     /// - Parameter newElements: The optional sequence to append to the array
     mutating func appendIfNonNil<S>(contentsOf newElements: S?) where Base.Element == S.Element, S : Sequence {
         guard let newElements = newElements else { return }
-        base.pointee.append(contentsOf: newElements)
+        base.append(contentsOf: newElements)
     }
 }
 

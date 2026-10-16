@@ -1244,52 +1244,45 @@ extension Reer where Base: UIDevice {
     }
     
     private static func threadBasicInfos() -> [thread_basic_info]  {
-        var result: [thread_basic_info] = []
-        
-        var thinfo : thread_info_t = thread_info_t.allocate(capacity: Int(THREAD_INFO_MAX))
-        let thread_info_count = UnsafeMutablePointer<mach_msg_type_number_t>.allocate(capacity: 128)
-        let count: Int = MemoryLayout<thread_basic_info_data_t>.size / MemoryLayout<integer_t>.size
-        for act_t in threadActPointers() {
-            thread_info_count.pointee = UInt32(THREAD_INFO_MAX);
-            let kr = thread_info(act_t ,thread_flavor_t(THREAD_BASIC_INFO),thinfo, thread_info_count);
-            if (kr != KERN_SUCCESS) {
-                return [thread_basic_info]();
+        let threads = threadActPointers()
+        defer {
+            for thread in threads {
+                mach_port_deallocate(mach_task_self_, thread)
             }
-            
-            let th_basic_info = withUnsafePointer(to: &thinfo, {
-                return $0.withMemoryRebound(to: thread_basic_info_t.self, capacity: count, {
-                    return $0.pointee
-                })
-            }).pointee
-            
-            result.append(th_basic_info)
+        }
+
+        var result: [thread_basic_info] = []
+        let infoCount = MemoryLayout<thread_basic_info_data_t>.size / MemoryLayout<integer_t>.size
+        for thread in threads {
+            var info = thread_basic_info()
+            var count = mach_msg_type_number_t(infoCount)
+            let kr = withUnsafeMutablePointer(to: &info) {
+                $0.withMemoryRebound(to: integer_t.self, capacity: infoCount) {
+                    thread_info(thread, thread_flavor_t(THREAD_BASIC_INFO), $0, &count)
+                }
+            }
+            guard kr == KERN_SUCCESS else {
+                return []
+            }
+            result.append(info)
         }
         return result
     }
-    
+
+    /// The returned thread ports must be released with `mach_port_deallocate`.
     private static func threadActPointers() -> [thread_act_t] {
-        var threads_act: [thread_act_t] = []
-        
-        var threads_array: thread_act_array_t? = nil
+        var threadsArray: thread_act_array_t?
         var count = mach_msg_type_number_t()
-        
-        let result = task_threads(mach_task_self_, &(threads_array), &count)
-        
-        guard result == KERN_SUCCESS else {
-            return threads_act
+
+        guard task_threads(mach_task_self_, &threadsArray, &count) == KERN_SUCCESS,
+              let array = threadsArray else {
+            return []
         }
-        
-        guard let array = threads_array  else {
-            return threads_act
-        }
-        
-        for i in 0..<count {
-            threads_act.append(array[Int(i)])
-        }
-        
-        let krsize = count * UInt32.init(MemoryLayout<thread_t>.size)
-        _ = vm_deallocate(mach_task_self_, vm_address_t(array.pointee), vm_size_t(krsize));
-        return threads_act
+
+        let threads = Array(UnsafeBufferPointer(start: array, count: Int(count)))
+        let size = vm_size_t(Int(count) * MemoryLayout<thread_act_t>.stride)
+        vm_deallocate(mach_task_self_, vm_address_t(bitPattern: array), size)
+        return threads
     }
     #endif
 }

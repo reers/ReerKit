@@ -27,14 +27,14 @@ public extension ReerForMutableCollection where Base: MutableCollection & Random
     /// - Parameter keyPath: Key path to sort by. The key path type must be Comparable.
     /// - Parameter compare: Comparation function that will determine the ordering.
     mutating func sort<T>(by keyPath: KeyPath<Base.Element, T>, with compare: (T, T) -> Bool) {
-        base.pointee.sort { compare($0[keyPath: keyPath], $1[keyPath: keyPath]) }
+        base.sort { compare($0[keyPath: keyPath], $1[keyPath: keyPath]) }
     }
     
     /// ReerKit: Sort the collection based on a keypath.
     ///
     /// - Parameter keyPath: Key path to sort by. The key path type must be Comparable.
     mutating func sort<T: Comparable>(by keyPath: KeyPath<Base.Element, T>) {
-        base.pointee.sort { $0[keyPath: keyPath] < $1[keyPath: keyPath] }
+        base.sort { $0[keyPath: keyPath] < $1[keyPath: keyPath] }
     }
 
     /// ReerKit: Sort the collection based on two key paths. The second one will be used in case the values of the first one match.
@@ -46,7 +46,7 @@ public extension ReerForMutableCollection where Base: MutableCollection & Random
         by keyPath1: KeyPath<Base.Element, T>,
         and keyPath2: KeyPath<Base.Element, U>
     ) {
-        base.pointee.sort {
+        base.sort {
             if $0[keyPath: keyPath1] != $1[keyPath: keyPath1] {
                 return $0[keyPath: keyPath1] < $1[keyPath: keyPath1]
             }
@@ -65,7 +65,7 @@ public extension ReerForMutableCollection where Base: MutableCollection & Random
         and keyPath2: KeyPath<Base.Element, U>,
         and keyPath3: KeyPath<Base.Element, V>
     ) {
-        base.pointee.sort {
+        base.sort {
             if $0[keyPath: keyPath1] != $1[keyPath: keyPath1] {
                 return $0[keyPath: keyPath1] < $1[keyPath: keyPath1]
             }
@@ -84,8 +84,8 @@ public extension ReerForMutableCollection where Base: MutableCollection {
     ///   - value: The new value of the field.
     ///   - keyPath: The actual field of the element.
     mutating func assignToAll<Value>(value: Value, by keyPath: WritableKeyPath<Base.Element, Value>) {
-        for idx in base.pointee.indices {
-            base.pointee[idx][keyPath: keyPath] = value
+        for idx in base.indices {
+            base[idx][keyPath: keyPath] = value
         }
     }
 }

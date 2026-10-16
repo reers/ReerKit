@@ -127,9 +127,9 @@ public extension ReerGeneric2Compatible {
 /// Wrapper for ReerKit compatible types in a reference way. This type provides an extension point for
 /// convenience methods in ReerKit.
 public struct ReerReference<Base> {
-    public internal(set) var base: UnsafeMutablePointer<Base>
-    public init(_ base: inout Base) {
-        self.base = withUnsafeMutablePointer(to: &base) { $0 }
+    public var base: Base
+    public init(_ base: Base) {
+        self.base = base
     }
 }
 
@@ -140,8 +140,14 @@ public protocol ReerReferenceCompatible {}
 public extension ReerReferenceCompatible {
     /// Gets a namespace holder for ReerKit compatible types.
     var re: ReerReference<Self> {
-        mutating get { return ReerReference(&self) }
-        set {}
+        mutating get { return ReerReference(self) }
+        set { self = newValue.base }
+        _modify {
+            // `consume` moves the value into the wrapper so in-place mutations don't trigger a CoW copy.
+            var wrapper = ReerReference(consume self)
+            defer { self = wrapper.base }
+            yield &wrapper
+        }
     }
 
     /// Gets a namespace holder for ReerKit compatible meta types.
@@ -155,9 +161,9 @@ public extension ReerReferenceCompatible {
 /// Wrapper for ReerKit compatible types with a generic parameter in a reference way. This type provides an extension point for
 /// convenience methods in ReerKit.
 public struct ReerReferenceGeneric<Base, T> {
-    public let base: UnsafeMutablePointer<Base>
-    public init(_ base: inout Base) {
-        self.base = withUnsafeMutablePointer(to: &base) { $0 }
+    public var base: Base
+    public init(_ base: Base) {
+        self.base = base
     }
 }
 
@@ -170,8 +176,14 @@ public protocol ReerReferenceGenericCompatible {
 public extension ReerReferenceGenericCompatible {
     /// Gets a namespace holder for ReerKit compatible types.
     var re: ReerReferenceGeneric<Self, T> {
-        mutating get { return ReerReferenceGeneric(&self) }
-        set {}
+        mutating get { return ReerReferenceGeneric(self) }
+        set { self = newValue.base }
+        _modify {
+            // `consume` moves the value into the wrapper so in-place mutations don't trigger a CoW copy.
+            var wrapper = ReerReferenceGeneric<Self, T>(consume self)
+            defer { self = wrapper.base }
+            yield &wrapper
+        }
     }
 
     /// Gets a namespace holder for ReerKit compatible meta types.
@@ -185,9 +197,9 @@ public extension ReerReferenceGenericCompatible {
 /// Wrapper for ReerKit compatible types with a generic parameter in a reference way. This type provides an extension point for
 /// convenience methods in ReerKit.
 public struct ReerReferenceGeneric2<Base, U1, U2> {
-    public let base: UnsafeMutablePointer<Base>
-    public init(_ base: inout Base) {
-        self.base = withUnsafeMutablePointer(to: &base) { $0 }
+    public var base: Base
+    public init(_ base: Base) {
+        self.base = base
     }
 }
 
@@ -201,8 +213,14 @@ public protocol ReerReferenceGeneric2Compatible {
 public extension ReerReferenceGeneric2Compatible {
     /// Gets a namespace holder for ReerKit compatible types.
     var re: ReerReferenceGeneric2<Self, U1, U2> {
-        mutating get { return ReerReferenceGeneric2(&self) }
-        set {}
+        mutating get { return ReerReferenceGeneric2(self) }
+        set { self = newValue.base }
+        _modify {
+            // `consume` moves the value into the wrapper so in-place mutations don't trigger a CoW copy.
+            var wrapper = ReerReferenceGeneric2<Self, U1, U2>(consume self)
+            defer { self = wrapper.base }
+            yield &wrapper
+        }
     }
 
     /// Gets a namespace holder for ReerKit compatible meta types.

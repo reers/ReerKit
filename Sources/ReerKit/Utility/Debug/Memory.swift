@@ -86,7 +86,9 @@ public struct Memory<T> {
     
     /// ReerKit: Get memory data for the variable in byte array format
     public static func bytes(ofVal v: inout T) -> [UInt8] {
-        return bytes(pointer(ofVal: &v), MemoryLayout.stride(ofValue: v))
+        guard MemoryLayout.size(ofValue: v) > 0 else { return [] }
+        let stride = MemoryLayout.stride(ofValue: v)
+        return withUnsafePointer(to: &v) { bytes(UnsafeRawPointer($0), stride) }
     }
 
     /// ReerKit: Get the memory data pointed to by the reference in byte array format.
@@ -101,12 +103,10 @@ public struct Memory<T> {
     /// - Parameter v: The value type value.
     /// - Returns: Get memory data.
     public static func string(ofVal v: inout T, alignment: MemoryAlign? = nil) -> String {
-        let p = pointer(ofVal: &v)
-        return string(
-            p,
-            MemoryLayout.stride(ofValue: v),
-            alignment != nil ? alignment!.rawValue : MemoryLayout.alignment(ofValue: v)
-        )
+        guard MemoryLayout.size(ofValue: v) > 0 else { return "" }
+        let stride = MemoryLayout.stride(ofValue: v)
+        let align = alignment != nil ? alignment!.rawValue : MemoryLayout.alignment(ofValue: v)
+        return withUnsafePointer(to: &v) { string(UnsafeRawPointer($0), stride, align) }
     }
     
     /// ReerKit: Get the memory data pointed to by the reference in string format
@@ -124,6 +124,9 @@ public struct Memory<T> {
     }
     
     /// ReerKit: Get the memory address of the variable
+    ///
+    /// - Warning: The returned pointer is only meaningful for printing the address.
+    ///   It must not be dereferenced, the memory it points to may no longer be valid.
     public static func pointer(ofVal v: inout T) -> UnsafeRawPointer {
         return MemoryLayout.size(ofValue: v) == 0 ? _EMPTY_PTR : withUnsafePointer(to: &v) {
             UnsafeRawPointer($0)
@@ -160,10 +163,12 @@ public struct Memory<T> {
 
 public extension ReerReference where Base == String {
     mutating func memoryType() -> StringMemoryType {
-        let pointer = Memory.pointer(ofVal: &base)
-        return StringMemoryType(rawValue: (pointer + 15).load(as: UInt8.self) & 0xf0)
-            ?? StringMemoryType(rawValue: (pointer + 7).load(as: UInt8.self) & 0xf0)
-            ?? .unknow
+        return withUnsafeBytes(of: &base) { bytes in
+            guard bytes.count >= 16 else { return .unknow }
+            return StringMemoryType(rawValue: bytes[15] & 0xf0)
+                ?? StringMemoryType(rawValue: bytes[7] & 0xf0)
+                ?? .unknow
+        }
     }
 }
 

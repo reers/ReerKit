@@ -965,19 +965,19 @@ public extension ReerReference where Base == String {
     ///
     @discardableResult
     mutating func camelize() -> String {
-        let source = base.pointee.lowercased()
+        let source = base.lowercased()
         let first = source[..<source.index(after: source.startIndex)]
         if source.contains(" ") {
             let connected = source.capitalized.replacingOccurrences(of: " ", with: "")
             let camel = connected.replacingOccurrences(of: "\n", with: "")
             let rest = String(camel.dropFirst())
-            base.pointee = first + rest
-            return base.pointee
+            base = first + rest
+            return base
         }
         let rest = String(source.dropFirst())
 
-        base.pointee = first + rest
-        return base.pointee
+        base = first + rest
+        return base
     }
 
     /// ReerKit: First character of string uppercased(if applicable) while keeping the original string.
@@ -986,8 +986,8 @@ public extension ReerReference where Base == String {
     ///        "".re.firstCharacterUppercased() -> ""
     ///
     mutating func firstCharacterUppercased() {
-        guard let first = base.pointee.first else { return }
-        base.pointee = String(first).uppercased() + base.pointee.dropFirst()
+        guard let first = base.first else { return }
+        base = String(first).uppercased() + base.dropFirst()
     }
 
     #if canImport(Foundation)
@@ -999,17 +999,17 @@ public extension ReerReference where Base == String {
     ///
     @discardableResult
     mutating func latinize() -> String {
-        base.pointee = base.pointee.folding(options: .diacriticInsensitive, locale: Locale.current)
-        return base.pointee
+        base = base.folding(options: .diacriticInsensitive, locale: Locale.current)
+        return base
     }
     #endif
 
     /// ReerKit: Reverse string.
     @discardableResult
     mutating func reverse() -> String {
-        let chars: [Character] = base.pointee.reversed()
-        base.pointee = String(chars)
-        return base.pointee
+        let chars: [Character] = base.reversed()
+        base = String(chars)
+        return base
     }
 
     /// ReerKit: Slice given string from a start index with length (if applicable).
@@ -1023,10 +1023,10 @@ public extension ReerReference where Base == String {
     ///   - length: amount of characters to be sliced after given index.
     @discardableResult
     mutating func slice(from index: Int, length: Int) -> String {
-        if let str = base.pointee.re.slicing(from: index, length: length) {
-            base.pointee = String(str)
+        if let str = base.re.slicing(from: index, length: length) {
+            base = String(str)
         }
-        return base.pointee
+        return base
     }
 
     /// ReerKit: Slice given string from a start index to an end index (if applicable).
@@ -1040,11 +1040,11 @@ public extension ReerReference where Base == String {
     ///   - end: string index the slicing should end at.
     @discardableResult
     mutating func slice(from start: Int, to end: Int) -> String {
-        guard end >= start else { return base.pointee }
-        if let str = base.pointee.re[start..<end] {
-            base.pointee = str
+        guard end >= start else { return base }
+        if let str = base.re[start..<end] {
+            base = str
         }
-        return base.pointee
+        return base
     }
 
     /// ReerKit: Slice given string from a start index (if applicable).
@@ -1056,11 +1056,11 @@ public extension ReerReference where Base == String {
     /// - Parameter index: string index the slicing should start from.
     @discardableResult
     mutating func slice(at index: Int) -> String {
-        guard index < base.pointee.count else { return base.pointee }
-        if let str = base.pointee.re[index..<base.pointee.count] {
-            base.pointee = str
+        guard index < base.count else { return base }
+        if let str = base.re[index..<base.count] {
+            base = str
         }
-        return base.pointee
+        return base
     }
 
     #if canImport(Foundation)
@@ -1072,8 +1072,8 @@ public extension ReerReference where Base == String {
     ///
     @discardableResult
     mutating func trim() -> String {
-        base.pointee = base.pointee.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        return base.pointee
+        base = base.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        return base
     }
     #endif
 
@@ -1088,12 +1088,12 @@ public extension ReerReference where Base == String {
     ///   - trailing: string to add at the end of truncated string (default is "...").
     @discardableResult
     mutating func truncate(toLength length: Int, trailing: String? = "...") -> String {
-        guard length > 0 else { return base.pointee }
-        if base.pointee.count > length {
-            let start = base.pointee.startIndex
-            base.pointee = base.pointee[start..<base.pointee.index(start, offsetBy: length)] + (trailing ?? "")
+        guard length > 0 else { return base }
+        if base.count > length {
+            let start = base.startIndex
+            base = base[start..<base.index(start, offsetBy: length)] + (trailing ?? "")
         }
-        return base.pointee
+        return base
     }
 
     #if canImport(Foundation)
@@ -1105,10 +1105,10 @@ public extension ReerReference where Base == String {
     ///
     @discardableResult
     mutating func urlDecode() -> String {
-        if let decoded = base.pointee.removingPercentEncoding {
-            base.pointee = decoded
+        if let decoded = base.removingPercentEncoding {
+            base = decoded
         }
-        return base.pointee
+        return base
     }
     #endif
 
@@ -1121,10 +1121,10 @@ public extension ReerReference where Base == String {
     ///
     @discardableResult
     mutating func urlEncode() -> String {
-        if let encoded = base.pointee.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
-            base.pointee = encoded
+        if let encoded = base.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
+            base = encoded
         }
-        return base.pointee
+        return base
     }
     #endif
 
@@ -1138,8 +1138,8 @@ public extension ReerReference where Base == String {
     ///   - string: Pad string. Default is " ".
     @discardableResult
     mutating func padStart(_ length: Int, with string: String = " ") -> String {
-        base.pointee = base.pointee.re.paddingStart(length, with: string)
-        return base.pointee
+        base = base.re.paddingStart(length, with: string)
+        return base
     }
 
     /// ReerKit: Pad string to fit the length parameter size with another string in the start.
@@ -1152,8 +1152,8 @@ public extension ReerReference where Base == String {
     ///   - string: Pad string. Default is " ".
     @discardableResult
     mutating func padEnd(_ length: Int, with string: String = " ") -> String {
-        base.pointee = base.pointee.re.paddingEnd(length, with: string)
-        return base.pointee
+        base = base.re.paddingEnd(length, with: string)
+        return base
     }
 }
 

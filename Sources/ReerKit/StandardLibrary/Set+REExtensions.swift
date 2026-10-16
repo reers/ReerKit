@@ -34,10 +34,10 @@ public extension ReerReferenceGeneric where Base == Set<T> {
     /// - Returns: True if the element was inserted, false if it was removed
     @discardableResult
     mutating func toggle(_ element: T) -> Bool {
-        if base.pointee.insert(element).inserted {
+        if base.insert(element).inserted {
             return true
         } else {
-            base.pointee.remove(element)
+            base.remove(element)
             return false
         }
     }

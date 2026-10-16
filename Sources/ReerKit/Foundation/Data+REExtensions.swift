@@ -434,20 +434,22 @@ public extension ReerForEquatable where Base == Data {
         var result = Data(count: base.count + kCCBlockSizeAES128)
         var resultLength: size_t = 0
         
-        let cryptStatus = key.withUnsafeBytes { keyBytes in
-            iv.withUnsafeBytes { ivBytes in
-                base.withUnsafeBytes { dataBytes in
-                    CCCrypt(
-                        CCOperation(kCCEncrypt),
-                        CCAlgorithm(kCCAlgorithmAES),
-                        CCOptions(kCCOptionPKCS7Padding),
-                        keyBytes.baseAddress, key.count,
-                        ivBytes.baseAddress,
-                        dataBytes.baseAddress, base.count,
-                        result.withUnsafeMutableBytes { $0.baseAddress },
-                        result.count,
-                        &resultLength
-                    )
+        let cryptStatus = result.withUnsafeMutableBytes { resultBytes in
+            key.withUnsafeBytes { keyBytes in
+                iv.withUnsafeBytes { ivBytes in
+                    base.withUnsafeBytes { dataBytes in
+                        CCCrypt(
+                            CCOperation(kCCEncrypt),
+                            CCAlgorithm(kCCAlgorithmAES),
+                            CCOptions(kCCOptionPKCS7Padding),
+                            keyBytes.baseAddress, key.count,
+                            ivBytes.baseAddress,
+                            dataBytes.baseAddress, base.count,
+                            resultBytes.baseAddress,
+                            resultBytes.count,
+                            &resultLength
+                        )
+                    }
                 }
             }
         }
@@ -478,20 +480,22 @@ public extension ReerForEquatable where Base == Data {
         var result = Data(count: base.count + kCCBlockSizeAES128)
         var resultLength: size_t = 0
         
-        let cryptStatus = key.withUnsafeBytes { keyBytes in
-            iv.withUnsafeBytes { ivBytes in
-                base.withUnsafeBytes { dataBytes in
-                    CCCrypt(
-                        CCOperation(kCCDecrypt),
-                        CCAlgorithm(kCCAlgorithmAES),
-                        CCOptions(kCCOptionPKCS7Padding),
-                        keyBytes.baseAddress, key.count,
-                        ivBytes.baseAddress,
-                        dataBytes.baseAddress, base.count,
-                        result.withUnsafeMutableBytes { $0.baseAddress },
-                        result.count,
-                        &resultLength
-                    )
+        let cryptStatus = result.withUnsafeMutableBytes { resultBytes in
+            key.withUnsafeBytes { keyBytes in
+                iv.withUnsafeBytes { ivBytes in
+                    base.withUnsafeBytes { dataBytes in
+                        CCCrypt(
+                            CCOperation(kCCDecrypt),
+                            CCAlgorithm(kCCAlgorithmAES),
+                            CCOptions(kCCOptionPKCS7Padding),
+                            keyBytes.baseAddress, key.count,
+                            ivBytes.baseAddress,
+                            dataBytes.baseAddress, base.count,
+                            resultBytes.baseAddress,
+                            resultBytes.count,
+                            &resultLength
+                        )
+                    }
                 }
             }
         }
@@ -665,16 +669,22 @@ public extension ReerForEquatable where Base == Data {
     func zlibCompressed(level: CompressionLevel = .defaultCompression) -> Data? {
         guard !base.isEmpty else { return base }
 
-        var stream = z_stream()
+        // zlib keeps a back pointer to the stream, so its address must stay fixed across calls.
+        let stream = UnsafeMutablePointer<z_stream>.allocate(capacity: 1)
+        stream.initialize(to: z_stream())
+        defer {
+            stream.deinitialize(count: 1)
+            stream.deallocate()
+        }
         var status: Int32
 
-        status = deflateInit_(&stream, level.rawValue, ZLIB_VERSION, Int32(DataSize.stream))
+        status = deflateInit_(stream, level.rawValue, ZLIB_VERSION, Int32(DataSize.stream))
         guard status == Z_OK else { return nil }
 
         var data = Data(capacity: DataSize.chunk)
 
         repeat {
-            if Int(stream.total_out) >= data.count {
+            if Int(stream.pointee.total_out) >= data.count {
                 data.count += DataSize.chunk
             }
 
@@ -682,27 +692,27 @@ public extension ReerForEquatable where Base == Data {
             let outputCount = data.count
 
             base.withUnsafeBytes { (inputPointer: UnsafeRawBufferPointer) in
-                stream.next_in = UnsafeMutablePointer<Bytef>(
+                stream.pointee.next_in = UnsafeMutablePointer<Bytef>(
                     mutating: inputPointer.bindMemory(to: Bytef.self).baseAddress!
                 )
-                .advanced(by: Int(stream.total_in))
+                .advanced(by: Int(stream.pointee.total_in))
 
-                stream.avail_in = uint(inputCount) - uInt(stream.total_in)
+                stream.pointee.avail_in = uint(inputCount) - uInt(stream.pointee.total_in)
                 data.withUnsafeMutableBytes { (outputPointer: UnsafeMutableRawBufferPointer) in
-                    stream.next_out = outputPointer
+                    stream.pointee.next_out = outputPointer
                         .bindMemory(to: Bytef.self).baseAddress!
-                        .advanced(by: Int(stream.total_out))
-                    stream.avail_out = uInt(outputCount) - uInt(stream.total_out)
-                    status = deflate(&stream, Z_FINISH)
-                    stream.next_out = nil
+                        .advanced(by: Int(stream.pointee.total_out))
+                    stream.pointee.avail_out = uInt(outputCount) - uInt(stream.pointee.total_out)
+                    status = deflate(stream, Z_FINISH)
+                    stream.pointee.next_out = nil
                 }
-                stream.next_in = nil
+                stream.pointee.next_in = nil
             }
-        } while stream.avail_out == 0
+        } while stream.pointee.avail_out == 0
 
-        guard deflateEnd(&stream) == Z_OK, status == Z_STREAM_END else { return nil }
+        guard deflateEnd(stream) == Z_OK, status == Z_STREAM_END else { return nil }
 
-        data.count = Int(stream.total_out)
+        data.count = Int(stream.pointee.total_out)
         return data
     }
 
@@ -712,15 +722,21 @@ public extension ReerForEquatable where Base == Data {
     func zlibDecompressed() -> Data? {
         guard !base.isEmpty else { return base }
 
-        var stream = z_stream()
+        // zlib keeps a back pointer to the stream, so its address must stay fixed across calls.
+        let stream = UnsafeMutablePointer<z_stream>.allocate(capacity: 1)
+        stream.initialize(to: z_stream())
+        defer {
+            stream.deinitialize(count: 1)
+            stream.deallocate()
+        }
         var status: Int32
 
-        status = inflateInit_(&stream, ZLIB_VERSION, Int32(DataSize.stream))
+        status = inflateInit_(stream, ZLIB_VERSION, Int32(DataSize.stream))
         guard status == Z_OK else { return nil }
 
         var data = Data(capacity: base.count * 2)
         repeat {
-            if Int(stream.total_out) >= data.count {
+            if Int(stream.pointee.total_out) >= data.count {
                 data.count += base.count / 2
             }
 
@@ -728,28 +744,28 @@ public extension ReerForEquatable where Base == Data {
             let outputCount = data.count
 
             base.withUnsafeBytes { (inputPointer: UnsafeRawBufferPointer) in
-                stream.next_in = UnsafeMutablePointer<Bytef>(
+                stream.pointee.next_in = UnsafeMutablePointer<Bytef>(
                     mutating: inputPointer.bindMemory(to: Bytef.self).baseAddress!
                 )
-                .advanced(by: Int(stream.total_in))
-                stream.avail_in = uint(inputCount) - uInt(stream.total_in)
+                .advanced(by: Int(stream.pointee.total_in))
+                stream.pointee.avail_in = uint(inputCount) - uInt(stream.pointee.total_in)
 
                 data.withUnsafeMutableBytes { (outputPointer: UnsafeMutableRawBufferPointer) in
-                    stream.next_out = outputPointer
+                    stream.pointee.next_out = outputPointer
                         .bindMemory(to: Bytef.self).baseAddress!
-                        .advanced(by: Int(stream.total_out))
-                    stream.avail_out = uInt(outputCount) - uInt(stream.total_out)
-                    status = inflate(&stream, Z_SYNC_FLUSH)
-                    stream.next_out = nil
+                        .advanced(by: Int(stream.pointee.total_out))
+                    stream.pointee.avail_out = uInt(outputCount) - uInt(stream.pointee.total_out)
+                    status = inflate(stream, Z_SYNC_FLUSH)
+                    stream.pointee.next_out = nil
                 }
-                stream.next_in = nil
+                stream.pointee.next_in = nil
             }
 
         } while status == Z_OK
 
-        guard inflateEnd(&stream) == Z_OK, status == Z_STREAM_END else { return nil }
+        guard inflateEnd(stream) == Z_OK, status == Z_STREAM_END else { return nil }
 
-        data.count = Int(stream.total_out)
+        data.count = Int(stream.pointee.total_out)
         return data
     }
 
@@ -759,10 +775,16 @@ public extension ReerForEquatable where Base == Data {
     func gzipCompressed(level: CompressionLevel = .defaultCompression) -> Data? {
         guard !base.isEmpty else { return base }
 
-        var stream = z_stream()
+        // zlib keeps a back pointer to the stream, so its address must stay fixed across calls.
+        let stream = UnsafeMutablePointer<z_stream>.allocate(capacity: 1)
+        stream.initialize(to: z_stream())
+        defer {
+            stream.deinitialize(count: 1)
+            stream.deallocate()
+        }
         var status: Int32
         status = deflateInit2_(
-            &stream,
+            stream,
             level.rawValue,
             Z_DEFLATED,
             MAX_WBITS + 16,
@@ -777,7 +799,7 @@ public extension ReerForEquatable where Base == Data {
         var data = Data(capacity: DataSize.chunk)
 
         repeat {
-            if Int(stream.total_out) >= data.count {
+            if Int(stream.pointee.total_out) >= data.count {
                 data.count += DataSize.chunk
             }
 
@@ -785,26 +807,26 @@ public extension ReerForEquatable where Base == Data {
             let outputCount = data.count
 
             base.withUnsafeBytes { (inputPointer: UnsafeRawBufferPointer) in
-                stream.next_in = UnsafeMutablePointer<Bytef>(
+                stream.pointee.next_in = UnsafeMutablePointer<Bytef>(
                     mutating: inputPointer.bindMemory(to: Bytef.self).baseAddress!
                 )
-                .advanced(by: Int(stream.total_in))
-                stream.avail_in = uint(inputCount) - uInt(stream.total_in)
+                .advanced(by: Int(stream.pointee.total_in))
+                stream.pointee.avail_in = uint(inputCount) - uInt(stream.pointee.total_in)
                 data.withUnsafeMutableBytes { (outputPointer: UnsafeMutableRawBufferPointer) in
-                    stream.next_out = outputPointer
+                    stream.pointee.next_out = outputPointer
                         .bindMemory(to: Bytef.self).baseAddress!
-                        .advanced(by: Int(stream.total_out))
-                    stream.avail_out = uInt(outputCount) - uInt(stream.total_out)
-                    status = deflate(&stream, Z_FINISH)
-                    stream.next_out = nil
+                        .advanced(by: Int(stream.pointee.total_out))
+                    stream.pointee.avail_out = uInt(outputCount) - uInt(stream.pointee.total_out)
+                    status = deflate(stream, Z_FINISH)
+                    stream.pointee.next_out = nil
                 }
-                stream.next_in = nil
+                stream.pointee.next_in = nil
             }
-        } while stream.avail_out == 0
+        } while stream.pointee.avail_out == 0
 
-        guard deflateEnd(&stream) == Z_OK, status == Z_STREAM_END else { return nil }
+        guard deflateEnd(stream) == Z_OK, status == Z_STREAM_END else { return nil }
 
-        data.count = Int(stream.total_out)
+        data.count = Int(stream.pointee.total_out)
         return data
     }
 
@@ -814,16 +836,22 @@ public extension ReerForEquatable where Base == Data {
     func gzipDecompressed() -> Data? {
         guard !base.isEmpty else { return base }
 
-        var stream = z_stream()
+        // zlib keeps a back pointer to the stream, so its address must stay fixed across calls.
+        let stream = UnsafeMutablePointer<z_stream>.allocate(capacity: 1)
+        stream.initialize(to: z_stream())
+        defer {
+            stream.deinitialize(count: 1)
+            stream.deallocate()
+        }
         var status: Int32
 
-        status = inflateInit2_(&stream, MAX_WBITS + 32, ZLIB_VERSION, Int32(DataSize.stream))
+        status = inflateInit2_(stream, MAX_WBITS + 32, ZLIB_VERSION, Int32(DataSize.stream))
 
         guard status == Z_OK else { return nil }
 
         var data = Data(capacity: base.count * 2)
         repeat {
-            if Int(stream.total_out) >= data.count {
+            if Int(stream.pointee.total_out) >= data.count {
                 data.count += base.count / 2
             }
 
@@ -831,27 +859,27 @@ public extension ReerForEquatable where Base == Data {
             let outputCount = data.count
 
             base.withUnsafeBytes { (inputPointer: UnsafeRawBufferPointer) in
-                stream.next_in = UnsafeMutablePointer<Bytef>(
+                stream.pointee.next_in = UnsafeMutablePointer<Bytef>(
                     mutating: inputPointer.bindMemory(to: Bytef.self).baseAddress!
                 )
-                .advanced(by: Int(stream.total_in))
-                stream.avail_in = uint(inputCount) - uInt(stream.total_in)
+                .advanced(by: Int(stream.pointee.total_in))
+                stream.pointee.avail_in = uint(inputCount) - uInt(stream.pointee.total_in)
                 data.withUnsafeMutableBytes { (outputPointer: UnsafeMutableRawBufferPointer) in
-                    stream.next_out = outputPointer
+                    stream.pointee.next_out = outputPointer
                         .bindMemory(to: Bytef.self).baseAddress!
-                        .advanced(by: Int(stream.total_out))
-                    stream.avail_out = uInt(outputCount) - uInt(stream.total_out)
-                    status = inflate(&stream, Z_SYNC_FLUSH)
-                    stream.next_out = nil
+                        .advanced(by: Int(stream.pointee.total_out))
+                    stream.pointee.avail_out = uInt(outputCount) - uInt(stream.pointee.total_out)
+                    status = inflate(stream, Z_SYNC_FLUSH)
+                    stream.pointee.next_out = nil
                 }
-                stream.next_in = nil
+                stream.pointee.next_in = nil
             }
 
         } while status == Z_OK
 
-        guard inflateEnd(&stream) == Z_OK, status == Z_STREAM_END else { return nil }
+        guard inflateEnd(stream) == Z_OK, status == Z_STREAM_END else { return nil }
 
-        data.count = Int(stream.total_out)
+        data.count = Int(stream.pointee.total_out)
         return data
     }
 }

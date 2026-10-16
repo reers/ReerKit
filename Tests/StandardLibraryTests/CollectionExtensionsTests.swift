@@ -21,7 +21,8 @@ final class CollectionExtensionsTests: XCTestCase {
         let expectation = XCTestExpectation(description: "forEachInParallel")
 
         var count = 0
-        let countQueue = DispatchQueue.global()
+        // Must be serial: `count += 1` on a concurrent queue loses increments and the expectation never fires.
+        let countQueue = DispatchQueue(label: "forEachInParallel.count")
         collection.re.forEachInParallel {
             XCTAssert(collection.contains($0))
             countQueue.async {
@@ -31,9 +32,7 @@ final class CollectionExtensionsTests: XCTestCase {
                 }
             }
         }
-        if count != collection.count {
-            wait(for: [expectation], timeout: 1.0)
-        }
+        wait(for: [expectation], timeout: 1.0)
     }
 
     func testSafeSubscript() {

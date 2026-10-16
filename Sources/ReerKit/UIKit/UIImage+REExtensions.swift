@@ -354,6 +354,7 @@ public extension Reer where Base: UIImage {
             corners = temp
         }
 
+        guard base.size.width > 0, base.size.height > 0 else { return base }
         UIGraphicsBeginImageContextWithOptions(base.size, false, base.scale)
         guard let context = UIGraphicsGetCurrentContext() else {
             return base
@@ -498,6 +499,7 @@ public extension Reer where Base: UIImage {
             height: destRect.height.rounded()
         )
 
+        guard roundedDestRect.width > 0, roundedDestRect.height > 0 else { return nil }
         UIGraphicsBeginImageContextWithOptions(roundedDestRect.size, false, base.scale)
         guard let contextRef = UIGraphicsGetCurrentContext() else { return nil }
         contextRef.setShouldAntialias(true)
@@ -538,6 +540,7 @@ public extension Reer where Base: UIImage {
             height: destRect.height.rounded()
         )
 
+        guard roundedDestRect.width > 0, roundedDestRect.height > 0 else { return nil }
         UIGraphicsBeginImageContextWithOptions(roundedDestRect.size, false, base.scale)
         guard let contextRef = UIGraphicsGetCurrentContext() else { return nil }
 
@@ -592,7 +595,8 @@ public extension Reer where Base: UIImage {
     ///
     /// - Returns: A new image with orientation .up, or the original image if already .up.
     func orientationFixed() -> UIImage {
-        guard base.imageOrientation != .up else { return base }
+        guard base.imageOrientation != .up,
+              base.size.width > 0, base.size.height > 0 else { return base }
         UIGraphicsBeginImageContextWithOptions(base.size, false, base.scale)
         defer { UIGraphicsEndImageContext() }
         base.draw(in: CGRect(origin: .zero, size: base.size))
@@ -608,6 +612,7 @@ public extension Reer where Base: UIImage {
     func resize(toHeight: CGFloat, opaque: Bool = false) -> UIImage? {
         let scale = toHeight / base.size.height
         let newWidth = base.size.width * scale
+        guard newWidth > 0, toHeight > 0 else { return nil }
         UIGraphicsBeginImageContextWithOptions(CGSize(width: newWidth, height: toHeight), opaque, base.scale)
         base.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: toHeight))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -624,6 +629,7 @@ public extension Reer where Base: UIImage {
     func resize(toWidth: CGFloat, opaque: Bool = false) -> UIImage? {
         let scale = toWidth / base.size.width
         let newHeight = base.size.height * scale
+        guard toWidth > 0, newHeight > 0 else { return nil }
         UIGraphicsBeginImageContextWithOptions(CGSize(width: toWidth, height: newHeight), opaque, base.scale)
         base.draw(in: CGRect(x: 0, y: 0, width: toWidth, height: newHeight))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -1065,6 +1071,7 @@ public extension UIImage {
     ///   - color: image fill color.
     ///   - size: image size.
     static func re(color: UIColor, size: CGSize = .init(width: 1, height: 1)) -> UIImage {
+        guard size.width > 0, size.height > 0 else { return UIImage() }
         UIGraphicsBeginImageContextWithOptions(size, false, 1)
 
         defer {

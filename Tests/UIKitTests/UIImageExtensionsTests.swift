@@ -81,7 +81,9 @@ final class UIImageExtensionsTests: XCTestCase {
     func testBytesSize() {
         let bundle = Bundle(for: UIImageExtensionsTests.self)
         let image = UIImage(named: "TestImage", in: bundle, compatibleWith: nil)!
-        XCTAssertEqual(image.re.bytesSize, 99954)
+        // The JPEG encoder writes different EXIF fields across OS versions, so the exact byte count isn't stable.
+        XCTAssertEqual(image.re.bytesSize, image.jpegData(compressionQuality: 1)?.count)
+        XCTAssertGreaterThan(image.re.bytesSize, 0)
         XCTAssertEqual(UIImage().re.bytesSize, 0)
     }
 
@@ -317,7 +319,7 @@ final class UIImageExtensionsTests: XCTestCase {
         let size = CGSize(width: 5, height: 5)
         XCTAssertEqual(image?.size, size)
 
-        XCTAssertEqual(image?.re.bytesSize, 787)
+        XCTAssertEqual(image?.re.bytesSize, image?.jpegData(compressionQuality: 1)?.count)
 
         let scale = CGFloat(5.0)
         let scaledSize = CGSize(width: size.width / scale, height: size.height / scale)
@@ -385,16 +387,21 @@ final class UIImageExtensionsTests: XCTestCase {
 
     func testPNGBase64String() {
         let image = UIImage.re(color: .blue, size: CGSize(width: 1, height: 1))
-        XCTAssertEqual(
-            image.re.pngBase64String(),
-            "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAADUlEQVQIHWNgYPj/HwADAgH/p+FUpQAAAABJRU5ErkJggg==")
+        // ImageIO adds different metadata across OS versions, so compare decoded pixels instead of raw bytes.
+        let base64 = image.re.pngBase64String()
+        XCTAssertEqual(base64, image.pngData()?.base64EncodedString())
+        let decoded = base64.flatMap { Data(base64Encoded: $0) }.flatMap { UIImage(data: $0) }
+        XCTAssertEqual(decoded?.size, CGSize(width: 1, height: 1))
+        XCTAssertEqual(.blue, decoded!.re.averageColor()!, accuracy: 0.01)
     }
 
     func testJPEGBase64String() {
         let image = UIImage.re(color: .blue, size: CGSize(width: 1, height: 1))
-        XCTAssertEqual(
-            image.re.jpegBase64String(compressionQuality: 1),
-            "/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8AAEQgAAQABAwERAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/bAEMAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/bAEMBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/dAAQAAf/aAAwDAQACEQMRAD8A/jnr/v4P5XP/2Q==")
+        let base64 = image.re.jpegBase64String(compressionQuality: 1)
+        XCTAssertEqual(base64, image.jpegData(compressionQuality: 1)?.base64EncodedString())
+        let decoded = base64.flatMap { Data(base64Encoded: $0) }.flatMap { UIImage(data: $0) }
+        XCTAssertEqual(decoded?.size, CGSize(width: 1, height: 1))
+        XCTAssertEqual(.blue, decoded!.re.averageColor()!, accuracy: 0.02)
     }
 
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)

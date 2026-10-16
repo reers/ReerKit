@@ -54,8 +54,9 @@ class SignedIntegerExtensionsTests: XCTestCase {
     }
     
     func testOrdinalString() {
-        XCTAssertEqual(1.re.ordinalString(), "1st")
-        XCTAssertEqual(2.re.ordinalString(), "2nd")
-        XCTAssertEqual(11.re.ordinalString(), "11th")
+        let locale = Locale(identifier: "en_US")
+        XCTAssertEqual(1.re.ordinalString(locale: locale), "1st")
+        XCTAssertEqual(2.re.ordinalString(locale: locale), "2nd")
+        XCTAssertEqual(11.re.ordinalString(locale: locale), "11th")
     }
 }

@@ -46,30 +46,27 @@ final class UITextViewExtensionsTests: XCTestCase {
         textView.font = UIFont.systemFont(ofSize: 20.0)
         textView.text = text
 
-        // determining the text size
-        let constraintRect = CGSize(width: 100, height: CGFloat.greatestFiniteMagnitude)
-        let boundingBox = text.boundingRect(with: constraintRect,
-                                            options: NSStringDrawingOptions.usesLineFragmentOrigin,
-                                            attributes: [.font: textView.font!],
-                                            context: nil)
-        let textHeight = ceil(boundingBox.height)
-        let textSize = CGSize(width: 100, height: textHeight)
-
         // before setting wrap, content won't be equal to bounds
         XCTAssertNotEqual(textView.bounds.size, textView.contentSize)
 
         // calling the wrap extension method
         textView.re.wrapToContent()
 
-        // Setting the frame:
-        // This is important to set the frame after calling the wrapToContent, otherwise
-        // boundingRect can give you fractional value, and method call `sizeToFit` inside the
-        // wrapToContent would change to the fractional value instead of the ceil value.
-        textView.bounds = CGRect(origin: .zero, size: textSize)
+        XCTAssertEqual(textView.contentInset, .zero)
+        XCTAssertEqual(textView.textContainerInset, .zero)
+        XCTAssertEqual(textView.textContainer.lineFragmentPadding, 0)
 
         #if !targetEnvironment(macCatalyst)
-        // after setting wrap, content size will be equal to bounds
-        XCTAssertEqual(textView.bounds.size, textView.contentSize)
+        // TextKit 2 lays out lazily and only estimates `contentSize` for off-screen text,
+        // so compare against an explicit measurement instead of `contentSize`.
+        let boundingBox = text.boundingRect(
+            with: CGSize(width: 100, height: CGFloat.greatestFiniteMagnitude),
+            options: .usesLineFragmentOrigin,
+            attributes: [.font: textView.font!],
+            context: nil
+        )
+        XCTAssertEqual(textView.bounds.width, 100, accuracy: 1)
+        XCTAssertEqual(textView.bounds.height, ceil(boundingBox.height), accuracy: 1)
         #endif
     }
 }

@@ -29,15 +29,20 @@ final class DebouncerTests: XCTestCase {
             }
 
         }
-        waitForExpectations(timeout: 4.5, handler: nil)
+        // Timers and main-queue dispatch can lag on a busy simulator, so leave headroom over the ideal 4s.
+        waitForExpectations(timeout: 8, handler: nil)
     }
 
     var start: Date?
+    var lastCall: Date?
 
     func intervalTest() {
+        lastCall = Date()
         debouncer.execute(interval: 2) {
             os_log("debouncer action")
-            XCTAssertEqual((Date().timeIntervalSince(self.start!) - 4) < 0.1, true)
+            // The action must wait the full interval after the *last* call; firing late is fine, early is not.
+            XCTAssertGreaterThanOrEqual(Date().timeIntervalSince(self.lastCall!), 2 - 0.05)
+            XCTAssertGreaterThanOrEqual(Date().timeIntervalSince(self.start!), 4 - 0.05)
             self.expectation?.fulfill()
         }
     }

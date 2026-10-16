@@ -33,6 +33,7 @@ public extension Reer where Base: UIScrollView {
     /// - Returns: Snapshot as UIImage for rendered ScrollView.
     var snapshot: UIImage? {
         // Original Source: https://gist.github.com/thestoics/1204051
+        guard base.contentSize.width > 0, base.contentSize.height > 0 else { return nil }
         UIGraphicsBeginImageContextWithOptions(base.contentSize, false, 0)
         defer {
             UIGraphicsEndImageContext()

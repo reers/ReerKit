@@ -139,6 +139,23 @@ final class DataExtensionsTests: XCTestCase {
         XCTAssertTrue(data.re.zlibCompressed(level: .bestCompression)!.re.isZlibbed)
         XCTAssertTrue(data.re.zlibCompressed(level: CompressionLevel(rawValue: 2))!.re.isZlibbed)
     }
+
+    func testCompressionAcrossMultipleChunks() {
+        // Random bytes don't compress, so the output needs several 16KB chunks and several deflate/inflate calls.
+        let data = Data((0..<100_000).map { _ in UInt8.random(in: 0...255) })
+        XCTAssertEqual(data.re.zlibCompressed(level: .bestSpeed)?.re.zlibDecompressed(), data)
+        XCTAssertEqual(data.re.gzipCompressed(level: .bestSpeed)?.re.gzipDecompressed(), data)
+    }
+
+    func testAesLargeData() {
+        let data = Data((0..<100_000).map { _ in UInt8.random(in: 0...255) })
+        let key = Data.re(hexString: "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f")!
+        let iv = Data.re(hexString: "0f0e0d0c0b0a09080706050403020100")!
+        let encrypted = data.re.aesEncrypt(withKey: key, iv: iv)
+        XCTAssertNotNil(encrypted)
+        XCTAssertNotEqual(encrypted, data)
+        XCTAssertEqual(encrypted?.re.aesDecrypt(withKey: key, iv: iv), data)
+    }
     
     func testRSA() {
         // 512 bit

@@ -123,6 +123,25 @@ final class MemoryTests: XCTestCase {
         print("8个字节为1组 :", Memory.string(ofVal: &int64, alignment: .eight))
     }
 
+    func testStringMemoryType() {
+        var small = "123456789"
+        XCTAssertEqual(small.re.memoryType(), .taggedPointer)
+
+        var literal = "1234567812345678"
+        XCTAssertEqual(literal.re.memoryType(), .text)
+
+        var heap = "1234567812345678"
+        heap.append("9")
+        XCTAssertEqual(heap.re.memoryType(), .heap)
+        XCTAssertNotEqual(Memory.pointer(ofRef: heap), Memory.pointer(ofRef: literal))
+    }
+
+    func testBytesOfValue() {
+        var value: Int64 = 0x0102030405060708
+        XCTAssertEqual(Memory.bytes(ofVal: &value), [0x08, 0x07, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01])
+        XCTAssertEqual(Memory.string(ofVal: &value, alignment: .four), "0x05060708 0x01020304")
+    }
+
     func testMemory() {
         showInt()
         showEnum()

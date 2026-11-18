@@ -37,17 +37,22 @@ public final class CountdownTimer {
     /// The action to be performed on each tick of the timer.
     public let action: (CountdownTimer) -> Void
 
+    private let lock = UnfairLock()
+    private var _leftTimes: Int
+
     /// The number of ticks remaining.
-    public private(set) var leftTimes: Int
+    public var leftTimes: Int {
+        return lock.around { _leftTimes }
+    }
 
     /// The remaining duration of the countdown.
     public var leftDuration: TimeInterval {
-        return interval * Double(leftTimes)
+        return max(0, interval * Double(leftTimes))
     }
 
     /// Indicates whether the countdown has finished.
     public var finished: Bool {
-        return leftTimes == 0
+        return leftTimes <= 0
     }
 
     /// The underlying timer object.
@@ -60,11 +65,13 @@ public final class CountdownTimer {
     ///   - times: The total number of ticks.
     ///   - action: The action to be performed on each tick.
     public init(interval: TimeInterval, times: Int, action: @escaping (CountdownTimer) -> Void) {
-        self.interval = interval
-        self.times = times
-        self.totalDuration = interval * Double(times)
+        let sanitizedInterval = max(0, interval)
+        let sanitizedTimes = max(0, times)
+        self.interval = sanitizedInterval
+        self.times = sanitizedTimes
+        self.totalDuration = sanitizedInterval * Double(sanitizedTimes)
         self.action = action
-        self.leftTimes = times
+        self._leftTimes = sanitizedTimes
     }
 
     /// Initializes a new countdown timer with a specified number of ticks and total duration.
@@ -74,11 +81,13 @@ public final class CountdownTimer {
     ///   - totalDuration: The total duration of the countdown.
     ///   - action: The action to be performed on each tick.
     public init(times: Int, totalDuration: TimeInterval, action: @escaping (CountdownTimer) -> Void) {
-        self.interval = totalDuration / Double(times)
-        self.times = times
-        self.totalDuration = totalDuration
+        let sanitizedTimes = max(0, times)
+        let sanitizedDuration = sanitizedTimes > 0 ? max(0, totalDuration) : 0
+        self.interval = sanitizedTimes > 0 ? sanitizedDuration / Double(sanitizedTimes) : 0
+        self.times = sanitizedTimes
+        self.totalDuration = sanitizedDuration
         self.action = action
-        self.leftTimes = times
+        self._leftTimes = sanitizedTimes
     }
 
     /// Creates and returns a new countdown timer with the specified interval and number of ticks.
@@ -140,53 +149,101 @@ public final class CountdownTimer {
     ) -> CountdownTimer {
         let accuracy: TimeInterval = 0.1
         let multiple = Int(1.0 / accuracy)
-        let totalTimes = totalSeconds * multiple
+        let sanitizedSeconds = max(0, totalSeconds)
+        let totalTimes = sanitizedSeconds * multiple
         let timer = CountdownTimer(interval: accuracy, times: totalTimes) { countDownTimer in
-            countDownTimer.secondsCount += 1
-            if countDownTimer.secondsCount % multiple == 0 {
-                let displaySeconds = Int(countDownTimer.leftDuration.rounded(.up))
-                let passedDuration = Double(totalSeconds) - countDownTimer.leftDuration
-                action(displaySeconds, countDownTimer.leftDuration, passedDuration)
+            let secondsCount: Int = countDownTimer.lock.around {
+                countDownTimer.secondsCount += 1
+                return countDownTimer.secondsCount
+            }
+
+            if secondsCount % multiple == 0 {
+                let leftDuration = countDownTimer.leftDuration
+                let displaySeconds = Int(leftDuration.rounded(.up))
+                let passedDuration = max(0, Double(sanitizedSeconds) - leftDuration)
+                action(displaySeconds, leftDuration, passedDuration)
             }
         }
         timer.fire()
         return timer
     }
 
-    /// Starts the countdown timer.
+    /// Starts the countdown timer. Calling it again invalidates the previous
+    /// timer first, so the action can never be delivered twice per tick.
     public func fire() {
-        timer = RETimer.scheduledTimer(timeInterval: interval, repeats: times > 1) { [weak self] timer in
-            guard let self = self else { return }
-            self.leftTimes -= 1
-            if self.leftTimes == 0 {
-                timer.invalidate()
+        let (oldTimer, newTimer): (RETimer?, RETimer?) = lock.around {
+            let previous = timer
+            timer = nil
+            guard _leftTimes > 0 else {
+                return (previous, nil)
             }
-            self.action(self)
+
+            let created = RETimer(timeInterval: interval, repeats: true) { [weak self] firingTimer in
+                guard let self = self else { return }
+
+                var shouldInvokeAction = false
+                var shouldInvalidateTimer = false
+
+                self.lock.lock()
+                if self.timer === firingTimer, self._leftTimes > 0 {
+                    self._leftTimes -= 1
+                    shouldInvokeAction = true
+                    if self._leftTimes <= 0 {
+                        self.timer = nil
+                        shouldInvalidateTimer = true
+                    }
+                } else {
+                    shouldInvalidateTimer = true
+                }
+                self.lock.unlock()
+
+                if shouldInvalidateTimer {
+                    firingTimer.invalidate()
+                }
+                if shouldInvokeAction {
+                    self.action(self)
+                }
+            }
+            timer = created
+            return (previous, created)
         }
+
+        oldTimer?.invalidate()
+        newTimer?.schedule()
     }
-    
+
     /// Resumes the countdown timer if it was suspended.
     public func resume() {
-        timer?.schedule()
+        let currentTimer = lock.around { timer }
+        currentTimer?.resume()
     }
 
     /// Suspends the countdown timer.
     public func suspend() {
-        timer?.suspend()
+        let currentTimer = lock.around { timer }
+        currentTimer?.suspend()
     }
 
     /// Invalidates the countdown timer, preventing it from ever firing again.
     public func invalidate() {
-        timer?.invalidate()
+        let oldTimer: RETimer? = lock.around {
+            let previous = timer
+            timer = nil
+            return previous
+        }
+        oldTimer?.invalidate()
     }
-    
+
     /// Resets the countdown timer to its initial state.
     public func reset() {
-        resume()
-        invalidate()
-        timer = nil
-        leftTimes = times
-        secondsCount = 0
+        let oldTimer: RETimer? = lock.around {
+            let previous = timer
+            timer = nil
+            _leftTimes = times
+            secondsCount = 0
+            return previous
+        }
+        oldTimer?.invalidate()
     }
 }
 

@@ -36,7 +36,7 @@ import Foundation
 ///         |--------delay--------|-------interval-------|-------interval-------|
 public final class RETimer {
     
-    public enum State {
+    public enum State: Equatable {
         case initial
         case running
         case suspended
@@ -48,15 +48,26 @@ public final class RETimer {
 
     public private(set) var repeats: Bool
     public private(set) var timeInterval: TimeInterval
-    public private(set) var state: State = .initial
     public typealias RETimerAction = (_ timer: RETimer) -> Void
-    
+
+    private var _state: State = .initial
+
+    /// The current state, protected by `unfairLock`.
+    public var state: State {
+        os_unfair_lock_lock(unfairLock)
+        defer { os_unfair_lock_unlock(unfairLock) }
+        return _state
+    }
+
     private let timer: DispatchSourceTimer
-    private var action: RETimerAction
     private var callbackImmediatelyWhenFired: Bool = false
     private let delay: TimeInterval
     private let unfairLock: os_unfair_lock_t
-    
+
+    /// Whether the dispatch source has an outstanding `resume()`.
+    /// A dispatch source starts suspended; it must be resumed before deinit.
+    private var isResumed = false
+
     /// A record for timer to count seconds when callback occurs every second.
     private var secondsCount = 0
 
@@ -70,6 +81,8 @@ public final class RETimer {
 
     /// Total elapsed time since the timer started, excluding paused durations.
     public var totalElapsedTime: TimeInterval {
+        os_unfair_lock_lock(unfairLock)
+        defer { os_unfair_lock_unlock(unfairLock) }
         if let startTime = startTime {
             // Timer is running, calculate the current running duration.
             return elapsedTime + Date().timeIntervalSince(startTime)
@@ -98,17 +111,20 @@ public final class RETimer {
         action: @escaping RETimerAction
     ) {
         self.repeats = repeats
-        self.action = action
         self.timeInterval = max(0.0001, timeInterval)
         self.callbackImmediatelyWhenFired = callbackImmediatelyWhenFired
-        self.delay = delay
-        
+        self.delay = max(0, delay)
+
         unfairLock = .allocate(capacity: 1)
         unfairLock.initialize(to: os_unfair_lock())
 
         self.timer = DispatchSource.makeTimerSource(queue: queue)
         timer.setEventHandler { [weak self] in
-            guard let self = self, self.state != .invalidated else { return }
+            guard let self = self else { return }
+            os_unfair_lock_lock(self.unfairLock)
+            let isInvalidated = self._state == .invalidated
+            os_unfair_lock_unlock(self.unfairLock)
+            guard !isInvalidated else { return }
             action(self)
             if !repeats {
                 self.invalidate()
@@ -182,10 +198,11 @@ public final class RETimer {
     public func schedule() -> Bool {
         os_unfair_lock_lock(unfairLock)
         defer { os_unfair_lock_unlock(unfairLock) }
-        guard state == .initial || state == .suspended else { return false }
+        guard _state == .initial || _state == .suspended else { return false }
         _ = scheduleTimerOnce
         timer.resume()
-        state = .running
+        isResumed = true
+        _state = .running
         startTime = Date() // Record start time
         return true
     }
@@ -212,9 +229,10 @@ public final class RETimer {
     public func resume() {
         os_unfair_lock_lock(unfairLock)
         defer { os_unfair_lock_unlock(unfairLock) }
-        guard state == .suspended else { return }
+        guard _state == .suspended else { return }
         timer.resume()
-        state = .running
+        isResumed = true
+        _state = .running
         startTime = Date() // Record resume time
     }
 
@@ -222,9 +240,10 @@ public final class RETimer {
     public func suspend() {
         os_unfair_lock_lock(unfairLock)
         defer { os_unfair_lock_unlock(unfairLock) }
-        guard state == .running else { return }
+        guard _state == .running else { return }
         timer.suspend()
-        state = .suspended
+        isResumed = false
+        _state = .suspended
         if let startTime = startTime {
             elapsedTime += Date().timeIntervalSince(startTime) // Accumulate running time
             self.startTime = nil
@@ -235,27 +254,36 @@ public final class RETimer {
     public func invalidate() {
         os_unfair_lock_lock(unfairLock)
         defer { os_unfair_lock_unlock(unfairLock) }
-        guard state != .invalidated else { return }
-        if state == .suspended {
-            timer.resume()
-        }
+        guard _state != .invalidated else { return }
+        _state = .invalidated
         if let startTime = startTime {
             elapsedTime += Date().timeIntervalSince(startTime) // Accumulate running time
             self.startTime = nil
         }
+        timer.setEventHandler(handler: nil)
         timer.cancel()
-        state = .invalidated
+        if !isResumed {
+            // Balance the initial suspend of the dispatch source, otherwise
+            // releasing it later triggers libdispatch's
+            // "Release of a suspended object" trap.
+            timer.resume()
+            isResumed = true
+        }
     }
-    
+
     deinit {
         os_unfair_lock_lock(unfairLock)
         timer.setEventHandler(handler: nil)
-        if state == .suspended {
-            timer.resume()
-        }
         timer.cancel()
+        if !isResumed {
+            // A timer that was never scheduled (or was suspended without
+            // invalidation) still has an unbalanced suspend on the dispatch source.
+            // Resume before releasing to avoid libdispatch's suspended-object trap.
+            timer.resume()
+            isResumed = true
+        }
         os_unfair_lock_unlock(unfairLock)
-        
+
         unfairLock.deinitialize(count: 1)
         unfairLock.deallocate()
     }
@@ -317,8 +345,11 @@ public extension RETimer {
         
         timer.schedule()
         
-        // Immediately call the action with initial values
-        queue.async {
+        // Immediately call the action with initial values. Use a weak capture so
+        // that releasing the timer before this block runs doesn't deliver a
+        // callback for an already-dead timer, and ensure it is still running.
+        queue.async { [weak timer] in
+            guard let timer, timer.state == .running else { return }
             let displaySeconds = 0
             let passedDuration = timer.totalElapsedTime
             action(timer, displaySeconds, passedDuration)
